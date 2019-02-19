@@ -58,6 +58,7 @@ newtype LiveChatModeratorsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatModeratorsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ liveChatModeratorsDelete
     -> LiveChatModeratorsDelete
 liveChatModeratorsDelete pLcmdId_ =
   LiveChatModeratorsDelete' {_lcmdId = pLcmdId_}
+
 
 -- | The id parameter identifies the chat moderator to remove. The value
 -- uniquely identifies both the moderator and the chat.

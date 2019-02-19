@@ -61,6 +61,7 @@ newtype PrivilegesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PrivilegesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ privilegesList
     :: Text -- ^ 'plCustomer'
     -> PrivilegesList
 privilegesList pPlCustomer_ = PrivilegesList' {_plCustomer = pPlCustomer_}
+
 
 -- | Immutable ID of the G Suite account.
 plCustomer :: Lens' PrivilegesList Text

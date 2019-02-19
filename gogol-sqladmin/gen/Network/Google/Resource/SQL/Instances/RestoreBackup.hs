@@ -66,6 +66,7 @@ data InstancesRestoreBackup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesRestoreBackup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ instancesRestoreBackup pIrbProject_ pIrbPayload_ pIrbInstance_ =
     , _irbPayload = pIrbPayload_
     , _irbInstance = pIrbInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 irbProject :: Lens' InstancesRestoreBackup Text

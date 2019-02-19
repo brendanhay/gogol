@@ -76,6 +76,7 @@ data ProjectsRegionsOperationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsOperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ projectsRegionsOperationsDelete pProdName_ =
     , _prodName = pProdName_
     , _prodCallback = Nothing
     }
+
 
 -- | V1 error format.
 prodXgafv :: Lens' ProjectsRegionsOperationsDelete (Maybe Xgafv)

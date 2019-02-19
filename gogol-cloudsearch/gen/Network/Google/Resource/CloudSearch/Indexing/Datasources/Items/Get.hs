@@ -77,6 +77,7 @@ data IndexingDatasourcesItemsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IndexingDatasourcesItemsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ indexingDatasourcesItemsGet pIdigName_ =
     , _idigDebugOptionsEnableDebugging = Nothing
     , _idigCallback = Nothing
     }
+
 
 -- | V1 error format.
 idigXgafv :: Lens' IndexingDatasourcesItemsGet (Maybe Xgafv)

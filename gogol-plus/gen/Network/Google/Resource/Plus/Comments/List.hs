@@ -67,6 +67,7 @@ data CommentsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ commentsList pClActivityId_ =
     , _clPageToken = Nothing
     , _clMaxResults = 20
     }
+
 
 -- | The ID of the activity to get comments for.
 clActivityId :: Lens' CommentsList Text

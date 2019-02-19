@@ -61,6 +61,7 @@ newtype PawsInit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsInit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ pawsInit
     :: PawsInitRequest -- ^ 'piPayload'
     -> PawsInit
 pawsInit pPiPayload_ = PawsInit' {_piPayload = pPiPayload_}
+
 
 -- | Multipart request metadata.
 piPayload :: Lens' PawsInit PawsInitRequest

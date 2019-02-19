@@ -82,6 +82,7 @@ data AccountsCreativesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCreativesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ accountsCreativesList pAclAccountId_ =
     , _aclPageSize = Nothing
     , _aclCallback = Nothing
     }
+
 
 -- | V1 error format.
 aclXgafv :: Lens' AccountsCreativesList (Maybe Xgafv)

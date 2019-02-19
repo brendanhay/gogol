@@ -72,6 +72,7 @@ data SSLCertsCreateEphemeral =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertsCreateEphemeral' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ sslCertsCreateEphemeral pScceProject_ pSccePayload_ pScceInstance_ =
     , _sccePayload = pSccePayload_
     , _scceInstance = pScceInstance_
     }
+
 
 -- | Project ID of the Cloud SQL project.
 scceProject :: Lens' SSLCertsCreateEphemeral Text

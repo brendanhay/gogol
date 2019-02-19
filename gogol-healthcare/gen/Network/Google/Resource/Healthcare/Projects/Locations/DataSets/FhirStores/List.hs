@@ -79,6 +79,7 @@ data ProjectsLocationsDataSetsFhirStoresList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsFhirStoresList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsLocationsDataSetsFhirStoresList pPldsfslParent_ =
     , _pldsfslPageSize = Nothing
     , _pldsfslCallback = Nothing
     }
+
 
 -- | Name of the dataset.
 pldsfslParent :: Lens' ProjectsLocationsDataSetsFhirStoresList Text

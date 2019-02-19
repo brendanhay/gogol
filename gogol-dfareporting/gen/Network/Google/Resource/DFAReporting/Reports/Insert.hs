@@ -61,6 +61,7 @@ data ReportsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ reportsInsert
 reportsInsert pRiProFileId_ pRiPayload_ =
   ReportsInsert'
     {_riProFileId = _Coerce # pRiProFileId_, _riPayload = pRiPayload_}
+
 
 -- | The DFA user profile ID.
 riProFileId :: Lens' ReportsInsert Int64

@@ -153,6 +153,7 @@ data AdsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -234,6 +235,7 @@ adsList pAlProFileId_ =
     , _alMaxResults = 1000
     , _alAudienceSegmentIds = Nothing
     }
+
 
 -- | Select only ads whose list targeting expression use these remarketing
 -- list IDs.

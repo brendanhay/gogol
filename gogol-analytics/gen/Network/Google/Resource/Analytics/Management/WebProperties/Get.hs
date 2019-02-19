@@ -62,6 +62,7 @@ data ManagementWebPropertiesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementWebPropertiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ managementWebPropertiesGet
 managementWebPropertiesGet pMwpgWebPropertyId_ pMwpgAccountId_ =
   ManagementWebPropertiesGet'
     {_mwpgWebPropertyId = pMwpgWebPropertyId_, _mwpgAccountId = pMwpgAccountId_}
+
 
 -- | ID to retrieve the web property for.
 mwpgWebPropertyId :: Lens' ManagementWebPropertiesGet Text

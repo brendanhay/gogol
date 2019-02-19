@@ -29,6 +29,7 @@ newtype InAppProductListings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InAppProductListings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39,6 +40,7 @@ inAppProductListings
     -> InAppProductListings
 inAppProductListings pIaplAddtional_ =
   InAppProductListings' {_iaplAddtional = _Coerce # pIaplAddtional_}
+
 
 -- | The language of the localized data, as defined by BCP 47. i.e.:
 -- \"en-US\", \"en-GB\".
@@ -66,6 +68,7 @@ data MonthDay =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonthDay' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +79,7 @@ data MonthDay =
 monthDay
     :: MonthDay
 monthDay = MonthDay' {_mdDay = Nothing, _mdMonth = Nothing}
+
 
 -- | Day of a month, value in [1, 31] range. Valid range depends on the
 -- specified month.
@@ -111,6 +115,7 @@ data Track =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Track' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +126,7 @@ data Track =
 track
     :: Track
 track = Track' {_tTrack = Nothing, _tReleases = Nothing}
+
 
 -- | Identifier for this track.
 tTrack :: Lens' Track (Maybe Text)
@@ -158,6 +164,7 @@ data Image =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -170,6 +177,7 @@ data Image =
 image
     :: Image
 image = Image' {_iURL = Nothing, _iSha1 = Nothing, _iId = Nothing}
+
 
 -- | A URL that will serve a preview of the image.
 iURL :: Lens' Image (Maybe Text)
@@ -206,6 +214,7 @@ data InAppProductListing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InAppProductListing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -217,6 +226,7 @@ inAppProductListing
     :: InAppProductListing
 inAppProductListing =
   InAppProductListing' {_iaplTitle = Nothing, _iaplDescription = Nothing}
+
 
 iaplTitle :: Lens' InAppProductListing (Maybe Text)
 iaplTitle
@@ -249,6 +259,7 @@ newtype ImagesDeleteAllResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImagesDeleteAllResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -257,6 +268,7 @@ newtype ImagesDeleteAllResponse =
 imagesDeleteAllResponse
     :: ImagesDeleteAllResponse
 imagesDeleteAllResponse = ImagesDeleteAllResponse' {_idarDeleted = Nothing}
+
 
 idarDeleted :: Lens' ImagesDeleteAllResponse [Image]
 idarDeleted
@@ -285,6 +297,7 @@ data TokenPagination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -296,6 +309,7 @@ tokenPagination
     :: TokenPagination
 tokenPagination =
   TokenPagination' {_tpNextPageToken = Nothing, _tpPreviousPageToken = Nothing}
+
 
 tpNextPageToken :: Lens' TokenPagination (Maybe Text)
 tpNextPageToken
@@ -331,6 +345,7 @@ data ExpansionFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExpansionFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -342,6 +357,7 @@ expansionFile
     :: ExpansionFile
 expansionFile =
   ExpansionFile' {_efFileSize = Nothing, _efReferencesVersion = Nothing}
+
 
 -- | If set this field indicates that this APK has an Expansion File uploaded
 -- to it: this APK does not reference another APK\'s Expansion File. The
@@ -392,6 +408,7 @@ data UserComment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserComment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -436,6 +453,7 @@ userComment =
     , _ucStarRating = Nothing
     , _ucLastModified = Nothing
     }
+
 
 -- | Integer Android SDK version of the user\'s device at the time the review
 -- was written, e.g. 23 is Marshmallow. May be absent.
@@ -559,6 +577,7 @@ data Testers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Testers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -569,6 +588,7 @@ data Testers =
 testers
     :: Testers
 testers = Testers' {_tGooglePlusCommUnities = Nothing, _tGoogleGroups = Nothing}
+
 
 tGooglePlusCommUnities :: Lens' Testers [Text]
 tGooglePlusCommUnities
@@ -611,6 +631,7 @@ data SubscriptionCancelSurveyResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionCancelSurveyResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -623,6 +644,7 @@ subscriptionCancelSurveyResult
 subscriptionCancelSurveyResult =
   SubscriptionCancelSurveyResult'
     {_scsrCancelSurveyReason = Nothing, _scsrUserInputCancelReason = Nothing}
+
 
 -- | The cancellation reason the user chose in the survey. Possible values
 -- are: - Other - I don\'t use this service enough - Technical issues -
@@ -670,6 +692,7 @@ data Listing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Listing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -693,6 +716,7 @@ listing =
     , _lLanguage = Nothing
     , _lTitle = Nothing
     }
+
 
 -- | Full description of the app; this may be up to 4000 characters in
 -- length.
@@ -750,6 +774,7 @@ data APK =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APK' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -760,6 +785,7 @@ data APK =
 aPK
     :: APK
 aPK = APK' {_aVersionCode = Nothing, _aBinary = Nothing}
+
 
 -- | The version code of the APK, as specified in the APK\'s manifest file.
 aVersionCode :: Lens' APK (Maybe Int32)
@@ -792,6 +818,7 @@ newtype SubscriptionPurchasesDeferRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionPurchasesDeferRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -801,6 +828,7 @@ subscriptionPurchasesDeferRequest
     :: SubscriptionPurchasesDeferRequest
 subscriptionPurchasesDeferRequest =
   SubscriptionPurchasesDeferRequest' {_spdrDeferralInfo = Nothing}
+
 
 -- | The information about the new desired expiry time for the subscription.
 spdrDeferralInfo :: Lens' SubscriptionPurchasesDeferRequest (Maybe SubscriptionDeferralInfo)
@@ -832,6 +860,7 @@ data TracksListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TracksListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -844,6 +873,7 @@ tracksListResponse
 tracksListResponse =
   TracksListResponse'
     {_tlrTracks = Nothing, _tlrKind = "androidpublisher#tracksListResponse"}
+
 
 tlrTracks :: Lens' TracksListResponse [Track]
 tlrTracks
@@ -882,6 +912,7 @@ data Season =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Season' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -894,6 +925,7 @@ data Season =
 season
     :: Season
 season = Season' {_sStart = Nothing, _sEnd = Nothing, _sProrations = Nothing}
+
 
 -- | Inclusive start date of the recurrence period.
 sStart :: Lens' Season (Maybe MonthDay)
@@ -938,6 +970,7 @@ data PageInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -955,6 +988,7 @@ pageInfo =
     , _piTotalResults = Nothing
     , _piStartIndex = Nothing
     }
+
 
 piResultPerPage :: Lens' PageInfo (Maybe Int32)
 piResultPerPage
@@ -997,6 +1031,7 @@ newtype ImagesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImagesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1005,6 +1040,7 @@ newtype ImagesListResponse =
 imagesListResponse
     :: ImagesListResponse
 imagesListResponse = ImagesListResponse' {_ilrImages = Nothing}
+
 
 ilrImages :: Lens' ImagesListResponse [Image]
 ilrImages
@@ -1033,6 +1069,7 @@ data AppEdit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppEdit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1043,6 +1080,7 @@ data AppEdit =
 appEdit
     :: AppEdit
 appEdit = AppEdit' {_aeId = Nothing, _aeExpiryTimeSeconds = Nothing}
+
 
 -- | The ID of the edit that can be used in subsequent API calls.
 aeId :: Lens' AppEdit (Maybe Text)
@@ -1085,6 +1123,7 @@ data ProductPurchase =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductPurchase' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1114,6 +1153,7 @@ productPurchase =
     , _ppDeveloperPayload = Nothing
     , _ppOrderId = Nothing
     }
+
 
 -- | The purchase state of the order. Possible values are: - Purchased -
 -- Canceled
@@ -1203,6 +1243,7 @@ data ReviewsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReviewsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1220,6 +1261,7 @@ reviewsListResponse =
     , _rlrPageInfo = Nothing
     , _rlrReviews = Nothing
     }
+
 
 rlrTokenPagination :: Lens' ReviewsListResponse (Maybe TokenPagination)
 rlrTokenPagination
@@ -1260,6 +1302,7 @@ newtype SubscriptionPurchasesDeferResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionPurchasesDeferResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1269,6 +1312,7 @@ subscriptionPurchasesDeferResponse
     :: SubscriptionPurchasesDeferResponse
 subscriptionPurchasesDeferResponse =
   SubscriptionPurchasesDeferResponse' {_spdrNewExpiryTimeMillis = Nothing}
+
 
 -- | The new expiry time for the subscription in milliseconds since the
 -- Epoch.
@@ -1324,6 +1368,7 @@ data SubscriptionPurchase =
     , _spCancelSurveyResult         :: !(Maybe SubscriptionCancelSurveyResult)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionPurchase' with the minimum fields required to make a request.
 --
@@ -1399,6 +1444,7 @@ subscriptionPurchase =
     , _spOrderId = Nothing
     , _spCancelSurveyResult = Nothing
     }
+
 
 -- | The given name of the user when the subscription was purchased. Only
 -- present for purchases made with \'Subscribe with Google\'.
@@ -1649,6 +1695,7 @@ data SubscriptionPriceChange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionPriceChange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1660,6 +1707,7 @@ subscriptionPriceChange
     :: SubscriptionPriceChange
 subscriptionPriceChange =
   SubscriptionPriceChange' {_spcState = Nothing, _spcNewPrice = Nothing}
+
 
 -- | The current state of the price change. Possible values are: -
 -- Outstanding: State for a pending price change waiting for the user to
@@ -1704,6 +1752,7 @@ data AppDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1724,6 +1773,7 @@ appDetails =
     , _adContactWebsite = Nothing
     , _adDefaultLanguage = Nothing
     }
+
 
 -- | The user-visible support telephone number for this app.
 adContactPhone :: Lens' AppDetails (Maybe Text)
@@ -1777,6 +1827,7 @@ newtype InAppProductPrices =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InAppProductPrices' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1787,6 +1838,7 @@ inAppProductPrices
     -> InAppProductPrices
 inAppProductPrices pIAppAddtional_ =
   InAppProductPrices' {_iAppAddtional = _Coerce # pIAppAddtional_}
+
 
 -- | Region code, as defined by ISO 3166-2.
 iAppAddtional :: Lens' InAppProductPrices (HashMap Text Price)
@@ -1828,6 +1880,7 @@ data ExternallyHostedAPK =
     , _ehapkCertificateBase64s  :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExternallyHostedAPK' with the minimum fields required to make a request.
 --
@@ -1882,6 +1935,7 @@ externallyHostedAPK =
     , _ehapkUsesPermissions = Nothing
     , _ehapkCertificateBase64s = Nothing
     }
+
 
 -- | The application label.
 ehapkApplicationLabel :: Lens' ExternallyHostedAPK (Maybe Text)
@@ -2042,6 +2096,7 @@ data TrackRelease =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrackRelease' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2065,6 +2120,7 @@ trackRelease =
     , _trUserFraction = Nothing
     , _trName = Nothing
     }
+
 
 -- | A list of all version codes of APKs that will be exposed to the users of
 -- this track when this release is rolled out. Note that this list should
@@ -2134,6 +2190,7 @@ data Bundle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Bundle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2146,6 +2203,7 @@ data Bundle =
 bundle
     :: Bundle
 bundle = Bundle' {_bVersionCode = Nothing, _bSha1 = Nothing, _bSha256 = Nothing}
+
 
 -- | The version code of the Android App Bundle. As specified in the Android
 -- App Bundle\'s base module APK manifest file.
@@ -2188,6 +2246,7 @@ newtype DeobfuscationFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeobfuscationFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2196,6 +2255,7 @@ newtype DeobfuscationFile =
 deobfuscationFile
     :: DeobfuscationFile
 deobfuscationFile = DeobfuscationFile' {_dfSymbolType = Nothing}
+
 
 -- | The type of the deobfuscation file.
 dfSymbolType :: Lens' DeobfuscationFile (Maybe Text)
@@ -2222,6 +2282,7 @@ data VoidedPurchasesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VoidedPurchasesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2239,6 +2300,7 @@ voidedPurchasesListResponse =
     , _vplrPageInfo = Nothing
     , _vplrVoidedPurchases = Nothing
     }
+
 
 vplrTokenPagination :: Lens' VoidedPurchasesListResponse (Maybe TokenPagination)
 vplrTokenPagination
@@ -2280,6 +2342,7 @@ newtype ExpansionFilesUploadResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExpansionFilesUploadResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2289,6 +2352,7 @@ expansionFilesUploadResponse
     :: ExpansionFilesUploadResponse
 expansionFilesUploadResponse =
   ExpansionFilesUploadResponse' {_efurExpansionFile = Nothing}
+
 
 efurExpansionFile :: Lens' ExpansionFilesUploadResponse (Maybe ExpansionFile)
 efurExpansionFile
@@ -2316,6 +2380,7 @@ newtype ImagesUploadResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImagesUploadResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2324,6 +2389,7 @@ newtype ImagesUploadResponse =
 imagesUploadResponse
     :: ImagesUploadResponse
 imagesUploadResponse = ImagesUploadResponse' {_iurImage = Nothing}
+
 
 iurImage :: Lens' ImagesUploadResponse (Maybe Image)
 iurImage = lens _iurImage (\ s a -> s{_iurImage = a})
@@ -2346,6 +2412,7 @@ data Prorate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Prorate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2356,6 +2423,7 @@ data Prorate =
 prorate
     :: Prorate
 prorate = Prorate' {_pStart = Nothing, _pDefaultPrice = Nothing}
+
 
 -- | Defines the first day on which the price takes effect.
 pStart :: Lens' Prorate (Maybe MonthDay)
@@ -2392,6 +2460,7 @@ newtype DeobfuscationFilesUploadResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeobfuscationFilesUploadResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2401,6 +2470,7 @@ deobfuscationFilesUploadResponse
     :: DeobfuscationFilesUploadResponse
 deobfuscationFilesUploadResponse =
   DeobfuscationFilesUploadResponse' {_dfurDeobfuscationFile = Nothing}
+
 
 dfurDeobfuscationFile :: Lens' DeobfuscationFilesUploadResponse (Maybe DeobfuscationFile)
 dfurDeobfuscationFile
@@ -2434,6 +2504,7 @@ data InAppProductsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InAppProductsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2454,6 +2525,7 @@ inAppProductsListResponse =
     , _iaplrKind = "androidpublisher#inappproductsListResponse"
     , _iaplrInAppProduct = Nothing
     }
+
 
 iaplrTokenPagination :: Lens' InAppProductsListResponse (Maybe TokenPagination)
 iaplrTokenPagination
@@ -2506,6 +2578,7 @@ data LocalizedText =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocalizedText' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2516,6 +2589,7 @@ data LocalizedText =
 localizedText
     :: LocalizedText
 localizedText = LocalizedText' {_ltText = Nothing, _ltLanguage = Nothing}
+
 
 -- | The text in the given \`language\`.
 ltText :: Lens' LocalizedText (Maybe Text)
@@ -2550,6 +2624,7 @@ data Review =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Review' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2563,6 +2638,7 @@ review
     :: Review
 review =
   Review' {_rReviewId = Nothing, _rAuthorName = Nothing, _rComments = Nothing}
+
 
 -- | Unique identifier for this review.
 rReviewId :: Lens' Review (Maybe Text)
@@ -2605,6 +2681,7 @@ newtype APKsAddExternallyHostedResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APKsAddExternallyHostedResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2614,6 +2691,7 @@ aPKsAddExternallyHostedResponse
     :: APKsAddExternallyHostedResponse
 aPKsAddExternallyHostedResponse =
   APKsAddExternallyHostedResponse' {_apkaehrExternallyHostedAPK = Nothing}
+
 
 -- | The definition of the externally-hosted APK and where it is located.
 apkaehrExternallyHostedAPK :: Lens' APKsAddExternallyHostedResponse (Maybe ExternallyHostedAPK)
@@ -2647,6 +2725,7 @@ data SubscriptionDeferralInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionDeferralInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2661,6 +2740,7 @@ subscriptionDeferralInfo =
     { _sdiDesiredExpiryTimeMillis = Nothing
     , _sdiExpectedExpiryTimeMillis = Nothing
     }
+
 
 -- | The desired next expiry time to assign to the subscription, in
 -- milliseconds since the Epoch. The given time must be later\/greater than
@@ -2705,6 +2785,7 @@ newtype ReviewsReplyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReviewsReplyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2713,6 +2794,7 @@ newtype ReviewsReplyRequest =
 reviewsReplyRequest
     :: ReviewsReplyRequest
 reviewsReplyRequest = ReviewsReplyRequest' {_rrrReplyText = Nothing}
+
 
 -- | The text to set as the reply. Replies of more than approximately 350
 -- characters will be rejected. HTML tags will be stripped.
@@ -2747,6 +2829,7 @@ data DeviceMetadata =
     , _dmScreenDensityDpi :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeviceMetadata' with the minimum fields required to make a request.
 --
@@ -2789,6 +2872,7 @@ deviceMetadata =
     , _dmCPUModel = Nothing
     , _dmScreenDensityDpi = Nothing
     }
+
 
 -- | Device model name (e.g. Droid)
 dmProductName :: Lens' DeviceMetadata (Maybe Text)
@@ -2899,6 +2983,7 @@ data DeveloperComment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeveloperComment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2910,6 +2995,7 @@ developerComment
     :: DeveloperComment
 developerComment =
   DeveloperComment' {_dcText = Nothing, _dcLastModified = Nothing}
+
 
 -- | The content of the comment, i.e. reply body.
 dcText :: Lens' DeveloperComment (Maybe Text)
@@ -2953,6 +3039,7 @@ data InAppProduct =
     , _iapDefaultLanguage    :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InAppProduct' with the minimum fields required to make a request.
 --
@@ -2998,6 +3085,7 @@ inAppProduct =
     , _iapListings = Nothing
     , _iapDefaultLanguage = Nothing
     }
+
 
 iapStatus :: Lens' InAppProduct (Maybe Text)
 iapStatus
@@ -3117,6 +3205,7 @@ data Price =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3127,6 +3216,7 @@ data Price =
 price
     :: Price
 price = Price' {_pPriceMicros = Nothing, _pCurrency = Nothing}
+
 
 -- | The price in millionths of the currency base unit represented as a
 -- string.
@@ -3163,6 +3253,7 @@ data APKBinary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APKBinary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3173,6 +3264,7 @@ data APKBinary =
 aPKBinary
     :: APKBinary
 aPKBinary = APKBinary' {_apkbSha1 = Nothing, _apkbSha256 = Nothing}
+
 
 -- | A sha1 hash of the APK payload, encoded as a hex string and matching the
 -- output of the sha1sum command.
@@ -3207,6 +3299,7 @@ data APKsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APKsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3219,6 +3312,7 @@ aPKsListResponse
 aPKsListResponse =
   APKsListResponse'
     {_apklrKind = "androidpublisher#apksListResponse", _apklrAPKs = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidpublisher#apksListResponse\".
@@ -3256,6 +3350,7 @@ newtype ReviewsReplyResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReviewsReplyResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3264,6 +3359,7 @@ newtype ReviewsReplyResponse =
 reviewsReplyResponse
     :: ReviewsReplyResponse
 reviewsReplyResponse = ReviewsReplyResponse' {_rrrResult = Nothing}
+
 
 rrrResult :: Lens' ReviewsReplyResponse (Maybe ReviewReplyResult)
 rrrResult
@@ -3288,6 +3384,7 @@ data ExternallyHostedAPKUsesPermission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExternallyHostedAPKUsesPermission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3300,6 +3397,7 @@ externallyHostedAPKUsesPermission
 externallyHostedAPKUsesPermission =
   ExternallyHostedAPKUsesPermission'
     {_ehapkupName = Nothing, _ehapkupMaxSdkVersion = Nothing}
+
 
 -- | The name of the permission requested.
 ehapkupName :: Lens' ExternallyHostedAPKUsesPermission (Maybe Text)
@@ -3339,6 +3437,7 @@ data ListingsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListingsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3351,6 +3450,7 @@ listingsListResponse
 listingsListResponse =
   ListingsListResponse'
     {_llrKind = "androidpublisher#listingsListResponse", _llrListings = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidpublisher#listingsListResponse\".
@@ -3387,6 +3487,7 @@ newtype APKsAddExternallyHostedRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APKsAddExternallyHostedRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3396,6 +3497,7 @@ aPKsAddExternallyHostedRequest
     :: APKsAddExternallyHostedRequest
 aPKsAddExternallyHostedRequest =
   APKsAddExternallyHostedRequest' {_aExternallyHostedAPK = Nothing}
+
 
 -- | The definition of the externally-hosted APK and where it is located.
 aExternallyHostedAPK :: Lens' APKsAddExternallyHostedRequest (Maybe ExternallyHostedAPK)
@@ -3427,6 +3529,7 @@ data Comment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3437,6 +3540,7 @@ data Comment =
 comment
     :: Comment
 comment = Comment' {_cUserComment = Nothing, _cDeveloperComment = Nothing}
+
 
 -- | A comment from a user.
 cUserComment :: Lens' Comment (Maybe UserComment)
@@ -3472,6 +3576,7 @@ data Timestamp =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Timestamp' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3482,6 +3587,7 @@ data Timestamp =
 timestamp
     :: Timestamp
 timestamp = Timestamp' {_tNanos = Nothing, _tSeconds = Nothing}
+
 
 tNanos :: Lens' Timestamp (Maybe Int32)
 tNanos
@@ -3519,6 +3625,7 @@ data VoidedPurchase =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VoidedPurchase' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3539,6 +3646,7 @@ voidedPurchase =
     , _vpPurchaseToken = Nothing
     , _vpVoidedTimeMillis = Nothing
     }
+
 
 -- | This kind represents a voided purchase object in the androidpublisher
 -- service.
@@ -3596,6 +3704,7 @@ data BundlesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BundlesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3608,6 +3717,7 @@ bundlesListResponse
 bundlesListResponse =
   BundlesListResponse'
     {_blrBundles = Nothing, _blrKind = "androidpublisher#bundlesListResponse"}
+
 
 blrBundles :: Lens' BundlesListResponse [Bundle]
 blrBundles
@@ -3645,6 +3755,7 @@ data ReviewReplyResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReviewReplyResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3656,6 +3767,7 @@ reviewReplyResult
     :: ReviewReplyResult
 reviewReplyResult =
   ReviewReplyResult' {_rReplyText = Nothing, _rLastEdited = Nothing}
+
 
 -- | The reply text that was applied.
 rReplyText :: Lens' ReviewReplyResult (Maybe Text)

@@ -72,6 +72,7 @@ data SubnetworksSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworksSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ subnetworksSetIAMPolicy pSsiampProject_ pSsiampPayload_ pSsiampResource_ pSsiamp
     , _ssiampResource = pSsiampResource_
     , _ssiampRegion = pSsiampRegion_
     }
+
 
 -- | Project ID for this request.
 ssiampProject :: Lens' SubnetworksSetIAMPolicy Text

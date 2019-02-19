@@ -61,6 +61,7 @@ data EventTagsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventTagsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ eventTagsDelete
 eventTagsDelete pEtdProFileId_ pEtdId_ =
   EventTagsDelete'
     {_etdProFileId = _Coerce # pEtdProFileId_, _etdId = _Coerce # pEtdId_}
+
 
 -- | User profile ID associated with this request.
 etdProFileId :: Lens' EventTagsDelete Int64

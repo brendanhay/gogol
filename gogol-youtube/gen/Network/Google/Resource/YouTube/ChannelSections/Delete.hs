@@ -60,6 +60,7 @@ data ChannelSectionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSectionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ channelSectionsDelete
 channelSectionsDelete pCsdId_ =
   ChannelSectionsDelete'
     {_csdOnBehalfOfContentOwner = Nothing, _csdId = pCsdId_}
+
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the

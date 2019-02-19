@@ -67,6 +67,7 @@ data OrdersInstorerefundlineitem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersInstorerefundlineitem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ ordersInstorerefundlineitem pOiMerchantId_ pOiPayload_ pOiOrderId_ =
     , _oiPayload = pOiPayload_
     , _oiOrderId = pOiOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

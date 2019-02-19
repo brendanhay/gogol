@@ -76,6 +76,7 @@ data ProjectsRegionsOperationsGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsOperationsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsRegionsOperationsGetIAMPolicy pProgipPayload_ pProgipResource_ =
     , _progipResource = pProgipResource_
     , _progipCallback = Nothing
     }
+
 
 -- | V1 error format.
 progipXgafv :: Lens' ProjectsRegionsOperationsGetIAMPolicy (Maybe Xgafv)

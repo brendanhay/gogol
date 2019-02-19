@@ -81,6 +81,7 @@ data ProjectsInstancesDatabasesSessionsStreamingRead =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsStreamingRead' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsInstancesDatabasesSessionsStreamingRead pPidssrPayload_ pPidssrSession_ 
     , _pidssrSession = pPidssrSession_
     , _pidssrCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidssrXgafv :: Lens' ProjectsInstancesDatabasesSessionsStreamingRead (Maybe Xgafv)

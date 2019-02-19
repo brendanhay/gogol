@@ -75,6 +75,7 @@ data ProjectsLookup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLookup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLookup pPlPayload_ pPlProjectId_ =
     , _plProjectId = pPlProjectId_
     , _plCallback = Nothing
     }
+
 
 -- | V1 error format.
 plXgafv :: Lens' ProjectsLookup (Maybe Xgafv)

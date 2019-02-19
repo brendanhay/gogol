@@ -82,6 +82,7 @@ data GroupsMembershipsLookup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsMembershipsLookup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ groupsMembershipsLookup pGmlParent_ =
     , _gmlMemberKeyNamespace = Nothing
     , _gmlCallback = Nothing
     }
+
 
 -- | [Resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the

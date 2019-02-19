@@ -33,6 +33,7 @@ data ReplicaStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplicaStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -56,6 +57,7 @@ replicaStatus =
     , _rsVMStartTime = Nothing
     , _rsDetails = Nothing
     }
+
 
 -- | [Output Only] The state of the Replica.
 rsState :: Lens' ReplicaStatus (Maybe Text)
@@ -114,6 +116,7 @@ data DiskAttachment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskAttachment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +127,7 @@ data DiskAttachment =
 diskAttachment
     :: DiskAttachment
 diskAttachment = DiskAttachment' {_daDeviceName = Nothing, _daIndex = Nothing}
+
 
 -- | The device name of this disk.
 daDeviceName :: Lens' DiskAttachment (Maybe Text)
@@ -159,6 +163,7 @@ newtype PoolsDeleteRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PoolsDeleteRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -167,6 +172,7 @@ newtype PoolsDeleteRequest =
 poolsDeleteRequest
     :: PoolsDeleteRequest
 poolsDeleteRequest = PoolsDeleteRequest' {_pdrAbandonInstances = Nothing}
+
 
 -- | If there are instances you would like to keep, you can specify them
 -- here. These instances won\'t be deleted, but the associated replica
@@ -207,6 +213,7 @@ data HealthCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -242,6 +249,7 @@ healthCheck =
     , _hcUnhealthyThreshold = Nothing
     , _hcPort = Nothing
     }
+
 
 -- | The number of consecutive health check requests that need to succeed
 -- before the replica is considered healthy again. The default value is 2.
@@ -338,6 +346,7 @@ data Tag =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Tag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -348,6 +357,7 @@ data Tag =
 tag
     :: Tag
 tag = Tag' {_tFingerPrint = Nothing, _tItems = Nothing}
+
 
 -- | The fingerprint of the tag. Required for updating the list of tags.
 tFingerPrint :: Lens' Tag (Maybe Text)
@@ -385,6 +395,7 @@ data NewDiskInitializeParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NewDiskInitializeParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -402,6 +413,7 @@ newDiskInitializeParams =
     , _ndipDiskSizeGb = Nothing
     , _ndipDiskType = Nothing
     }
+
 
 -- | The name or fully-qualified URL of a source image to use to create this
 -- disk. If you provide a name of the source image, Replica Pool will look
@@ -456,6 +468,7 @@ data MetadataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetadataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -466,6 +479,7 @@ data MetadataItem =
 metadataItem
     :: MetadataItem
 metadataItem = MetadataItem' {_miValue = Nothing, _miKey = Nothing}
+
 
 -- | A metadata value.
 miValue :: Lens' MetadataItem (Maybe Text)
@@ -500,6 +514,7 @@ data Replica =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Replica' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -512,6 +527,7 @@ data Replica =
 replica
     :: Replica
 replica = Replica' {_rStatus = Nothing, _rSelfLink = Nothing, _rName = Nothing}
+
 
 -- | [Output Only] Last known status of the Replica.
 rStatus :: Lens' Replica (Maybe ReplicaStatus)
@@ -554,6 +570,7 @@ data NetworkInterface =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkInterface' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -568,6 +585,7 @@ networkInterface
 networkInterface =
   NetworkInterface'
     {_niNetwork = Nothing, _niNetworkIP = Nothing, _niAccessConfigs = Nothing}
+
 
 -- | Name the Network resource to which this interface applies.
 niNetwork :: Lens' NetworkInterface (Maybe Text)
@@ -616,6 +634,7 @@ data ExistingDisk =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExistingDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -626,6 +645,7 @@ data ExistingDisk =
 existingDisk
     :: ExistingDisk
 existingDisk = ExistingDisk' {_edAttachment = Nothing, _edSource = Nothing}
+
 
 -- | How the disk will be attached to the Replica.
 edAttachment :: Lens' ExistingDisk (Maybe DiskAttachment)
@@ -662,6 +682,7 @@ data Action =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Action' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -679,6 +700,7 @@ action =
     , _aTimeoutMilliSeconds = Nothing
     , _aEnvVariables = Nothing
     }
+
 
 -- | A list of commands to run, one per line. If any command fails, the whole
 -- action is considered a failure and no further actions are run. This also
@@ -747,6 +769,7 @@ data Pool =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Pool' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -800,6 +823,7 @@ pool =
     , _pDescription = Nothing
     , _pHealthChecks = Nothing
     }
+
 
 -- | The list of resource views that should be updated with all the replicas
 -- that are managed by this pool.
@@ -957,6 +981,7 @@ data ServiceAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -967,6 +992,7 @@ data ServiceAccount =
 serviceAccount
     :: ServiceAccount
 serviceAccount = ServiceAccount' {_saEmail = Nothing, _saScopes = Nothing}
+
 
 -- | The service account email address, for example:
 -- 123845678986\'project.gserviceaccount.com
@@ -1015,6 +1041,7 @@ data VMParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VMParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1056,6 +1083,7 @@ vMParams =
     , _vmpDisksToCreate = Nothing
     , _vmpTags = Nothing
     }
+
 
 -- | A list of Service Accounts to enable for this instance.
 vmpServiceAccounts :: Lens' VMParams [ServiceAccount]
@@ -1179,6 +1207,7 @@ data ReplicasListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplicasListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1190,6 +1219,7 @@ replicasListResponse
     :: ReplicasListResponse
 replicasListResponse =
   ReplicasListResponse' {_rlrNextPageToken = Nothing, _rlrResources = Nothing}
+
 
 rlrNextPageToken :: Lens' ReplicasListResponse (Maybe Text)
 rlrNextPageToken
@@ -1228,6 +1258,7 @@ data Metadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1238,6 +1269,7 @@ data Metadata =
 metadata
     :: Metadata
 metadata = Metadata' {_mFingerPrint = Nothing, _mItems = Nothing}
+
 
 -- | The fingerprint of the metadata. Required for updating the metadata
 -- entries for this instance.
@@ -1277,6 +1309,7 @@ data Template =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Template' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1297,6 +1330,7 @@ template =
     , _tVersion = Nothing
     , _tHealthChecks = Nothing
     }
+
 
 -- | An action to run during initialization of your replicas. An action is
 -- run as shell commands which are executed one after the other in the same
@@ -1356,6 +1390,7 @@ data EnvVariable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnvVariable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1369,6 +1404,7 @@ envVariable
     :: EnvVariable
 envVariable =
   EnvVariable' {_evValue = Nothing, _evName = Nothing, _evHidden = Nothing}
+
 
 -- | The value of the variable.
 evValue :: Lens' EnvVariable (Maybe Text)
@@ -1405,6 +1441,7 @@ newtype ReplicasDeleteRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplicasDeleteRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1413,6 +1450,7 @@ newtype ReplicasDeleteRequest =
 replicasDeleteRequest
     :: ReplicasDeleteRequest
 replicasDeleteRequest = ReplicasDeleteRequest' {_rdrAbandonInstance = Nothing}
+
 
 -- | Whether the instance resource represented by this replica should be
 -- deleted or abandoned. If abandoned, the replica will be deleted but the
@@ -1447,6 +1485,7 @@ data AccessConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1460,6 +1499,7 @@ accessConfig
     :: AccessConfig
 accessConfig =
   AccessConfig' {_acName = Nothing, _acNATIP = Nothing, _acType = Nothing}
+
 
 -- | Name of this access configuration.
 acName :: Lens' AccessConfig (Maybe Text)
@@ -1499,6 +1539,7 @@ data Label =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Label' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1509,6 +1550,7 @@ data Label =
 label
     :: Label
 label = Label' {_lValue = Nothing, _lKey = Nothing}
+
 
 -- | The value of this label.
 lValue :: Lens' Label (Maybe Text)
@@ -1538,6 +1580,7 @@ data PoolsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PoolsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1549,6 +1592,7 @@ poolsListResponse
     :: PoolsListResponse
 poolsListResponse =
   PoolsListResponse' {_plrNextPageToken = Nothing, _plrResources = Nothing}
+
 
 plrNextPageToken :: Lens' PoolsListResponse (Maybe Text)
 plrNextPageToken
@@ -1590,6 +1634,7 @@ data NewDisk =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NewDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1610,6 +1655,7 @@ newDisk =
     , _ndAttachment = Nothing
     , _ndInitializeParams = Nothing
     }
+
 
 -- | If true, indicates that this is the root persistent disk.
 ndBoot :: Lens' NewDisk (Maybe Bool)

@@ -85,6 +85,7 @@ data BillingAccountsSinksUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsSinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ billingAccountsSinksUpdate pBasuPayload_ pBasuSinkName_ =
     , _basuSinkName = pBasuSinkName_
     , _basuCallback = Nothing
     }
+
 
 -- | V1 error format.
 basuXgafv :: Lens' BillingAccountsSinksUpdate (Maybe Xgafv)

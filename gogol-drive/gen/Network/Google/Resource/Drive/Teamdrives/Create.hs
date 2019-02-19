@@ -60,6 +60,7 @@ data TeamdrivesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeamdrivesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ teamdrivesCreate
     -> TeamdrivesCreate
 teamdrivesCreate pTcRequestId_ pTcPayload_ =
   TeamdrivesCreate' {_tcRequestId = pTcRequestId_, _tcPayload = pTcPayload_}
+
 
 -- | An ID, such as a random UUID, which uniquely identifies this user\'s
 -- request for idempotent creation of a Team Drive. A repeated request by

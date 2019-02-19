@@ -87,6 +87,7 @@ data ProjectsClientEventsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsClientEventsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ projectsClientEventsCreate pPcecParent_ pPcecPayload_ =
     , _pcecPayload = pPcecPayload_
     , _pcecCallback = Nothing
     }
+
 
 -- | Parent project name.
 pcecParent :: Lens' ProjectsClientEventsCreate Text

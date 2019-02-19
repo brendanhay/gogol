@@ -72,6 +72,7 @@ data ObjectAccessControlsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectAccessControlsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ objectAccessControlsInsert pOaciBucket_ pOaciPayload_ pOaciObject_ =
     , _oaciObject = pOaciObject_
     , _oaciGeneration = Nothing
     }
+
 
 -- | Name of a bucket.
 oaciBucket :: Lens' ObjectAccessControlsInsert Text

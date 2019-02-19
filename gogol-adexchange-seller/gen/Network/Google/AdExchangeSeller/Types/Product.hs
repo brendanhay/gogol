@@ -31,6 +31,7 @@ data AdClients =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdClients' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -51,6 +52,7 @@ adClients =
     , _acKind = "adexchangeseller#adClients"
     , _acItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 acEtag :: Lens' AdClients (Maybe Text)
@@ -104,6 +106,7 @@ data ReportingMetadataEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportingMetadataEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -133,6 +136,7 @@ reportingMetadataEntry =
     , _rmeCompatibleDimensions = Nothing
     , _rmeSupportedProducts = Nothing
     }
+
 
 -- | Kind of resource this is, in this case
 -- adexchangeseller#reportingMetadataEntry.
@@ -232,6 +236,7 @@ data Accounts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Accounts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -252,6 +257,7 @@ accounts =
     , _aKind = "adexchangeseller#accounts"
     , _aItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 aEtag :: Lens' Accounts (Maybe Text)
@@ -300,6 +306,7 @@ data Alerts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Alerts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -310,6 +317,7 @@ data Alerts =
 alerts
     :: Alerts
 alerts = Alerts' {_aleKind = "adexchangeseller#alerts", _aleItems = Nothing}
+
 
 -- | Kind of list this is, in this case adexchangeseller#alerts.
 aleKind :: Lens' Alerts Text
@@ -348,6 +356,7 @@ data SavedReports =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SavedReports' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -368,6 +377,7 @@ savedReports =
     , _srKind = "adexchangeseller#savedReports"
     , _srItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 srEtag :: Lens' SavedReports (Maybe Text)
@@ -418,6 +428,7 @@ data SavedReport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SavedReport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -432,6 +443,7 @@ savedReport
 savedReport =
   SavedReport'
     {_sKind = "adexchangeseller#savedReport", _sName = Nothing, _sId = Nothing}
+
 
 -- | Kind of resource this is, in this case adexchangeseller#savedReport.
 sKind :: Lens' SavedReport Text
@@ -472,6 +484,7 @@ data URLChannels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLChannels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -492,6 +505,7 @@ urlChannels =
     , _ucKind = "adexchangeseller#urlChannels"
     , _ucItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 ucEtag :: Lens' URLChannels (Maybe Text)
@@ -543,6 +557,7 @@ data CustomChannels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomChannels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -563,6 +578,7 @@ customChannels =
     , _ccKind = "adexchangeseller#customChannels"
     , _ccItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 ccEtag :: Lens' CustomChannels (Maybe Text)
@@ -617,6 +633,7 @@ data Report =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -646,6 +663,7 @@ report =
     , _rHeaders = Nothing
     , _rTotalMatchedRows = Nothing
     }
+
 
 -- | Kind this is, in this case adexchangeseller#report.
 rKind :: Lens' Report Text
@@ -736,6 +754,7 @@ data Alert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Alert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -759,6 +778,7 @@ alert =
     , _aaType = Nothing
     , _aaMessage = Nothing
     }
+
 
 -- | Kind of resource this is, in this case adexchangeseller#alert.
 aaKind :: Lens' Alert Text
@@ -815,6 +835,7 @@ data Account =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -832,6 +853,7 @@ account =
     , _accName = Nothing
     , _accId = Nothing
     }
+
 
 -- | Kind of resource this is, in this case adexchangeseller#account.
 accKind :: Lens' Account Text
@@ -873,6 +895,7 @@ data AdClient =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdClient' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -896,6 +919,7 @@ adClient =
     , _adId = Nothing
     , _adProductCode = Nothing
     }
+
 
 -- | Kind of resource this is, in this case adexchangeseller#adClient.
 adKind :: Lens' AdClient Text
@@ -954,6 +978,7 @@ data ReportHeadersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportHeadersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -968,6 +993,7 @@ reportHeadersItem
 reportHeadersItem =
   ReportHeadersItem'
     {_rhiName = Nothing, _rhiCurrency = Nothing, _rhiType = Nothing}
+
 
 -- | The name of the header.
 rhiName :: Lens' ReportHeadersItem (Maybe Text)
@@ -1012,6 +1038,7 @@ data CustomChannelTargetingInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomChannelTargetingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1032,6 +1059,7 @@ customChannelTargetingInfo =
     , _cctiAdsAppearOn = Nothing
     , _cctiDescription = Nothing
     }
+
 
 -- | The locations in which ads appear. (Only valid for content and mobile
 -- content ads). Acceptable values for content ads are: TOP_LEFT,
@@ -1088,6 +1116,7 @@ data PreferredDeals =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PreferredDeals' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1100,6 +1129,7 @@ preferredDeals
 preferredDeals =
   PreferredDeals'
     {_pdKind = "adexchangeseller#preferredDeals", _pdItems = Nothing}
+
 
 -- | Kind of list this is, in this case adexchangeseller#preferredDeals.
 pdKind :: Lens' PreferredDeals Text
@@ -1135,6 +1165,7 @@ data Metadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1145,6 +1176,7 @@ data Metadata =
 metadata
     :: Metadata
 metadata = Metadata' {_mKind = "adexchangeseller#metadata", _mItems = Nothing}
+
 
 -- | Kind of list this is, in this case adexchangeseller#metadata.
 mKind :: Lens' Metadata Text
@@ -1181,6 +1213,7 @@ data CustomChannel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1204,6 +1237,7 @@ customChannel =
     , _cCode = Nothing
     , _cId = Nothing
     }
+
 
 -- | The targeting information of this custom channel, if activated.
 cTargetingInfo :: Lens' CustomChannel (Maybe CustomChannelTargetingInfo)
@@ -1258,6 +1292,7 @@ data URLChannel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1275,6 +1310,7 @@ urlChannel =
     , _urlcId = Nothing
     , _urlcURLPattern = Nothing
     }
+
 
 -- | Kind of resource this is, in this case adexchangeseller#urlChannel.
 urlcKind :: Lens' URLChannel Text
@@ -1324,6 +1360,7 @@ data PreferredDeal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PreferredDeal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1356,6 +1393,7 @@ preferredDeal =
     , _pId = Nothing
     , _pFixedCpm = Nothing
     }
+
 
 -- | The name of the advertiser this deal is for.
 pAdvertiserName :: Lens' PreferredDeal (Maybe Text)

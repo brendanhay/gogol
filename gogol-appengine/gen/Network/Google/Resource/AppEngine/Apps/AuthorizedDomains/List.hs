@@ -79,6 +79,7 @@ data AppsAuthorizedDomainsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsAuthorizedDomainsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ appsAuthorizedDomainsList pAadlAppsId_ =
     , _aadlPageSize = Nothing
     , _aadlCallback = Nothing
     }
+
 
 -- | V1 error format.
 aadlXgafv :: Lens' AppsAuthorizedDomainsList (Maybe Xgafv)

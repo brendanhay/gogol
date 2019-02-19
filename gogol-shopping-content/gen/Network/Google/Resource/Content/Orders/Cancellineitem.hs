@@ -65,6 +65,7 @@ data OrdersCancellineitem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCancellineitem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ ordersCancellineitem pOrdrMerchantId_ pOrdrPayload_ pOrdrOrderId_ =
     , _ordrPayload = pOrdrPayload_
     , _ordrOrderId = pOrdrOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

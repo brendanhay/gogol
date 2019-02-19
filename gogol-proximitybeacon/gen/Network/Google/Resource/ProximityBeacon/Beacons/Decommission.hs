@@ -85,6 +85,7 @@ data BeaconsDecommission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconsDecommission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ beaconsDecommission pBddBeaconName_ =
     , _bddProjectId = Nothing
     , _bddCallback = Nothing
     }
+
 
 -- | V1 error format.
 bddXgafv :: Lens' BeaconsDecommission (Maybe Xgafv)

@@ -60,6 +60,7 @@ newtype RelyingPartyVerifyCustomToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartyVerifyCustomToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ relyingPartyVerifyCustomToken
     -> RelyingPartyVerifyCustomToken
 relyingPartyVerifyCustomToken pRpvctPayload_ =
   RelyingPartyVerifyCustomToken' {_rpvctPayload = pRpvctPayload_}
+
 
 -- | Multipart request metadata.
 rpvctPayload :: Lens' RelyingPartyVerifyCustomToken IdentitytoolkitRelyingPartyVerifyCustomTokenRequest

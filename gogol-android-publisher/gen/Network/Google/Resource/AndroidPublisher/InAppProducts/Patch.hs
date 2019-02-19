@@ -70,6 +70,7 @@ data InAppProductsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InAppProductsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ inAppProductsPatch pIAppPackageName_ pIAppPayload_ pIAppSKU_ =
     , _iAppPayload = pIAppPayload_
     , _iAppSKU = pIAppSKU_
     }
+
 
 -- | If true the prices for all regions targeted by the parent app that
 -- don\'t have a price specified for this in-app product will be auto

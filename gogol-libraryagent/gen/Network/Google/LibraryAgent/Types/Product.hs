@@ -30,6 +30,7 @@ data GoogleExampleLibraryagentV1Shelf =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleExampleLibraryagentV1Shelf' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42,6 +43,7 @@ googleExampleLibraryagentV1Shelf
 googleExampleLibraryagentV1Shelf =
   GoogleExampleLibraryagentV1Shelf'
     {_gelvsName = Nothing, _gelvsTheme = Nothing}
+
 
 -- | Output only. The resource name of the shelf. Shelf names have the form
 -- \`shelves\/{shelf_id}\`. The name is ignored when creating a shelf.
@@ -80,6 +82,7 @@ data GoogleExampleLibraryagentV1ListShelvesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleExampleLibraryagentV1ListShelvesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +95,7 @@ googleExampleLibraryagentV1ListShelvesResponse
 googleExampleLibraryagentV1ListShelvesResponse =
   GoogleExampleLibraryagentV1ListShelvesResponse'
     {_gelvlsrNextPageToken = Nothing, _gelvlsrShelves = Nothing}
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- ListShelvesRequest.page_token field in the subsequent call to
@@ -140,6 +144,7 @@ data GoogleExampleLibraryagentV1ListBooksResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleExampleLibraryagentV1ListBooksResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -152,6 +157,7 @@ googleExampleLibraryagentV1ListBooksResponse
 googleExampleLibraryagentV1ListBooksResponse =
   GoogleExampleLibraryagentV1ListBooksResponse'
     {_gelvlbrNextPageToken = Nothing, _gelvlbrBooks = Nothing}
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- ListBooksRequest.page_token field in the subsequent call to
@@ -201,6 +207,7 @@ data GoogleExampleLibraryagentV1Book =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleExampleLibraryagentV1Book' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -221,6 +228,7 @@ googleExampleLibraryagentV1Book =
     , _gelvbAuthor = Nothing
     , _gelvbTitle = Nothing
     }
+
 
 -- | Value indicating whether the book has been read.
 gelvbRead :: Lens' GoogleExampleLibraryagentV1Book (Maybe Bool)

@@ -74,6 +74,7 @@ data ProjectsServiceAccountsSignJwt =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServiceAccountsSignJwt' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsServiceAccountsSignJwt pPsasjPayload_ pPsasjName_ =
     , _psasjName = pPsasjName_
     , _psasjCallback = Nothing
     }
+
 
 -- | V1 error format.
 psasjXgafv :: Lens' ProjectsServiceAccountsSignJwt (Maybe Xgafv)

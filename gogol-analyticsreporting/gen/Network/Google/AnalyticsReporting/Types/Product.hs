@@ -32,6 +32,7 @@ data MetricFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -52,6 +53,7 @@ metricFilter =
     , _mfMetricName = Nothing
     , _mfComparisonValue = Nothing
     }
+
 
 -- | Logical \`NOT\` operator. If this boolean is set to true, then the
 -- matching metric values will be excluded in the report. The default is
@@ -108,6 +110,7 @@ data ReportRow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportRow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +121,7 @@ data ReportRow =
 reportRow
     :: ReportRow
 reportRow = ReportRow' {_rrMetrics = Nothing, _rrDimensions = Nothing}
+
 
 -- | List of metrics for each requested DateRange.
 rrMetrics :: Lens' ReportRow [DateRangeValues]
@@ -160,6 +164,7 @@ data PivotHeaderEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PivotHeaderEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -177,6 +182,7 @@ pivotHeaderEntry =
     , _pheDimensionNames = Nothing
     , _pheMetric = Nothing
     }
+
 
 -- | The values for the dimensions in the pivot.
 pheDimensionValues :: Lens' PivotHeaderEntry [Text]
@@ -225,6 +231,7 @@ newtype PivotValueRegion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PivotValueRegion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -233,6 +240,7 @@ newtype PivotValueRegion =
 pivotValueRegion
     :: PivotValueRegion
 pivotValueRegion = PivotValueRegion' {_pvrValues = Nothing}
+
 
 -- | The values of the metrics in each of the pivot regions.
 pvrValues :: Lens' PivotValueRegion [Text]
@@ -275,6 +283,7 @@ data ReportRequest =
     , _rFiltersExpression      :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportRequest' with the minimum fields required to make a request.
 --
@@ -335,6 +344,7 @@ reportRequest =
     , _rOrderBys = Nothing
     , _rFiltersExpression = Nothing
     }
+
 
 -- | The metrics requested. Requests must specify at least one metric.
 -- Requests can have a total of 10 metrics.
@@ -554,6 +564,7 @@ data MetricHeaderEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricHeaderEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -564,6 +575,7 @@ data MetricHeaderEntry =
 metricHeaderEntry
     :: MetricHeaderEntry
 metricHeaderEntry = MetricHeaderEntry' {_mheName = Nothing, _mheType = Nothing}
+
 
 -- | The name of the header.
 mheName :: Lens' MetricHeaderEntry (Maybe Text)
@@ -600,6 +612,7 @@ data CohortGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CohortGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -610,6 +623,7 @@ data CohortGroup =
 cohortGroup
     :: CohortGroup
 cohortGroup = CohortGroup' {_cgCohorts = Nothing, _cgLifetimeValue = Nothing}
+
 
 -- | The definition for the cohort.
 cgCohorts :: Lens' CohortGroup [Cohort]
@@ -669,6 +683,7 @@ newtype SimpleSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SimpleSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -677,6 +692,7 @@ newtype SimpleSegment =
 simpleSegment
     :: SimpleSegment
 simpleSegment = SimpleSegment' {_ssOrFiltersForSegment = Nothing}
+
 
 -- | A list of segment filters groups which are combined with logical \`AND\`
 -- operator.
@@ -712,6 +728,7 @@ data DimensionFilterClause =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DimensionFilterClause' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -723,6 +740,7 @@ dimensionFilterClause
     :: DimensionFilterClause
 dimensionFilterClause =
   DimensionFilterClause' {_dfcOperator = Nothing, _dfcFilters = Nothing}
+
 
 -- | The operator for combining multiple dimension filters. If unspecified,
 -- it is treated as an \`OR\`.
@@ -763,6 +781,7 @@ data OrderBy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderBy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -777,6 +796,7 @@ orderBy
 orderBy =
   OrderBy'
     {_obOrderType = Nothing, _obSortOrder = Nothing, _obFieldName = Nothing}
+
 
 -- | The order type. The default orderType is \`VALUE\`.
 obOrderType :: Lens' OrderBy (Maybe OrderByOrderType)
@@ -824,6 +844,7 @@ data Dimension =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Dimension' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -834,6 +855,7 @@ data Dimension =
 dimension
     :: Dimension
 dimension = Dimension' {_dName = Nothing, _dHistogramBuckets = Nothing}
+
 
 -- | Name of the dimension to fetch, for example \`ga:browser\`.
 dName :: Lens' Dimension (Maybe Text)
@@ -894,6 +916,7 @@ data DateRangeValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DateRangeValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -905,6 +928,7 @@ dateRangeValues
     :: DateRangeValues
 dateRangeValues =
   DateRangeValues' {_drvPivotValueRegions = Nothing, _drvValues = Nothing}
+
 
 -- | The values of each pivot region.
 drvPivotValueRegions :: Lens' DateRangeValues [PivotValueRegion]
@@ -946,6 +970,7 @@ data PivotHeader =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PivotHeader' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -958,6 +983,7 @@ pivotHeader
 pivotHeader =
   PivotHeader'
     {_phTotalPivotGroupsCount = Nothing, _phPivotHeaderEntries = Nothing}
+
 
 -- | The total number of groups for this pivot.
 phTotalPivotGroupsCount :: Lens' PivotHeader (Maybe Int32)
@@ -1000,6 +1026,7 @@ data MetricHeader =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricHeader' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1011,6 +1038,7 @@ metricHeader
     :: MetricHeader
 metricHeader =
   MetricHeader' {_mhPivotHeaders = Nothing, _mhMetricHeaderEntries = Nothing}
+
 
 -- | Headers for the pivots in the response.
 mhPivotHeaders :: Lens' MetricHeader [PivotHeader]
@@ -1058,6 +1086,7 @@ data SegmentFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SegmentFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1072,6 +1101,7 @@ segmentFilter
 segmentFilter =
   SegmentFilter'
     {_sfNot = Nothing, _sfSimpleSegment = Nothing, _sfSequenceSegment = Nothing}
+
 
 -- | If true, match the complement of simple or sequence segment. For
 -- example, to match all visits not from \"New York\", we can define the
@@ -1127,6 +1157,7 @@ data DateRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DateRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1137,6 +1168,7 @@ data DateRange =
 dateRange
     :: DateRange
 dateRange = DateRange' {_drEndDate = Nothing, _drStartDate = Nothing}
+
 
 -- | The end date for the query in the format \`YYYY-MM-DD\`.
 drEndDate :: Lens' DateRange (Maybe Text)
@@ -1173,6 +1205,7 @@ data Report =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1187,6 +1220,7 @@ report
 report =
   Report'
     {_rNextPageToken = Nothing, _rData = Nothing, _rColumnHeader = Nothing}
+
 
 -- | Page token to retrieve the next page of results in the list.
 rNextPageToken :: Lens' Report (Maybe Text)
@@ -1237,6 +1271,7 @@ data ReportData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1272,6 +1307,7 @@ reportData =
     , _rdSamplingSpaceSizes = Nothing
     , _rdIsDataGolden = Nothing
     }
+
 
 -- | Minimum and maximum values seen over all matching rows. These are both
 -- empty when \`hideValueRanges\` in the request is false, or when rowCount
@@ -1401,6 +1437,7 @@ data SegmentFilterClause =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SegmentFilterClause' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1418,6 +1455,7 @@ segmentFilterClause =
     , _sfcNot = Nothing
     , _sfcDimensionFilter = Nothing
     }
+
 
 -- | Metric Filter for the segment definition.
 sfcMetricFilter :: Lens' SegmentFilterClause (Maybe SegmentMetricFilter)
@@ -1461,6 +1499,7 @@ data SegmentSequenceStep =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SegmentSequenceStep' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1473,6 +1512,7 @@ segmentSequenceStep
 segmentSequenceStep =
   SegmentSequenceStep'
     {_sssMatchType = Nothing, _sssOrFiltersForSegment = Nothing}
+
 
 -- | Specifies if the step immediately precedes or can be any time before the
 -- next step.
@@ -1515,6 +1555,7 @@ newtype OrFiltersForSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrFiltersForSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1523,6 +1564,7 @@ newtype OrFiltersForSegment =
 orFiltersForSegment
     :: OrFiltersForSegment
 orFiltersForSegment = OrFiltersForSegment' {_offsSegmentFilterClauses = Nothing}
+
 
 -- | List of segment filters to be combined with a \`OR\` operator.
 offsSegmentFilterClauses :: Lens' OrFiltersForSegment [SegmentFilterClause]
@@ -1556,6 +1598,7 @@ newtype SegmentDefinition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SegmentDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1564,6 +1607,7 @@ newtype SegmentDefinition =
 segmentDefinition
     :: SegmentDefinition
 segmentDefinition = SegmentDefinition' {_sdSegmentFilters = Nothing}
+
 
 -- | A segment is defined by a set of segment filters which are combined
 -- together with a logical \`AND\` operation.
@@ -1602,6 +1646,7 @@ data Pivot =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Pivot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1625,6 +1670,7 @@ pivot =
     , _pDimensions = Nothing
     , _pDimensionFilterClauses = Nothing
     }
+
 
 -- | If k metrics were requested, then the response will contain some
 -- data-dependent multiple of k columns in the report. E.g., if you pivoted
@@ -1715,6 +1761,7 @@ data SequenceSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SequenceSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1729,6 +1776,7 @@ sequenceSegment =
     { _ssFirstStepShouldMatchFirstHit = Nothing
     , _ssSegmentSequenceSteps = Nothing
     }
+
 
 -- | If set, first step condition must match the first hit of the visitor (in
 -- the date range).
@@ -1775,6 +1823,7 @@ data Metric =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Metric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1789,6 +1838,7 @@ metric
 metric =
   Metric'
     {_mFormattingType = Nothing, _mAlias = Nothing, _mExpression = Nothing}
+
 
 -- | Specifies how the metric expression should be formatted, for example
 -- \`INTEGER\`.
@@ -1846,6 +1896,7 @@ data SegmentMetricFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SegmentMetricFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1869,6 +1920,7 @@ segmentMetricFilter =
     , _smfScope = Nothing
     , _smfComparisonValue = Nothing
     }
+
 
 -- | Specifies is the operation to perform to compare the metric. The default
 -- is \`EQUAL\`.
@@ -1933,6 +1985,7 @@ data GetReportsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetReportsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1945,6 +1998,7 @@ getReportsRequest
 getReportsRequest =
   GetReportsRequest'
     {_grrUseResourceQuotas = Nothing, _grrReportRequests = Nothing}
+
 
 -- | Enables [resource based
 -- quotas](\/analytics\/devguides\/reporting\/core\/v4\/limits-quotas#analytics_reporting_api_v4),
@@ -1997,6 +2051,7 @@ data Cohort =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Cohort' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2009,6 +2064,7 @@ data Cohort =
 cohort
     :: Cohort
 cohort = Cohort' {_cDateRange = Nothing, _cName = Nothing, _cType = Nothing}
+
 
 -- | This is used for \`FIRST_VISIT_DATE\` cohort, the cohort selects users
 -- whose first visit date is between start date and end date defined in the
@@ -2063,6 +2119,7 @@ data DimensionFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DimensionFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2086,6 +2143,7 @@ dimensionFilter =
     , _dfDimensionName = Nothing
     , _dfCaseSensitive = Nothing
     }
+
 
 -- | Logical \`NOT\` operator. If this boolean is set to true, then the
 -- matching dimension values will be excluded in the report. The default is
@@ -2153,6 +2211,7 @@ data GetReportsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetReportsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2170,6 +2229,7 @@ getReportsResponse =
     , _grrResourceQuotasRemaining = Nothing
     , _grrQueryCost = Nothing
     }
+
 
 -- | Responses corresponding to each of the request.
 grrReports :: Lens' GetReportsResponse [Report]
@@ -2221,6 +2281,7 @@ data Segment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Segment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2231,6 +2292,7 @@ data Segment =
 segment
     :: Segment
 segment = Segment' {_sDynamicSegment = Nothing, _sSegmentId = Nothing}
+
 
 -- | A dynamic segment definition in the request.
 sDynamicSegment :: Lens' Segment (Maybe DynamicSegment)
@@ -2269,6 +2331,7 @@ data ResourceQuotasRemaining =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceQuotasRemaining' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2283,6 +2346,7 @@ resourceQuotasRemaining =
     { _rqrHourlyQuotaTokensRemaining = Nothing
     , _rqrDailyQuotaTokensRemaining = Nothing
     }
+
 
 -- | Hourly resource quota tokens remaining.
 rqrHourlyQuotaTokensRemaining :: Lens' ResourceQuotasRemaining (Maybe Int32)
@@ -2329,6 +2393,7 @@ data SegmentDimensionFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SegmentDimensionFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2355,6 +2420,7 @@ segmentDimensionFilter =
     , _sdfDimensionName = Nothing
     , _sdfCaseSensitive = Nothing
     }
+
 
 -- | The operator to use to match the dimension with the expressions.
 sdfOperator :: Lens' SegmentDimensionFilter (Maybe SegmentDimensionFilterOperator)
@@ -2428,6 +2494,7 @@ data DynamicSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DynamicSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2442,6 +2509,7 @@ dynamicSegment
 dynamicSegment =
   DynamicSegment'
     {_dsUserSegment = Nothing, _dsName = Nothing, _dsSessionSegment = Nothing}
+
 
 -- | User Segment to select users to include in the segment.
 dsUserSegment :: Lens' DynamicSegment (Maybe SegmentDefinition)
@@ -2486,6 +2554,7 @@ data MetricFilterClause =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricFilterClause' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2497,6 +2566,7 @@ metricFilterClause
     :: MetricFilterClause
 metricFilterClause =
   MetricFilterClause' {_mfcOperator = Nothing, _mfcFilters = Nothing}
+
 
 -- | The operator for combining multiple metric filters. If unspecified, it
 -- is treated as an \`OR\`.
@@ -2536,6 +2606,7 @@ data ColumnHeader =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColumnHeader' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2547,6 +2618,7 @@ columnHeader
     :: ColumnHeader
 columnHeader =
   ColumnHeader' {_chMetricHeader = Nothing, _chDimensions = Nothing}
+
 
 -- | Metric headers for the metrics in the response.
 chMetricHeader :: Lens' ColumnHeader (Maybe MetricHeader)

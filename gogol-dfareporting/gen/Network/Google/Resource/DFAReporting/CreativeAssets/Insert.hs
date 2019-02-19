@@ -79,6 +79,7 @@ data CreativeAssetsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeAssetsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ creativeAssetsInsert pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ =
     , _caiProFileId = _Coerce # pCaiProFileId_
     , _caiPayload = pCaiPayload_
     }
+
 
 -- | Advertiser ID of this creative. This is a required field.
 caiAdvertiserId :: Lens' CreativeAssetsInsert Int64

@@ -73,6 +73,7 @@ data ProjectsLocationsDataSetsFhirStoresDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsFhirStoresDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ projectsLocationsDataSetsFhirStoresDelete pPldsfsdName_ =
     , _pldsfsdName = pPldsfsdName_
     , _pldsfsdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldsfsdXgafv :: Lens' ProjectsLocationsDataSetsFhirStoresDelete (Maybe Xgafv)

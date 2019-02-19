@@ -68,6 +68,7 @@ data NodeTemplatesGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplatesGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ nodeTemplatesGetIAMPolicy pNtgipProject_ pNtgipResource_ pNtgipRegion_ =
     , _ntgipResource = pNtgipResource_
     , _ntgipRegion = pNtgipRegion_
     }
+
 
 -- | Project ID for this request.
 ntgipProject :: Lens' NodeTemplatesGetIAMPolicy Text

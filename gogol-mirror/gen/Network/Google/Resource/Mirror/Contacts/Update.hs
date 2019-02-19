@@ -60,6 +60,7 @@ data ContactsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ contactsUpdate
     -> ContactsUpdate
 contactsUpdate pCuPayload_ pCuId_ =
   ContactsUpdate' {_cuPayload = pCuPayload_, _cuId = pCuId_}
+
 
 -- | Multipart request metadata.
 cuPayload :: Lens' ContactsUpdate Contact

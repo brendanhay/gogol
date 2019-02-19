@@ -63,6 +63,7 @@ data EnterprisesSetAndroidDevicePolicyConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesSetAndroidDevicePolicyConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ enterprisesSetAndroidDevicePolicyConfig pEsadpcEnterpriseId_ pEsadpcPayload_ =
     { _esadpcEnterpriseId = pEsadpcEnterpriseId_
     , _esadpcPayload = pEsadpcPayload_
     }
+
 
 -- | The ID of the enterprise.
 esadpcEnterpriseId :: Lens' EnterprisesSetAndroidDevicePolicyConfig Text

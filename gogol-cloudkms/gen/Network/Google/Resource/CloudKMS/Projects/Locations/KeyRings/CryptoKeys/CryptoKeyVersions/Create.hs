@@ -78,6 +78,7 @@ data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate pPlkrckckvcParent_ pP
     , _plkrckckvcPayload = pPlkrckckvcPayload_
     , _plkrckckvcCallback = Nothing
     }
+
 
 -- | Required. The name of the CryptoKey associated with the
 -- CryptoKeyVersions.

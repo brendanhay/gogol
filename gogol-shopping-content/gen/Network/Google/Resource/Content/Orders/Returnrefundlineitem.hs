@@ -67,6 +67,7 @@ data OrdersReturnrefundlineitem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersReturnrefundlineitem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ ordersReturnrefundlineitem pOrMerchantId_ pOrPayload_ pOrOrderId_ =
     , _orPayload = pOrPayload_
     , _orOrderId = pOrOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

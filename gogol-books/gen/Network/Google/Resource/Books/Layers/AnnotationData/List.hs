@@ -97,6 +97,7 @@ data LayersAnnotationDataList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LayersAnnotationDataList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -147,6 +148,7 @@ layersAnnotationDataList pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
     , _ladlLayerId = pLadlLayerId_
     , _ladlMaxResults = Nothing
     }
+
 
 -- | The requested pixel width for any images. If width is provided height
 -- must also be provided.

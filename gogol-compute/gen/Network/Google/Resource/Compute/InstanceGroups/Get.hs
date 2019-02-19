@@ -67,6 +67,7 @@ data InstanceGroupsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ instanceGroupsGet pIggProject_ pIggZone_ pIggInstanceGroup_ =
     , _iggZone = pIggZone_
     , _iggInstanceGroup = pIggInstanceGroup_
     }
+
 
 -- | Project ID for this request.
 iggProject :: Lens' InstanceGroupsGet Text

@@ -63,6 +63,7 @@ data SecurityPoliciesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPoliciesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ securityPoliciesGet
 securityPoliciesGet pSecProject_ pSecSecurityPolicy_ =
   SecurityPoliciesGet'
     {_secProject = pSecProject_, _secSecurityPolicy = pSecSecurityPolicy_}
+
 
 -- | Project ID for this request.
 secProject :: Lens' SecurityPoliciesGet Text

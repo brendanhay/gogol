@@ -83,6 +83,7 @@ data FilesAsyncBatchAnnotate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilesAsyncBatchAnnotate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ filesAsyncBatchAnnotate pFabaPayload_ =
     , _fabaPayload = pFabaPayload_
     , _fabaCallback = Nothing
     }
+
 
 -- | V1 error format.
 fabaXgafv :: Lens' FilesAsyncBatchAnnotate (Maybe Xgafv)

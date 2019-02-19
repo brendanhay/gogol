@@ -59,6 +59,7 @@ newtype LanguagesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LanguagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ languagesList
     -> LanguagesList
 languagesList pLlProFileId_ =
   LanguagesList' {_llProFileId = _Coerce # pLlProFileId_}
+
 
 -- | User profile ID associated with this request.
 llProFileId :: Lens' LanguagesList Int64

@@ -66,6 +66,7 @@ data AccountsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ accountsInsert pAiAccountName_ pAiPayload_ pAiUserToken_ pAiAccountType_ =
     , _aiUserToken = pAiUserToken_
     , _aiAccountType = pAiAccountType_
     }
+
 
 -- | The name of the account to be passed to the Android Account Manager.
 aiAccountName :: Lens' AccountsInsert Text

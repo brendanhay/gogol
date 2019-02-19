@@ -57,6 +57,7 @@ newtype UserProFilesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserProFilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ userProFilesGet
     -> UserProFilesGet
 userProFilesGet pUpfgProFileId_ =
   UserProFilesGet' {_upfgProFileId = _Coerce # pUpfgProFileId_}
+
 
 -- | The user profile ID.
 upfgProFileId :: Lens' UserProFilesGet Int64

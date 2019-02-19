@@ -71,6 +71,7 @@ data UsersSettingsSendAsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsSendAsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ usersSettingsSendAsUpdate pUssauPayload_ pUssauSendAsEmail_ =
     , _ussauUserId = "me"
     , _ussauSendAsEmail = pUssauSendAsEmail_
     }
+
 
 -- | Multipart request metadata.
 ussauPayload :: Lens' UsersSettingsSendAsUpdate SendAs

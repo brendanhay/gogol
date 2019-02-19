@@ -82,6 +82,7 @@ data AccountsClientsInvitationsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsClientsInvitationsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ accountsClientsInvitationsCreate pAcicPayload_ pAcicAccountId_ pAcicClientAccoun
     , _acicClientAccountId = _Coerce # pAcicClientAccountId_
     , _acicCallback = Nothing
     }
+
 
 -- | V1 error format.
 acicXgafv :: Lens' AccountsClientsInvitationsCreate (Maybe Xgafv)

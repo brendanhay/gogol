@@ -91,6 +91,7 @@ data ProjectsLocationsClustersCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ projectsLocationsClustersCreate pPlccParent_ pPlccPayload_ =
     , _plccPayload = pPlccPayload_
     , _plccCallback = Nothing
     }
+
 
 -- | The parent (project and location) where the cluster will be created.
 -- Specified in the format \'projects\/*\/locations\/*\'.

@@ -70,6 +70,7 @@ data ProjectsServiceAccountsKeysDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServiceAccountsKeysDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsServiceAccountsKeysDelete pPsakdName_ =
     , _psakdName = pPsakdName_
     , _psakdCallback = Nothing
     }
+
 
 -- | V1 error format.
 psakdXgafv :: Lens' ProjectsServiceAccountsKeysDelete (Maybe Xgafv)

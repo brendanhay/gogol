@@ -99,6 +99,7 @@ data AppsServicesVersionsInstancesDebug =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsServicesVersionsInstancesDebug' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -142,6 +143,7 @@ appsServicesVersionsInstancesDebug pAsvidInstancesId_ pAsvidPayload_ pAsvidVersi
     , _asvidServicesId = pAsvidServicesId_
     , _asvidCallback = Nothing
     }
+
 
 -- | V1 error format.
 asvidXgafv :: Lens' AppsServicesVersionsInstancesDebug (Maybe Xgafv)

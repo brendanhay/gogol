@@ -63,6 +63,7 @@ data LiveBroadcastsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveBroadcastsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ liveBroadcastsDelete pLbdId_ =
     , _lbdOnBehalfOfContentOwnerChannel = Nothing
     , _lbdId = pLbdId_
     }
+
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the

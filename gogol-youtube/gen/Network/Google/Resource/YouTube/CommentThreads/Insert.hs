@@ -63,6 +63,7 @@ data CommentThreadsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentThreadsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ commentThreadsInsert
     -> CommentThreadsInsert
 commentThreadsInsert pCtiPart_ pCtiPayload_ =
   CommentThreadsInsert' {_ctiPart = pCtiPart_, _ctiPayload = pCtiPayload_}
+
 
 -- | The part parameter identifies the properties that the API response will
 -- include. Set the parameter value to snippet. The snippet part has a

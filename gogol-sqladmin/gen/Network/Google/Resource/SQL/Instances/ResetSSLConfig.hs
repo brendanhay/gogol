@@ -64,6 +64,7 @@ data InstancesResetSSLConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesResetSSLConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ instancesResetSSLConfig
 instancesResetSSLConfig pIrscProject_ pIrscInstance_ =
   InstancesResetSSLConfig'
     {_irscProject = pIrscProject_, _irscInstance = pIrscInstance_}
+
 
 -- | Project ID of the project that contains the instance.
 irscProject :: Lens' InstancesResetSSLConfig Text

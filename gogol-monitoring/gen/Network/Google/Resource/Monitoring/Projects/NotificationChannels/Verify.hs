@@ -78,6 +78,7 @@ data ProjectsNotificationChannelsVerify =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotificationChannelsVerify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsNotificationChannelsVerify pPncvPayload_ pPncvName_ =
     , _pncvName = pPncvName_
     , _pncvCallback = Nothing
     }
+
 
 -- | V1 error format.
 pncvXgafv :: Lens' ProjectsNotificationChannelsVerify (Maybe Xgafv)

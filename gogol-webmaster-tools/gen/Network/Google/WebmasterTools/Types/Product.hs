@@ -31,6 +31,7 @@ data WmxSitemapContent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WmxSitemapContent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -45,6 +46,7 @@ wmxSitemapContent
 wmxSitemapContent =
   WmxSitemapContent'
     {_wscIndexed = Nothing, _wscType = Nothing, _wscSubmitted = Nothing}
+
 
 -- | The number of URLs from the sitemap that were indexed (of the content
 -- type).
@@ -88,6 +90,7 @@ data APIdimensionFilterGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APIdimensionFilterGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +102,7 @@ apidimensionFilterGroup
     :: APIdimensionFilterGroup
 apidimensionFilterGroup =
   APIdimensionFilterGroup' {_afgFilters = Nothing, _afgGroupType = Nothing}
+
 
 afgFilters :: Lens' APIdimensionFilterGroup [APIdimensionFilter]
 afgFilters
@@ -134,6 +138,7 @@ data URLSampleDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLSampleDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -146,6 +151,7 @@ urlSampleDetails
 urlSampleDetails =
   URLSampleDetails'
     {_usdLinkedFromURLs = Nothing, _usdContainingSitemaps = Nothing}
+
 
 -- | A sample set of URLs linking to this URL.
 usdLinkedFromURLs :: Lens' URLSampleDetails [Text]
@@ -191,6 +197,7 @@ data URLCrawlErrorCountsPerType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLCrawlErrorCountsPerType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -208,6 +215,7 @@ urlCrawlErrorCountsPerType =
     , _ucecptEntries = Nothing
     , _ucecptCategory = Nothing
     }
+
 
 -- | The general type of Googlebot that made the request (see list of
 -- Googlebot user-agents for the user-agents used).
@@ -258,6 +266,7 @@ data APIDataRow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APIDataRow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -281,6 +290,7 @@ apiDataRow =
     , _adrClicks = Nothing
     , _adrPosition = Nothing
     }
+
 
 adrImpressions :: Lens' APIDataRow (Maybe Double)
 adrImpressions
@@ -337,6 +347,7 @@ data APIdimensionFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APIdimensionFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -351,6 +362,7 @@ apidimensionFilter
 apidimensionFilter =
   APIdimensionFilter'
     {_afOperator = Nothing, _afDimension = Nothing, _afExpression = Nothing}
+
 
 afOperator :: Lens' APIdimensionFilter (Maybe Text)
 afOperator
@@ -390,6 +402,7 @@ data URLCrawlErrorCount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLCrawlErrorCount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -401,6 +414,7 @@ urlCrawlErrorCount
     :: URLCrawlErrorCount
 urlCrawlErrorCount =
   URLCrawlErrorCount' {_ucecCount = Nothing, _ucecTimestamp = Nothing}
+
 
 -- | The error count at the given timestamp.
 ucecCount :: Lens' URLCrawlErrorCount (Maybe Int64)
@@ -441,6 +455,7 @@ data SearchAnalyticsQueryResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchAnalyticsQueryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -453,6 +468,7 @@ searchAnalyticsQueryResponse
 searchAnalyticsQueryResponse =
   SearchAnalyticsQueryResponse'
     {_saqrRows = Nothing, _saqrResponseAggregationType = Nothing}
+
 
 -- | A list of rows grouped by the key values in the order given in the
 -- query.
@@ -493,6 +509,7 @@ newtype URLCrawlErrorsSamplesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLCrawlErrorsSamplesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -502,6 +519,7 @@ urlCrawlErrorsSamplesListResponse
     :: URLCrawlErrorsSamplesListResponse
 urlCrawlErrorsSamplesListResponse =
   URLCrawlErrorsSamplesListResponse' {_uceslrURLCrawlErrorSample = Nothing}
+
 
 -- | Information about the sample URL and its crawl error.
 uceslrURLCrawlErrorSample :: Lens' URLCrawlErrorsSamplesListResponse [URLCrawlErrorsSample]
@@ -537,6 +555,7 @@ newtype URLCrawlErrorsCountsQueryResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLCrawlErrorsCountsQueryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -546,6 +565,7 @@ urlCrawlErrorsCountsQueryResponse
     :: URLCrawlErrorsCountsQueryResponse
 urlCrawlErrorsCountsQueryResponse =
   URLCrawlErrorsCountsQueryResponse' {_ucecqrCountPerTypes = Nothing}
+
 
 -- | The time series of the number of URL crawl errors per error category and
 -- platform.
@@ -584,6 +604,7 @@ data URLCrawlErrorsSample =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLCrawlErrorsSample' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -607,6 +628,7 @@ urlCrawlErrorsSample =
     , _ucesPageURL = Nothing
     , _ucesFirstDetected = Nothing
     }
+
 
 -- | The HTTP response code, if any.
 ucesResponseCode :: Lens' URLCrawlErrorsSample (Maybe Int32)
@@ -678,6 +700,7 @@ data WmxSitemap =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WmxSitemap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -713,6 +736,7 @@ wmxSitemap =
     , _wsType = Nothing
     , _wsErrors = Nothing
     }
+
 
 -- | The various content types in the sitemap.
 wsContents :: Lens' WmxSitemap [WmxSitemapContent]
@@ -807,6 +831,7 @@ newtype SitemapsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitemapsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -815,6 +840,7 @@ newtype SitemapsListResponse =
 sitemapsListResponse
     :: SitemapsListResponse
 sitemapsListResponse = SitemapsListResponse' {_slrSitemap = Nothing}
+
 
 -- | Contains detailed information about a specific URL submitted as a
 -- sitemap.
@@ -850,6 +876,7 @@ data SearchAnalyticsQueryRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchAnalyticsQueryRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -882,6 +909,7 @@ searchAnalyticsQueryRequest =
     , _saqrStartRow = Nothing
     , _saqrDimensions = Nothing
     }
+
 
 -- | [Optional; Default is \"auto\"] How data is aggregated. If aggregated by
 -- property, all data for the same property is aggregated; if aggregated by
@@ -992,6 +1020,7 @@ newtype SitesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1000,6 +1029,7 @@ newtype SitesListResponse =
 sitesListResponse
     :: SitesListResponse
 sitesListResponse = SitesListResponse' {_slrSiteEntry = Nothing}
+
 
 -- | Contains permission level information about a Search Console site. For
 -- more information, see Permissions in Search Console.
@@ -1032,6 +1062,7 @@ data WmxSite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WmxSite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1042,6 +1073,7 @@ data WmxSite =
 wmxSite
     :: WmxSite
 wmxSite = WmxSite' {_wsPermissionLevel = Nothing, _wsSiteURL = Nothing}
+
 
 -- | The user\'s permission level for the site.
 wsPermissionLevel :: Lens' WmxSite (Maybe Text)

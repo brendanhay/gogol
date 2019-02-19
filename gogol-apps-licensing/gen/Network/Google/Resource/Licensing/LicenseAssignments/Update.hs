@@ -70,6 +70,7 @@ data LicenseAssignmentsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicenseAssignmentsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ licenseAssignmentsUpdate pLauSKUId_ pLauPayload_ pLauUserId_ pLauProductId_ =
     , _lauUserId = pLauUserId_
     , _lauProductId = pLauProductId_
     }
+
 
 -- | Name for sku for which license would be revoked
 lauSKUId :: Lens' LicenseAssignmentsUpdate Text

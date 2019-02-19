@@ -86,6 +86,7 @@ data ProjectsLocationsQueuesResume =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsQueuesResume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsLocationsQueuesResume pPlqrPayload_ pPlqrName_ =
     , _plqrName = pPlqrName_
     , _plqrCallback = Nothing
     }
+
 
 -- | V1 error format.
 plqrXgafv :: Lens' ProjectsLocationsQueuesResume (Maybe Xgafv)

@@ -33,6 +33,7 @@ data NetworkUtilization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkUtilization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -53,6 +54,7 @@ networkUtilization =
     , _nuTargetReceivedPacketsPerSecond = Nothing
     , _nuTargetSentBytesPerSecond = Nothing
     }
+
 
 -- | Target bytes received per second.
 nuTargetReceivedBytesPerSecond :: Lens' NetworkUtilization (Maybe Int32)
@@ -149,6 +151,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -161,6 +164,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -210,6 +214,7 @@ newtype OperationSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -220,6 +225,7 @@ operationSchema
     -> OperationSchema
 operationSchema pOsAddtional_ =
   OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -245,6 +251,7 @@ newtype LocationSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -255,6 +262,7 @@ locationSchema
     -> LocationSchema
 locationSchema pLsAddtional_ =
   LocationSchema' {_lsAddtional = _Coerce # pLsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lsAddtional :: Lens' LocationSchema (HashMap Text JSONValue)
@@ -282,6 +290,7 @@ data AuthorizedDomain =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthorizedDomain' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -292,6 +301,7 @@ data AuthorizedDomain =
 authorizedDomain
     :: AuthorizedDomain
 authorizedDomain = AuthorizedDomain' {_adName = Nothing, _adId = Nothing}
+
 
 -- | Full path to the AuthorizedDomain resource in the API. Example:
 -- apps\/myapp\/authorizedDomains\/example.com.\'OutputOnly
@@ -328,6 +338,7 @@ data TrafficSplit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrafficSplit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -338,6 +349,7 @@ data TrafficSplit =
 trafficSplit
     :: TrafficSplit
 trafficSplit = TrafficSplit' {_tsShardBy = Nothing, _tsAllocations = Nothing}
+
 
 -- | Mechanism used to determine which version a request is sent to. The
 -- traffic selection algorithm will be stable for either type until
@@ -382,6 +394,7 @@ newtype ScriptHandler =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScriptHandler' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -390,6 +403,7 @@ newtype ScriptHandler =
 scriptHandler
     :: ScriptHandler
 scriptHandler = ScriptHandler' {_shScriptPath = Nothing}
+
 
 -- | Path to the script from the application root directory.
 shScriptPath :: Lens' ScriptHandler (Maybe Text)
@@ -416,6 +430,7 @@ data ListServicesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListServicesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -427,6 +442,7 @@ listServicesResponse
     :: ListServicesResponse
 listServicesResponse =
   ListServicesResponse' {_lsrNextPageToken = Nothing, _lsrServices = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lsrNextPageToken :: Lens' ListServicesResponse (Maybe Text)
@@ -474,6 +490,7 @@ data URLMap =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -506,6 +523,7 @@ urlMap =
     , _umStaticFiles = Nothing
     , _umLogin = Nothing
     }
+
 
 -- | Executes a script to handle the requests that match this URL pattern.
 -- Only the auto value is supported for Node.js in the App Engine standard
@@ -595,6 +613,7 @@ data Library =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Library' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -605,6 +624,7 @@ data Library =
 library
     :: Library
 library = Library' {_lName = Nothing, _lVersion = Nothing}
+
 
 -- | Name of the library. Example: \"django\".
 lName :: Lens' Library (Maybe Text)
@@ -638,6 +658,7 @@ data ResourceRecord =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceRecord' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -651,6 +672,7 @@ resourceRecord
     :: ResourceRecord
 resourceRecord =
   ResourceRecord' {_rrRrData = Nothing, _rrName = Nothing, _rrType = Nothing}
+
 
 -- | Data for this record. Values vary by record type, as defined in RFC 1035
 -- (section 5) and RFC 1034 (section 3.6.1).
@@ -691,6 +713,7 @@ data ListLocationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -702,6 +725,7 @@ listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
   ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -744,6 +768,7 @@ data DiskUtilization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskUtilization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -764,6 +789,7 @@ diskUtilization =
     , _duTargetWriteOpsPerSecond = Nothing
     , _duTargetWriteBytesPerSecond = Nothing
     }
+
 
 -- | Target bytes read per second.
 duTargetReadBytesPerSecond :: Lens' DiskUtilization (Maybe Int32)
@@ -826,6 +852,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -838,6 +865,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -885,6 +913,7 @@ data HealthCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -914,6 +943,7 @@ healthCheck =
     , _hcTimeout = Nothing
     , _hcUnhealthyThreshold = Nothing
     }
+
 
 -- | Number of consecutive successful health checks required before receiving
 -- traffic.
@@ -1007,6 +1037,7 @@ data AuthorizedCertificate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthorizedCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1042,6 +1073,7 @@ authorizedCertificate =
     , _acExpireTime = Nothing
     , _acVisibleDomainMAppings = Nothing
     }
+
 
 -- | Only applicable if this certificate is managed by App Engine. Managed
 -- certificates are tied to the lifecycle of a DomainMapping and cannot be
@@ -1167,6 +1199,7 @@ data APIConfigHandler =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APIConfigHandler' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1190,6 +1223,7 @@ apiConfigHandler =
     , _achAuthFailAction = Nothing
     , _achLogin = Nothing
     }
+
 
 -- | Path to the script from the application root directory.
 achScript :: Lens' APIConfigHandler (Maybe Text)
@@ -1247,6 +1281,7 @@ newtype VersionEnvVariables =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VersionEnvVariables' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1257,6 +1292,7 @@ versionEnvVariables
     -> VersionEnvVariables
 versionEnvVariables pVevAddtional_ =
   VersionEnvVariables' {_vevAddtional = _Coerce # pVevAddtional_}
+
 
 vevAddtional :: Lens' VersionEnvVariables (HashMap Text Text)
 vevAddtional
@@ -1292,6 +1328,7 @@ data Application =
     , _aServingStatus           :: !(Maybe ApplicationServingStatus)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
@@ -1340,6 +1377,7 @@ application =
     , _aLocationId = Nothing
     , _aServingStatus = Nothing
     }
+
 
 -- | Hostname used to reach this application, as resolved by App
 -- Engine.\'OutputOnly
@@ -1475,6 +1513,7 @@ newtype VersionBetaSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VersionBetaSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1485,6 +1524,7 @@ versionBetaSettings
     -> VersionBetaSettings
 versionBetaSettings pVbsAddtional_ =
   VersionBetaSettings' {_vbsAddtional = _Coerce # pVbsAddtional_}
+
 
 vbsAddtional :: Lens' VersionBetaSettings (HashMap Text Text)
 vbsAddtional
@@ -1516,6 +1556,7 @@ data Service =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Service' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1528,6 +1569,7 @@ data Service =
 service
     :: Service
 service = Service' {_sSplit = Nothing, _sName = Nothing, _sId = Nothing}
+
 
 -- | Mapping that defines fractional HTTP traffic diversion to different
 -- versions within the service.
@@ -1575,6 +1617,7 @@ data EndpointsAPIService =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EndpointsAPIService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1595,6 +1638,7 @@ endpointsAPIService =
     , _easConfigId = Nothing
     , _easRolloutStrategy = Nothing
     }
+
 
 -- | Enable or disable trace sampling. By default, this is set to false for
 -- enabled.
@@ -1662,6 +1706,7 @@ data Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1685,6 +1730,7 @@ location =
     , _locLabels = Nothing
     , _locLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \"projects\/example-project\/locations\/us-east1\"
@@ -1750,6 +1796,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1773,6 +1820,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is false, it means the operation is still in progress. If
 -- true, the operation is completed, and either error or response is
@@ -1838,6 +1886,7 @@ data ZipInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZipInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1848,6 +1897,7 @@ data ZipInfo =
 zipInfo
     :: ZipInfo
 zipInfo = ZipInfo' {_ziFilesCount = Nothing, _ziSourceURL = Nothing}
+
 
 -- | An estimate of the number of files in a zip for a zip deployment. If
 -- set, must be greater than or equal to the actual number of files. Used
@@ -1890,11 +1940,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1913,6 +1965,7 @@ data URLDispatchRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLDispatchRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1927,6 +1980,7 @@ urlDispatchRule
 urlDispatchRule =
   URLDispatchRule'
     {_udrPath = Nothing, _udrService = Nothing, _udrDomain = Nothing}
+
 
 -- | Pathname within the host. Must start with a \"\/\". A single \"*\" can
 -- be included at the end of the path.The sum of the lengths of the domain
@@ -1979,6 +2033,7 @@ data OperationMetadataV1Beta =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadataV1Beta' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2011,6 +2066,7 @@ operationMetadataV1Beta =
     , _omvbCreateVersionMetadata = Nothing
     , _omvbTarget = Nothing
     }
+
 
 -- | Ephemeral message that may change every time the operation is polled.
 -- \'OutputOnly
@@ -2097,6 +2153,7 @@ data ListAuthorizedDomainsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAuthorizedDomainsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2109,6 +2166,7 @@ listAuthorizedDomainsResponse
 listAuthorizedDomainsResponse =
   ListAuthorizedDomainsResponse'
     {_ladrNextPageToken = Nothing, _ladrDomains = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 ladrNextPageToken :: Lens' ListAuthorizedDomainsResponse (Maybe Text)
@@ -2147,6 +2205,7 @@ newtype Entrypoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Entrypoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2155,6 +2214,7 @@ newtype Entrypoint =
 entrypoint
     :: Entrypoint
 entrypoint = Entrypoint' {_eShell = Nothing}
+
 
 -- | The format should be a shell command that can be fed to bash -c.
 eShell :: Lens' Entrypoint (Maybe Text)
@@ -2179,6 +2239,7 @@ data ListVersionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListVersionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2190,6 +2251,7 @@ listVersionsResponse
     :: ListVersionsResponse
 listVersionsResponse =
   ListVersionsResponse' {_lvrNextPageToken = Nothing, _lvrVersions = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lvrNextPageToken :: Lens' ListVersionsResponse (Maybe Text)
@@ -2229,6 +2291,7 @@ data ManagedCertificate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2240,6 +2303,7 @@ managedCertificate
     :: ManagedCertificate
 managedCertificate =
   ManagedCertificate' {_mcStatus = Nothing, _mcLastRenewalTime = Nothing}
+
 
 -- | Status of certificate management. Refers to the most recent certificate
 -- acquisition or renewal attempt.\'OutputOnly
@@ -2280,6 +2344,7 @@ newtype CreateVersionMetadataV1Alpha =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateVersionMetadataV1Alpha' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2289,6 +2354,7 @@ createVersionMetadataV1Alpha
     :: CreateVersionMetadataV1Alpha
 createVersionMetadataV1Alpha =
   CreateVersionMetadataV1Alpha' {_cvmvaCloudBuildId = Nothing}
+
 
 -- | The Cloud Build ID if one was created as part of the version create.
 -- \'OutputOnly
@@ -2322,6 +2388,7 @@ data FileInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2336,6 +2403,7 @@ fileInfo
 fileInfo =
   FileInfo'
     {_fiSha1Sum = Nothing, _fiMimeType = Nothing, _fiSourceURL = Nothing}
+
 
 -- | The SHA1 hash of the file, in hex.
 fiSha1Sum :: Lens' FileInfo (Maybe Text)
@@ -2394,6 +2462,7 @@ data AutomaticScaling =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutomaticScaling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2441,6 +2510,7 @@ automaticScaling =
     , _asMaxPendingLatency = Nothing
     , _asStandardSchedulerSettings = Nothing
     }
+
 
 -- | Target scaling by network usage.
 asNetworkUtilization :: Lens' AutomaticScaling (Maybe NetworkUtilization)
@@ -2593,6 +2663,7 @@ data OperationMetadataV1Beta5 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadataV1Beta5' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2616,6 +2687,7 @@ operationMetadataV1Beta5 =
     , _oEndTime = Nothing
     , _oTarget = Nothing
     }
+
 
 -- | Timestamp that this operation was created.\'OutputOnly
 oInsertTime :: Lens' OperationMetadataV1Beta5 (Maybe UTCTime)
@@ -2674,6 +2746,7 @@ data Volume =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Volume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2686,6 +2759,7 @@ data Volume =
 volume
     :: Volume
 volume = Volume' {_vSizeGb = Nothing, _vName = Nothing, _vVolumeType = Nothing}
+
 
 -- | Volume size in gigabytes.
 vSizeGb :: Lens' Volume (Maybe Double)
@@ -2726,6 +2800,7 @@ newtype APIEndpointHandler =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APIEndpointHandler' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2734,6 +2809,7 @@ newtype APIEndpointHandler =
 apiEndpointHandler
     :: APIEndpointHandler
 apiEndpointHandler = APIEndpointHandler' {_aehScriptPath = Nothing}
+
 
 -- | Path to the script from the application root directory.
 aehScriptPath :: Lens' APIEndpointHandler (Maybe Text)
@@ -2759,6 +2835,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2769,6 +2846,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2794,6 +2872,7 @@ data ListIngressRulesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListIngressRulesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2806,6 +2885,7 @@ listIngressRulesResponse
 listIngressRulesResponse =
   ListIngressRulesResponse'
     {_lirrNextPageToken = Nothing, _lirrIngressRules = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lirrNextPageToken :: Lens' ListIngressRulesResponse (Maybe Text)
@@ -2850,6 +2930,7 @@ data Network =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Network' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2873,6 +2954,7 @@ network =
     , _nInstanceTag = Nothing
     , _nName = Nothing
     }
+
 
 -- | Enable session affinity. Only applicable in the App Engine flexible
 -- environment.
@@ -2958,6 +3040,7 @@ data ReadinessCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReadinessCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2987,6 +3070,7 @@ readinessCheck =
     , _rcHost = Nothing
     , _rcTimeout = Nothing
     }
+
 
 -- | Number of consecutive successful checks required before receiving
 -- traffic.
@@ -3068,6 +3152,7 @@ newtype BatchUpdateIngressRulesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchUpdateIngressRulesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3077,6 +3162,7 @@ batchUpdateIngressRulesRequest
     :: BatchUpdateIngressRulesRequest
 batchUpdateIngressRulesRequest =
   BatchUpdateIngressRulesRequest' {_buirrIngressRules = Nothing}
+
 
 -- | A list of FirewallRules to replace the existing set.
 buirrIngressRules :: Lens' BatchUpdateIngressRulesRequest [FirewallRule]
@@ -3109,6 +3195,7 @@ newtype DebugInstanceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DebugInstanceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3117,6 +3204,7 @@ newtype DebugInstanceRequest =
 debugInstanceRequest
     :: DebugInstanceRequest
 debugInstanceRequest = DebugInstanceRequest' {_dirSSHKey = Nothing}
+
 
 -- | Public SSH key to add to the instance. Examples: [USERNAME]:ssh-rsa
 -- [KEY_VALUE] [USERNAME] [USERNAME]:ssh-rsa [KEY_VALUE] google-ssh
@@ -3145,6 +3233,7 @@ newtype StaticFilesHandlerHTTPHeaders =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StaticFilesHandlerHTTPHeaders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3156,6 +3245,7 @@ staticFilesHandlerHTTPHeaders
 staticFilesHandlerHTTPHeaders pSfhhttphAddtional_ =
   StaticFilesHandlerHTTPHeaders'
     {_sfhhttphAddtional = _Coerce # pSfhhttphAddtional_}
+
 
 sfhhttphAddtional :: Lens' StaticFilesHandlerHTTPHeaders (HashMap Text Text)
 sfhhttphAddtional
@@ -3185,6 +3275,7 @@ data Resources =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Resources' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3205,6 +3296,7 @@ resources =
     , _rVolumes = Nothing
     , _rCPU = Nothing
     }
+
 
 -- | Memory (GB) needed.
 rMemoryGb :: Lens' Resources (Maybe Double)
@@ -3258,6 +3350,7 @@ newtype FeatureSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FeatureSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3266,6 +3359,7 @@ newtype FeatureSettings =
 featureSettings
     :: FeatureSettings
 featureSettings = FeatureSettings' {_fsSplitHealthChecks = Nothing}
+
 
 -- | Boolean value indicating if split health checks should be used instead
 -- of the legacy health checks. At an app.yaml level, this means defaulting
@@ -3299,6 +3393,7 @@ data CertificateRawData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CertificateRawData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3311,6 +3406,7 @@ certificateRawData
 certificateRawData =
   CertificateRawData'
     {_crdPrivateKey = Nothing, _crdPublicCertificate = Nothing}
+
 
 -- | Unencrypted PEM encoded RSA private key. This field is set once on
 -- certificate creation and then encrypted. The key size must be 2048 bits
@@ -3359,6 +3455,7 @@ data DomainMApping =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainMApping' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3379,6 +3476,7 @@ domainMApping =
     , _dmaId = Nothing
     , _dmaSSLSettings = Nothing
     }
+
 
 -- | The resource records required to configure this domain mapping. These
 -- records must be added to the domain\'s DNS configuration in order to
@@ -3436,6 +3534,7 @@ newtype DeploymentFiles =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentFiles' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3446,6 +3545,7 @@ deploymentFiles
     -> DeploymentFiles
 deploymentFiles pDfAddtional_ =
   DeploymentFiles' {_dfAddtional = _Coerce # pDfAddtional_}
+
 
 dfAddtional :: Lens' DeploymentFiles (HashMap Text FileInfo)
 dfAddtional
@@ -3469,6 +3569,7 @@ newtype BatchUpdateIngressRulesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchUpdateIngressRulesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3478,6 +3579,7 @@ batchUpdateIngressRulesResponse
     :: BatchUpdateIngressRulesResponse
 batchUpdateIngressRulesResponse =
   BatchUpdateIngressRulesResponse' {_bIngressRules = Nothing}
+
 
 -- | The full list of ingress FirewallRules for this application.
 bIngressRules :: Lens' BatchUpdateIngressRulesResponse [FirewallRule]
@@ -3510,6 +3612,7 @@ data CPUUtilization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CPUUtilization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3522,6 +3625,7 @@ cpuUtilization
 cpuUtilization =
   CPUUtilization'
     {_cuAggregationWindowLength = Nothing, _cuTargetUtilization = Nothing}
+
 
 -- | Period of time over which CPU utilization is calculated.
 cuAggregationWindowLength :: Lens' CPUUtilization (Maybe Scientific)
@@ -3564,6 +3668,7 @@ newtype CreateVersionMetadataV1 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateVersionMetadataV1' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3572,6 +3677,7 @@ newtype CreateVersionMetadataV1 =
 createVersionMetadataV1
     :: CreateVersionMetadataV1
 createVersionMetadataV1 = CreateVersionMetadataV1' {_cvmvCloudBuildId = Nothing}
+
 
 -- | The Cloud Build ID if one was created as part of the version create.
 -- \'OutputOnly
@@ -3608,6 +3714,7 @@ newtype TrafficSplitAllocations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrafficSplitAllocations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3618,6 +3725,7 @@ trafficSplitAllocations
     -> TrafficSplitAllocations
 trafficSplitAllocations pTsaAddtional_ =
   TrafficSplitAllocations' {_tsaAddtional = _Coerce # pTsaAddtional_}
+
 
 tsaAddtional :: Lens' TrafficSplitAllocations (HashMap Text Double)
 tsaAddtional
@@ -3645,6 +3753,7 @@ data CloudBuildOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudBuildOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3657,6 +3766,7 @@ cloudBuildOptions
 cloudBuildOptions =
   CloudBuildOptions'
     {_cboCloudBuildTimeout = Nothing, _cboAppYamlPath = Nothing}
+
 
 -- | The Cloud Build timeout used as part of any dependent builds performed
 -- by version creation. Defaults to 10 minutes.
@@ -3700,6 +3810,7 @@ newtype ManualScaling =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManualScaling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3708,6 +3819,7 @@ newtype ManualScaling =
 manualScaling
     :: ManualScaling
 manualScaling = ManualScaling' {_msInstances = Nothing}
+
 
 -- | Number of instances to assign to the service at the start. This number
 -- can later be altered by using the Modules API
@@ -3741,6 +3853,7 @@ data BasicScaling =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BasicScaling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3752,6 +3865,7 @@ basicScaling
     :: BasicScaling
 basicScaling =
   BasicScaling' {_bsMaxInstances = Nothing, _bsIdleTimeout = Nothing}
+
 
 -- | Maximum number of instances to create for this version.
 bsMaxInstances :: Lens' BasicScaling (Maybe Int32)
@@ -3798,6 +3912,7 @@ data OperationMetadataV1 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadataV1' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3830,6 +3945,7 @@ operationMetadataV1 =
     , _omvCreateVersionMetadata = Nothing
     , _omvTarget = Nothing
     }
+
 
 -- | Ephemeral message that may change every time the operation is polled.
 -- \'OutputOnly
@@ -3951,6 +4067,7 @@ data Version =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Version' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4067,6 +4184,7 @@ version =
     , _verVersionURL = Nothing
     , _verDeployment = Nothing
     }
+
 
 -- | Desired runtime. Example: python27.
 verRuntime :: Lens' Version (Maybe Text)
@@ -4423,6 +4541,7 @@ data IdentityAwareProxy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentityAwareProxy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4443,6 +4562,7 @@ identityAwareProxy =
     , _iapOAuth2ClientSecret = Nothing
     , _iapOAuth2ClientId = Nothing
     }
+
 
 -- | Whether the serving infrastructure will authenticate and authorize all
 -- incoming requests.If true, the oauth2_client_id and oauth2_client_secret
@@ -4510,6 +4630,7 @@ data StaticFilesHandler =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StaticFilesHandler' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4539,6 +4660,7 @@ staticFilesHandler =
     , _sfhApplicationReadable = Nothing
     , _sfhUploadPathRegex = Nothing
     }
+
 
 -- | HTTP headers to use for all responses from these URLs.
 sfhHTTPHeaders :: Lens' StaticFilesHandler (Maybe StaticFilesHandlerHTTPHeaders)
@@ -4628,6 +4750,7 @@ data ErrorHandler =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ErrorHandler' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4642,6 +4765,7 @@ errorHandler
 errorHandler =
   ErrorHandler'
     {_ehMimeType = Nothing, _ehErrorCode = Nothing, _ehStaticFile = Nothing}
+
 
 -- | MIME type of file. Defaults to text\/html.
 ehMimeType :: Lens' ErrorHandler (Maybe Text)
@@ -4684,6 +4808,7 @@ newtype LocationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4694,6 +4819,7 @@ locationLabels
     -> LocationLabels
 locationLabels pLlAddtional_ =
   LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -4718,6 +4844,7 @@ data ListAuthorizedCertificatesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAuthorizedCertificatesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4730,6 +4857,7 @@ listAuthorizedCertificatesResponse
 listAuthorizedCertificatesResponse =
   ListAuthorizedCertificatesResponse'
     {_lacrNextPageToken = Nothing, _lacrCertificates = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lacrNextPageToken :: Lens' ListAuthorizedCertificatesResponse (Maybe Text)
@@ -4775,6 +4903,7 @@ data FirewallRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FirewallRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4795,6 +4924,7 @@ firewallRule =
     , _frSourceRange = Nothing
     , _frDescription = Nothing
     }
+
 
 -- | A positive integer between 1, Int32.MaxValue-1 that defines the order of
 -- rule evaluation. Rules with the lowest priority are evaluated first.A
@@ -4860,6 +4990,7 @@ data LocationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4874,6 +5005,7 @@ locationMetadata =
     { _lmStandardEnvironmentAvailable = Nothing
     , _lmFlexibleEnvironmentAvailable = Nothing
     }
+
 
 -- | App Engine standard environment is available in the given
 -- location.\'OutputOnly
@@ -4920,6 +5052,7 @@ data OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4946,6 +5079,7 @@ operationMetadata =
     , _omOperationType = Nothing
     , _omTarget = Nothing
     }
+
 
 -- | Timestamp that this operation was created.\'OutputOnly
 omInsertTime :: Lens' OperationMetadata (Maybe UTCTime)
@@ -5011,6 +5145,7 @@ data ListInstancesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5022,6 +5157,7 @@ listInstancesResponse
     :: ListInstancesResponse
 listInstancesResponse =
   ListInstancesResponse' {_lirNextPageToken = Nothing, _lirInstances = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lirNextPageToken :: Lens' ListInstancesResponse (Maybe Text)
@@ -5067,6 +5203,7 @@ data OperationMetadataV1Alpha =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadataV1Alpha' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5099,6 +5236,7 @@ operationMetadataV1Alpha =
     , _omvaCreateVersionMetadata = Nothing
     , _omvaTarget = Nothing
     }
+
 
 -- | Ephemeral message that may change every time the operation is polled.
 -- \'OutputOnly
@@ -5191,6 +5329,7 @@ data LivenessCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LivenessCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5220,6 +5359,7 @@ livenessCheck =
     , _lcInitialDelay = Nothing
     , _lcTimeout = Nothing
     }
+
 
 -- | Number of consecutive successful checks required before considering the
 -- VM healthy.
@@ -5302,6 +5442,7 @@ data RequestUtilization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RequestUtilization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5316,6 +5457,7 @@ requestUtilization =
     { _ruTargetConcurrentRequests = Nothing
     , _ruTargetRequestCountPerSecond = Nothing
     }
+
 
 -- | Target number of concurrent requests.
 ruTargetConcurrentRequests :: Lens' RequestUtilization (Maybe Int32)
@@ -5355,11 +5497,13 @@ data RepairApplicationRequest =
   RepairApplicationRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepairApplicationRequest' with the minimum fields required to make a request.
 --
 repairApplicationRequest
     :: RepairApplicationRequest
 repairApplicationRequest = RepairApplicationRequest'
+
 
 instance FromJSON RepairApplicationRequest where
         parseJSON
@@ -5384,6 +5528,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5394,6 +5539,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -5419,6 +5565,7 @@ newtype CreateVersionMetadataV1Beta =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateVersionMetadataV1Beta' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5428,6 +5575,7 @@ createVersionMetadataV1Beta
     :: CreateVersionMetadataV1Beta
 createVersionMetadataV1Beta =
   CreateVersionMetadataV1Beta' {_cvmvbCloudBuildId = Nothing}
+
 
 -- | The Cloud Build ID if one was created as part of the version create.
 -- \'OutputOnly
@@ -5459,6 +5607,7 @@ data ListDomainMAppingsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDomainMAppingsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5471,6 +5620,7 @@ listDomainMAppingsResponse
 listDomainMAppingsResponse =
   ListDomainMAppingsResponse'
     {_ldmarDomainMAppings = Nothing, _ldmarNextPageToken = Nothing}
+
 
 -- | The domain mappings for the application.
 ldmarDomainMAppings :: Lens' ListDomainMAppingsResponse [DomainMApping]
@@ -5513,6 +5663,7 @@ data StandardSchedulerSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StandardSchedulerSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5533,6 +5684,7 @@ standardSchedulerSettings =
     , _sssMaxInstances = Nothing
     , _sssTargetThroughputUtilization = Nothing
     }
+
 
 -- | Target CPU utilization ratio to maintain when scaling.
 sssTargetCPUUtilization :: Lens' StandardSchedulerSettings (Maybe Double)
@@ -5596,6 +5748,7 @@ newtype ContainerInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContainerInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5604,6 +5757,7 @@ newtype ContainerInfo =
 containerInfo
     :: ContainerInfo
 containerInfo = ContainerInfo' {_ciImage = Nothing}
+
 
 -- | URI to the hosted container image in Google Container Registry. The URI
 -- must be fully qualified and include a tag or digest. Examples:
@@ -5645,6 +5799,7 @@ data Instance =
     , _iAppEngineRelease :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
@@ -5702,6 +5857,7 @@ instance' =
     , _iAverageLatency = Nothing
     , _iAppEngineRelease = Nothing
     }
+
 
 -- | Total memory in use (bytes).\'OutputOnly
 iMemoryUsage :: Lens' Instance (Maybe Int64)
@@ -5846,6 +6002,7 @@ data SSLSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5863,6 +6020,7 @@ sslSettings =
     , _ssCertificateId = Nothing
     , _ssPendingManagedCertificateId = Nothing
     }
+
 
 -- | SSL management type for this domain. If AUTOMATIC, a managed certificate
 -- is automatically provisioned. If MANUAL, certificate_id must be manually
@@ -5927,6 +6085,7 @@ data Deployment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5947,6 +6106,7 @@ deployment =
     , _dContainer = Nothing
     , _dFiles = Nothing
     }
+
 
 -- | The zip file for this deployment, if this is a zip deployment.
 dZip :: Lens' Deployment (Maybe ZipInfo)

@@ -65,6 +65,7 @@ data ImagesGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImagesGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ imagesGetIAMPolicy
 imagesGetIAMPolicy pIgipProject_ pIgipResource_ =
   ImagesGetIAMPolicy'
     {_igipProject = pIgipProject_, _igipResource = pIgipResource_}
+
 
 -- | Project ID for this request.
 igipProject :: Lens' ImagesGetIAMPolicy Text

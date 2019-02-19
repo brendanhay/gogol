@@ -61,6 +61,7 @@ data SitemapsSubmit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitemapsSubmit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ sitemapsSubmit
     -> SitemapsSubmit
 sitemapsSubmit pSsFeedpath_ pSsSiteURL_ =
   SitemapsSubmit' {_ssFeedpath = pSsFeedpath_, _ssSiteURL = pSsSiteURL_}
+
 
 -- | The URL of the sitemap to add. For example:
 -- http:\/\/www.example.com\/sitemap.xml

@@ -68,6 +68,7 @@ data DefaultObjectAccessControlsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DefaultObjectAccessControlsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ defaultObjectAccessControlsPatch pDoacpBucket_ pDoacpPayload_ pDoacpEntity_ =
     , _doacpUserProject = Nothing
     , _doacpEntity = pDoacpEntity_
     }
+
 
 -- | Name of a bucket.
 doacpBucket :: Lens' DefaultObjectAccessControlsPatch Text

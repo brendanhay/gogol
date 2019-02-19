@@ -96,6 +96,7 @@ data ProjectsZonesClustersCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -131,6 +132,7 @@ projectsZonesClustersCreate pPzccZone_ pPzccPayload_ pPzccProjectId_ =
     , _pzccProjectId = pPzccProjectId_
     , _pzccCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzccXgafv :: Lens' ProjectsZonesClustersCreate (Maybe Xgafv)

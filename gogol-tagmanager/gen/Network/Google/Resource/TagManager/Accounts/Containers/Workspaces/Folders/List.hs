@@ -62,6 +62,7 @@ data AccountsContainersWorkspacesFoldersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ accountsContainersWorkspacesFoldersList
 accountsContainersWorkspacesFoldersList pAcwflParent_ =
   AccountsContainersWorkspacesFoldersList'
     {_acwflParent = pAcwflParent_, _acwflPageToken = Nothing}
+
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}

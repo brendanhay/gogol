@@ -70,6 +70,7 @@ data EventsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ eventsGet pEgCalendarId_ pEgEventId_ =
     , _egAlwaysIncludeEmail = Nothing
     , _egEventId = pEgEventId_
     }
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

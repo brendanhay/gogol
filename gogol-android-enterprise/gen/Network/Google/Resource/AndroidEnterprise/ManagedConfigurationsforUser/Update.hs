@@ -79,6 +79,7 @@ data ManagedConfigurationsforUserUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfigurationsforUserUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ managedConfigurationsforUserUpdate pMcuuEnterpriseId_ pMcuuPayload_ pMcuuUserId_
     , _mcuuUserId = pMcuuUserId_
     , _mcuuManagedConfigurationForUserId = pMcuuManagedConfigurationForUserId_
     }
+
 
 -- | The ID of the enterprise.
 mcuuEnterpriseId :: Lens' ManagedConfigurationsforUserUpdate Text

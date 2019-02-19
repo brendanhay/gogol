@@ -82,6 +82,7 @@ data AppsLocationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsLocationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ appsLocationsList pAllAppsId_ =
     , _allPageSize = Nothing
     , _allCallback = Nothing
     }
+
 
 -- | V1 error format.
 allXgafv :: Lens' AppsLocationsList (Maybe Xgafv)

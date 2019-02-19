@@ -87,6 +87,7 @@ data ServicesTenancyUnitsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesTenancyUnitsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ servicesTenancyUnitsList pStulParent_ =
     , _stulPageSize = Nothing
     , _stulCallback = Nothing
     }
+
 
 -- | Service and consumer. Required. services\/{service}\/{collection
 -- id}\/{resource id} {collection id} is the cloud resource collection type

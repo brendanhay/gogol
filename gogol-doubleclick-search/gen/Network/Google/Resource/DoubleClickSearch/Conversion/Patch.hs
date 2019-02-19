@@ -81,6 +81,7 @@ data ConversionPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConversionPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ conversionPatch pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pC
     , _cpStartRow = _Coerce # pCpStartRow_
     , _cpRowCount = _Coerce # pCpRowCount_
     }
+
 
 -- | Numeric ID of the engine account.
 cpEngineAccountId :: Lens' ConversionPatch Int64

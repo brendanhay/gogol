@@ -76,6 +76,7 @@ data RolesQueryGrantableRoles =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RolesQueryGrantableRoles' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ rolesQueryGrantableRoles pRqgrPayload_ =
     , _rqgrPayload = pRqgrPayload_
     , _rqgrCallback = Nothing
     }
+
 
 -- | V1 error format.
 rqgrXgafv :: Lens' RolesQueryGrantableRoles (Maybe Xgafv)

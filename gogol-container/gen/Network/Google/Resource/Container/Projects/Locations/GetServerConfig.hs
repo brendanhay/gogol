@@ -77,6 +77,7 @@ data ProjectsLocationsGetServerConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsGetServerConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ projectsLocationsGetServerConfig pPlgscName_ =
     , _plgscProjectId = Nothing
     , _plgscCallback = Nothing
     }
+
 
 -- | V1 error format.
 plgscXgafv :: Lens' ProjectsLocationsGetServerConfig (Maybe Xgafv)

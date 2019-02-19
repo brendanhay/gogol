@@ -67,6 +67,7 @@ data BackendServicesGetHealth =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServicesGetHealth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ backendServicesGetHealth pBsghProject_ pBsghPayload_ pBsghBackendService_ =
     , _bsghPayload = pBsghPayload_
     , _bsghBackendService = pBsghBackendService_
     }
+
 
 bsghProject :: Lens' BackendServicesGetHealth Text
 bsghProject

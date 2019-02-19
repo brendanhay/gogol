@@ -65,6 +65,7 @@ data EditsTestersPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsTestersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ editsTestersPatch pEtpTrack_ pEtpPackageName_ pEtpPayload_ pEtpEditId_ =
     , _etpPayload = pEtpPayload_
     , _etpEditId = pEtpEditId_
     }
+
 
 -- | The track to read or modify. Acceptable values are: \"alpha\", \"beta\",
 -- \"production\", \"rollout\" or \"internal\".

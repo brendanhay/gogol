@@ -60,6 +60,7 @@ data QueriesRunQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueriesRunQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ queriesRunQuery
 queriesRunQuery pQrqQueryId_ pQrqPayload_ =
   QueriesRunQuery'
     {_qrqQueryId = _Coerce # pQrqQueryId_, _qrqPayload = pQrqPayload_}
+
 
 -- | Query ID to run.
 qrqQueryId :: Lens' QueriesRunQuery Int64

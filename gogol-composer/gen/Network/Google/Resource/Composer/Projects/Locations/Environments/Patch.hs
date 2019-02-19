@@ -77,6 +77,7 @@ data ProjectsLocationsEnvironmentsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsEnvironmentsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsEnvironmentsPatch pPlepPayload_ pPlepName_ =
     , _plepName = pPlepName_
     , _plepCallback = Nothing
     }
+
 
 -- | V1 error format.
 plepXgafv :: Lens' ProjectsLocationsEnvironmentsPatch (Maybe Xgafv)

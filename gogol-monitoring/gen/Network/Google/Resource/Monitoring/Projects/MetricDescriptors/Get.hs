@@ -73,6 +73,7 @@ data ProjectsMetricDescriptorsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsMetricDescriptorsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ projectsMetricDescriptorsGet pPmdgName_ =
     , _pmdgName = pPmdgName_
     , _pmdgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmdgXgafv :: Lens' ProjectsMetricDescriptorsGet (Maybe Xgafv)

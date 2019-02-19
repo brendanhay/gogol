@@ -58,6 +58,7 @@ newtype MetadataColumnsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetadataColumnsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ metadataColumnsList
     -> MetadataColumnsList
 metadataColumnsList pMclReportType_ =
   MetadataColumnsList' {_mclReportType = pMclReportType_}
+
 
 -- | Report type. Allowed Values: \'ga\'. Where \'ga\' corresponds to the
 -- Core Reporting API

@@ -69,6 +69,7 @@ data DeploymentsStop =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentsStop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ deploymentsStop pDsProject_ pDsPayload_ pDsDeployment_ =
     , _dsPayload = pDsPayload_
     , _dsDeployment = pDsDeployment_
     }
+
 
 -- | The project ID for this request.
 dsProject :: Lens' DeploymentsStop Text

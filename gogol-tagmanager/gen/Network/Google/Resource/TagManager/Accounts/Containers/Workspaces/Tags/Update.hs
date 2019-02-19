@@ -62,6 +62,7 @@ data AccountsContainersWorkspacesTagsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesTagsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ accountsContainersWorkspacesTagsUpdate pAcwtucPath_ pAcwtucPayload_ =
     , _acwtucFingerprint = Nothing
     , _acwtucPayload = pAcwtucPayload_
     }
+
 
 -- | GTM Tag\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/tags\/{tag_id}

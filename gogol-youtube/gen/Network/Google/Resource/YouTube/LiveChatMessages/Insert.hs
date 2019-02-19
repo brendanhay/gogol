@@ -62,6 +62,7 @@ data LiveChatMessagesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatMessagesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ liveChatMessagesInsert
     -> LiveChatMessagesInsert
 liveChatMessagesInsert pLcmiPart_ pLcmiPayload_ =
   LiveChatMessagesInsert' {_lcmiPart = pLcmiPart_, _lcmiPayload = pLcmiPayload_}
+
 
 -- | The part parameter serves two purposes. It identifies the properties
 -- that the write operation will set as well as the properties that the API

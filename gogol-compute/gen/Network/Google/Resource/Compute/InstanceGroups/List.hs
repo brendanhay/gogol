@@ -77,6 +77,7 @@ data InstanceGroupsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ instanceGroupsList pIglProject_ pIglZone_ =
     , _iglPageToken = Nothing
     , _iglMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

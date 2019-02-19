@@ -65,6 +65,7 @@ data SubscriptionsStartPaidService =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsStartPaidService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ subscriptionsStartPaidService pSspsCustomerId_ pSspsSubscriptionId_ =
     { _sspsCustomerId = pSspsCustomerId_
     , _sspsSubscriptionId = pSspsSubscriptionId_
     }
+
 
 -- | Either the customer\'s primary domain name or the customer\'s unique
 -- identifier. If using the domain name, we do not recommend using a

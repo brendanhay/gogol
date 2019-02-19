@@ -65,6 +65,7 @@ data OrdersRejectreturnlineitem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersRejectreturnlineitem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ ordersRejectreturnlineitem pOrrMerchantId_ pOrrPayload_ pOrrOrderId_ =
     , _orrPayload = pOrrPayload_
     , _orrOrderId = pOrrOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

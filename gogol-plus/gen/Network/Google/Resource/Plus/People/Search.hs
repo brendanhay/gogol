@@ -66,6 +66,7 @@ data PeopleSearch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeopleSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ peopleSearch pPsQuery_ =
     , _psPageToken = Nothing
     , _psMaxResults = 25
     }
+
 
 -- | Specify a query string for full text search of public text in all
 -- profiles.

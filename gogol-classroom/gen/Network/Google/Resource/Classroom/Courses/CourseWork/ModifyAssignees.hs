@@ -91,6 +91,7 @@ data CoursesCourseWorkModifyAssignees =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesCourseWorkModifyAssignees' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ coursesCourseWorkModifyAssignees pCcwmaCourseId_ pCcwmaPayload_ pCcwmaId_ =
     , _ccwmaId = pCcwmaId_
     , _ccwmaCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccwmaXgafv :: Lens' CoursesCourseWorkModifyAssignees (Maybe Xgafv)

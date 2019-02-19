@@ -71,6 +71,7 @@ data CustomChannelsAdUnitsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomChannelsAdUnitsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ customChannelsAdUnitsList pCcaulCustomChannelId_ pCcaulAdClientId_ =
     , _ccaulPageToken = Nothing
     , _ccaulMaxResults = Nothing
     }
+
 
 -- | Whether to include inactive ad units. Default: true.
 ccaulIncludeInactive :: Lens' CustomChannelsAdUnitsList (Maybe Bool)

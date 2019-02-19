@@ -63,6 +63,7 @@ data ManagementAccountUserLinksInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementAccountUserLinksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ managementAccountUserLinksInsert
 managementAccountUserLinksInsert pMauliPayload_ pMauliAccountId_ =
   ManagementAccountUserLinksInsert'
     {_mauliPayload = pMauliPayload_, _mauliAccountId = pMauliAccountId_}
+
 
 -- | Multipart request metadata.
 mauliPayload :: Lens' ManagementAccountUserLinksInsert EntityUserLink

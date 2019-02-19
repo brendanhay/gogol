@@ -72,6 +72,7 @@ data NodeTemplatesSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplatesSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ nodeTemplatesSetIAMPolicy pNtsipProject_ pNtsipPayload_ pNtsipResource_ pNtsipRe
     , _ntsipResource = pNtsipResource_
     , _ntsipRegion = pNtsipRegion_
     }
+
 
 -- | Project ID for this request.
 ntsipProject :: Lens' NodeTemplatesSetIAMPolicy Text

@@ -62,6 +62,7 @@ data OrgUnitsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrgUnitsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ orgUnitsInsert
     -> OrgUnitsInsert
 orgUnitsInsert pOuiPayload_ pOuiCustomerId_ =
   OrgUnitsInsert' {_ouiPayload = pOuiPayload_, _ouiCustomerId = pOuiCustomerId_}
+
 
 -- | Multipart request metadata.
 ouiPayload :: Lens' OrgUnitsInsert OrgUnit

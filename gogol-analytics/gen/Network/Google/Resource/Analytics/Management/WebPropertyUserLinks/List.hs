@@ -70,6 +70,7 @@ data ManagementWebPropertyUserLinksList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementWebPropertyUserLinksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ managementWebPropertyUserLinksList pMwpullWebPropertyId_ pMwpullAccountId_ =
     , _mwpullStartIndex = Nothing
     , _mwpullMaxResults = Nothing
     }
+
 
 -- | Web Property ID for the webProperty-user links to retrieve. Can either
 -- be a specific web property ID or \'~all\', which refers to all the web

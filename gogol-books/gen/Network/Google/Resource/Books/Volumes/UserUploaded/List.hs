@@ -75,6 +75,7 @@ data VolumesUserUploadedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumesUserUploadedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ volumesUserUploadedList =
     , _vuulStartIndex = Nothing
     , _vuulMaxResults = Nothing
     }
+
 
 -- | The processing state of the user uploaded volumes to be returned.
 vuulProcessingState :: Lens' VolumesUserUploadedList [VolumesUserUploadedListProcessingState]

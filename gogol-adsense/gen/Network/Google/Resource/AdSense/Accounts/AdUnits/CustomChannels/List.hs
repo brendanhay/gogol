@@ -73,6 +73,7 @@ data AccountsAdUnitsCustomChannelsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsAdUnitsCustomChannelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ accountsAdUnitsCustomChannelsList pAaucclAdUnitId_ pAaucclAdClientId_ pAaucclAcc
     , _aaucclPageToken = Nothing
     , _aaucclMaxResults = Nothing
     }
+
 
 -- | Ad unit for which to list custom channels.
 aaucclAdUnitId :: Lens' AccountsAdUnitsCustomChannelsList Text

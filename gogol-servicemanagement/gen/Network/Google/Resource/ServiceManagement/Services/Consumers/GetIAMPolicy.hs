@@ -76,6 +76,7 @@ data ServicesConsumersGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesConsumersGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ servicesConsumersGetIAMPolicy pScgipPayload_ pScgipResource_ =
     , _scgipResource = pScgipResource_
     , _scgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 scgipXgafv :: Lens' ServicesConsumersGetIAMPolicy (Maybe Xgafv)

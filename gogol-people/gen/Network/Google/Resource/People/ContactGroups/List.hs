@@ -80,6 +80,7 @@ data ContactGroupsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ contactGroupsList =
     , _cglPageSize = Nothing
     , _cglCallback = Nothing
     }
+
 
 -- | A sync token, returned by a previous call to \`contactgroups.list\`.
 -- Only resources changed since the sync token was created will be

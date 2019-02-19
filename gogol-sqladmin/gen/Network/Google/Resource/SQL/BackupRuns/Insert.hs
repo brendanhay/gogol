@@ -67,6 +67,7 @@ data BackupRunsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackupRunsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ backupRunsInsert pBriProject_ pBriPayload_ pBriInstance_ =
     , _briPayload = pBriPayload_
     , _briInstance = pBriInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 briProject :: Lens' BackupRunsInsert Text

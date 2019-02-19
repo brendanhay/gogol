@@ -90,6 +90,7 @@ data ActivitiesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ activitiesList pAlPart_ =
     , _alMaxResults = 5
     , _alPublishedBefore = Nothing
     }
+
 
 -- | The publishedAfter parameter specifies the earliest date and time that
 -- an activity could have occurred for that activity to be included in the

@@ -65,6 +65,7 @@ data OrdersUpdatemerchantOrderid =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersUpdatemerchantOrderid' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ ordersUpdatemerchantOrderid pOuoMerchantId_ pOuoPayload_ pOuoOrderId_ =
     , _ouoPayload = pOuoPayload_
     , _ouoOrderId = pOuoOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

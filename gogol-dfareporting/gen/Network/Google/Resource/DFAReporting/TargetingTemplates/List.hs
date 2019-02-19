@@ -86,6 +86,7 @@ data TargetingTemplatesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingTemplatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +120,7 @@ targetingTemplatesList pTtlProFileId_ =
     , _ttlSortField = TTLSFID
     , _ttlMaxResults = 1000
     }
+
 
 -- | Select only targeting templates with this advertiser ID.
 ttlAdvertiserId :: Lens' TargetingTemplatesList (Maybe Int64)

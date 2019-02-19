@@ -70,6 +70,7 @@ data PagesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ pagesPatch pPpBlogId_ pPpPageId_ pPpPayload_ =
     , _ppRevert = Nothing
     , _ppPublish = Nothing
     }
+
 
 -- | The ID of the Blog.
 ppBlogId :: Lens' PagesPatch Text

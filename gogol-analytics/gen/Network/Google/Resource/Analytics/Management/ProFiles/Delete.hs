@@ -66,6 +66,7 @@ data ManagementProFilesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementProFilesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ managementProFilesDelete pMpfdWebPropertyId_ pMpfdProFileId_ pMpfdAccountId_ =
     , _mpfdProFileId = pMpfdProFileId_
     , _mpfdAccountId = pMpfdAccountId_
     }
+
 
 -- | Web property ID to delete the view (profile) for.
 mpfdWebPropertyId :: Lens' ManagementProFilesDelete Text

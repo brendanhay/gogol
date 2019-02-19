@@ -90,6 +90,7 @@ data ProjectsContentDeidentify =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsContentDeidentify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ projectsContentDeidentify pPcdParent_ pPcdPayload_ =
     , _pcdPayload = pPcdPayload_
     , _pcdCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id.
 pcdParent :: Lens' ProjectsContentDeidentify Text

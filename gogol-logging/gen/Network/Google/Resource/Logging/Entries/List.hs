@@ -76,6 +76,7 @@ data EntriesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntriesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ entriesList pElPayload_ =
     , _elPayload = pElPayload_
     , _elCallback = Nothing
     }
+
 
 -- | V1 error format.
 elXgafv :: Lens' EntriesList (Maybe Xgafv)

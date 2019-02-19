@@ -74,6 +74,7 @@ data ProjectsLocationsNodesStop =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsNodesStop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsLocationsNodesStop pPPayload_ pPName_ =
     , _pName = pPName_
     , _pCallback = Nothing
     }
+
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsLocationsNodesStop (Maybe Xgafv)

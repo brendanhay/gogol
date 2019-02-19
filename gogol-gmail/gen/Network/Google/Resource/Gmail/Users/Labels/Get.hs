@@ -61,6 +61,7 @@ data UsersLabelsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersLabelsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ usersLabelsGet
     :: Text -- ^ 'ulgId'
     -> UsersLabelsGet
 usersLabelsGet pUlgId_ = UsersLabelsGet' {_ulgUserId = "me", _ulgId = pUlgId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

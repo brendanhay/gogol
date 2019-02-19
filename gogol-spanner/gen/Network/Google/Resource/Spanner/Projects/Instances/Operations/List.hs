@@ -98,6 +98,7 @@ data ProjectsInstancesOperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -134,6 +135,7 @@ projectsInstancesOperationsList pPiolName_ =
     , _piolPageSize = Nothing
     , _piolCallback = Nothing
     }
+
 
 -- | V1 error format.
 piolXgafv :: Lens' ProjectsInstancesOperationsList (Maybe Xgafv)

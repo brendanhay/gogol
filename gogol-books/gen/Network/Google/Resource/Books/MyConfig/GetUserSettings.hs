@@ -53,11 +53,13 @@ data MyConfigGetUserSettings =
   MyConfigGetUserSettings'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyConfigGetUserSettings' with the minimum fields required to make a request.
 --
 myConfigGetUserSettings
     :: MyConfigGetUserSettings
 myConfigGetUserSettings = MyConfigGetUserSettings'
+
 
 instance GoogleRequest MyConfigGetUserSettings where
         type Rs MyConfigGetUserSettings = UserSettings

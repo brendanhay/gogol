@@ -62,6 +62,7 @@ data RoleAssignmentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoleAssignmentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ roleAssignmentsDelete
 roleAssignmentsDelete pRadCustomer_ pRadRoleAssignmentId_ =
   RoleAssignmentsDelete'
     {_radCustomer = pRadCustomer_, _radRoleAssignmentId = pRadRoleAssignmentId_}
+
 
 -- | Immutable ID of the G Suite account.
 radCustomer :: Lens' RoleAssignmentsDelete Text

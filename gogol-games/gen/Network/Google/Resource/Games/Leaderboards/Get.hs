@@ -60,6 +60,7 @@ data LeaderboardsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ leaderboardsGet
     -> LeaderboardsGet
 leaderboardsGet pLgLeaderboardId_ =
   LeaderboardsGet' {_lgLeaderboardId = pLgLeaderboardId_, _lgLanguage = Nothing}
+
 
 -- | The ID of the leaderboard.
 lgLeaderboardId :: Lens' LeaderboardsGet Text

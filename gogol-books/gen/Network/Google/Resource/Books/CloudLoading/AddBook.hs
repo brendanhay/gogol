@@ -68,6 +68,7 @@ data CloudLoadingAddBook =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudLoadingAddBook' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ cloudLoadingAddBook =
     , _clabName = Nothing
     , _clabDriveDocumentId = Nothing
     }
+
 
 -- | The document MIME type. It can be set only if the drive_document_id is
 -- set.

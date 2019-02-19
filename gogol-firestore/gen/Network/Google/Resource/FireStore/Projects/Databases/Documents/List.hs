@@ -95,6 +95,7 @@ data ProjectsDatabasesDocumentsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesDocumentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -147,6 +148,7 @@ projectsDatabasesDocumentsList pPParent_ pPCollectionId_ =
     , _pMaskFieldPaths = Nothing
     , _pCallback = Nothing
     }
+
 
 -- | The parent resource name. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\` or

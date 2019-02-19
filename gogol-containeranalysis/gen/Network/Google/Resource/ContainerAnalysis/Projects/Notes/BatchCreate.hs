@@ -75,6 +75,7 @@ data ProjectsNotesBatchCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotesBatchCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsNotesBatchCreate pPnbcParent_ pPnbcPayload_ =
     , _pnbcPayload = pPnbcPayload_
     , _pnbcCallback = Nothing
     }
+
 
 -- | The name of the project in the form of \`projects\/[PROJECT_ID]\`, under
 -- which the notes are to be created.

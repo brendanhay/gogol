@@ -81,6 +81,7 @@ data ProjectsServiceAccountsGenerateIdentityBindingAccessToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServiceAccountsGenerateIdentityBindingAccessToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsServiceAccountsGenerateIdentityBindingAccessToken pPsagibatPayload_ pPsa
     , _psagibatName = pPsagibatName_
     , _psagibatCallback = Nothing
     }
+
 
 -- | V1 error format.
 psagibatXgafv :: Lens' ProjectsServiceAccountsGenerateIdentityBindingAccessToken (Maybe Xgafv)

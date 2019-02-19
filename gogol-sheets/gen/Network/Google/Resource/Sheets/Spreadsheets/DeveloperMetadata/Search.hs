@@ -84,6 +84,7 @@ data SpreadsheetsDeveloperMetadataSearch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsDeveloperMetadataSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ spreadsheetsDeveloperMetadataSearch pSdmsSpreadsheetId_ pSdmsPayload_ =
     , _sdmsPayload = pSdmsPayload_
     , _sdmsCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdmsXgafv :: Lens' SpreadsheetsDeveloperMetadataSearch (Maybe Xgafv)

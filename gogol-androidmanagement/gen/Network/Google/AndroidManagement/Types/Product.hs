@@ -64,6 +64,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -123,6 +125,7 @@ data ListPoliciesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListPoliciesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -134,6 +137,7 @@ listPoliciesResponse
     :: ListPoliciesResponse
 listPoliciesResponse =
   ListPoliciesResponse' {_lprNextPageToken = Nothing, _lprPolicies = Nothing}
+
 
 -- | If there are more results, a token to retrieve next page of results.
 lprNextPageToken :: Lens' ListPoliciesResponse (Maybe Text)
@@ -173,6 +177,7 @@ data MemoryInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MemoryInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -184,6 +189,7 @@ memoryInfo
     :: MemoryInfo
 memoryInfo =
   MemoryInfo' {_miTotalInternalStorage = Nothing, _miTotalRam = Nothing}
+
 
 -- | Total internal storage on device in bytes.
 miTotalInternalStorage :: Lens' MemoryInfo (Maybe Int64)
@@ -223,6 +229,7 @@ newtype PackageNameList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PackageNameList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -231,6 +238,7 @@ newtype PackageNameList =
 packageNameList
     :: PackageNameList
 packageNameList = PackageNameList' {_pnlPackageNames = Nothing}
+
 
 -- | A list of package names.
 pnlPackageNames :: Lens' PackageNameList [Text]
@@ -268,6 +276,7 @@ data Command =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Command' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -297,6 +306,7 @@ command =
     , _cDuration = Nothing
     , _cCreateTime = Nothing
     }
+
 
 -- | For commands of type RESET_PASSWORD, optionally specifies flags.
 cResetPasswordFlags :: Lens' Command [Text]
@@ -379,6 +389,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -391,6 +402,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -436,6 +448,7 @@ data Display =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Display' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -465,6 +478,7 @@ display =
     , _dDisplayId = Nothing
     , _dDensity = Nothing
     }
+
 
 -- | Display height in pixels.
 dHeight :: Lens' Display (Maybe Int32)
@@ -537,6 +551,7 @@ data AlwaysOnVPNPackage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlwaysOnVPNPackage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -549,6 +564,7 @@ alwaysOnVPNPackage
 alwaysOnVPNPackage =
   AlwaysOnVPNPackage'
     {_aovpLockdownEnabled = Nothing, _aovpPackageName = Nothing}
+
 
 -- | Disallows networking when the VPN is not connected.
 aovpLockdownEnabled :: Lens' AlwaysOnVPNPackage (Maybe Bool)
@@ -586,6 +602,7 @@ newtype PolicyOpenNetworkConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PolicyOpenNetworkConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -596,6 +613,7 @@ policyOpenNetworkConfiguration
     -> PolicyOpenNetworkConfiguration
 policyOpenNetworkConfiguration pPoncAddtional_ =
   PolicyOpenNetworkConfiguration' {_poncAddtional = _Coerce # pPoncAddtional_}
+
 
 -- | Properties of the object.
 poncAddtional :: Lens' PolicyOpenNetworkConfiguration (HashMap Text JSONValue)
@@ -624,6 +642,7 @@ newtype LaunchAppAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LaunchAppAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -632,6 +651,7 @@ newtype LaunchAppAction =
 launchAppAction
     :: LaunchAppAction
 launchAppAction = LaunchAppAction' {_laaPackageName = Nothing}
+
 
 -- | Package name of app to be launched
 laaPackageName :: Lens' LaunchAppAction (Maybe Text)
@@ -665,6 +685,7 @@ data HardwareStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HardwareStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -694,6 +715,7 @@ hardwareStatus =
     , _hsCPUUsages = Nothing
     , _hsCreateTime = Nothing
     }
+
 
 -- | Current CPU temperatures in Celsius for each CPU on the device.
 hsCPUTemperatures :: Lens' HardwareStatus [Double]
@@ -788,6 +810,7 @@ data Application =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -808,6 +831,7 @@ application =
     , _aPermissions = Nothing
     , _aTitle = Nothing
     }
+
 
 -- | The set of managed properties available to be pre-configured for the
 -- app.
@@ -868,6 +892,7 @@ data ManagedProperty =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedProperty' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -897,6 +922,7 @@ managedProperty =
     , _mpType = Nothing
     , _mpDescription = Nothing
     }
+
 
 -- | For CHOICE or MULTISELECT properties, the list of possible entries.
 mpEntries :: Lens' ManagedProperty [ManagedPropertyEntry]
@@ -979,6 +1005,7 @@ data ProxyInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProxyInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -999,6 +1026,7 @@ proxyInfo =
     , _piExcludedHosts = Nothing
     , _piPort = Nothing
     }
+
 
 -- | The URI of the PAC script used to configure the proxy.
 piPacURI :: Lens' ProxyInfo (Maybe Text)
@@ -1053,6 +1081,7 @@ data PersistentPreferredActivity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersistentPreferredActivity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1070,6 +1099,7 @@ persistentPreferredActivity =
     , _ppaCategories = Nothing
     , _ppaReceiverActivity = Nothing
     }
+
 
 -- | The intent actions to match in the filter. If any actions are included
 -- in the filter, then an intent\'s action must be one of those values for
@@ -1132,6 +1162,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1155,6 +1186,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is false, it means the operation is still in progress. If
 -- true, the operation is completed, and either error or response is
@@ -1221,11 +1253,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1244,6 +1278,7 @@ data ExternalData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExternalData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1254,6 +1289,7 @@ data ExternalData =
 externalData
     :: ExternalData
 externalData = ExternalData' {_edURL = Nothing, _edSha256Hash = Nothing}
+
 
 -- | The absolute URL to the data, which must use either the http or https
 -- scheme. Android Device Policy doesn\'t provide any credentials in the
@@ -1295,6 +1331,7 @@ newtype APILevelCondition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APILevelCondition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1303,6 +1340,7 @@ newtype APILevelCondition =
 apiLevelCondition
     :: APILevelCondition
 apiLevelCondition = APILevelCondition' {_alcMinAPILevel = Nothing}
+
 
 -- | The minimum desired Android Framework API level. If the device doesn\'t
 -- meet the minimum requirement, this condition is satisfied. Must be
@@ -1338,6 +1376,7 @@ data DeviceSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1367,6 +1406,7 @@ deviceSettings =
     , _dsEncryptionStatus = Nothing
     , _dsUnknownSourcesEnabled = Nothing
     }
+
 
 -- | Whether the storage encryption is enabled.
 dsIsEncrypted :: Lens' DeviceSettings (Maybe Bool)
@@ -1449,6 +1489,7 @@ newtype ManagedConfigurationTemplateConfigurationVariables =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfigurationTemplateConfigurationVariables' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1460,6 +1501,7 @@ managedConfigurationTemplateConfigurationVariables
 managedConfigurationTemplateConfigurationVariables pMctcvAddtional_ =
   ManagedConfigurationTemplateConfigurationVariables'
     {_mctcvAddtional = _Coerce # pMctcvAddtional_}
+
 
 mctcvAddtional :: Lens' ManagedConfigurationTemplateConfigurationVariables (HashMap Text Text)
 mctcvAddtional
@@ -1505,6 +1547,7 @@ data HardwareInfo =
     , _hiHardware                      :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HardwareInfo' with the minimum fields required to make a request.
 --
@@ -1556,6 +1599,7 @@ hardwareInfo =
     , _hiDeviceBasebandVersion = Nothing
     , _hiHardware = Nothing
     }
+
 
 -- | CPU throttling temperature thresholds in Celsius for each CPU on the
 -- device.
@@ -1746,6 +1790,7 @@ data Device =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1844,6 +1889,7 @@ device =
     , _devEnrollmentTime = Nothing
     , _devDisplays = Nothing
     }
+
 
 -- | Memory information. This information is only available if
 -- memoryInfoEnabled is true in the device\'s policy.
@@ -2153,6 +2199,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2163,6 +2210,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2188,6 +2236,7 @@ data ManagedPropertyEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedPropertyEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2199,6 +2248,7 @@ managedPropertyEntry
     :: ManagedPropertyEntry
 managedPropertyEntry =
   ManagedPropertyEntry' {_mpeValue = Nothing, _mpeName = Nothing}
+
 
 -- | The machine-readable value of the entry, which should be used in the
 -- configuration. Not localized.
@@ -2235,6 +2285,7 @@ data ChoosePrivateKeyRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChoosePrivateKeyRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2252,6 +2303,7 @@ choosePrivateKeyRule =
     , _cpkrURLPattern = Nothing
     , _cpkrPackageNames = Nothing
     }
+
 
 -- | The alias of the private key to be used.
 cpkrPrivateKeyAlias :: Lens' ChoosePrivateKeyRule (Maybe Text)
@@ -2307,6 +2359,7 @@ newtype UserFacingMessageLocalizedMessages =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserFacingMessageLocalizedMessages' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2318,6 +2371,7 @@ userFacingMessageLocalizedMessages
 userFacingMessageLocalizedMessages pUfmlmAddtional_ =
   UserFacingMessageLocalizedMessages'
     {_ufmlmAddtional = _Coerce # pUfmlmAddtional_}
+
 
 ufmlmAddtional :: Lens' UserFacingMessageLocalizedMessages (HashMap Text Text)
 ufmlmAddtional
@@ -2346,6 +2400,7 @@ newtype User =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2354,6 +2409,7 @@ newtype User =
 user
     :: User
 user = User' {_uAccountIdentifier = Nothing}
+
 
 -- | A unique identifier you create for this user, such as user342 or
 -- asset#44418. This field must be set when the user is created and can\'t
@@ -2387,6 +2443,7 @@ data SystemUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SystemUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2401,6 +2458,7 @@ systemUpdate
 systemUpdate =
   SystemUpdate'
     {_suEndMinutes = Nothing, _suStartMinutes = Nothing, _suType = Nothing}
+
 
 -- | If the type is WINDOWED, the end of the maintenance window, measured as
 -- the number of minutes after midnight in device\'s local time. This value
@@ -2460,6 +2518,7 @@ data ApplicationReport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationReport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2498,6 +2557,7 @@ applicationReport =
     , _arDisplayName = Nothing
     , _arInstallerPackageName = Nothing
     }
+
 
 -- | The app version code, which can be used to determine whether one version
 -- is more recent than another.
@@ -2617,6 +2677,7 @@ data EnrollmentToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnrollmentToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2652,6 +2713,7 @@ enrollmentToken =
     , _etExpirationTimestamp = Nothing
     , _etDuration = Nothing
     }
+
 
 -- | The name of the policy initially applied to the enrolled device, in the
 -- form enterprises\/{enterpriseId}\/policies\/{policyId}. If not
@@ -2781,6 +2843,7 @@ newtype ApplicationPolicyManagedConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationPolicyManagedConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2792,6 +2855,7 @@ applicationPolicyManagedConfiguration
 applicationPolicyManagedConfiguration pApmcAddtional_ =
   ApplicationPolicyManagedConfiguration'
     {_apmcAddtional = _Coerce # pApmcAddtional_}
+
 
 -- | Properties of the object.
 apmcAddtional :: Lens' ApplicationPolicyManagedConfiguration (HashMap Text JSONValue)
@@ -2829,6 +2893,7 @@ data StatusReportingSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusReportingSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2861,6 +2926,7 @@ statusReportingSettings =
     , _srsNetworkInfoEnabled = Nothing
     , _srsDeviceSettingsEnabled = Nothing
     }
+
 
 -- | Whether software info reporting is enabled.
 srsSoftwareInfoEnabled :: Lens' StatusReportingSettings (Maybe Bool)
@@ -2960,6 +3026,7 @@ data ApplicationPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2998,6 +3065,7 @@ applicationPolicy =
     , _apMinimumVersionCode = Nothing
     , _apInstallType = Nothing
     }
+
 
 -- | The scopes delegated to the app from Android Device Policy.
 apDelegatedScopes :: Lens' ApplicationPolicy [Text]
@@ -3143,6 +3211,7 @@ data ListDevicesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDevicesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3154,6 +3223,7 @@ listDevicesResponse
     :: ListDevicesResponse
 listDevicesResponse =
   ListDevicesResponse' {_ldrNextPageToken = Nothing, _ldrDevices = Nothing}
+
 
 -- | If there are more results, a token to retrieve next page of results.
 ldrNextPageToken :: Lens' ListDevicesResponse (Maybe Text)
@@ -3194,6 +3264,7 @@ data ManagedConfigurationTemplate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfigurationTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3206,6 +3277,7 @@ managedConfigurationTemplate
 managedConfigurationTemplate =
   ManagedConfigurationTemplate'
     {_mctTemplateId = Nothing, _mctConfigurationVariables = Nothing}
+
 
 -- | The ID of the managed configurations template.
 mctTemplateId :: Lens' ManagedConfigurationTemplate (Maybe Text)
@@ -3253,6 +3325,7 @@ data Enterprise =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Enterprise' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3288,6 +3361,7 @@ enterprise =
     , _eTermsAndConditions = Nothing
     , _ePrimaryColor = Nothing
     }
+
 
 -- | Deprecated and unused.
 eAppAutoApprovalEnabled :: Lens' Enterprise (Maybe Bool)
@@ -3399,6 +3473,7 @@ data MemoryEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MemoryEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3413,6 +3488,7 @@ memoryEvent
 memoryEvent =
   MemoryEvent'
     {_meByteCount = Nothing, _meEventType = Nothing, _meCreateTime = Nothing}
+
 
 -- | The number of free bytes in the medium, or for
 -- EXTERNAL_STORAGE_DETECTED, the total capacity in bytes of the storage
@@ -3459,6 +3535,7 @@ data PermissionGrant =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PermissionGrant' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3470,6 +3547,7 @@ permissionGrant
     :: PermissionGrant
 permissionGrant =
   PermissionGrant' {_pgPolicy = Nothing, _pgPermission = Nothing}
+
 
 -- | The policy for granting the permission.
 pgPolicy :: Lens' PermissionGrant (Maybe PermissionGrantPolicy)
@@ -3506,6 +3584,7 @@ data SigninDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SigninDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3523,6 +3602,7 @@ signinDetail =
     , _sdQrCode = Nothing
     , _sdSigninEnrollmentToken = Nothing
     }
+
 
 -- | Sign-in URL for authentication when device is provisioned with a sign-in
 -- enrollment token. The sign-in endpoint should finish authentication flow
@@ -3576,6 +3656,7 @@ data SignupURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignupURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3586,6 +3667,7 @@ data SignupURL =
 signupURL
     :: SignupURL
 signupURL = SignupURL' {_suURL = Nothing, _suName = Nothing}
+
 
 -- | A URL where an enterprise admin can register their enterprise. The page
 -- can\'t be rendered in an iframe.
@@ -3621,6 +3703,7 @@ data NetworkInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3641,6 +3724,7 @@ networkInfo =
     , _niImei = Nothing
     , _niWifiMACAddress = Nothing
     }
+
 
 -- | Alphabetic name of current registered operator. For example, Vodafone.
 niNetworkOperatorName :: Lens' NetworkInfo (Maybe Text)
@@ -3691,6 +3775,7 @@ data PowerManagementEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PowerManagementEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3708,6 +3793,7 @@ powerManagementEvent =
     , _pmeEventType = Nothing
     , _pmeCreateTime = Nothing
     }
+
 
 -- | For BATTERY_LEVEL_COLLECTED events, the battery level as a percentage.
 pmeBatteryLevel :: Lens' PowerManagementEvent (Maybe Double)
@@ -3827,6 +3913,7 @@ data Policy =
     , _pFactoryResetDisabled               :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -4061,6 +4148,7 @@ policy =
     , _pPasswordPolicies = Nothing
     , _pFactoryResetDisabled = Nothing
     }
+
 
 -- | Whether configuring bluetooth is disabled.
 pBluetoothConfigDisabled :: Lens' Policy (Maybe Bool)
@@ -4818,6 +4906,7 @@ data NonComplianceDetailCondition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NonComplianceDetailCondition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4835,6 +4924,7 @@ nonComplianceDetailCondition =
     , _ncdcNonComplianceReason = Nothing
     , _ncdcSettingName = Nothing
     }
+
 
 -- | The package name of the app that\'s out of compliance. If not set, then
 -- this condition matches any package name.
@@ -4888,6 +4978,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4898,6 +4989,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -4925,6 +5017,7 @@ data WebToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4945,6 +5038,7 @@ webToken =
     , _wtName = Nothing
     , _wtPermissions = Nothing
     }
+
 
 -- | The URL of the parent frame hosting the iframe with the embedded UI. To
 -- prevent XSS, the iframe may not be hosted at other URLs. The URL must
@@ -5008,6 +5102,7 @@ data ComplianceRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ComplianceRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5028,6 +5123,7 @@ complianceRule =
     , _crPackageNamesToDisable = Nothing
     , _crNonComplianceDetailCondition = Nothing
     }
+
 
 -- | A condition which is satisfied if the Android Framework API level on the
 -- device doesn\'t meet a minimum requirement.
@@ -5101,6 +5197,7 @@ data PasswordRequirements =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PasswordRequirements' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5145,6 +5242,7 @@ passwordRequirements =
     , _prPasswordScope = Nothing
     , _prPasswordMinimumLowerCase = Nothing
     }
+
 
 -- | Minimum number of symbols required in the password. Only enforced when
 -- password_quality is COMPLEX.
@@ -5299,6 +5397,7 @@ data NonComplianceDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NonComplianceDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5325,6 +5424,7 @@ nonComplianceDetail =
     , _ncdSettingName = Nothing
     , _ncdCurrentValue = Nothing
     }
+
 
 -- | For settings with nested fields, if a particular nested field is out of
 -- compliance, this specifies the full path to the offending field. The
@@ -5408,6 +5508,7 @@ data ApplicationEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5419,6 +5520,7 @@ applicationEvent
     :: ApplicationEvent
 applicationEvent =
   ApplicationEvent' {_aeEventType = Nothing, _aeCreateTime = Nothing}
+
 
 -- | App event type.
 aeEventType :: Lens' ApplicationEvent (Maybe ApplicationEventEventType)
@@ -5455,6 +5557,7 @@ data TermsAndConditions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TermsAndConditions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5466,6 +5569,7 @@ termsAndConditions
     :: TermsAndConditions
 termsAndConditions =
   TermsAndConditions' {_tacContent = Nothing, _tacHeader = Nothing}
+
 
 -- | A well-formatted HTML string. It will be parsed on the client with
 -- android.text.Html#fromHtml.
@@ -5507,6 +5611,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5517,6 +5622,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -5543,6 +5649,7 @@ data UserFacingMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserFacingMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5555,6 +5662,7 @@ userFacingMessage
 userFacingMessage =
   UserFacingMessage'
     {_ufmLocalizedMessages = Nothing, _ufmDefaultMessage = Nothing}
+
 
 -- | A map containing pairs, where locale is a well-formed BCP 47 language
 -- (https:\/\/www.w3.org\/International\/articles\/language-tags\/) code,
@@ -5605,6 +5713,7 @@ data SoftwareInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SoftwareInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5643,6 +5752,7 @@ softwareInfo =
     , _siAndroidBuildNumber = Nothing
     , _siAndroidVersion = Nothing
     }
+
 
 -- | Security patch level, e.g. 2016-05-01.
 siSecurityPatchLevel :: Lens' SoftwareInfo (Maybe Text)
@@ -5757,6 +5867,7 @@ data ApplicationPermission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationPermission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5771,6 +5882,7 @@ applicationPermission
 applicationPermission =
   ApplicationPermission'
     {_apName = Nothing, _apDescription = Nothing, _apPermissionId = Nothing}
+
 
 -- | The name of the permission. Localized.
 apName :: Lens' ApplicationPermission (Maybe Text)
@@ -5816,6 +5928,7 @@ data SetupAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetupAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5830,6 +5943,7 @@ setupAction
 setupAction =
   SetupAction'
     {_saLaunchApp = Nothing, _saTitle = Nothing, _saDescription = Nothing}
+
 
 -- | An action to launch an app.
 saLaunchApp :: Lens' SetupAction (Maybe LaunchAppAction)

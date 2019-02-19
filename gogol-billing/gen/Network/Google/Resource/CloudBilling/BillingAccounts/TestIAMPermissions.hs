@@ -78,6 +78,7 @@ data BillingAccountsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ billingAccountsTestIAMPermissions pBatipPayload_ pBatipResource_ =
     , _batipResource = pBatipResource_
     , _batipCallback = Nothing
     }
+
 
 -- | V1 error format.
 batipXgafv :: Lens' BillingAccountsTestIAMPermissions (Maybe Xgafv)

@@ -75,6 +75,7 @@ data SpacesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpacesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ spacesList =
     , _slPageSize = Nothing
     , _slCallback = Nothing
     }
+
 
 -- | V1 error format.
 slXgafv :: Lens' SpacesList (Maybe Xgafv)

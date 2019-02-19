@@ -79,6 +79,7 @@ data DisksInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DisksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ disksInsert pDiProject_ pDiZone_ pDiPayload_ =
     , _diZone = pDiZone_
     , _diPayload = pDiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

@@ -114,6 +114,7 @@ data SpreadsheetsValuesAppend =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsValuesAppend' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -164,6 +165,7 @@ spreadsheetsValuesAppend pSvaSpreadsheetId_ pSvaPayload_ pSvaRange_ =
     , _svaCallback = Nothing
     , _svaResponseValueRenderOption = Nothing
     }
+
 
 -- | V1 error format.
 svaXgafv :: Lens' SpreadsheetsValuesAppend (Maybe Xgafv)

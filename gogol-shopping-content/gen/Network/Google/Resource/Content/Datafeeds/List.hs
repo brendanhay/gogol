@@ -64,6 +64,7 @@ data DatafeedsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ datafeedsList pDatMerchantId_ =
     , _datPageToken = Nothing
     , _datMaxResults = Nothing
     }
+
 
 -- | The ID of the account that manages the datafeeds. This account cannot be
 -- a multi-client account.

@@ -57,6 +57,7 @@ newtype UsersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ usersGet
     :: Text -- ^ 'ugUserId'
     -> UsersGet
 usersGet pUgUserId_ = UsersGet' {_ugUserId = pUgUserId_}
+
 
 -- | The ID of the user to get.
 ugUserId :: Lens' UsersGet Text

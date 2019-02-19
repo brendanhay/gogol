@@ -65,6 +65,7 @@ data LiaSettingsRequestgmbAccess =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsRequestgmbAccess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ liaSettingsRequestgmbAccess pLsraGmbEmail_ pLsraMerchantId_ pLsraAccountId_ =
     , _lsraMerchantId = _Coerce # pLsraMerchantId_
     , _lsraAccountId = _Coerce # pLsraAccountId_
     }
+
 
 -- | The email of the Google My Business account.
 lsraGmbEmail :: Lens' LiaSettingsRequestgmbAccess Text

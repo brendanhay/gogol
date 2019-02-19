@@ -75,6 +75,7 @@ data ProjectsDeploymentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDeploymentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsDeploymentsDelete pPddDeploymentId_ pPddScriptId_ =
     , _pddScriptId = pPddScriptId_
     , _pddCallback = Nothing
     }
+
 
 -- | The deployment ID to be undeployed.
 pddDeploymentId :: Lens' ProjectsDeploymentsDelete Text

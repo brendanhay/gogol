@@ -56,6 +56,7 @@ newtype AccountsContainersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -65,6 +66,7 @@ accountsContainersGet
     :: Text -- ^ 'acgPath'
     -> AccountsContainersGet
 accountsContainersGet pAcgPath_ = AccountsContainersGet' {_acgPath = pAcgPath_}
+
 
 -- | GTM Container\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}

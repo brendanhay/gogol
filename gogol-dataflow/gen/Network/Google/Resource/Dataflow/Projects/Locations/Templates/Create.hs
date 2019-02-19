@@ -80,6 +80,7 @@ data ProjectsLocationsTemplatesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsTemplatesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsLocationsTemplatesCreate pPltcLocation_ pPltcPayload_ pPltcProjectId_ =
     , _pltcProjectId = pPltcProjectId_
     , _pltcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pltcXgafv :: Lens' ProjectsLocationsTemplatesCreate (Maybe Xgafv)

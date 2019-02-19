@@ -65,6 +65,7 @@ data ImagesGetFromFamily =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImagesGetFromFamily' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ imagesGetFromFamily
 imagesGetFromFamily pIgffProject_ pIgffFamily_ =
   ImagesGetFromFamily'
     {_igffProject = pIgffProject_, _igffFamily = pIgffFamily_}
+
 
 -- | Project ID for this request.
 igffProject :: Lens' ImagesGetFromFamily Text

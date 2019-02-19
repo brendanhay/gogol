@@ -68,6 +68,7 @@ data StatesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ statesUpdate pSuStateKey_ pSuPayload_ =
     , _suStateKey = _Coerce # pSuStateKey_
     , _suPayload = pSuPayload_
     }
+
 
 -- | The version of the app state your application is attempting to update.
 -- If this does not match the current version, this method will return a

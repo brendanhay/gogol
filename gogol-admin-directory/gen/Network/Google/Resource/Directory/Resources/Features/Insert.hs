@@ -63,6 +63,7 @@ data ResourcesFeaturesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesFeaturesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ resourcesFeaturesInsert
 resourcesFeaturesInsert pRfiPayload_ pRfiCustomer_ =
   ResourcesFeaturesInsert'
     {_rfiPayload = pRfiPayload_, _rfiCustomer = pRfiCustomer_}
+
 
 -- | Multipart request metadata.
 rfiPayload :: Lens' ResourcesFeaturesInsert Feature

@@ -62,6 +62,7 @@ data UsersUndelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ usersUndelete
     -> UsersUndelete
 usersUndelete pUuPayload_ pUuUserKey_ =
   UsersUndelete' {_uuPayload = pUuPayload_, _uuUserKey = pUuUserKey_}
+
 
 -- | Multipart request metadata.
 uuPayload :: Lens' UsersUndelete UserUndelete

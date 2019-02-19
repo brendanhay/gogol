@@ -37,6 +37,7 @@ data MarketplaceNote =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MarketplaceNote' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ marketplaceNote =
     , _mnNoteId = Nothing
     , _mnCreatorRole = Nothing
     }
+
 
 -- | The actual note to attach. (readonly, except on create)
 mnNote :: Lens' MarketplaceNote (Maybe Text)
@@ -165,6 +167,7 @@ data CreativeNATiveAd =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeNATiveAd' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -215,6 +218,7 @@ creativeNATiveAd =
     , _cnataStarRating = Nothing
     , _cnataLogo = Nothing
     }
+
 
 -- | A large image.
 cnataImage :: Lens' CreativeNATiveAd (Maybe CreativeNATiveAdImage)
@@ -345,6 +349,7 @@ data EditAllOrderDealsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditAllOrderDealsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -357,6 +362,7 @@ editAllOrderDealsResponse
 editAllOrderDealsResponse =
   EditAllOrderDealsResponse'
     {_eaodrDeals = Nothing, _eaodrOrderRevisionNumber = Nothing}
+
 
 -- | List of all deals in the proposal after edit.
 eaodrDeals :: Lens' EditAllOrderDealsResponse [MarketplaceDeal]
@@ -396,6 +402,7 @@ newtype TargetingValueDemogGenderCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingValueDemogGenderCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -405,6 +412,7 @@ targetingValueDemogGenderCriteria
     :: TargetingValueDemogGenderCriteria
 targetingValueDemogGenderCriteria =
   TargetingValueDemogGenderCriteria' {_tvdgcDemogGenderCriteriaIds = Nothing}
+
 
 tvdgcDemogGenderCriteriaIds :: Lens' TargetingValueDemogGenderCriteria [Text]
 tvdgcDemogGenderCriteriaIds
@@ -442,6 +450,7 @@ data CreativesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -459,6 +468,7 @@ creativesList =
     , _clKind = "adexchangebuyer#creativesList"
     , _clItems = Nothing
     }
+
 
 -- | Continuation token used to page through creatives. To retrieve the next
 -- page of results, set the next request\'s \"pageToken\" value to this.
@@ -503,6 +513,7 @@ data CreativeDealIdsDealStatusesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeDealIdsDealStatusesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -520,6 +531,7 @@ creativeDealIdsDealStatusesItem =
     , _cdidsiWebPropertyId = Nothing
     , _cdidsiDealId = Nothing
     }
+
 
 -- | ARC approval status.
 cdidsiArcStatus :: Lens' CreativeDealIdsDealStatusesItem (Maybe Text)
@@ -568,6 +580,7 @@ data CreativeServingRestrictionsItemContextsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeServingRestrictionsItemContextsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -588,6 +601,7 @@ creativeServingRestrictionsItemContextsItem =
     , _csriciAuctionType = Nothing
     , _csriciGeoCriteriaId = Nothing
     }
+
 
 -- | Only set when contextType=PLATFORM. Represents the platforms this
 -- restriction applies to.
@@ -657,6 +671,7 @@ newtype CreateOrdersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateOrdersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -665,6 +680,7 @@ newtype CreateOrdersResponse =
 createOrdersResponse
     :: CreateOrdersResponse
 createOrdersResponse = CreateOrdersResponse' {_corProposals = Nothing}
+
 
 -- | The list of proposals successfully created.
 corProposals :: Lens' CreateOrdersResponse [Proposal]
@@ -696,6 +712,7 @@ data AccountBidderLocationItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountBidderLocationItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -716,6 +733,7 @@ accountBidderLocationItem =
     , _abliRegion = Nothing
     , _abliBidProtocol = Nothing
     }
+
 
 -- | The URL to which the Ad Exchange will send bid requests.
 abliURL :: Lens' AccountBidderLocationItem (Maybe Text)
@@ -773,6 +791,7 @@ data PrivateData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PrivateData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -784,6 +803,7 @@ privateData
     :: PrivateData
 privateData =
   PrivateData' {_pdReferencePayload = Nothing, _pdReferenceId = Nothing}
+
 
 pdReferencePayload :: Lens' PrivateData (Maybe ByteString)
 pdReferencePayload
@@ -824,6 +844,7 @@ data Budget =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Budget' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -850,6 +871,7 @@ budget =
     , _bId = Nothing
     , _bBillingId = Nothing
     }
+
 
 -- | The currency code for the buyer. This cannot be altered here.
 bCurrencyCode :: Lens' Budget (Maybe Text)
@@ -916,6 +938,7 @@ newtype AddOrderNotesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddOrderNotesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -924,6 +947,7 @@ newtype AddOrderNotesRequest =
 addOrderNotesRequest
     :: AddOrderNotesRequest
 addOrderNotesRequest = AddOrderNotesRequest' {_aonrNotes = Nothing}
+
 
 -- | The list of notes to add.
 aonrNotes :: Lens' AddOrderNotesRequest [MarketplaceNote]
@@ -952,6 +976,7 @@ data DeliveryControlFrequencyCap =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeliveryControlFrequencyCap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -969,6 +994,7 @@ deliveryControlFrequencyCap =
     , _dcfcNumTimeUnits = Nothing
     , _dcfcTimeUnitType = Nothing
     }
+
 
 dcfcMaxImpressions :: Lens' DeliveryControlFrequencyCap (Maybe Int32)
 dcfcMaxImpressions
@@ -1012,6 +1038,7 @@ data MarketplaceDealParty =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MarketplaceDealParty' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1023,6 +1050,7 @@ marketplaceDealParty
     :: MarketplaceDealParty
 marketplaceDealParty =
   MarketplaceDealParty' {_mdpSeller = Nothing, _mdpBuyer = Nothing}
+
 
 -- | The buyer\/seller associated with the deal. One of buyer\/seller is
 -- specified for a deal party.
@@ -1057,6 +1085,7 @@ newtype GetOrderNotesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetOrderNotesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1065,6 +1094,7 @@ newtype GetOrderNotesResponse =
 getOrderNotesResponse
     :: GetOrderNotesResponse
 getOrderNotesResponse = GetOrderNotesResponse' {_gonrNotes = Nothing}
+
 
 -- | The list of matching notes. The notes for a proposal are ordered from
 -- oldest to newest. If the notes span multiple proposals, they will be
@@ -1095,6 +1125,7 @@ newtype GetOrdersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetOrdersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1103,6 +1134,7 @@ newtype GetOrdersResponse =
 getOrdersResponse
     :: GetOrdersResponse
 getOrdersResponse = GetOrdersResponse' {_gorProposals = Nothing}
+
 
 -- | The list of matching proposals.
 gorProposals :: Lens' GetOrdersResponse [Proposal]
@@ -1132,6 +1164,7 @@ data CreativeServingRestrictionsItemDisApprovalReasonsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeServingRestrictionsItemDisApprovalReasonsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1144,6 +1177,7 @@ creativeServingRestrictionsItemDisApprovalReasonsItem
 creativeServingRestrictionsItemDisApprovalReasonsItem =
   CreativeServingRestrictionsItemDisApprovalReasonsItem'
     {_csridariReason = Nothing, _csridariDetails = Nothing}
+
 
 -- | The categorized reason for disapproval.
 csridariReason :: Lens' CreativeServingRestrictionsItemDisApprovalReasonsItem (Maybe Text)
@@ -1191,6 +1225,7 @@ data AccountsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1202,6 +1237,7 @@ accountsList
     :: AccountsList
 accountsList =
   AccountsList' {_alKind = "adexchangebuyer#accountsList", _alItems = Nothing}
+
 
 -- | Resource type.
 alKind :: Lens' AccountsList Text
@@ -1240,6 +1276,7 @@ data Dimension =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Dimension' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1250,6 +1287,7 @@ data Dimension =
 dimension
     :: Dimension
 dimension = Dimension' {_dDimensionValues = Nothing, _dDimensionType = Nothing}
+
 
 dDimensionValues :: Lens' Dimension [DimensionDimensionValue]
 dDimensionValues
@@ -1287,6 +1325,7 @@ data CreateOrdersRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateOrdersRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1298,6 +1337,7 @@ createOrdersRequest
     :: CreateOrdersRequest
 createOrdersRequest =
   CreateOrdersRequest' {_cProposals = Nothing, _cWebPropertyCode = Nothing}
+
 
 -- | The list of proposals to create.
 cProposals :: Lens' CreateOrdersRequest [Proposal]
@@ -1337,6 +1377,7 @@ data CreativeCorrectionsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeCorrectionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1351,6 +1392,7 @@ creativeCorrectionsItem
 creativeCorrectionsItem =
   CreativeCorrectionsItem'
     {_cciContexts = Nothing, _cciReason = Nothing, _cciDetails = Nothing}
+
 
 -- | All known serving contexts containing serving status information.
 cciContexts :: Lens' CreativeCorrectionsItem [CreativeCorrectionsItemContextsItem]
@@ -1396,6 +1438,7 @@ data DealTermsRubiconNonGuaranteedTerms =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DealTermsRubiconNonGuaranteedTerms' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1408,6 +1451,7 @@ dealTermsRubiconNonGuaranteedTerms
 dealTermsRubiconNonGuaranteedTerms =
   DealTermsRubiconNonGuaranteedTerms'
     {_dtrngtPriorityPrice = Nothing, _dtrngtStandardPrice = Nothing}
+
 
 -- | Optional price for Rubicon priority access in the auction.
 dtrngtPriorityPrice :: Lens' DealTermsRubiconNonGuaranteedTerms (Maybe Price)
@@ -1446,6 +1490,7 @@ data DealServingMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DealServingMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1458,6 +1503,7 @@ dealServingMetadata
 dealServingMetadata =
   DealServingMetadata'
     {_dsmDealPauseStatus = Nothing, _dsmAlcoholAdsAllowed = Nothing}
+
 
 -- | Tracks which parties (if any) have paused a deal. (readonly, except via
 -- PauseResumeOrderDeals action)
@@ -1498,6 +1544,7 @@ data AddOrderDealsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddOrderDealsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1510,6 +1557,7 @@ addOrderDealsResponse
 addOrderDealsResponse =
   AddOrderDealsResponse'
     {_aodrDeals = Nothing, _aodrProposalRevisionNumber = Nothing}
+
 
 -- | List of deals added (in the same proposal as passed in the request)
 aodrDeals :: Lens' AddOrderDealsResponse [MarketplaceDeal]
@@ -1551,6 +1599,7 @@ data DeliveryControl =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeliveryControl' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1568,6 +1617,7 @@ deliveryControl =
     , _dcFrequencyCaps = Nothing
     , _dcDeliveryRateType = Nothing
     }
+
 
 dcCreativeBlockingLevel :: Lens' DeliveryControl (Maybe Text)
 dcCreativeBlockingLevel
@@ -1620,6 +1670,7 @@ data PricePerBuyer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PricePerBuyer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1640,6 +1691,7 @@ pricePerBuyer =
     , _ppbAuctionTier = Nothing
     , _ppbBuyer = Nothing
     }
+
 
 -- | Reference to the buyer that will get billed.
 ppbBilledBuyer :: Lens' PricePerBuyer (Maybe Buyer)
@@ -1718,6 +1770,7 @@ data Creative =
     , _cCreativeStatusIdentityType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Creative' with the minimum fields required to make a request.
 --
@@ -1817,6 +1870,7 @@ creative =
     , _cOpenAuctionStatus = Nothing
     , _cCreativeStatusIdentityType = Nothing
     }
+
 
 -- | List of buyer selectable attributes for the ads that may be shown from
 -- this snippet. Each attribute is represented by an integer as defined in
@@ -2145,6 +2199,7 @@ data TargetingValueDayPartTargetingDayPart =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingValueDayPartTargetingDayPart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2168,6 +2223,7 @@ targetingValueDayPartTargetingDayPart =
     , _tvdptdpDayOfWeek = Nothing
     , _tvdptdpEndMinute = Nothing
     }
+
 
 tvdptdpEndHour :: Lens' TargetingValueDayPartTargetingDayPart (Maybe Int32)
 tvdptdpEndHour
@@ -2232,6 +2288,7 @@ data DimensionDimensionValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DimensionDimensionValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2246,6 +2303,7 @@ dimensionDimensionValue
 dimensionDimensionValue =
   DimensionDimensionValue'
     {_ddvName = Nothing, _ddvId = Nothing, _ddvPercentage = Nothing}
+
 
 -- | Name of the dimension mainly for debugging purposes, except for the case
 -- of CREATIVE_SIZE. For CREATIVE_SIZE, strings are used instead of ids.
@@ -2291,6 +2349,7 @@ data PretargetingConfigList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PretargetingConfigList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2303,6 +2362,7 @@ pretargetingConfigList
 pretargetingConfigList =
   PretargetingConfigList'
     {_pclKind = "adexchangebuyer#pretargetingConfigList", _pclItems = Nothing}
+
 
 -- | Resource type.
 pclKind :: Lens' PretargetingConfigList Text
@@ -2339,6 +2399,7 @@ newtype TargetingValueDemogAgeCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingValueDemogAgeCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2348,6 +2409,7 @@ targetingValueDemogAgeCriteria
     :: TargetingValueDemogAgeCriteria
 targetingValueDemogAgeCriteria =
   TargetingValueDemogAgeCriteria' {_tvdacDemogAgeCriteriaIds = Nothing}
+
 
 tvdacDemogAgeCriteriaIds :: Lens' TargetingValueDemogAgeCriteria [Text]
 tvdacDemogAgeCriteriaIds
@@ -2379,6 +2441,7 @@ newtype DealTermsNonGuaranteedFixedPriceTerms =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DealTermsNonGuaranteedFixedPriceTerms' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2388,6 +2451,7 @@ dealTermsNonGuaranteedFixedPriceTerms
     :: DealTermsNonGuaranteedFixedPriceTerms
 dealTermsNonGuaranteedFixedPriceTerms =
   DealTermsNonGuaranteedFixedPriceTerms' {_dtngfptFixedPrices = Nothing}
+
 
 -- | Fixed price for the specified buyer.
 dtngfptFixedPrices :: Lens' DealTermsNonGuaranteedFixedPriceTerms [PricePerBuyer]
@@ -2442,6 +2506,7 @@ data PerformanceReport =
     , _prOutOfQuota              :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PerformanceReport' with the minimum fields required to make a request.
 --
@@ -2517,6 +2582,7 @@ performanceReport =
     , _prPixelMatchRequests = Nothing
     , _prOutOfQuota = Nothing
     }
+
 
 -- | The number of bid responses that were filtered due to a policy violation
 -- or other errors.
@@ -2750,6 +2816,7 @@ data PretargetingConfigExcludedPlacementsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PretargetingConfigExcludedPlacementsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2762,6 +2829,7 @@ pretargetingConfigExcludedPlacementsItem
 pretargetingConfigExcludedPlacementsItem =
   PretargetingConfigExcludedPlacementsItem'
     {_pcepiToken = Nothing, _pcepiType = Nothing}
+
 
 -- | The value of the placement. Interpretation depends on the placement
 -- type, e.g. URL for a site placement, channel name for a channel
@@ -2803,6 +2871,7 @@ data Seller =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Seller' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2813,6 +2882,7 @@ data Seller =
 seller
     :: Seller
 seller = Seller' {_sAccountId = Nothing, _sSubAccountId = Nothing}
+
 
 -- | The unique id for the seller. The seller fills in this field. The seller
 -- account id is then available to buyer in the product.
@@ -2857,6 +2927,7 @@ data Account =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2892,6 +2963,7 @@ account =
     , _aId = Nothing
     , _aBidderLocation = Nothing
     }
+
 
 -- | When this is false, bid requests that include a deal ID for a private
 -- auction or preferred deal are always sent to your bidder. When true, all
@@ -3003,6 +3075,7 @@ data DeleteOrderDealsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteOrderDealsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3020,6 +3093,7 @@ deleteOrderDealsRequest =
     , _dodrDealIds = Nothing
     , _dodrProposalRevisionNumber = Nothing
     }
+
 
 -- | Indicates an optional action to take on the proposal
 dodrUpdateAction :: Lens' DeleteOrderDealsRequest (Maybe Text)
@@ -3068,6 +3142,7 @@ data ContactInformation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactInformation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3078,6 +3153,7 @@ data ContactInformation =
 contactInformation
     :: ContactInformation
 contactInformation = ContactInformation' {_ciEmail = Nothing, _ciName = Nothing}
+
 
 -- | Email address of the contact.
 ciEmail :: Lens' ContactInformation (Maybe Text)
@@ -3111,6 +3187,7 @@ data CreativeNATiveAdLogo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeNATiveAdLogo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3125,6 +3202,7 @@ creativeNATiveAdLogo
 creativeNATiveAdLogo =
   CreativeNATiveAdLogo'
     {_cnatalHeight = Nothing, _cnatalURL = Nothing, _cnatalWidth = Nothing}
+
 
 cnatalHeight :: Lens' CreativeNATiveAdLogo (Maybe Int32)
 cnatalHeight
@@ -3164,6 +3242,7 @@ newtype GetOrderDealsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetOrderDealsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3172,6 +3251,7 @@ newtype GetOrderDealsResponse =
 getOrderDealsResponse
     :: GetOrderDealsResponse
 getOrderDealsResponse = GetOrderDealsResponse' {_godrDeals = Nothing}
+
 
 -- | List of deals for the proposal
 godrDeals :: Lens' GetOrderDealsResponse [MarketplaceDeal]
@@ -3201,6 +3281,7 @@ data PerformanceReportList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PerformanceReportList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3215,6 +3296,7 @@ performanceReportList =
     { _prlKind = "adexchangebuyer#performanceReportList"
     , _prlPerformanceReport = Nothing
     }
+
 
 -- | Resource type.
 prlKind :: Lens' PerformanceReportList Text
@@ -3276,6 +3358,7 @@ data PretargetingConfig =
     , _pcMobileOperatingSystemVersions :: !(Maybe [Textual Int64])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PretargetingConfig' with the minimum fields required to make a request.
 --
@@ -3363,6 +3446,7 @@ pretargetingConfig =
     , _pcBillingId = Nothing
     , _pcMobileOperatingSystemVersions = Nothing
     }
+
 
 -- | Requests matching any of these platforms will match. Possible values are
 -- PRETARGETING_PLATFORM_MOBILE, PRETARGETING_PLATFORM_DESKTOP, and
@@ -3658,6 +3742,7 @@ data CreativeFilteringReasons =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFilteringReasons' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3669,6 +3754,7 @@ creativeFilteringReasons
     :: CreativeFilteringReasons
 creativeFilteringReasons =
   CreativeFilteringReasons' {_cfrReasons = Nothing, _cfrDate = Nothing}
+
 
 -- | The filtering reasons.
 cfrReasons :: Lens' CreativeFilteringReasons [CreativeFilteringReasonsReasonsItem]
@@ -3710,6 +3796,7 @@ data TargetingValueCreativeSize =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingValueCreativeSize' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3736,6 +3823,7 @@ targetingValueCreativeSize =
     , _tvcsAllowedFormats = Nothing
     , _tvcsNATiveTemplate = Nothing
     }
+
 
 -- | For regular or video creative size type, specifies the size of the
 -- creative.
@@ -3810,6 +3898,7 @@ data DealTermsGuaranteedFixedPriceTermsBillingInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DealTermsGuaranteedFixedPriceTermsBillingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3830,6 +3919,7 @@ dealTermsGuaranteedFixedPriceTermsBillingInfo =
     , _dtgfptbiPrice = Nothing
     , _dtgfptbiOriginalContractedQuantity = Nothing
     }
+
 
 -- | The timestamp (in ms since epoch) when the original reservation price
 -- for the deal was first converted to DFP currency. This is used to
@@ -3901,6 +3991,7 @@ newtype GetPublisherProFilesByAccountIdResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetPublisherProFilesByAccountIdResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3910,6 +4001,7 @@ getPublisherProFilesByAccountIdResponse
     :: GetPublisherProFilesByAccountIdResponse
 getPublisherProFilesByAccountIdResponse =
   GetPublisherProFilesByAccountIdResponse' {_gppfbairProFiles = Nothing}
+
 
 -- | Profiles for the requested publisher
 gppfbairProFiles :: Lens' GetPublisherProFilesByAccountIdResponse [PublisherProFileAPIProto]
@@ -3972,6 +4064,7 @@ data Proposal =
     , _pBuyer                      :: !(Maybe Buyer)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Proposal' with the minimum fields required to make a request.
 --
@@ -4050,6 +4143,7 @@ proposal =
     , _pHasBuyerSignedOff = Nothing
     , _pBuyer = Nothing
     }
+
 
 -- | Private data for buyer. (hidden from seller).
 pBuyerPrivateData :: Lens' Proposal (Maybe PrivateData)
@@ -4266,6 +4360,7 @@ data BillingInfoList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingInfoList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4278,6 +4373,7 @@ billingInfoList
 billingInfoList =
   BillingInfoList'
     {_bilKind = "adexchangebuyer#billingInfoList", _bilItems = Nothing}
+
 
 -- | Resource type.
 bilKind :: Lens' BillingInfoList Text
@@ -4313,6 +4409,7 @@ newtype AddOrderNotesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddOrderNotesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4321,6 +4418,7 @@ newtype AddOrderNotesResponse =
 addOrderNotesResponse
     :: AddOrderNotesResponse
 addOrderNotesResponse = AddOrderNotesResponse' {_aNotes = Nothing}
+
 
 aNotes :: Lens' AddOrderNotesResponse [MarketplaceNote]
 aNotes
@@ -4347,6 +4445,7 @@ data TargetingValueSize =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingValueSize' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4358,6 +4457,7 @@ targetingValueSize
     :: TargetingValueSize
 targetingValueSize =
   TargetingValueSize' {_tvsHeight = Nothing, _tvsWidth = Nothing}
+
 
 -- | The height of the creative.
 tvsHeight :: Lens' TargetingValueSize (Maybe Int32)
@@ -4396,6 +4496,7 @@ data UpdatePrivateAuctionProposalRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdatePrivateAuctionProposalRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4416,6 +4517,7 @@ updatePrivateAuctionProposalRequest =
     , _upaprNote = Nothing
     , _upaprProposalRevisionNumber = Nothing
     }
+
 
 -- | The externalDealId of the deal to be updated.
 upaprExternalDealId :: Lens' UpdatePrivateAuctionProposalRequest (Maybe Text)
@@ -4471,6 +4573,7 @@ data PretargetingConfigDimensionsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PretargetingConfigDimensionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4483,6 +4586,7 @@ pretargetingConfigDimensionsItem
 pretargetingConfigDimensionsItem =
   PretargetingConfigDimensionsItem'
     {_pcdiHeight = Nothing, _pcdiWidth = Nothing}
+
 
 -- | Height in pixels.
 pcdiHeight :: Lens' PretargetingConfigDimensionsItem (Maybe Int64)
@@ -4523,6 +4627,7 @@ data CreativeCorrectionsItemContextsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeCorrectionsItemContextsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4543,6 +4648,7 @@ creativeCorrectionsItemContextsItem =
     , _cciciAuctionType = Nothing
     , _cciciGeoCriteriaId = Nothing
     }
+
 
 -- | Only set when contextType=PLATFORM. Represents the platforms this
 -- correction applies to.
@@ -4609,6 +4715,7 @@ data PublisherProvidedForecast =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PublisherProvidedForecast' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4626,6 +4733,7 @@ publisherProvidedForecast =
     , _ppfWeeklyUniques = Nothing
     , _ppfDimensions = Nothing
     }
+
 
 -- | Publisher provided weekly impressions.
 ppfWeeklyImpressions :: Lens' PublisherProvidedForecast (Maybe Int64)
@@ -4679,6 +4787,7 @@ data TargetingValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4705,6 +4814,7 @@ targetingValue =
     , _tvDayPartTargetingValue = Nothing
     , _tvDemogGenderCriteriaValue = Nothing
     }
+
 
 tvDemogAgeCriteriaValue :: Lens' TargetingValue (Maybe TargetingValueDemogAgeCriteria)
 tvDemogAgeCriteriaValue
@@ -4778,6 +4888,7 @@ data CreativeNATiveAdAppIcon =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeNATiveAdAppIcon' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4792,6 +4903,7 @@ creativeNATiveAdAppIcon
 creativeNATiveAdAppIcon =
   CreativeNATiveAdAppIcon'
     {_cnataaiHeight = Nothing, _cnataaiURL = Nothing, _cnataaiWidth = Nothing}
+
 
 cnataaiHeight :: Lens' CreativeNATiveAdAppIcon (Maybe Int32)
 cnataaiHeight
@@ -4835,6 +4947,7 @@ data Price =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4855,6 +4968,7 @@ price =
     , _pPricingType = Nothing
     , _pExpectedCpmMicros = Nothing
     }
+
 
 -- | The currency code for the price.
 pCurrencyCode :: Lens' Price (Maybe Text)
@@ -4909,6 +5023,7 @@ data PretargetingConfigVideoPlayerSizesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PretargetingConfigVideoPlayerSizesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4926,6 +5041,7 @@ pretargetingConfigVideoPlayerSizesItem =
     , _pcvpsiAspectRatio = Nothing
     , _pcvpsiMinHeight = Nothing
     }
+
 
 -- | The minimum player width in pixels. Leave this field blank to match any
 -- player width.
@@ -4981,6 +5097,7 @@ data EditAllOrderDealsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditAllOrderDealsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5001,6 +5118,7 @@ editAllOrderDealsRequest =
     , _eProposalRevisionNumber = Nothing
     , _eProposal = Nothing
     }
+
 
 -- | Indicates an optional action to take on the proposal
 eUpdateAction :: Lens' EditAllOrderDealsRequest (Maybe Text)
@@ -5069,6 +5187,7 @@ data BillingInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5089,6 +5208,7 @@ billingInfo =
     , _biAccountId = Nothing
     , _biBillingId = Nothing
     }
+
 
 -- | Resource type.
 biKind :: Lens' BillingInfo Text
@@ -5143,6 +5263,7 @@ data TargetingValueDayPartTargeting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingValueDayPartTargeting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5155,6 +5276,7 @@ targetingValueDayPartTargeting
 targetingValueDayPartTargeting =
   TargetingValueDayPartTargeting'
     {_tvdptTimeZoneType = Nothing, _tvdptDayParts = Nothing}
+
 
 tvdptTimeZoneType :: Lens' TargetingValueDayPartTargeting (Maybe Text)
 tvdptTimeZoneType
@@ -5194,6 +5316,7 @@ data SharedTargeting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SharedTargeting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5208,6 +5331,7 @@ sharedTargeting
 sharedTargeting =
   SharedTargeting'
     {_stKey = Nothing, _stExclusions = Nothing, _stInclusions = Nothing}
+
 
 -- | The key representing the shared targeting criterion.
 stKey :: Lens' SharedTargeting (Maybe Text)
@@ -5256,6 +5380,7 @@ data CreativeNATiveAdImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeNATiveAdImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5270,6 +5395,7 @@ creativeNATiveAdImage
 creativeNATiveAdImage =
   CreativeNATiveAdImage'
     {_cnataiHeight = Nothing, _cnataiURL = Nothing, _cnataiWidth = Nothing}
+
 
 cnataiHeight :: Lens' CreativeNATiveAdImage (Maybe Int32)
 cnataiHeight
@@ -5341,6 +5467,7 @@ data Product =
     , _proBuyer                         :: !(Maybe Buyer)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
@@ -5431,6 +5558,7 @@ product =
     , _proProductId = Nothing
     , _proBuyer = Nothing
     }
+
 
 -- | The state of the product. (buyer-readonly)
 proState :: Lens' Product (Maybe Text)
@@ -5692,6 +5820,7 @@ data CreativeServingRestrictionsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeServingRestrictionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5709,6 +5838,7 @@ creativeServingRestrictionsItem =
     , _csriReason = Nothing
     , _csriDisApprovalReasons = Nothing
     }
+
 
 -- | All known contexts\/restrictions.
 csriContexts :: Lens' CreativeServingRestrictionsItem [CreativeServingRestrictionsItemContextsItem]
@@ -5762,6 +5892,7 @@ data DeleteOrderDealsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteOrderDealsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5774,6 +5905,7 @@ deleteOrderDealsResponse
 deleteOrderDealsResponse =
   DeleteOrderDealsResponse'
     {_dDeals = Nothing, _dProposalRevisionNumber = Nothing}
+
 
 -- | List of deals deleted (in the same proposal as passed in the request)
 dDeals :: Lens' DeleteOrderDealsResponse [MarketplaceDeal]
@@ -5813,6 +5945,7 @@ data PretargetingConfigPlacementsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PretargetingConfigPlacementsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5824,6 +5957,7 @@ pretargetingConfigPlacementsItem
     :: PretargetingConfigPlacementsItem
 pretargetingConfigPlacementsItem =
   PretargetingConfigPlacementsItem' {_pcpiToken = Nothing, _pcpiType = Nothing}
+
 
 -- | The value of the placement. Interpretation depends on the placement
 -- type, e.g. URL for a site placement, channel name for a channel
@@ -5880,6 +6014,7 @@ data PublisherProFileAPIProto =
     , _ppfapProgrammaticContact       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PublisherProFileAPIProto' with the minimum fields required to make a request.
 --
@@ -5955,6 +6090,7 @@ publisherProFileAPIProto =
     , _ppfapTopHeadlines = Nothing
     , _ppfapProgrammaticContact = Nothing
     }
+
 
 -- | Publisher provided info on its audience.
 ppfapAudience :: Lens' PublisherProFileAPIProto (Maybe Text)
@@ -6185,6 +6321,7 @@ data MarketplaceDeal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MarketplaceDeal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6268,6 +6405,7 @@ marketplaceDeal =
     , _mdProductId = Nothing
     , _mdCreativeSafeFrameCompatibility = Nothing
     }
+
 
 -- | The external deal id assigned to this deal once the deal is finalized.
 -- This is the deal-id that shows up in serving\/reporting etc. (readonly)
@@ -6508,6 +6646,7 @@ newtype GetOffersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetOffersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6516,6 +6655,7 @@ newtype GetOffersResponse =
 getOffersResponse
     :: GetOffersResponse
 getOffersResponse = GetOffersResponse' {_gorProducts = Nothing}
+
 
 -- | The returned list of products.
 gorProducts :: Lens' GetOffersResponse [Product]
@@ -6544,6 +6684,7 @@ data DealTermsNonGuaranteedAuctionTerms =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DealTermsNonGuaranteedAuctionTerms' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6558,6 +6699,7 @@ dealTermsNonGuaranteedAuctionTerms =
     { _dtngatReservePricePerBuyers = Nothing
     , _dtngatAutoOptimizePrivateAuction = Nothing
     }
+
 
 -- | Reserve price for the specified buyer.
 dtngatReservePricePerBuyers :: Lens' DealTermsNonGuaranteedAuctionTerms [PricePerBuyer]
@@ -6602,6 +6744,7 @@ data CreativeFilteringReasonsReasonsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFilteringReasonsReasonsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6614,6 +6757,7 @@ creativeFilteringReasonsReasonsItem
 creativeFilteringReasonsReasonsItem =
   CreativeFilteringReasonsReasonsItem'
     {_cfrriFilteringStatus = Nothing, _cfrriFilteringCount = Nothing}
+
 
 -- | The filtering status code as defined in creative-status-codes.txt.
 cfrriFilteringStatus :: Lens' CreativeFilteringReasonsReasonsItem (Maybe Int32)
@@ -6664,6 +6808,7 @@ data DealTerms =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DealTerms' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6702,6 +6847,7 @@ dealTerms =
     , _dtGuaranteedFixedPriceTerms = Nothing
     , _dtDescription = Nothing
     }
+
 
 -- | Non-binding estimate of the estimated gross spend for this deal Can be
 -- set by buyer or seller.
@@ -6817,6 +6963,7 @@ data CreativeDealIds =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeDealIds' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6829,6 +6976,7 @@ creativeDealIds
 creativeDealIds =
   CreativeDealIds'
     {_cdiKind = "adexchangebuyer#creativeDealIds", _cdiDealStatuses = Nothing}
+
 
 -- | Resource type.
 cdiKind :: Lens' CreativeDealIds Text
@@ -6868,6 +7016,7 @@ data MarketplaceLabel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MarketplaceLabel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6888,6 +7037,7 @@ marketplaceLabel =
     , _mlCreateTimeMs = Nothing
     , _mlLabel = Nothing
     }
+
 
 -- | Information about the party that created the label.
 mlDeprecatedMarketplaceDealParty :: Lens' MarketplaceLabel (Maybe MarketplaceDealParty)
@@ -6939,6 +7089,7 @@ newtype Buyer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Buyer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6947,6 +7098,7 @@ newtype Buyer =
 buyer
     :: Buyer
 buyer = Buyer' {_buyAccountId = Nothing}
+
 
 -- | Adx account id of the buyer.
 buyAccountId :: Lens' Buyer (Maybe Text)
@@ -6973,6 +7125,7 @@ data AddOrderDealsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddOrderDealsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6990,6 +7143,7 @@ addOrderDealsRequest =
     , _aDeals = Nothing
     , _aProposalRevisionNumber = Nothing
     }
+
 
 -- | Indicates an optional action to take on the proposal
 aUpdateAction :: Lens' AddOrderDealsRequest (Maybe Text)
@@ -7042,6 +7196,7 @@ data DealServingMetadataDealPauseStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DealServingMetadataDealPauseStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7065,6 +7220,7 @@ dealServingMetadataDealPauseStatus =
     , _dsmdpsSellerPauseReason = Nothing
     , _dsmdpsHasSellerPaused = Nothing
     }
+
 
 -- | If the deal is paused, records which party paused the deal first.
 dsmdpsFirstPausedBy :: Lens' DealServingMetadataDealPauseStatus (Maybe Text)
@@ -7128,6 +7284,7 @@ data DealTermsGuaranteedFixedPriceTerms =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DealTermsGuaranteedFixedPriceTerms' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7151,6 +7308,7 @@ dealTermsGuaranteedFixedPriceTerms =
     , _dtgfptFixedPrices = Nothing
     , _dtgfptMinimumDailyLooks = Nothing
     }
+
 
 -- | Count of guaranteed looks. Required for deal, optional for product. For
 -- CPD deals, buyer changes to guaranteed_looks will be ignored.

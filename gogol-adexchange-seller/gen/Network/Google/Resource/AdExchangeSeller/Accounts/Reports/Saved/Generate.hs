@@ -72,6 +72,7 @@ data AccountsReportsSavedGenerate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsReportsSavedGenerate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ accountsReportsSavedGenerate pArsgSavedReportId_ pArsgAccountId_ =
     , _arsgStartIndex = Nothing
     , _arsgMaxResults = Nothing
     }
+
 
 -- | Optional locale to use for translating report output to a local
 -- language. Defaults to \"en_US\" if not specified.

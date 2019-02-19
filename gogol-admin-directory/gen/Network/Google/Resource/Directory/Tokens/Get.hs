@@ -62,6 +62,7 @@ data TokensGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TokensGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ tokensGet
     -> TokensGet
 tokensGet pTgClientId_ pTgUserKey_ =
   TokensGet' {_tgClientId = pTgClientId_, _tgUserKey = pTgUserKey_}
+
 
 -- | The Client ID of the application the token is issued to.
 tgClientId :: Lens' TokensGet Text

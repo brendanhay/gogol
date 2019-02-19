@@ -83,6 +83,7 @@ data ProjectsZonesClustersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ projectsZonesClustersUpdate pPzcuZone_ pPzcuPayload_ pPzcuClusterId_ pPzcuProjec
     , _pzcuProjectId = pPzcuProjectId_
     , _pzcuCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcuXgafv :: Lens' ProjectsZonesClustersUpdate (Maybe Xgafv)

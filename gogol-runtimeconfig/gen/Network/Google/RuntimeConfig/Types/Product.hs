@@ -65,6 +65,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -124,6 +126,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +139,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -173,11 +177,13 @@ data CancelOperationRequest =
   CancelOperationRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
 cancelOperationRequest
     :: CancelOperationRequest
 cancelOperationRequest = CancelOperationRequest'
+
 
 instance FromJSON CancelOperationRequest where
         parseJSON
@@ -200,6 +206,7 @@ data Operation =
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -224,6 +231,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -291,11 +299,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -311,6 +321,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -321,6 +332,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -348,6 +360,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -358,6 +371,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -389,6 +403,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -399,6 +414,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)

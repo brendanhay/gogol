@@ -86,6 +86,7 @@ data ProjectsOccurrencesSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsOccurrencesSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsOccurrencesSetIAMPolicy pPosipPayload_ pPosipResource_ =
     , _posipResource = pPosipResource_
     , _posipCallback = Nothing
     }
+
 
 -- | V1 error format.
 posipXgafv :: Lens' ProjectsOccurrencesSetIAMPolicy (Maybe Xgafv)

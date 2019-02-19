@@ -100,6 +100,7 @@ data BlobsBatchUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BlobsBatchUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -131,6 +132,7 @@ blobsBatchUpdate pBbuPayload_ pBbuInstanceName_ =
     , _bbuInstanceName = pBbuInstanceName_
     , _bbuCallback = Nothing
     }
+
 
 -- | V1 error format.
 bbuXgafv :: Lens' BlobsBatchUpdate (Maybe Xgafv)

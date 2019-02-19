@@ -70,6 +70,7 @@ data DataSetsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSetsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ dataSetsPatch pDspPayload_ pDspDataSetId_ pDspProjectId_ =
     , _dspDataSetId = pDspDataSetId_
     , _dspProjectId = pDspProjectId_
     }
+
 
 -- | Multipart request metadata.
 dspPayload :: Lens' DataSetsPatch DataSet

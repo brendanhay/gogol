@@ -66,6 +66,7 @@ data ManagementProFilesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementProFilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ managementProFilesGet pMpfgWebPropertyId_ pMpfgProFileId_ pMpfgAccountId_ =
     , _mpfgProFileId = pMpfgProFileId_
     , _mpfgAccountId = pMpfgAccountId_
     }
+
 
 -- | Web property ID to retrieve the view (profile) for.
 mpfgWebPropertyId :: Lens' ManagementProFilesGet Text

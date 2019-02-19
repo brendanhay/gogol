@@ -67,6 +67,7 @@ data DeploymentsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ deploymentsTestIAMPermissions pDtipProject_ pDtipPayload_ pDtipResource_ =
     , _dtipPayload = pDtipPayload_
     , _dtipResource = pDtipResource_
     }
+
 
 -- | Project ID for this request.
 dtipProject :: Lens' DeploymentsTestIAMPermissions Text

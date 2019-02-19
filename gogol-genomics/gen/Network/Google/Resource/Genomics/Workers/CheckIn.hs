@@ -77,6 +77,7 @@ data WorkersCheckIn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkersCheckIn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ workersCheckIn pWciPayload_ pWciId_ =
     , _wciId = pWciId_
     , _wciCallback = Nothing
     }
+
 
 -- | V1 error format.
 wciXgafv :: Lens' WorkersCheckIn (Maybe Xgafv)

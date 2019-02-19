@@ -84,6 +84,7 @@ data RegionInstanceGroupManagersPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ regionInstanceGroupManagersPatch pRigmpProject_ pRigmpInstanceGroupManager_ pRig
     , _rigmpPayload = pRigmpPayload_
     , _rigmpRegion = pRigmpRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

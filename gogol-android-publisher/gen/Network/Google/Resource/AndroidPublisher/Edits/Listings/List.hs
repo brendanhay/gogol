@@ -63,6 +63,7 @@ data EditsListingsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsListingsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ editsListingsList
 editsListingsList pEllPackageName_ pEllEditId_ =
   EditsListingsList'
     {_ellPackageName = pEllPackageName_, _ellEditId = pEllEditId_}
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

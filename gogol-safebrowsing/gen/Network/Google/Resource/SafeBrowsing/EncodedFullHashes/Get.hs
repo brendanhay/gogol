@@ -78,6 +78,7 @@ data EncodedFullHashesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EncodedFullHashesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ encodedFullHashesGet pEfhgEncodedRequest_ =
     , _efhgClientVersion = Nothing
     , _efhgCallback = Nothing
     }
+
 
 -- | A client ID that (hopefully) uniquely identifies the client
 -- implementation of the Safe Browsing API.

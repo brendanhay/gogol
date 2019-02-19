@@ -89,6 +89,7 @@ data InvitationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InvitationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +125,7 @@ invitationsList =
     , _ilPageSize = Nothing
     , _ilCallback = Nothing
     }
+
 
 -- | V1 error format.
 ilXgafv :: Lens' InvitationsList (Maybe Xgafv)

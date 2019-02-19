@@ -85,6 +85,7 @@ data CoursesAliasesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesAliasesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ coursesAliasesDelete pCadCourseId_ pCadAlias_ =
     , _cadAlias = pCadAlias_
     , _cadCallback = Nothing
     }
+
 
 -- | V1 error format.
 cadXgafv :: Lens' CoursesAliasesDelete (Maybe Xgafv)

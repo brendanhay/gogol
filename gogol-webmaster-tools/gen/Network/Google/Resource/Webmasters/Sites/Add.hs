@@ -57,6 +57,7 @@ newtype SitesAdd =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesAdd' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ sitesAdd
     :: Text -- ^ 'saSiteURL'
     -> SitesAdd
 sitesAdd pSaSiteURL_ = SitesAdd' {_saSiteURL = pSaSiteURL_}
+
 
 -- | The URL of the site to add.
 saSiteURL :: Lens' SitesAdd Text

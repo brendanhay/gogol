@@ -79,6 +79,7 @@ data SitesReleasesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesReleasesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ sitesReleasesCreate pSrcParent_ pSrcPayload_ =
     , _srcPayload = pSrcPayload_
     , _srcCallback = Nothing
     }
+
 
 -- | The site that the release belongs to, in the format: 'sites\/site-name'
 srcParent :: Lens' SitesReleasesCreate Text

@@ -78,6 +78,7 @@ data ProjectsLocationsDataSetsFhirStoresResourcesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsFhirStoresResourcesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsLocationsDataSetsFhirStoresResourcesUpdate pPldsfsruPayload_ pPldsfsruNa
     , _pldsfsruName = pPldsfsruName_
     , _pldsfsruCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldsfsruXgafv :: Lens' ProjectsLocationsDataSetsFhirStoresResourcesUpdate (Maybe Xgafv)

@@ -57,6 +57,7 @@ newtype StatesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -65,6 +66,7 @@ newtype StatesList =
 statesList
     :: StatesList
 statesList = StatesList' {_slIncludeData = False}
+
 
 -- | Whether to include the full data in addition to the version number
 slIncludeData :: Lens' StatesList Bool

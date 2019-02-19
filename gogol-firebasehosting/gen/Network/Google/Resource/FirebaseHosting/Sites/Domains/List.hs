@@ -78,6 +78,7 @@ data SitesDomainsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesDomainsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ sitesDomainsList pSdlParent_ =
     , _sdlPageSize = Nothing
     , _sdlCallback = Nothing
     }
+
 
 -- | Required. The parent for which to list domains, in the format:
 -- 'sites\/site-name'

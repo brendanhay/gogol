@@ -58,11 +58,13 @@ data ScoresResetAll =
   ScoresResetAll'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScoresResetAll' with the minimum fields required to make a request.
 --
 scoresResetAll
     :: ScoresResetAll
 scoresResetAll = ScoresResetAll'
+
 
 instance GoogleRequest ScoresResetAll where
         type Rs ScoresResetAll = PlayerScoreResetAllResponse

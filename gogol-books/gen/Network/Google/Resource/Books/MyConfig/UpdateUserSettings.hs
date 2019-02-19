@@ -63,6 +63,7 @@ newtype MyConfigUpdateUserSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyConfigUpdateUserSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ myConfigUpdateUserSettings
     -> MyConfigUpdateUserSettings
 myConfigUpdateUserSettings pMcuusPayload_ =
   MyConfigUpdateUserSettings' {_mcuusPayload = pMcuusPayload_}
+
 
 -- | Multipart request metadata.
 mcuusPayload :: Lens' MyConfigUpdateUserSettings UserSettings

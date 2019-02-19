@@ -62,6 +62,7 @@ data PosList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ posList pPosMerchantId_ pPosTargetMerchantId_ =
     { _posMerchantId = _Coerce # pPosMerchantId_
     , _posTargetMerchantId = _Coerce # pPosTargetMerchantId_
     }
+
 
 -- | The ID of the POS or inventory data provider.
 posMerchantId :: Lens' PosList Word64

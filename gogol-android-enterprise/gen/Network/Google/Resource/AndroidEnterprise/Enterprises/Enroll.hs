@@ -61,6 +61,7 @@ data EnterprisesEnroll =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesEnroll' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ enterprisesEnroll
     -> EnterprisesEnroll
 enterprisesEnroll pEeToken_ pEePayload_ =
   EnterprisesEnroll' {_eeToken = pEeToken_, _eePayload = pEePayload_}
+
 
 -- | The token provided by the enterprise to register the EMM.
 eeToken :: Lens' EnterprisesEnroll Text

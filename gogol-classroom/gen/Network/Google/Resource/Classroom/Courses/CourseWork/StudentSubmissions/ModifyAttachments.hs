@@ -106,6 +106,7 @@ data CoursesCourseWorkStudentSubmissionsModifyAttachments =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsModifyAttachments' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -145,6 +146,7 @@ coursesCourseWorkStudentSubmissionsModifyAttachments pCcwssmaCourseId_ pCcwssmaP
     , _ccwssmaCallback = Nothing
     , _ccwssmaCourseWorkId = pCcwssmaCourseWorkId_
     }
+
 
 -- | V1 error format.
 ccwssmaXgafv :: Lens' CoursesCourseWorkStudentSubmissionsModifyAttachments (Maybe Xgafv)

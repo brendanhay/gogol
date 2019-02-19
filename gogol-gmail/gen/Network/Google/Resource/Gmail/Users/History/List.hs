@@ -78,6 +78,7 @@ data UsersHistoryList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersHistoryList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ usersHistoryList =
     , _uhlLabelId = Nothing
     , _uhlMaxResults = 100
     }
+
 
 -- | History types to be returned by the function
 uhlHistoryTypes :: Lens' UsersHistoryList [UsersHistoryListHistoryTypes]

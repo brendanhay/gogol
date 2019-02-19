@@ -70,6 +70,7 @@ data CommentsSetModerationStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsSetModerationStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ commentsSetModerationStatus pCsmsModerationStatus_ pCsmsId_ =
     , _csmsModerationStatus = pCsmsModerationStatus_
     , _csmsId = pCsmsId_
     }
+
 
 -- | The banAuthor parameter lets you indicate that you want to automatically
 -- reject any additional comments written by the comment\'s author. Set the

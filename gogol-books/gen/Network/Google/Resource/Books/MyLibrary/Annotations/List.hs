@@ -86,6 +86,7 @@ data MyLibraryAnnotationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryAnnotationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +125,7 @@ myLibraryAnnotationsList =
     , _mlalLayerId = Nothing
     , _mlalMaxResults = Nothing
     }
+
 
 -- | The content version for the requested volume.
 mlalContentVersion :: Lens' MyLibraryAnnotationsList (Maybe Text)

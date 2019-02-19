@@ -60,6 +60,7 @@ newtype RelyingPartyVerifyAssertion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartyVerifyAssertion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ relyingPartyVerifyAssertion
     -> RelyingPartyVerifyAssertion
 relyingPartyVerifyAssertion pRpvaPayload_ =
   RelyingPartyVerifyAssertion' {_rpvaPayload = pRpvaPayload_}
+
 
 -- | Multipart request metadata.
 rpvaPayload :: Lens' RelyingPartyVerifyAssertion IdentitytoolkitRelyingPartyVerifyAssertionRequest

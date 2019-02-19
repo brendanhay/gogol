@@ -64,6 +64,7 @@ data ChannelSectionsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSectionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ channelSectionsUpdate pCsuPart_ pCsuPayload_ =
     , _csuPayload = pCsuPayload_
     , _csuOnBehalfOfContentOwner = Nothing
     }
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

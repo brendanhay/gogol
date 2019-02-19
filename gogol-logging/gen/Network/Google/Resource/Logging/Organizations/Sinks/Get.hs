@@ -70,6 +70,7 @@ data OrganizationsSinksGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsSinksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ organizationsSinksGet pOsgSinkName_ =
     , _osgSinkName = pOsgSinkName_
     , _osgCallback = Nothing
     }
+
 
 -- | V1 error format.
 osgXgafv :: Lens' OrganizationsSinksGet (Maybe Xgafv)

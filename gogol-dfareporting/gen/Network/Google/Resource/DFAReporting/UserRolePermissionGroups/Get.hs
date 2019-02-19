@@ -62,6 +62,7 @@ data UserRolePermissionGroupsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolePermissionGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ userRolePermissionGroupsGet pUrpggProFileId_ pUrpggId_ =
     { _urpggProFileId = _Coerce # pUrpggProFileId_
     , _urpggId = _Coerce # pUrpggId_
     }
+
 
 -- | User profile ID associated with this request.
 urpggProFileId :: Lens' UserRolePermissionGroupsGet Int64

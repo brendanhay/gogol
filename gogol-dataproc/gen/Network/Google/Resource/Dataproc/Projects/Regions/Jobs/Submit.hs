@@ -80,6 +80,7 @@ data ProjectsRegionsJobsSubmit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsJobsSubmit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsRegionsJobsSubmit pPrjsPayload_ pPrjsRegion_ pPrjsProjectId_ =
     , _prjsProjectId = pPrjsProjectId_
     , _prjsCallback = Nothing
     }
+
 
 -- | V1 error format.
 prjsXgafv :: Lens' ProjectsRegionsJobsSubmit (Maybe Xgafv)

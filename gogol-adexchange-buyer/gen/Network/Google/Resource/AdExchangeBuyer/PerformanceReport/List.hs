@@ -70,6 +70,7 @@ data PerformanceReportList' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PerformanceReportList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ performanceReportList' pPrlAccountId_ pPrlEndDateTime_ pPrlStartDateTime_ =
     , _prlMaxResults = Nothing
     , _prlStartDateTime = pPrlStartDateTime_
     }
+
 
 -- | The account id to get the reports.
 prlAccountId :: Lens' PerformanceReportList' Int64

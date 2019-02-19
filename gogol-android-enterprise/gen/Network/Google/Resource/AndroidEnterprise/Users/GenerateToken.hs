@@ -68,6 +68,7 @@ data UsersGenerateToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersGenerateToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ usersGenerateToken
 usersGenerateToken pUgtEnterpriseId_ pUgtUserId_ =
   UsersGenerateToken'
     {_ugtEnterpriseId = pUgtEnterpriseId_, _ugtUserId = pUgtUserId_}
+
 
 -- | The ID of the enterprise.
 ugtEnterpriseId :: Lens' UsersGenerateToken Text

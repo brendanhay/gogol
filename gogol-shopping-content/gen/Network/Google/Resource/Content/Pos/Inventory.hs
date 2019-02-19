@@ -65,6 +65,7 @@ data PosInventory' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosInventory'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ posInventory' pPiMerchantId_ pPiTargetMerchantId_ pPiPayload_ =
     , _piTargetMerchantId = _Coerce # pPiTargetMerchantId_
     , _piPayload = pPiPayload_
     }
+
 
 -- | The ID of the POS or inventory data provider.
 piMerchantId :: Lens' PosInventory' Word64

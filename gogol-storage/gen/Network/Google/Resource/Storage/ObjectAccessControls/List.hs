@@ -69,6 +69,7 @@ data ObjectAccessControlsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectAccessControlsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ objectAccessControlsList pOaclBucket_ pOaclObject_ =
     , _oaclObject = pOaclObject_
     , _oaclGeneration = Nothing
     }
+
 
 -- | Name of a bucket.
 oaclBucket :: Lens' ObjectAccessControlsList Text

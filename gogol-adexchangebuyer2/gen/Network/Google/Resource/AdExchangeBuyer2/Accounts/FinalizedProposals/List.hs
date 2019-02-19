@@ -89,6 +89,7 @@ data AccountsFinalizedProposalsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsFinalizedProposalsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +129,7 @@ accountsFinalizedProposalsList pAfplAccountId_ =
     , _afplPageSize = Nothing
     , _afplCallback = Nothing
     }
+
 
 -- | V1 error format.
 afplXgafv :: Lens' AccountsFinalizedProposalsList (Maybe Xgafv)

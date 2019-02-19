@@ -70,6 +70,7 @@ data ProjectsReposGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsReposGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsReposGet pPrgName_ =
     , _prgName = pPrgName_
     , _prgCallback = Nothing
     }
+
 
 -- | V1 error format.
 prgXgafv :: Lens' ProjectsReposGet (Maybe Xgafv)

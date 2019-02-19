@@ -92,6 +92,7 @@ data DebuggerDebuggeesBreakpointsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DebuggerDebuggeesBreakpointsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -137,6 +138,7 @@ debuggerDebuggeesBreakpointsList pDdblDebuggeeId_ =
     , _ddblClientVersion = Nothing
     , _ddblCallback = Nothing
     }
+
 
 -- | V1 error format.
 ddblXgafv :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Xgafv)

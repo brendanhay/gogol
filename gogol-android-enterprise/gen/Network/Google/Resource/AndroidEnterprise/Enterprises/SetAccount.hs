@@ -64,6 +64,7 @@ data EnterprisesSetAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesSetAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ enterprisesSetAccount
 enterprisesSetAccount pEsaEnterpriseId_ pEsaPayload_ =
   EnterprisesSetAccount'
     {_esaEnterpriseId = pEsaEnterpriseId_, _esaPayload = pEsaPayload_}
+
 
 -- | The ID of the enterprise.
 esaEnterpriseId :: Lens' EnterprisesSetAccount Text

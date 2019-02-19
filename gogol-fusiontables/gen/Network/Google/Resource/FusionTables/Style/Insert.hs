@@ -62,6 +62,7 @@ data StyleInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StyleInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ styleInsert
     -> StyleInsert
 styleInsert pSiPayload_ pSiTableId_ =
   StyleInsert' {_siPayload = pSiPayload_, _siTableId = pSiTableId_}
+
 
 -- | Multipart request metadata.
 siPayload :: Lens' StyleInsert StyleSetting

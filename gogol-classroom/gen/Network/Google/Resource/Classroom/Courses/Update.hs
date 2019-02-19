@@ -82,6 +82,7 @@ data CoursesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ coursesUpdate pCuPayload_ pCuId_ =
     , _cuId = pCuId_
     , _cuCallback = Nothing
     }
+
 
 -- | V1 error format.
 cuXgafv :: Lens' CoursesUpdate (Maybe Xgafv)

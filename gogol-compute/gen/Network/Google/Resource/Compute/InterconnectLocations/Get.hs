@@ -65,6 +65,7 @@ data InterconnectLocationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectLocationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ interconnectLocationsGet pIlgProject_ pIlgInterconnectLocation_ =
     { _ilgProject = pIlgProject_
     , _ilgInterconnectLocation = pIlgInterconnectLocation_
     }
+
 
 -- | Project ID for this request.
 ilgProject :: Lens' InterconnectLocationsGet Text

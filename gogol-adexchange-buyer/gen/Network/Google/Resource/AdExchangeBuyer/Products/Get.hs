@@ -57,6 +57,7 @@ newtype ProductsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ productsGet
     :: Text -- ^ 'pgProductId'
     -> ProductsGet
 productsGet pPgProductId_ = ProductsGet' {_pgProductId = pPgProductId_}
+
 
 -- | The id for the product to get the head revision for.
 pgProductId :: Lens' ProductsGet Text

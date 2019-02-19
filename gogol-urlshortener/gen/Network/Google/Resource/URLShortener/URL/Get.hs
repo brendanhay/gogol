@@ -60,6 +60,7 @@ data URLGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ urlGet
     -> URLGet
 urlGet pUgShortURL_ =
   URLGet' {_ugProjection = Nothing, _ugShortURL = pUgShortURL_}
+
 
 -- | Additional information to return.
 ugProjection :: Lens' URLGet (Maybe URLGetProjection)

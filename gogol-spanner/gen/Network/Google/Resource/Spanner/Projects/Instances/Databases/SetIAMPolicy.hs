@@ -78,6 +78,7 @@ data ProjectsInstancesDatabasesSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsInstancesDatabasesSetIAMPolicy pPidsipPayload_ pPidsipResource_ =
     , _pidsipResource = pPidsipResource_
     , _pidsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidsipXgafv :: Lens' ProjectsInstancesDatabasesSetIAMPolicy (Maybe Xgafv)

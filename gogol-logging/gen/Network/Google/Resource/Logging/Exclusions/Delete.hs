@@ -70,6 +70,7 @@ data ExclusionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExclusionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ exclusionsDelete pEdName_ =
     , _edName = pEdName_
     , _edCallback = Nothing
     }
+
 
 -- | V1 error format.
 edXgafv :: Lens' ExclusionsDelete (Maybe Xgafv)

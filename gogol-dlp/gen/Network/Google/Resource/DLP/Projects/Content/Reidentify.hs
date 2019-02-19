@@ -82,6 +82,7 @@ data ProjectsContentReidentify =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsContentReidentify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsContentReidentify pPcrParent_ pPcrPayload_ =
     , _pcrPayload = pPcrPayload_
     , _pcrCallback = Nothing
     }
+
 
 -- | The parent resource name.
 pcrParent :: Lens' ProjectsContentReidentify Text

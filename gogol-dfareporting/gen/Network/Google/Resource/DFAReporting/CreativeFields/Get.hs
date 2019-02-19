@@ -61,6 +61,7 @@ data CreativeFieldsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ creativeFieldsGet
 creativeFieldsGet pCfgProFileId_ pCfgId_ =
   CreativeFieldsGet'
     {_cfgProFileId = _Coerce # pCfgProFileId_, _cfgId = _Coerce # pCfgId_}
+
 
 -- | User profile ID associated with this request.
 cfgProFileId :: Lens' CreativeFieldsGet Int64

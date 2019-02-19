@@ -61,6 +61,7 @@ data PostalCodesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostalCodesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ postalCodesGet
 postalCodesGet pPcgProFileId_ pPcgCode_ =
   PostalCodesGet'
     {_pcgProFileId = _Coerce # pPcgProFileId_, _pcgCode = pPcgCode_}
+
 
 -- | User profile ID associated with this request.
 pcgProFileId :: Lens' PostalCodesGet Int64

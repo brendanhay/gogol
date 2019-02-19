@@ -68,6 +68,7 @@ data NotificationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ notificationsList pNlCustomer_ =
     , _nlPageToken = Nothing
     , _nlMaxResults = Nothing
     }
+
 
 -- | The unique ID for the customer\'s G Suite account.
 nlCustomer :: Lens' NotificationsList Text

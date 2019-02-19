@@ -76,6 +76,7 @@ data ProjectsTopicsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTopicsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsTopicsPatch pPtpPayload_ pPtpName_ =
     , _ptpName = pPtpName_
     , _ptpCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptpXgafv :: Lens' ProjectsTopicsPatch (Maybe Xgafv)

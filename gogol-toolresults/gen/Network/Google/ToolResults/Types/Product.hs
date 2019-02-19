@@ -30,6 +30,7 @@ data ListStepThumbnailsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListStepThumbnailsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42,6 +43,7 @@ listStepThumbnailsResponse
 listStepThumbnailsResponse =
   ListStepThumbnailsResponse'
     {_lstrNextPageToken = Nothing, _lstrThumbnails = Nothing}
+
 
 -- | A continuation token to resume the query at the next item. If set,
 -- indicates that there are more thumbnails to read, by calling list again
@@ -91,6 +93,7 @@ data Screen =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Screen' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +114,7 @@ screen =
     , _sModel = Nothing
     , _sVersion = Nothing
     }
+
 
 -- | File reference of the png file. Required.
 sFileReference :: Lens' Screen (Maybe Text)
@@ -159,6 +163,7 @@ data Thumbnail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Thumbnail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -179,6 +184,7 @@ thumbnail =
     , _tWidthPx = Nothing
     , _tContentType = Nothing
     }
+
 
 -- | The thumbnail file itself. That is, the bytes here are precisely the
 -- bytes that make up the thumbnail file; they can be served as an image
@@ -268,6 +274,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -280,6 +287,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -328,6 +336,7 @@ data ToolOutputReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ToolOutputReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -342,6 +351,7 @@ toolOutputReference
 toolOutputReference =
   ToolOutputReference'
     {_torCreationTime = Nothing, _torTestCase = Nothing, _torOutput = Nothing}
+
 
 -- | The creation time of the file. - In response: present if set by
 -- create\/update request - In create\/update request: optional
@@ -393,6 +403,7 @@ data PerfSampleSeries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PerfSampleSeries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -419,6 +430,7 @@ perfSampleSeries =
     , _pssSampleSeriesId = Nothing
     , _pssBasicPerfSampleSeries = Nothing
     }
+
 
 -- | A tool results execution ID.
 pssExecutionId :: Lens' PerfSampleSeries (Maybe Text)
@@ -488,6 +500,7 @@ data AndroidAppInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidAppInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -508,6 +521,7 @@ androidAppInfo =
     , _aaiPackageName = Nothing
     , _aaiName = Nothing
     }
+
 
 -- | The internal version code of the app. Optional.
 aaiVersionCode :: Lens' AndroidAppInfo (Maybe Text)
@@ -559,6 +573,7 @@ data PerfSample =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PerfSample' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -569,6 +584,7 @@ data PerfSample =
 perfSample
     :: PerfSample
 perfSample = PerfSample' {_psValue = Nothing, _psSampleTime = Nothing}
+
 
 -- | Value observed
 psValue :: Lens' PerfSample (Maybe Double)
@@ -609,6 +625,7 @@ data TestIssue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIssue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -635,6 +652,7 @@ testIssue =
     , _tiType = Nothing
     , _tiErrorMessage = Nothing
     }
+
 
 -- | Category of issue. Required.
 tiCategory :: Lens' TestIssue (Maybe TestIssueCategory)
@@ -698,6 +716,7 @@ data MemoryInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MemoryInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -710,6 +729,7 @@ memoryInfo
 memoryInfo =
   MemoryInfo'
     {_miMemoryCapInKibibyte = Nothing, _miMemoryTotalInKibibyte = Nothing}
+
 
 -- | Maximum memory that can be allocated to the process in KiB
 miMemoryCapInKibibyte :: Lens' MemoryInfo (Maybe Int64)
@@ -754,6 +774,7 @@ data Image =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -774,6 +795,7 @@ image =
     , _iSourceImage = Nothing
     , _iError = Nothing
     }
+
 
 -- | The thumbnail.
 iThumbnail :: Lens' Image (Maybe Thumbnail)
@@ -821,6 +843,7 @@ data InconclusiveDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InconclusiveDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -833,6 +856,7 @@ inconclusiveDetail
 inconclusiveDetail =
   InconclusiveDetail'
     {_idInfrastructureFailure = Nothing, _idAbortedByUser = Nothing}
+
 
 -- | If the test runner could not determine success or failure because the
 -- test depends on a component other than the system under test which
@@ -876,6 +900,7 @@ data GraphicsStatsBucket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GraphicsStatsBucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -887,6 +912,7 @@ graphicsStatsBucket
     :: GraphicsStatsBucket
 graphicsStatsBucket =
   GraphicsStatsBucket' {_gsbRenderMillis = Nothing, _gsbFrameCount = Nothing}
+
 
 -- | Lower bound of render time in milliseconds.
 gsbRenderMillis :: Lens' GraphicsStatsBucket (Maybe Int64)
@@ -932,6 +958,7 @@ data History =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'History' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -945,6 +972,7 @@ history
     :: History
 history =
   History' {_hName = Nothing, _hHistoryId = Nothing, _hDisplayName = Nothing}
+
 
 -- | A name to uniquely identify a history within a project. Maximum of 200
 -- characters. - In response always set - In create request: always set
@@ -991,6 +1019,7 @@ newtype BatchCreatePerfSamplesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchCreatePerfSamplesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1000,6 +1029,7 @@ batchCreatePerfSamplesRequest
     :: BatchCreatePerfSamplesRequest
 batchCreatePerfSamplesRequest =
   BatchCreatePerfSamplesRequest' {_bcpsrPerfSamples = Nothing}
+
 
 -- | The set of PerfSamples to create should not include existing timestamps
 bcpsrPerfSamples :: Lens' BatchCreatePerfSamplesRequest [PerfSample]
@@ -1030,6 +1060,7 @@ newtype ListPerfSampleSeriesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListPerfSampleSeriesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1039,6 +1070,7 @@ listPerfSampleSeriesResponse
     :: ListPerfSampleSeriesResponse
 listPerfSampleSeriesResponse =
   ListPerfSampleSeriesResponse' {_lpssrPerfSampleSeries = Nothing}
+
 
 -- | The resulting PerfSampleSeries sorted by id
 lpssrPerfSampleSeries :: Lens' ListPerfSampleSeriesResponse [PerfSampleSeries]
@@ -1070,6 +1102,7 @@ data ListPerfSamplesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListPerfSamplesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1082,6 +1115,7 @@ listPerfSamplesResponse
 listPerfSamplesResponse =
   ListPerfSamplesResponse'
     {_lpsrPerfSamples = Nothing, _lpsrNextPageToken = Nothing}
+
 
 lpsrPerfSamples :: Lens' ListPerfSamplesResponse [PerfSample]
 lpsrPerfSamples
@@ -1125,6 +1159,7 @@ data AndroidTest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidTest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1145,6 +1180,7 @@ androidTest =
     , _atAndroidRoboTest = Nothing
     , _atAndroidInstrumentationTest = Nothing
     }
+
 
 -- | Information about the application under test.
 atAndroidAppInfo :: Lens' AndroidTest (Maybe AndroidAppInfo)
@@ -1204,6 +1240,7 @@ data AndroidRoboTest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidRoboTest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1227,6 +1264,7 @@ androidRoboTest =
     , _artBootstrapPackageId = Nothing
     , _artMaxDepth = Nothing
     }
+
 
 -- | The runner class for the bootstrap. Optional
 artBootstrapRunnerClass :: Lens' AndroidRoboTest (Maybe Text)
@@ -1290,6 +1328,7 @@ newtype FileReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1298,6 +1337,7 @@ newtype FileReference =
 fileReference
     :: FileReference
 fileReference = FileReference' {_frFileURI = Nothing}
+
 
 -- | The URI of a file stored in Google Cloud Storage. For example:
 -- http:\/\/storage.googleapis.com\/mybucket\/path\/to\/test.xml or in
@@ -1329,6 +1369,7 @@ data CPUInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CPUInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1346,6 +1387,7 @@ cpuInfo =
     , _ciCPUProcessor = Nothing
     , _ciCPUSpeedInGhz = Nothing
     }
+
 
 -- | the number of CPU cores
 ciNumberOfCores :: Lens' CPUInfo (Maybe Int32)
@@ -1393,6 +1435,7 @@ data ListExecutionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListExecutionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1405,6 +1448,7 @@ listExecutionsResponse
 listExecutionsResponse =
   ListExecutionsResponse'
     {_lerNextPageToken = Nothing, _lerExecutions = Nothing}
+
 
 -- | A continuation token to resume the query at the next item. Will only be
 -- set if there are more Executions to fetch.
@@ -1446,6 +1490,7 @@ data ListStepsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListStepsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1457,6 +1502,7 @@ listStepsResponse
     :: ListStepsResponse
 listStepsResponse =
   ListStepsResponse' {_lsrNextPageToken = Nothing, _lsrSteps = Nothing}
+
 
 -- | A continuation token to resume the query at the next item. If set,
 -- indicates that there are more steps to read, by calling list again with
@@ -1498,6 +1544,7 @@ data ProjectSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1509,6 +1556,7 @@ projectSettings
     :: ProjectSettings
 projectSettings =
   ProjectSettings' {_psName = Nothing, _psDefaultBucket = Nothing}
+
 
 -- | The name of the project\'s settings. Always of the form:
 -- projects\/{project-id}\/settings In update request: never set In
@@ -1548,6 +1596,7 @@ newtype ToolExecutionStep =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ToolExecutionStep' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1556,6 +1605,7 @@ newtype ToolExecutionStep =
 toolExecutionStep
     :: ToolExecutionStep
 toolExecutionStep = ToolExecutionStep' {_tesToolExecution = Nothing}
+
 
 -- | A Tool execution. - In response: present if set by create\/update
 -- request - In create\/update request: optional
@@ -1585,6 +1635,7 @@ data StepLabelsEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StepLabelsEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1595,6 +1646,7 @@ data StepLabelsEntry =
 stepLabelsEntry
     :: StepLabelsEntry
 stepLabelsEntry = StepLabelsEntry' {_sleValue = Nothing, _sleKey = Nothing}
+
 
 sleValue :: Lens' StepLabelsEntry (Maybe Text)
 sleValue = lens _sleValue (\ s a -> s{_sleValue = a})
@@ -1631,6 +1683,7 @@ data TestExecutionStep =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestExecutionStep' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1651,6 +1704,7 @@ testExecutionStep =
     , _tTestSuiteOverviews = Nothing
     , _tTestTiming = Nothing
     }
+
 
 -- | Issues observed during the test execution. For example, if the mobile
 -- app under test crashed during the test, the error message and the stack
@@ -1721,6 +1775,7 @@ data TestCaseReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestCaseReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1735,6 +1790,7 @@ testCaseReference
 testCaseReference =
   TestCaseReference'
     {_tcrTestSuiteName = Nothing, _tcrName = Nothing, _tcrClassName = Nothing}
+
 
 -- | The name of the test suite to which this test case belongs.
 tcrTestSuiteName :: Lens' TestCaseReference (Maybe Text)
@@ -1779,6 +1835,7 @@ data FailureDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FailureDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1802,6 +1859,7 @@ failureDetail =
     , _fdOtherNATiveCrash = Nothing
     , _fdUnableToCrawl = Nothing
     }
+
 
 -- | If the failure was severe because the system (app) under test crashed.
 fdCrashed :: Lens' FailureDetail (Maybe Bool)
@@ -1863,6 +1921,7 @@ data PerfEnvironment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PerfEnvironment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1874,6 +1933,7 @@ perfEnvironment
     :: PerfEnvironment
 perfEnvironment =
   PerfEnvironment' {_peMemoryInfo = Nothing, _peCPUInfo = Nothing}
+
 
 -- | Memory related environment info
 peMemoryInfo :: Lens' PerfEnvironment (Maybe MemoryInfo)
@@ -1907,6 +1967,7 @@ newtype ListScreenshotClustersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListScreenshotClustersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1916,6 +1977,7 @@ listScreenshotClustersResponse
     :: ListScreenshotClustersResponse
 listScreenshotClustersResponse =
   ListScreenshotClustersResponse' {_lscrClusters = Nothing}
+
 
 -- | The set of clusters associated with an execution Always set
 lscrClusters :: Lens' ListScreenshotClustersResponse [ScreenshotCluster]
@@ -1946,6 +2008,7 @@ data AppStartTime =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppStartTime' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1957,6 +2020,7 @@ appStartTime
     :: AppStartTime
 appStartTime =
   AppStartTime' {_astInitialDisplayTime = Nothing, _astFullyDrawnTime = Nothing}
+
 
 -- | The time from app start to the first displayed activity being drawn, as
 -- reported in Logcat. See
@@ -2014,6 +2078,7 @@ data GraphicsStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GraphicsStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2058,6 +2123,7 @@ graphicsStats =
     , _gsSlowUiThreadCount = Nothing
     , _gsJankyFrames = Nothing
     }
+
 
 -- | Total \"slow draw\" events.
 gsSlowDrawCount :: Lens' GraphicsStats (Maybe Int64)
@@ -2185,6 +2251,7 @@ newtype StackTrace =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StackTrace' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2193,6 +2260,7 @@ newtype StackTrace =
 stackTrace
     :: StackTrace
 stackTrace = StackTrace' {_stException = Nothing}
+
 
 -- | The stack trace message. Required
 stException :: Lens' StackTrace (Maybe Text)
@@ -2217,6 +2285,7 @@ newtype BatchCreatePerfSamplesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchCreatePerfSamplesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2226,6 +2295,7 @@ batchCreatePerfSamplesResponse
     :: BatchCreatePerfSamplesResponse
 batchCreatePerfSamplesResponse =
   BatchCreatePerfSamplesResponse' {_bPerfSamples = Nothing}
+
 
 bPerfSamples :: Lens' BatchCreatePerfSamplesResponse [PerfSample]
 bPerfSamples
@@ -2266,6 +2336,7 @@ data Execution =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Execution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2295,6 +2366,7 @@ execution =
     , _eOutcome = Nothing
     , _eSpecification = Nothing
     }
+
 
 -- | The time when the Execution was created. This value will be set
 -- automatically when CreateExecution is called. - In response: always set
@@ -2390,6 +2462,7 @@ data Outcome =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Outcome' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2413,6 +2486,7 @@ outcome =
     , _oSuccessDetail = Nothing
     , _oSkippedDetail = Nothing
     }
+
 
 -- | The simplest way to interpret a result. Required
 oSummary :: Lens' Outcome (Maybe OutcomeSummary)
@@ -2501,6 +2575,7 @@ data Step =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Step' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2554,6 +2629,7 @@ step =
     , _sDeviceUsageDuration = Nothing
     , _sDescription = Nothing
     }
+
 
 -- | The time when the step was created. - In response: always set - In
 -- create\/update request: never set
@@ -2754,6 +2830,7 @@ newtype SuccessDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SuccessDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2762,6 +2839,7 @@ newtype SuccessDetail =
 successDetail
     :: SuccessDetail
 successDetail = SuccessDetail' {_sdOtherNATiveCrash = Nothing}
+
 
 -- | If a native process other than the app crashed.
 sdOtherNATiveCrash :: Lens' SuccessDetail (Maybe Bool)
@@ -2794,6 +2872,7 @@ data ToolExecution =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ToolExecution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2814,6 +2893,7 @@ toolExecution =
     , _teToolLogs = Nothing
     , _teExitCode = Nothing
     }
+
 
 -- | The full tokenized command line including the program name (equivalent
 -- to argv in a C program). - In response: present if set by create request
@@ -2888,6 +2968,7 @@ newtype PublishXUnitXMLFilesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PublishXUnitXMLFilesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2897,6 +2978,7 @@ publishXUnitXMLFilesRequest
     :: PublishXUnitXMLFilesRequest
 publishXUnitXMLFilesRequest =
   PublishXUnitXMLFilesRequest' {_pxuxfrXUnitXMLFiles = Nothing}
+
 
 -- | URI of the Xunit XML files to publish. The maximum size of the file this
 -- reference is pointing to is 50MB. Required.
@@ -2936,6 +3018,7 @@ data PerfMetricsSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PerfMetricsSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2968,6 +3051,7 @@ perfMetricsSummary =
     , _pmsHistoryId = Nothing
     , _pmsProjectId = Nothing
     }
+
 
 -- | A tool results execution ID.
 pmsExecutionId :: Lens' PerfMetricsSummary (Maybe Text)
@@ -3053,6 +3137,7 @@ data ListHistoriesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListHistoriesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3064,6 +3149,7 @@ listHistoriesResponse
     :: ListHistoriesResponse
 listHistoriesResponse =
   ListHistoriesResponse' {_lhrNextPageToken = Nothing, _lhrHistories = Nothing}
+
 
 -- | A continuation token to resume the query at the next item. Will only be
 -- set if there are more histories to fetch. Tokens are valid for up to one
@@ -3107,6 +3193,7 @@ newtype ToolExitCode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ToolExitCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3115,6 +3202,7 @@ newtype ToolExitCode =
 toolExitCode
     :: ToolExitCode
 toolExitCode = ToolExitCode' {_tecNumber = Nothing}
+
 
 -- | Tool execution exit code. A value of 0 means that the execution was
 -- successful. - In response: always set - In create\/update request:
@@ -3147,6 +3235,7 @@ data AndroidInstrumentationTest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidInstrumentationTest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3167,6 +3256,7 @@ androidInstrumentationTest =
     , _aitTestRunnerClass = Nothing
     , _aitTestPackageId = Nothing
     }
+
 
 -- | Each target must be fully qualified with the package name or class name,
 -- in one of these formats: - \"package package_name\" - \"class
@@ -3227,6 +3317,7 @@ data StepDimensionValueEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StepDimensionValueEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3238,6 +3329,7 @@ stepDimensionValueEntry
     :: StepDimensionValueEntry
 stepDimensionValueEntry =
   StepDimensionValueEntry' {_sdveValue = Nothing, _sdveKey = Nothing}
+
 
 sdveValue :: Lens' StepDimensionValueEntry (Maybe Text)
 sdveValue
@@ -3269,6 +3361,7 @@ newtype Specification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Specification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3277,6 +3370,7 @@ newtype Specification =
 specification
     :: Specification
 specification = Specification' {_sAndroidTest = Nothing}
+
 
 -- | An Android mobile test execution specification.
 sAndroidTest :: Lens' Specification (Maybe AndroidTest)
@@ -3304,6 +3398,7 @@ data IndividualOutcome =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IndividualOutcome' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3315,6 +3410,7 @@ individualOutcome
     :: IndividualOutcome
 individualOutcome =
   IndividualOutcome' {_ioStepId = Nothing, _ioOutcomeSummary = Nothing}
+
 
 ioStepId :: Lens' IndividualOutcome (Maybe Text)
 ioStepId = lens _ioStepId (\ s a -> s{_ioStepId = a})
@@ -3355,6 +3451,7 @@ data TestSuiteOverview =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestSuiteOverview' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3381,6 +3478,7 @@ testSuiteOverview =
     , _tsoFailureCount = Nothing
     , _tsoTotalCount = Nothing
     }
+
 
 -- | Number of test cases not run, typically set by the service by parsing
 -- the xml_source. - In create\/response: always set - In update request:
@@ -3464,6 +3562,7 @@ data MultiStep =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MultiStep' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3481,6 +3580,7 @@ multiStep =
     , _msPrimaryStepId = Nothing
     , _msPrimaryStep = Nothing
     }
+
 
 -- | Unique int given to each step. Ranges from 0(inclusive) to total number
 -- of steps(exclusive). The primary step is 0.
@@ -3554,6 +3654,7 @@ data Duration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Duration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3564,6 +3665,7 @@ data Duration =
 duration
     :: Duration
 duration = Duration' {_dNanos = Nothing, _dSeconds = Nothing}
+
 
 -- | Signed fractions of a second at nanosecond resolution of the span of
 -- time. Durations less than one second are represented with a 0
@@ -3659,6 +3761,7 @@ data Timestamp =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Timestamp' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3669,6 +3772,7 @@ data Timestamp =
 timestamp
     :: Timestamp
 timestamp = Timestamp' {_tNanos = Nothing, _tSeconds = Nothing}
+
 
 -- | Non-negative fractions of a second at nanosecond resolution. Negative
 -- second values with fractions must still have non-negative nanos values
@@ -3736,6 +3840,7 @@ data Any =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Any' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3746,6 +3851,7 @@ data Any =
 any
     :: Any
 any = Any' {_aValue = Nothing, _aTypeURL = Nothing}
+
 
 -- | Must be a valid serialized protocol buffer of the above specified type.
 aValue :: Lens' Any (Maybe ByteString)
@@ -3798,6 +3904,7 @@ newtype TestTiming =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestTiming' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3806,6 +3913,7 @@ newtype TestTiming =
 testTiming
     :: TestTiming
 testTiming = TestTiming' {_ttTestProcessDuration = Nothing}
+
 
 -- | How long it took to run the test process. - In response: present if
 -- previously set. - In create\/update request: optional
@@ -3838,6 +3946,7 @@ data ScreenshotCluster =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScreenshotCluster' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3858,6 +3967,7 @@ screenshotCluster =
     , _scActivity = Nothing
     , _scKeyScreen = Nothing
     }
+
 
 -- | A unique identifier for the cluster.
 scClusterId :: Lens' ScreenshotCluster (Maybe Text)
@@ -3914,6 +4024,7 @@ data BasicPerfSampleSeries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BasicPerfSampleSeries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3931,6 +4042,7 @@ basicPerfSampleSeries =
     , _bpssPerfMetricType = Nothing
     , _bpssSampleSeriesLabel = Nothing
     }
+
 
 bpssPerfUnit :: Lens' BasicPerfSampleSeries (Maybe BasicPerfSampleSeriesPerfUnit)
 bpssPerfUnit
@@ -3973,6 +4085,7 @@ data PrimaryStep =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PrimaryStep' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3983,6 +4096,7 @@ data PrimaryStep =
 primaryStep
     :: PrimaryStep
 primaryStep = PrimaryStep' {_psRollUp = Nothing, _psIndividualOutcome = Nothing}
+
 
 -- | Rollup test status of multiple steps that were run with the same
 -- configuration as a group.
@@ -4022,6 +4136,7 @@ data SkippedDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SkippedDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4039,6 +4154,7 @@ skippedDetail =
     , _sdIncompatibleAppVersion = Nothing
     , _sdIncompatibleDevice = Nothing
     }
+
 
 -- | If the App doesn\'t run on the specific architecture, for example, x86.
 sdIncompatibleArchitecture :: Lens' SkippedDetail (Maybe Bool)

@@ -60,6 +60,7 @@ newtype AchievementConfigurationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementConfigurationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ achievementConfigurationsGet
     -> AchievementConfigurationsGet
 achievementConfigurationsGet pAcgAchievementId_ =
   AchievementConfigurationsGet' {_acgAchievementId = pAcgAchievementId_}
+
 
 -- | The ID of the achievement used by this method.
 acgAchievementId :: Lens' AchievementConfigurationsGet Text

@@ -33,6 +33,7 @@ data Application =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -56,6 +57,7 @@ application =
     , _aName = Nothing
     , _aId = Nothing
     }
+
 
 -- | The list of all possible transfer parameters for this application. These
 -- parameters can be used to select the data of the user in this
@@ -115,6 +117,7 @@ data ApplicationTransferParam =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationTransferParam' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +129,7 @@ applicationTransferParam
     :: ApplicationTransferParam
 applicationTransferParam =
   ApplicationTransferParam' {_atpValue = Nothing, _atpKey = Nothing}
+
 
 -- | The value of the coressponding transfer parameter. eg: \'PRIVATE\' or
 -- \'SHARED\'
@@ -164,6 +168,7 @@ data ApplicationsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -184,6 +189,7 @@ applicationsListResponse =
     , _alrKind = "admin#datatransfer#applicationsList"
     , _alrApplications = Nothing
     }
+
 
 -- | ETag of the resource.
 alrEtag :: Lens' ApplicationsListResponse (Maybe Text)
@@ -243,6 +249,7 @@ data DataTransfer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataTransfer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -275,6 +282,7 @@ dataTransfer =
     , _dtId = Nothing
     , _dtOverallTransferStatusCode = Nothing
     }
+
 
 -- | ETag of the resource.
 dtEtag :: Lens' DataTransfer (Maybe Text)
@@ -365,6 +373,7 @@ data DataTransfersListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataTransfersListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -385,6 +394,7 @@ dataTransfersListResponse =
     , _dtlrKind = "admin#datatransfer#dataTransfersList"
     , _dtlrDataTransfers = Nothing
     }
+
 
 -- | ETag of the resource.
 dtlrEtag :: Lens' DataTransfersListResponse (Maybe Text)
@@ -438,6 +448,7 @@ data ApplicationDataTransfer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationDataTransfer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -455,6 +466,7 @@ applicationDataTransfer =
     , _adtApplicationId = Nothing
     , _adtApplicationTransferStatus = Nothing
     }
+
 
 -- | The transfer parameters for the application. These parameters are used
 -- to select the data which will get transfered in context of this

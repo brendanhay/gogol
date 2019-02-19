@@ -61,6 +61,7 @@ newtype ProjectsGetServiceAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGetServiceAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ projectsGetServiceAccount
     -> ProjectsGetServiceAccount
 projectsGetServiceAccount pPgsaProjectId_ =
   ProjectsGetServiceAccount' {_pgsaProjectId = pPgsaProjectId_}
+
 
 -- | Project ID for which the service account is requested.
 pgsaProjectId :: Lens' ProjectsGetServiceAccount Text

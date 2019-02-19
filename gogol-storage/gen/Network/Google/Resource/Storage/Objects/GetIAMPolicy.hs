@@ -68,6 +68,7 @@ data ObjectsGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ objectsGetIAMPolicy pOgipBucket_ pOgipObject_ =
     , _ogipObject = pOgipObject_
     , _ogipGeneration = Nothing
     }
+
 
 -- | Name of the bucket in which the object resides.
 ogipBucket :: Lens' ObjectsGetIAMPolicy Text

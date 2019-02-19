@@ -64,6 +64,7 @@ data GlobalOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GlobalOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ globalOperationsGet
 globalOperationsGet pGogProject_ pGogOperation_ =
   GlobalOperationsGet'
     {_gogProject = pGogProject_, _gogOperation = pGogOperation_}
+
 
 -- | Project ID for this request.
 gogProject :: Lens' GlobalOperationsGet Text

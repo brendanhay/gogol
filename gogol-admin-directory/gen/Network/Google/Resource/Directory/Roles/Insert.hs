@@ -62,6 +62,7 @@ data RolesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RolesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ rolesInsert
     -> RolesInsert
 rolesInsert pRiPayload_ pRiCustomer_ =
   RolesInsert' {_riPayload = pRiPayload_, _riCustomer = pRiCustomer_}
+
 
 -- | Multipart request metadata.
 riPayload :: Lens' RolesInsert Role

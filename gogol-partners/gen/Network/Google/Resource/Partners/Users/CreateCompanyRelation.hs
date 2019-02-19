@@ -108,6 +108,7 @@ data UsersCreateCompanyRelation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersCreateCompanyRelation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -160,6 +161,7 @@ usersCreateCompanyRelation pUccrPayload_ pUccrUserId_ =
     , _uccrRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _uccrCallback = Nothing
     }
+
 
 -- | V1 error format.
 uccrXgafv :: Lens' UsersCreateCompanyRelation (Maybe Xgafv)

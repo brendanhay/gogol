@@ -80,6 +80,7 @@ data ProjectsJobsWorkItemsReportStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobsWorkItemsReportStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsJobsWorkItemsReportStatus pPjwirsJobId_ pPjwirsPayload_ pPjwirsProjectId
     , _pjwirsProjectId = pPjwirsProjectId_
     , _pjwirsCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjwirsXgafv :: Lens' ProjectsJobsWorkItemsReportStatus (Maybe Xgafv)

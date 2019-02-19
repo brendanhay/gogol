@@ -91,6 +91,7 @@ data CoursesAnnouncementsModifyAssignees =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesAnnouncementsModifyAssignees' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ coursesAnnouncementsModifyAssignees pCamaCourseId_ pCamaPayload_ pCamaId_ =
     , _camaId = pCamaId_
     , _camaCallback = Nothing
     }
+
 
 -- | V1 error format.
 camaXgafv :: Lens' CoursesAnnouncementsModifyAssignees (Maybe Xgafv)

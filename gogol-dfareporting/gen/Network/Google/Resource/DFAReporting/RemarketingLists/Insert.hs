@@ -62,6 +62,7 @@ data RemarketingListsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingListsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ remarketingListsInsert
 remarketingListsInsert pRliProFileId_ pRliPayload_ =
   RemarketingListsInsert'
     {_rliProFileId = _Coerce # pRliProFileId_, _rliPayload = pRliPayload_}
+
 
 -- | User profile ID associated with this request.
 rliProFileId :: Lens' RemarketingListsInsert Int64

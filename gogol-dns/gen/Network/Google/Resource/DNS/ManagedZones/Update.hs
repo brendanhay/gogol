@@ -67,6 +67,7 @@ data ManagedZonesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedZonesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ managedZonesUpdate pMzuProject_ pMzuPayload_ pMzuManagedZone_ =
     , _mzuManagedZone = pMzuManagedZone_
     , _mzuClientOperationId = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 mzuProject :: Lens' ManagedZonesUpdate Text

@@ -72,6 +72,7 @@ data ManagementUploadsDeleteUploadData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementUploadsDeleteUploadData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ managementUploadsDeleteUploadData pMududWebPropertyId_ pMududCustomDataSourceId_
     , _mududPayload = pMududPayload_
     , _mududAccountId = pMududAccountId_
     }
+
 
 -- | Web property Id for the uploads to be deleted.
 mududWebPropertyId :: Lens' ManagementUploadsDeleteUploadData Text

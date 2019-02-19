@@ -62,6 +62,7 @@ data ManagementFiltersInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementFiltersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ managementFiltersInsert
 managementFiltersInsert pMfiPayload_ pMfiAccountId_ =
   ManagementFiltersInsert'
     {_mfiPayload = pMfiPayload_, _mfiAccountId = pMfiAccountId_}
+
 
 -- | Multipart request metadata.
 mfiPayload :: Lens' ManagementFiltersInsert Filter

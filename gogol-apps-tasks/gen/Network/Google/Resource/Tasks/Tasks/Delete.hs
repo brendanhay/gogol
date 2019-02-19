@@ -61,6 +61,7 @@ data TasksDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TasksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ tasksDelete
     -> TasksDelete
 tasksDelete pTdTaskList_ pTdTask_ =
   TasksDelete' {_tdTaskList = pTdTaskList_, _tdTask = pTdTask_}
+
 
 -- | Task list identifier.
 tdTaskList :: Lens' TasksDelete Text

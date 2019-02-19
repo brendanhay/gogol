@@ -80,6 +80,7 @@ data TestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ testIAMPermissions pTipPayload_ pTipResource_ =
     , _tipResource = pTipResource_
     , _tipCallback = Nothing
     }
+
 
 -- | V1 error format.
 tipXgafv :: Lens' TestIAMPermissions (Maybe Xgafv)

@@ -64,6 +64,7 @@ data AudiencesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AudiencesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ audiencesList
 audiencesList pAUserId_ =
   AudiencesList'
     {_aUserId = pAUserId_, _aPageToken = Nothing, _aMaxResults = 20}
+
 
 -- | The ID of the user to get audiences for. The special value \"me\" can be
 -- used to indicate the authenticated user.

@@ -67,6 +67,7 @@ data RegionCommitmentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionCommitmentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ regionCommitmentsGet pRcgProject_ pRcgRegion_ pRcgCommitment_ =
     , _rcgRegion = pRcgRegion_
     , _rcgCommitment = pRcgCommitment_
     }
+
 
 -- | Project ID for this request.
 rcgProject :: Lens' RegionCommitmentsGet Text

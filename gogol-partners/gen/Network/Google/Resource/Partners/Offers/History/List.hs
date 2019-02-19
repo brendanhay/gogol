@@ -119,6 +119,7 @@ data OffersHistoryList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OffersHistoryList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -175,6 +176,7 @@ offersHistoryList =
     , _ohlRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _ohlCallback = Nothing
     }
+
 
 -- | V1 error format.
 ohlXgafv :: Lens' OffersHistoryList (Maybe Xgafv)

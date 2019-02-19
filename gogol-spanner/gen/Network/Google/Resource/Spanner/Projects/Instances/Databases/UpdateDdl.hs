@@ -83,6 +83,7 @@ data ProjectsInstancesDatabasesUpdateDdl =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesUpdateDdl' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ projectsInstancesDatabasesUpdateDdl pPidudDatabase_ pPidudPayload_ =
     , _pidudPayload = pPidudPayload_
     , _pidudCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidudXgafv :: Lens' ProjectsInstancesDatabasesUpdateDdl (Maybe Xgafv)

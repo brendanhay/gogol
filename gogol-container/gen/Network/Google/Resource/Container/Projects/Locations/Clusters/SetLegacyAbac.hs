@@ -74,6 +74,7 @@ data ProjectsLocationsClustersSetLegacyAbac =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersSetLegacyAbac' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsLocationsClustersSetLegacyAbac pPlcslaPayload_ pPlcslaName_ =
     , _plcslaName = pPlcslaName_
     , _plcslaCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcslaXgafv :: Lens' ProjectsLocationsClustersSetLegacyAbac (Maybe Xgafv)

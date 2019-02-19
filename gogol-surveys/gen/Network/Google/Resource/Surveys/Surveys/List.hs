@@ -64,6 +64,7 @@ data SurveysList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveysList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ surveysList
 surveysList =
   SurveysList'
     {_slToken = Nothing, _slStartIndex = Nothing, _slMaxResults = Nothing}
+
 
 slToken :: Lens' SurveysList (Maybe Text)
 slToken = lens _slToken (\ s a -> s{_slToken = a})

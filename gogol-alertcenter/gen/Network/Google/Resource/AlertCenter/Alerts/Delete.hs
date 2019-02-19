@@ -82,6 +82,7 @@ data AlertsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlertsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ alertsDelete pAdAlertId_ =
     , _adCustomerId = Nothing
     , _adCallback = Nothing
     }
+
 
 -- | V1 error format.
 adXgafv :: Lens' AlertsDelete (Maybe Xgafv)

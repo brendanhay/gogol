@@ -80,6 +80,7 @@ data ActionResultsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActionResultsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ actionResultsGet pArgSizeBytes_ pArgHash_ pArgInstanceName_ =
     , _argInstanceName = pArgInstanceName_
     , _argCallback = Nothing
     }
+
 
 -- | The size of the blob, in bytes.
 argSizeBytes :: Lens' ActionResultsGet Int64

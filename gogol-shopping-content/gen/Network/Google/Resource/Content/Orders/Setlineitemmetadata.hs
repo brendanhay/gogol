@@ -65,6 +65,7 @@ data OrdersSetlineitemmetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersSetlineitemmetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ ordersSetlineitemmetadata pOssMerchantId_ pOssPayload_ pOssOrderId_ =
     , _ossPayload = pOssPayload_
     , _ossOrderId = pOssOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

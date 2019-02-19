@@ -69,6 +69,7 @@ data EditsImagesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsImagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ editsImagesList pEilPackageName_ pEilImageType_ pEilLanguage_ pEilEditId_ =
     , _eilLanguage = pEilLanguage_
     , _eilEditId = pEilEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

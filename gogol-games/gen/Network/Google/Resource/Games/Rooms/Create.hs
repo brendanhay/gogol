@@ -64,6 +64,7 @@ data RoomsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ roomsCreate
     -> RoomsCreate
 roomsCreate pRcPayload_ =
   RoomsCreate' {_rcPayload = pRcPayload_, _rcLanguage = Nothing}
+
 
 -- | Multipart request metadata.
 rcPayload :: Lens' RoomsCreate RoomCreateRequest

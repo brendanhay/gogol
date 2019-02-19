@@ -72,6 +72,7 @@ data OnboardingListCategoryVolumes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OnboardingListCategoryVolumes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ onboardingListCategoryVolumes =
     , _olcvPageToken = Nothing
     , _olcvPageSize = Nothing
     }
+
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Default is en-US if
 -- unset.

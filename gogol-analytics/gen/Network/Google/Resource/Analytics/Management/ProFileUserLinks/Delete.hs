@@ -70,6 +70,7 @@ data ManagementProFileUserLinksDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementProFileUserLinksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ managementProFileUserLinksDelete pMpfuldWebPropertyId_ pMpfuldProFileId_ pMpfuld
     , _mpfuldAccountId = pMpfuldAccountId_
     , _mpfuldLinkId = pMpfuldLinkId_
     }
+
 
 -- | Web Property ID to delete the user link for.
 mpfuldWebPropertyId :: Lens' ManagementProFileUserLinksDelete Text

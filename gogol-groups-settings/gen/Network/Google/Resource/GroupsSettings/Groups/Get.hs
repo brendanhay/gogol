@@ -57,6 +57,7 @@ newtype GroupsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ groupsGet
     :: Text -- ^ 'ggGroupUniqueId'
     -> GroupsGet
 groupsGet pGgGroupUniqueId_ = GroupsGet' {_ggGroupUniqueId = pGgGroupUniqueId_}
+
 
 -- | The resource ID
 ggGroupUniqueId :: Lens' GroupsGet Text

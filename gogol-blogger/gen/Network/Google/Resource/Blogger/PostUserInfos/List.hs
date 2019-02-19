@@ -94,6 +94,7 @@ data PostUserInfosList' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostUserInfosList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -137,6 +138,7 @@ postUserInfosList' pPuilBlogId_ pPuilUserId_ =
     , _puilPageToken = Nothing
     , _puilMaxResults = Nothing
     }
+
 
 puilStatus :: Lens' PostUserInfosList' [PostUserInfosListStatus]
 puilStatus

@@ -62,6 +62,7 @@ data AccountActiveAdSummariesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountActiveAdSummariesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ accountActiveAdSummariesGet pAaasgProFileId_ pAaasgSummaryAccountId_ =
     { _aaasgProFileId = _Coerce # pAaasgProFileId_
     , _aaasgSummaryAccountId = _Coerce # pAaasgSummaryAccountId_
     }
+
 
 -- | User profile ID associated with this request.
 aaasgProFileId :: Lens' AccountActiveAdSummariesGet Int64

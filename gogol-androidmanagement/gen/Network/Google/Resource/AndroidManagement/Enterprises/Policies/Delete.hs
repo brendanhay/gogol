@@ -72,6 +72,7 @@ data EnterprisesPoliciesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesPoliciesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ enterprisesPoliciesDelete pEpdName_ =
     , _epdName = pEpdName_
     , _epdCallback = Nothing
     }
+
 
 -- | V1 error format.
 epdXgafv :: Lens' EnterprisesPoliciesDelete (Maybe Xgafv)

@@ -62,6 +62,7 @@ data FirewallsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FirewallsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ firewallsGet
     -> FirewallsGet
 firewallsGet pFgProject_ pFgFirewall_ =
   FirewallsGet' {_fgProject = pFgProject_, _fgFirewall = pFgFirewall_}
+
 
 -- | Project ID for this request.
 fgProject :: Lens' FirewallsGet Text

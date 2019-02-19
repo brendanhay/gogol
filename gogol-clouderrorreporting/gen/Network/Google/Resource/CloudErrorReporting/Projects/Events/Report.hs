@@ -85,6 +85,7 @@ data ProjectsEventsReport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsEventsReport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsEventsReport pPerPayload_ pPerProjectName_ =
     , _perProjectName = pPerProjectName_
     , _perCallback = Nothing
     }
+
 
 -- | V1 error format.
 perXgafv :: Lens' ProjectsEventsReport (Maybe Xgafv)

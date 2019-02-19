@@ -61,6 +61,7 @@ data AdUnitsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdUnitsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ adUnitsGet
     -> AdUnitsGet
 adUnitsGet pAugAdUnitId_ pAugAdClientId_ =
   AdUnitsGet' {_augAdUnitId = pAugAdUnitId_, _augAdClientId = pAugAdClientId_}
+
 
 -- | Ad unit to retrieve.
 augAdUnitId :: Lens' AdUnitsGet Text

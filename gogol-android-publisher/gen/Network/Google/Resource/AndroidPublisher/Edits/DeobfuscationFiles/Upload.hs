@@ -92,6 +92,7 @@ data EditsDeobfuscationFilesUpload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsDeobfuscationFilesUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ editsDeobfuscationFilesUpload pEdfuDeobfuscationFileType_ pEdfuPackageName_ pEdf
     , _edfuAPKVersionCode = _Coerce # pEdfuAPKVersionCode_
     , _edfuEditId = pEdfuEditId_
     }
+
 
 edfuDeobfuscationFileType :: Lens' EditsDeobfuscationFilesUpload EditsDeobfuscationFilesUploadDeobfuscationFileType
 edfuDeobfuscationFileType

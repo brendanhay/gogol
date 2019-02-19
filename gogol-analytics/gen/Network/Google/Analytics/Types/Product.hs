@@ -33,6 +33,7 @@ data UserDeletionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserDeletionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -56,6 +57,7 @@ userDeletionRequest =
     , _udrFirebaseProjectId = Nothing
     , _udrDeletionRequestTime = Nothing
     }
+
 
 -- | Web property ID of the form UA-XXXXX-YY.
 udrWebPropertyId :: Lens' UserDeletionRequest (Maybe Text)
@@ -125,6 +127,7 @@ data UnSampledReports =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnSampledReports' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -157,6 +160,7 @@ unSampledReports =
     , _usrStartIndex = Nothing
     , _usrPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this unsampled report collection.
 usrNextLink :: Lens' UnSampledReports (Maybe Text)
@@ -247,6 +251,7 @@ data GoalURLDestinationDetailsStepsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoalURLDestinationDetailsStepsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -261,6 +266,7 @@ goalURLDestinationDetailsStepsItem
 goalURLDestinationDetailsStepsItem =
   GoalURLDestinationDetailsStepsItem'
     {_guddsiURL = Nothing, _guddsiName = Nothing, _guddsiNumber = Nothing}
+
 
 -- | URL for this step.
 guddsiURL :: Lens' GoalURLDestinationDetailsStepsItem (Maybe Text)
@@ -315,6 +321,7 @@ data GaDataQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GaDataQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -356,6 +363,7 @@ gaDataQuery =
     , _gdqSegment = Nothing
     , _gdqStartDate = Nothing
     }
+
 
 -- | List of analytics metrics.
 gdqMetrics :: Lens' GaDataQuery [Text]
@@ -471,6 +479,7 @@ data RemarketingAudiences =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingAudiences' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -503,6 +512,7 @@ remarketingAudiences =
     , _raStartIndex = Nothing
     , _raPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this remarketing audience collection.
 raNextLink :: Lens' RemarketingAudiences (Maybe Text)
@@ -589,6 +599,7 @@ newtype GaDataDataTableRowsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GaDataDataTableRowsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -597,6 +608,7 @@ newtype GaDataDataTableRowsItem =
 gaDataDataTableRowsItem
     :: GaDataDataTableRowsItem
 gaDataDataTableRowsItem = GaDataDataTableRowsItem' {_gddtriC = Nothing}
+
 
 gddtriC :: Lens' GaDataDataTableRowsItem [GaDataDataTableRowsItemCItem]
 gddtriC
@@ -639,6 +651,7 @@ data UnSampledReport =
     , _uStartDate                   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UnSampledReport' with the minimum fields required to make a request.
 --
@@ -705,6 +718,7 @@ unSampledReport =
     , _uCloudStorageDownloadDetails = Nothing
     , _uStartDate = Nothing
     }
+
 
 -- | The type of download you need to use for the report data file. Possible
 -- values include \`GOOGLE_DRIVE\` and \`GOOGLE_CLOUD_STORAGE\`. If the
@@ -864,6 +878,7 @@ data McfDataColumnHeadersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'McfDataColumnHeadersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -878,6 +893,7 @@ mcfDataColumnHeadersItem
 mcfDataColumnHeadersItem =
   McfDataColumnHeadersItem'
     {_mdchiColumnType = Nothing, _mdchiName = Nothing, _mdchiDataType = Nothing}
+
 
 -- | Column Type. Either DIMENSION or METRIC.
 mdchiColumnType :: Lens' McfDataColumnHeadersItem (Maybe Text)
@@ -924,6 +940,7 @@ newtype GaDataTotalsForAllResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GaDataTotalsForAllResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -934,6 +951,7 @@ gaDataTotalsForAllResults
     -> GaDataTotalsForAllResults
 gaDataTotalsForAllResults pGdtfarAddtional_ =
   GaDataTotalsForAllResults' {_gdtfarAddtional = _Coerce # pGdtfarAddtional_}
+
 
 -- | Key-value pair for the total value of a metric. Key is the metric name
 -- and the value is the total value for that metric.
@@ -963,6 +981,7 @@ data ProFileParentLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFileParentLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -974,6 +993,7 @@ proFileParentLink
     :: ProFileParentLink
 proFileParentLink =
   ProFileParentLink' {_pfplHref = Nothing, _pfplType = "analytics#webproperty"}
+
 
 -- | Link to the web property to which this view (profile) belongs.
 pfplHref :: Lens' ProFileParentLink (Maybe Text)
@@ -1019,6 +1039,7 @@ data RemarketingAudience =
     , _rDescription                  :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemarketingAudience' with the minimum fields required to make a request.
 --
@@ -1070,6 +1091,7 @@ remarketingAudience =
     , _rUpdated = Nothing
     , _rDescription = Nothing
     }
+
 
 -- | Web property ID of the form UA-XXXXX-YY to which this remarketing
 -- audience belongs.
@@ -1203,6 +1225,7 @@ newtype GaDataDataTableRowsItemCItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GaDataDataTableRowsItemCItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1212,6 +1235,7 @@ gaDataDataTableRowsItemCItem
     :: GaDataDataTableRowsItemCItem
 gaDataDataTableRowsItemCItem =
   GaDataDataTableRowsItemCItem' {_gddtriciV = Nothing}
+
 
 gddtriciV :: Lens' GaDataDataTableRowsItemCItem (Maybe Text)
 gddtriciV
@@ -1237,6 +1261,7 @@ data EntityUserLinkPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityUserLinkPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1248,6 +1273,7 @@ entityUserLinkPermissions
     :: EntityUserLinkPermissions
 entityUserLinkPermissions =
   EntityUserLinkPermissions' {_eulpLocal = Nothing, _eulpEffective = Nothing}
+
 
 -- | Permissions that a user has been assigned at this very level. Does not
 -- include any implied or inherited permissions. Local permissions are
@@ -1299,6 +1325,7 @@ data RealtimeDataProFileInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RealtimeDataProFileInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1325,6 +1352,7 @@ realtimeDataProFileInfo =
     , _rdpfiInternalWebPropertyId = Nothing
     , _rdpfiTableId = Nothing
     }
+
 
 -- | Web Property ID to which this view (profile) belongs.
 rdpfiWebPropertyId :: Lens' RealtimeDataProFileInfo (Maybe Text)
@@ -1393,6 +1421,7 @@ data McfDataRowsItemItemConversionPathValueItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'McfDataRowsItemItemConversionPathValueItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1405,6 +1434,7 @@ mcfDataRowsItemItemConversionPathValueItem
 mcfDataRowsItemItemConversionPathValueItem =
   McfDataRowsItemItemConversionPathValueItem'
     {_mdriicpviInteractionType = Nothing, _mdriicpviNodeValue = Nothing}
+
 
 -- | Type of an interaction on conversion path. Such as CLICK, IMPRESSION
 -- etc.
@@ -1455,6 +1485,7 @@ data FilterExpression =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterExpression' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1481,6 +1512,7 @@ filterExpression =
     , _feCaseSensitive = Nothing
     , _feExpressionValue = Nothing
     }
+
 
 -- | The Index of the custom dimension. Set only if the field is a is
 -- CUSTOM_DIMENSION.
@@ -1581,6 +1613,7 @@ data ProFileRef =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFileRef' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1610,6 +1643,7 @@ proFileRef =
     , _pfrInternalWebPropertyId = Nothing
     , _pfrId = Nothing
     }
+
 
 -- | Web property ID of the form UA-XXXXX-YY to which this view (profile)
 -- belongs.
@@ -1689,6 +1723,7 @@ data Accounts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Accounts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1721,6 +1756,7 @@ accounts =
     , _aStartIndex = Nothing
     , _aPreviousLink = Nothing
     }
+
 
 -- | Next link for this account collection.
 aNextLink :: Lens' Accounts (Maybe Text)
@@ -1818,6 +1854,7 @@ data Experiments =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Experiments' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1850,6 +1887,7 @@ experiments =
     , _eStartIndex = Nothing
     , _ePreviousLink = Nothing
     }
+
 
 -- | Link to next page for this experiment collection.
 eNextLink :: Lens' Experiments (Maybe Text)
@@ -1939,6 +1977,7 @@ data ExperimentParentLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExperimentParentLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1950,6 +1989,7 @@ experimentParentLink
     :: ExperimentParentLink
 experimentParentLink =
   ExperimentParentLink' {_eplHref = Nothing, _eplType = "analytics#profile"}
+
 
 -- | Link to the view (profile) to which this experiment belongs. This field
 -- is read-only.
@@ -1984,6 +2024,7 @@ newtype UnSampledReportDriveDownloadDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnSampledReportDriveDownloadDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1993,6 +2034,7 @@ unSampledReportDriveDownloadDetails
     :: UnSampledReportDriveDownloadDetails
 unSampledReportDriveDownloadDetails =
   UnSampledReportDriveDownloadDetails' {_usrdddDocumentId = Nothing}
+
 
 -- | Id of the document\/file containing the report data.
 usrdddDocumentId :: Lens' UnSampledReportDriveDownloadDetails (Maybe Text)
@@ -2029,6 +2071,7 @@ data McfDataProFileInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'McfDataProFileInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2055,6 +2098,7 @@ mcfDataProFileInfo =
     , _mdpfiInternalWebPropertyId = Nothing
     , _mdpfiTableId = Nothing
     }
+
 
 -- | Web Property ID to which this view (profile) belongs.
 mdpfiWebPropertyId :: Lens' McfDataProFileInfo (Maybe Text)
@@ -2132,6 +2176,7 @@ data CustomDataSources =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomDataSources' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2164,6 +2209,7 @@ customDataSources =
     , _cdsStartIndex = Nothing
     , _cdsPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this custom data source collection.
 cdsNextLink :: Lens' CustomDataSources (Maybe Text)
@@ -2255,6 +2301,7 @@ data WebPropertyChildLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebPropertyChildLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2266,6 +2313,7 @@ webPropertyChildLink
     :: WebPropertyChildLink
 webPropertyChildLink =
   WebPropertyChildLink' {_wpclHref = Nothing, _wpclType = "analytics#profiles"}
+
 
 -- | Link to the list of views (profiles) for this web property.
 wpclHref :: Lens' WebPropertyChildLink (Maybe Text)
@@ -2302,6 +2350,7 @@ data HashClientIdResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HashClientIdResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2322,6 +2371,7 @@ hashClientIdResponse =
     , _hcirKind = "analytics#hashClientIdResponse"
     , _hcirHashedClientId = Nothing
     }
+
 
 hcirClientId :: Lens' HashClientIdResponse (Maybe Text)
 hcirClientId
@@ -2381,6 +2431,7 @@ data McfData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'McfData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2434,6 +2485,7 @@ mcfData =
     , _mdTotalsForAllResults = Nothing
     , _mdPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this Analytics data query.
 mdNextLink :: Lens' McfData (Maybe Text)
@@ -2585,6 +2637,7 @@ data UserRef =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRef' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2598,6 +2651,7 @@ userRef
     :: UserRef
 userRef =
   UserRef' {_urEmail = Nothing, _urKind = "analytics#userRef", _urId = Nothing}
+
 
 -- | Email ID of this user.
 urEmail :: Lens' UserRef (Maybe Text)
@@ -2636,6 +2690,7 @@ data GoalVisitNumPagesDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoalVisitNumPagesDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2648,6 +2703,7 @@ goalVisitNumPagesDetails
 goalVisitNumPagesDetails =
   GoalVisitNumPagesDetails'
     {_gvnpdComparisonValue = Nothing, _gvnpdComparisonType = Nothing}
+
 
 -- | Value used for this comparison.
 gvnpdComparisonValue :: Lens' GoalVisitNumPagesDetails (Maybe Int64)
@@ -2688,6 +2744,7 @@ data RealtimeDataColumnHeadersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RealtimeDataColumnHeadersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2702,6 +2759,7 @@ realtimeDataColumnHeadersItem
 realtimeDataColumnHeadersItem =
   RealtimeDataColumnHeadersItem'
     {_rdchiColumnType = Nothing, _rdchiName = Nothing, _rdchiDataType = Nothing}
+
 
 -- | Column Type. Either DIMENSION or METRIC.
 rdchiColumnType :: Lens' RealtimeDataColumnHeadersItem (Maybe Text)
@@ -2750,6 +2808,7 @@ data AccountRef =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountRef' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2770,6 +2829,7 @@ accountRef =
     , _arName = Nothing
     , _arId = Nothing
     }
+
 
 -- | Analytics account reference.
 arKind :: Lens' AccountRef Text
@@ -2820,6 +2880,7 @@ data EntityAdWordsLinks =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityAdWordsLinks' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2849,6 +2910,7 @@ entityAdWordsLinks =
     , _eawlStartIndex = Nothing
     , _eawlPreviousLink = Nothing
     }
+
 
 -- | Next link for this Google Ads link collection.
 eawlNextLink :: Lens' EntityAdWordsLinks (Maybe Text)
@@ -2940,6 +3002,7 @@ data ProFiles =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFiles' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2972,6 +3035,7 @@ proFiles =
     , _pfStartIndex = Nothing
     , _pfPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this view (profile) collection.
 pfNextLink :: Lens' ProFiles (Maybe Text)
@@ -3059,6 +3123,7 @@ newtype AnalyticsDataimportDeleteUploadDataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyticsDataimportDeleteUploadDataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3069,6 +3134,7 @@ analyticsDataimportDeleteUploadDataRequest
 analyticsDataimportDeleteUploadDataRequest =
   AnalyticsDataimportDeleteUploadDataRequest'
     {_addudrCustomDataImportUids = Nothing}
+
 
 -- | A list of upload UIDs.
 addudrCustomDataImportUids :: Lens' AnalyticsDataimportDeleteUploadDataRequest [Text]
@@ -3113,6 +3179,7 @@ data EntityAdWordsLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityAdWordsLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3142,6 +3209,7 @@ entityAdWordsLink =
     , _entId = Nothing
     , _entEntity = Nothing
     }
+
 
 -- | A list of Google Ads client accounts. These cannot be MCC accounts. This
 -- field is required when creating a Google Ads link. It cannot be empty.
@@ -3220,6 +3288,7 @@ data FilterSearchAndReplaceDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterSearchAndReplaceDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3243,6 +3312,7 @@ filterSearchAndReplaceDetails =
     , _fsardReplaceString = Nothing
     , _fsardCaseSensitive = Nothing
     }
+
 
 -- | The Index of the custom dimension. Required if field is a
 -- CUSTOM_DIMENSION.
@@ -3304,6 +3374,7 @@ newtype ProFilePermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFilePermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3312,6 +3383,7 @@ newtype ProFilePermissions =
 proFilePermissions
     :: ProFilePermissions
 proFilePermissions = ProFilePermissions' {_pfpEffective = Nothing}
+
 
 -- | All the permissions that the user has for this view (profile). These
 -- include any implied permissions (e.g., EDIT implies VIEW) or inherited
@@ -3367,6 +3439,7 @@ data ProFile =
     , _pStripSiteSearchQueryParameters    :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProFile' with the minimum fields required to make a request.
 --
@@ -3454,6 +3527,7 @@ proFile =
     , _pEnhancedECommerceTracking = Nothing
     , _pStripSiteSearchQueryParameters = Nothing
     }
+
 
 -- | Parent link for this view (profile). Points to the web property to which
 -- this view (profile) belongs.
@@ -3690,6 +3764,7 @@ data AccountSummaries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountSummaries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3722,6 +3797,7 @@ accountSummaries =
     , _asStartIndex = Nothing
     , _asPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this AccountSummary collection.
 asNextLink :: Lens' AccountSummaries (Maybe Text)
@@ -3810,6 +3886,7 @@ data GoalEventDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoalEventDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3821,6 +3898,7 @@ goalEventDetails
     :: GoalEventDetails
 goalEventDetails =
   GoalEventDetails' {_gedUseEventValue = Nothing, _gedEventConditions = Nothing}
+
 
 -- | Determines if the event value should be used as the value for this goal.
 gedUseEventValue :: Lens' GoalEventDetails (Maybe Bool)
@@ -3868,6 +3946,7 @@ data WebPropertySummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebPropertySummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3900,6 +3979,7 @@ webPropertySummary =
     , _wpsWebsiteURL = Nothing
     , _wpsLevel = Nothing
     }
+
 
 -- | Resource type for Analytics WebPropertySummary.
 wpsKind :: Lens' WebPropertySummary Text
@@ -3986,6 +4066,7 @@ data Filters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Filters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4018,6 +4099,7 @@ filters =
     , _fStartIndex = Nothing
     , _fPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this filter collection.
 fNextLink :: Lens' Filters (Maybe Text)
@@ -4121,6 +4203,7 @@ data GaData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GaData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4180,6 +4263,7 @@ gaData =
     , _gdTotalsForAllResults = Nothing
     , _gdPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this Analytics data query.
 gdNextLink :: Lens' GaData (Maybe Text)
@@ -4346,6 +4430,7 @@ newtype RealtimeDataTotalsForAllResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RealtimeDataTotalsForAllResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4357,6 +4442,7 @@ realtimeDataTotalsForAllResults
 realtimeDataTotalsForAllResults pRdtfarAddtional_ =
   RealtimeDataTotalsForAllResults'
     {_rdtfarAddtional = _Coerce # pRdtfarAddtional_}
+
 
 -- | Key-value pair for the total value of a metric. Key is the metric name
 -- and the value is the total value for that metric.
@@ -4400,6 +4486,7 @@ data CustomDataSource =
     , _cProFilesLinked :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomDataSource' with the minimum fields required to make a request.
 --
@@ -4457,6 +4544,7 @@ customDataSource =
     , _cDescription = Nothing
     , _cProFilesLinked = Nothing
     }
+
 
 -- | Parent link for this custom data source. Points to the web property to
 -- which this custom data source belongs.
@@ -4599,6 +4687,7 @@ data AccountTreeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountTreeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4625,6 +4714,7 @@ accountTreeRequest =
     , _atrWebsiteURL = Nothing
     , _atrTimezone = Nothing
     }
+
 
 atrWebPropertyName :: Lens' AccountTreeRequest (Maybe Text)
 atrWebPropertyName
@@ -4691,6 +4781,7 @@ data WebPropertyRef =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebPropertyRef' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4717,6 +4808,7 @@ webPropertyRef =
     , _wprInternalWebPropertyId = Nothing
     , _wprId = Nothing
     }
+
 
 -- | Analytics web property reference.
 wprKind :: Lens' WebPropertyRef Text
@@ -4786,6 +4878,7 @@ data LinkedForeignAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LinkedForeignAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4824,6 +4917,7 @@ linkedForeignAccount =
     , _lfaId = Nothing
     , _lfaType = Nothing
     }
+
 
 -- | The status of this foreign account link.
 lfaStatus :: Lens' LinkedForeignAccount (Maybe Text)
@@ -4930,6 +5024,7 @@ data Goals =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Goals' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4962,6 +5057,7 @@ goals =
     , _gStartIndex = Nothing
     , _gPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this goal collection.
 gNextLink :: Lens' Goals (Maybe Text)
@@ -5052,6 +5148,7 @@ data McfDataRowsItemItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'McfDataRowsItemItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5064,6 +5161,7 @@ mcfDataRowsItemItem
 mcfDataRowsItemItem =
   McfDataRowsItemItem'
     {_mdriiPrimitiveValue = Nothing, _mdriiConversionPathValue = Nothing}
+
 
 -- | A primitive dimension value. A primitive metric value.
 mdriiPrimitiveValue :: Lens' McfDataRowsItemItem (Maybe Text)
@@ -5105,6 +5203,7 @@ newtype AccountPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5113,6 +5212,7 @@ newtype AccountPermissions =
 accountPermissions
     :: AccountPermissions
 accountPermissions = AccountPermissions' {_apEffective = Nothing}
+
 
 -- | All the permissions that the user has for this account. These include
 -- any implied permissions (e.g., EDIT implies VIEW).
@@ -5146,6 +5246,7 @@ data EntityUserLinkEntity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityUserLinkEntity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5163,6 +5264,7 @@ entityUserLinkEntity =
     , _euleAccountRef = Nothing
     , _euleWebPropertyRef = Nothing
     }
+
 
 -- | View (Profile) for this link.
 euleProFileRef :: Lens' EntityUserLinkEntity (Maybe ProFileRef)
@@ -5215,6 +5317,7 @@ data Account =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5250,6 +5353,7 @@ account =
     , _accUpdated = Nothing
     , _accPermissions = Nothing
     }
+
 
 -- | Child link for an account entry. Points to the list of web properties
 -- for this account.
@@ -5361,6 +5465,7 @@ data Experiment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Experiment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5453,6 +5558,7 @@ experiment =
     , _expServingFramework = Nothing
     , _expDescription = Nothing
     }
+
 
 -- | Parent link for an experiment. Points to the view (profile) to which
 -- this experiment belongs.
@@ -5754,6 +5860,7 @@ data EntityUserLinks =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityUserLinks' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5783,6 +5890,7 @@ entityUserLinks =
     , _eulStartIndex = Nothing
     , _eulPreviousLink = Nothing
     }
+
 
 -- | Next link for this account collection.
 eulNextLink :: Lens' EntityUserLinks (Maybe Text)
@@ -5867,6 +5975,7 @@ data AdWordsAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdWordsAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5884,6 +5993,7 @@ adWordsAccount =
     , _awaKind = "analytics#adWordsAccount"
     , _awaCustomerId = Nothing
     }
+
 
 -- | True if auto-tagging is enabled on the Google Ads account. Read-only
 -- after the insert operation.
@@ -5933,6 +6043,7 @@ data FilterRef =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterRef' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5956,6 +6067,7 @@ filterRef =
     , _frName = Nothing
     , _frId = Nothing
     }
+
 
 -- | Kind value for filter reference.
 frKind :: Lens' FilterRef Text
@@ -6007,6 +6119,7 @@ data GoalVisitTimeOnSiteDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoalVisitTimeOnSiteDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6019,6 +6132,7 @@ goalVisitTimeOnSiteDetails
 goalVisitTimeOnSiteDetails =
   GoalVisitTimeOnSiteDetails'
     {_gvtosdComparisonValue = Nothing, _gvtosdComparisonType = Nothing}
+
 
 -- | Value used for this comparison.
 gvtosdComparisonValue :: Lens' GoalVisitTimeOnSiteDetails (Maybe Int64)
@@ -6066,6 +6180,7 @@ data WebProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6098,6 +6213,7 @@ webProperties =
     , _wpStartIndex = Nothing
     , _wpPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this web property collection.
 wpNextLink :: Lens' WebProperties (Maybe Text)
@@ -6194,6 +6310,7 @@ data CustomMetrics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomMetrics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6226,6 +6343,7 @@ customMetrics =
     , _cmStartIndex = Nothing
     , _cmPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this custom metric collection.
 cmNextLink :: Lens' CustomMetrics (Maybe Text)
@@ -6325,6 +6443,7 @@ data FilterAdvancedDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterAdvancedDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6372,6 +6491,7 @@ filterAdvancedDetails =
     , _fadFieldBRequired = Nothing
     , _fadOverrideOutputField = Nothing
     }
+
 
 -- | Expression to extract from field A.
 fadExtractA :: Lens' FilterAdvancedDetails (Maybe Text)
@@ -6505,6 +6625,7 @@ data AccountTreeResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountTreeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6525,6 +6646,7 @@ accountTreeResponse =
     , _atrtAccount = Nothing
     , _atrtWebProperty = Nothing
     }
+
 
 -- | Resource type for account ticket.
 atrtKind :: Lens' AccountTreeResponse Text
@@ -6575,6 +6697,7 @@ data FilterUppercaseDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterUppercaseDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6586,6 +6709,7 @@ filterUppercaseDetails
     :: FilterUppercaseDetails
 filterUppercaseDetails =
   FilterUppercaseDetails' {_fudFieldIndex = Nothing, _fudField = Nothing}
+
 
 -- | The Index of the custom dimension. Required if field is a
 -- CUSTOM_DIMENSION.
@@ -6622,6 +6746,7 @@ data CustomDataSourceChildLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomDataSourceChildLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6633,6 +6758,7 @@ customDataSourceChildLink
     :: CustomDataSourceChildLink
 customDataSourceChildLink =
   CustomDataSourceChildLink' {_cdsclHref = Nothing, _cdsclType = Nothing}
+
 
 -- | Link to the list of daily uploads for this custom data source. Link to
 -- the list of uploads for this custom data source.
@@ -6672,6 +6798,7 @@ data IncludeConditions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IncludeConditions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6695,6 +6822,7 @@ includeConditions =
     , _icSegment = Nothing
     , _icIsSmartList = Nothing
     }
+
 
 -- | Resource type for include conditions.
 icKind :: Lens' IncludeConditions Text
@@ -6764,6 +6892,7 @@ data FilterParentLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterParentLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6775,6 +6904,7 @@ filterParentLink
     :: FilterParentLink
 filterParentLink =
   FilterParentLink' {_fplHref = Nothing, _fplType = "analytics#account"}
+
 
 -- | Link to the account to which this filter belongs.
 fplHref :: Lens' FilterParentLink (Maybe Text)
@@ -6810,6 +6940,7 @@ data HashClientIdRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HashClientIdRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6827,6 +6958,7 @@ hashClientIdRequest =
     , _hWebPropertyId = Nothing
     , _hKind = "analytics#hashClientIdRequest"
     }
+
 
 hClientId :: Lens' HashClientIdRequest (Maybe Text)
 hClientId
@@ -6873,6 +7005,7 @@ data RealtimeData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RealtimeData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6908,6 +7041,7 @@ realtimeData =
     , _rdTotalResults = Nothing
     , _rdTotalsForAllResults = Nothing
     }
+
 
 -- | Information for the view (profile), for which the real time data was
 -- requested.
@@ -7018,6 +7152,7 @@ data CustomMetric =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomMetric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7071,6 +7206,7 @@ customMetric =
     , _cusType = Nothing
     , _cusIndex = Nothing
     }
+
 
 -- | Parent link for the custom metric. Points to the property to which the
 -- custom metric belongs.
@@ -7201,6 +7337,7 @@ data ProFileSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFileSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7224,6 +7361,7 @@ proFileSummary =
     , _pfsId = Nothing
     , _pfsType = Nothing
     }
+
 
 -- | Resource type for Analytics ProfileSummary.
 pfsKind :: Lens' ProFileSummary Text
@@ -7276,6 +7414,7 @@ data CustomDimensionParentLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomDimensionParentLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7288,6 +7427,7 @@ customDimensionParentLink
 customDimensionParentLink =
   CustomDimensionParentLink'
     {_cdplHref = Nothing, _cdplType = "analytics#webproperty"}
+
 
 -- | Link to the property to which the custom dimension belongs.
 cdplHref :: Lens' CustomDimensionParentLink (Maybe Text)
@@ -7338,6 +7478,7 @@ data WebProperty =
     , _wLevel                           :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebProperty' with the minimum fields required to make a request.
 --
@@ -7404,6 +7545,7 @@ webProperty =
     , _wIndustryVertical = Nothing
     , _wLevel = Nothing
     }
+
 
 -- | Parent link for this web property. Points to the account to which this
 -- web property belongs.
@@ -7569,6 +7711,7 @@ newtype WebPropertyPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebPropertyPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7577,6 +7720,7 @@ newtype WebPropertyPermissions =
 webPropertyPermissions
     :: WebPropertyPermissions
 webPropertyPermissions = WebPropertyPermissions' {_wppEffective = Nothing}
+
 
 -- | All the permissions that the user has for this web property. These
 -- include any implied permissions (e.g., EDIT implies VIEW) or inherited
@@ -7614,6 +7758,7 @@ data EntityUserLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityUserLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7640,6 +7785,7 @@ entityUserLink =
     , _euluPermissions = Nothing
     , _euluEntity = Nothing
     }
+
 
 -- | Resource type for entity user link.
 euluKind :: Lens' EntityUserLink Text
@@ -7705,6 +7851,7 @@ data CustomDataSourceParentLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomDataSourceParentLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7717,6 +7864,7 @@ customDataSourceParentLink
 customDataSourceParentLink =
   CustomDataSourceParentLink'
     {_cdsplHref = Nothing, _cdsplType = "analytics#webproperty"}
+
 
 -- | Link to the web property to which this custom data source belongs.
 cdsplHref :: Lens' CustomDataSourceParentLink (Maybe Text)
@@ -7755,6 +7903,7 @@ data GoalEventDetailsEventConditionsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoalEventDetailsEventConditionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7778,6 +7927,7 @@ goalEventDetailsEventConditionsItem =
     , _gedeciType = Nothing
     , _gedeciComparisonType = Nothing
     }
+
 
 -- | Type of the match to be performed. Possible values are REGEXP,
 -- BEGINS_WITH, or EXACT.
@@ -7853,6 +8003,7 @@ data McfDataQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'McfDataQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7894,6 +8045,7 @@ mcfDataQuery =
     , _mdqSegment = Nothing
     , _mdqStartDate = Nothing
     }
+
 
 -- | List of analytics metrics.
 mdqMetrics :: Lens' McfDataQuery [Text]
@@ -8017,6 +8169,7 @@ data Goal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Goal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8079,6 +8232,7 @@ goal =
     , _goaUpdated = Nothing
     , _goaType = Nothing
     }
+
 
 -- | Parent link for a goal. Points to the view (profile) to which this goal
 -- belongs.
@@ -8245,6 +8399,7 @@ data AccountTicket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountTicket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8271,6 +8426,7 @@ accountTicket =
     , _atWebProperty = Nothing
     , _atId = Nothing
     }
+
 
 -- | Redirect URI where the user will be sent after accepting Terms of
 -- Service. Must be configured in APIs console as a callback URL.
@@ -8340,6 +8496,7 @@ data AccountSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8363,6 +8520,7 @@ accountSummary =
     , _assStarred = Nothing
     , _assId = Nothing
     }
+
 
 -- | Resource type for Analytics AccountSummary.
 assKind :: Lens' AccountSummary Text
@@ -8424,6 +8582,7 @@ data RealtimeDataQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RealtimeDataQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8450,6 +8609,7 @@ realtimeDataQuery =
     , _rdqDimensions = Nothing
     , _rdqMaxResults = Nothing
     }
+
 
 -- | List of real time metrics.
 rdqMetrics :: Lens' RealtimeDataQuery [Text]
@@ -8520,6 +8680,7 @@ data Columns =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Columns' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8543,6 +8704,7 @@ columns =
     , _colTotalResults = Nothing
     , _colAttributeNames = Nothing
     }
+
 
 -- | Etag of collection. This etag can be compared with the last response
 -- etag to check if response has changed.
@@ -8605,6 +8767,7 @@ data FilterLowercaseDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterLowercaseDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8616,6 +8779,7 @@ filterLowercaseDetails
     :: FilterLowercaseDetails
 filterLowercaseDetails =
   FilterLowercaseDetails' {_fldFieldIndex = Nothing, _fldField = Nothing}
+
 
 -- | The Index of the custom dimension. Required if field is a
 -- CUSTOM_DIMENSION.
@@ -8665,6 +8829,7 @@ data Filter =
     , _filSearchAndReplaceDetails :: !(Maybe FilterSearchAndReplaceDetails)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
@@ -8719,6 +8884,7 @@ filter' =
     , _filType = Nothing
     , _filSearchAndReplaceDetails = Nothing
     }
+
 
 -- | Parent link for this filter. Points to the account to which this filter
 -- belongs.
@@ -8859,6 +9025,7 @@ data Uploads =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Uploads' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8888,6 +9055,7 @@ uploads =
     , _uplStartIndex = Nothing
     , _uplPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this upload collection.
 uplNextLink :: Lens' Uploads (Maybe Text)
@@ -8979,6 +9147,7 @@ data CustomDimensions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomDimensions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9011,6 +9180,7 @@ customDimensions =
     , _cdStartIndex = Nothing
     , _cdPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this custom dimension collection.
 cdNextLink :: Lens' CustomDimensions (Maybe Text)
@@ -9107,6 +9277,7 @@ data Segments =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Segments' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9139,6 +9310,7 @@ segments =
     , _sStartIndex = Nothing
     , _sPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this segment collection.
 sNextLink :: Lens' Segments (Maybe Text)
@@ -9226,6 +9398,7 @@ data GaDataDataTable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GaDataDataTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9236,6 +9409,7 @@ data GaDataDataTable =
 gaDataDataTable
     :: GaDataDataTable
 gaDataDataTable = GaDataDataTable' {_gddtCols = Nothing, _gddtRows = Nothing}
+
 
 gddtCols :: Lens' GaDataDataTable [GaDataDataTableColsItem]
 gddtCols
@@ -9273,6 +9447,7 @@ newtype EntityAdWordsLinkEntity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityAdWordsLinkEntity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9282,6 +9457,7 @@ entityAdWordsLinkEntity
     :: EntityAdWordsLinkEntity
 entityAdWordsLinkEntity =
   EntityAdWordsLinkEntity' {_eawleWebPropertyRef = Nothing}
+
 
 eawleWebPropertyRef :: Lens' EntityAdWordsLinkEntity (Maybe WebPropertyRef)
 eawleWebPropertyRef
@@ -9312,6 +9488,7 @@ data RemarketingAudienceStateBasedAudienceDefinition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingAudienceStateBasedAudienceDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9324,6 +9501,7 @@ remarketingAudienceStateBasedAudienceDefinition
 remarketingAudienceStateBasedAudienceDefinition =
   RemarketingAudienceStateBasedAudienceDefinition'
     {_rasbadExcludeConditions = Nothing, _rasbadIncludeConditions = Nothing}
+
 
 -- | Defines the conditions to exclude users from the audience.
 rasbadExcludeConditions :: Lens' RemarketingAudienceStateBasedAudienceDefinition (Maybe RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions)
@@ -9373,6 +9551,7 @@ data GoalURLDestinationDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoalURLDestinationDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9396,6 +9575,7 @@ goalURLDestinationDetails =
     , _guddCaseSensitive = Nothing
     , _guddFirstStepRequired = Nothing
     }
+
 
 -- | URL for this goal.
 guddURL :: Lens' GoalURLDestinationDetails (Maybe Text)
@@ -9465,6 +9645,7 @@ data ProFileFilterLinks =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFileFilterLinks' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9497,6 +9678,7 @@ proFileFilterLinks =
     , _pfflStartIndex = Nothing
     , _pfflPreviousLink = Nothing
     }
+
 
 -- | Link to next page for this profile filter link collection.
 pfflNextLink :: Lens' ProFileFilterLinks (Maybe Text)
@@ -9588,6 +9770,7 @@ data WebPropertyParentLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebPropertyParentLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9599,6 +9782,7 @@ webPropertyParentLink
     :: WebPropertyParentLink
 webPropertyParentLink =
   WebPropertyParentLink' {_wpplHref = Nothing, _wpplType = "analytics#account"}
+
 
 -- | Link to the account for this web property.
 wpplHref :: Lens' WebPropertyParentLink (Maybe Text)
@@ -9638,6 +9822,7 @@ data GaDataProFileInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GaDataProFileInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9664,6 +9849,7 @@ gaDataProFileInfo =
     , _gdpfiInternalWebPropertyId = Nothing
     , _gdpfiTableId = Nothing
     }
+
 
 -- | Web Property ID to which this view (profile) belongs.
 gdpfiWebPropertyId :: Lens' GaDataProFileInfo (Maybe Text)
@@ -9738,6 +9924,7 @@ data Upload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Upload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9767,6 +9954,7 @@ upload =
     , _uuId = Nothing
     , _uuErrors = Nothing
     }
+
 
 -- | Upload status. Possible values: PENDING, COMPLETED, FAILED, DELETING,
 -- DELETED.
@@ -9850,6 +10038,7 @@ data CustomDimension =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomDimension' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9894,6 +10083,7 @@ customDimension =
     , _cddUpdated = Nothing
     , _cddIndex = Nothing
     }
+
 
 -- | Parent link for the custom dimension. Points to the property to which
 -- the custom dimension belongs.
@@ -10007,6 +10197,7 @@ data Segment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Segment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10042,6 +10233,7 @@ segment =
     , _segType = Nothing
     , _segSegmentId = Nothing
     }
+
 
 -- | Segment definition.
 segDefinition :: Lens' Segment (Maybe Text)
@@ -10127,6 +10319,7 @@ data AccountChildLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountChildLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10138,6 +10331,7 @@ accountChildLink
     :: AccountChildLink
 accountChildLink =
   AccountChildLink' {_aclHref = Nothing, _aclType = "analytics#webproperties"}
+
 
 -- | Link to the list of web properties for this account.
 aclHref :: Lens' AccountChildLink (Maybe Text)
@@ -10176,6 +10370,7 @@ data ProFileFilterLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFileFilterLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10202,6 +10397,7 @@ proFileFilterLink =
     , _proId = Nothing
     , _proRank = Nothing
     }
+
 
 -- | View (Profile) for this link.
 proProFileRef :: Lens' ProFileFilterLink (Maybe ProFileRef)
@@ -10276,6 +10472,7 @@ data CustomMetricParentLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomMetricParentLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10288,6 +10485,7 @@ customMetricParentLink
 customMetricParentLink =
   CustomMetricParentLink'
     {_cmplHref = Nothing, _cmplType = "analytics#webproperty"}
+
 
 -- | Link to the property to which the custom metric belongs.
 cmplHref :: Lens' CustomMetricParentLink (Maybe Text)
@@ -10323,6 +10521,7 @@ data Column =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Column' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10337,6 +10536,7 @@ column
 column =
   Column'
     {_ccKind = "analytics#column", _ccAttributes = Nothing, _ccId = Nothing}
+
 
 -- | Resource type for Analytics column.
 ccKind :: Lens' Column Text
@@ -10378,6 +10578,7 @@ newtype RemarketingAudienceAudienceDefinition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingAudienceAudienceDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10387,6 +10588,7 @@ remarketingAudienceAudienceDefinition
     :: RemarketingAudienceAudienceDefinition
 remarketingAudienceAudienceDefinition =
   RemarketingAudienceAudienceDefinition' {_raadIncludeConditions = Nothing}
+
 
 -- | Defines the conditions to include users to the audience.
 raadIncludeConditions :: Lens' RemarketingAudienceAudienceDefinition (Maybe IncludeConditions)
@@ -10421,6 +10623,7 @@ data GaDataDataTableColsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GaDataDataTableColsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10435,6 +10638,7 @@ gaDataDataTableColsItem
 gaDataDataTableColsItem =
   GaDataDataTableColsItem'
     {_gddtciId = Nothing, _gddtciType = Nothing, _gddtciLabel = Nothing}
+
 
 gddtciId :: Lens' GaDataDataTableColsItem (Maybe Text)
 gddtciId = lens _gddtciId (\ s a -> s{_gddtciId = a})
@@ -10474,6 +10678,7 @@ data ExperimentVariationsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExperimentVariationsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10497,6 +10702,7 @@ experimentVariationsItem =
     , _eviWon = Nothing
     , _eviName = Nothing
     }
+
 
 -- | Status of the variation. Possible values: \"ACTIVE\", \"INACTIVE\".
 -- INACTIVE variations are not served. This field may not be changed for an
@@ -10557,6 +10763,7 @@ data RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10569,6 +10776,7 @@ remarketingAudienceStateBasedAudienceDefinitionExcludeConditions
 remarketingAudienceStateBasedAudienceDefinitionExcludeConditions =
   RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions'
     {_rasbadecExclusionDuration = Nothing, _rasbadecSegment = Nothing}
+
 
 -- | Whether to make the exclusion TEMPORARY or PERMANENT.
 rasbadecExclusionDuration :: Lens' RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions (Maybe Text)
@@ -10616,6 +10824,7 @@ newtype McfDataTotalsForAllResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'McfDataTotalsForAllResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10626,6 +10835,7 @@ mcfDataTotalsForAllResults
     -> McfDataTotalsForAllResults
 mcfDataTotalsForAllResults pMdtfarAddtional_ =
   McfDataTotalsForAllResults' {_mdtfarAddtional = _Coerce # pMdtfarAddtional_}
+
 
 -- | Key-value pair for the total value of a metric. Key is the metric name
 -- and the value is the total value for that metric.
@@ -10654,6 +10864,7 @@ data UserDeletionRequestId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserDeletionRequestId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10665,6 +10876,7 @@ userDeletionRequestId
     :: UserDeletionRequestId
 userDeletionRequestId =
   UserDeletionRequestId' {_udriUserId = Nothing, _udriType = Nothing}
+
 
 -- | The User\'s id
 udriUserId :: Lens' UserDeletionRequestId (Maybe Text)
@@ -10699,6 +10911,7 @@ data UnSampledReportCloudStorageDownloadDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnSampledReportCloudStorageDownloadDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10711,6 +10924,7 @@ unSampledReportCloudStorageDownloadDetails
 unSampledReportCloudStorageDownloadDetails =
   UnSampledReportCloudStorageDownloadDetails'
     {_usrcsddObjectId = Nothing, _usrcsddBucketId = Nothing}
+
 
 -- | Id of the file object containing the report data.
 usrcsddObjectId :: Lens' UnSampledReportCloudStorageDownloadDetails (Maybe Text)
@@ -10755,6 +10969,7 @@ data ProFileChildLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFileChildLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10766,6 +10981,7 @@ proFileChildLink
     :: ProFileChildLink
 proFileChildLink =
   ProFileChildLink' {_pfclHref = Nothing, _pfclType = "analytics#goals"}
+
 
 -- | Link to the list of goals for this view (profile).
 pfclHref :: Lens' ProFileChildLink (Maybe Text)
@@ -10800,6 +11016,7 @@ data GaDataColumnHeadersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GaDataColumnHeadersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10814,6 +11031,7 @@ gaDataColumnHeadersItem
 gaDataColumnHeadersItem =
   GaDataColumnHeadersItem'
     {_gdchiColumnType = Nothing, _gdchiName = Nothing, _gdchiDataType = Nothing}
+
 
 -- | Column Type. Either DIMENSION or METRIC.
 gdchiColumnType :: Lens' GaDataColumnHeadersItem (Maybe Text)
@@ -10861,6 +11079,7 @@ data GoalParentLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoalParentLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10872,6 +11091,7 @@ goalParentLink
     :: GoalParentLink
 goalParentLink =
   GoalParentLink' {_gplHref = Nothing, _gplType = "analytics#profile"}
+
 
 -- | Link to the view (profile) to which this goal belongs.
 gplHref :: Lens' GoalParentLink (Maybe Text)
@@ -10905,6 +11125,7 @@ newtype ColumnAttributes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColumnAttributes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10915,6 +11136,7 @@ columnAttributes
     -> ColumnAttributes
 columnAttributes pCaAddtional_ =
   ColumnAttributes' {_caAddtional = _Coerce # pCaAddtional_}
+
 
 -- | The name of the attribute.
 caAddtional :: Lens' ColumnAttributes (HashMap Text Text)

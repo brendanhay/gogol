@@ -109,6 +109,7 @@ data CoursesCourseWorkStudentSubmissionsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -151,6 +152,7 @@ coursesCourseWorkStudentSubmissionsPatch pCcwsspCourseId_ pCcwsspPayload_ pCcwss
     , _ccwsspCallback = Nothing
     , _ccwsspCourseWorkId = pCcwsspCourseWorkId_
     }
+
 
 -- | V1 error format.
 ccwsspXgafv :: Lens' CoursesCourseWorkStudentSubmissionsPatch (Maybe Xgafv)

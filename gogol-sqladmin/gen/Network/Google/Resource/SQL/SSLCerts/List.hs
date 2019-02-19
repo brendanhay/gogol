@@ -63,6 +63,7 @@ data SSLCertsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ sslCertsList
     -> SSLCertsList
 sslCertsList pSclProject_ pSclInstance_ =
   SSLCertsList' {_sclProject = pSclProject_, _sclInstance = pSclInstance_}
+
 
 -- | Project ID of the project that contains the instance.
 sclProject :: Lens' SSLCertsList Text

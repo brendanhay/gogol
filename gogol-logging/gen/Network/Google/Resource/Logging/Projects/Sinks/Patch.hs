@@ -85,6 +85,7 @@ data ProjectsSinksPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSinksPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ projectsSinksPatch pPspPayload_ pPspSinkName_ =
     , _pspSinkName = pPspSinkName_
     , _pspCallback = Nothing
     }
+
 
 -- | V1 error format.
 pspXgafv :: Lens' ProjectsSinksPatch (Maybe Xgafv)

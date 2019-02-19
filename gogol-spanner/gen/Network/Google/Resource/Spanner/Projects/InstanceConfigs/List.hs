@@ -78,6 +78,7 @@ data ProjectsInstanceConfigsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstanceConfigsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsInstanceConfigsList pPiclParent_ =
     , _piclPageSize = Nothing
     , _piclCallback = Nothing
     }
+
 
 -- | Required. The name of the project for which a list of supported instance
 -- configurations is requested. Values are of the form \`projects\/\`.

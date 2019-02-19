@@ -65,6 +65,7 @@ data SubAccountsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubAccountsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ subAccountsPatch pSapProFileId_ pSapPayload_ pSapId_ =
     , _sapPayload = pSapPayload_
     , _sapId = _Coerce # pSapId_
     }
+
 
 -- | User profile ID associated with this request.
 sapProFileId :: Lens' SubAccountsPatch Int64

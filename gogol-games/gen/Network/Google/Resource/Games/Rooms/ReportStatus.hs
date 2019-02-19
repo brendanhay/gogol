@@ -69,6 +69,7 @@ data RoomsReportStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomsReportStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ roomsReportStatus pRrsPayload_ pRrsRoomId_ =
     , _rrsRoomId = pRrsRoomId_
     , _rrsLanguage = Nothing
     }
+
 
 -- | Multipart request metadata.
 rrsPayload :: Lens' RoomsReportStatus RoomP2PStatuses

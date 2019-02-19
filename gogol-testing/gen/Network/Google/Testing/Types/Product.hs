@@ -30,6 +30,7 @@ data TestDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41,6 +42,7 @@ testDetails
     :: TestDetails
 testDetails =
   TestDetails' {_tdProgressMessages = Nothing, _tdErrorMessage = Nothing}
+
 
 -- | Output only. Human-readable, detailed descriptions of the test\'s
 -- progress. For example: \"Provisioning a device\", \"Starting Test\".
@@ -87,6 +89,7 @@ data IntentFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IntentFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +107,7 @@ intentFilter =
     , _ifMimeType = Nothing
     , _ifCategoryNames = Nothing
     }
+
 
 -- | The android:name value of the tag.
 ifActionNames :: Lens' IntentFilter [Text]
@@ -152,6 +156,7 @@ newtype IosTestSetup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IosTestSetup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -160,6 +165,7 @@ newtype IosTestSetup =
 iosTestSetup
     :: IosTestSetup
 iosTestSetup = IosTestSetup' {_itsNetworkProFile = Nothing}
+
 
 -- | The network traffic profile used for running the test. Available network
 -- profiles can be queried by using the NETWORK_CONFIGURATION environment
@@ -198,6 +204,7 @@ data TestExecution =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestExecution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -233,6 +240,7 @@ testExecution =
     , _teToolResultsStep = Nothing
     , _teTimestamp = Nothing
     }
+
 
 -- | Output only. Additional details about the running test.
 teTestDetails :: Lens' TestExecution (Maybe TestDetails)
@@ -323,6 +331,7 @@ data IosVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IosVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -346,6 +355,7 @@ iosVersion =
     , _ivId = Nothing
     , _ivTags = Nothing
     }
+
 
 -- | An integer representing the minor iOS version. Examples: \"1\", \"2\".
 ivMinorVersion :: Lens' IosVersion (Maybe Int32)
@@ -410,6 +420,7 @@ newtype IosDeviceList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IosDeviceList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -418,6 +429,7 @@ newtype IosDeviceList =
 iosDeviceList
     :: IosDeviceList
 iosDeviceList = IosDeviceList' {_idlIosDevices = Nothing}
+
 
 -- | Required. A list of iOS devices.
 idlIosDevices :: Lens' IosDeviceList [IosDevice]
@@ -451,6 +463,7 @@ data RoboDirective =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoboDirective' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -465,6 +478,7 @@ roboDirective
 roboDirective =
   RoboDirective'
     {_rdResourceName = Nothing, _rdInputText = Nothing, _rdActionType = Nothing}
+
 
 -- | Required. The android resource name of the target UI element. For
 -- example, in Java: R.string.foo in xml: \'string\/foo Only the \"foo\"
@@ -513,6 +527,7 @@ data AndroidRuntimeConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidRuntimeConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -525,6 +540,7 @@ androidRuntimeConfiguration
 androidRuntimeConfiguration =
   AndroidRuntimeConfiguration'
     {_arcOrientations = Nothing, _arcLocales = Nothing}
+
 
 -- | The set of available orientations.
 arcOrientations :: Lens' AndroidRuntimeConfiguration [Orientation]
@@ -566,6 +582,7 @@ data XcodeVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'XcodeVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -576,6 +593,7 @@ data XcodeVersion =
 xcodeVersion
     :: XcodeVersion
 xcodeVersion = XcodeVersion' {_xvVersion = Nothing, _xvTags = Nothing}
+
 
 -- | The id for this version. Example: \"9.2\".
 xvVersion :: Lens' XcodeVersion (Maybe Text)
@@ -613,6 +631,7 @@ data Distribution =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Distribution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -624,6 +643,7 @@ distribution
     :: Distribution
 distribution =
   Distribution' {_dMeasurementTime = Nothing, _dMarketShare = Nothing}
+
 
 -- | Output only. The time this distribution was measured.
 dMeasurementTime :: Lens' Distribution (Maybe UTCTime)
@@ -667,6 +687,7 @@ data IosModel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IosModel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -693,6 +714,7 @@ iosModel =
     , _imDeviceCapabilities = Nothing
     , _imTags = Nothing
     }
+
 
 -- | Whether this device is a phone, tablet, wearable, etc.
 imFormFactor :: Lens' IosModel (Maybe IosModelFormFactor)
@@ -766,6 +788,7 @@ data APK =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APK' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -776,6 +799,7 @@ data APK =
 aPK
     :: APK
 aPK = APK' {_aPackageName = Nothing, _aLocation = Nothing}
+
 
 -- | The java package for the APK to be installed. Value is determined by
 -- examining the application\'s manifest.
@@ -810,6 +834,7 @@ newtype NetworkConfigurationCatalog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkConfigurationCatalog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -819,6 +844,7 @@ networkConfigurationCatalog
     :: NetworkConfigurationCatalog
 networkConfigurationCatalog =
   NetworkConfigurationCatalog' {_nccConfigurations = Nothing}
+
 
 nccConfigurations :: Lens' NetworkConfigurationCatalog [NetworkConfiguration]
 nccConfigurations
@@ -852,6 +878,7 @@ data IosDevice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IosDevice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -872,6 +899,7 @@ iosDevice =
     , _idIosVersionId = Nothing
     , _idOrientation = Nothing
     }
+
 
 -- | Required. The locale the test device used for testing. Use the
 -- EnvironmentDiscoveryService to get supported options.
@@ -926,6 +954,7 @@ newtype GetAPKDetailsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetAPKDetailsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -934,6 +963,7 @@ newtype GetAPKDetailsResponse =
 getAPKDetailsResponse
     :: GetAPKDetailsResponse
 getAPKDetailsResponse = GetAPKDetailsResponse' {_gapkdrAPKDetail = Nothing}
+
 
 -- | Details of the Android APK.
 gapkdrAPKDetail :: Lens' GetAPKDetailsResponse (Maybe APKDetail)
@@ -971,6 +1001,7 @@ data AndroidRoboTest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidRoboTest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1006,6 +1037,7 @@ androidRoboTest =
     , _artAppAPK = Nothing
     , _artMaxDepth = Nothing
     }
+
 
 -- | A set of directives Robo should apply during the crawl. This allows
 -- users to customize the crawl. For example, the username and password for
@@ -1110,6 +1142,7 @@ newtype FileReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1118,6 +1151,7 @@ newtype FileReference =
 fileReference
     :: FileReference
 fileReference = FileReference' {_frGcsPath = Nothing}
+
 
 -- | A path to a file in Google Cloud Storage. Example:
 -- gs:\/\/build-app-1414623860166\/app-debug-unaligned.apk
@@ -1144,6 +1178,7 @@ data Environment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Environment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1154,6 +1189,7 @@ data Environment =
 environment
     :: Environment
 environment = Environment' {_eIosDevice = Nothing, _eAndroidDevice = Nothing}
+
 
 -- | An iOS device which must be used with an iOS test.
 eIosDevice :: Lens' Environment (Maybe IosDevice)
@@ -1190,6 +1226,7 @@ data ToolResultsHistory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ToolResultsHistory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1201,6 +1238,7 @@ toolResultsHistory
     :: ToolResultsHistory
 toolResultsHistory =
   ToolResultsHistory' {_trhHistoryId = Nothing, _trhProjectId = Nothing}
+
 
 -- | Required. A tool results history ID.
 trhHistoryId :: Lens' ToolResultsHistory (Maybe Text)
@@ -1238,6 +1276,7 @@ data TestEnvironmentCatalog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestEnvironmentCatalog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1258,6 +1297,7 @@ testEnvironmentCatalog =
     , _tecAndroidDeviceCatalog = Nothing
     , _tecIosDeviceCatalog = Nothing
     }
+
 
 -- | The software test environment provided by TestExecutionService.
 tecSoftwareCatalog :: Lens' TestEnvironmentCatalog (Maybe ProvidedSoftwareCatalog)
@@ -1316,6 +1356,7 @@ data Locale =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Locale' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1332,6 +1373,7 @@ locale
 locale =
   Locale'
     {_lName = Nothing, _lId = Nothing, _lRegion = Nothing, _lTags = Nothing}
+
 
 -- | A human-friendly name for this language\/locale. Example: \"English\".
 lName :: Lens' Locale (Maybe Text)
@@ -1378,6 +1420,7 @@ data AndroidDeviceCatalog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidDeviceCatalog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1395,6 +1438,7 @@ androidDeviceCatalog =
     , _adcModels = Nothing
     , _adcRuntimeConfiguration = Nothing
     }
+
 
 -- | The set of supported Android OS versions.
 adcVersions :: Lens' AndroidDeviceCatalog [AndroidVersion]
@@ -1452,6 +1496,7 @@ data TestSpecification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestSpecification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1490,6 +1535,7 @@ testSpecification =
     , _tsTestSetup = Nothing
     , _tsAndroidTestLoop = Nothing
     }
+
 
 -- | Test setup requirements for iOS.
 tsIosTestSetup :: Lens' TestSpecification (Maybe IosTestSetup)
@@ -1599,6 +1645,7 @@ newtype ProvidedSoftwareCatalog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProvidedSoftwareCatalog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1608,6 +1655,7 @@ providedSoftwareCatalog
     :: ProvidedSoftwareCatalog
 providedSoftwareCatalog =
   ProvidedSoftwareCatalog' {_pscOrchestratorVersion = Nothing}
+
 
 -- | A string representing the current version of Android Test Orchestrator
 -- that is provided by TestExecutionService. Example: \"1.0.2 beta\".
@@ -1643,6 +1691,7 @@ data TrafficRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrafficRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1666,6 +1715,7 @@ trafficRule =
     , _trBurst = Nothing
     , _trDelay = Nothing
     }
+
 
 -- | Packet loss ratio (0.0 - 1.0).
 trPacketLossRatio :: Lens' TrafficRule (Maybe Double)
@@ -1733,6 +1783,7 @@ data IosDeviceCatalog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IosDeviceCatalog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1753,6 +1804,7 @@ iosDeviceCatalog =
     , _idcModels = Nothing
     , _idcRuntimeConfiguration = Nothing
     }
+
 
 -- | The set of supported Xcode versions.
 idcXcodeVersions :: Lens' IosDeviceCatalog [XcodeVersion]
@@ -1814,11 +1866,13 @@ data GoogleAuto =
   GoogleAuto'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleAuto' with the minimum fields required to make a request.
 --
 googleAuto
     :: GoogleAuto
 googleAuto = GoogleAuto'
+
 
 instance FromJSON GoogleAuto where
         parseJSON
@@ -1836,6 +1890,7 @@ newtype Account =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1844,6 +1899,7 @@ newtype Account =
 account
     :: Account
 account = Account' {_aGoogleAuto = Nothing}
+
 
 -- | An automatic google login account.
 aGoogleAuto :: Lens' Account (Maybe GoogleAuto)
@@ -1871,6 +1927,7 @@ data StartActivityIntent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StartActivityIntent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1885,6 +1942,7 @@ startActivityIntent
 startActivityIntent =
   StartActivityIntent'
     {_saiURI = Nothing, _saiCategories = Nothing, _saiAction = Nothing}
+
 
 -- | URI for the action.
 saiURI :: Lens' StartActivityIntent (Maybe Text)
@@ -1930,6 +1988,7 @@ data RoboStartingIntent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoboStartingIntent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1947,6 +2006,7 @@ roboStartingIntent =
     , _rsiStartActivity = Nothing
     , _rsiTimeout = Nothing
     }
+
 
 rsiLauncherActivity :: Lens' RoboStartingIntent (Maybe LauncherActivityIntent)
 rsiLauncherActivity
@@ -1999,6 +2059,7 @@ data Date =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2011,6 +2072,7 @@ data Date =
 date
     :: Date
 date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -2058,6 +2120,7 @@ data RegularFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegularFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2068,6 +2131,7 @@ data RegularFile =
 regularFile
     :: RegularFile
 regularFile = RegularFile' {_rfDevicePath = Nothing, _rfContent = Nothing}
+
 
 -- | Required. Where to put the content on the device. Must be an absolute,
 -- whitelisted path. If the file exists, it will be replaced. The following
@@ -2132,6 +2196,7 @@ data AndroidModel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidModel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2182,6 +2247,7 @@ androidModel =
     , _amForm = Nothing
     , _amTags = Nothing
     }
+
 
 -- | The list of supported ABIs for this device. This corresponds to either
 -- android.os.Build.SUPPORTED_ABIS (for API level 21 and above) or
@@ -2322,6 +2388,7 @@ data ClientInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClientInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2332,6 +2399,7 @@ data ClientInfo =
 clientInfo
     :: ClientInfo
 clientInfo = ClientInfo' {_ciName = Nothing, _ciClientInfoDetails = Nothing}
+
 
 -- | Required. Client name, such as gcloud.
 ciName :: Lens' ClientInfo (Maybe Text)
@@ -2374,6 +2442,7 @@ data APKManifest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APKManifest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2397,6 +2466,7 @@ aPKManifest =
     , _apkmIntentFilters = Nothing
     , _apkmMaxSdkVersion = Nothing
     }
+
 
 -- | User-readable name for the application.
 apkmApplicationLabel :: Lens' APKManifest (Maybe Text)
@@ -2466,6 +2536,7 @@ newtype AppBundle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppBundle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2474,6 +2545,7 @@ newtype AppBundle =
 appBundle
     :: AppBundle
 appBundle = AppBundle' {_abBundleLocation = Nothing}
+
 
 -- | .aab file representing the app bundle under test.
 abBundleLocation :: Lens' AppBundle (Maybe FileReference)
@@ -2514,6 +2586,7 @@ data AndroidInstrumentationTest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidInstrumentationTest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2546,6 +2619,7 @@ androidInstrumentationTest =
     , _aitAppAPK = Nothing
     , _aitTestPackageId = Nothing
     }
+
 
 -- | Each target must be fully qualified with the package name or class name,
 -- in one of these formats: - \"package package_name\" - \"class
@@ -2654,6 +2728,7 @@ data TestMatrix =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestMatrix' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2695,6 +2770,7 @@ testMatrix =
     , _tmEnvironmentMatrix = Nothing
     , _tmTimestamp = Nothing
     }
+
 
 -- | Output only. Indicates the current progress of the test matrix (e.g.,
 -- FINISHED).
@@ -2808,6 +2884,7 @@ newtype CancelTestMatrixResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CancelTestMatrixResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2816,6 +2893,7 @@ newtype CancelTestMatrixResponse =
 cancelTestMatrixResponse
     :: CancelTestMatrixResponse
 cancelTestMatrixResponse = CancelTestMatrixResponse' {_ctmrTestState = Nothing}
+
 
 -- | The current rolled-up state of the test matrix. If this state is already
 -- final, then the cancelation request will have no effect.
@@ -2847,6 +2925,7 @@ data ToolResultsExecution =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ToolResultsExecution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2864,6 +2943,7 @@ toolResultsExecution =
     , _treHistoryId = Nothing
     , _treProjectId = Nothing
     }
+
 
 -- | Output only. A tool results execution ID.
 treExecutionId :: Lens' ToolResultsExecution (Maybe Text)
@@ -2914,6 +2994,7 @@ data IosXcTest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IosXcTest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2934,6 +3015,7 @@ iosXcTest =
     , _ixtAppBundleId = Nothing
     , _ixtTestsZip = Nothing
     }
+
 
 -- | An .xctestrun file that will override the .xctestrun file in the tests
 -- zip. Because the .xctestrun file contains environment variables along
@@ -2993,6 +3075,7 @@ data ResultStorage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultStorage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3010,6 +3093,7 @@ resultStorage =
     , _rsToolResultsExecution = Nothing
     , _rsGoogleCloudStorage = Nothing
     }
+
 
 -- | The tool results history that contains the tool results execution that
 -- results are written to. If not provided, the service will choose an
@@ -3065,6 +3149,7 @@ data AndroidMatrix =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidMatrix' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3085,6 +3170,7 @@ androidMatrix =
     , _amOrientations = Nothing
     , _amLocales = Nothing
     }
+
 
 -- | Required. The ids of the set of Android device to be used. Use the
 -- EnvironmentDiscoveryService to get supported options.
@@ -3153,6 +3239,7 @@ data ToolResultsStep =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ToolResultsStep' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3173,6 +3260,7 @@ toolResultsStep =
     , _trsHistoryId = Nothing
     , _trsProjectId = Nothing
     }
+
 
 -- | Output only. A tool results execution ID.
 trsExecutionId :: Lens' ToolResultsStep (Maybe Text)
@@ -3220,11 +3308,13 @@ data LauncherActivityIntent =
   LauncherActivityIntent'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LauncherActivityIntent' with the minimum fields required to make a request.
 --
 launcherActivityIntent
     :: LauncherActivityIntent
 launcherActivityIntent = LauncherActivityIntent'
+
 
 instance FromJSON LauncherActivityIntent where
         parseJSON
@@ -3244,6 +3334,7 @@ newtype APKDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APKDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3252,6 +3343,7 @@ newtype APKDetail =
 aPKDetail
     :: APKDetail
 aPKDetail = APKDetail' {_apkdAPKManifest = Nothing}
+
 
 apkdAPKManifest :: Lens' APKDetail (Maybe APKManifest)
 apkdAPKManifest
@@ -3280,6 +3372,7 @@ data AndroidDevice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidDevice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3300,6 +3393,7 @@ androidDevice =
     , _adAndroidModelId = Nothing
     , _adOrientation = Nothing
     }
+
 
 -- | Required. The id of the Android OS version to be used. Use the
 -- EnvironmentDiscoveryService to get supported options.
@@ -3355,6 +3449,7 @@ data EnvironmentVariable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnvironmentVariable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3366,6 +3461,7 @@ environmentVariable
     :: EnvironmentVariable
 environmentVariable =
   EnvironmentVariable' {_evValue = Nothing, _evKey = Nothing}
+
 
 -- | Value for the environment variable.
 evValue :: Lens' EnvironmentVariable (Maybe Text)
@@ -3399,6 +3495,7 @@ data Orientation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Orientation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3411,6 +3508,7 @@ data Orientation =
 orientation
     :: Orientation
 orientation = Orientation' {_oName = Nothing, _oId = Nothing, _oTags = Nothing}
+
 
 -- | A human-friendly name for this orientation. Example: \"portrait\".
 oName :: Lens' Orientation (Maybe Text)
@@ -3452,6 +3550,7 @@ data EnvironmentMatrix =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnvironmentMatrix' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3469,6 +3568,7 @@ environmentMatrix =
     , _emAndroidMatrix = Nothing
     , _emAndroidDeviceList = Nothing
     }
+
 
 -- | A list of iOS devices.
 emIosDeviceList :: Lens' EnvironmentMatrix (Maybe IosDeviceList)
@@ -3515,6 +3615,7 @@ data DeviceFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3525,6 +3626,7 @@ data DeviceFile =
 deviceFile
     :: DeviceFile
 deviceFile = DeviceFile' {_dfRegularFile = Nothing, _dfObbFile = Nothing}
+
 
 -- | A reference to a regular file
 dfRegularFile :: Lens' DeviceFile (Maybe RegularFile)
@@ -3563,6 +3665,7 @@ data ClientInfoDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClientInfoDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3573,6 +3676,7 @@ data ClientInfoDetail =
 clientInfoDetail
     :: ClientInfoDetail
 clientInfoDetail = ClientInfoDetail' {_cidValue = Nothing, _cidKey = Nothing}
+
 
 -- | Required. The value of detailed client information.
 cidValue :: Lens' ClientInfoDetail (Maybe Text)
@@ -3605,6 +3709,7 @@ data NetworkConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3619,6 +3724,7 @@ networkConfiguration
 networkConfiguration =
   NetworkConfiguration'
     {_ncDownRule = Nothing, _ncId = Nothing, _ncUpRule = Nothing}
+
 
 -- | The emulation rule applying to the download traffic.
 ncDownRule :: Lens' NetworkConfiguration (Maybe TrafficRule)
@@ -3658,6 +3764,7 @@ data IosRuntimeConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IosRuntimeConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3669,6 +3776,7 @@ iosRuntimeConfiguration
     :: IosRuntimeConfiguration
 iosRuntimeConfiguration =
   IosRuntimeConfiguration' {_ircOrientations = Nothing, _ircLocales = Nothing}
+
 
 -- | The set of available orientations.
 ircOrientations :: Lens' IosRuntimeConfiguration [Orientation]
@@ -3709,6 +3817,7 @@ newtype GoogleCloudStorage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudStorage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3717,6 +3826,7 @@ newtype GoogleCloudStorage =
 googleCloudStorage
     :: GoogleCloudStorage
 googleCloudStorage = GoogleCloudStorage' {_gcsGcsPath = Nothing}
+
 
 -- | Required. The path to a directory in GCS that will eventually contain
 -- the results for this test. The requesting user must have write access on
@@ -3749,6 +3859,7 @@ data AndroidVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3778,6 +3889,7 @@ androidVersion =
     , _avReleaseDate = Nothing
     , _avTags = Nothing
     }
+
 
 -- | The code name for this Android version. Examples: \"JellyBean\",
 -- \"KitKat\".
@@ -3857,6 +3969,7 @@ data ObbFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObbFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3867,6 +3980,7 @@ data ObbFile =
 obbFile
     :: ObbFile
 obbFile = ObbFile' {_ofObb = Nothing, _ofObbFileName = Nothing}
+
 
 -- | Required. Opaque Binary Blob (OBB) file(s) to install on the device.
 ofObb :: Lens' ObbFile (Maybe FileReference)
@@ -3908,6 +4022,7 @@ data AndroidTestLoop =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidTestLoop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3931,6 +4046,7 @@ androidTestLoop =
     , _atlAppBundle = Nothing
     , _atlAppAPK = Nothing
     }
+
 
 -- | The list of scenarios that should be run during the test. The default is
 -- all test loops, derived from the application\'s manifest.
@@ -4001,6 +4117,7 @@ newtype AndroidDeviceList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidDeviceList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4009,6 +4126,7 @@ newtype AndroidDeviceList =
 androidDeviceList
     :: AndroidDeviceList
 androidDeviceList = AndroidDeviceList' {_adlAndroidDevices = Nothing}
+
 
 -- | Required. A list of Android devices.
 adlAndroidDevices :: Lens' AndroidDeviceList [AndroidDevice]
@@ -4046,6 +4164,7 @@ data TestSetup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestSetup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4072,6 +4191,7 @@ testSetup =
     , _tsFilesToPush = Nothing
     , _tsDirectoriesToPull = Nothing
     }
+
 
 -- | The device will be logged in on this account for the duration of the
 -- test.

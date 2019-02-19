@@ -60,6 +60,7 @@ newtype ResellernotifyUnregister =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResellernotifyUnregister' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ resellernotifyUnregister
     :: ResellernotifyUnregister
 resellernotifyUnregister =
   ResellernotifyUnregister' {_ruServiceAccountEmailAddress = Nothing}
+
 
 -- | The service account which owns the Cloud-PubSub topic.
 ruServiceAccountEmailAddress :: Lens' ResellernotifyUnregister (Maybe Text)

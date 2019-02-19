@@ -70,6 +70,7 @@ data FoldersExclusionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersExclusionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ foldersExclusionsDelete pFedName_ =
     , _fedName = pFedName_
     , _fedCallback = Nothing
     }
+
 
 -- | V1 error format.
 fedXgafv :: Lens' FoldersExclusionsDelete (Maybe Xgafv)

@@ -71,6 +71,7 @@ data DevicesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DevicesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ devicesUpdate pDuEnterpriseId_ pDuPayload_ pDuUserId_ pDuDeviceId_ =
     , _duUserId = pDuUserId_
     , _duDeviceId = pDuDeviceId_
     }
+
 
 -- | Mask that identifies which fields to update. If not set, all modifiable
 -- fields will be modified. When set in a query parameter, this field

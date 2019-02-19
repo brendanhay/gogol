@@ -68,6 +68,7 @@ data ManagedZonesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedZonesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ managedZonesList pMzlProject_ =
     , _mzlDNSName = Nothing
     , _mzlMaxResults = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 mzlProject :: Lens' ManagedZonesList Text

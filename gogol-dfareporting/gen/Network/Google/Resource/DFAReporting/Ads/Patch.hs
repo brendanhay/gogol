@@ -64,6 +64,7 @@ data AdsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ adsPatch pAdsdProFileId_ pAdsdPayload_ pAdsdId_ =
     , _adsdPayload = pAdsdPayload_
     , _adsdId = _Coerce # pAdsdId_
     }
+
 
 -- | User profile ID associated with this request.
 adsdProFileId :: Lens' AdsPatch Int64

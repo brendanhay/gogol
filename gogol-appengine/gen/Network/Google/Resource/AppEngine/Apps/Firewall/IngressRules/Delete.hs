@@ -76,6 +76,7 @@ data AppsFirewallIngressRulesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsFirewallIngressRulesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ appsFirewallIngressRulesDelete pAfirdIngressRulesId_ pAfirdAppsId_ =
     , _afirdAppsId = pAfirdAppsId_
     , _afirdCallback = Nothing
     }
+
 
 -- | V1 error format.
 afirdXgafv :: Lens' AppsFirewallIngressRulesDelete (Maybe Xgafv)

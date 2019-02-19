@@ -70,6 +70,7 @@ data MyLibraryBookshelvesAddVolume =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryBookshelvesAddVolume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ myLibraryBookshelvesAddVolume pMlbavShelf_ pMlbavVolumeId_ =
     , _mlbavVolumeId = pMlbavVolumeId_
     , _mlbavSource = Nothing
     }
+
 
 -- | The reason for which the book is added to the library.
 mlbavReason :: Lens' MyLibraryBookshelvesAddVolume (Maybe MyLibraryBookshelvesAddVolumeReason)

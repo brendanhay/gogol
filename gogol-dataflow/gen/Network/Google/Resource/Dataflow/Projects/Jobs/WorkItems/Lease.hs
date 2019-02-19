@@ -80,6 +80,7 @@ data ProjectsJobsWorkItemsLease =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobsWorkItemsLease' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsJobsWorkItemsLease pPjwilJobId_ pPjwilPayload_ pPjwilProjectId_ =
     , _pjwilProjectId = pPjwilProjectId_
     , _pjwilCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjwilXgafv :: Lens' ProjectsJobsWorkItemsLease (Maybe Xgafv)

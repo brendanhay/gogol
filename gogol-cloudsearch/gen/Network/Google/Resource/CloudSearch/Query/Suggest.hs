@@ -73,6 +73,7 @@ data QuerySuggest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuerySuggest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ querySuggest pQsPayload_ =
     , _qsPayload = pQsPayload_
     , _qsCallback = Nothing
     }
+
 
 -- | V1 error format.
 qsXgafv :: Lens' QuerySuggest (Maybe Xgafv)

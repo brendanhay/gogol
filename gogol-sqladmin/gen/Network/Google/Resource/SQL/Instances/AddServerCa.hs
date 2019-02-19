@@ -70,6 +70,7 @@ data InstancesAddServerCa =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesAddServerCa' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ instancesAddServerCa
 instancesAddServerCa pIascProject_ pIascInstance_ =
   InstancesAddServerCa'
     {_iascProject = pIascProject_, _iascInstance = pIascInstance_}
+
 
 -- | Project ID of the project that contains the instance.
 iascProject :: Lens' InstancesAddServerCa Text

@@ -77,6 +77,7 @@ data ProjectsAllocateIds =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAllocateIds' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsAllocateIds pPaiPayload_ pPaiProjectId_ =
     , _paiProjectId = pPaiProjectId_
     , _paiCallback = Nothing
     }
+
 
 -- | V1 error format.
 paiXgafv :: Lens' ProjectsAllocateIds (Maybe Xgafv)

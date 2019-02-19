@@ -75,6 +75,7 @@ data RepresentativesRepresentativeInfoByDivision =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepresentativesRepresentativeInfoByDivision' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ representativesRepresentativeInfoByDivision pRribdPayload_ pRribdOcdId_ =
     , _rribdOcdId = pRribdOcdId_
     , _rribdLevels = Nothing
     }
+
 
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching

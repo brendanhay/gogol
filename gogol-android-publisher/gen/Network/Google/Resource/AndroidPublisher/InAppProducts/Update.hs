@@ -68,6 +68,7 @@ data InAppProductsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InAppProductsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ inAppProductsUpdate pIapuPackageName_ pIapuPayload_ pIapuSKU_ =
     , _iapuPayload = pIapuPayload_
     , _iapuSKU = pIapuSKU_
     }
+
 
 -- | If true the prices for all regions targeted by the parent app that
 -- don\'t have a price specified for this in-app product will be auto

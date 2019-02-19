@@ -67,6 +67,7 @@ data PlacementStrategiesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementStrategiesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ placementStrategiesPatch pPspProFileId_ pPspPayload_ pPspId_ =
     , _pspPayload = pPspPayload_
     , _pspId = _Coerce # pPspId_
     }
+
 
 -- | User profile ID associated with this request.
 pspProFileId :: Lens' PlacementStrategiesPatch Int64

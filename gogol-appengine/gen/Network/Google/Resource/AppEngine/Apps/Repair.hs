@@ -81,6 +81,7 @@ data AppsRepair =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsRepair' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ appsRepair pArPayload_ pArAppsId_ =
     , _arAppsId = pArAppsId_
     , _arCallback = Nothing
     }
+
 
 -- | V1 error format.
 arXgafv :: Lens' AppsRepair (Maybe Xgafv)

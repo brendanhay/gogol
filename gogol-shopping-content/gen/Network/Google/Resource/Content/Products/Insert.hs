@@ -64,6 +64,7 @@ data ProductsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ productsInsert
 productsInsert pPiiMerchantId_ pPiiPayload_ =
   ProductsInsert'
     {_piiMerchantId = _Coerce # pPiiMerchantId_, _piiPayload = pPiiPayload_}
+
 
 -- | The ID of the account that contains the product. This account cannot be
 -- a multi-client account.

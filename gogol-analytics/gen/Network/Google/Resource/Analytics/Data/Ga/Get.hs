@@ -95,6 +95,7 @@ data DataGaGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataGaGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -146,6 +147,7 @@ dataGaGet pDggMetrics_ pDggIds_ pDggEndDate_ pDggStartDate_ =
     , _dggSegment = Nothing
     , _dggStartDate = pDggStartDate_
     }
+
 
 -- | A comma-separated list of Analytics metrics. E.g.,
 -- \'ga:sessions,ga:pageviews\'. At least one metric must be specified.

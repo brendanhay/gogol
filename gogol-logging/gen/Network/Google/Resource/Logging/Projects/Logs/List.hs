@@ -80,6 +80,7 @@ data ProjectsLogsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLogsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsLogsList pPllParent_ =
     , _pllPageSize = Nothing
     , _pllCallback = Nothing
     }
+
 
 -- | Required. The resource name that owns the logs:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

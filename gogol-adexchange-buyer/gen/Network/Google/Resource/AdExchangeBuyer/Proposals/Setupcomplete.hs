@@ -58,6 +58,7 @@ newtype ProposalsSetupcomplete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProposalsSetupcomplete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ proposalsSetupcomplete
     -> ProposalsSetupcomplete
 proposalsSetupcomplete pPsProposalId_ =
   ProposalsSetupcomplete' {_psProposalId = pPsProposalId_}
+
 
 -- | The proposal id for which the setup is complete
 psProposalId :: Lens' ProposalsSetupcomplete Text

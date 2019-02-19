@@ -70,6 +70,7 @@ data GroupsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ groupsGet pGgName_ =
     , _ggName = pGgName_
     , _ggCallback = Nothing
     }
+
 
 -- | V1 error format.
 ggXgafv :: Lens' GroupsGet (Maybe Xgafv)

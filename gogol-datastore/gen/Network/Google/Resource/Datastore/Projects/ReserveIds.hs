@@ -77,6 +77,7 @@ data ProjectsReserveIds =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsReserveIds' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsReserveIds pPriPayload_ pPriProjectId_ =
     , _priProjectId = pPriProjectId_
     , _priCallback = Nothing
     }
+
 
 -- | V1 error format.
 priXgafv :: Lens' ProjectsReserveIds (Maybe Xgafv)

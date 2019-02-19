@@ -63,6 +63,7 @@ data MyLibraryAnnotationsSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryAnnotationsSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ myLibraryAnnotationsSummary
 myLibraryAnnotationsSummary pMlasLayerIds_ pMlasVolumeId_ =
   MyLibraryAnnotationsSummary'
     {_mlasLayerIds = _Coerce # pMlasLayerIds_, _mlasVolumeId = pMlasVolumeId_}
+
 
 -- | Array of layer IDs to get the summary for.
 mlasLayerIds :: Lens' MyLibraryAnnotationsSummary [Text]

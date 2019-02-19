@@ -29,6 +29,7 @@ newtype UndeleteServiceResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UndeleteServiceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37,6 +38,7 @@ newtype UndeleteServiceResponse =
 undeleteServiceResponse
     :: UndeleteServiceResponse
 undeleteServiceResponse = UndeleteServiceResponse' {_usrService = Nothing}
+
 
 -- | Revived service resource.
 usrService :: Lens' UndeleteServiceResponse (Maybe ManagedService)
@@ -66,6 +68,7 @@ data SystemParameter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SystemParameter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +83,7 @@ systemParameter
 systemParameter =
   SystemParameter'
     {_spHTTPHeader = Nothing, _spURLQueryParameter = Nothing, _spName = Nothing}
+
 
 -- | Define the HTTP header name to use for the parameter. It is case
 -- insensitive.
@@ -125,6 +129,7 @@ newtype Advice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Advice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -133,6 +138,7 @@ newtype Advice =
 advice
     :: Advice
 advice = Advice' {_aDescription = Nothing}
+
 
 -- | Useful description for why this advice was applied and what actions
 -- should be taken to mitigate any implied risks.
@@ -161,6 +167,7 @@ data ConfigFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConfigFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -175,6 +182,7 @@ configFile
 configFile =
   ConfigFile'
     {_cfFileContents = Nothing, _cfFilePath = Nothing, _cfFileType = Nothing}
+
 
 -- | The bytes that constitute the file.
 cfFileContents :: Lens' ConfigFile (Maybe ByteString)
@@ -229,6 +237,7 @@ data MonitoredResourceDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResourceDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -252,6 +261,7 @@ monitoredResourceDescriptor =
     , _mrdType = Nothing
     , _mrdDescription = Nothing
     }
+
 
 -- | Optional. The resource name of the monitored resource descriptor:
 -- \`\"projects\/{project_id}\/monitoredResourceDescriptors\/{type}\"\`
@@ -325,6 +335,7 @@ data DocumentationRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentationRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -342,6 +353,7 @@ documentationRule =
     , _drDeprecationDescription = Nothing
     , _drDescription = Nothing
     }
+
 
 -- | The selector is a comma-separated list of patterns. Each pattern is a
 -- qualified name of the element which may end in \"*\", indicating a
@@ -429,6 +441,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -441,6 +454,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -490,6 +504,7 @@ newtype OperationSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -500,6 +515,7 @@ operationSchema
     -> OperationSchema
 operationSchema pOsAddtional_ =
   OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -527,6 +543,7 @@ data GenerateConfigReportResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateConfigReportResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -547,6 +564,7 @@ generateConfigReportResponse =
     , _gcrrId = Nothing
     , _gcrrChangeReports = Nothing
     }
+
 
 -- | Errors \/ Linter warnings associated with the service definition this
 -- report belongs to.
@@ -606,6 +624,7 @@ data BillingDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -617,6 +636,7 @@ billingDestination
     :: BillingDestination
 billingDestination =
   BillingDestination' {_bdMetrics = Nothing, _bdMonitoredResource = Nothing}
+
 
 -- | Names of the metrics to report to this billing destination. Each name
 -- must be defined in Service.metrics section.
@@ -674,6 +694,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -684,6 +705,7 @@ data AuditConfig =
 auditConfig
     :: AuditConfig
 auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -726,6 +748,7 @@ newtype Control =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Control' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -734,6 +757,7 @@ newtype Control =
 control
     :: Control
 control = Control' {_cEnvironment = Nothing}
+
 
 -- | The service control environment to use. If empty, no control plane
 -- feature (like quota and billing) will be enabled.
@@ -759,11 +783,13 @@ data DeleteServiceStrategy =
   DeleteServiceStrategy'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteServiceStrategy' with the minimum fields required to make a request.
 --
 deleteServiceStrategy
     :: DeleteServiceStrategy
 deleteServiceStrategy = DeleteServiceStrategy'
+
 
 instance FromJSON DeleteServiceStrategy where
         parseJSON
@@ -785,6 +811,7 @@ data AuthRequirement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthRequirement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -796,6 +823,7 @@ authRequirement
     :: AuthRequirement
 authRequirement =
   AuthRequirement' {_arProviderId = Nothing, _arAudiences = Nothing}
+
 
 -- | id from authentication provider. Example: provider_id: bookstore_auth
 arProviderId :: Lens' AuthRequirement (Maybe Text)
@@ -841,6 +869,7 @@ data ListServicesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListServicesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -852,6 +881,7 @@ listServicesResponse
     :: ListServicesResponse
 listServicesResponse =
   ListServicesResponse' {_lsrNextPageToken = Nothing, _lsrServices = Nothing}
+
 
 -- | Token that can be passed to \`ListServices\` to resume a paginated
 -- query.
@@ -896,6 +926,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -916,6 +947,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -982,6 +1014,7 @@ newtype Context =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Context' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -990,6 +1023,7 @@ newtype Context =
 context
     :: Context
 context = Context' {_cRules = Nothing}
+
 
 -- | A list of RPC context rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -1019,6 +1053,7 @@ data LoggingDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LoggingDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1030,6 +1065,7 @@ loggingDestination
     :: LoggingDestination
 loggingDestination =
   LoggingDestination' {_ldMonitoredResource = Nothing, _ldLogs = Nothing}
+
 
 -- | The monitored resource type. The type must be defined in the
 -- Service.monitored_resources section.
@@ -1081,6 +1117,7 @@ data MetricDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1116,6 +1153,7 @@ metricDescriptor =
     , _mdDescription = Nothing
     , _mdUnit = Nothing
     }
+
 
 -- | Whether the metric records instantaneous values, changes to a value,
 -- etc. Some combinations of \`metric_kind\` and \`value_type\` might not
@@ -1244,6 +1282,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1256,6 +1295,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -1293,11 +1333,13 @@ data GetIAMPolicyRequest =
   GetIAMPolicyRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -1321,6 +1363,7 @@ data BackendRule =
     , _brPathTranslation   :: !(Maybe BackendRulePathTranslation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendRule' with the minimum fields required to make a request.
 --
@@ -1351,6 +1394,7 @@ backendRule =
     , _brDeadline = Nothing
     , _brPathTranslation = Nothing
     }
+
 
 -- | The JWT audience is used when generating a JWT id token for the backend.
 brJwtAudience :: Lens' BackendRule (Maybe Text)
@@ -1432,6 +1476,7 @@ data SubmitConfigSourceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubmitConfigSourceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1444,6 +1489,7 @@ submitConfigSourceRequest
 submitConfigSourceRequest =
   SubmitConfigSourceRequest'
     {_scsrValidateOnly = Nothing, _scsrConfigSource = Nothing}
+
 
 -- | Optional. If set, this will result in the generation of a
 -- \`google.api.Service\` configuration based on the \`ConfigSource\`
@@ -1484,6 +1530,7 @@ newtype SourceContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1492,6 +1539,7 @@ newtype SourceContext =
 sourceContext
     :: SourceContext
 sourceContext = SourceContext' {_scFileName = Nothing}
+
 
 -- | The path-qualified name of the .proto file that contained the associated
 -- protobuf element. For example:
@@ -1527,6 +1575,7 @@ data Field =
     , _fTypeURL      :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Field' with the minimum fields required to make a request.
 --
@@ -1566,6 +1615,7 @@ field =
     , _fNumber = Nothing
     , _fTypeURL = Nothing
     }
+
 
 -- | The field type.
 fKind :: Lens' Field (Maybe FieldKind)
@@ -1662,6 +1712,7 @@ data MetricRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1672,6 +1723,7 @@ data MetricRule =
 metricRule
     :: MetricRule
 metricRule = MetricRule' {_mrSelector = Nothing, _mrMetricCosts = Nothing}
+
 
 -- | Selects the methods to which this rule applies. Refer to selector for
 -- syntax details.
@@ -1720,6 +1772,7 @@ newtype TrafficPercentStrategy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrafficPercentStrategy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1728,6 +1781,7 @@ newtype TrafficPercentStrategy =
 trafficPercentStrategy
     :: TrafficPercentStrategy
 trafficPercentStrategy = TrafficPercentStrategy' {_tpsPercentages = Nothing}
+
 
 -- | Maps service configuration IDs to their corresponding traffic
 -- percentage. Key is the service configuration ID, Value is the traffic
@@ -1795,6 +1849,7 @@ data Service =
     , _sQuota              :: !(Maybe Quota)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Service' with the minimum fields required to make a request.
 --
@@ -1888,6 +1943,7 @@ service =
     , _sLogging = Nothing
     , _sQuota = Nothing
     }
+
 
 -- | Configuration for the service control plane.
 sControl :: Lens' Service (Maybe Control)
@@ -2142,6 +2198,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2165,6 +2222,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -2230,6 +2288,7 @@ newtype EnableServiceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnableServiceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2238,6 +2297,7 @@ newtype EnableServiceRequest =
 enableServiceRequest
     :: EnableServiceRequest
 enableServiceRequest = EnableServiceRequest' {_esrConsumerId = Nothing}
+
 
 -- | The identity of consumer resource which service enablement will be
 -- applied to. The Google Service Management implementation accepts the
@@ -2269,6 +2329,7 @@ data ListServiceConfigsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListServiceConfigsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2281,6 +2342,7 @@ listServiceConfigsResponse
 listServiceConfigsResponse =
   ListServiceConfigsResponse'
     {_lscrServiceConfigs = Nothing, _lscrNextPageToken = Nothing}
+
 
 -- | The list of service configuration resources.
 lscrServiceConfigs :: Lens' ListServiceConfigsResponse [Service]
@@ -2321,6 +2383,7 @@ data CustomErrorRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomErrorRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2332,6 +2395,7 @@ customErrorRule
     :: CustomErrorRule
 customErrorRule =
   CustomErrorRule' {_cerIsErrorType = Nothing, _cerSelector = Nothing}
+
 
 -- | Mark this message as possible payload in error response. Otherwise,
 -- objects of this type will be filtered when they appear in error payload.
@@ -2369,6 +2433,7 @@ newtype SubmitConfigSourceResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubmitConfigSourceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2378,6 +2443,7 @@ submitConfigSourceResponse
     :: SubmitConfigSourceResponse
 submitConfigSourceResponse =
   SubmitConfigSourceResponse' {_scsrServiceConfig = Nothing}
+
 
 -- | The generated service configuration.
 scsrServiceConfig :: Lens' SubmitConfigSourceResponse (Maybe Service)
@@ -2409,6 +2475,7 @@ newtype ChangeReport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangeReport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2417,6 +2484,7 @@ newtype ChangeReport =
 changeReport
     :: ChangeReport
 changeReport = ChangeReport' {_crConfigChanges = Nothing}
+
 
 -- | List of changes between two service configurations. The changes will be
 -- alphabetically sorted based on the identifier of each change. A
@@ -2455,6 +2523,7 @@ newtype OptionValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OptionValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2465,6 +2534,7 @@ optionValue
     -> OptionValue
 optionValue pOvAddtional_ =
   OptionValue' {_ovAddtional = _Coerce # pOvAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 ovAddtional :: Lens' OptionValue (HashMap Text JSONValue)
@@ -2491,6 +2561,7 @@ data EnumValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnumValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2504,6 +2575,7 @@ enumValue
     :: EnumValue
 enumValue =
   EnumValue' {_evName = Nothing, _evOptions = Nothing, _evNumber = Nothing}
+
 
 -- | Enum value name.
 evName :: Lens' EnumValue (Maybe Text)
@@ -2554,6 +2626,7 @@ data Authentication =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Authentication' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2564,6 +2637,7 @@ data Authentication =
 authentication
     :: Authentication
 authentication = Authentication' {_aRules = Nothing, _aProviders = Nothing}
+
 
 -- | A list of authentication rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -2636,6 +2710,7 @@ data Mixin =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Mixin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2646,6 +2721,7 @@ data Mixin =
 mixin
     :: Mixin
 mixin = Mixin' {_mRoot = Nothing, _mName = Nothing}
+
 
 -- | If non-empty specifies a path under which inherited HTTP paths are
 -- rooted.
@@ -2677,6 +2753,7 @@ data CustomHTTPPattern =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomHTTPPattern' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2688,6 +2765,7 @@ customHTTPPattern
     :: CustomHTTPPattern
 customHTTPPattern =
   CustomHTTPPattern' {_chttppPath = Nothing, _chttppKind = Nothing}
+
 
 -- | The path matched by this custom verb.
 chttppPath :: Lens' CustomHTTPPattern (Maybe Text)
@@ -2735,6 +2813,7 @@ data UsageRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsageRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2752,6 +2831,7 @@ usageRule =
     , _urAllowUnregisteredCalls = Nothing
     , _urSkipServiceControl = Nothing
     }
+
 
 -- | Selects the methods to which this rule applies. Use \'*\' to indicate
 -- all methods in all APIs. Refer to selector for syntax details.
@@ -2801,6 +2881,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2811,6 +2892,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2838,6 +2920,7 @@ data Page =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Page' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2850,6 +2933,7 @@ data Page =
 page
     :: Page
 page = Page' {_pSubpages = Nothing, _pContent = Nothing, _pName = Nothing}
+
 
 -- | Subpages of this page. The order of subpages specified here will be
 -- honored in the generated docset.
@@ -2910,6 +2994,7 @@ newtype GenerateConfigReportRequestOldConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateConfigReportRequestOldConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2921,6 +3006,7 @@ generateConfigReportRequestOldConfig
 generateConfigReportRequestOldConfig pGcrrocAddtional_ =
   GenerateConfigReportRequestOldConfig'
     {_gcrrocAddtional = _Coerce # pGcrrocAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 gcrrocAddtional :: Lens' GenerateConfigReportRequestOldConfig (HashMap Text JSONValue)
@@ -2959,6 +3045,7 @@ data AuthenticationRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthenticationRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2979,6 +3066,7 @@ authenticationRule =
     , _arAllowWithoutCredential = Nothing
     , _arOAuth = Nothing
     }
+
 
 -- | Requirements for additional authentication providers.
 arRequirements :: Lens' AuthenticationRule [AuthRequirement]
@@ -3034,6 +3122,7 @@ data SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3045,6 +3134,7 @@ setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
   SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -3089,6 +3179,7 @@ newtype MetricRuleMetricCosts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricRuleMetricCosts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3099,6 +3190,7 @@ metricRuleMetricCosts
     -> MetricRuleMetricCosts
 metricRuleMetricCosts pMrmcAddtional_ =
   MetricRuleMetricCosts' {_mrmcAddtional = _Coerce # pMrmcAddtional_}
+
 
 mrmcAddtional :: Lens' MetricRuleMetricCosts (HashMap Text Int64)
 mrmcAddtional
@@ -3127,6 +3219,7 @@ newtype TrafficPercentStrategyPercentages =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrafficPercentStrategyPercentages' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3138,6 +3231,7 @@ trafficPercentStrategyPercentages
 trafficPercentStrategyPercentages pTpspAddtional_ =
   TrafficPercentStrategyPercentages'
     {_tpspAddtional = _Coerce # pTpspAddtional_}
+
 
 tpspAddtional :: Lens' TrafficPercentStrategyPercentages (HashMap Text Double)
 tpspAddtional
@@ -3169,6 +3263,7 @@ newtype AuthorizationConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthorizationConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3177,6 +3272,7 @@ newtype AuthorizationConfig =
 authorizationConfig
     :: AuthorizationConfig
 authorizationConfig = AuthorizationConfig' {_acProvider = Nothing}
+
 
 -- | The name of the authorization provider, such as
 -- firebaserules.googleapis.com.
@@ -3204,6 +3300,7 @@ newtype Experimental =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Experimental' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3212,6 +3309,7 @@ newtype Experimental =
 experimental
     :: Experimental
 experimental = Experimental' {_eAuthorization = Nothing}
+
 
 -- | Authorization configuration.
 eAuthorization :: Lens' Experimental (Maybe AuthorizationConfig)
@@ -3240,6 +3338,7 @@ data ListServiceRolloutsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListServiceRolloutsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3252,6 +3351,7 @@ listServiceRolloutsResponse
 listServiceRolloutsResponse =
   ListServiceRolloutsResponse'
     {_lsrrNextPageToken = Nothing, _lsrrRollouts = Nothing}
+
 
 -- | The token of the next page of results.
 lsrrNextPageToken :: Lens' ListServiceRolloutsResponse (Maybe Text)
@@ -3297,6 +3397,7 @@ data ConfigChange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConfigChange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3320,6 +3421,7 @@ configChange =
     , _ccChangeType = Nothing
     , _ccElement = Nothing
     }
+
 
 -- | Value of the changed object in the old Service configuration, in JSON
 -- format. This field will not be populated if ChangeType == ADDED.
@@ -3388,6 +3490,7 @@ newtype Backend =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Backend' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3396,6 +3499,7 @@ newtype Backend =
 backend
     :: Backend
 backend = Backend' {_bRules = Nothing}
+
 
 -- | A list of API backend rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -3443,6 +3547,7 @@ data Monitoring =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Monitoring' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3455,6 +3560,7 @@ monitoring
 monitoring =
   Monitoring'
     {_mProducerDestinations = Nothing, _mConsumerDestinations = Nothing}
+
 
 -- | Monitoring configurations for sending metrics to the producer project.
 -- There can be multiple producer destinations. A monitored resouce type
@@ -3514,6 +3620,7 @@ data LogDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3534,6 +3641,7 @@ logDescriptor =
     , _ldLabels = Nothing
     , _ldDescription = Nothing
     }
+
 
 -- | The name of the log. It must be less than 512 characters long and can
 -- include the following characters: upper- and lower-case alphanumeric
@@ -3598,6 +3706,7 @@ data Method =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Method' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3627,6 +3736,7 @@ method =
     , _metOptions = Nothing
     , _metSyntax = Nothing
     }
+
 
 -- | If true, the request is streamed.
 metRequestStreaming :: Lens' Method (Maybe Bool)
@@ -3704,6 +3814,7 @@ data Diagnostic =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Diagnostic' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3717,6 +3828,7 @@ diagnostic
     :: Diagnostic
 diagnostic =
   Diagnostic' {_dLocation = Nothing, _dKind = Nothing, _dMessage = Nothing}
+
 
 -- | File name and line number of the error or warning.
 dLocation :: Lens' Diagnostic (Maybe Text)
@@ -3760,6 +3872,7 @@ newtype SystemParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SystemParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3768,6 +3881,7 @@ newtype SystemParameters =
 systemParameters
     :: SystemParameters
 systemParameters = SystemParameters' {_spRules = Nothing}
+
 
 -- | Define system parameters. The parameters defined here will override the
 -- default parameters implemented by the system. If this field is missing
@@ -3805,6 +3919,7 @@ data ConfigSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConfigSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3815,6 +3930,7 @@ data ConfigSource =
 configSource
     :: ConfigSource
 configSource = ConfigSource' {_csFiles = Nothing, _csId = Nothing}
+
 
 -- | Set of source configuration files that are used to generate a service
 -- configuration (\`google.api.Service\`).
@@ -3911,6 +4027,7 @@ data Documentation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Documentation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3934,6 +4051,7 @@ documentation =
     , _dPages = Nothing
     , _dOverview = Nothing
     }
+
 
 -- | A short summary of what the service does. Can only be provided by plain
 -- text.
@@ -4009,6 +4127,7 @@ data Step =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Step' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4019,6 +4138,7 @@ data Step =
 step
     :: Step
 step = Step' {_sStatus = Nothing, _sDescription = Nothing}
+
 
 -- | The status code.
 sStatus :: Lens' Step (Maybe StepStatus)
@@ -4053,6 +4173,7 @@ data MetricDescriptorMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricDescriptorMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4070,6 +4191,7 @@ metricDescriptorMetadata =
     , _mdmIngestDelay = Nothing
     , _mdmLaunchStage = Nothing
     }
+
 
 -- | The sampling period of metric data points. For metrics which are written
 -- periodically, consecutive data points are stored at this time interval,
@@ -4121,6 +4243,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4130,6 +4253,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -4165,6 +4289,7 @@ data SystemParameterRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SystemParameterRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4176,6 +4301,7 @@ systemParameterRule
     :: SystemParameterRule
 systemParameterRule =
   SystemParameterRule' {_sprSelector = Nothing, _sprParameters = Nothing}
+
 
 -- | Selects the methods to which this rule applies. Use \'*\' to indicate
 -- all methods in all APIs. Refer to selector for syntax details.
@@ -4220,6 +4346,7 @@ data LabelDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LabelDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4234,6 +4361,7 @@ labelDescriptor
 labelDescriptor =
   LabelDescriptor'
     {_lKey = Nothing, _lValueType = Nothing, _lDescription = Nothing}
+
 
 -- | The label key.
 lKey :: Lens' LabelDescriptor (Maybe Text)
@@ -4276,6 +4404,7 @@ data Usage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Usage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4293,6 +4422,7 @@ usage =
     , _uRules = Nothing
     , _uProducerNotificationChannel = Nothing
     }
+
 
 -- | Requirements that must be satisfied before a consumer project can use
 -- the service. Each requirement is of the form \/; for example
@@ -4350,6 +4480,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4359,6 +4490,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -4394,6 +4526,7 @@ newtype GenerateConfigReportRequestNewConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateConfigReportRequestNewConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4405,6 +4538,7 @@ generateConfigReportRequestNewConfig
 generateConfigReportRequestNewConfig pGcrrncAddtional_ =
   GenerateConfigReportRequestNewConfig'
     {_gcrrncAddtional = _Coerce # pGcrrncAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 gcrrncAddtional :: Lens' GenerateConfigReportRequestNewConfig (HashMap Text JSONValue)
@@ -4438,6 +4572,7 @@ data HTTP =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTP' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4448,6 +4583,7 @@ data HTTP =
 hTTP
     :: HTTP
 hTTP = HTTP' {_hRules = Nothing, _hFullyDecodeReservedExpansion = Nothing}
+
 
 -- | A list of HTTP configuration rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -4491,6 +4627,7 @@ newtype DisableServiceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DisableServiceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4499,6 +4636,7 @@ newtype DisableServiceRequest =
 disableServiceRequest
     :: DisableServiceRequest
 disableServiceRequest = DisableServiceRequest' {_dsrConsumerId = Nothing}
+
 
 -- | The identity of consumer resource which service disablement will be
 -- applied to. The Google Service Management implementation accepts the
@@ -4548,6 +4686,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4568,6 +4707,7 @@ policy =
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -4636,6 +4776,7 @@ data Type =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4662,6 +4803,7 @@ type' =
     , _tFields = Nothing
     , _tSyntax = Nothing
     }
+
 
 -- | The source context.
 tSourceContext :: Lens' Type (Maybe SourceContext)
@@ -4741,6 +4883,7 @@ data API =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'API' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4770,6 +4913,7 @@ api =
     , _aOptions = Nothing
     , _aSyntax = Nothing
     }
+
 
 -- | Source context for the protocol buffer service represented by this
 -- message.
@@ -4860,6 +5004,7 @@ data MonitoringDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoringDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4871,6 +5016,7 @@ monitoringDestination
     :: MonitoringDestination
 monitoringDestination =
   MonitoringDestination' {_mdMetrics = Nothing, _mdMonitoredResource = Nothing}
+
 
 -- | Types of the metrics to report to this monitoring destination. Each type
 -- must be defined in Service.metrics section.
@@ -4913,6 +5059,7 @@ data ManagedService =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4924,6 +5071,7 @@ managedService
     :: ManagedService
 managedService =
   ManagedService' {_msServiceName = Nothing, _msProducerProjectId = Nothing}
+
 
 -- | The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements.
@@ -4965,6 +5113,7 @@ data OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4985,6 +5134,7 @@ operationMetadata =
     , _omProgressPercentage = Nothing
     , _omResourceNames = Nothing
     }
+
 
 -- | The start time of the operation.
 omStartTime :: Lens' OperationMetadata (Maybe UTCTime)
@@ -5054,6 +5204,7 @@ data Endpoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Endpoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5077,6 +5228,7 @@ endpoint =
     , _eFeatures = Nothing
     , _eTarget = Nothing
     }
+
 
 -- | DEPRECATED: This field is no longer supported. Instead of using aliases,
 -- please specify multiple google.api.Endpoint for each of the intended
@@ -5158,6 +5310,7 @@ newtype OAuthRequirements =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OAuthRequirements' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5166,6 +5319,7 @@ newtype OAuthRequirements =
 oAuthRequirements
     :: OAuthRequirements
 oAuthRequirements = OAuthRequirements' {_oarCanonicalScopes = Nothing}
+
 
 -- | The list of publicly documented OAuth scopes that are allowed access. An
 -- OAuth token containing any of these scopes will be accepted. Example:
@@ -5201,6 +5355,7 @@ data CustomError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5211,6 +5366,7 @@ data CustomError =
 customError
     :: CustomError
 customError = CustomError' {_ceRules = Nothing, _ceTypes = Nothing}
+
 
 -- | The list of custom error rules that apply to individual API messages.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -5262,6 +5418,7 @@ data QuotaLimit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuotaLimit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5300,6 +5457,7 @@ quotaLimit =
     , _qlUnit = Nothing
     , _qlMaxLimit = Nothing
     }
+
 
 -- | Tiered limit values. You must specify this as a key:value pair, with an
 -- integer value that is the maximum number of requests allowed for the
@@ -5434,6 +5592,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5445,6 +5604,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -5486,6 +5646,7 @@ data Option =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Option' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5496,6 +5657,7 @@ data Option =
 option
     :: Option
 option = Option' {_optValue = Nothing, _optName = Nothing}
+
 
 -- | The option\'s value packed in an Any message. If the value is a
 -- primitive, the corresponding wrapper type defined in
@@ -5542,6 +5704,7 @@ newtype Billing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Billing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5550,6 +5713,7 @@ newtype Billing =
 billing
     :: Billing
 billing = Billing' {_bConsumerDestinations = Nothing}
+
 
 -- | Billing configurations for sending metrics to the consumer project.
 -- There can be multiple consumer destinations per service, each one must
@@ -5585,6 +5749,7 @@ newtype SourceInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5593,6 +5758,7 @@ newtype SourceInfo =
 sourceInfo
     :: SourceInfo
 sourceInfo = SourceInfo' {_siSourceFiles = Nothing}
+
 
 -- | All files used during config generation.
 siSourceFiles :: Lens' SourceInfo [SourceInfoSourceFilesItem]
@@ -5624,6 +5790,7 @@ newtype QuotaLimitValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuotaLimitValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5634,6 +5801,7 @@ quotaLimitValues
     -> QuotaLimitValues
 quotaLimitValues pQlvAddtional_ =
   QuotaLimitValues' {_qlvAddtional = _Coerce # pQlvAddtional_}
+
 
 qlvAddtional :: Lens' QuotaLimitValues (HashMap Text Int64)
 qlvAddtional
@@ -5666,6 +5834,7 @@ data Rollout =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Rollout' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5695,6 +5864,7 @@ rollout =
     , _rRolloutId = Nothing
     , _rCreateTime = Nothing
     }
+
 
 -- | The status of this rollout. Readonly. In case of a failed rollout, the
 -- system will automatically rollback to the current Rollout version.
@@ -5781,6 +5951,7 @@ data Enum' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Enum' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5804,6 +5975,7 @@ enum =
     , _enuOptions = Nothing
     , _enuSyntax = Nothing
     }
+
 
 -- | The source context.
 enuSourceContext :: Lens' Enum' (Maybe SourceContext)
@@ -5877,6 +6049,7 @@ data Logging =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Logging' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5888,6 +6061,7 @@ logging
     :: Logging
 logging =
   Logging' {_lProducerDestinations = Nothing, _lConsumerDestinations = Nothing}
+
 
 -- | Logging configurations for sending logs to the producer project. There
 -- can be multiple producer destinations, each one must have a different
@@ -5937,6 +6111,7 @@ newtype ConfigRef =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConfigRef' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5945,6 +6120,7 @@ newtype ConfigRef =
 configRef
     :: ConfigRef
 configRef = ConfigRef' {_crName = Nothing}
+
 
 -- | Resource name of a service config. It must have the following format:
 -- \"services\/{service name}\/configs\/{config id}\".
@@ -5970,6 +6146,7 @@ data GenerateConfigReportRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateConfigReportRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5982,6 +6159,7 @@ generateConfigReportRequest
 generateConfigReportRequest =
   GenerateConfigReportRequest'
     {_gcrrOldConfig = Nothing, _gcrrNewConfig = Nothing}
+
 
 -- | Service configuration against which the comparison will be done. For
 -- this version of API, the supported types are
@@ -6023,6 +6201,7 @@ newtype SourceInfoSourceFilesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceInfoSourceFilesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6033,6 +6212,7 @@ sourceInfoSourceFilesItem
     -> SourceInfoSourceFilesItem
 sourceInfoSourceFilesItem pSisfiAddtional_ =
   SourceInfoSourceFilesItem' {_sisfiAddtional = _Coerce # pSisfiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sisfiAddtional :: Lens' SourceInfoSourceFilesItem (HashMap Text JSONValue)
@@ -6081,6 +6261,7 @@ data Quota =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6091,6 +6272,7 @@ data Quota =
 quota
     :: Quota
 quota = Quota' {_qLimits = Nothing, _qMetricRules = Nothing}
+
 
 -- | List of \`QuotaLimit\` definitions for the service.
 qLimits :: Lens' Quota [QuotaLimit]
@@ -6288,6 +6470,7 @@ data HTTPRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6326,6 +6509,7 @@ hTTPRule =
     , _httprDelete = Nothing
     , _httprPut = Nothing
     }
+
 
 -- | Selects a method to which this rule applies. Refer to selector for
 -- syntax details.
@@ -6441,6 +6625,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6451,6 +6636,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -6481,6 +6667,7 @@ data AuthProvider =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthProvider' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6504,6 +6691,7 @@ authProvider =
     , _apAuthorizationURL = Nothing
     , _apIssuer = Nothing
     }
+
 
 -- | URL of the provider\'s public key set to validate signature of the JWT.
 -- See [OpenID
@@ -6582,6 +6770,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6595,6 +6784,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -6659,6 +6849,7 @@ data ContextRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContextRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6682,6 +6873,7 @@ contextRule =
     , _crProvided = Nothing
     , _crAllowedResponseExtensions = Nothing
     }
+
 
 -- | Selects the methods to which this rule applies. Refer to selector for
 -- syntax details.

@@ -91,6 +91,7 @@ data StatsIndexDatasourcesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatsIndexDatasourcesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +137,7 @@ statsIndexDatasourcesGet pSidgName_ =
     , _sidgToDateMonth = Nothing
     , _sidgCallback = Nothing
     }
+
 
 -- | Month of date. Must be from 1 to 12.
 sidgFromDateMonth :: Lens' StatsIndexDatasourcesGet (Maybe Int32)

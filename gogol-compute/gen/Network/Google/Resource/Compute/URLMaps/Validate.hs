@@ -71,6 +71,7 @@ data URLMapsValidate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMapsValidate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ urlMapsValidate pUmvURLMap_ pUmvProject_ pUmvPayload_ =
     , _umvProject = pUmvProject_
     , _umvPayload = pUmvPayload_
     }
+
 
 -- | Name of the UrlMap resource to be validated as.
 umvURLMap :: Lens' URLMapsValidate Text

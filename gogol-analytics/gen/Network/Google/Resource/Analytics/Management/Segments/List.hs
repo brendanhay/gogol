@@ -61,6 +61,7 @@ data ManagementSegmentsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementSegmentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ managementSegmentsList
     :: ManagementSegmentsList
 managementSegmentsList =
   ManagementSegmentsList' {_mslStartIndex = Nothing, _mslMaxResults = Nothing}
+
 
 -- | An index of the first segment to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.

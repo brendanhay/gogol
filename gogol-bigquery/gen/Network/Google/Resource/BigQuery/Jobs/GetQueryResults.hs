@@ -77,6 +77,7 @@ data JobsGetQueryResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobsGetQueryResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ jobsGetQueryResults pJgqrJobId_ pJgqrProjectId_ =
     , _jgqrStartIndex = Nothing
     , _jgqrMaxResults = Nothing
     }
+
 
 -- | [Required] Job ID of the query job
 jgqrJobId :: Lens' JobsGetQueryResults Text

@@ -66,6 +66,7 @@ data UsersSettingsSendAsSmimeInfoGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsSendAsSmimeInfoGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ usersSettingsSendAsSmimeInfoGet pUssasigSendAsEmail_ pUssasigId_ =
     , _ussasigSendAsEmail = pUssasigSendAsEmail_
     , _ussasigId = pUssasigId_
     }
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

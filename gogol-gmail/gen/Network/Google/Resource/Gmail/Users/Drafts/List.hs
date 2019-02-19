@@ -71,6 +71,7 @@ data UsersDraftsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDraftsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ usersDraftsList =
     , _udlPageToken = Nothing
     , _udlMaxResults = 100
     }
+
 
 -- | Only return draft messages matching the specified query. Supports the
 -- same query format as the Gmail search box. For example,

@@ -59,6 +59,7 @@ newtype TimelineAttachmentsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimelineAttachmentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ timelineAttachmentsList
     -> TimelineAttachmentsList
 timelineAttachmentsList pTalItemId_ =
   TimelineAttachmentsList' {_talItemId = pTalItemId_}
+
 
 -- | The ID of the timeline item whose attachments should be listed.
 talItemId :: Lens' TimelineAttachmentsList Text

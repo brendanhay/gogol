@@ -67,6 +67,7 @@ data AutoscalersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ autoscalersGet pAgProject_ pAgZone_ pAgAutoscaler_ =
     , _agZone = pAgZone_
     , _agAutoscaler = pAgAutoscaler_
     }
+
 
 -- | Project ID for this request.
 agProject :: Lens' AutoscalersGet Text

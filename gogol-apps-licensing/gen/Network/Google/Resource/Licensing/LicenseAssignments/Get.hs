@@ -67,6 +67,7 @@ data LicenseAssignmentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicenseAssignmentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ licenseAssignmentsGet pLagSKUId_ pLagUserId_ pLagProductId_ =
     , _lagUserId = pLagUserId_
     , _lagProductId = pLagProductId_
     }
+
 
 -- | Name for sku
 lagSKUId :: Lens' LicenseAssignmentsGet Text

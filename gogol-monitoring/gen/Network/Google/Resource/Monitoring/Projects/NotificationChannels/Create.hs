@@ -77,6 +77,7 @@ data ProjectsNotificationChannelsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotificationChannelsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsNotificationChannelsCreate pPnccPayload_ pPnccName_ =
     , _pnccName = pPnccName_
     , _pnccCallback = Nothing
     }
+
 
 -- | V1 error format.
 pnccXgafv :: Lens' ProjectsNotificationChannelsCreate (Maybe Xgafv)

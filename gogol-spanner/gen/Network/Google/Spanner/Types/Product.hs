@@ -38,6 +38,7 @@ newtype ExecuteSQLRequestParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExecuteSQLRequestParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -48,6 +49,7 @@ executeSQLRequestParams
     -> ExecuteSQLRequestParams
 executeSQLRequestParams pEsqlrpAddtional_ =
   ExecuteSQLRequestParams' {_esqlrpAddtional = _Coerce # pEsqlrpAddtional_}
+
 
 -- | Properties of the object.
 esqlrpAddtional :: Lens' ExecuteSQLRequestParams (HashMap Text JSONValue)
@@ -91,6 +93,7 @@ newtype InstanceLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +104,7 @@ instanceLabels
     -> InstanceLabels
 instanceLabels pIlAddtional_ =
   InstanceLabels' {_ilAddtional = _Coerce # pIlAddtional_}
+
 
 ilAddtional :: Lens' InstanceLabels (HashMap Text Text)
 ilAddtional
@@ -124,6 +128,7 @@ newtype CreateDatabaseMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateDatabaseMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -132,6 +137,7 @@ newtype CreateDatabaseMetadata =
 createDatabaseMetadata
     :: CreateDatabaseMetadata
 createDatabaseMetadata = CreateDatabaseMetadata' {_cdmDatabase = Nothing}
+
 
 -- | The database being created.
 cdmDatabase :: Lens' CreateDatabaseMetadata (Maybe Text)
@@ -333,6 +339,7 @@ data TransactionOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransactionOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -347,6 +354,7 @@ transactionOptions
 transactionOptions =
   TransactionOptions'
     {_toReadWrite = Nothing, _toPartitionedDml = Nothing, _toReadOnly = Nothing}
+
 
 -- | Transaction may write. Authorization to begin a read-write transaction
 -- requires \`spanner.databases.beginOrRollbackReadWriteTransaction\`
@@ -396,6 +404,7 @@ newtype GetDatabaseDdlResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetDatabaseDdlResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -404,6 +413,7 @@ newtype GetDatabaseDdlResponse =
 getDatabaseDdlResponse
     :: GetDatabaseDdlResponse
 getDatabaseDdlResponse = GetDatabaseDdlResponse' {_gddrStatements = Nothing}
+
 
 -- | A list of formatted DDL statements defining the schema of the database
 -- specified in the request.
@@ -471,6 +481,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -483,6 +494,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -530,6 +542,7 @@ data CreateInstanceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateInstanceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -541,6 +554,7 @@ createInstanceRequest
     :: CreateInstanceRequest
 createInstanceRequest =
   CreateInstanceRequest' {_cirInstanceId = Nothing, _cirInstance = Nothing}
+
 
 -- | Required. The ID of the instance to create. Valid identifiers are of the
 -- form \`a-z*[a-z0-9]\` and must be between 6 and 30 characters in length.
@@ -577,11 +591,13 @@ data ReadWrite =
   ReadWrite'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReadWrite' with the minimum fields required to make a request.
 --
 readWrite
     :: ReadWrite
 readWrite = ReadWrite'
+
 
 instance FromJSON ReadWrite where
         parseJSON
@@ -599,6 +615,7 @@ newtype RollbackRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -607,6 +624,7 @@ newtype RollbackRequest =
 rollbackRequest
     :: RollbackRequest
 rollbackRequest = RollbackRequest' {_rrTransactionId = Nothing}
+
 
 -- | Required. The transaction to roll back.
 rrTransactionId :: Lens' RollbackRequest (Maybe ByteString)
@@ -636,6 +654,7 @@ data ListDatabasesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDatabasesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -647,6 +666,7 @@ listDatabasesResponse
     :: ListDatabasesResponse
 listDatabasesResponse =
   ListDatabasesResponse' {_ldrNextPageToken = Nothing, _ldrDatabases = Nothing}
+
 
 -- | \`next_page_token\` can be sent in a subsequent ListDatabases call to
 -- fetch more of the matching databases.
@@ -691,6 +711,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -711,6 +732,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -765,6 +787,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -777,6 +800,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -814,11 +838,13 @@ data GetIAMPolicyRequest =
   GetIAMPolicyRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -840,6 +866,7 @@ data ChildLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChildLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -853,6 +880,7 @@ childLink
     :: ChildLink
 childLink =
   ChildLink' {_clChildIndex = Nothing, _clVariable = Nothing, _clType = Nothing}
+
 
 -- | The node to which the link points.
 clChildIndex :: Lens' ChildLink (Maybe Int32)
@@ -903,6 +931,7 @@ newtype BeginTransactionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeginTransactionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -911,6 +940,7 @@ newtype BeginTransactionRequest =
 beginTransactionRequest
     :: BeginTransactionRequest
 beginTransactionRequest = BeginTransactionRequest' {_btrOptions = Nothing}
+
 
 -- | Required. Options for the new transaction.
 btrOptions :: Lens' BeginTransactionRequest (Maybe TransactionOptions)
@@ -937,6 +967,7 @@ data PartitionOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartitionOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -949,6 +980,7 @@ partitionOptions
 partitionOptions =
   PartitionOptions'
     {_poMaxPartitions = Nothing, _poPartitionSizeBytes = Nothing}
+
 
 -- | **Note:** This hint is currently ignored by PartitionQuery and
 -- PartitionRead requests. The desired maximum number of partitions to
@@ -1000,6 +1032,7 @@ data ResultSetStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultSetStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1020,6 +1053,7 @@ resultSetStats =
     , _rssQueryStats = Nothing
     , _rssQueryPlan = Nothing
     }
+
 
 -- | Standard DML returns an exact count of rows that were modified.
 rssRowCountExact :: Lens' ResultSetStats (Maybe Int64)
@@ -1079,6 +1113,7 @@ data Field =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Field' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1089,6 +1124,7 @@ data Field =
 field
     :: Field
 field = Field' {_fName = Nothing, _fType = Nothing}
+
 
 -- | The name of the field. For reads, this is the column name. For SQL
 -- queries, it is the column alias (e.g., \`\"Word\"\` in the query
@@ -1125,6 +1161,7 @@ data Write =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Write' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1137,6 +1174,7 @@ data Write =
 write
     :: Write
 write = Write' {_wValues = Nothing, _wColumns = Nothing, _wTable = Nothing}
+
 
 -- | The values to be written. \`values\` can contain more than one list of
 -- values. If it does, then multiple rows are written, one for each entry
@@ -1196,6 +1234,7 @@ data KeySet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KeySet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1208,6 +1247,7 @@ data KeySet =
 keySet
     :: KeySet
 keySet = KeySet' {_ksAll = Nothing, _ksRanges = Nothing, _ksKeys = Nothing}
+
 
 -- | For convenience \`all\` can be set to \`true\` to indicate that this
 -- \`KeySet\` matches all keys in the table or index. Note that any keys
@@ -1265,6 +1305,7 @@ newtype PartitionQueryRequestParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartitionQueryRequestParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1275,6 +1316,7 @@ partitionQueryRequestParams
     -> PartitionQueryRequestParams
 partitionQueryRequestParams pPqrpAddtional_ =
   PartitionQueryRequestParams' {_pqrpAddtional = _Coerce # pPqrpAddtional_}
+
 
 -- | Properties of the object.
 pqrpAddtional :: Lens' PartitionQueryRequestParams (HashMap Text JSONValue)
@@ -1306,6 +1348,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1329,6 +1372,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -1396,6 +1440,7 @@ data UpdateDatabaseDdlMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateDatabaseDdlMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1413,6 +1458,7 @@ updateDatabaseDdlMetadata =
     , _uddmDatabase = Nothing
     , _uddmStatements = Nothing
     }
+
 
 -- | Reports the commit timestamps of all statements that have succeeded so
 -- far, where \`commit_timestamps[i]\` is the commit timestamp for the
@@ -1466,11 +1512,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1488,6 +1536,7 @@ data Database =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Database' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1498,6 +1547,7 @@ data Database =
 database
     :: Database
 database = Database' {_dState = Nothing, _dName = Nothing}
+
 
 -- | Output only. The current database state.
 dState :: Lens' Database (Maybe DatabaseState)
@@ -1537,6 +1587,7 @@ data PlanNode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlanNode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1566,6 +1617,7 @@ planNode =
     , _pnIndex = Nothing
     , _pnChildLinks = Nothing
     }
+
 
 -- | Used to determine the type of node. May be needed for visualizing
 -- different kinds of nodes differently. For example, If the node is a
@@ -1650,6 +1702,7 @@ newtype CreateSessionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateSessionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1658,6 +1711,7 @@ newtype CreateSessionRequest =
 createSessionRequest
     :: CreateSessionRequest
 createSessionRequest = CreateSessionRequest' {_csrSession = Nothing}
+
 
 -- | The session to create.
 csrSession :: Lens' CreateSessionRequest (Maybe Session)
@@ -1684,6 +1738,7 @@ data ShortRepresentation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShortRepresentation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1695,6 +1750,7 @@ shortRepresentation
     :: ShortRepresentation
 shortRepresentation =
   ShortRepresentation' {_srSubqueries = Nothing, _srDescription = Nothing}
+
 
 -- | A mapping of (subquery variable name) -> (subquery node id) for cases
 -- where the \`description\` string of this node references a \`SCALAR\`
@@ -1738,6 +1794,7 @@ newtype ShortRepresentationSubqueries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShortRepresentationSubqueries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1748,6 +1805,7 @@ shortRepresentationSubqueries
     -> ShortRepresentationSubqueries
 shortRepresentationSubqueries pSrsAddtional_ =
   ShortRepresentationSubqueries' {_srsAddtional = _Coerce # pSrsAddtional_}
+
 
 srsAddtional :: Lens' ShortRepresentationSubqueries (HashMap Text Int32)
 srsAddtional
@@ -1772,6 +1830,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1782,6 +1841,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1809,6 +1869,7 @@ newtype PlanNodeMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlanNodeMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1819,6 +1880,7 @@ planNodeMetadata
     -> PlanNodeMetadata
 planNodeMetadata pPnmAddtional_ =
   PlanNodeMetadata' {_pnmAddtional = _Coerce # pPnmAddtional_}
+
 
 -- | Properties of the object.
 pnmAddtional :: Lens' PlanNodeMetadata (HashMap Text JSONValue)
@@ -1841,11 +1903,13 @@ data PartitionedDml =
   PartitionedDml'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartitionedDml' with the minimum fields required to make a request.
 --
 partitionedDml
     :: PartitionedDml
 partitionedDml = PartitionedDml'
+
 
 instance FromJSON PartitionedDml where
         parseJSON
@@ -1864,6 +1928,7 @@ newtype SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1872,6 +1937,7 @@ newtype SetIAMPolicyRequest =
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest = SetIAMPolicyRequest' {_siprPolicy = Nothing}
+
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -1911,6 +1977,7 @@ data UpdateDatabaseDdlRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateDatabaseDdlRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1923,6 +1990,7 @@ updateDatabaseDdlRequest
 updateDatabaseDdlRequest =
   UpdateDatabaseDdlRequest'
     {_uddrOperationId = Nothing, _uddrStatements = Nothing}
+
 
 -- | If empty, the new update request is assigned an automatically-generated
 -- operation ID. Otherwise, \`operation_id\` is used to construct the name
@@ -1978,6 +2046,7 @@ data Mutation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Mutation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2001,6 +2070,7 @@ mutation =
     , _mDelete = Nothing
     , _mUpdate = Nothing
     }
+
 
 -- | Like insert, except that if the row already exists, it is deleted, and
 -- the column values provided are inserted instead. Unlike
@@ -2066,6 +2136,7 @@ data PartitionReadRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartitionReadRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2092,6 +2163,7 @@ partitionReadRequest =
     , _prrIndex = Nothing
     , _prrTable = Nothing
     }
+
 
 -- | Additional options that affect how many partitions are created.
 prrPartitionOptions :: Lens' PartitionReadRequest (Maybe PartitionOptions)
@@ -2168,6 +2240,7 @@ newtype ExecuteSQLRequestParamTypes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExecuteSQLRequestParamTypes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2179,6 +2252,7 @@ executeSQLRequestParamTypes
 executeSQLRequestParamTypes pEsqlrptAddtional_ =
   ExecuteSQLRequestParamTypes'
     {_esqlrptAddtional = _Coerce # pEsqlrptAddtional_}
+
 
 esqlrptAddtional :: Lens' ExecuteSQLRequestParamTypes (HashMap Text Type)
 esqlrptAddtional
@@ -2205,6 +2279,7 @@ data Transaction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Transaction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2215,6 +2290,7 @@ data Transaction =
 transaction
     :: Transaction
 transaction = Transaction' {_tReadTimestamp = Nothing, _tId = Nothing}
+
 
 -- | For snapshot read-only transactions, the read timestamp chosen for the
 -- transaction. Not returned by default: see
@@ -2259,6 +2335,7 @@ data ListSessionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSessionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2270,6 +2347,7 @@ listSessionsResponse
     :: ListSessionsResponse
 listSessionsResponse =
   ListSessionsResponse' {_lsrNextPageToken = Nothing, _lsrSessions = Nothing}
+
 
 -- | \`next_page_token\` can be sent in a subsequent ListSessions call to
 -- fetch more of the matching sessions.
@@ -2309,6 +2387,7 @@ newtype StructType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StructType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2317,6 +2396,7 @@ newtype StructType =
 structType
     :: StructType
 structType = StructType' {_stFields = Nothing}
+
 
 -- | The list of fields that make up this struct. Order is significant,
 -- because values of this struct type are represented as lists, where the
@@ -2347,6 +2427,7 @@ newtype CommitResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2355,6 +2436,7 @@ newtype CommitResponse =
 commitResponse
     :: CommitResponse
 commitResponse = CommitResponse' {_crCommitTimestamp = Nothing}
+
 
 -- | The Cloud Spanner timestamp at which the transaction committed.
 crCommitTimestamp :: Lens' CommitResponse (Maybe UTCTime)
@@ -2384,6 +2466,7 @@ newtype Partition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Partition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2392,6 +2475,7 @@ newtype Partition =
 partition
     :: Partition
 partition = Partition' {_pPartitionToken = Nothing}
+
 
 -- | This token can be passed to Read, StreamingRead, ExecuteSql, or
 -- ExecuteStreamingSql requests to restrict the results to those identified
@@ -2422,6 +2506,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2431,6 +2516,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | REQUIRED: The set of permissions to check for \'resource\'. Permissions
 -- with wildcards (such as \'*\', \'spanner.*\', \'spanner.instances.*\')
@@ -2468,6 +2554,7 @@ newtype PartitionQueryRequestParamTypes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartitionQueryRequestParamTypes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2479,6 +2566,7 @@ partitionQueryRequestParamTypes
 partitionQueryRequestParamTypes pPqrptAddtional_ =
   PartitionQueryRequestParamTypes'
     {_pqrptAddtional = _Coerce # pPqrptAddtional_}
+
 
 pqrptAddtional :: Lens' PartitionQueryRequestParamTypes (HashMap Text Type)
 pqrptAddtional
@@ -2509,6 +2597,7 @@ data UpdateInstanceMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateInstanceMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2529,6 +2618,7 @@ updateInstanceMetadata =
     , _uimEndTime = Nothing
     , _uimInstance = Nothing
     }
+
 
 -- | The time at which UpdateInstance request was received.
 uimStartTime :: Lens' UpdateInstanceMetadata (Maybe UTCTime)
@@ -2586,6 +2676,7 @@ newtype PlanNodeExecutionStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlanNodeExecutionStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2596,6 +2687,7 @@ planNodeExecutionStats
     -> PlanNodeExecutionStats
 planNodeExecutionStats pPnesAddtional_ =
   PlanNodeExecutionStats' {_pnesAddtional = _Coerce # pPnesAddtional_}
+
 
 -- | Properties of the object.
 pnesAddtional :: Lens' PlanNodeExecutionStats (HashMap Text JSONValue)
@@ -2622,6 +2714,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2631,6 +2724,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -2669,6 +2763,7 @@ data PartialResultSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartialResultSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2692,6 +2787,7 @@ partialResultSet =
     , _prsMetadata = Nothing
     , _prsChunkedValue = Nothing
     }
+
 
 -- | Streaming calls might be interrupted for a variety of reasons, such as
 -- TCP connection loss. If this occurs, the stream of results can be
@@ -2816,6 +2912,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2828,6 +2925,7 @@ data Policy =
 policy
     :: Policy
 policy = Policy' {_pEtag = Nothing, _pVersion = Nothing, _pBindings = Nothing}
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -2883,6 +2981,7 @@ data CreateDatabaseRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateDatabaseRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2895,6 +2994,7 @@ createDatabaseRequest
 createDatabaseRequest =
   CreateDatabaseRequest'
     {_cdrExtraStatements = Nothing, _cdrCreateStatement = Nothing}
+
 
 -- | An optional list of DDL statements to run inside the newly created
 -- database. Statements can create tables, indexes, etc. These statements
@@ -2948,6 +3048,7 @@ data ExecuteSQLRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExecuteSQLRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2980,6 +3081,7 @@ executeSQLRequest =
     , _esqlrPartitionToken = Nothing
     , _esqlrQueryMode = Nothing
     }
+
 
 -- | It is not always possible for Cloud Spanner to infer the right SQL type
 -- from a JSON value. For example, values of type \`BYTES\` and values of
@@ -3103,6 +3205,7 @@ data CommitRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3120,6 +3223,7 @@ commitRequest =
     , _crTransactionId = Nothing
     , _crSingleUseTransaction = Nothing
     }
+
 
 -- | The mutations to be executed when this transaction commits. All
 -- mutations are applied atomically, in the order they appear in this list.
@@ -3178,6 +3282,7 @@ data Type =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3191,6 +3296,7 @@ type'
     :: Type
 type' =
   Type' {_tArrayElementType = Nothing, _tStructType = Nothing, _tCode = Nothing}
+
 
 -- | If code == ARRAY, then \`array_element_type\` is the type of the array
 -- elements.
@@ -3237,6 +3343,7 @@ data CreateInstanceMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateInstanceMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3257,6 +3364,7 @@ createInstanceMetadata =
     , _cimEndTime = Nothing
     , _cimInstance = Nothing
     }
+
 
 -- | The time at which the CreateInstance request was received.
 cimStartTime :: Lens' CreateInstanceMetadata (Maybe UTCTime)
@@ -3351,6 +3459,7 @@ data KeyRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KeyRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3371,6 +3480,7 @@ keyRange =
     , _krStartOpen = Nothing
     , _krEndClosed = Nothing
     }
+
 
 -- | If the start is closed, then the range includes all rows whose first
 -- \`len(start_closed)\` key columns exactly match \`start_closed\`.
@@ -3436,6 +3546,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3446,6 +3557,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -3472,6 +3584,7 @@ data InstanceConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3482,6 +3595,7 @@ data InstanceConfig =
 instanceConfig
     :: InstanceConfig
 instanceConfig = InstanceConfig' {_icName = Nothing, _icDisplayName = Nothing}
+
 
 -- | A unique identifier for the instance configuration. Values are of the
 -- form \`projects\/\/instanceConfigs\/a-z*\`
@@ -3519,6 +3633,7 @@ data ResultSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3532,6 +3647,7 @@ resultSet
     :: ResultSet
 resultSet =
   ResultSet' {_rsStats = Nothing, _rsRows = Nothing, _rsMetadata = Nothing}
+
 
 -- | Query plan and execution statistics for the SQL statement that produced
 -- this result set. These can be requested by setting
@@ -3586,6 +3702,7 @@ newtype SessionLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SessionLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3596,6 +3713,7 @@ sessionLabels
     -> SessionLabels
 sessionLabels pSlAddtional_ =
   SessionLabels' {_slAddtional = _Coerce # pSlAddtional_}
+
 
 slAddtional :: Lens' SessionLabels (HashMap Text Text)
 slAddtional
@@ -3620,6 +3738,7 @@ data ListInstancesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3631,6 +3750,7 @@ listInstancesResponse
     :: ListInstancesResponse
 listInstancesResponse =
   ListInstancesResponse' {_lirNextPageToken = Nothing, _lirInstances = Nothing}
+
 
 -- | \`next_page_token\` can be sent in a subsequent ListInstances call to
 -- fetch more of the matching instances.
@@ -3677,6 +3797,7 @@ data ReadRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReadRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3709,6 +3830,7 @@ readRequest =
     , _rrTable = Nothing
     , _rrPartitionToken = Nothing
     }
+
 
 -- | If this request is resuming a previously interrupted read,
 -- \`resume_token\` should be copied from the last PartialResultSet yielded
@@ -3812,6 +3934,7 @@ data Session =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Session' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3832,6 +3955,7 @@ session =
     , _sLabels = Nothing
     , _sCreateTime = Nothing
     }
+
 
 -- | Output only. The approximate timestamp when the session is last used. It
 -- is typically earlier than the actual last use time.
@@ -3896,6 +4020,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3906,6 +4031,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -3935,6 +4061,7 @@ data ReadOnly =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReadOnly' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3961,6 +4088,7 @@ readOnly =
     , _roMinReadTimestamp = Nothing
     , _roReturnReadTimestamp = Nothing
     }
+
 
 -- | Executes all reads at the given timestamp. Unlike other modes, reads at
 -- a specific timestamp are repeatable; the same read at the same timestamp
@@ -4062,6 +4190,7 @@ data ResultSetMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultSetMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4073,6 +4202,7 @@ resultSetMetadata
     :: ResultSetMetadata
 resultSetMetadata =
   ResultSetMetadata' {_rsmRowType = Nothing, _rsmTransaction = Nothing}
+
 
 -- | Indicates the field names and types for the rows in the result set. For
 -- example, a SQL query like \`\"SELECT UserId, UserName FROM Users\"\`
@@ -4114,6 +4244,7 @@ data Delete' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Delete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4124,6 +4255,7 @@ data Delete' =
 delete'
     :: Delete'
 delete' = Delete'' {_dKeySet = Nothing, _dTable = Nothing}
+
 
 -- | Required. The primary keys of the rows within table to delete. Delete is
 -- idempotent. The transaction will succeed even if some or all rows do not
@@ -4158,6 +4290,7 @@ data UpdateInstanceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateInstanceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4169,6 +4302,7 @@ updateInstanceRequest
     :: UpdateInstanceRequest
 updateInstanceRequest =
   UpdateInstanceRequest' {_uirFieldMask = Nothing, _uirInstance = Nothing}
+
 
 -- | Required. A mask specifying which fields in
 -- [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance]
@@ -4214,6 +4348,7 @@ newtype ResultSetStatsQueryStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultSetStatsQueryStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4224,6 +4359,7 @@ resultSetStatsQueryStats
     -> ResultSetStatsQueryStats
 resultSetStatsQueryStats pRssqsAddtional_ =
   ResultSetStatsQueryStats' {_rssqsAddtional = _Coerce # pRssqsAddtional_}
+
 
 -- | Properties of the object.
 rssqsAddtional :: Lens' ResultSetStatsQueryStats (HashMap Text JSONValue)
@@ -4254,6 +4390,7 @@ data TransactionSelector =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransactionSelector' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4268,6 +4405,7 @@ transactionSelector
 transactionSelector =
   TransactionSelector'
     {_tsBegin = Nothing, _tsId = Nothing, _tsSingleUse = Nothing}
+
 
 -- | Begin a new transaction and execute this read or SQL query in it. The
 -- transaction ID of the new transaction is returned in
@@ -4312,6 +4450,7 @@ data ListInstanceConfigsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListInstanceConfigsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4324,6 +4463,7 @@ listInstanceConfigsResponse
 listInstanceConfigsResponse =
   ListInstanceConfigsResponse'
     {_licrNextPageToken = Nothing, _licrInstanceConfigs = Nothing}
+
 
 -- | \`next_page_token\` can be sent in a subsequent ListInstanceConfigs call
 -- to fetch more of the matching instance configurations.
@@ -4366,6 +4506,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4379,6 +4520,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -4439,6 +4581,7 @@ data PartitionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartitionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4450,6 +4593,7 @@ partitionResponse
     :: PartitionResponse
 partitionResponse =
   PartitionResponse' {_prPartitions = Nothing, _prTransaction = Nothing}
+
 
 -- | Partitions created by this request.
 prPartitions :: Lens' PartitionResponse [Partition]
@@ -4492,6 +4636,7 @@ data PartitionQueryRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartitionQueryRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4515,6 +4660,7 @@ partitionQueryRequest =
     , _pqrTransaction = Nothing
     , _pqrSQL = Nothing
     }
+
 
 -- | It is not always possible for Cloud Spanner to infer the right SQL type
 -- from a JSON value. For example, values of type \`BYTES\` and values of
@@ -4594,6 +4740,7 @@ newtype QueryPlan =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryPlan' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4602,6 +4749,7 @@ newtype QueryPlan =
 queryPlan
     :: QueryPlan
 queryPlan = QueryPlan' {_qpPlanNodes = Nothing}
+
 
 -- | The nodes in the query plan. Plan nodes are returned in pre-order
 -- starting with the plan root. Each PlanNode\'s \`id\` corresponds to its
@@ -4638,6 +4786,7 @@ data Instance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4664,6 +4813,7 @@ instance' =
     , _iDisplayName = Nothing
     , _iLabels = Nothing
     }
+
 
 -- | Output only. The current instance state. For CreateInstance, the state
 -- must be either omitted or set to \`CREATING\`. For UpdateInstance, the

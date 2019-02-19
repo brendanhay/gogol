@@ -57,6 +57,7 @@ newtype QueriesDeleteQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueriesDeleteQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ queriesDeleteQuery
     -> QueriesDeleteQuery
 queriesDeleteQuery pQdqQueryId_ =
   QueriesDeleteQuery' {_qdqQueryId = _Coerce # pQdqQueryId_}
+
 
 -- | Query ID to delete.
 qdqQueryId :: Lens' QueriesDeleteQuery Int64

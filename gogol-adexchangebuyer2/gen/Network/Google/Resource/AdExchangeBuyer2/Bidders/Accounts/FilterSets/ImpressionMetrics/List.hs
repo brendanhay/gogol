@@ -79,6 +79,7 @@ data BiddersAccountsFilterSetsImpressionMetricsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BiddersAccountsFilterSetsImpressionMetricsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ biddersAccountsFilterSetsImpressionMetricsList pBafsimlFilterSetName_ =
     , _bafsimlPageSize = Nothing
     , _bafsimlCallback = Nothing
     }
+
 
 -- | V1 error format.
 bafsimlXgafv :: Lens' BiddersAccountsFilterSetsImpressionMetricsList (Maybe Xgafv)

@@ -80,6 +80,7 @@ data PlayListItemsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListItemsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ playListItemsList pPlilPart_ =
     , _plilPlayListId = Nothing
     , _plilMaxResults = 5
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- playlistItem resource properties that the API response will include. If

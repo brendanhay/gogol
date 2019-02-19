@@ -79,6 +79,7 @@ data ProjectsNotificationChannelsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotificationChannelsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsNotificationChannelsPatch pPncpPayload_ pPncpName_ =
     , _pncpName = pPncpName_
     , _pncpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pncpXgafv :: Lens' ProjectsNotificationChannelsPatch (Maybe Xgafv)

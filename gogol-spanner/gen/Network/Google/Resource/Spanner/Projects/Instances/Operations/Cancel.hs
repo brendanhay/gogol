@@ -86,6 +86,7 @@ data ProjectsInstancesOperationsCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesOperationsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsInstancesOperationsCancel pPiocName_ =
     , _piocName = pPiocName_
     , _piocCallback = Nothing
     }
+
 
 -- | V1 error format.
 piocXgafv :: Lens' ProjectsInstancesOperationsCancel (Maybe Xgafv)

@@ -61,6 +61,7 @@ newtype PeopleGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeopleGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ peopleGet
     :: Text -- ^ 'pgUserId'
     -> PeopleGet
 peopleGet pPgUserId_ = PeopleGet' {_pgUserId = pPgUserId_}
+
 
 -- | The ID of the person to get the profile for. The special value \"me\"
 -- can be used to indicate the authenticated user.

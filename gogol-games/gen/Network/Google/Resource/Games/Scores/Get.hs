@@ -87,6 +87,7 @@ data ScoresGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScoresGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +120,7 @@ scoresGet pSgTimeSpan_ pSgLeaderboardId_ pSgPlayerId_ =
     , _sgPlayerId = pSgPlayerId_
     , _sgMaxResults = Nothing
     }
+
 
 -- | The time span for the scores and ranks you\'re requesting.
 sgTimeSpan :: Lens' ScoresGet ScoresGetTimeSpan

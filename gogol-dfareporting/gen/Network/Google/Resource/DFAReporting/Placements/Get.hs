@@ -61,6 +61,7 @@ data PlacementsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ placementsGet
 placementsGet pPgProFileId_ pPgId_ =
   PlacementsGet'
     {_pgProFileId = _Coerce # pPgProFileId_, _pgId = _Coerce # pPgId_}
+
 
 -- | User profile ID associated with this request.
 pgProFileId :: Lens' PlacementsGet Int64

@@ -64,6 +64,7 @@ data BucketsSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketsSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ bucketsSetIAMPolicy pBsipBucket_ pBsipPayload_ =
     , _bsipPayload = pBsipPayload_
     , _bsipUserProject = Nothing
     }
+
 
 -- | Name of a bucket.
 bsipBucket :: Lens' BucketsSetIAMPolicy Text

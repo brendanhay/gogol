@@ -87,6 +87,7 @@ data ProjectsDlpJobsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDlpJobsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ projectsDlpJobsCreate pPParent_ pPPayload_ =
     , _pPayload = pPPayload_
     , _pCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id.
 pParent :: Lens' ProjectsDlpJobsCreate Text

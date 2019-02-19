@@ -64,6 +64,7 @@ data PosInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ posInsert pPpMerchantId_ pPpTargetMerchantId_ pPpPayload_ =
     , _ppTargetMerchantId = _Coerce # pPpTargetMerchantId_
     , _ppPayload = pPpPayload_
     }
+
 
 -- | The ID of the POS or inventory data provider.
 ppMerchantId :: Lens' PosInsert Word64

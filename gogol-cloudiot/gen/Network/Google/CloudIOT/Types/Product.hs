@@ -65,6 +65,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -121,11 +123,13 @@ data UnbindDeviceFromGatewayResponse =
   UnbindDeviceFromGatewayResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnbindDeviceFromGatewayResponse' with the minimum fields required to make a request.
 --
 unbindDeviceFromGatewayResponse
     :: UnbindDeviceFromGatewayResponse
 unbindDeviceFromGatewayResponse = UnbindDeviceFromGatewayResponse'
+
 
 instance FromJSON UnbindDeviceFromGatewayResponse
          where
@@ -146,6 +150,7 @@ data DeviceState =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceState' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -156,6 +161,7 @@ data DeviceState =
 deviceState
     :: DeviceState
 deviceState = DeviceState' {_dsUpdateTime = Nothing, _dsBinaryData = Nothing}
+
 
 -- | [Output only] The time at which this state version was updated in Cloud
 -- IoT Core.
@@ -198,6 +204,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -218,6 +225,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -269,11 +277,13 @@ data GetIAMPolicyRequest =
   GetIAMPolicyRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -293,6 +303,7 @@ data ListDeviceRegistriesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDeviceRegistriesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -305,6 +316,7 @@ listDeviceRegistriesResponse
 listDeviceRegistriesResponse =
   ListDeviceRegistriesResponse'
     {_ldrrNextPageToken = Nothing, _ldrrDeviceRegistries = Nothing}
+
 
 -- | If not empty, indicates that there may be more registries that match the
 -- request; this value should be passed in a new
@@ -349,6 +361,7 @@ data DeviceConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -369,6 +382,7 @@ deviceConfig =
     , _dcBinaryData = Nothing
     , _dcVersion = Nothing
     }
+
 
 -- | [Output only] The time at which Cloud IoT Core received the
 -- acknowledgment from the device, indicating that the device has received
@@ -436,6 +450,7 @@ newtype ListDeviceConfigVersionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDeviceConfigVersionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -445,6 +460,7 @@ listDeviceConfigVersionsResponse
     :: ListDeviceConfigVersionsResponse
 listDeviceConfigVersionsResponse =
   ListDeviceConfigVersionsResponse' {_ldcvrDeviceConfigs = Nothing}
+
 
 -- | The device configuration for the last few versions. Versions are listed
 -- in decreasing order, starting from the most recent one.
@@ -482,6 +498,7 @@ data GatewayConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GatewayConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -502,6 +519,7 @@ gatewayConfig =
     , _gcLastAccessedGatewayTime = Nothing
     , _gcGatewayType = Nothing
     }
+
 
 -- | [Output only] The ID of the gateway the device accessed most recently.
 gcLastAccessedGatewayId :: Lens' GatewayConfig (Maybe Text)
@@ -560,6 +578,7 @@ newtype ListDeviceStatesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDeviceStatesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -569,6 +588,7 @@ listDeviceStatesResponse
     :: ListDeviceStatesResponse
 listDeviceStatesResponse =
   ListDeviceStatesResponse' {_ldsrDeviceStates = Nothing}
+
 
 -- | The last few device states. States are listed in descending order of
 -- server update time, starting from the most recent one.
@@ -603,11 +623,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -625,6 +647,7 @@ newtype StateNotificationConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StateNotificationConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -634,6 +657,7 @@ stateNotificationConfig
     :: StateNotificationConfig
 stateNotificationConfig =
   StateNotificationConfig' {_sncPubsubTopicName = Nothing}
+
 
 -- | A Cloud Pub\/Sub topic name. For example,
 -- \`projects\/myProject\/topics\/deviceEvents\`.
@@ -679,6 +703,7 @@ data Device =
     , _dLastEventTime      :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --
@@ -739,6 +764,7 @@ device =
     , _dBlocked = Nothing
     , _dLastEventTime = Nothing
     }
+
 
 -- | [Output only] The state most recently received from the device. If no
 -- state has been reported, this field is not present.
@@ -933,6 +959,7 @@ data DeviceCredential =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceCredential' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -944,6 +971,7 @@ deviceCredential
     :: DeviceCredential
 deviceCredential =
   DeviceCredential' {_dcPublicKey = Nothing, _dcExpirationTime = Nothing}
+
 
 -- | A public key used to verify the signature of JSON Web Tokens (JWTs).
 -- When adding a new device credential, either via device creation or via
@@ -993,6 +1021,7 @@ data EventNotificationConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventNotificationConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1005,6 +1034,7 @@ eventNotificationConfig
 eventNotificationConfig =
   EventNotificationConfig'
     {_encPubsubTopicName = Nothing, _encSubfolderMatches = Nothing}
+
 
 -- | A Cloud Pub\/Sub topic name. For example,
 -- \`projects\/myProject\/topics\/deviceEvents\`.
@@ -1051,6 +1081,7 @@ data X509CertificateDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'X509CertificateDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1077,6 +1108,7 @@ x509CertificateDetails =
     , _xcdIssuer = Nothing
     , _xcdPublicKeyType = Nothing
     }
+
 
 -- | The entity the certificate and public key belong to.
 xcdSubject :: Lens' X509CertificateDetails (Maybe Text)
@@ -1146,6 +1178,7 @@ data PublicKeyCertificate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PublicKeyCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1160,6 +1193,7 @@ publicKeyCertificate
 publicKeyCertificate =
   PublicKeyCertificate'
     {_pkcFormat = Nothing, _pkcCertificate = Nothing, _pkcX509Details = Nothing}
+
 
 -- | The certificate format.
 pkcFormat :: Lens' PublicKeyCertificate (Maybe PublicKeyCertificateFormat)
@@ -1202,6 +1236,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1212,6 +1247,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1236,6 +1272,7 @@ newtype MqttConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MqttConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1244,6 +1281,7 @@ newtype MqttConfig =
 mqttConfig
     :: MqttConfig
 mqttConfig = MqttConfig' {_mcMqttEnabledState = Nothing}
+
 
 -- | If enabled, allows connections using the MQTT protocol. Otherwise, MQTT
 -- connections to this registry will fail.
@@ -1272,6 +1310,7 @@ newtype SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1280,6 +1319,7 @@ newtype SetIAMPolicyRequest =
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest = SetIAMPolicyRequest' {_siprPolicy = Nothing}
+
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -1307,6 +1347,7 @@ newtype RegistryCredential =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegistryCredential' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1315,6 +1356,7 @@ newtype RegistryCredential =
 registryCredential
     :: RegistryCredential
 registryCredential = RegistryCredential' {_rcPublicKeyCertificate = Nothing}
+
 
 -- | A public key certificate used to verify the device credentials.
 rcPublicKeyCertificate :: Lens' RegistryCredential (Maybe PublicKeyCertificate)
@@ -1346,6 +1388,7 @@ data SendCommandToDeviceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SendCommandToDeviceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1358,6 +1401,7 @@ sendCommandToDeviceRequest
 sendCommandToDeviceRequest =
   SendCommandToDeviceRequest'
     {_sctdrBinaryData = Nothing, _sctdrSubfolder = Nothing}
+
 
 -- | The command data to send to the device.
 sctdrBinaryData :: Lens' SendCommandToDeviceRequest (Maybe ByteString)
@@ -1398,11 +1442,13 @@ data BindDeviceToGatewayResponse =
   BindDeviceToGatewayResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BindDeviceToGatewayResponse' with the minimum fields required to make a request.
 --
 bindDeviceToGatewayResponse
     :: BindDeviceToGatewayResponse
 bindDeviceToGatewayResponse = BindDeviceToGatewayResponse'
+
 
 instance FromJSON BindDeviceToGatewayResponse where
         parseJSON
@@ -1421,6 +1467,7 @@ newtype HTTPConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1429,6 +1476,7 @@ newtype HTTPConfig =
 hTTPConfig
     :: HTTPConfig
 hTTPConfig = HTTPConfig' {_httpcHTTPEnabledState = Nothing}
+
 
 -- | If enabled, allows devices to use DeviceService via the HTTP protocol.
 -- Otherwise, any requests to DeviceService will fail for this registry.
@@ -1457,6 +1505,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1466,6 +1515,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1500,6 +1550,7 @@ data ListDevicesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDevicesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1511,6 +1562,7 @@ listDevicesResponse
     :: ListDevicesResponse
 listDevicesResponse =
   ListDevicesResponse' {_ldrNextPageToken = Nothing, _ldrDevices = Nothing}
+
 
 -- | If not empty, indicates that there may be more devices that match the
 -- request; this value should be passed in a new \`ListDevicesRequest\`.
@@ -1556,6 +1608,7 @@ newtype DeviceMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1566,6 +1619,7 @@ deviceMetadata
     -> DeviceMetadata
 deviceMetadata pDmAddtional_ =
   DeviceMetadata' {_dmAddtional = _Coerce # pDmAddtional_}
+
 
 dmAddtional :: Lens' DeviceMetadata (HashMap Text Text)
 dmAddtional
@@ -1595,6 +1649,7 @@ data DeviceRegistry =
     , _drId                       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeviceRegistry' with the minimum fields required to make a request.
 --
@@ -1628,6 +1683,7 @@ deviceRegistry =
     , _drHTTPConfig = Nothing
     , _drId = Nothing
     }
+
 
 -- | **Beta Feature** The default logging verbosity for activity from devices
 -- in this registry. The verbosity level can be overridden by
@@ -1738,6 +1794,7 @@ data PublicKeyCredential =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PublicKeyCredential' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1748,6 +1805,7 @@ data PublicKeyCredential =
 publicKeyCredential
     :: PublicKeyCredential
 publicKeyCredential = PublicKeyCredential' {_pFormat = Nothing, _pKey = Nothing}
+
 
 -- | The format of the key.
 pFormat :: Lens' PublicKeyCredential (Maybe PublicKeyCredentialFormat)
@@ -1780,6 +1838,7 @@ data UnbindDeviceFromGatewayRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnbindDeviceFromGatewayRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1792,6 +1851,7 @@ unbindDeviceFromGatewayRequest
 unbindDeviceFromGatewayRequest =
   UnbindDeviceFromGatewayRequest'
     {_udfgrDeviceId = Nothing, _udfgrGatewayId = Nothing}
+
 
 -- | The device to disassociate from the specified gateway. The value of
 -- \`device_id\` can be either the device numeric ID or the user-defined
@@ -1832,6 +1892,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1841,6 +1902,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1891,6 +1953,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1903,6 +1966,7 @@ data Policy =
 policy
     :: Policy
 policy = Policy' {_pEtag = Nothing, _pVersion = Nothing, _pBindings = Nothing}
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -1955,11 +2019,13 @@ data SendCommandToDeviceResponse =
   SendCommandToDeviceResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SendCommandToDeviceResponse' with the minimum fields required to make a request.
 --
 sendCommandToDeviceResponse
     :: SendCommandToDeviceResponse
 sendCommandToDeviceResponse = SendCommandToDeviceResponse'
+
 
 instance FromJSON SendCommandToDeviceResponse where
         parseJSON
@@ -1979,6 +2045,7 @@ data BindDeviceToGatewayRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BindDeviceToGatewayRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1991,6 +2058,7 @@ bindDeviceToGatewayRequest
 bindDeviceToGatewayRequest =
   BindDeviceToGatewayRequest'
     {_bdtgrDeviceId = Nothing, _bdtgrGatewayId = Nothing}
+
 
 -- | The device to associate with the specified gateway. The value of
 -- \`device_id\` can be either the device numeric ID or the user-defined
@@ -2031,6 +2099,7 @@ data ModifyCloudToDeviceConfigRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModifyCloudToDeviceConfigRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2043,6 +2112,7 @@ modifyCloudToDeviceConfigRequest
 modifyCloudToDeviceConfigRequest =
   ModifyCloudToDeviceConfigRequest'
     {_mctdcrVersionToUpdate = Nothing, _mctdcrBinaryData = Nothing}
+
 
 -- | The version number to update. If this value is zero, it will not check
 -- the version number of the server and will always update the current
@@ -2089,6 +2159,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2102,6 +2173,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

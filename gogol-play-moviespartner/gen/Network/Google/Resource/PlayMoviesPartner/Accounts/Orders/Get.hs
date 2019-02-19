@@ -83,6 +83,7 @@ data AccountsOrdersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsOrdersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ accountsOrdersGet pAogAccountId_ pAogOrderId_ =
     , _aogOrderId = pAogOrderId_
     , _aogCallback = Nothing
     }
+
 
 -- | V1 error format.
 aogXgafv :: Lens' AccountsOrdersGet (Maybe Xgafv)

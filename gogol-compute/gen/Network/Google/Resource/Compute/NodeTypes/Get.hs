@@ -67,6 +67,7 @@ data NodeTypesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ nodeTypesGet pNtgProject_ pNtgZone_ pNtgNodeType_ =
     , _ntgZone = pNtgZone_
     , _ntgNodeType = pNtgNodeType_
     }
+
 
 -- | Project ID for this request.
 ntgProject :: Lens' NodeTypesGet Text

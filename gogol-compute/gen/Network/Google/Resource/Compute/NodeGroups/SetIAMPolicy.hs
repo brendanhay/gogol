@@ -72,6 +72,7 @@ data NodeGroupsSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ nodeGroupsSetIAMPolicy pNgsipProject_ pNgsipZone_ pNgsipPayload_ pNgsipResource_
     , _ngsipPayload = pNgsipPayload_
     , _ngsipResource = pNgsipResource_
     }
+
 
 -- | Project ID for this request.
 ngsipProject :: Lens' NodeGroupsSetIAMPolicy Text

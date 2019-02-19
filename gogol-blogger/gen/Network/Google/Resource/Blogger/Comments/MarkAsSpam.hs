@@ -66,6 +66,7 @@ data CommentsMarkAsSpam =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsMarkAsSpam' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ commentsMarkAsSpam pCmasBlogId_ pCmasPostId_ pCmasCommentId_ =
     , _cmasPostId = pCmasPostId_
     , _cmasCommentId = pCmasCommentId_
     }
+
 
 -- | The ID of the Blog.
 cmasBlogId :: Lens' CommentsMarkAsSpam Text

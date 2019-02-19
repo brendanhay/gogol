@@ -59,6 +59,7 @@ newtype UserDeletionUserDeletionRequestUpsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserDeletionUserDeletionRequestUpsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ userDeletionUserDeletionRequestUpsert
     -> UserDeletionUserDeletionRequestUpsert
 userDeletionUserDeletionRequestUpsert pUdudruPayload_ =
   UserDeletionUserDeletionRequestUpsert' {_ududruPayload = pUdudruPayload_}
+
 
 -- | Multipart request metadata.
 ududruPayload :: Lens' UserDeletionUserDeletionRequestUpsert UserDeletionRequest

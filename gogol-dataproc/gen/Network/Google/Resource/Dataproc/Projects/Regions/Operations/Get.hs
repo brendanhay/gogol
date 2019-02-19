@@ -74,6 +74,7 @@ data ProjectsRegionsOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ projectsRegionsOperationsGet pProgName_ =
     , _progName = pProgName_
     , _progCallback = Nothing
     }
+
 
 -- | V1 error format.
 progXgafv :: Lens' ProjectsRegionsOperationsGet (Maybe Xgafv)

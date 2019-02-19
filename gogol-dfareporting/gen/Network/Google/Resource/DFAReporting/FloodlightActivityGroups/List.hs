@@ -96,6 +96,7 @@ data FloodlightActivityGroupsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivityGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -135,6 +136,7 @@ floodlightActivityGroupsList pFaglProFileId_ =
     , _faglType = Nothing
     , _faglMaxResults = 1000
     }
+
 
 -- | Select only floodlight activity groups with the specified floodlight
 -- configuration ID. Must specify either advertiserId, or

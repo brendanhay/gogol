@@ -77,6 +77,7 @@ data IndexingDatasourcesItemsUpload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IndexingDatasourcesItemsUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ indexingDatasourcesItemsUpload pIndPayload_ pIndName_ =
     , _indName = pIndName_
     , _indCallback = Nothing
     }
+
 
 -- | V1 error format.
 indXgafv :: Lens' IndexingDatasourcesItemsUpload (Maybe Xgafv)

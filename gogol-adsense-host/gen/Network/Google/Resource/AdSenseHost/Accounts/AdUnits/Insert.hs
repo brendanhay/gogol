@@ -67,6 +67,7 @@ data AccountsAdUnitsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsAdUnitsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ accountsAdUnitsInsert pAauiPayload_ pAauiAdClientId_ pAauiAccountId_ =
     , _aauiAdClientId = pAauiAdClientId_
     , _aauiAccountId = pAauiAccountId_
     }
+
 
 -- | Multipart request metadata.
 aauiPayload :: Lens' AccountsAdUnitsInsert AdUnit

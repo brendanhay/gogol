@@ -83,6 +83,7 @@ data AccessPoliciesAccessLevelsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessPoliciesAccessLevelsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ accessPoliciesAccessLevelsPatch pApalpPayload_ pApalpName_ =
     , _apalpName = pApalpName_
     , _apalpCallback = Nothing
     }
+
 
 -- | V1 error format.
 apalpXgafv :: Lens' AccessPoliciesAccessLevelsPatch (Maybe Xgafv)

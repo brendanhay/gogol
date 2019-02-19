@@ -70,6 +70,7 @@ data TargetHTTPSProxiesSetSSLCertificates =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPSProxiesSetSSLCertificates' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ targetHTTPSProxiesSetSSLCertificates pThpsscProject_ pThpsscPayload_ pThpsscTarg
     , _thpsscPayload = pThpsscPayload_
     , _thpsscTargetHTTPSProxy = pThpsscTargetHTTPSProxy_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

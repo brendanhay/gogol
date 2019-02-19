@@ -37,6 +37,7 @@ data WriteRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WriteRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -57,6 +58,7 @@ writeRequest =
     , _wrWrites = Nothing
     , _wrStreamId = Nothing
     }
+
 
 -- | A stream token that was previously sent by the server. The client should
 -- set this field to the token from the most recent WriteResponse it has
@@ -123,6 +125,7 @@ data LatLng =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -133,6 +136,7 @@ data LatLng =
 latLng
     :: LatLng
 latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -170,6 +174,7 @@ data WriteResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WriteResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -181,6 +186,7 @@ writeResult
     :: WriteResult
 writeResult =
   WriteResult' {_wrUpdateTime = Nothing, _wrTransformResults = Nothing}
+
 
 -- | The last update time of the document after applying the write. Not set
 -- after a \`delete\`. If the write did not actually change the document,
@@ -226,6 +232,7 @@ data GoogleFirestoreAdminV1Field =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1Field' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -238,6 +245,7 @@ googleFirestoreAdminV1Field
 googleFirestoreAdminV1Field =
   GoogleFirestoreAdminV1Field'
     {_gfavfIndexConfig = Nothing, _gfavfName = Nothing}
+
 
 -- | The index configuration for this field. If unset, field indexing will
 -- revert to the configuration defined by the \`ancestor_field\`. To
@@ -295,6 +303,7 @@ data TransactionOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransactionOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -306,6 +315,7 @@ transactionOptions
     :: TransactionOptions
 transactionOptions =
   TransactionOptions' {_toReadWrite = Nothing, _toReadOnly = Nothing}
+
 
 -- | The transaction can be used for both read and write operations.
 toReadWrite :: Lens' TransactionOptions (Maybe ReadWrite)
@@ -376,6 +386,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -388,6 +399,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -437,6 +449,7 @@ newtype GoogleLongrunningOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -448,6 +461,7 @@ googleLongrunningOperationMetadata
 googleLongrunningOperationMetadata pGlomAddtional_ =
   GoogleLongrunningOperationMetadata'
     {_glomAddtional = _Coerce # pGlomAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glomAddtional :: Lens' GoogleLongrunningOperationMetadata (HashMap Text JSONValue)
@@ -478,6 +492,7 @@ data Precondition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Precondition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -488,6 +503,7 @@ data Precondition =
 precondition
     :: Precondition
 precondition = Precondition' {_pExists = Nothing, _pUpdateTime = Nothing}
+
 
 -- | When set to \`true\`, the target document must exist. When set to
 -- \`false\`, the target document must not exist.
@@ -524,6 +540,7 @@ newtype ReadWrite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReadWrite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -532,6 +549,7 @@ newtype ReadWrite =
 readWrite
     :: ReadWrite
 readWrite = ReadWrite' {_rwRetryTransaction = Nothing}
+
 
 -- | An optional transaction to retry.
 rwRetryTransaction :: Lens' ReadWrite (Maybe ByteString)
@@ -560,6 +578,7 @@ newtype RollbackRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -568,6 +587,7 @@ newtype RollbackRequest =
 rollbackRequest
     :: RollbackRequest
 rollbackRequest = RollbackRequest' {_rrTransaction = Nothing}
+
 
 -- | The transaction to roll back.
 rrTransaction :: Lens' RollbackRequest (Maybe ByteString)
@@ -596,6 +616,7 @@ data GoogleFirestoreAdminV1ExportDocumentsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1ExportDocumentsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -608,6 +629,7 @@ googleFirestoreAdminV1ExportDocumentsRequest
 googleFirestoreAdminV1ExportDocumentsRequest =
   GoogleFirestoreAdminV1ExportDocumentsRequest'
     {_gfavedrCollectionIds = Nothing, _gfavedrOutputURIPrefix = Nothing}
+
 
 -- | Which collection ids to export. Unspecified means all collections.
 gfavedrCollectionIds :: Lens' GoogleFirestoreAdminV1ExportDocumentsRequest [Text]
@@ -664,6 +686,7 @@ data TargetChange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetChange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -687,6 +710,7 @@ targetChange =
     , _tcTargetChangeType = Nothing
     , _tcTargetIds = Nothing
     }
+
 
 -- | The consistent \`read_time\` for the given \`target_ids\` (omitted when
 -- the target_ids are not at a consistent snapshot). The stream is
@@ -761,6 +785,7 @@ data ListLocationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -772,6 +797,7 @@ listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
   ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -811,6 +837,7 @@ data Cursor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Cursor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -821,6 +848,7 @@ data Cursor =
 cursor
     :: Cursor
 cursor = Cursor' {_cValues = Nothing, _cBefore = Nothing}
+
 
 -- | The values that represent a position, in the order they appear in the
 -- order by clause of a query. Can contain fewer values than specified in
@@ -865,6 +893,7 @@ data GoogleFirestoreAdminV1ImportDocumentsMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1ImportDocumentsMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -894,6 +923,7 @@ googleFirestoreAdminV1ImportDocumentsMetadata =
     , _gfavidmEndTime = Nothing
     , _gfavidmOperationState = Nothing
     }
+
 
 -- | The progress, in bytes, of this operation.
 gfavidmProgressBytes :: Lens' GoogleFirestoreAdminV1ImportDocumentsMetadata (Maybe GoogleFirestoreAdminV1Progress)
@@ -982,6 +1012,7 @@ newtype BeginTransactionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeginTransactionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -990,6 +1021,7 @@ newtype BeginTransactionRequest =
 beginTransactionRequest
     :: BeginTransactionRequest
 beginTransactionRequest = BeginTransactionRequest' {_btrOptions = Nothing}
+
 
 -- | The options for the transaction. Defaults to a read-write transaction.
 btrOptions :: Lens' BeginTransactionRequest (Maybe TransactionOptions)
@@ -1018,6 +1050,7 @@ data RunQueryRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RunQueryRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1038,6 +1071,7 @@ runQueryRequest =
     , _rqrStructuredQuery = Nothing
     , _rqrTransaction = Nothing
     }
+
 
 -- | Reads documents as they were at the given time. This may not be older
 -- than 60 seconds.
@@ -1095,6 +1129,7 @@ data GoogleFirestoreAdminV1IndexConfigDelta =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1IndexConfigDelta' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1107,6 +1142,7 @@ googleFirestoreAdminV1IndexConfigDelta
 googleFirestoreAdminV1IndexConfigDelta =
   GoogleFirestoreAdminV1IndexConfigDelta'
     {_gfavicdIndex = Nothing, _gfavicdChangeType = Nothing}
+
 
 -- | The index being changed.
 gfavicdIndex :: Lens' GoogleFirestoreAdminV1IndexConfigDelta (Maybe GoogleFirestoreAdminV1Index)
@@ -1149,6 +1185,7 @@ data GoogleFirestoreAdminV1IndexConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1IndexConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1169,6 +1206,7 @@ googleFirestoreAdminV1IndexConfig =
     , _gfavicIndexes = Nothing
     , _gfavicUsesAncestorConfig = Nothing
     }
+
 
 -- | Output only. Specifies the resource name of the \`Field\` from which
 -- this field\'s index configuration is set (when \`uses_ancestor_config\`
@@ -1238,6 +1276,7 @@ data GoogleFirestoreAdminV1IndexField =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1IndexField' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1255,6 +1294,7 @@ googleFirestoreAdminV1IndexField =
     , _gfavifArrayConfig = Nothing
     , _gfavifOrder = Nothing
     }
+
 
 -- | Can be __name__. For single field indexes, this must match the name of
 -- the field or may be omitted.
@@ -1306,6 +1346,7 @@ data Write =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Write' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1329,6 +1370,7 @@ write =
     , _wDelete = Nothing
     , _wUpdate = Nothing
     }
+
 
 -- | Applies a tranformation to a document. At most one \`transform\` per
 -- document is allowed in a given request. An \`update\` cannot follow a
@@ -1398,6 +1440,7 @@ data Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1421,6 +1464,7 @@ location =
     , _lLabels = Nothing
     , _lLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
@@ -1480,11 +1524,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1503,6 +1549,7 @@ data BatchGetDocumentsResponse =
     , _bgdrMissing     :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchGetDocumentsResponse' with the minimum fields required to make a request.
 --
@@ -1524,6 +1571,7 @@ batchGetDocumentsResponse =
     , _bgdrTransaction = Nothing
     , _bgdrMissing = Nothing
     }
+
 
 -- | The time at which the document was read. This may be monotically
 -- increasing, in this case the previous documents in the result stream are
@@ -1581,6 +1629,7 @@ data CompositeFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompositeFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1591,6 +1640,7 @@ data CompositeFilter =
 compositeFilter
     :: CompositeFilter
 compositeFilter = CompositeFilter' {_cfOp = Nothing, _cfFilters = Nothing}
+
 
 -- | The operator for combining multiple filters.
 cfOp :: Lens' CompositeFilter (Maybe CompositeFilterOp)
@@ -1625,6 +1675,7 @@ newtype DocumentsTarget =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentsTarget' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1633,6 +1684,7 @@ newtype DocumentsTarget =
 documentsTarget
     :: DocumentsTarget
 documentsTarget = DocumentsTarget' {_dtDocuments = Nothing}
+
 
 -- | The names of the documents to retrieve. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}\`.
@@ -1664,6 +1716,7 @@ newtype ListenRequestLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListenRequestLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1674,6 +1727,7 @@ listenRequestLabels
     -> ListenRequestLabels
 listenRequestLabels pLrlAddtional_ =
   ListenRequestLabels' {_lrlAddtional = _Coerce # pLrlAddtional_}
+
 
 lrlAddtional :: Lens' ListenRequestLabels (HashMap Text Text)
 lrlAddtional
@@ -1701,6 +1755,7 @@ data GoogleFirestoreAdminV1Index =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1Index' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1721,6 +1776,7 @@ googleFirestoreAdminV1Index =
     , _gfaviName = Nothing
     , _gfaviFields = Nothing
     }
+
 
 -- | Output only. The serving state of the index.
 gfaviState :: Lens' GoogleFirestoreAdminV1Index (Maybe GoogleFirestoreAdminV1IndexState)
@@ -1788,6 +1844,7 @@ newtype BeginTransactionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeginTransactionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1796,6 +1853,7 @@ newtype BeginTransactionResponse =
 beginTransactionResponse
     :: BeginTransactionResponse
 beginTransactionResponse = BeginTransactionResponse' {_btrTransaction = Nothing}
+
 
 -- | The transaction that was started.
 btrTransaction :: Lens' BeginTransactionResponse (Maybe ByteString)
@@ -1827,6 +1885,7 @@ data RunQueryResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RunQueryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1847,6 +1906,7 @@ runQueryResponse =
     , _rTransaction = Nothing
     , _rDocument = Nothing
     }
+
 
 -- | The time at which the document was read. This may be monotonically
 -- increasing; in this case, the previous documents in the result stream
@@ -1915,6 +1975,7 @@ data GoogleFirestoreAdminV1ExportDocumentsMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1ExportDocumentsMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1944,6 +2005,7 @@ googleFirestoreAdminV1ExportDocumentsMetadata =
     , _gfavedmOperationState = Nothing
     , _gfavedmOutputURIPrefix = Nothing
     }
+
 
 -- | The progress, in bytes, of this operation.
 gfavedmProgressBytes :: Lens' GoogleFirestoreAdminV1ExportDocumentsMetadata (Maybe GoogleFirestoreAdminV1Progress)
@@ -2034,6 +2096,7 @@ data GoogleFirestoreAdminV1Progress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1Progress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2046,6 +2109,7 @@ googleFirestoreAdminV1Progress
 googleFirestoreAdminV1Progress =
   GoogleFirestoreAdminV1Progress'
     {_gfavpCompletedWork = Nothing, _gfavpEstimatedWork = Nothing}
+
 
 -- | The amount of work completed.
 gfavpCompletedWork :: Lens' GoogleFirestoreAdminV1Progress (Maybe Int64)
@@ -2088,6 +2152,7 @@ newtype DocumentMask =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentMask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2096,6 +2161,7 @@ newtype DocumentMask =
 documentMask
     :: DocumentMask
 documentMask = DocumentMask' {_dmFieldPaths = Nothing}
+
 
 -- | The list of field paths in the mask. See Document.fields for a field
 -- path syntax reference.
@@ -2126,6 +2192,7 @@ data QueryTarget =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryTarget' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2136,6 +2203,7 @@ data QueryTarget =
 queryTarget
     :: QueryTarget
 queryTarget = QueryTarget' {_qtParent = Nothing, _qtStructuredQuery = Nothing}
+
 
 -- | The parent resource name. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\` or
@@ -2185,6 +2253,7 @@ data Value =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2226,6 +2295,7 @@ value =
     , _vReferenceValue = Nothing
     , _vNullValue = Nothing
     }
+
 
 -- | A geo point value representing a point on the surface of Earth.
 vGeoPointValue :: Lens' Value (Maybe LatLng)
@@ -2337,6 +2407,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2347,6 +2418,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2372,6 +2444,7 @@ data DocumentTransform =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentTransform' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2383,6 +2456,7 @@ documentTransform
     :: DocumentTransform
 documentTransform =
   DocumentTransform' {_dtDocument = Nothing, _dtFieldTransforms = Nothing}
+
 
 -- | The name of the document to transform.
 dtDocument :: Lens' DocumentTransform (Maybe Text)
@@ -2429,6 +2503,7 @@ data StructuredQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StructuredQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2461,6 +2536,7 @@ structuredQuery =
     , _sqLimit = Nothing
     , _sqSelect = Nothing
     }
+
 
 -- | The filter to apply.
 sqWhere :: Lens' StructuredQuery (Maybe Filter)
@@ -2550,6 +2626,7 @@ data ExistenceFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExistenceFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2560,6 +2637,7 @@ data ExistenceFilter =
 existenceFilter
     :: ExistenceFilter
 existenceFilter = ExistenceFilter' {_efTargetId = Nothing, _efCount = Nothing}
+
 
 -- | The target ID to which this filter applies.
 efTargetId :: Lens' ExistenceFilter (Maybe Int32)
@@ -2599,6 +2677,7 @@ data GoogleFirestoreAdminV1ListFieldsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1ListFieldsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2611,6 +2690,7 @@ googleFirestoreAdminV1ListFieldsResponse
 googleFirestoreAdminV1ListFieldsResponse =
   GoogleFirestoreAdminV1ListFieldsResponse'
     {_gfavlfrNextPageToken = Nothing, _gfavlfrFields = Nothing}
+
 
 -- | A page token that may be used to request another page of results. If
 -- blank, this is the last page.
@@ -2657,6 +2737,7 @@ data GoogleFirestoreAdminV1ImportDocumentsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1ImportDocumentsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2669,6 +2750,7 @@ googleFirestoreAdminV1ImportDocumentsRequest
 googleFirestoreAdminV1ImportDocumentsRequest =
   GoogleFirestoreAdminV1ImportDocumentsRequest'
     {_gfavidrInputURIPrefix = Nothing, _gfavidrCollectionIds = Nothing}
+
 
 -- | Location of the exported files. This must match the output_uri_prefix of
 -- an ExportDocumentsResponse from an export that has completed
@@ -2716,11 +2798,13 @@ data GoogleFirestoreAdminV1LocationMetadata =
   GoogleFirestoreAdminV1LocationMetadata'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1LocationMetadata' with the minimum fields required to make a request.
 --
 googleFirestoreAdminV1LocationMetadata
     :: GoogleFirestoreAdminV1LocationMetadata
 googleFirestoreAdminV1LocationMetadata = GoogleFirestoreAdminV1LocationMetadata'
+
 
 instance FromJSON
            GoogleFirestoreAdminV1LocationMetadata
@@ -2741,12 +2825,14 @@ data GoogleLongrunningCancelOperationRequest =
   GoogleLongrunningCancelOperationRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningCancelOperationRequest' with the minimum fields required to make a request.
 --
 googleLongrunningCancelOperationRequest
     :: GoogleLongrunningCancelOperationRequest
 googleLongrunningCancelOperationRequest =
   GoogleLongrunningCancelOperationRequest'
+
 
 instance FromJSON
            GoogleLongrunningCancelOperationRequest
@@ -2772,6 +2858,7 @@ data ListCollectionIdsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListCollectionIdsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2784,6 +2871,7 @@ listCollectionIdsResponse
 listCollectionIdsResponse =
   ListCollectionIdsResponse'
     {_lcirNextPageToken = Nothing, _lcirCollectionIds = Nothing}
+
 
 -- | A page token that may be used to continue the list.
 lcirNextPageToken :: Lens' ListCollectionIdsResponse (Maybe Text)
@@ -2823,6 +2911,7 @@ newtype FieldReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FieldReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2831,6 +2920,7 @@ newtype FieldReference =
 fieldReference
     :: FieldReference
 fieldReference = FieldReference' {_frFieldPath = Nothing}
+
 
 frFieldPath :: Lens' FieldReference (Maybe Text)
 frFieldPath
@@ -2862,6 +2952,7 @@ data DocumentRemove =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentRemove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2879,6 +2970,7 @@ documentRemove =
     , _drDocument = Nothing
     , _drRemovedTargetIds = Nothing
     }
+
 
 -- | The read timestamp at which the remove was observed. Greater or equal to
 -- the \`commit_time\` of the change\/delete\/remove.
@@ -2930,6 +3022,7 @@ data DocumentChange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentChange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2947,6 +3040,7 @@ documentChange =
     , _dcTargetIds = Nothing
     , _dcRemovedTargetIds = Nothing
     }
+
 
 -- | The new state of the Document. If \`mask\` is set, contains only fields
 -- that were updated or added.
@@ -3001,6 +3095,7 @@ data GoogleFirestoreAdminV1FieldOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1FieldOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3030,6 +3125,7 @@ googleFirestoreAdminV1FieldOperationMetadata =
     , _gfavfomIndexConfigDeltas = Nothing
     , _gfavfomEndTime = Nothing
     }
+
 
 -- | The progress, in bytes, of this operation.
 gfavfomProgressBytes :: Lens' GoogleFirestoreAdminV1FieldOperationMetadata (Maybe GoogleFirestoreAdminV1Progress)
@@ -3119,6 +3215,7 @@ data GoogleFirestoreAdminV1ListIndexesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1ListIndexesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3131,6 +3228,7 @@ googleFirestoreAdminV1ListIndexesResponse
 googleFirestoreAdminV1ListIndexesResponse =
   GoogleFirestoreAdminV1ListIndexesResponse'
     {_gfavlirNextPageToken = Nothing, _gfavlirIndexes = Nothing}
+
 
 -- | A page token that may be used to request another page of results. If
 -- blank, this is the last page.
@@ -3176,6 +3274,7 @@ newtype MapValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MapValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3184,6 +3283,7 @@ newtype MapValue =
 mapValue
     :: MapValue
 mapValue = MapValue' {_mvFields = Nothing}
+
 
 -- | The map\'s fields. The map keys represent field names. Field names
 -- matching the regular expression \`__.*__\` are reserved. Reserved field
@@ -3214,6 +3314,7 @@ data BatchGetDocumentsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchGetDocumentsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3237,6 +3338,7 @@ batchGetDocumentsRequest =
     , _bDocuments = Nothing
     , _bMask = Nothing
     }
+
 
 -- | Reads documents as they were at the given time. This may not be older
 -- than 60 seconds.
@@ -3307,6 +3409,7 @@ data Document =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Document' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3327,6 +3430,7 @@ document =
     , _dCreateTime = Nothing
     , _dFields = Nothing
     }
+
 
 -- | Output only. The time at which the document was last changed. This value
 -- is initially set to the \`create_time\` then increases monotonically
@@ -3398,6 +3502,7 @@ newtype ArrayValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ArrayValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3406,6 +3511,7 @@ newtype ArrayValue =
 arrayValue
     :: ArrayValue
 arrayValue = ArrayValue' {_avValues = Nothing}
+
 
 -- | Values in the array.
 avValues :: Lens' ArrayValue [Value]
@@ -3433,6 +3539,7 @@ data CommitResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3444,6 +3551,7 @@ commitResponse
     :: CommitResponse
 commitResponse =
   CommitResponse' {_crCommitTime = Nothing, _crWriteResults = Nothing}
+
 
 -- | The time at which the commit occurred.
 crCommitTime :: Lens' CommitResponse (Maybe UTCTime)
@@ -3488,6 +3596,7 @@ data ListenResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListenResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3511,6 +3620,7 @@ listenResponse =
     , _lrFilter = Nothing
     , _lrDocumentDelete = Nothing
     }
+
 
 -- | Targets have changed.
 lrTargetChange :: Lens' ListenResponse (Maybe TargetChange)
@@ -3574,6 +3684,7 @@ data FieldFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FieldFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3587,6 +3698,7 @@ fieldFilter
     :: FieldFilter
 fieldFilter =
   FieldFilter' {_ffOp = Nothing, _ffField = Nothing, _ffValue = Nothing}
+
 
 -- | The operator to filter by.
 ffOp :: Lens' FieldFilter (Maybe FieldFilterOp)
@@ -3630,6 +3742,7 @@ newtype GoogleLongrunningOperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningOperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3641,6 +3754,7 @@ googleLongrunningOperationResponse
 googleLongrunningOperationResponse pGlorAddtional_ =
   GoogleLongrunningOperationResponse'
     {_glorAddtional = _Coerce # pGlorAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glorAddtional :: Lens' GoogleLongrunningOperationResponse (HashMap Text JSONValue)
@@ -3671,6 +3785,7 @@ data ListDocumentsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDocumentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3682,6 +3797,7 @@ listDocumentsResponse
     :: ListDocumentsResponse
 listDocumentsResponse =
   ListDocumentsResponse' {_ldrNextPageToken = Nothing, _ldrDocuments = Nothing}
+
 
 -- | The next page token.
 ldrNextPageToken :: Lens' ListDocumentsResponse (Maybe Text)
@@ -3720,6 +3836,7 @@ newtype GoogleFirestoreAdminV1ExportDocumentsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1ExportDocumentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3729,6 +3846,7 @@ googleFirestoreAdminV1ExportDocumentsResponse
     :: GoogleFirestoreAdminV1ExportDocumentsResponse
 googleFirestoreAdminV1ExportDocumentsResponse =
   GoogleFirestoreAdminV1ExportDocumentsResponse' {_gOutputURIPrefix = Nothing}
+
 
 -- | Location of the output files. This can be used to begin an import into
 -- Cloud Firestore (this project or another project) after the operation
@@ -3766,6 +3884,7 @@ newtype Projection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Projection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3774,6 +3893,7 @@ newtype Projection =
 projection
     :: Projection
 projection = Projection' {_pFields = Nothing}
+
 
 -- | The fields to return. If empty, all fields are returned. To only return
 -- the name of the document, use \`[\'__name__\']\`.
@@ -3802,6 +3922,7 @@ data Filter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3819,6 +3940,7 @@ filter' =
     , _fFieldFilter = Nothing
     , _fUnaryFilter = Nothing
     }
+
 
 -- | A composite filter.
 fCompositeFilter :: Lens' Filter (Maybe CompositeFilter)
@@ -3867,6 +3989,7 @@ data GoogleFirestoreAdminV1IndexOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleFirestoreAdminV1IndexOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3893,6 +4016,7 @@ googleFirestoreAdminV1IndexOperationMetadata =
     , _gfaviomEndTime = Nothing
     , _gfaviomIndex = Nothing
     }
+
 
 -- | The progress, in bytes, of this operation.
 gfaviomProgressBytes :: Lens' GoogleFirestoreAdminV1IndexOperationMetadata (Maybe GoogleFirestoreAdminV1Progress)
@@ -3971,6 +4095,7 @@ newtype LocationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3981,6 +4106,7 @@ locationLabels
     -> LocationLabels
 locationLabels pLlAddtional_ =
   LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -4006,6 +4132,7 @@ data ListenRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListenRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4020,6 +4147,7 @@ listenRequest
 listenRequest =
   ListenRequest'
     {_lrRemoveTarget = Nothing, _lrLabels = Nothing, _lrAddTarget = Nothing}
+
 
 -- | The ID of a target to remove from this stream.
 lrRemoveTarget :: Lens' ListenRequest (Maybe Int32)
@@ -4063,6 +4191,7 @@ data CommitRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4073,6 +4202,7 @@ data CommitRequest =
 commitRequest
     :: CommitRequest
 commitRequest = CommitRequest' {_crTransaction = Nothing, _crWrites = Nothing}
+
 
 -- | If set, applies all writes in this transaction, and commits it.
 crTransaction :: Lens' CommitRequest (Maybe ByteString)
@@ -4113,6 +4243,7 @@ newtype LocationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4123,6 +4254,7 @@ locationMetadata
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
   LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -4148,6 +4280,7 @@ data GoogleLongrunningListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4160,6 +4293,7 @@ googleLongrunningListOperationsResponse
 googleLongrunningListOperationsResponse =
   GoogleLongrunningListOperationsResponse'
     {_gllorNextPageToken = Nothing, _gllorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 gllorNextPageToken :: Lens' GoogleLongrunningListOperationsResponse (Maybe Text)
@@ -4205,6 +4339,7 @@ data CollectionSelector =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CollectionSelector' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4216,6 +4351,7 @@ collectionSelector
     :: CollectionSelector
 collectionSelector =
   CollectionSelector' {_csAllDescendants = Nothing, _csCollectionId = Nothing}
+
 
 -- | When false, selects only collections that are immediate children of the
 -- \`parent\` specified in the containing \`RunQueryRequest\`. When true,
@@ -4255,6 +4391,7 @@ data ListCollectionIdsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListCollectionIdsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4266,6 +4403,7 @@ listCollectionIdsRequest
     :: ListCollectionIdsRequest
 listCollectionIdsRequest =
   ListCollectionIdsRequest' {_lcirPageToken = Nothing, _lcirPageSize = Nothing}
+
 
 -- | A page token. Must be a value from ListCollectionIdsResponse.
 lcirPageToken :: Lens' ListCollectionIdsRequest (Maybe Text)
@@ -4305,6 +4443,7 @@ data WriteResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WriteResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4325,6 +4464,7 @@ writeResponse =
     , _wWriteResults = Nothing
     , _wStreamId = Nothing
     }
+
 
 -- | A token that represents the position of this response in the stream.
 -- This can be used by a client to resume the stream at this point. This
@@ -4383,6 +4523,7 @@ data Order =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4393,6 +4534,7 @@ data Order =
 order
     :: Order
 order = Order' {_oField = Nothing, _oDirection = Nothing}
+
 
 -- | The field to order by.
 oField :: Lens' Order (Maybe FieldReference)
@@ -4430,6 +4572,7 @@ data DocumentDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4447,6 +4590,7 @@ documentDelete =
     , _ddDocument = Nothing
     , _ddRemovedTargetIds = Nothing
     }
+
 
 -- | The read timestamp at which the delete was observed. Greater or equal to
 -- the \`commit_time\` of the delete.
@@ -4499,6 +4643,7 @@ data FieldTransform =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FieldTransform' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4528,6 +4673,7 @@ fieldTransform =
     , _ftRemoveAllFromArray = Nothing
     , _ftIncrement = Nothing
     }
+
 
 -- | The path of the field. See Document.fields for the field path syntax
 -- reference.
@@ -4644,6 +4790,7 @@ newtype MapValueFields =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MapValueFields' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4654,6 +4801,7 @@ mapValueFields
     -> MapValueFields
 mapValueFields pMvfAddtional_ =
   MapValueFields' {_mvfAddtional = _Coerce # pMvfAddtional_}
+
 
 mvfAddtional :: Lens' MapValueFields (HashMap Text Value)
 mvfAddtional
@@ -4693,6 +4841,7 @@ newtype DocumentFields =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentFields' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4703,6 +4852,7 @@ documentFields
     -> DocumentFields
 documentFields pDfAddtional_ =
   DocumentFields' {_dfAddtional = _Coerce # pDfAddtional_}
+
 
 dfAddtional :: Lens' DocumentFields (HashMap Text Value)
 dfAddtional
@@ -4726,6 +4876,7 @@ newtype ReadOnly =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReadOnly' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4734,6 +4885,7 @@ newtype ReadOnly =
 readOnly
     :: ReadOnly
 readOnly = ReadOnly' {_roReadTime = Nothing}
+
 
 -- | Reads documents at the given time. This may not be older than 60
 -- seconds.
@@ -4766,6 +4918,7 @@ data Target =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Target' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4792,6 +4945,7 @@ target =
     , _tDocuments = Nothing
     , _tQuery = Nothing
     }
+
 
 -- | A client provided target ID. If not set, the server will assign an ID
 -- for the target. Used for resuming a target without changing IDs. The IDs
@@ -4861,6 +5015,7 @@ newtype WriteRequestLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WriteRequestLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4871,6 +5026,7 @@ writeRequestLabels
     -> WriteRequestLabels
 writeRequestLabels pWrlAddtional_ =
   WriteRequestLabels' {_wrlAddtional = _Coerce # pWrlAddtional_}
+
 
 wrlAddtional :: Lens' WriteRequestLabels (HashMap Text Text)
 wrlAddtional
@@ -4899,6 +5055,7 @@ data GoogleLongrunningOperation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningOperation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4922,6 +5079,7 @@ googleLongrunningOperation =
     , _gloName = Nothing
     , _gloMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -4989,6 +5147,7 @@ data UnaryFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnaryFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4999,6 +5158,7 @@ data UnaryFilter =
 unaryFilter
     :: UnaryFilter
 unaryFilter = UnaryFilter' {_ufOp = Nothing, _ufField = Nothing}
+
 
 -- | The unary operator to apply.
 ufOp :: Lens' UnaryFilter (Maybe UnaryFilterOp)

@@ -32,6 +32,7 @@ data HeldAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HeldAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42,6 +43,7 @@ data HeldAccount =
 heldAccount
     :: HeldAccount
 heldAccount = HeldAccount' {_haAccountId = Nothing, _haHoldTime = Nothing}
+
 
 -- | The account\'s ID as provided by the
 -- <https://developers.google.com/admin-sdk/ Admin SDK>.
@@ -78,6 +80,7 @@ newtype HeldHangoutsChatQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HeldHangoutsChatQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +89,7 @@ newtype HeldHangoutsChatQuery =
 heldHangoutsChatQuery
     :: HeldHangoutsChatQuery
 heldHangoutsChatQuery = HeldHangoutsChatQuery' {_hhcqIncludeRooms = Nothing}
+
 
 -- | If true, include rooms the user has participated in.
 hhcqIncludeRooms :: Lens' HeldHangoutsChatQuery (Maybe Bool)
@@ -122,6 +126,7 @@ data Export =
     , _eCreateTime       :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Export' with the minimum fields required to make a request.
 --
@@ -161,6 +166,7 @@ export' =
     , _eRequester = Nothing
     , _eCreateTime = Nothing
     }
+
 
 -- | Output only. The export status.
 eStatus :: Lens' Export (Maybe ExportStatus)
@@ -283,6 +289,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -295,6 +302,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -341,6 +349,7 @@ newtype AccountInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -349,6 +358,7 @@ newtype AccountInfo =
 accountInfo
     :: AccountInfo
 accountInfo = AccountInfo' {_aiEmails = Nothing}
+
 
 -- | A set of accounts to search.
 aiEmails :: Lens' AccountInfo [Text]
@@ -375,6 +385,7 @@ newtype CloudStorageSink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudStorageSink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -383,6 +394,7 @@ newtype CloudStorageSink =
 cloudStorageSink
     :: CloudStorageSink
 cloudStorageSink = CloudStorageSink' {_cssFiles = Nothing}
+
 
 -- | Output only. The exported files on cloud storage.
 cssFiles :: Lens' CloudStorageSink [CloudStorageFile]
@@ -410,6 +422,7 @@ newtype HangoutsChatExportOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HangoutsChatExportOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -419,6 +432,7 @@ hangoutsChatExportOptions
     :: HangoutsChatExportOptions
 hangoutsChatExportOptions =
   HangoutsChatExportOptions' {_hceoExportFormat = Nothing}
+
 
 -- | The export format for hangouts chat export.
 hceoExportFormat :: Lens' HangoutsChatExportOptions (Maybe HangoutsChatExportOptionsExportFormat)
@@ -449,6 +463,7 @@ data UserInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -459,6 +474,7 @@ data UserInfo =
 userInfo
     :: UserInfo
 userInfo = UserInfo' {_uiEmail = Nothing, _uiDisplayName = Nothing}
+
 
 -- | The email address of the user.
 uiEmail :: Lens' UserInfo (Maybe Text)
@@ -493,6 +509,7 @@ newtype TeamDriveInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeamDriveInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -501,6 +518,7 @@ newtype TeamDriveInfo =
 teamDriveInfo
     :: TeamDriveInfo
 teamDriveInfo = TeamDriveInfo' {_tdiTeamDriveIds = Nothing}
+
 
 -- | List of Team Drive ids, as provided by
 -- <https://developers.google.com/drive Drive API>.
@@ -533,6 +551,7 @@ data AddHeldAccountsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddHeldAccountsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -544,6 +563,7 @@ addHeldAccountsRequest
     :: AddHeldAccountsRequest
 addHeldAccountsRequest =
   AddHeldAccountsRequest' {_aharAccountIds = Nothing, _aharEmails = Nothing}
+
 
 -- | Account ids to identify which accounts to add. Only account_ids or only
 -- emails should be specified, but not both.
@@ -589,6 +609,7 @@ data CorpusQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CorpusQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -609,6 +630,7 @@ corpusQuery =
     , _cqHangoutsChatQuery = Nothing
     , _cqMailQuery = Nothing
     }
+
 
 -- | Details pertaining to Groups holds. If set, corpus must be Groups.
 cqGroupsQuery :: Lens' CorpusQuery (Maybe HeldGroupsQuery)
@@ -660,6 +682,7 @@ newtype OrgUnitInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrgUnitInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -668,6 +691,7 @@ newtype OrgUnitInfo =
 orgUnitInfo
     :: OrgUnitInfo
 orgUnitInfo = OrgUnitInfo' {_ouiOrgUnitId = Nothing}
+
 
 -- | Org unit to search, as provided by the
 -- <https://developers.google.com/admin-sdk/directory/ Admin SDK Directory API>.
@@ -694,6 +718,7 @@ newtype RemoveHeldAccountsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemoveHeldAccountsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -703,6 +728,7 @@ removeHeldAccountsResponse
     :: RemoveHeldAccountsResponse
 removeHeldAccountsResponse =
   RemoveHeldAccountsResponse' {_rharStatuses = Nothing}
+
 
 -- | A list of statuses for deleted accounts. Results have the same order as
 -- the request.
@@ -735,11 +761,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -758,6 +786,7 @@ data ExportStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExportStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -775,6 +804,7 @@ exportStats =
     , _esSizeInBytes = Nothing
     , _esExportedArtifactCount = Nothing
     }
+
 
 -- | The number of documents to be exported.
 esTotalArtifactCount :: Lens' ExportStats (Maybe Int64)
@@ -824,6 +854,7 @@ newtype HangoutsChatInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HangoutsChatInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -832,6 +863,7 @@ newtype HangoutsChatInfo =
 hangoutsChatInfo
     :: HangoutsChatInfo
 hangoutsChatInfo = HangoutsChatInfo' {_hciRoomId = Nothing}
+
 
 -- | A set of rooms to search.
 hciRoomId :: Lens' HangoutsChatInfo [Text]
@@ -859,6 +891,7 @@ newtype RemoveHeldAccountsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemoveHeldAccountsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -868,6 +901,7 @@ removeHeldAccountsRequest
     :: RemoveHeldAccountsRequest
 removeHeldAccountsRequest =
   RemoveHeldAccountsRequest' {_rharAccountIds = Nothing}
+
 
 -- | Account ids to identify HeldAccounts to remove.
 rharAccountIds :: Lens' RemoveHeldAccountsRequest [Text]
@@ -899,6 +933,7 @@ data ListSavedQueriesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSavedQueriesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -911,6 +946,7 @@ listSavedQueriesResponse
 listSavedQueriesResponse =
   ListSavedQueriesResponse'
     {_lsqrNextPageToken = Nothing, _lsqrSavedQueries = Nothing}
+
 
 -- | Page token to retrieve the next page of results in the list. If this is
 -- empty, then there are no more saved queries to list.
@@ -949,11 +985,13 @@ data UndeleteMatterRequest =
   UndeleteMatterRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UndeleteMatterRequest' with the minimum fields required to make a request.
 --
 undeleteMatterRequest
     :: UndeleteMatterRequest
 undeleteMatterRequest = UndeleteMatterRequest'
+
 
 instance FromJSON UndeleteMatterRequest where
         parseJSON
@@ -972,6 +1010,7 @@ newtype HeldDriveQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HeldDriveQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -980,6 +1019,7 @@ newtype HeldDriveQuery =
 heldDriveQuery
     :: HeldDriveQuery
 heldDriveQuery = HeldDriveQuery' {_hdqIncludeTeamDriveFiles = Nothing}
+
 
 -- | If true, include files in Team Drives in the hold.
 hdqIncludeTeamDriveFiles :: Lens' HeldDriveQuery (Maybe Bool)
@@ -1009,6 +1049,7 @@ newtype HangoutsChatOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HangoutsChatOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1017,6 +1058,7 @@ newtype HangoutsChatOptions =
 hangoutsChatOptions
     :: HangoutsChatOptions
 hangoutsChatOptions = HangoutsChatOptions' {_hcoIncludeRooms = Nothing}
+
 
 -- | Set to true to include rooms.
 hcoIncludeRooms :: Lens' HangoutsChatOptions (Maybe Bool)
@@ -1048,6 +1090,7 @@ data AddMatterPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddMatterPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1065,6 +1108,7 @@ addMatterPermissionsRequest =
     , _amprCcMe = Nothing
     , _amprMatterPermission = Nothing
     }
+
 
 -- | True to send notification email to the added account. False to not send
 -- notification email.
@@ -1108,6 +1152,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1118,6 +1163,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1146,6 +1192,7 @@ data Matter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Matter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1169,6 +1216,7 @@ matter =
     , _mName = Nothing
     , _mDescription = Nothing
     }
+
 
 -- | The state of the matter.
 mState :: Lens' Matter (Maybe MatterState)
@@ -1228,6 +1276,7 @@ newtype CloseMatterResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloseMatterResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1236,6 +1285,7 @@ newtype CloseMatterResponse =
 closeMatterResponse
     :: CloseMatterResponse
 closeMatterResponse = CloseMatterResponse' {_cmrMatter = Nothing}
+
 
 -- | The updated matter, with state CLOSED.
 cmrMatter :: Lens' CloseMatterResponse (Maybe Matter)
@@ -1262,6 +1312,7 @@ data HeldMailQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HeldMailQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1276,6 +1327,7 @@ heldMailQuery
 heldMailQuery =
   HeldMailQuery'
     {_hmqStartTime = Nothing, _hmqTerms = Nothing, _hmqEndTime = Nothing}
+
 
 -- | The start time range for the search query. These timestamps are in GMT
 -- and rounded down to the start of the given date.
@@ -1320,6 +1372,7 @@ newtype ListHeldAccountsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListHeldAccountsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1328,6 +1381,7 @@ newtype ListHeldAccountsResponse =
 listHeldAccountsResponse
     :: ListHeldAccountsResponse
 listHeldAccountsResponse = ListHeldAccountsResponse' {_lharAccounts = Nothing}
+
 
 -- | The held accounts on a hold.
 lharAccounts :: Lens' ListHeldAccountsResponse [HeldAccount]
@@ -1358,6 +1412,7 @@ data ListExportsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListExportsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1369,6 +1424,7 @@ listExportsResponse
     :: ListExportsResponse
 listExportsResponse =
   ListExportsResponse' {_lerNextPageToken = Nothing, _lerExports = Nothing}
+
 
 -- | Page token to retrieve the next page of results in the list.
 lerNextPageToken :: Lens' ListExportsResponse (Maybe Text)
@@ -1409,6 +1465,7 @@ data HeldOrgUnit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HeldOrgUnit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1419,6 +1476,7 @@ data HeldOrgUnit =
 heldOrgUnit
     :: HeldOrgUnit
 heldOrgUnit = HeldOrgUnit' {_houHoldTime = Nothing, _houOrgUnitId = Nothing}
+
 
 -- | When the org unit was put on hold. This property is immutable.
 houHoldTime :: Lens' HeldOrgUnit (Maybe UTCTime)
@@ -1455,6 +1513,7 @@ data ListMattersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListMattersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1466,6 +1525,7 @@ listMattersResponse
     :: ListMattersResponse
 listMattersResponse =
   ListMattersResponse' {_lmrNextPageToken = Nothing, _lmrMatters = Nothing}
+
 
 -- | Page token to retrieve the next page of results in the list.
 lmrNextPageToken :: Lens' ListMattersResponse (Maybe Text)
@@ -1502,11 +1562,13 @@ data ReopenMatterRequest =
   ReopenMatterRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReopenMatterRequest' with the minimum fields required to make a request.
 --
 reopenMatterRequest
     :: ReopenMatterRequest
 reopenMatterRequest = ReopenMatterRequest'
+
 
 instance FromJSON ReopenMatterRequest where
         parseJSON
@@ -1525,6 +1587,7 @@ newtype RemoveMatterPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemoveMatterPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1534,6 +1597,7 @@ removeMatterPermissionsRequest
     :: RemoveMatterPermissionsRequest
 removeMatterPermissionsRequest =
   RemoveMatterPermissionsRequest' {_rmprAccountId = Nothing}
+
 
 -- | The account ID.
 rmprAccountId :: Lens' RemoveMatterPermissionsRequest (Maybe Text)
@@ -1567,6 +1631,7 @@ data ExportOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExportOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1590,6 +1655,7 @@ exportOptions =
     , _eoRegion = Nothing
     , _eoMailOptions = Nothing
     }
+
 
 -- | Option available for hangouts chat export.
 eoHangoutsChatOptions :: Lens' ExportOptions (Maybe HangoutsChatExportOptions)
@@ -1648,11 +1714,13 @@ data CloseMatterRequest =
   CloseMatterRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloseMatterRequest' with the minimum fields required to make a request.
 --
 closeMatterRequest
     :: CloseMatterRequest
 closeMatterRequest = CloseMatterRequest'
+
 
 instance FromJSON CloseMatterRequest where
         parseJSON
@@ -1672,6 +1740,7 @@ data DriveOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DriveOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1683,6 +1752,7 @@ driveOptions
     :: DriveOptions
 driveOptions =
   DriveOptions' {_doIncludeTeamDrives = Nothing, _doVersionDate = Nothing}
+
 
 -- | Set to true to include Team Drive.
 doIncludeTeamDrives :: Lens' DriveOptions (Maybe Bool)
@@ -1724,6 +1794,7 @@ data AddHeldAccountResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddHeldAccountResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1735,6 +1806,7 @@ addHeldAccountResult
     :: AddHeldAccountResult
 addHeldAccountResult =
   AddHeldAccountResult' {_aharStatus = Nothing, _aharAccount = Nothing}
+
 
 -- | This represents the success status. If failed, check message.
 aharStatus :: Lens' AddHeldAccountResult (Maybe Status)
@@ -1773,6 +1845,7 @@ data SavedQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SavedQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1796,6 +1869,7 @@ savedQuery =
     , _sqDisplayName = Nothing
     , _sqCreateTime = Nothing
     }
+
 
 -- | A unique identifier for the saved query.
 sqSavedQueryId :: Lens' SavedQuery (Maybe Text)
@@ -1865,6 +1939,7 @@ data Hold =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Hold' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1894,6 +1969,7 @@ hold =
     , _hQuery = Nothing
     , _hCorpus = Nothing
     }
+
 
 -- | If set, the hold applies to all members of the organizational unit and
 -- accounts must be empty. This property is mutable. For groups holds, set
@@ -1977,6 +2053,7 @@ data Query =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Query' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2027,6 +2104,7 @@ query =
     , _qMailOptions = Nothing
     , _qSearchMethod = Nothing
     }
+
 
 -- | When \'ACCOUNT\' is chosen as search method, account_info needs to be
 -- specified.
@@ -2161,6 +2239,7 @@ newtype AddHeldAccountsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddHeldAccountsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2169,6 +2248,7 @@ newtype AddHeldAccountsResponse =
 addHeldAccountsResponse
     :: AddHeldAccountsResponse
 addHeldAccountsResponse = AddHeldAccountsResponse' {_aharResponses = Nothing}
+
 
 -- | The list of responses, in the same order as the batch request.
 aharResponses :: Lens' AddHeldAccountsResponse [AddHeldAccountResult]
@@ -2199,6 +2279,7 @@ newtype MailExportOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MailExportOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2207,6 +2288,7 @@ newtype MailExportOptions =
 mailExportOptions
     :: MailExportOptions
 mailExportOptions = MailExportOptions' {_meoExportFormat = Nothing}
+
 
 -- | The export file format.
 meoExportFormat :: Lens' MailExportOptions (Maybe MailExportOptionsExportFormat)
@@ -2236,6 +2318,7 @@ data ListHoldsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListHoldsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2247,6 +2330,7 @@ listHoldsResponse
     :: ListHoldsResponse
 listHoldsResponse =
   ListHoldsResponse' {_lhrNextPageToken = Nothing, _lhrHolds = Nothing}
+
 
 -- | Page token to retrieve the next page of results in the list. If this is
 -- empty, then there are no more holds to list.
@@ -2286,6 +2370,7 @@ newtype GroupsExportOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsExportOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2294,6 +2379,7 @@ newtype GroupsExportOptions =
 groupsExportOptions
     :: GroupsExportOptions
 groupsExportOptions = GroupsExportOptions' {_geoExportFormat = Nothing}
+
 
 -- | The export format for groups export.
 geoExportFormat :: Lens' GroupsExportOptions (Maybe GroupsExportOptionsExportFormat)
@@ -2325,6 +2411,7 @@ data MatterPermission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MatterPermission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2335,6 +2422,7 @@ data MatterPermission =
 matterPermission
     :: MatterPermission
 matterPermission = MatterPermission' {_mpRole = Nothing, _mpAccountId = Nothing}
+
 
 -- | The user\'s role in this matter.
 mpRole :: Lens' MatterPermission (Maybe MatterPermissionRole)
@@ -2369,6 +2457,7 @@ newtype DriveExportOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DriveExportOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2377,6 +2466,7 @@ newtype DriveExportOptions =
 driveExportOptions
     :: DriveExportOptions
 driveExportOptions = DriveExportOptions' {_deoIncludeAccessInfo = Nothing}
+
 
 -- | Set to true to include access level information for users with
 -- <https://support.google.com/vault/answer/6099459#metadata indirect access>
@@ -2409,6 +2499,7 @@ data HeldGroupsQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HeldGroupsQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2423,6 +2514,7 @@ heldGroupsQuery
 heldGroupsQuery =
   HeldGroupsQuery'
     {_hgqStartTime = Nothing, _hgqTerms = Nothing, _hgqEndTime = Nothing}
+
 
 -- | The start time range for the search query. These timestamps are in GMT
 -- and rounded down to the start of the given date.
@@ -2467,6 +2559,7 @@ newtype ReopenMatterResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReopenMatterResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2475,6 +2568,7 @@ newtype ReopenMatterResponse =
 reopenMatterResponse
     :: ReopenMatterResponse
 reopenMatterResponse = ReopenMatterResponse' {_rmrMatter = Nothing}
+
 
 -- | The updated matter, with state OPEN.
 rmrMatter :: Lens' ReopenMatterResponse (Maybe Matter)
@@ -2502,6 +2596,7 @@ data CloudStorageFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudStorageFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2522,6 +2617,7 @@ cloudStorageFile =
     , _csfBucketName = Nothing
     , _csfMD5Hash = Nothing
     }
+
 
 -- | The cloud storage object name of this export file. Can be used in cloud
 -- storage JSON\/XML API.
@@ -2575,6 +2671,7 @@ newtype MailOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MailOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2583,6 +2680,7 @@ newtype MailOptions =
 mailOptions
     :: MailOptions
 mailOptions = MailOptions' {_moExcludeDrafts = Nothing}
+
 
 -- | Set to true to exclude drafts.
 moExcludeDrafts :: Lens' MailOptions (Maybe Bool)

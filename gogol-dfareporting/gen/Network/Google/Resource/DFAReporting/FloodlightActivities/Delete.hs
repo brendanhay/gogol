@@ -61,6 +61,7 @@ data FloodlightActivitiesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivitiesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ floodlightActivitiesDelete
 floodlightActivitiesDelete pFadProFileId_ pFadId_ =
   FloodlightActivitiesDelete'
     {_fadProFileId = _Coerce # pFadProFileId_, _fadId = _Coerce # pFadId_}
+
 
 -- | User profile ID associated with this request.
 fadProFileId :: Lens' FloodlightActivitiesDelete Int64

@@ -71,6 +71,7 @@ data DNSKeysGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DNSKeysGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ dnsKeysGet pDkgProject_ pDkgDNSKeyId_ pDkgManagedZone_ =
     , _dkgManagedZone = pDkgManagedZone_
     , _dkgClientOperationId = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 dkgProject :: Lens' DNSKeysGet Text

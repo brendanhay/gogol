@@ -66,6 +66,7 @@ data UsersRevokeDeviceAccess =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersRevokeDeviceAccess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ usersRevokeDeviceAccess
 usersRevokeDeviceAccess pUrdaEnterpriseId_ pUrdaUserId_ =
   UsersRevokeDeviceAccess'
     {_urdaEnterpriseId = pUrdaEnterpriseId_, _urdaUserId = pUrdaUserId_}
+
 
 -- | The ID of the enterprise.
 urdaEnterpriseId :: Lens' UsersRevokeDeviceAccess Text

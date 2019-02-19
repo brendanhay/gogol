@@ -90,6 +90,7 @@ data ProjectsZonesClustersNodePoolsAutoscaling =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsAutoscaling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -133,6 +134,7 @@ projectsZonesClustersNodePoolsAutoscaling pPzcnpaZone_ pPzcnpaPayload_ pPzcnpaNo
     , _pzcnpaProjectId = pPzcnpaProjectId_
     , _pzcnpaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcnpaXgafv :: Lens' ProjectsZonesClustersNodePoolsAutoscaling (Maybe Xgafv)

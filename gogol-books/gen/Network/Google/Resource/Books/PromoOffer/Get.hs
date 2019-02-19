@@ -73,6 +73,7 @@ data PromoOfferGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PromoOfferGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ promoOfferGet =
     , _pogProduct = Nothing
     , _pogAndroidId = Nothing
     }
+
 
 -- | device manufacturer
 pogManufacturer :: Lens' PromoOfferGet (Maybe Text)

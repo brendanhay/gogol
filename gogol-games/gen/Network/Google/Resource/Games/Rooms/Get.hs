@@ -60,6 +60,7 @@ data RoomsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ roomsGet
     :: Text -- ^ 'rgRoomId'
     -> RoomsGet
 roomsGet pRgRoomId_ = RoomsGet' {_rgRoomId = pRgRoomId_, _rgLanguage = Nothing}
+
 
 -- | The ID of the room.
 rgRoomId :: Lens' RoomsGet Text

@@ -74,6 +74,7 @@ data SignupURLsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignupURLsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ signupURLsCreate =
     , _sucProjectId = Nothing
     , _sucCallback = Nothing
     }
+
 
 -- | V1 error format.
 sucXgafv :: Lens' SignupURLsCreate (Maybe Xgafv)

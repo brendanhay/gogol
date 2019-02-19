@@ -65,6 +65,7 @@ data OrdersCreatetestreturn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCreatetestreturn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ ordersCreatetestreturn pOccMerchantId_ pOccPayload_ pOccOrderId_ =
     , _occPayload = pOccPayload_
     , _occOrderId = pOccOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

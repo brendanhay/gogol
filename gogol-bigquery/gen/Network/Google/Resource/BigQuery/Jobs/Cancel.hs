@@ -70,6 +70,7 @@ data JobsCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ jobsCancel
 jobsCancel pJcJobId_ pJcProjectId_ =
   JobsCancel'
     {_jcJobId = pJcJobId_, _jcLocation = Nothing, _jcProjectId = pJcProjectId_}
+
 
 -- | [Required] Job ID of the job to cancel
 jcJobId :: Lens' JobsCancel Text

@@ -74,6 +74,7 @@ data ProjectsLocationsClustersUpdateMaster =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersUpdateMaster' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsLocationsClustersUpdateMaster pPlcumPayload_ pPlcumName_ =
     , _plcumName = pPlcumName_
     , _plcumCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcumXgafv :: Lens' ProjectsLocationsClustersUpdateMaster (Maybe Xgafv)

@@ -61,6 +61,7 @@ data AccountsPreferredDealsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsPreferredDealsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ accountsPreferredDealsGet
 accountsPreferredDealsGet pApdgDealId_ pApdgAccountId_ =
   AccountsPreferredDealsGet'
     {_apdgDealId = pApdgDealId_, _apdgAccountId = pApdgAccountId_}
+
 
 -- | Preferred deal to get information about.
 apdgDealId :: Lens' AccountsPreferredDealsGet Text

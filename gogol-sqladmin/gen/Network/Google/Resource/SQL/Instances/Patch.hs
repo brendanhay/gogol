@@ -71,6 +71,7 @@ data InstancesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ instancesPatch pIpProject_ pIpPayload_ pIpInstance_ =
     , _ipPayload = pIpPayload_
     , _ipInstance = pIpInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 ipProject :: Lens' InstancesPatch Text

@@ -68,6 +68,7 @@ data TargetPoolsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ targetPoolsDelete pTpdProject_ pTpdTargetPool_ pTpdRegion_ =
     , _tpdTargetPool = pTpdTargetPool_
     , _tpdRegion = pTpdRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

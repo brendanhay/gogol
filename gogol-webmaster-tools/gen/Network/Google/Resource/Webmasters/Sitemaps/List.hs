@@ -64,6 +64,7 @@ data SitemapsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitemapsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ sitemapsList
     -> SitemapsList
 sitemapsList pSlSiteURL_ =
   SitemapsList' {_slSiteURL = pSlSiteURL_, _slSitemapIndex = Nothing}
+
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/

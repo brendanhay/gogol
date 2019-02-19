@@ -60,6 +60,7 @@ newtype StorelayoutpagesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StorelayoutpagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ storelayoutpagesList
     -> StorelayoutpagesList
 storelayoutpagesList pSlEnterpriseId_ =
   StorelayoutpagesList' {_slEnterpriseId = pSlEnterpriseId_}
+
 
 -- | The ID of the enterprise.
 slEnterpriseId :: Lens' StorelayoutpagesList Text

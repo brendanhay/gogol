@@ -80,6 +80,7 @@ packages:
   - gogol-discovery
   - gogol-dlp
   - gogol-dns
+  - gogol-docs
   - gogol-doubleclick-bids
   - gogol-doubleclick-search
   - gogol-drive

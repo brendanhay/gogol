@@ -66,6 +66,7 @@ data ManagementCustomMetricsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementCustomMetricsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ managementCustomMetricsGet pMcmgCustomMetricId_ pMcmgWebPropertyId_ pMcmgAccount
     , _mcmgWebPropertyId = pMcmgWebPropertyId_
     , _mcmgAccountId = pMcmgAccountId_
     }
+
 
 -- | The ID of the custom metric to retrieve.
 mcmgCustomMetricId :: Lens' ManagementCustomMetricsGet Text

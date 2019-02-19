@@ -62,6 +62,7 @@ data TargetingTemplatesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingTemplatesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ targetingTemplatesUpdate
 targetingTemplatesUpdate pTtuProFileId_ pTtuPayload_ =
   TargetingTemplatesUpdate'
     {_ttuProFileId = _Coerce # pTtuProFileId_, _ttuPayload = pTtuPayload_}
+
 
 -- | User profile ID associated with this request.
 ttuProFileId :: Lens' TargetingTemplatesUpdate Int64

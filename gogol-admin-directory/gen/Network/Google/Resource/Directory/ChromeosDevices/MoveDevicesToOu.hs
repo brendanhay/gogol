@@ -68,6 +68,7 @@ data ChromeosDevicesMoveDevicesToOu =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeosDevicesMoveDevicesToOu' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ chromeosDevicesMoveDevicesToOu pCdmdtoPayload_ pCdmdtoOrgUnitPath_ pCdmdtoCustom
     , _cdmdtoOrgUnitPath = pCdmdtoOrgUnitPath_
     , _cdmdtoCustomerId = pCdmdtoCustomerId_
     }
+
 
 -- | Multipart request metadata.
 cdmdtoPayload :: Lens' ChromeosDevicesMoveDevicesToOu ChromeOSMoveDevicesToOu

@@ -69,6 +69,7 @@ data ReportsSavedGenerate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsSavedGenerate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ reportsSavedGenerate pRsgSavedReportId_ =
     , _rsgStartIndex = Nothing
     , _rsgMaxResults = Nothing
     }
+
 
 -- | Optional locale to use for translating report output to a local
 -- language. Defaults to \"en_US\" if not specified.

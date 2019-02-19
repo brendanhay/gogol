@@ -62,6 +62,7 @@ data UsersAliasesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersAliasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ usersAliasesList
     -> UsersAliasesList
 usersAliasesList pUalUserKey_ =
   UsersAliasesList' {_ualEvent = Nothing, _ualUserKey = pUalUserKey_}
+
 
 -- | Event on which subscription is intended (if subscribing)
 ualEvent :: Lens' UsersAliasesList (Maybe UsersAliasesListEvent)

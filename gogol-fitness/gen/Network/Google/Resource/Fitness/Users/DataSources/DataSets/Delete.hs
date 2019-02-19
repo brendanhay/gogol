@@ -83,6 +83,7 @@ data UsersDataSourcesDataSetsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDataSourcesDataSetsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ usersDataSourcesDataSetsDelete pUdsdsdDataSourceId_ pUdsdsdUserId_ pUdsdsdDataSe
     , _udsdsdModifiedTimeMillis = Nothing
     , _udsdsdCurrentTimeMillis = Nothing
     }
+
 
 -- | The data stream ID of the data source that created the dataset.
 udsdsdDataSourceId :: Lens' UsersDataSourcesDataSetsDelete Text

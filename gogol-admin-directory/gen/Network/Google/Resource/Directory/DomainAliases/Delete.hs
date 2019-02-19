@@ -62,6 +62,7 @@ data DomainAliasesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainAliasesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ domainAliasesDelete
 domainAliasesDelete pDadDomainAliasName_ pDadCustomer_ =
   DomainAliasesDelete'
     {_dadDomainAliasName = pDadDomainAliasName_, _dadCustomer = pDadCustomer_}
+
 
 -- | Name of domain alias to be retrieved.
 dadDomainAliasName :: Lens' DomainAliasesDelete Text

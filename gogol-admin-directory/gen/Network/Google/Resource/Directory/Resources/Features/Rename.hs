@@ -67,6 +67,7 @@ data ResourcesFeaturesRename =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesFeaturesRename' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ resourcesFeaturesRename pRfrPayload_ pRfrCustomer_ pRfrOldName_ =
     , _rfrCustomer = pRfrCustomer_
     , _rfrOldName = pRfrOldName_
     }
+
 
 -- | Multipart request metadata.
 rfrPayload :: Lens' ResourcesFeaturesRename FeatureRename

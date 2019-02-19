@@ -35,6 +35,7 @@ data Webfont =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Webfont' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ webfont =
     , _wSubSets = Nothing
     , _wLastModified = Nothing
     }
+
 
 -- | The available variants for the font.
 wVariants :: Lens' Webfont [Text]
@@ -148,6 +150,7 @@ data WebfontList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebfontList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -159,6 +162,7 @@ webfontList
     :: WebfontList
 webfontList =
   WebfontList' {_wlKind = "webfonts#webfontList", _wlItems = Nothing}
+
 
 -- | This kind represents a list of webfont objects in the webfonts service.
 wlKind :: Lens' WebfontList Text
@@ -195,6 +199,7 @@ newtype WebfontFiles =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebfontFiles' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -205,6 +210,7 @@ webfontFiles
     -> WebfontFiles
 webfontFiles pWfAddtional_ =
   WebfontFiles' {_wfAddtional = _Coerce # pWfAddtional_}
+
 
 -- | The font file URL (value) for an specific variant (key).
 wfAddtional :: Lens' WebfontFiles (HashMap Text Text)

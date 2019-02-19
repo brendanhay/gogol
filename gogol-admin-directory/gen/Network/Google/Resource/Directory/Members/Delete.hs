@@ -62,6 +62,7 @@ data MembersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MembersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ membersDelete
     -> MembersDelete
 membersDelete pMdMemberKey_ pMdGroupKey_ =
   MembersDelete' {_mdMemberKey = pMdMemberKey_, _mdGroupKey = pMdGroupKey_}
+
 
 -- | Email or immutable ID of the member
 mdMemberKey :: Lens' MembersDelete Text

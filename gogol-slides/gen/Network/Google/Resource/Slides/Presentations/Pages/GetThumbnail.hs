@@ -89,6 +89,7 @@ data PresentationsPagesGetThumbnail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PresentationsPagesGetThumbnail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ presentationsPagesGetThumbnail pPpgtPageObjectId_ pPpgtPresentationId_ =
     , _ppgtPresentationId = pPpgtPresentationId_
     , _ppgtCallback = Nothing
     }
+
 
 -- | V1 error format.
 ppgtXgafv :: Lens' PresentationsPagesGetThumbnail (Maybe Xgafv)

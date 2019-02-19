@@ -62,6 +62,7 @@ data CreativesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ creativesGet pCgBuyerCreativeId_ pCgAccountId_ =
     { _cgBuyerCreativeId = pCgBuyerCreativeId_
     , _cgAccountId = _Coerce # pCgAccountId_
     }
+
 
 -- | The buyer-specific id for this creative.
 cgBuyerCreativeId :: Lens' CreativesGet Text

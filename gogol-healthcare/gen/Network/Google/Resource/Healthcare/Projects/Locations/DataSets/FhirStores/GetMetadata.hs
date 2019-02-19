@@ -72,6 +72,7 @@ data ProjectsLocationsDataSetsFhirStoresGetMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsFhirStoresGetMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsLocationsDataSetsFhirStoresGetMetadata pPldsfsgmName_ =
     , _pldsfsgmName = pPldsfsgmName_
     , _pldsfsgmCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldsfsgmXgafv :: Lens' ProjectsLocationsDataSetsFhirStoresGetMetadata (Maybe Xgafv)

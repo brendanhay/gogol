@@ -73,6 +73,7 @@ data UsersSettingsSendAsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsSendAsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ usersSettingsSendAsPatch pUssapPayload_ pUssapSendAsEmail_ =
     , _ussapUserId = "me"
     , _ussapSendAsEmail = pUssapSendAsEmail_
     }
+
 
 -- | Multipart request metadata.
 ussapPayload :: Lens' UsersSettingsSendAsPatch SendAs

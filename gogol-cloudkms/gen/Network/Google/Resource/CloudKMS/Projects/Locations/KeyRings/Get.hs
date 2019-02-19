@@ -70,6 +70,7 @@ data ProjectsLocationsKeyRingsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsKeyRingsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsLocationsKeyRingsGet pPlkrgName_ =
     , _plkrgName = pPlkrgName_
     , _plkrgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrgXgafv :: Lens' ProjectsLocationsKeyRingsGet (Maybe Xgafv)

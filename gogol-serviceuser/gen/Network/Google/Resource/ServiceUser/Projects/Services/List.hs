@@ -78,6 +78,7 @@ data ProjectsServicesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsServicesList pPslParent_ =
     , _pslPageSize = Nothing
     , _pslCallback = Nothing
     }
+
 
 -- | List enabled services for the specified parent. An example valid parent
 -- would be: - projects\/my-project

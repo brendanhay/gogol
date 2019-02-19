@@ -34,6 +34,7 @@ data Insert2ModelInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Insert2ModelInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -60,6 +61,7 @@ insert2ModelInfo =
     , _imiNumberLabels = Nothing
     , _imiNumberInstances = Nothing
     }
+
 
 -- | Type of predictive model (CLASSIFICATION or REGRESSION).
 imiModelType :: Lens' Insert2ModelInfo (Maybe Text)
@@ -139,6 +141,7 @@ newtype AnalyzeModelDescriptionConfusionMatrixRowTotals =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeModelDescriptionConfusionMatrixRowTotals' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -150,6 +153,7 @@ analyzeModelDescriptionConfusionMatrixRowTotals
 analyzeModelDescriptionConfusionMatrixRowTotals pAmdcmrtAddtional_ =
   AnalyzeModelDescriptionConfusionMatrixRowTotals'
     {_amdcmrtAddtional = _Coerce # pAmdcmrtAddtional_}
+
 
 amdcmrtAddtional :: Lens' AnalyzeModelDescriptionConfusionMatrixRowTotals (HashMap Text Text)
 amdcmrtAddtional
@@ -187,6 +191,7 @@ data Insert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Insert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -219,6 +224,7 @@ insert =
     , _iId = Nothing
     , _iStoragePMMLLocation = Nothing
     }
+
 
 -- | Google storage location of the training data file.
 iStorageDataLocation :: Lens' Insert (Maybe Text)
@@ -308,6 +314,7 @@ data List =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'List' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -328,6 +335,7 @@ list =
     , _lItems = Nothing
     , _lSelfLink = Nothing
     }
+
 
 -- | Pagination token to fetch the next page, if one exists.
 lNextPageToken :: Lens' List (Maybe Text)
@@ -377,6 +385,7 @@ newtype InsertUtilityItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InsertUtilityItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -387,6 +396,7 @@ insertUtilityItem
     -> InsertUtilityItem
 insertUtilityItem pIuiAddtional_ =
   InsertUtilityItem' {_iuiAddtional = _Coerce # pIuiAddtional_}
+
 
 iuiAddtional :: Lens' InsertUtilityItem (HashMap Text Double)
 iuiAddtional
@@ -418,6 +428,7 @@ data Insert2 =
     , _insModelInfo                :: !(Maybe Insert2ModelInfo)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Insert2' with the minimum fields required to make a request.
 --
@@ -460,6 +471,7 @@ insert2 =
     , _insStoragePMMLLocation = Nothing
     , _insModelInfo = Nothing
     }
+
 
 -- | Google storage location of the training data file.
 insStorageDataLocation :: Lens' Insert2 (Maybe Text)
@@ -566,6 +578,7 @@ data InsertTrainingInstancesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InsertTrainingInstancesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -578,6 +591,7 @@ insertTrainingInstancesItem
 insertTrainingInstancesItem =
   InsertTrainingInstancesItem'
     {_itiiCSVInstance = Nothing, _itiiOutput = Nothing}
+
 
 -- | The input features for this instance.
 itiiCSVInstance :: Lens' InsertTrainingInstancesItem [JSONValue]
@@ -616,6 +630,7 @@ newtype InputInput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InputInput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -624,6 +639,7 @@ newtype InputInput =
 inputInput
     :: InputInput
 inputInput = InputInput' {_iiCSVInstance = Nothing}
+
 
 -- | A list of input features, these can be strings or doubles.
 iiCSVInstance :: Lens' InputInput [JSONValue]
@@ -653,6 +669,7 @@ data AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -665,6 +682,7 @@ analyzeDataDescriptionFeaturesItemCategoricalValuesItem
 analyzeDataDescriptionFeaturesItemCategoricalValuesItem =
   AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem'
     {_addficviValue = Nothing, _addficviCount = Nothing}
+
 
 -- | The category name.
 addficviValue :: Lens' AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem (Maybe Text)
@@ -710,6 +728,7 @@ data AnalyzeDataDescriptionFeaturesItemNumeric =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeDataDescriptionFeaturesItemNumeric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -724,6 +743,7 @@ analyzeDataDescriptionFeaturesItemNumeric
 analyzeDataDescriptionFeaturesItemNumeric =
   AnalyzeDataDescriptionFeaturesItemNumeric'
     {_addfinMean = Nothing, _addfinCount = Nothing, _addfinVariance = Nothing}
+
 
 -- | Mean of the numeric values of this feature in the data set.
 addfinMean :: Lens' AnalyzeDataDescriptionFeaturesItemNumeric (Maybe Text)
@@ -771,6 +791,7 @@ newtype Input =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Input' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -779,6 +800,7 @@ newtype Input =
 input
     :: Input
 input = Input' {_iInput = Nothing}
+
 
 -- | Input to the model for a prediction.
 iInput :: Lens' Input (Maybe InputInput)
@@ -803,6 +825,7 @@ data AnalyzeDataDescriptionFeaturesItemCategorical =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeDataDescriptionFeaturesItemCategorical' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -815,6 +838,7 @@ analyzeDataDescriptionFeaturesItemCategorical
 analyzeDataDescriptionFeaturesItemCategorical =
   AnalyzeDataDescriptionFeaturesItemCategorical'
     {_addficValues = Nothing, _addficCount = Nothing}
+
 
 -- | List of all the categories for this feature in the data set.
 addficValues :: Lens' AnalyzeDataDescriptionFeaturesItemCategorical [AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem]
@@ -858,6 +882,7 @@ data AnalyzeDataDescriptionOutputFeatureTextItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeDataDescriptionOutputFeatureTextItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -870,6 +895,7 @@ analyzeDataDescriptionOutputFeatureTextItem
 analyzeDataDescriptionOutputFeatureTextItem =
   AnalyzeDataDescriptionOutputFeatureTextItem'
     {_addoftiValue = Nothing, _addoftiCount = Nothing}
+
 
 -- | The output label.
 addoftiValue :: Lens' AnalyzeDataDescriptionOutputFeatureTextItem (Maybe Text)
@@ -911,6 +937,7 @@ data OutputOutputMultiItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OutputOutputMultiItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -922,6 +949,7 @@ outputOutputMultiItem
     :: OutputOutputMultiItem
 outputOutputMultiItem =
   OutputOutputMultiItem' {_oomiScore = Nothing, _oomiLabel = Nothing}
+
 
 -- | The probability of the class label.
 oomiScore :: Lens' OutputOutputMultiItem (Maybe Text)
@@ -960,6 +988,7 @@ data Analyze =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Analyze' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -986,6 +1015,7 @@ analyze =
     , _aErrors = Nothing
     , _aDataDescription = Nothing
     }
+
 
 -- | What kind of resource this is.
 aKind :: Lens' Analyze Text
@@ -1054,6 +1084,7 @@ newtype AnalyzeModelDescriptionConfusionMatrix =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeModelDescriptionConfusionMatrix' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1065,6 +1096,7 @@ analyzeModelDescriptionConfusionMatrix
 analyzeModelDescriptionConfusionMatrix pAmdcmAddtional_ =
   AnalyzeModelDescriptionConfusionMatrix'
     {_amdcmAddtional = _Coerce # pAmdcmAddtional_}
+
 
 -- | Confusion matrix information for the true class label.
 amdcmAddtional :: Lens' AnalyzeModelDescriptionConfusionMatrix (HashMap Text AnalyzeModelDescriptionConfusionMatrixAdditional)
@@ -1100,6 +1132,7 @@ data Output =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Output' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1126,6 +1159,7 @@ output =
     , _oId = Nothing
     , _oOutputMulti = Nothing
     }
+
 
 -- | The estimated regression value (Regression models only).
 oOutputValue :: Lens' Output (Maybe Text)
@@ -1191,6 +1225,7 @@ data AnalyzeDataDescriptionOutputFeatureNumeric =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeDataDescriptionOutputFeatureNumeric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1205,6 +1240,7 @@ analyzeDataDescriptionOutputFeatureNumeric
 analyzeDataDescriptionOutputFeatureNumeric =
   AnalyzeDataDescriptionOutputFeatureNumeric'
     {_addofnMean = Nothing, _addofnCount = Nothing, _addofnVariance = Nothing}
+
 
 -- | Mean of the output values in the data set.
 addofnMean :: Lens' AnalyzeDataDescriptionOutputFeatureNumeric (Maybe Text)
@@ -1253,6 +1289,7 @@ newtype AnalyzeErrorsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1263,6 +1300,7 @@ analyzeErrorsItem
     -> AnalyzeErrorsItem
 analyzeErrorsItem pAeiAddtional_ =
   AnalyzeErrorsItem' {_aeiAddtional = _Coerce # pAeiAddtional_}
+
 
 -- | Error level followed by a detailed error message.
 aeiAddtional :: Lens' AnalyzeErrorsItem (HashMap Text Text)
@@ -1288,6 +1326,7 @@ data AnalyzeDataDescription =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeDataDescription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1299,6 +1338,7 @@ analyzeDataDescription
     :: AnalyzeDataDescription
 analyzeDataDescription =
   AnalyzeDataDescription' {_addOutputFeature = Nothing, _addFeatures = Nothing}
+
 
 -- | Description of the output value or label.
 addOutputFeature :: Lens' AnalyzeDataDescription (Maybe AnalyzeDataDescriptionOutputFeature)
@@ -1339,6 +1379,7 @@ data AnalyzeModelDescription =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeModelDescription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1356,6 +1397,7 @@ analyzeModelDescription =
     , _amdConfusionMatrix = Nothing
     , _amdModelInfo = Nothing
     }
+
 
 -- | A list of the confusion matrix row totals.
 amdConfusionMatrixRowTotals :: Lens' AnalyzeModelDescription (Maybe AnalyzeModelDescriptionConfusionMatrixRowTotals)
@@ -1406,6 +1448,7 @@ newtype AnalyzeDataDescriptionFeaturesItemText =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeDataDescriptionFeaturesItemText' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1415,6 +1458,7 @@ analyzeDataDescriptionFeaturesItemText
     :: AnalyzeDataDescriptionFeaturesItemText
 analyzeDataDescriptionFeaturesItemText =
   AnalyzeDataDescriptionFeaturesItemText' {_addfitCount = Nothing}
+
 
 -- | Number of multiple-word text values for this feature.
 addfitCount :: Lens' AnalyzeDataDescriptionFeaturesItemText (Maybe Int64)
@@ -1446,6 +1490,7 @@ newtype AnalyzeModelDescriptionConfusionMatrixAdditional =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeModelDescriptionConfusionMatrixAdditional' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1457,6 +1502,7 @@ analyzeModelDescriptionConfusionMatrixAdditional
 analyzeModelDescriptionConfusionMatrixAdditional pAmdcmaAddtional_ =
   AnalyzeModelDescriptionConfusionMatrixAdditional'
     {_amdcmaAddtional = _Coerce # pAmdcmaAddtional_}
+
 
 -- | Average number of times an instance with correct class label
 -- modelDescription.confusionMatrix.(key) was wrongfully classified as this
@@ -1493,6 +1539,7 @@ data AnalyzeDataDescriptionFeaturesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeDataDescriptionFeaturesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1513,6 +1560,7 @@ analyzeDataDescriptionFeaturesItem =
     , _addfiIndex = Nothing
     , _addfiCategorical = Nothing
     }
+
 
 -- | Description of multiple-word text values of this feature.
 addfiText :: Lens' AnalyzeDataDescriptionFeaturesItem (Maybe AnalyzeDataDescriptionFeaturesItemText)
@@ -1565,6 +1613,7 @@ data Update =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Update' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1575,6 +1624,7 @@ data Update =
 update
     :: Update
 update = Update' {_uCSVInstance = Nothing, _uOutput = Nothing}
+
 
 -- | The input features for this instance.
 uCSVInstance :: Lens' Update [JSONValue]
@@ -1612,6 +1662,7 @@ data AnalyzeDataDescriptionOutputFeature =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeDataDescriptionOutputFeature' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1624,6 +1675,7 @@ analyzeDataDescriptionOutputFeature
 analyzeDataDescriptionOutputFeature =
   AnalyzeDataDescriptionOutputFeature'
     {_addofText = Nothing, _addofNumeric = Nothing}
+
 
 -- | Description of the output labels in the data set.
 addofText :: Lens' AnalyzeDataDescriptionOutputFeature [AnalyzeDataDescriptionOutputFeatureTextItem]

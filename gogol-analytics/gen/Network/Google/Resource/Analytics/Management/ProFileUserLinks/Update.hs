@@ -74,6 +74,7 @@ data ManagementProFileUserLinksUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementProFileUserLinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ managementProFileUserLinksUpdate pMpfuluWebPropertyId_ pMpfuluProFileId_ pMpfulu
     , _mpfuluAccountId = pMpfuluAccountId_
     , _mpfuluLinkId = pMpfuluLinkId_
     }
+
 
 -- | Web Property ID to update the user link for.
 mpfuluWebPropertyId :: Lens' ManagementProFileUserLinksUpdate Text

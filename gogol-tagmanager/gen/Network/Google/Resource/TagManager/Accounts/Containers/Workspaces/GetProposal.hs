@@ -58,6 +58,7 @@ newtype AccountsContainersWorkspacesGetProposal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesGetProposal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ accountsContainersWorkspacesGetProposal
     -> AccountsContainersWorkspacesGetProposal
 accountsContainersWorkspacesGetProposal pAcwgpPath_ =
   AccountsContainersWorkspacesGetProposal' {_acwgpPath = pAcwgpPath_}
+
 
 -- | GTM workspace proposal\'s relative path: Example:
 -- accounts\/{aid}\/containers\/{cid}\/workspace\/{wid}\/workspace_proposal

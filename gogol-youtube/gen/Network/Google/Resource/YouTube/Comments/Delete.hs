@@ -57,6 +57,7 @@ newtype CommentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ commentsDelete
     :: Text -- ^ 'cdId'
     -> CommentsDelete
 commentsDelete pCdId_ = CommentsDelete' {_cdId = pCdId_}
+
 
 -- | The id parameter specifies the comment ID for the resource that is being
 -- deleted.

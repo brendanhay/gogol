@@ -66,6 +66,7 @@ data UsersAliasesWatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersAliasesWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ usersAliasesWatch pUawPayload_ pUawUserKey_ =
     , _uawPayload = pUawPayload_
     , _uawUserKey = pUawUserKey_
     }
+
 
 -- | Event on which subscription is intended (if subscribing)
 uawEvent :: Lens' UsersAliasesWatch (Maybe UsersAliasesWatchEvent)

@@ -72,6 +72,7 @@ data ReopenAttribution =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReopenAttribution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ reopenAttribution pRaPayload_ =
     , _raPayload = pRaPayload_
     , _raCallback = Nothing
     }
+
 
 -- | V1 error format.
 raXgafv :: Lens' ReopenAttribution (Maybe Xgafv)

@@ -59,6 +59,7 @@ newtype BrowsersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BrowsersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ browsersList
     -> BrowsersList
 browsersList pBlProFileId_ =
   BrowsersList' {_blProFileId = _Coerce # pBlProFileId_}
+
 
 -- | User profile ID associated with this request.
 blProFileId :: Lens' BrowsersList Int64

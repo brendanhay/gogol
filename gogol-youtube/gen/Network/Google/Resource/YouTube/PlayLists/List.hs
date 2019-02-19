@@ -86,6 +86,7 @@ data PlayListsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ playListsList pPllPart_ =
     , _pllPageToken = Nothing
     , _pllMaxResults = 5
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- playlist resource properties that the API response will include. If the

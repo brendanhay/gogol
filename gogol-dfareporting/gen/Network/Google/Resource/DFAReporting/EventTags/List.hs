@@ -92,6 +92,7 @@ data EventTagsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventTagsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -134,6 +135,7 @@ eventTagsList pEtlProFileId_ =
     , _etlAdId = Nothing
     , _etlSortField = ETLSFID
     }
+
 
 -- | Examine only the specified campaign or advertiser\'s event tags for
 -- matching selector criteria. When set to false, the parent advertiser and

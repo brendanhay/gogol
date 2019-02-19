@@ -85,6 +85,7 @@ data EditsImagesUpload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsImagesUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ editsImagesUpload pEiuPackageName_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
     , _eiuLanguage = pEiuLanguage_
     , _eiuEditId = pEiuEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

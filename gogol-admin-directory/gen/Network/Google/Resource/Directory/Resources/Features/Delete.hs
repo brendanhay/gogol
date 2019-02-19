@@ -63,6 +63,7 @@ data ResourcesFeaturesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesFeaturesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ resourcesFeaturesDelete
 resourcesFeaturesDelete pRfdCustomer_ pRfdFeatureKey_ =
   ResourcesFeaturesDelete'
     {_rfdCustomer = pRfdCustomer_, _rfdFeatureKey = pRfdFeatureKey_}
+
 
 -- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your

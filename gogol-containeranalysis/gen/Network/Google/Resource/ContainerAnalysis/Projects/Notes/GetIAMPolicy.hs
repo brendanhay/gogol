@@ -86,6 +86,7 @@ data ProjectsNotesGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotesGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsNotesGetIAMPolicy pPngipPayload_ pPngipResource_ =
     , _pngipResource = pPngipResource_
     , _pngipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pngipXgafv :: Lens' ProjectsNotesGetIAMPolicy (Maybe Xgafv)

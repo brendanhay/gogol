@@ -97,6 +97,7 @@ data UserProFilesGuardiansDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserProFilesGuardiansDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +129,7 @@ userProFilesGuardiansDelete pUpfgdStudentId_ pUpfgdGuardianId_ =
     , _upfgdGuardianId = pUpfgdGuardianId_
     , _upfgdCallback = Nothing
     }
+
 
 -- | The student whose guardian is to be deleted. One of the following: * the
 -- numeric identifier for the user * the email address of the user * the

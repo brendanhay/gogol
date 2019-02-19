@@ -70,6 +70,7 @@ data SitesVersionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesVersionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ sitesVersionsDelete pSvdName_ =
     , _svdName = pSvdName_
     , _svdCallback = Nothing
     }
+
 
 -- | V1 error format.
 svdXgafv :: Lens' SitesVersionsDelete (Maybe Xgafv)

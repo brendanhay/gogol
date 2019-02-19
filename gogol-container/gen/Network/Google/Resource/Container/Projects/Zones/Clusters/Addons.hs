@@ -84,6 +84,7 @@ data ProjectsZonesClustersAddons =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersAddons' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsZonesClustersAddons pPzcaZone_ pPzcaPayload_ pPzcaClusterId_ pPzcaProjec
     , _pzcaProjectId = pPzcaProjectId_
     , _pzcaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcaXgafv :: Lens' ProjectsZonesClustersAddons (Maybe Xgafv)

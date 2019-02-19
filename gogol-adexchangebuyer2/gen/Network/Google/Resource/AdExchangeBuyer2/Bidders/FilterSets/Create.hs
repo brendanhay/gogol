@@ -79,6 +79,7 @@ data BiddersFilterSetsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BiddersFilterSetsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ biddersFilterSetsCreate pBfscOwnerName_ pBfscPayload_ =
     , _bfscIsTransient = Nothing
     , _bfscCallback = Nothing
     }
+
 
 -- | V1 error format.
 bfscXgafv :: Lens' BiddersFilterSetsCreate (Maybe Xgafv)

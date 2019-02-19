@@ -75,6 +75,7 @@ data ProjectsBeginTransaction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsBeginTransaction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsBeginTransaction pPbtPayload_ pPbtProjectId_ =
     , _pbtProjectId = pPbtProjectId_
     , _pbtCallback = Nothing
     }
+
 
 -- | V1 error format.
 pbtXgafv :: Lens' ProjectsBeginTransaction (Maybe Xgafv)

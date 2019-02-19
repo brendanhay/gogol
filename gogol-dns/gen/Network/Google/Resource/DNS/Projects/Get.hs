@@ -60,6 +60,7 @@ data ProjectsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ projectsGet
     -> ProjectsGet
 projectsGet pPgProject_ =
   ProjectsGet' {_pgProject = pPgProject_, _pgClientOperationId = Nothing}
+
 
 -- | Identifies the project addressed by this request.
 pgProject :: Lens' ProjectsGet Text

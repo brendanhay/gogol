@@ -73,6 +73,7 @@ data ProjectsInspectTemplatesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInspectTemplatesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ projectsInspectTemplatesDelete pPitdName_ =
     , _pitdName = pPitdName_
     , _pitdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pitdXgafv :: Lens' ProjectsInspectTemplatesDelete (Maybe Xgafv)

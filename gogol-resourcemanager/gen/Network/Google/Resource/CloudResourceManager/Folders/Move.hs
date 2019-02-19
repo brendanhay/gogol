@@ -98,6 +98,7 @@ data FoldersMove =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersMove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -129,6 +130,7 @@ foldersMove pFmPayload_ pFmName_ =
     , _fmName = pFmName_
     , _fmCallback = Nothing
     }
+
 
 -- | V1 error format.
 fmXgafv :: Lens' FoldersMove (Maybe Xgafv)

@@ -70,6 +70,7 @@ data ManagementRemarketingAudienceUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementRemarketingAudienceUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ managementRemarketingAudienceUpdate pMrauWebPropertyId_ pMrauPayload_ pMrauAccou
     , _mrauAccountId = pMrauAccountId_
     , _mrauRemarketingAudienceId = pMrauRemarketingAudienceId_
     }
+
 
 -- | The web property ID of the remarketing audience to update.
 mrauWebPropertyId :: Lens' ManagementRemarketingAudienceUpdate Text

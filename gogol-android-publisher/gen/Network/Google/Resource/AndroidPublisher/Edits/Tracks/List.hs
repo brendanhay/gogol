@@ -63,6 +63,7 @@ data EditsTracksList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsTracksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ editsTracksList
 editsTracksList pEtlPackageName_ pEtlEditId_ =
   EditsTracksList'
     {_etlPackageName = pEtlPackageName_, _etlEditId = pEtlEditId_}
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

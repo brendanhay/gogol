@@ -70,6 +70,7 @@ data ManagementExperimentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementExperimentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ managementExperimentsGet pMegWebPropertyId_ pMegProFileId_ pMegAccountId_ pMegEx
     , _megAccountId = pMegAccountId_
     , _megExperimentId = pMegExperimentId_
     }
+
 
 -- | Web property ID to retrieve the experiment for.
 megWebPropertyId :: Lens' ManagementExperimentsGet Text

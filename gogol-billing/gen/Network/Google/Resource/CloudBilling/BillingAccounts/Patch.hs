@@ -87,6 +87,7 @@ data BillingAccountsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ billingAccountsPatch pBapPayload_ pBapName_ =
     , _bapName = pBapName_
     , _bapCallback = Nothing
     }
+
 
 -- | V1 error format.
 bapXgafv :: Lens' BillingAccountsPatch (Maybe Xgafv)

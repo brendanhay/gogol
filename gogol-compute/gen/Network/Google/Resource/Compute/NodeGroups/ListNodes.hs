@@ -79,6 +79,7 @@ data NodeGroupsListNodes' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsListNodes'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ nodeGroupsListNodes' pNglnNodeGroup_ pNglnProject_ pNglnZone_ =
     , _nglnPageToken = Nothing
     , _nglnMaxResults = 500
     }
+
 
 -- | Name of the NodeGroup resource whose nodes you want to list.
 nglnNodeGroup :: Lens' NodeGroupsListNodes' Text

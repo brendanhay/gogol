@@ -70,6 +70,7 @@ data ManagementWebPropertyUserLinksUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementWebPropertyUserLinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ managementWebPropertyUserLinksUpdate pMwpuluWebPropertyId_ pMwpuluPayload_ pMwpu
     , _mwpuluAccountId = pMwpuluAccountId_
     , _mwpuluLinkId = pMwpuluLinkId_
     }
+
 
 -- | Web property ID to update the account-user link for.
 mwpuluWebPropertyId :: Lens' ManagementWebPropertyUserLinksUpdate Text

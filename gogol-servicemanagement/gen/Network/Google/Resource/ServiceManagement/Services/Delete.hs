@@ -77,6 +77,7 @@ data ServicesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ servicesDelete pSdServiceName_ =
     , _sdServiceName = pSdServiceName_
     , _sdCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdXgafv :: Lens' ServicesDelete (Maybe Xgafv)

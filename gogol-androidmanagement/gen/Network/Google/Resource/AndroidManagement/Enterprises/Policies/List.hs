@@ -78,6 +78,7 @@ data EnterprisesPoliciesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesPoliciesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ enterprisesPoliciesList pEplParent_ =
     , _eplPageSize = Nothing
     , _eplCallback = Nothing
     }
+
 
 -- | The name of the enterprise in the form enterprises\/{enterpriseId}.
 eplParent :: Lens' EnterprisesPoliciesList Text

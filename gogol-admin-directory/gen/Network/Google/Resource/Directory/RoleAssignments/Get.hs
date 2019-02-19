@@ -63,6 +63,7 @@ data RoleAssignmentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoleAssignmentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ roleAssignmentsGet
 roleAssignmentsGet pRagCustomer_ pRagRoleAssignmentId_ =
   RoleAssignmentsGet'
     {_ragCustomer = pRagCustomer_, _ragRoleAssignmentId = pRagRoleAssignmentId_}
+
 
 -- | Immutable ID of the G Suite account.
 ragCustomer :: Lens' RoleAssignmentsGet Text

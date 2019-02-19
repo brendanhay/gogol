@@ -90,6 +90,7 @@ data AccountsStoreInfosCountryGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsStoreInfosCountryGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -131,6 +132,7 @@ accountsStoreInfosCountryGet pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
     , _asicgBearerToken = Nothing
     , _asicgCallback = Nothing
     }
+
 
 -- | V1 error format.
 asicgXgafv :: Lens' AccountsStoreInfosCountryGet (Maybe Xgafv)

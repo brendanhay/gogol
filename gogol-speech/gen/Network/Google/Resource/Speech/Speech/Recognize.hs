@@ -74,6 +74,7 @@ data SpeechRecognize =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpeechRecognize' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ speechRecognize pSrPayload_ =
     , _srPayload = pSrPayload_
     , _srCallback = Nothing
     }
+
 
 -- | V1 error format.
 srXgafv :: Lens' SpeechRecognize (Maybe Xgafv)

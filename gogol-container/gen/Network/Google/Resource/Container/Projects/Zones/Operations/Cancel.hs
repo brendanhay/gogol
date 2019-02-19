@@ -83,6 +83,7 @@ data ProjectsZonesOperationsCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesOperationsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ projectsZonesOperationsCancel pPzocZone_ pPzocPayload_ pPzocProjectId_ pPzocOper
     , _pzocOperationId = pPzocOperationId_
     , _pzocCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzocXgafv :: Lens' ProjectsZonesOperationsCancel (Maybe Xgafv)

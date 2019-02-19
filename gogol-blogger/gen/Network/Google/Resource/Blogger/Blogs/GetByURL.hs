@@ -61,6 +61,7 @@ data BlogsGetByURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BlogsGetByURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ blogsGetByURL
     -> BlogsGetByURL
 blogsGetByURL pBgbuURL_ =
   BlogsGetByURL' {_bgbuURL = pBgbuURL_, _bgbuView = Nothing}
+
 
 -- | The URL of the blog to retrieve.
 bgbuURL :: Lens' BlogsGetByURL Text

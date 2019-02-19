@@ -97,6 +97,7 @@ data PeopleConnectionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeopleConnectionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -145,6 +146,7 @@ peopleConnectionsList pPclResourceName_ =
     , _pclPageSize = Nothing
     , _pclCallback = Nothing
     }
+
 
 -- | A sync token returned by a previous call to \`people.connections.list\`.
 -- Only resources changed since the sync token was created will be

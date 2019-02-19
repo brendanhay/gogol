@@ -73,6 +73,7 @@ data ManagementCustomDimensionsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementCustomDimensionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ managementCustomDimensionsUpdate pMcduWebPropertyId_ pMcduPayload_ pMcduAccountI
     , _mcduAccountId = pMcduAccountId_
     , _mcduCustomDimensionId = pMcduCustomDimensionId_
     }
+
 
 -- | Web property ID for the custom dimension to update.
 mcduWebPropertyId :: Lens' ManagementCustomDimensionsUpdate Text

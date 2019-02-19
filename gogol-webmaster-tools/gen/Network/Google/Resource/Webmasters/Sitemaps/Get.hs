@@ -61,6 +61,7 @@ data SitemapsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitemapsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ sitemapsGet
     -> SitemapsGet
 sitemapsGet pSgFeedpath_ pSgSiteURL_ =
   SitemapsGet' {_sgFeedpath = pSgFeedpath_, _sgSiteURL = pSgSiteURL_}
+
 
 -- | The URL of the actual sitemap. For example:
 -- http:\/\/www.example.com\/sitemap.xml

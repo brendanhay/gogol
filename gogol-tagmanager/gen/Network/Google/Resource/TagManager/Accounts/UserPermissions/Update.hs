@@ -60,6 +60,7 @@ data AccountsUserPermissionsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsUserPermissionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ accountsUserPermissionsUpdate
 accountsUserPermissionsUpdate pAupuPath_ pAupuPayload_ =
   AccountsUserPermissionsUpdate'
     {_aupuPath = pAupuPath_, _aupuPayload = pAupuPayload_}
+
 
 -- | GTM UserPermission\'s API relative path. Example:
 -- accounts\/{account_id}\/user_permissions\/{user_permission_id}

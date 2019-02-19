@@ -74,6 +74,7 @@ data IndexingDatasourcesItemsPush =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IndexingDatasourcesItemsPush' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ indexingDatasourcesItemsPush pIdipPayload_ pIdipName_ =
     , _idipName = pIdipName_
     , _idipCallback = Nothing
     }
+
 
 -- | V1 error format.
 idipXgafv :: Lens' IndexingDatasourcesItemsPush (Maybe Xgafv)

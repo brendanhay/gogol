@@ -67,6 +67,7 @@ data SubnetworksGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ subnetworksGet pSgProject_ pSgSubnetwork_ pSgRegion_ =
     , _sgSubnetwork = pSgSubnetwork_
     , _sgRegion = pSgRegion_
     }
+
 
 -- | Project ID for this request.
 sgProject :: Lens' SubnetworksGet Text

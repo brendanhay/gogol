@@ -93,6 +93,7 @@ data ServicesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -129,6 +130,7 @@ servicesList pSlParent_ =
     , _slPageSize = Nothing
     , _slCallback = Nothing
     }
+
 
 -- | Parent to search for services on. An example name would be:
 -- \`projects\/123\` where \`123\` is the project number (not project ID).

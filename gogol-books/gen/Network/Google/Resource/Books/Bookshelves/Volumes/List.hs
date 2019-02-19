@@ -74,6 +74,7 @@ data BookshelvesVolumesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BookshelvesVolumesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ bookshelvesVolumesList pBvlUserId_ pBvlShelf_ =
     , _bvlMaxResults = Nothing
     , _bvlShowPreOrders = Nothing
     }
+
 
 -- | ID of user for whom to retrieve bookshelf volumes.
 bvlUserId :: Lens' BookshelvesVolumesList Text

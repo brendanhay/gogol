@@ -79,6 +79,7 @@ data CustomersDevicesUnclaim =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersDevicesUnclaim' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ customersDevicesUnclaim pCduParent_ pCduPayload_ =
     , _cduPayload = pCduPayload_
     , _cduCallback = Nothing
     }
+
 
 -- | Required. The customer managing the device. An API resource name in the
 -- format \`customers\/[CUSTOMER_ID]\`.

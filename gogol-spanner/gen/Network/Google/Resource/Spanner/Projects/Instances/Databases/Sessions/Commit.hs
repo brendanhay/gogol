@@ -87,6 +87,7 @@ data ProjectsInstancesDatabasesSessionsCommit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsCommit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ projectsInstancesDatabasesSessionsCommit pPidscPayload_ pPidscSession_ =
     , _pidscSession = pPidscSession_
     , _pidscCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidscXgafv :: Lens' ProjectsInstancesDatabasesSessionsCommit (Maybe Xgafv)

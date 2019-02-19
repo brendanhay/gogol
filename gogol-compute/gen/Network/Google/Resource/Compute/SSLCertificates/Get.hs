@@ -65,6 +65,7 @@ data SSLCertificatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertificatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ sslCertificatesGet
 sslCertificatesGet pScgProject_ pScgSSLCertificate_ =
   SSLCertificatesGet'
     {_scgProject = pScgProject_, _scgSSLCertificate = pScgSSLCertificate_}
+
 
 -- | Project ID for this request.
 scgProject :: Lens' SSLCertificatesGet Text

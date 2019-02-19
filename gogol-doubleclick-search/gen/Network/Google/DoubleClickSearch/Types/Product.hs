@@ -29,6 +29,7 @@ newtype ReportRow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportRow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38,6 +39,7 @@ reportRow
     :: HashMap Text JSONValue -- ^ 'rrAddtional'
     -> ReportRow
 reportRow pRrAddtional_ = ReportRow' {_rrAddtional = _Coerce # pRrAddtional_}
+
 
 -- | Indicates the columns that are represented in this row. That is, each
 -- key corresponds to a column with a non-empty cell in this row.
@@ -75,6 +77,7 @@ data ReportRequest =
     , _rrRowCount               :: !(Textual Int32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportRequest' with the minimum fields required to make a request.
 --
@@ -126,6 +129,7 @@ reportRequest =
     , _rrVerifySingleTimeZone = False
     , _rrRowCount = 10000
     }
+
 
 -- | Asynchronous report only. The maximum number of rows per report file. A
 -- large report is split into many files based on this field. Acceptable
@@ -293,6 +297,7 @@ data ReportRequestOrderByItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportRequestOrderByItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -304,6 +309,7 @@ reportRequestOrderByItem
     :: ReportRequestOrderByItem
 reportRequestOrderByItem =
   ReportRequestOrderByItem' {_rrobiSortOrder = Nothing, _rrobiColumn = Nothing}
+
 
 -- | The sort direction, which is either ascending or descending.
 rrobiSortOrder :: Lens' ReportRequestOrderByItem (Maybe Text)
@@ -350,6 +356,7 @@ data Report =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -385,6 +392,7 @@ report =
     , _rRowCount = Nothing
     , _rRequest = Nothing
     }
+
 
 -- | Identifies this as a Report resource. Value: the fixed string
 -- doubleclicksearch#report.
@@ -480,6 +488,7 @@ data ReportFilesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportFilesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -490,6 +499,7 @@ data ReportFilesItem =
 reportFilesItem
     :: ReportFilesItem
 reportFilesItem = ReportFilesItem' {_rfiURL = Nothing, _rfiByteCount = Nothing}
+
 
 -- | Use this url to download the report file.
 rfiURL :: Lens' ReportFilesItem (Maybe Text)
@@ -525,6 +535,7 @@ data ReportRequestFiltersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportRequestFiltersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -539,6 +550,7 @@ reportRequestFiltersItem
 reportRequestFiltersItem =
   ReportRequestFiltersItem'
     {_rrfiOperator = Nothing, _rrfiValues = Nothing, _rrfiColumn = Nothing}
+
 
 -- | Operator to use in the filter. See the filter reference for a list of
 -- available operators.
@@ -590,6 +602,7 @@ data Availability =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Availability' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -616,6 +629,7 @@ availability =
     , _aAvailabilityTimestamp = Nothing
     , _aSegmentationType = Nothing
     }
+
 
 -- | DS agency ID.
 aAgencyId :: Lens' Availability (Maybe Int64)
@@ -692,6 +706,7 @@ newtype UpdateAvailabilityRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateAvailabilityRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -701,6 +716,7 @@ updateAvailabilityRequest
     :: UpdateAvailabilityRequest
 updateAvailabilityRequest =
   UpdateAvailabilityRequest' {_uarAvailabilities = Nothing}
+
 
 -- | The availabilities being requested.
 uarAvailabilities :: Lens' UpdateAvailabilityRequest [Availability]
@@ -733,6 +749,7 @@ data CustomMetric =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomMetric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -743,6 +760,7 @@ data CustomMetric =
 customMetric
     :: CustomMetric
 customMetric = CustomMetric' {_cmValue = Nothing, _cmName = Nothing}
+
 
 -- | Custom metric numeric value.
 cmValue :: Lens' CustomMetric (Maybe Double)
@@ -776,6 +794,7 @@ data ConversionList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConversionList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -788,6 +807,7 @@ conversionList
 conversionList =
   ConversionList'
     {_clKind = "doubleclicksearch#conversionList", _clConversion = Nothing}
+
 
 -- | Identifies this as a ConversionList resource. Value: the fixed string
 -- doubleclicksearch#conversionList.
@@ -834,6 +854,7 @@ data ReportAPIColumnSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportAPIColumnSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -872,6 +893,7 @@ reportAPIColumnSpec =
     , _racsPlatformSource = Nothing
     , _racsColumnName = Nothing
     }
+
 
 -- | Segments a report by a custom dimension. The report must be scoped to an
 -- advertiser or lower, and the custom dimension must already be set up in
@@ -1000,6 +1022,7 @@ data ReportRequestTimeRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportRequestTimeRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1020,6 +1043,7 @@ reportRequestTimeRange =
     , _rrtrStartDate = Nothing
     , _rrtrChangedMetricsSinceTimestamp = Nothing
     }
+
 
 -- | Inclusive date in YYYY-MM-DD format.
 rrtrEndDate :: Lens' ReportRequestTimeRange (Maybe Text)
@@ -1110,6 +1134,7 @@ data Conversion =
     , _cProductGroupId              :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Conversion' with the minimum fields required to make a request.
 --
@@ -1218,6 +1243,7 @@ conversion =
     , _cProductId = Nothing
     , _cProductGroupId = Nothing
     }
+
 
 -- | DS ad group ID.
 cAdGroupId :: Lens' Conversion (Maybe Int64)
@@ -1531,6 +1557,7 @@ data SavedColumn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SavedColumn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1548,6 +1575,7 @@ savedColumn =
     , _scKind = "doubleclicksearch#savedColumn"
     , _scType = Nothing
     }
+
 
 -- | The name of the saved column.
 scSavedColumnName :: Lens' SavedColumn (Maybe Text)
@@ -1590,6 +1618,7 @@ data CustomDimension =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomDimension' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1600,6 +1629,7 @@ data CustomDimension =
 customDimension
     :: CustomDimension
 customDimension = CustomDimension' {_cdValue = Nothing, _cdName = Nothing}
+
 
 -- | Custom dimension value.
 cdValue :: Lens' CustomDimension (Maybe Text)
@@ -1631,6 +1661,7 @@ newtype UpdateAvailabilityResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateAvailabilityResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1640,6 +1671,7 @@ updateAvailabilityResponse
     :: UpdateAvailabilityResponse
 updateAvailabilityResponse =
   UpdateAvailabilityResponse' {_uAvailabilities = Nothing}
+
 
 -- | The availabilities being returned.
 uAvailabilities :: Lens' UpdateAvailabilityResponse [Availability]
@@ -1679,6 +1711,7 @@ data ReportRequestReportScope =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportRequestReportScope' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1708,6 +1741,7 @@ reportRequestReportScope =
     , _rrrsCampaignId = Nothing
     , _rrrsAdId = Nothing
     }
+
 
 -- | DS keyword ID.
 rrrsKeywordId :: Lens' ReportRequestReportScope (Maybe Int64)
@@ -1793,6 +1827,7 @@ data SavedColumnList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SavedColumnList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1805,6 +1840,7 @@ savedColumnList
 savedColumnList =
   SavedColumnList'
     {_sclKind = "doubleclicksearch#savedColumnList", _sclItems = Nothing}
+
 
 -- | Identifies this as a SavedColumnList resource. Value: the fixed string
 -- doubleclicksearch#savedColumnList.

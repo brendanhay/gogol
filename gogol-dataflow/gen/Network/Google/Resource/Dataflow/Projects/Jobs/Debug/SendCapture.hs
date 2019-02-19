@@ -81,6 +81,7 @@ data ProjectsJobsDebugSendCapture =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobsDebugSendCapture' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsJobsDebugSendCapture pPjdscJobId_ pPjdscPayload_ pPjdscProjectId_ =
     , _pjdscProjectId = pPjdscProjectId_
     , _pjdscCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjdscXgafv :: Lens' ProjectsJobsDebugSendCapture (Maybe Xgafv)

@@ -83,6 +83,7 @@ data MyConfigSyncVolumeLicenses =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyConfigSyncVolumeLicenses' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ myConfigSyncVolumeLicenses pMcsvlCpksver_ pMcsvlSource_ pMcsvlNonce_ =
     , _mcsvlShowPreOrders = Nothing
     , _mcsvlNonce = pMcsvlNonce_
     }
+
 
 -- | The device\/version ID from which to release the restriction.
 mcsvlCpksver :: Lens' MyConfigSyncVolumeLicenses Text

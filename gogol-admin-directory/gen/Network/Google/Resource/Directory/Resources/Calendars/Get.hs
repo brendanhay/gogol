@@ -64,6 +64,7 @@ data ResourcesCalendarsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesCalendarsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ resourcesCalendarsGet pRcgCustomer_ pRcgCalendarResourceId_ =
     { _rcgCustomer = pRcgCustomer_
     , _rcgCalendarResourceId = pRcgCalendarResourceId_
     }
+
 
 -- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your

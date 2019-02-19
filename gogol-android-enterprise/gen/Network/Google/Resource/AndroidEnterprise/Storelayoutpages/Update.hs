@@ -65,6 +65,7 @@ data StorelayoutpagesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StorelayoutpagesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ storelayoutpagesUpdate pSuEnterpriseId_ pSuPageId_ pSuPayload_ =
     , _suPageId = pSuPageId_
     , _suPayload = pSuPayload_
     }
+
 
 -- | The ID of the enterprise.
 suEnterpriseId :: Lens' StorelayoutpagesUpdate Text

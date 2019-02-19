@@ -73,6 +73,7 @@ data ReportsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ reportsList pRlProFileId_ =
     , _rlSortField = RLSFLastModifiedTime
     , _rlMaxResults = 10
     }
+
 
 -- | The DFA user profile ID.
 rlProFileId :: Lens' ReportsList Int64

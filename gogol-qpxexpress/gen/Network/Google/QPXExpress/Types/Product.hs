@@ -32,6 +32,7 @@ data TripOptionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TripOptionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -52,6 +53,7 @@ tripOptionsResponse =
     , _torData = Nothing
     , _torTripOption = Nothing
     }
+
 
 -- | An identifier uniquely identifying this response.
 torRequestId :: Lens' TripOptionsResponse (Maybe Text)
@@ -105,6 +107,7 @@ data CarrierData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CarrierData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +122,7 @@ carrierData
 carrierData =
   CarrierData'
     {_cdKind = "qpxexpress#carrierData", _cdName = Nothing, _cdCode = Nothing}
+
 
 -- | Identifies this as a kind of carrier (ie. an airline, bus line,
 -- railroad, etc). Value: the fixed string qpxexpress#carrierData.
@@ -164,6 +168,7 @@ data FreeBaggageAllowance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FreeBaggageAllowance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -190,6 +195,7 @@ freeBaggageAllowance =
     , _fbaKilos = Nothing
     , _fbaPieces = Nothing
     }
+
 
 -- | Identifies this as free baggage object, allowed on one segment of a
 -- trip. Value: the fixed string qpxexpress#freeBaggageAllowance.
@@ -264,6 +270,7 @@ data TimeOfDayRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeOfDayRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -281,6 +288,7 @@ timeOfDayRange =
     , _todrLatestTime = Nothing
     , _todrEarliestTime = Nothing
     }
+
 
 -- | Identifies this as a time of day range object, representing two times in
 -- a single day defining a time range. Value: the fixed string
@@ -333,6 +341,7 @@ data Data' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Data' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -359,6 +368,7 @@ data' =
     , _dCity = Nothing
     , _dTax = Nothing
     }
+
 
 -- | The airline carrier of the aircraft flying between an origin and
 -- destination. Allowed values are IATA carrier codes.
@@ -433,6 +443,7 @@ data AircraftData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AircraftData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -447,6 +458,7 @@ aircraftData
 aircraftData =
   AircraftData'
     {_adKind = "qpxexpress#aircraftData", _adName = Nothing, _adCode = Nothing}
+
 
 -- | Identifies this as an aircraftData object. Value: the fixed string
 -- qpxexpress#aircraftData
@@ -503,6 +515,7 @@ data LegInfo =
     , _liDePartureTime       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LegInfo' with the minimum fields required to make a request.
 --
@@ -563,6 +576,7 @@ legInfo =
     , _liMileage = Nothing
     , _liDePartureTime = Nothing
     }
+
 
 -- | The leg destination as a city and airport.
 liDestination :: Lens' LegInfo (Maybe Text)
@@ -727,6 +741,7 @@ data AirportData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AirportData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -747,6 +762,7 @@ airportData =
     , _aCity = Nothing
     , _aCode = Nothing
     }
+
 
 -- | Identifies this as an airport object. Value: the fixed string
 -- qpxexpress#airportData.
@@ -796,6 +812,7 @@ data SegmentPricing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SegmentPricing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -816,6 +833,7 @@ segmentPricing =
     , _spFareId = Nothing
     , _spSegmentId = Nothing
     }
+
 
 -- | Details of the free baggage allowance on this segment.
 spFreeBaggageOption :: Lens' SegmentPricing [FreeBaggageAllowance]
@@ -876,6 +894,7 @@ data SliceInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SliceInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -893,6 +912,7 @@ sliceInfo =
     , _siSegment = Nothing
     , _siDuration = Nothing
     }
+
 
 -- | Identifies this as a slice object. A slice represents a traveller\'s
 -- intent, the portion of a low-fare search corresponding to a traveler\'s
@@ -942,6 +962,7 @@ data TripsSearchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TripsSearchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -954,6 +975,7 @@ tripsSearchResponse
 tripsSearchResponse =
   TripsSearchResponse'
     {_tsrTrips = Nothing, _tsrKind = "qpxExpress#tripsSearch"}
+
 
 -- | All possible solutions to the QPX Express search request.
 tsrTrips :: Lens' TripsSearchResponse (Maybe TripOptionsResponse)
@@ -992,6 +1014,7 @@ data TripOption =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TripOption' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1015,6 +1038,7 @@ tripOption =
     , _toSlice = Nothing
     , _toSaleTotal = Nothing
     }
+
 
 -- | Per passenger pricing information.
 toPricing :: Lens' TripOption [PricingInfo]
@@ -1077,6 +1101,7 @@ data BagDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BagDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1100,6 +1125,7 @@ bagDescriptor =
     , _bdDescription = Nothing
     , _bdSubcode = Nothing
     }
+
 
 -- | Identifies this as a baggage object. Value: the fixed string
 -- qpxexpress#bagDescriptor.
@@ -1165,6 +1191,7 @@ data CityData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CityData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1185,6 +1212,7 @@ cityData =
     , _cName = Nothing
     , _cCode = Nothing
     }
+
 
 -- | The two-character country code of the country the city is located in.
 -- For example, US for the United States of America.
@@ -1238,6 +1266,7 @@ data PassengerCounts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PassengerCounts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1264,6 +1293,7 @@ passengerCounts =
     , _pcInfantInSeatCount = Nothing
     , _pcAdultCount = Nothing
     }
+
 
 -- | The number of passengers that are senior citizens.
 pcSeniorCount :: Lens' PassengerCounts (Maybe Int32)
@@ -1349,6 +1379,7 @@ data SegmentInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SegmentInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1390,6 +1421,7 @@ segmentInfo =
     , _sDuration = Nothing
     , _sLeg = Nothing
     }
+
 
 -- | The booking code or class for this segment.
 sBookingCode :: Lens' SegmentInfo (Maybe Text)
@@ -1507,6 +1539,7 @@ data TaxData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TaxData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1520,6 +1553,7 @@ taxData
     :: TaxData
 taxData =
   TaxData' {_tdKind = "qpxexpress#taxData", _tdName = Nothing, _tdId = Nothing}
+
 
 -- | Identifies this as a tax data object, representing some tax. Value: the
 -- fixed string qpxexpress#taxData.
@@ -1559,6 +1593,7 @@ newtype TripsSearchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TripsSearchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1567,6 +1602,7 @@ newtype TripsSearchRequest =
 tripsSearchRequest
     :: TripsSearchRequest
 tripsSearchRequest = TripsSearchRequest' {_tsrRequest = Nothing}
+
 
 -- | A QPX Express search request. Required values are at least one adult or
 -- senior passenger, an origin, a destination, and a date.
@@ -1597,6 +1633,7 @@ data TaxInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TaxInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1623,6 +1660,7 @@ taxInfo =
     , _tiCode = Nothing
     , _tiId = Nothing
     }
+
 
 -- | Whether this is a government charge or a carrier surcharge.
 tiChargeType :: Lens' TaxInfo (Maybe Text)
@@ -1698,6 +1736,7 @@ data PricingInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PricingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1745,6 +1784,7 @@ pricingInfo =
     , _piSaleTotal = Nothing
     , _piSaleFareTotal = Nothing
     }
+
 
 -- | The taxes in the sale or equivalent currency.
 piSaleTaxTotal :: Lens' PricingInfo (Maybe Text)
@@ -1881,6 +1921,7 @@ data FlightInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FlightInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1891,6 +1932,7 @@ data FlightInfo =
 flightInfo
     :: FlightInfo
 flightInfo = FlightInfo' {_fiCarrier = Nothing, _fiNumber = Nothing}
+
 
 fiCarrier :: Lens' FlightInfo (Maybe Text)
 fiCarrier
@@ -1933,6 +1975,7 @@ data FareInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FareInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1962,6 +2005,7 @@ fareInfo =
     , _fBasisCode = Nothing
     , _fId = Nothing
     }
+
 
 -- | The carrier of the aircraft or other vehicle commuting between two
 -- points.
@@ -2034,6 +2078,7 @@ data TripOptionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TripOptionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2063,6 +2108,7 @@ tripOptionsRequest =
     , _torSlice = Nothing
     , _torMaxPrice = Nothing
     }
+
 
 -- | Return only solutions with refundable fares.
 torRefundable :: Lens' TripOptionsRequest (Maybe Bool)
@@ -2158,6 +2204,7 @@ data SliceInput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SliceInput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2199,6 +2246,7 @@ sliceInput =
     , _sliPermittedCarrier = Nothing
     , _sliAlliance = Nothing
     }
+
 
 -- | Airport or city IATA designator of the destination.
 sliDestination :: Lens' SliceInput (Maybe Text)

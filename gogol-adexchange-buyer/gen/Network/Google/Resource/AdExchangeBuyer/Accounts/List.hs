@@ -52,11 +52,13 @@ data AccountsList' =
   AccountsList''
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
 --
 accountsList'
     :: AccountsList'
 accountsList' = AccountsList''
+
 
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsList

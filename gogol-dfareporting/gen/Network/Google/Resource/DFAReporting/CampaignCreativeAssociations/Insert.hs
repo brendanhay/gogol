@@ -70,6 +70,7 @@ data CampaignCreativeAssociationsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CampaignCreativeAssociationsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ campaignCreativeAssociationsInsert pCcaiCampaignId_ pCcaiProFileId_ pCcaiPayload
     , _ccaiProFileId = _Coerce # pCcaiProFileId_
     , _ccaiPayload = pCcaiPayload_
     }
+
 
 -- | Campaign ID in this association.
 ccaiCampaignId :: Lens' CampaignCreativeAssociationsInsert Int64

@@ -62,6 +62,7 @@ data InstancesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ instancesInsert
     -> InstancesInsert
 instancesInsert pIiiProject_ pIiiPayload_ =
   InstancesInsert' {_iiiProject = pIiiProject_, _iiiPayload = pIiiPayload_}
+
 
 -- | Project ID of the project to which the newly created Cloud SQL instances
 -- should belong.

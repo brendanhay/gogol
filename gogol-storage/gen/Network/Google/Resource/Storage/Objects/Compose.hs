@@ -85,6 +85,7 @@ data ObjectsCompose =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectsCompose' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ objectsCompose pOPayload_ pODestinationBucket_ pODestinationObject_ =
     , _oKmsKeyName = Nothing
     , _oDestinationObject = pODestinationObject_
     }
+
 
 -- | Apply a predefined set of access controls to the destination object.
 oDestinationPredefinedACL :: Lens' ObjectsCompose (Maybe ObjectsComposeDestinationPredefinedACL)

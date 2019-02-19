@@ -68,6 +68,7 @@ newtype TimelineAttachmentsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimelineAttachmentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ timelineAttachmentsInsert
     -> TimelineAttachmentsInsert
 timelineAttachmentsInsert pTaiItemId_ =
   TimelineAttachmentsInsert' {_taiItemId = pTaiItemId_}
+
 
 -- | The ID of the timeline item the attachment belongs to.
 taiItemId :: Lens' TimelineAttachmentsInsert Text

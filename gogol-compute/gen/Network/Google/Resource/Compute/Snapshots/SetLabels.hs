@@ -69,6 +69,7 @@ data SnapshotsSetLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotsSetLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ snapshotsSetLabels pSslProject_ pSslPayload_ pSslResource_ =
     , _sslPayload = pSslPayload_
     , _sslResource = pSslResource_
     }
+
 
 -- | Project ID for this request.
 sslProject :: Lens' SnapshotsSetLabels Text

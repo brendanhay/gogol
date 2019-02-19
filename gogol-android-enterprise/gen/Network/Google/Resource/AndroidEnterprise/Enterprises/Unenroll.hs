@@ -58,6 +58,7 @@ newtype EnterprisesUnenroll =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesUnenroll' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ enterprisesUnenroll
     -> EnterprisesUnenroll
 enterprisesUnenroll pEntEnterpriseId_ =
   EnterprisesUnenroll' {_entEnterpriseId = pEntEnterpriseId_}
+
 
 -- | The ID of the enterprise.
 entEnterpriseId :: Lens' EnterprisesUnenroll Text

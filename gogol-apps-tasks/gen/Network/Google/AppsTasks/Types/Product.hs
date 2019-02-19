@@ -30,6 +30,7 @@ data TaskLinksItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TaskLinksItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44,6 +45,7 @@ taskLinksItem
 taskLinksItem =
   TaskLinksItem'
     {_tliLink = Nothing, _tliType = Nothing, _tliDescription = Nothing}
+
 
 -- | The URL.
 tliLink :: Lens' TaskLinksItem (Maybe Text)
@@ -85,6 +87,7 @@ data Tasks =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Tasks' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +108,7 @@ tasks =
     , _tKind = "tasks#tasks"
     , _tItems = Nothing
     }
+
 
 -- | ETag of the resource.
 tEtag :: Lens' Tasks (Maybe Text)
@@ -154,6 +158,7 @@ data TaskLists =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TaskLists' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -174,6 +179,7 @@ taskLists =
     , _tlKind = "tasks#taskLists"
     , _tlItems = Nothing
     }
+
 
 -- | ETag of the resource.
 tlEtag :: Lens' TaskLists (Maybe Text)
@@ -225,6 +231,7 @@ data TaskList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TaskList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -251,6 +258,7 @@ taskList =
     , _tasUpdated = Nothing
     , _tasTitle = Nothing
     }
+
 
 -- | ETag of the resource.
 tasEtag :: Lens' TaskList (Maybe Text)
@@ -323,6 +331,7 @@ data Task =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Task' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -376,6 +385,7 @@ task =
     , _ttNotes = Nothing
     , _ttPosition = Nothing
     }
+
 
 -- | Parent task identifier. This field is omitted if it is a top-level task.
 -- This field is read-only. Use the \"move\" method to move the task under

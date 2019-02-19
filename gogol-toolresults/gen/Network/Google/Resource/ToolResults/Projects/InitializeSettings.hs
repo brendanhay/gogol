@@ -96,6 +96,7 @@ newtype ProjectsInitializeSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInitializeSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsInitializeSettings
     -> ProjectsInitializeSettings
 projectsInitializeSettings pPisProjectId_ =
   ProjectsInitializeSettings' {_pisProjectId = pPisProjectId_}
+
 
 -- | A Project id. Required.
 pisProjectId :: Lens' ProjectsInitializeSettings Text

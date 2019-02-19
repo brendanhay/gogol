@@ -62,6 +62,7 @@ data PagesPublish =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagesPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ pagesPublish
     -> PagesPublish
 pagesPublish pPagaBlogId_ pPagaPageId_ =
   PagesPublish' {_pagaBlogId = pPagaBlogId_, _pagaPageId = pPagaPageId_}
+
 
 -- | The ID of the blog.
 pagaBlogId :: Lens' PagesPublish Text

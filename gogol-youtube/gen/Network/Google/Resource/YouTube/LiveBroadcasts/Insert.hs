@@ -67,6 +67,7 @@ data LiveBroadcastsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveBroadcastsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ liveBroadcastsInsert pLbiPart_ pLbiPayload_ =
     , _lbiOnBehalfOfContentOwner = Nothing
     , _lbiOnBehalfOfContentOwnerChannel = Nothing
     }
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

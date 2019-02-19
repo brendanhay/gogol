@@ -39,6 +39,7 @@ data MonitoredResourceDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResourceDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -62,6 +63,7 @@ monitoredResourceDescriptor =
     , _mrdType = Nothing
     , _mrdDescription = Nothing
     }
+
 
 -- | Optional. The resource name of the monitored resource descriptor:
 -- \"projects\/{project_id}\/monitoredResourceDescriptors\/{type}\" where
@@ -167,6 +169,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -179,6 +182,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -226,6 +230,7 @@ data ListNotificationChannelsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListNotificationChannelsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -238,6 +243,7 @@ listNotificationChannelsResponse
 listNotificationChannelsResponse =
   ListNotificationChannelsResponse'
     {_lncrNextPageToken = Nothing, _lncrNotificationChannels = Nothing}
+
 
 -- | If not empty, indicates that there may be more results that match the
 -- request. Use the value in the page_token field in a subsequent request
@@ -285,6 +291,7 @@ data ListTimeSeriesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTimeSeriesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -302,6 +309,7 @@ listTimeSeriesResponse =
     , _ltsrExecutionErrors = Nothing
     , _ltsrTimeSeries = Nothing
     }
+
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
@@ -355,6 +363,7 @@ data GetNotificationChannelVerificationCodeResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetNotificationChannelVerificationCodeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -367,6 +376,7 @@ getNotificationChannelVerificationCodeResponse
 getNotificationChannelVerificationCodeResponse =
   GetNotificationChannelVerificationCodeResponse'
     {_gncvcrCode = Nothing, _gncvcrExpireTime = Nothing}
+
 
 -- | The verification code, which may be used to verify other channels that
 -- have an equivalent identity (i.e. other channels of the same type with
@@ -415,6 +425,7 @@ data ListNotificationChannelDescriptorsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListNotificationChannelDescriptorsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -427,6 +438,7 @@ listNotificationChannelDescriptorsResponse
 listNotificationChannelDescriptorsResponse =
   ListNotificationChannelDescriptorsResponse'
     {_lncdrNextPageToken = Nothing, _lncdrChannelDescriptors = Nothing}
+
 
 -- | If not empty, indicates that there may be more results that match the
 -- request. Use the value in the page_token field in a subsequent request
@@ -487,6 +499,7 @@ data MetricDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -522,6 +535,7 @@ metricDescriptor =
     , _mdDescription = Nothing
     , _mdUnit = Nothing
     }
+
 
 -- | Whether the metric records instantaneous values, changes to a value,
 -- etc. Some combinations of metric_kind and value_type might not be
@@ -668,6 +682,7 @@ data Group =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -691,6 +706,7 @@ group' =
     , _gIsCluster = Nothing
     , _gParentName = Nothing
     }
+
 
 -- | Output only. The name of this group. The format is
 -- \"projects\/{project_id_or_number}\/groups\/{group_id}\". When creating
@@ -756,6 +772,7 @@ data TypedValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TypedValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -779,6 +796,7 @@ typedValue =
     , _tvDistributionValue = Nothing
     , _tvInt64Value = Nothing
     }
+
 
 -- | A Boolean value: true or false.
 tvBoolValue :: Lens' TypedValue (Maybe Bool)
@@ -842,6 +860,7 @@ newtype MonitoredResourceLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResourceLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -852,6 +871,7 @@ monitoredResourceLabels
     -> MonitoredResourceLabels
 monitoredResourceLabels pMrlAddtional_ =
   MonitoredResourceLabels' {_mrlAddtional = _Coerce # pMrlAddtional_}
+
 
 mrlAddtional :: Lens' MonitoredResourceLabels (HashMap Text Text)
 mrlAddtional
@@ -882,6 +902,7 @@ data MonitoredResourceMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResourceMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -894,6 +915,7 @@ monitoredResourceMetadata
 monitoredResourceMetadata =
   MonitoredResourceMetadata'
     {_mrmUserLabels = Nothing, _mrmSystemLabels = Nothing}
+
 
 -- | Output only. A map of user-defined metadata labels.
 mrmUserLabels :: Lens' MonitoredResourceMetadata (Maybe MonitoredResourceMetadataUserLabels)
@@ -942,6 +964,7 @@ newtype NotificationChannelUserLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationChannelUserLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -952,6 +975,7 @@ notificationChannelUserLabels
     -> NotificationChannelUserLabels
 notificationChannelUserLabels pNculAddtional_ =
   NotificationChannelUserLabels' {_nculAddtional = _Coerce # pNculAddtional_}
+
 
 nculAddtional :: Lens' NotificationChannelUserLabels (HashMap Text Text)
 nculAddtional
@@ -979,6 +1003,7 @@ newtype SourceContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -987,6 +1012,7 @@ newtype SourceContext =
 sourceContext
     :: SourceContext
 sourceContext = SourceContext' {_scFileName = Nothing}
+
 
 -- | The path-qualified name of the .proto file that contained the associated
 -- protobuf element. For example:
@@ -1017,6 +1043,7 @@ data BasicAuthentication =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BasicAuthentication' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1028,6 +1055,7 @@ basicAuthentication
     :: BasicAuthentication
 basicAuthentication =
   BasicAuthentication' {_baUsername = Nothing, _baPassword = Nothing}
+
 
 -- | The username to authenticate.
 baUsername :: Lens' BasicAuthentication (Maybe Text)
@@ -1079,6 +1107,7 @@ data Distribution =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Distribution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1108,6 +1137,7 @@ distribution =
     , _dRange = Nothing
     , _dBucketOptions = Nothing
     }
+
 
 -- | The sum of squared deviations from the mean of the values in the
 -- population. For values x_i this is: Sum[i=1..n]((x_i - mean)^2) Knuth,
@@ -1213,6 +1243,7 @@ data Field =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Field' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1251,6 +1282,7 @@ field =
     , _fNumber = Nothing
     , _fTypeURL = Nothing
     }
+
 
 -- | The field type.
 fKind :: Lens' Field (Maybe FieldKind)
@@ -1344,6 +1376,7 @@ newtype ExemplarAttachmentsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExemplarAttachmentsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1354,6 +1387,7 @@ exemplarAttachmentsItem
     -> ExemplarAttachmentsItem
 exemplarAttachmentsItem pEaiAddtional_ =
   ExemplarAttachmentsItem' {_eaiAddtional = _Coerce # pEaiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 eaiAddtional :: Lens' ExemplarAttachmentsItem (HashMap Text JSONValue)
@@ -1386,6 +1420,7 @@ data NotificationChannelDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationChannelDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1412,6 +1447,7 @@ notificationChannelDescriptor =
     , _ncdType = Nothing
     , _ncdDescription = Nothing
     }
+
 
 -- | The full REST resource name for this descriptor. The syntax is:
 -- projects\/[PROJECT_ID]\/notificationChannelDescriptors\/[TYPE] In the
@@ -1491,11 +1527,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1513,6 +1551,7 @@ data ListGroupsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListGroupsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1524,6 +1563,7 @@ listGroupsResponse
     :: ListGroupsResponse
 listGroupsResponse =
   ListGroupsResponse' {_lgrNextPageToken = Nothing, _lgrGroup = Nothing}
+
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
@@ -1565,6 +1605,7 @@ data ListMetricDescriptorsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListMetricDescriptorsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1577,6 +1618,7 @@ listMetricDescriptorsResponse
 listMetricDescriptorsResponse =
   ListMetricDescriptorsResponse'
     {_lmdrMetricDescriptors = Nothing, _lmdrNextPageToken = Nothing}
+
 
 -- | The metric descriptors that are available to the project and that match
 -- the value of filter, if present.
@@ -1619,6 +1661,7 @@ newtype VerifyNotificationChannelRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VerifyNotificationChannelRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1628,6 +1671,7 @@ verifyNotificationChannelRequest
     :: VerifyNotificationChannelRequest
 verifyNotificationChannelRequest =
   VerifyNotificationChannelRequest' {_vncrCode = Nothing}
+
 
 -- | The verification code that was delivered to the channel as a result of
 -- invoking the SendNotificationChannelVerificationCode API method or that
@@ -1664,6 +1708,7 @@ newtype OptionValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OptionValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1674,6 +1719,7 @@ optionValue
     -> OptionValue
 optionValue pOvAddtional_ =
   OptionValue' {_ovAddtional = _Coerce # pOvAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 ovAddtional :: Lens' OptionValue (HashMap Text JSONValue)
@@ -1701,6 +1747,7 @@ newtype NotificationChannelLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationChannelLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1711,6 +1758,7 @@ notificationChannelLabels
     -> NotificationChannelLabels
 notificationChannelLabels pNclAddtional_ =
   NotificationChannelLabels' {_nclAddtional = _Coerce # pNclAddtional_}
+
 
 nclAddtional :: Lens' NotificationChannelLabels (HashMap Text Text)
 nclAddtional
@@ -1735,6 +1783,7 @@ newtype CreateTimeSeriesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateTimeSeriesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1743,6 +1792,7 @@ newtype CreateTimeSeriesRequest =
 createTimeSeriesRequest
     :: CreateTimeSeriesRequest
 createTimeSeriesRequest = CreateTimeSeriesRequest' {_ctsrTimeSeries = Nothing}
+
 
 -- | The new data to be added to a list of time series. Adds at most one data
 -- point to each of several time series. The new data point must be more
@@ -1778,6 +1828,7 @@ newtype DroppedLabelsLabel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DroppedLabelsLabel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1788,6 +1839,7 @@ droppedLabelsLabel
     -> DroppedLabelsLabel
 droppedLabelsLabel pDllAddtional_ =
   DroppedLabelsLabel' {_dllAddtional = _Coerce # pDllAddtional_}
+
 
 dllAddtional :: Lens' DroppedLabelsLabel (HashMap Text Text)
 dllAddtional
@@ -1818,6 +1870,7 @@ data MetricThreshold =
     , _mtDuration                :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricThreshold' with the minimum fields required to make a request.
 --
@@ -1851,6 +1904,7 @@ metricThreshold =
     , _mtTrigger = Nothing
     , _mtDuration = Nothing
     }
+
 
 -- | A value against which to compare the time series.
 mtThresholdValue :: Lens' MetricThreshold (Maybe Double)
@@ -1987,6 +2041,7 @@ newtype SpanContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpanContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1995,6 +2050,7 @@ newtype SpanContext =
 spanContext
     :: SpanContext
 spanContext = SpanContext' {_scSpanName = Nothing}
+
 
 -- | The resource name of the span in the following format:
 -- projects\/[PROJECT_ID]\/traces\/[TRACE_ID]\/spans\/[SPAN_ID] TRACE_ID is
@@ -2024,6 +2080,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2034,6 +2091,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2058,6 +2116,7 @@ newtype MonitoredResourceMetadataUserLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResourceMetadataUserLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2069,6 +2128,7 @@ monitoredResourceMetadataUserLabels
 monitoredResourceMetadataUserLabels pMrmulAddtional_ =
   MonitoredResourceMetadataUserLabels'
     {_mrmulAddtional = _Coerce # pMrmulAddtional_}
+
 
 mrmulAddtional :: Lens' MonitoredResourceMetadataUserLabels (HashMap Text Text)
 mrmulAddtional
@@ -2103,6 +2163,7 @@ data InternalChecker =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InternalChecker' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2129,6 +2190,7 @@ internalChecker =
     , _icGcpZone = Nothing
     , _icDisplayName = Nothing
     }
+
 
 -- | The current operational state of the internal checker.
 icState :: Lens' InternalChecker (Maybe InternalCheckerState)
@@ -2210,6 +2272,7 @@ data NotificationChannel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2242,6 +2305,7 @@ notificationChannel =
     , _ncType = Nothing
     , _ncDescription = Nothing
     }
+
 
 -- | Whether notifications are forwarded to the described channel. This makes
 -- it possible to disable delivery of notifications to a particular channel
@@ -2352,6 +2416,7 @@ data ListMonitoredResourceDescriptorsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListMonitoredResourceDescriptorsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2364,6 +2429,7 @@ listMonitoredResourceDescriptorsResponse
 listMonitoredResourceDescriptorsResponse =
   ListMonitoredResourceDescriptorsResponse'
     {_lmrdrNextPageToken = Nothing, _lmrdrResourceDescriptors = Nothing}
+
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
@@ -2417,6 +2483,7 @@ newtype Explicit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Explicit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2425,6 +2492,7 @@ newtype Explicit =
 explicit
     :: Explicit
 explicit = Explicit' {_eBounds = Nothing}
+
 
 -- | The values must be monotonically increasing.
 eBounds :: Lens' Explicit [Double]
@@ -2451,6 +2519,7 @@ newtype MetricLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2461,6 +2530,7 @@ metricLabels
     -> MetricLabels
 metricLabels pMlAddtional_ =
   MetricLabels' {_mlAddtional = _Coerce # pMlAddtional_}
+
 
 mlAddtional :: Lens' MetricLabels (HashMap Text Text)
 mlAddtional
@@ -2484,6 +2554,7 @@ newtype CollectdPayloadMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CollectdPayloadMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2494,6 +2565,7 @@ collectdPayloadMetadata
     -> CollectdPayloadMetadata
 collectdPayloadMetadata pCpmAddtional_ =
   CollectdPayloadMetadata' {_cpmAddtional = _Coerce # pCpmAddtional_}
+
 
 cpmAddtional :: Lens' CollectdPayloadMetadata (HashMap Text TypedValue)
 cpmAddtional
@@ -2520,6 +2592,7 @@ data CollectdValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CollectdValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2537,6 +2610,7 @@ collectdValue =
     , _cvDataSourceType = Nothing
     , _cvValue = Nothing
     }
+
 
 -- | The data source for the collectd value. For example there are two data
 -- sources for network measurements: \"rx\" and \"tx\".
@@ -2582,6 +2656,7 @@ data CreateCollectdTimeSeriesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateCollectdTimeSeriesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2599,6 +2674,7 @@ createCollectdTimeSeriesRequest =
     , _cctsrResource = Nothing
     , _cctsrCollectdVersion = Nothing
     }
+
 
 -- | The collectd payloads representing the time series data. You must not
 -- include more than a single point for each time series, so no two
@@ -2659,6 +2735,7 @@ data Aggregation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Aggregation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2679,6 +2756,7 @@ aggregation =
     , _aAlignmentPeriod = Nothing
     , _aGroupByFields = Nothing
     }
+
 
 -- | The approach to be used to align individual time series. Not all
 -- alignment functions may be applied to all time series, depending on the
@@ -2778,6 +2856,7 @@ data UptimeCheckConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UptimeCheckConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2822,6 +2901,7 @@ uptimeCheckConfig =
     , _uccHTTPCheck = Nothing
     , _uccTCPCheck = Nothing
     }
+
 
 -- | The internal checkers that this check will egress from. If is_internal
 -- is true and this list is empty, the check will egress from all the
@@ -2969,6 +3049,7 @@ data Point =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Point' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2979,6 +3060,7 @@ data Point =
 point
     :: Point
 point = Point' {_pValue = Nothing, _pInterval = Nothing}
+
 
 -- | The value of the data point.
 pValue :: Lens' Point (Maybe TypedValue)
@@ -3026,6 +3108,7 @@ data CollectdPayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CollectdPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3058,6 +3141,7 @@ collectdPayload =
     , _cpType = Nothing
     , _cpPlugin = Nothing
     }
+
 
 -- | The start time of the interval.
 cpStartTime :: Lens' CollectdPayload (Maybe UTCTime)
@@ -3140,6 +3224,7 @@ data MutationRecord =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MutationRecord' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3151,6 +3236,7 @@ mutationRecord
     :: MutationRecord
 mutationRecord =
   MutationRecord' {_mrMutatedBy = Nothing, _mrMutateTime = Nothing}
+
 
 -- | The email address of the user making the change.
 mrMutatedBy :: Lens' MutationRecord (Maybe Text)
@@ -3188,6 +3274,7 @@ data Metric =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Metric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3198,6 +3285,7 @@ data Metric =
 metric
     :: Metric
 metric = Metric' {_mLabels = Nothing, _mType = Nothing}
+
 
 -- | The set of label values that uniquely identify this metric. All labels
 -- listed in the MetricDescriptor must be assigned values.
@@ -3232,6 +3320,7 @@ data CollectdPayloadError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CollectdPayloadError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3246,6 +3335,7 @@ collectdPayloadError
 collectdPayloadError =
   CollectdPayloadError'
     {_cpeError = Nothing, _cpeValueErrors = Nothing, _cpeIndex = Nothing}
+
 
 -- | Records the error status for the payload. If this field is present, the
 -- partial errors for nested values won\'t be populated.
@@ -3292,12 +3382,14 @@ data SendNotificationChannelVerificationCodeRequest =
   SendNotificationChannelVerificationCodeRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SendNotificationChannelVerificationCodeRequest' with the minimum fields required to make a request.
 --
 sendNotificationChannelVerificationCodeRequest
     :: SendNotificationChannelVerificationCodeRequest
 sendNotificationChannelVerificationCodeRequest =
   SendNotificationChannelVerificationCodeRequest'
+
 
 instance FromJSON
            SendNotificationChannelVerificationCodeRequest
@@ -3329,6 +3421,7 @@ data Exponential =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Exponential' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3343,6 +3436,7 @@ exponential
 exponential =
   Exponential'
     {_eGrowthFactor = Nothing, _eScale = Nothing, _eNumFiniteBuckets = Nothing}
+
 
 -- | Must be greater than 1.
 eGrowthFactor :: Lens' Exponential (Maybe Double)
@@ -3390,6 +3484,7 @@ data Range =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Range' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3400,6 +3495,7 @@ data Range =
 range
     :: Range
 range = Range' {_rMax = Nothing, _rMin = Nothing}
+
 
 -- | The maximum of the population values.
 rMax :: Lens' Range (Maybe Double)
@@ -3444,6 +3540,7 @@ data MonitoredResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3454,6 +3551,7 @@ data MonitoredResource =
 monitoredResource
     :: MonitoredResource
 monitoredResource = MonitoredResource' {_mrLabels = Nothing, _mrType = Nothing}
+
 
 -- | Required. Values for all of the labels listed in the associated
 -- monitored resource descriptor. For example, Compute Engine VM instances
@@ -3494,6 +3592,7 @@ data UptimeCheckIP =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UptimeCheckIP' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3508,6 +3607,7 @@ uptimeCheckIP
 uptimeCheckIP =
   UptimeCheckIP'
     {_uciIPAddress = Nothing, _uciLocation = Nothing, _uciRegion = Nothing}
+
 
 -- | The IP address from which the uptime check originates. This is a full IP
 -- address (not an IP address range). Most IP addresses, as of this
@@ -3559,6 +3659,7 @@ newtype AlertPolicyUserLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlertPolicyUserLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3569,6 +3670,7 @@ alertPolicyUserLabels
     -> AlertPolicyUserLabels
 alertPolicyUserLabels pApulAddtional_ =
   AlertPolicyUserLabels' {_apulAddtional = _Coerce # pApulAddtional_}
+
 
 apulAddtional :: Lens' AlertPolicyUserLabels (HashMap Text Text)
 apulAddtional
@@ -3596,6 +3698,7 @@ data Documentation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Documentation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3606,6 +3709,7 @@ data Documentation =
 documentation
     :: Documentation
 documentation = Documentation' {_dContent = Nothing, _dMimeType = Nothing}
+
 
 -- | The text of the documentation, interpreted according to mime_type. The
 -- content may not exceed 8,192 Unicode characters and may not exceed more
@@ -3649,6 +3753,7 @@ data Exemplar =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Exemplar' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3662,6 +3767,7 @@ exemplar
     :: Exemplar
 exemplar =
   Exemplar' {_eAttachments = Nothing, _eValue = Nothing, _eTimestamp = Nothing}
+
 
 -- | Contextual information about the example value. Examples are:Trace ID:
 -- type.googleapis.com\/google.devtools.cloudtrace.v1.TraceLiteral string:
@@ -3716,6 +3822,7 @@ data MetricDescriptorMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricDescriptorMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3733,6 +3840,7 @@ metricDescriptorMetadata =
     , _mdmIngestDelay = Nothing
     , _mdmLaunchStage = Nothing
     }
+
 
 -- | The sampling period of metric data points. For metrics which are written
 -- periodically, consecutive data points are stored at this time interval,
@@ -3791,6 +3899,7 @@ data TimeInterval =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeInterval' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3801,6 +3910,7 @@ data TimeInterval =
 timeInterval
     :: TimeInterval
 timeInterval = TimeInterval' {_tiStartTime = Nothing, _tiEndTime = Nothing}
+
 
 -- | Optional. The beginning of the time interval. The default value for the
 -- start time is the end time. The start time must not be later than the
@@ -3846,6 +3956,7 @@ newtype HTTPCheckHeaders =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPCheckHeaders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3856,6 +3967,7 @@ hTTPCheckHeaders
     -> HTTPCheckHeaders
 hTTPCheckHeaders pHttpchAddtional_ =
   HTTPCheckHeaders' {_httpchAddtional = _Coerce # pHttpchAddtional_}
+
 
 httpchAddtional :: Lens' HTTPCheckHeaders (HashMap Text Text)
 httpchAddtional
@@ -3885,6 +3997,7 @@ newtype MonitoredResourceMetadataSystemLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResourceMetadataSystemLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3896,6 +4009,7 @@ monitoredResourceMetadataSystemLabels
 monitoredResourceMetadataSystemLabels pMrmslAddtional_ =
   MonitoredResourceMetadataSystemLabels'
     {_mrmslAddtional = _Coerce # pMrmslAddtional_}
+
 
 -- | Properties of the object.
 mrmslAddtional :: Lens' MonitoredResourceMetadataSystemLabels (HashMap Text JSONValue)
@@ -3927,6 +4041,7 @@ newtype ContentMatcher =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContentMatcher' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3935,6 +4050,7 @@ newtype ContentMatcher =
 contentMatcher
     :: ContentMatcher
 contentMatcher = ContentMatcher' {_cmContent = Nothing}
+
 
 -- | String or regex content to match (max 1024 bytes)
 cmContent :: Lens' ContentMatcher (Maybe Text)
@@ -3961,6 +4077,7 @@ data ListGroupMembersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListGroupMembersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3978,6 +4095,7 @@ listGroupMembersResponse =
     , _lgmrMembers = Nothing
     , _lgmrTotalSize = Nothing
     }
+
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
@@ -4029,6 +4147,7 @@ data LabelDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LabelDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4043,6 +4162,7 @@ labelDescriptor
 labelDescriptor =
   LabelDescriptor'
     {_ldKey = Nothing, _ldValueType = Nothing, _ldDescription = Nothing}
+
 
 -- | The label key.
 ldKey :: Lens' LabelDescriptor (Maybe Text)
@@ -4091,6 +4211,7 @@ data Linear =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Linear' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4104,6 +4225,7 @@ linear
     :: Linear
 linear =
   Linear' {_lOffSet = Nothing, _lWidth = Nothing, _lNumFiniteBuckets = Nothing}
+
 
 -- | Lower bound of the first bucket.
 lOffSet :: Lens' Linear (Maybe Double)
@@ -4150,6 +4272,7 @@ data ListUptimeCheckIPsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListUptimeCheckIPsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4162,6 +4285,7 @@ listUptimeCheckIPsResponse
 listUptimeCheckIPsResponse =
   ListUptimeCheckIPsResponse'
     {_lucirNextPageToken = Nothing, _lucirUptimeCheckIPs = Nothing}
+
 
 -- | This field represents the pagination token to retrieve the next page of
 -- results. If the value is empty, it means no further results for the
@@ -4207,6 +4331,7 @@ newtype GetNotificationChannelVerificationCodeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetNotificationChannelVerificationCodeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4216,6 +4341,7 @@ getNotificationChannelVerificationCodeRequest
     :: GetNotificationChannelVerificationCodeRequest
 getNotificationChannelVerificationCodeRequest =
   GetNotificationChannelVerificationCodeRequest' {_gExpireTime = Nothing}
+
 
 -- | The desired expiration time. If specified, the API will guarantee that
 -- the returned code will not be valid after the specified timestamp;
@@ -4260,6 +4386,7 @@ data ResourceGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4270,6 +4397,7 @@ data ResourceGroup =
 resourceGroup
     :: ResourceGroup
 resourceGroup = ResourceGroup' {_rgResourceType = Nothing, _rgGroupId = Nothing}
+
 
 -- | The resource type of the group members.
 rgResourceType :: Lens' ResourceGroup (Maybe ResourceGroupResourceType)
@@ -4317,6 +4445,7 @@ newtype DroppedLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DroppedLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4325,6 +4454,7 @@ newtype DroppedLabels =
 droppedLabels
     :: DroppedLabels
 droppedLabels = DroppedLabels' {_dlLabel = Nothing}
+
 
 -- | Map from label to its value, for all labels dropped in any aggregation.
 dlLabel :: Lens' DroppedLabels (Maybe DroppedLabelsLabel)
@@ -4350,6 +4480,7 @@ data Trigger =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Trigger' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4360,6 +4491,7 @@ data Trigger =
 trigger
     :: Trigger
 trigger = Trigger' {_tPercent = Nothing, _tCount = Nothing}
+
 
 -- | The percentage of time series that must fail the predicate for the
 -- condition to be triggered.
@@ -4402,6 +4534,7 @@ data Type =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4428,6 +4561,7 @@ type' =
     , _tFields = Nothing
     , _tSyntax = Nothing
     }
+
 
 -- | The source context.
 tSourceContext :: Lens' Type (Maybe SourceContext)
@@ -4493,6 +4627,7 @@ newtype CreateCollectdTimeSeriesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateCollectdTimeSeriesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4502,6 +4637,7 @@ createCollectdTimeSeriesResponse
     :: CreateCollectdTimeSeriesResponse
 createCollectdTimeSeriesResponse =
   CreateCollectdTimeSeriesResponse' {_cctsrPayloadErrors = Nothing}
+
 
 -- | Records the error status for points that were not written due to an
 -- error.Failed requests for which nothing is written will return an error
@@ -4539,6 +4675,7 @@ data Option =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Option' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4549,6 +4686,7 @@ data Option =
 option
     :: Option
 option = Option' {_oValue = Nothing, _oName = Nothing}
+
 
 -- | The option\'s value packed in an Any message. If the value is a
 -- primitive, the corresponding wrapper type defined in
@@ -4591,6 +4729,7 @@ data Condition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4611,6 +4750,7 @@ condition =
     , _cName = Nothing
     , _cDisplayName = Nothing
     }
+
 
 -- | A condition that checks that a time series continues to receive new data
 -- points.
@@ -4693,6 +4833,7 @@ data BucketOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4710,6 +4851,7 @@ bucketOptions =
     , _boLinearBuckets = Nothing
     , _boExplicitBuckets = Nothing
     }
+
 
 -- | The exponential buckets.
 boExponentialBuckets :: Lens' BucketOptions (Maybe Exponential)
@@ -4757,6 +4899,7 @@ data ListUptimeCheckConfigsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListUptimeCheckConfigsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4774,6 +4917,7 @@ listUptimeCheckConfigsResponse =
     , _luccrNextPageToken = Nothing
     , _luccrTotalSize = Nothing
     }
+
 
 -- | The returned uptime check configurations.
 luccrUptimeCheckConfigs :: Lens' ListUptimeCheckConfigsResponse [UptimeCheckConfig]
@@ -4834,6 +4978,7 @@ data HTTPCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4860,6 +5005,7 @@ hTTPCheck =
     , _httpcAuthInfo = Nothing
     , _httpcPort = Nothing
     }
+
 
 -- | If true, use HTTPS instead of HTTP to run the check.
 httpcUseSSL :: Lens' HTTPCheck (Maybe Bool)
@@ -4950,6 +5096,7 @@ data TimeSeries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeSeries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4976,6 +5123,7 @@ timeSeries =
     , _tsMetadata = Nothing
     , _tsValueType = Nothing
     }
+
 
 -- | The data points of this time series. When listing time series, points
 -- are returned in reverse time order.When creating a time series, this
@@ -5073,6 +5221,7 @@ data AlertPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlertPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5111,6 +5260,7 @@ alertPolicy =
     , _apConditions = Nothing
     , _apCombiner = Nothing
     }
+
 
 -- | Whether or not the policy is enabled. On write, the default
 -- interpretation if unset is that the policy is enabled. On read, clients
@@ -5245,6 +5395,7 @@ data ListAlertPoliciesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAlertPoliciesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5257,6 +5408,7 @@ listAlertPoliciesResponse
 listAlertPoliciesResponse =
   ListAlertPoliciesResponse'
     {_laprNextPageToken = Nothing, _laprAlertPolicies = Nothing}
+
 
 -- | If there might be more results than were returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
@@ -5298,6 +5450,7 @@ newtype TCPCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TCPCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5306,6 +5459,7 @@ newtype TCPCheck =
 tcpCheck
     :: TCPCheck
 tcpCheck = TCPCheck' {_tcPort = Nothing}
+
 
 -- | The port to the page to run the check against. Will be combined with
 -- host (specified within the MonitoredResource) to construct the full URL.
@@ -5340,6 +5494,7 @@ data MetricAbsence =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricAbsence' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5360,6 +5515,7 @@ metricAbsence =
     , _maTrigger = Nothing
     , _maDuration = Nothing
     }
+
 
 -- | Specifies the alignment of data points in individual time series as well
 -- as how to combine the retrieved time series together (such as when
@@ -5433,6 +5589,7 @@ data CollectdValueError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CollectdValueError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5444,6 +5601,7 @@ collectdValueError
     :: CollectdValueError
 collectdValueError =
   CollectdValueError' {_cveError = Nothing, _cveIndex = Nothing}
+
 
 -- | Records the error status for the value.
 cveError :: Lens' CollectdValueError (Maybe Status)

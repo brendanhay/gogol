@@ -73,6 +73,7 @@ data AchievementsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ achievementsList pAlPlayerId_ =
     , _alPlayerId = pAlPlayerId_
     , _alMaxResults = Nothing
     }
+
 
 -- | Tells the server to return only achievements with the specified state.
 -- If this parameter isn\'t specified, all achievements are returned.

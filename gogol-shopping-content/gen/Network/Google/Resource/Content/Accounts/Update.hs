@@ -63,6 +63,7 @@ data AccountsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ accountsUpdate pAuuMerchantId_ pAuuPayload_ pAuuAccountId_ =
     , _auuPayload = pAuuPayload_
     , _auuAccountId = _Coerce # pAuuAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

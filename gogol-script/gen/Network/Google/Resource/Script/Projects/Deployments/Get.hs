@@ -75,6 +75,7 @@ data ProjectsDeploymentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDeploymentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsDeploymentsGet pPdgDeploymentId_ pPdgScriptId_ =
     , _pdgScriptId = pPdgScriptId_
     , _pdgCallback = Nothing
     }
+
 
 -- | The deployment ID.
 pdgDeploymentId :: Lens' ProjectsDeploymentsGet Text

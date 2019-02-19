@@ -60,6 +60,7 @@ data ContactsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ contactsPatch
     -> ContactsPatch
 contactsPatch pCpPayload_ pCpId_ =
   ContactsPatch' {_cpPayload = pCpPayload_, _cpId = pCpId_}
+
 
 -- | Multipart request metadata.
 cpPayload :: Lens' ContactsPatch Contact

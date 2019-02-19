@@ -66,6 +66,7 @@ data CommentsApprove =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsApprove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ commentsApprove pCaBlogId_ pCaPostId_ pCaCommentId_ =
     , _caPostId = pCaPostId_
     , _caCommentId = pCaCommentId_
     }
+
 
 -- | The ID of the Blog.
 caBlogId :: Lens' CommentsApprove Text

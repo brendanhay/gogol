@@ -67,6 +67,7 @@ data DatafeedstatusesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedstatusesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ datafeedstatusesGet pDggMerchantId_ pDggDatafeedId_ =
     , _dggDatafeedId = _Coerce # pDggDatafeedId_
     , _dggLanguage = Nothing
     }
+
 
 -- | The ID of the account that manages the datafeed. This account cannot be
 -- a multi-client account.

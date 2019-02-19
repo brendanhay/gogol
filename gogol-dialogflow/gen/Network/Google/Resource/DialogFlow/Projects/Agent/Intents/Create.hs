@@ -81,6 +81,7 @@ data ProjectsAgentIntentsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentIntentsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ projectsAgentIntentsCreate pPaicParent_ pPaicPayload_ =
     , _paicIntentView = Nothing
     , _paicCallback = Nothing
     }
+
 
 -- | Required. The agent to create a intent for. Format:
 -- \`projects\/\/agent\`.

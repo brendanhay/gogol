@@ -73,6 +73,7 @@ data InterconnectsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ interconnectsPatch pIpProject_ pIpPayload_ pIpInterconnect_ =
     , _ipPayload = pIpPayload_
     , _ipInterconnect = pIpInterconnect_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

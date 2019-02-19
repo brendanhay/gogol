@@ -85,6 +85,7 @@ data OrganizationsRolesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsRolesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ organizationsRolesDelete pOrdName_ =
     , _ordName = pOrdName_
     , _ordCallback = Nothing
     }
+
 
 -- | V1 error format.
 ordXgafv :: Lens' OrganizationsRolesDelete (Maybe Xgafv)

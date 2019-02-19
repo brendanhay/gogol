@@ -77,6 +77,7 @@ data ProjectsAgentIntentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentIntentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ projectsAgentIntentsGet pPaigName_ =
     , _paigName = pPaigName_
     , _paigCallback = Nothing
     }
+
 
 -- | V1 error format.
 paigXgafv :: Lens' ProjectsAgentIntentsGet (Maybe Xgafv)

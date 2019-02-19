@@ -62,6 +62,7 @@ data AdvertiserLandingPagesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserLandingPagesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ advertiserLandingPagesUpdate
 advertiserLandingPagesUpdate pAlpuProFileId_ pAlpuPayload_ =
   AdvertiserLandingPagesUpdate'
     {_alpuProFileId = _Coerce # pAlpuProFileId_, _alpuPayload = pAlpuPayload_}
+
 
 -- | User profile ID associated with this request.
 alpuProFileId :: Lens' AdvertiserLandingPagesUpdate Int64

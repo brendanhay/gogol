@@ -29,6 +29,7 @@ data OperationWarningsItemDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationWarningsItemDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40,6 +41,7 @@ operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
   OperationWarningsItemDataItem' {_owidiValue = Nothing, _owidiKey = Nothing}
+
 
 -- | [Output Only] Metadata value for this warning.
 owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
@@ -88,6 +90,7 @@ data RollingUpdate =
     , _ruInstanceGroup        :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RollingUpdate' with the minimum fields required to make a request.
 --
@@ -145,6 +148,7 @@ rollingUpdate =
     , _ruDescription = Nothing
     , _ruInstanceGroup = Nothing
     }
+
 
 -- | [Output Only] Status of the update. Possible values are: -
 -- \"ROLLING_FORWARD\": The update is going forward. - \"ROLLING_BACK\":
@@ -301,6 +305,7 @@ newtype RollingUpdateError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollingUpdateError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -309,6 +314,7 @@ newtype RollingUpdateError =
 rollingUpdateError
     :: RollingUpdateError
 rollingUpdateError = RollingUpdateError' {_rueErrors = Nothing}
+
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -341,6 +347,7 @@ data OperationList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -364,6 +371,7 @@ operationList =
     , _olSelfLink = Nothing
     , _olId = Nothing
     }
+
 
 -- | [Output Only] A token used to continue a truncate.
 olNextPageToken :: Lens' OperationList (Maybe Text)
@@ -423,6 +431,7 @@ data InstanceUpdateList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceUpdateList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -443,6 +452,7 @@ instanceUpdateList =
     , _iulItems = Nothing
     , _iulSelfLink = Nothing
     }
+
 
 -- | A token used to continue a truncated list request.
 iulNextPageToken :: Lens' InstanceUpdateList (Maybe Text)
@@ -496,6 +506,7 @@ data RollingUpdateErrorErrorsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollingUpdateErrorErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -510,6 +521,7 @@ rollingUpdateErrorErrorsItem
 rollingUpdateErrorErrorsItem =
   RollingUpdateErrorErrorsItem'
     {_rueeiLocation = Nothing, _rueeiCode = Nothing, _rueeiMessage = Nothing}
+
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -573,6 +585,7 @@ data Operation =
     , _oClientOperationId   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -648,6 +661,7 @@ operation =
     , _oTargetLink = Nothing
     , _oClientOperationId = Nothing
     }
+
 
 -- | [Output Only] Unique target id which identifies a particular incarnation
 -- of the target.
@@ -824,6 +838,7 @@ data InstanceUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -838,6 +853,7 @@ instanceUpdate
 instanceUpdate =
   InstanceUpdate'
     {_iuStatus = Nothing, _iuError = Nothing, _iuInstance = Nothing}
+
 
 -- | Status of the instance update. Possible values are: - \"PENDING\": The
 -- instance update is pending execution. - \"ROLLING_FORWARD\": The
@@ -886,6 +902,7 @@ newtype InstanceUpdateError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceUpdateError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -894,6 +911,7 @@ newtype InstanceUpdateError =
 instanceUpdateError
     :: InstanceUpdateError
 instanceUpdateError = InstanceUpdateError' {_iueErrors = Nothing}
+
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -926,6 +944,7 @@ data RollingUpdatePolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollingUpdatePolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -949,6 +968,7 @@ rollingUpdatePolicy =
     , _rupAutoPauseAfterInstances = Nothing
     , _rupMaxNumConcurrentInstances = Nothing
     }
+
 
 -- | The minimum amount of time that the updater spends to update each
 -- instance. Update time is the time it takes to complete all update
@@ -1036,6 +1056,7 @@ newtype OperationError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1044,6 +1065,7 @@ newtype OperationError =
 operationError
     :: OperationError
 operationError = OperationError' {_oeErrors = Nothing}
+
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -1073,6 +1095,7 @@ data OperationErrorErrorsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationErrorErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1087,6 +1110,7 @@ operationErrorErrorsItem
 operationErrorErrorsItem =
   OperationErrorErrorsItem'
     {_oeeiLocation = Nothing, _oeeiCode = Nothing, _oeeiMessage = Nothing}
+
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -1129,6 +1153,7 @@ data InstanceUpdateErrorErrorsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceUpdateErrorErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1143,6 +1168,7 @@ instanceUpdateErrorErrorsItem
 instanceUpdateErrorErrorsItem =
   InstanceUpdateErrorErrorsItem'
     {_iueeiLocation = Nothing, _iueeiCode = Nothing, _iueeiMessage = Nothing}
+
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -1189,6 +1215,7 @@ data RollingUpdateList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollingUpdateList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1209,6 +1236,7 @@ rollingUpdateList =
     , _rulItems = Nothing
     , _rulSelfLink = Nothing
     }
+
 
 -- | A token used to continue a truncated list request.
 rulNextPageToken :: Lens' RollingUpdateList (Maybe Text)
@@ -1262,6 +1290,7 @@ data OperationWarningsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationWarningsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1276,6 +1305,7 @@ operationWarningsItem
 operationWarningsItem =
   OperationWarningsItem'
     {_owiData = Nothing, _owiCode = Nothing, _owiMessage = Nothing}
+
 
 -- | [Output only] Metadata for this warning in key:value format.
 owiData :: Lens' OperationWarningsItem [OperationWarningsItemDataItem]

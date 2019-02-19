@@ -116,6 +116,7 @@ data ProjectsNotificationChannelsGetVerificationCode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotificationChannelsGetVerificationCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -147,6 +148,7 @@ projectsNotificationChannelsGetVerificationCode pPncgvcPayload_ pPncgvcName_ =
     , _pncgvcName = pPncgvcName_
     , _pncgvcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pncgvcXgafv :: Lens' ProjectsNotificationChannelsGetVerificationCode (Maybe Xgafv)

@@ -66,6 +66,7 @@ data FamilysharingShare =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FamilysharingShare' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ familysharingShare
 familysharingShare =
   FamilysharingShare'
     {_fsVolumeId = Nothing, _fsSource = Nothing, _fsDocId = Nothing}
+
 
 -- | The volume to share.
 fsVolumeId :: Lens' FamilysharingShare (Maybe Text)

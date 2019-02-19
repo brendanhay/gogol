@@ -75,6 +75,7 @@ data ManagementCustomDimensionsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementCustomDimensionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ managementCustomDimensionsPatch pMcdpWebPropertyId_ pMcdpPayload_ pMcdpAccountId
     , _mcdpAccountId = pMcdpAccountId_
     , _mcdpCustomDimensionId = pMcdpCustomDimensionId_
     }
+
 
 -- | Web property ID for the custom dimension to update.
 mcdpWebPropertyId :: Lens' ManagementCustomDimensionsPatch Text

@@ -62,6 +62,7 @@ data AccountsContainersWorkspacesProposalCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesProposalCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ accountsContainersWorkspacesProposalCreate
 accountsContainersWorkspacesProposalCreate pAcwpcParent_ pAcwpcPayload_ =
   AccountsContainersWorkspacesProposalCreate'
     {_acwpcParent = pAcwpcParent_, _acwpcPayload = pAcwpcPayload_}
+
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{aid}\/containers\/{cid}\/workspace\/{wid}

@@ -34,6 +34,7 @@ data RateLimits =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RateLimits' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -51,6 +52,7 @@ rateLimits =
     , _rlMaxDispatchesPerSecond = Nothing
     , _rlMaxBurstSize = Nothing
     }
+
 
 -- | The maximum number of concurrent tasks that Cloud Tasks allows to be
 -- dispatched for this queue. After this threshold has been reached, Cloud
@@ -166,6 +168,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -178,6 +181,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -229,6 +233,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -249,6 +254,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -303,6 +309,7 @@ data ListLocationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -314,6 +321,7 @@ listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
   ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -350,11 +358,13 @@ data GetIAMPolicyRequest =
   GetIAMPolicyRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -377,6 +387,7 @@ data RetryConfig =
     , _rcMinBackoff       :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RetryConfig' with the minimum fields required to make a request.
 --
@@ -401,6 +412,7 @@ retryConfig =
     , _rcMaxBackoff = Nothing
     , _rcMinBackoff = Nothing
     }
+
 
 -- | The time between retries will double \`max_doublings\` times. A task\'s
 -- retry interval starts at min_backoff, then doubles \`max_doublings\`
@@ -502,6 +514,7 @@ newtype RunTaskRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RunTaskRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -510,6 +523,7 @@ newtype RunTaskRequest =
 runTaskRequest
     :: RunTaskRequest
 runTaskRequest = RunTaskRequest' {_rtrResponseView = Nothing}
+
 
 -- | The response_view specifies which subset of the Task will be returned.
 -- By default response_view is BASIC; not all information is retrieved by
@@ -547,6 +561,7 @@ data Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -570,6 +585,7 @@ location =
     , _lLabels = Nothing
     , _lLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
@@ -629,11 +645,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -651,6 +669,7 @@ data CreateTaskRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateTaskRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -662,6 +681,7 @@ createTaskRequest
     :: CreateTaskRequest
 createTaskRequest =
   CreateTaskRequest' {_ctrResponseView = Nothing, _ctrTask = Nothing}
+
 
 -- | The response_view specifies which subset of the Task will be returned.
 -- By default response_view is BASIC; not all information is retrieved by
@@ -724,6 +744,7 @@ data ListQueuesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListQueuesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -735,6 +756,7 @@ listQueuesResponse
     :: ListQueuesResponse
 listQueuesResponse =
   ListQueuesResponse' {_lqrNextPageToken = Nothing, _lqrQueues = Nothing}
+
 
 -- | A token to retrieve next page of results. To return the next page of
 -- results, call ListQueues with this value as the page_token. If the
@@ -775,6 +797,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -785,6 +808,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -816,6 +840,7 @@ newtype AppEngineHTTPQueue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppEngineHTTPQueue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -825,6 +850,7 @@ appEngineHTTPQueue
     :: AppEngineHTTPQueue
 appEngineHTTPQueue =
   AppEngineHTTPQueue' {_aehttpqAppEngineRoutingOverride = Nothing}
+
 
 -- | Overrides for the task-level app_engine_routing. If set,
 -- \`app_engine_routing_override\` is used for all tasks in the queue, no
@@ -857,6 +883,7 @@ newtype SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -865,6 +892,7 @@ newtype SetIAMPolicyRequest =
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest = SetIAMPolicyRequest' {_siprPolicy = Nothing}
+
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -899,6 +927,7 @@ data Queue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Queue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -925,6 +954,7 @@ queue =
     , _qName = Nothing
     , _qPurgeTime = Nothing
     }
+
 
 -- | Rate limits for task dispatches. rate_limits and retry_config are
 -- related because they both control task attempts. However they control
@@ -1028,6 +1058,7 @@ data ListTasksResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTasksResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1039,6 +1070,7 @@ listTasksResponse
     :: ListTasksResponse
 listTasksResponse =
   ListTasksResponse' {_ltrNextPageToken = Nothing, _ltrTasks = Nothing}
+
 
 -- | A token to retrieve next page of results. To return the next page of
 -- results, call ListTasks with this value as the page_token. If the
@@ -1103,6 +1135,7 @@ newtype AppEngineHTTPRequestHeaders =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppEngineHTTPRequestHeaders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1114,6 +1147,7 @@ appEngineHTTPRequestHeaders
 appEngineHTTPRequestHeaders pAehttprhAddtional_ =
   AppEngineHTTPRequestHeaders'
     {_aehttprhAddtional = _Coerce # pAehttprhAddtional_}
+
 
 aehttprhAddtional :: Lens' AppEngineHTTPRequestHeaders (HashMap Text Text)
 aehttprhAddtional
@@ -1137,11 +1171,13 @@ data PauseQueueRequest =
   PauseQueueRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PauseQueueRequest' with the minimum fields required to make a request.
 --
 pauseQueueRequest
     :: PauseQueueRequest
 pauseQueueRequest = PauseQueueRequest'
+
 
 instance FromJSON PauseQueueRequest where
         parseJSON
@@ -1160,6 +1196,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1169,6 +1206,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1205,6 +1243,7 @@ data Attempt =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Attempt' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1225,6 +1264,7 @@ attempt =
     , _aDispatchTime = Nothing
     , _aResponseTime = Nothing
     }
+
 
 -- | Output only. The response from the worker for this attempt. If
 -- \`response_time\` is unset, then the task has not been attempted or is
@@ -1283,11 +1323,13 @@ data PurgeQueueRequest =
   PurgeQueueRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PurgeQueueRequest' with the minimum fields required to make a request.
 --
 purgeQueueRequest
     :: PurgeQueueRequest
 purgeQueueRequest = PurgeQueueRequest'
+
 
 instance FromJSON PurgeQueueRequest where
         parseJSON
@@ -1314,6 +1356,7 @@ data Task =
     , _tCreateTime           :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Task' with the minimum fields required to make a request.
 --
@@ -1353,6 +1396,7 @@ task =
     , _tAppEngineHTTPRequest = Nothing
     , _tCreateTime = Nothing
     }
+
 
 -- | Output only. The status of the task\'s last attempt.
 tLastAttempt :: Lens' Task (Maybe Attempt)
@@ -1495,6 +1539,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1504,6 +1549,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1554,6 +1600,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1566,6 +1613,7 @@ data Policy =
 policy
     :: Policy
 policy = Policy' {_pEtag = Nothing, _pVersion = Nothing, _pBindings = Nothing}
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -1621,6 +1669,7 @@ newtype LocationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1631,6 +1680,7 @@ locationLabels
     -> LocationLabels
 locationLabels pLlAddtional_ =
   LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -1655,6 +1705,7 @@ newtype LocationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1665,6 +1716,7 @@ locationMetadata
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
   LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -1701,6 +1753,7 @@ data AppEngineRouting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppEngineRouting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1721,6 +1774,7 @@ appEngineRouting =
     , _aerHost = Nothing
     , _aerInstance = Nothing
     }
+
 
 -- | App service. By default, the task is sent to the service which is the
 -- default service when the task is attempted. For some queues or tasks
@@ -1831,6 +1885,7 @@ data AppEngineHTTPRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppEngineHTTPRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1854,6 +1909,7 @@ appEngineHTTPRequest =
     , _aehttprHeaders = Nothing
     , _aehttprAppEngineRouting = Nothing
     }
+
 
 -- | The HTTP method to use for the request. The default is POST. The app\'s
 -- request handler for the task\'s target URL must be able to handle HTTP
@@ -1953,11 +2009,13 @@ data ResumeQueueRequest =
   ResumeQueueRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResumeQueueRequest' with the minimum fields required to make a request.
 --
 resumeQueueRequest
     :: ResumeQueueRequest
 resumeQueueRequest = ResumeQueueRequest'
+
 
 instance FromJSON ResumeQueueRequest where
         parseJSON
@@ -1978,6 +2036,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1991,6 +2050,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

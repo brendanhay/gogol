@@ -70,6 +70,7 @@ data TransferOperationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferOperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ transferOperationsDelete pTodName_ =
     , _todName = pTodName_
     , _todCallback = Nothing
     }
+
 
 -- | V1 error format.
 todXgafv :: Lens' TransferOperationsDelete (Maybe Xgafv)

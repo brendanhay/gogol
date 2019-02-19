@@ -67,6 +67,7 @@ data SponsorsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SponsorsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ sponsorsList pSPart_ =
     , _sPageToken = Nothing
     , _sMaxResults = 5
     }
+
 
 -- | The part parameter specifies the sponsor resource parts that the API
 -- response will include. Supported values are id and snippet.

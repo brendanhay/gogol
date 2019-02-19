@@ -94,6 +94,7 @@ data BeaconsAttachmentsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconsAttachmentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +128,7 @@ beaconsAttachmentsList pBalBeaconName_ =
     , _balProjectId = Nothing
     , _balCallback = Nothing
     }
+
 
 -- | V1 error format.
 balXgafv :: Lens' BeaconsAttachmentsList (Maybe Xgafv)

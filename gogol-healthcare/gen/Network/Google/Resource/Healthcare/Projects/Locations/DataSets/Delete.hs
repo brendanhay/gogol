@@ -74,6 +74,7 @@ data ProjectsLocationsDataSetsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ projectsLocationsDataSetsDelete pPName_ =
     , _pName = pPName_
     , _pCallback = Nothing
     }
+
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsLocationsDataSetsDelete (Maybe Xgafv)

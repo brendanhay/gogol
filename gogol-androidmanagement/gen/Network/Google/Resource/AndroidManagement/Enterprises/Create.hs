@@ -82,6 +82,7 @@ data EnterprisesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ enterprisesCreate pEcPayload_ =
     , _ecEnterpriseToken = Nothing
     , _ecCallback = Nothing
     }
+
 
 -- | V1 error format.
 ecXgafv :: Lens' EnterprisesCreate (Maybe Xgafv)

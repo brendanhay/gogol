@@ -75,6 +75,7 @@ data ProjectsOccurrencesBatchCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsOccurrencesBatchCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsOccurrencesBatchCreate pPobcParent_ pPobcPayload_ =
     , _pobcPayload = pPobcPayload_
     , _pobcCallback = Nothing
     }
+
 
 -- | The name of the project in the form of \`projects\/[PROJECT_ID]\`, under
 -- which the occurrences are to be created.

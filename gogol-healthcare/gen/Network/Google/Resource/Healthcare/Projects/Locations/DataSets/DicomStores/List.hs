@@ -79,6 +79,7 @@ data ProjectsLocationsDataSetsDicomStoresList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsDicomStoresList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsLocationsDataSetsDicomStoresList pPldsdslParent_ =
     , _pldsdslPageSize = Nothing
     , _pldsdslCallback = Nothing
     }
+
 
 -- | Name of the dataset.
 pldsdslParent :: Lens' ProjectsLocationsDataSetsDicomStoresList Text

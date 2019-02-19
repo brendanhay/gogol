@@ -71,6 +71,7 @@ data UsersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ usersUpdate pUuProject_ pUuPayload_ pUuName_ pUuInstance_ =
     , _uuHost = Nothing
     , _uuInstance = pUuInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 uuProject :: Lens' UsersUpdate Text

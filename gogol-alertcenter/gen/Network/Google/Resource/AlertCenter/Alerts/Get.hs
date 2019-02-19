@@ -76,6 +76,7 @@ data AlertsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlertsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ alertsGet pAgAlertId_ =
     , _agCustomerId = Nothing
     , _agCallback = Nothing
     }
+
 
 -- | V1 error format.
 agXgafv :: Lens' AlertsGet (Maybe Xgafv)

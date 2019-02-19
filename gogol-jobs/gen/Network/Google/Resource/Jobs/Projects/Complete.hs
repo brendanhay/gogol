@@ -94,6 +94,7 @@ data ProjectsComplete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsComplete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -142,6 +143,7 @@ projectsComplete pPcName_ =
     , _pcPageSize = Nothing
     , _pcCallback = Nothing
     }
+
 
 -- | Optional. The list of languages of the query. This is the BCP-47
 -- language code, such as \"en-US\" or \"sr-Latn\". For more information,

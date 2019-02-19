@@ -67,6 +67,7 @@ data DatabasesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatabasesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ databasesGet pDgProject_ pDgDatabase_ pDgInstance_ =
     , _dgDatabase = pDgDatabase_
     , _dgInstance = pDgInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 dgProject :: Lens' DatabasesGet Text

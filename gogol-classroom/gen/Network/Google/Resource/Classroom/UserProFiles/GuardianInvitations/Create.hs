@@ -122,6 +122,7 @@ data UserProFilesGuardianInvitationsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserProFilesGuardianInvitationsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -153,6 +154,7 @@ userProFilesGuardianInvitationsCreate pUpfgicStudentId_ pUpfgicPayload_ =
     , _upfgicPayload = pUpfgicPayload_
     , _upfgicCallback = Nothing
     }
+
 
 -- | ID of the student (in standard format)
 upfgicStudentId :: Lens' UserProFilesGuardianInvitationsCreate Text

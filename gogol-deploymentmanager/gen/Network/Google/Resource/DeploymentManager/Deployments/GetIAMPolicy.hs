@@ -65,6 +65,7 @@ data DeploymentsGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ deploymentsGetIAMPolicy
 deploymentsGetIAMPolicy pDgipProject_ pDgipResource_ =
   DeploymentsGetIAMPolicy'
     {_dgipProject = pDgipProject_, _dgipResource = pDgipResource_}
+
 
 -- | Project ID for this request.
 dgipProject :: Lens' DeploymentsGetIAMPolicy Text

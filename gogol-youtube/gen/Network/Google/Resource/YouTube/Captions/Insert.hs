@@ -82,6 +82,7 @@ data CaptionsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CaptionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ captionsInsert pCiPart_ pCiPayload_ =
     , _ciOnBehalfOfContentOwner = Nothing
     , _ciSync = Nothing
     }
+
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
 -- of

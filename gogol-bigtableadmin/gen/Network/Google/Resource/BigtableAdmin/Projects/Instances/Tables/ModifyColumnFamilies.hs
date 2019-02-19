@@ -81,6 +81,7 @@ data ProjectsInstancesTablesModifyColumnFamilies =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesTablesModifyColumnFamilies' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsInstancesTablesModifyColumnFamilies pPitmcfPayload_ pPitmcfName_ =
     , _pitmcfName = pPitmcfName_
     , _pitmcfCallback = Nothing
     }
+
 
 -- | V1 error format.
 pitmcfXgafv :: Lens' ProjectsInstancesTablesModifyColumnFamilies (Maybe Xgafv)

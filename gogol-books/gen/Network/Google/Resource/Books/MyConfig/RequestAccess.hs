@@ -76,6 +76,7 @@ data MyConfigRequestAccess =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyConfigRequestAccess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ myConfigRequestAccess pMcraCpksver_ pMcraVolumeId_ pMcraSource_ pMcraNonce_ =
     , _mcraSource = pMcraSource_
     , _mcraNonce = pMcraNonce_
     }
+
 
 -- | The device\/version ID from which to request the restrictions.
 mcraCpksver :: Lens' MyConfigRequestAccess Text

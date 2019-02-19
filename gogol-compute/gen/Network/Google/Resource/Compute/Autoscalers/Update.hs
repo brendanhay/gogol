@@ -73,6 +73,7 @@ data AutoscalersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ autoscalersUpdate pAuProject_ pAuZone_ pAuPayload_ =
     , _auPayload = pAuPayload_
     , _auAutoscaler = Nothing
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

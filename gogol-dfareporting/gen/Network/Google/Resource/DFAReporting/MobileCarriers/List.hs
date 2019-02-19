@@ -59,6 +59,7 @@ newtype MobileCarriersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileCarriersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ mobileCarriersList
     -> MobileCarriersList
 mobileCarriersList pMclProFileId_ =
   MobileCarriersList' {_mclProFileId = _Coerce # pMclProFileId_}
+
 
 -- | User profile ID associated with this request.
 mclProFileId :: Lens' MobileCarriersList Int64

@@ -85,6 +85,7 @@ data CoursesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ coursesCreate pCcPayload_ =
     , _ccPayload = pCcPayload_
     , _ccCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccXgafv :: Lens' CoursesCreate (Maybe Xgafv)

@@ -71,6 +71,7 @@ data ProjectsHistoriesExecutionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsHistoriesExecutionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ projectsHistoriesExecutionsGet pPhegExecutionId_ pPhegHistoryId_ pPhegProjectId_
     , _phegHistoryId = pPhegHistoryId_
     , _phegProjectId = pPhegProjectId_
     }
+
 
 -- | An Execution id. Required.
 phegExecutionId :: Lens' ProjectsHistoriesExecutionsGet Text

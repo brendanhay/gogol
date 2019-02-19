@@ -64,6 +64,7 @@ data PagesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ pagesInsert
 pagesInsert pPiBlogId_ pPiPayload_ =
   PagesInsert'
     {_piIsDraft = Nothing, _piBlogId = pPiBlogId_, _piPayload = pPiPayload_}
+
 
 -- | Whether to create the page as a draft (default: false).
 piIsDraft :: Lens' PagesInsert (Maybe Bool)

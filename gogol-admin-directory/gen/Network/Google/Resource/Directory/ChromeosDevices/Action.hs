@@ -68,6 +68,7 @@ data ChromeosDevicesAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeosDevicesAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ chromeosDevicesAction pCdaResourceId_ pCdaPayload_ pCdaCustomerId_ =
     , _cdaPayload = pCdaPayload_
     , _cdaCustomerId = pCdaCustomerId_
     }
+
 
 -- | Immutable ID of Chrome OS Device
 cdaResourceId :: Lens' ChromeosDevicesAction Text

@@ -83,6 +83,7 @@ data BillingAccountsSinksCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsSinksCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ billingAccountsSinksCreate pBascParent_ pBascPayload_ =
     , _bascPayload = pBascPayload_
     , _bascCallback = Nothing
     }
+
 
 -- | Required. The resource in which to create the sink:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

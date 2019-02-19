@@ -79,6 +79,7 @@ data ProjectsLocationsFunctionsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsFunctionsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ projectsLocationsFunctionsCreate pPlfcLocation_ pPlfcPayload_ =
     , _plfcPayload = pPlfcPayload_
     , _plfcCallback = Nothing
     }
+
 
 -- | V1 error format.
 plfcXgafv :: Lens' ProjectsLocationsFunctionsCreate (Maybe Xgafv)

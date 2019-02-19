@@ -85,6 +85,7 @@ data ProjectsRegionsClustersDiagnose =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsClustersDiagnose' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +125,7 @@ projectsRegionsClustersDiagnose pPPayload_ pPClusterName_ pPRegion_ pPProjectId_
     , _pProjectId = pPProjectId_
     , _pCallback = Nothing
     }
+
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsRegionsClustersDiagnose (Maybe Xgafv)

@@ -80,6 +80,7 @@ data ProjectsInstancesPartialUpdateInstance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesPartialUpdateInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ projectsInstancesPartialUpdateInstance pPipuiPayload_ pPipuiName_ =
     , _pipuiName = pPipuiName_
     , _pipuiCallback = Nothing
     }
+
 
 -- | V1 error format.
 pipuiXgafv :: Lens' ProjectsInstancesPartialUpdateInstance (Maybe Xgafv)

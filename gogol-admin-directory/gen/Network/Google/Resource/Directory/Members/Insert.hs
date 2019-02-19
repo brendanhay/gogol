@@ -62,6 +62,7 @@ data MembersInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MembersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ membersInsert
     -> MembersInsert
 membersInsert pMiGroupKey_ pMiPayload_ =
   MembersInsert' {_miGroupKey = pMiGroupKey_, _miPayload = pMiPayload_}
+
 
 -- | Email or immutable ID of the group
 miGroupKey :: Lens' MembersInsert Text

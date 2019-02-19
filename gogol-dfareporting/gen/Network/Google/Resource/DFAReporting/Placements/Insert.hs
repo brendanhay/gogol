@@ -61,6 +61,7 @@ data PlacementsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ placementsInsert
 placementsInsert pPiProFileId_ pPiPayload_ =
   PlacementsInsert'
     {_piProFileId = _Coerce # pPiProFileId_, _piPayload = pPiPayload_}
+
 
 -- | User profile ID associated with this request.
 piProFileId :: Lens' PlacementsInsert Int64

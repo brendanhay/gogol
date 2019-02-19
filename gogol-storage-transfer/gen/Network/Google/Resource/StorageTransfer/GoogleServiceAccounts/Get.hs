@@ -84,6 +84,7 @@ data GoogleServiceAccountsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleServiceAccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ googleServiceAccountsGet pGsagProjectId_ =
     , _gsagProjectId = pGsagProjectId_
     , _gsagCallback = Nothing
     }
+
 
 -- | V1 error format.
 gsagXgafv :: Lens' GoogleServiceAccountsGet (Maybe Xgafv)

@@ -61,6 +61,7 @@ data SubAccountsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubAccountsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ subAccountsInsert
 subAccountsInsert pSaiProFileId_ pSaiPayload_ =
   SubAccountsInsert'
     {_saiProFileId = _Coerce # pSaiProFileId_, _saiPayload = pSaiPayload_}
+
 
 -- | User profile ID associated with this request.
 saiProFileId :: Lens' SubAccountsInsert Int64

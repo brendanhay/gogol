@@ -70,6 +70,7 @@ data ProjectsReleasesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsReleasesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsReleasesGet pPName_ =
     , _pName = pPName_
     , _pCallback = Nothing
     }
+
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsReleasesGet (Maybe Xgafv)

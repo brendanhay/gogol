@@ -72,6 +72,7 @@ data URLCrawlErrorsSamplesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLCrawlErrorsSamplesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ urlCrawlErrorsSamplesGet pUcesgPlatform_ pUcesgCategory_ pUcesgSiteURL_ pUcesgUR
     , _ucesgSiteURL = pUcesgSiteURL_
     , _ucesgURL = pUcesgURL_
     }
+
 
 -- | The user agent type (platform) that made the request. For example: web
 ucesgPlatform :: Lens' URLCrawlErrorsSamplesGet URLCrawlErrorsSamplesGetPlatform

@@ -200,6 +200,7 @@ data SearchList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -302,6 +303,7 @@ searchList pSlPart_ =
     , _slVideoType = Nothing
     , _slVideoDimension = Nothing
     }
+
 
 -- | The publishedAfter parameter indicates that the API response should only
 -- contain resources created after the specified time. The value is an RFC

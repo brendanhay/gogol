@@ -75,6 +75,7 @@ data SettingsSearchApplicationsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsSearchApplicationsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ settingsSearchApplicationsUpdate pSsauPayload_ pSsauName_ =
     , _ssauName = pSsauName_
     , _ssauCallback = Nothing
     }
+
 
 -- | V1 error format.
 ssauXgafv :: Lens' SettingsSearchApplicationsUpdate (Maybe Xgafv)

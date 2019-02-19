@@ -68,6 +68,7 @@ data ResourcesBuildingsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesBuildingsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ resourcesBuildingsInsert pRbiPayload_ pRbiCustomer_ =
     , _rbiCustomer = pRbiCustomer_
     , _rbiCoordinatesSource = RBICSSourceUnspecified
     }
+
 
 -- | Multipart request metadata.
 rbiPayload :: Lens' ResourcesBuildingsInsert Building

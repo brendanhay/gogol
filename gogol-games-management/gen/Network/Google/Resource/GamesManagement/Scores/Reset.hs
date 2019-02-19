@@ -64,6 +64,7 @@ newtype ScoresReset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScoresReset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ scoresReset
     -> ScoresReset
 scoresReset pSrLeaderboardId_ =
   ScoresReset' {_srLeaderboardId = pSrLeaderboardId_}
+
 
 -- | The ID of the leaderboard.
 srLeaderboardId :: Lens' ScoresReset Text

@@ -78,6 +78,7 @@ data ProjectsLocationsDataSetsDicomStoresCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsDicomStoresCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsLocationsDataSetsDicomStoresCreate pPldsdscParent_ pPldsdscPayload_ =
     , _pldsdscDicomStoreId = Nothing
     , _pldsdscCallback = Nothing
     }
+
 
 -- | The name of the dataset this DICOM store belongs to.
 pldsdscParent :: Lens' ProjectsLocationsDataSetsDicomStoresCreate Text

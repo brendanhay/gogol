@@ -57,6 +57,7 @@ newtype CommentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ commentsGet
     :: Text -- ^ 'cgCommentId'
     -> CommentsGet
 commentsGet pCgCommentId_ = CommentsGet' {_cgCommentId = pCgCommentId_}
+
 
 -- | The ID of the comment to get.
 cgCommentId :: Lens' CommentsGet Text

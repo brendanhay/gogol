@@ -92,6 +92,7 @@ data ProjectsRegionsJobsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsJobsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -138,6 +139,7 @@ projectsRegionsJobsList pPrjlRegion_ pPrjlProjectId_ =
     , _prjlPageSize = Nothing
     , _prjlCallback = Nothing
     }
+
 
 -- | Optional. Specifies enumerated categories of jobs to list. (default =
 -- match ALL jobs).If filter is provided, jobStateMatcher will be ignored.

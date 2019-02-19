@@ -79,6 +79,7 @@ data ProjectsDlpJobsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDlpJobsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsDlpJobsDelete pPdjdName_ =
     , _pdjdName = pPdjdName_
     , _pdjdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdjdXgafv :: Lens' ProjectsDlpJobsDelete (Maybe Xgafv)

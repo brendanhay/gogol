@@ -60,6 +60,7 @@ newtype RelyingPartyUploadAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartyUploadAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ relyingPartyUploadAccount
     -> RelyingPartyUploadAccount
 relyingPartyUploadAccount pRpuaPayload_ =
   RelyingPartyUploadAccount' {_rpuaPayload = pRpuaPayload_}
+
 
 -- | Multipart request metadata.
 rpuaPayload :: Lens' RelyingPartyUploadAccount IdentitytoolkitRelyingPartyUploadAccountRequest

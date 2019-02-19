@@ -68,6 +68,7 @@ data LiveChatModeratorsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatModeratorsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ liveChatModeratorsList pLivPart_ pLivLiveChatId_ =
     , _livPageToken = Nothing
     , _livMaxResults = 5
     }
+
 
 -- | The part parameter specifies the liveChatModerator resource parts that
 -- the API response will include. Supported values are id and snippet.

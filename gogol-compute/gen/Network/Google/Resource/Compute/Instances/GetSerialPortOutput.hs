@@ -73,6 +73,7 @@ data InstancesGetSerialPortOutput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesGetSerialPortOutput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ instancesGetSerialPortOutput pIgspoProject_ pIgspoZone_ pIgspoInstance_ =
     , _igspoPort = 1
     , _igspoInstance = pIgspoInstance_
     }
+
 
 -- | Project ID for this request.
 igspoProject :: Lens' InstancesGetSerialPortOutput Text

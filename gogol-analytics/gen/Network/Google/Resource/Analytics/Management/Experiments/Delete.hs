@@ -70,6 +70,7 @@ data ManagementExperimentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementExperimentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ managementExperimentsDelete pMedWebPropertyId_ pMedProFileId_ pMedAccountId_ pMe
     , _medAccountId = pMedAccountId_
     , _medExperimentId = pMedExperimentId_
     }
+
 
 -- | Web property ID to which the experiment belongs
 medWebPropertyId :: Lens' ManagementExperimentsDelete Text

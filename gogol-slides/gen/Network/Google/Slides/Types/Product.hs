@@ -30,6 +30,7 @@ data ParagraphMarker =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ParagraphMarker' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40,6 +41,7 @@ data ParagraphMarker =
 paragraphMarker
     :: ParagraphMarker
 paragraphMarker = ParagraphMarker' {_pmStyle = Nothing, _pmBullet = Nothing}
+
 
 -- | The paragraph\'s style
 pmStyle :: Lens' ParagraphMarker (Maybe ParagraphStyle)
@@ -74,6 +76,7 @@ data DeleteTableRowRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteTableRowRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +89,7 @@ deleteTableRowRequest
 deleteTableRowRequest =
   DeleteTableRowRequest'
     {_dtrrCellLocation = Nothing, _dtrrTableObjectId = Nothing}
+
 
 -- | The reference table cell location from which a row will be deleted. The
 -- row this cell spans will be deleted. If this is a merged cell, multiple
@@ -127,6 +131,7 @@ data Thumbnail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Thumbnail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -140,6 +145,7 @@ thumbnail
     :: Thumbnail
 thumbnail =
   Thumbnail' {_tHeight = Nothing, _tWidth = Nothing, _tContentURL = Nothing}
+
 
 -- | The positive height in pixels of the thumbnail image.
 tHeight :: Lens' Thumbnail (Maybe Int32)
@@ -189,6 +195,7 @@ data TableBOrderCell =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableBOrderCell' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -201,6 +208,7 @@ tableBOrderCell
 tableBOrderCell =
   TableBOrderCell'
     {_tbocLocation = Nothing, _tbocTableBOrderProperties = Nothing}
+
 
 -- | The location of the border within the border table.
 tbocLocation :: Lens' TableBOrderCell (Maybe TableCellLocation)
@@ -242,6 +250,7 @@ data PageElementProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageElementProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -256,6 +265,7 @@ pageElementProperties
 pageElementProperties =
   PageElementProperties'
     {_pepTransform = Nothing, _pepSize = Nothing, _pepPageObjectId = Nothing}
+
 
 -- | The transform for the element.
 pepTransform :: Lens' PageElementProperties (Maybe AffineTransform)
@@ -297,6 +307,7 @@ newtype ReplaceAllShapesWithImageResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplaceAllShapesWithImageResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -306,6 +317,7 @@ replaceAllShapesWithImageResponse
     :: ReplaceAllShapesWithImageResponse
 replaceAllShapesWithImageResponse =
   ReplaceAllShapesWithImageResponse' {_raswirOccurrencesChanged = Nothing}
+
 
 -- | The number of shapes replaced with images.
 raswirOccurrencesChanged :: Lens' ReplaceAllShapesWithImageResponse (Maybe Int32)
@@ -339,6 +351,7 @@ newtype OutlineFill =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OutlineFill' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -347,6 +360,7 @@ newtype OutlineFill =
 outlineFill
     :: OutlineFill
 outlineFill = OutlineFill' {_ofSolidFill = Nothing}
+
 
 -- | Solid color fill.
 ofSolidFill :: Lens' OutlineFill (Maybe SolidFill)
@@ -374,6 +388,7 @@ data Image =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -388,6 +403,7 @@ image
 image =
   Image'
     {_iImageProperties = Nothing, _iContentURL = Nothing, _iSourceURL = Nothing}
+
 
 -- | The properties of the image.
 iImageProperties :: Lens' Image (Maybe ImageProperties)
@@ -436,6 +452,7 @@ data UpdateLinePropertiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateLinePropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -453,6 +470,7 @@ updateLinePropertiesRequest =
     , _ulprObjectId = Nothing
     , _ulprFields = Nothing
     }
+
 
 -- | The line properties to update.
 ulprLineProperties :: Lens' UpdateLinePropertiesRequest (Maybe LineProperties)
@@ -519,6 +537,7 @@ data CropProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CropProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -542,6 +561,7 @@ cropProperties =
     , _cpRightOffSet = Nothing
     , _cpLeftOffSet = Nothing
     }
+
 
 -- | The offset specifies the bottom edge of the crop rectangle that is
 -- located above the original bounding rectangle bottom edge, relative to
@@ -621,6 +641,7 @@ data LineProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LineProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -653,6 +674,7 @@ lineProperties =
     , _lpEndConnection = Nothing
     , _lpEndArrow = Nothing
     }
+
 
 -- | The thickness of the line.
 lpWeight :: Lens' LineProperties (Maybe Dimension)
@@ -734,6 +756,7 @@ newtype Group =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -742,6 +765,7 @@ newtype Group =
 group'
     :: Group
 group' = Group' {_gChildren = Nothing}
+
 
 -- | The collection of elements in the group. The minimum size of a group is
 -- 2.
@@ -772,6 +796,7 @@ data ReplaceImageRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplaceImageRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -789,6 +814,7 @@ replaceImageRequest =
     , _rirImageObjectId = Nothing
     , _rirURL = Nothing
     }
+
 
 -- | The replacement method.
 rirImageReplaceMethod :: Lens' ReplaceImageRequest (Maybe ReplaceImageRequestImageReplaceMethod)
@@ -839,6 +865,7 @@ data BatchUpdatePresentationRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchUpdatePresentationRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -851,6 +878,7 @@ batchUpdatePresentationRequest
 batchUpdatePresentationRequest =
   BatchUpdatePresentationRequest'
     {_buprRequests = Nothing, _buprWriteControl = Nothing}
+
 
 -- | A list of updates to apply to the presentation.
 buprRequests :: Lens' BatchUpdatePresentationRequest [Request']
@@ -893,6 +921,7 @@ data UpdatePageElementsZOrderRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdatePageElementsZOrderRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -905,6 +934,7 @@ updatePageElementsZOrderRequest
 updatePageElementsZOrderRequest =
   UpdatePageElementsZOrderRequest'
     {_upezorOperation = Nothing, _upezorPageElementObjectIds = Nothing}
+
 
 -- | The Z-order operation to apply on the page elements. When applying the
 -- operation on multiple page elements, the relative Z-orders within these
@@ -951,6 +981,7 @@ data CreateShapeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateShapeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -968,6 +999,7 @@ createShapeRequest =
     , _csrObjectId = Nothing
     , _csrElementProperties = Nothing
     }
+
 
 -- | The shape type.
 csrShapeType :: Lens' CreateShapeRequest (Maybe CreateShapeRequestShapeType)
@@ -1018,6 +1050,7 @@ data AutoText =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoText' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1031,6 +1064,7 @@ autoText
     :: AutoText
 autoText =
   AutoText' {_atStyle = Nothing, _atContent = Nothing, _atType = Nothing}
+
 
 -- | The styling applied to this auto text.
 atStyle :: Lens' AutoText (Maybe TextStyle)
@@ -1078,6 +1112,7 @@ data ReplaceAllShapesWithSheetsChartRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplaceAllShapesWithSheetsChartRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1101,6 +1136,7 @@ replaceAllShapesWithSheetsChartRequest =
     , _raswscrContainsText = Nothing
     , _raswscrChartId = Nothing
     }
+
 
 -- | If non-empty, limits the matches to page elements only on the given
 -- pages. Returns a 400 bad request error if given the page object ID of a
@@ -1177,6 +1213,7 @@ data List =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'List' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1187,6 +1224,7 @@ data List =
 list
     :: List
 list = List' {_lListId = Nothing, _lNestingLevel = Nothing}
+
 
 -- | The ID of the list.
 lListId :: Lens' List (Maybe Text)
@@ -1224,6 +1262,7 @@ newtype NotesProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotesProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1232,6 +1271,7 @@ newtype NotesProperties =
 notesProperties
     :: NotesProperties
 notesProperties = NotesProperties' {_npSpeakerNotesObjectId = Nothing}
+
 
 -- | The object ID of the shape on this notes page that contains the speaker
 -- notes for the corresponding slide. The actual shape may not always exist
@@ -1266,6 +1306,7 @@ newtype GroupObjectsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupObjectsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1274,6 +1315,7 @@ newtype GroupObjectsResponse =
 groupObjectsResponse
     :: GroupObjectsResponse
 groupObjectsResponse = GroupObjectsResponse' {_gorObjectId = Nothing}
+
 
 -- | The object ID of the created group.
 gorObjectId :: Lens' GroupObjectsResponse (Maybe Text)
@@ -1301,6 +1343,7 @@ data RgbColor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RgbColor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1313,6 +1356,7 @@ data RgbColor =
 rgbColor
     :: RgbColor
 rgbColor = RgbColor' {_rcRed = Nothing, _rcGreen = Nothing, _rcBlue = Nothing}
+
 
 -- | The red component of the color, from 0.0 to 1.0.
 rcRed :: Lens' RgbColor (Maybe Double)
@@ -1357,6 +1401,7 @@ data UpdatePagePropertiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdatePagePropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1374,6 +1419,7 @@ updatePagePropertiesRequest =
     , _upprPageProperties = Nothing
     , _upprFields = Nothing
     }
+
 
 -- | The object ID of the page the update is applied to.
 upprObjectId :: Lens' UpdatePagePropertiesRequest (Maybe Text)
@@ -1428,6 +1474,7 @@ data CreateSheetsChartRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateSheetsChartRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1451,6 +1498,7 @@ createSheetsChartRequest =
     , _cscrElementProperties = Nothing
     , _cscrChartId = Nothing
     }
+
 
 -- | A user-supplied object ID. If specified, the ID must be unique among all
 -- pages and page elements in the presentation. The ID should start with a
@@ -1519,6 +1567,7 @@ newtype TableRowProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableRowProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1527,6 +1576,7 @@ newtype TableRowProperties =
 tableRowProperties
     :: TableRowProperties
 tableRowProperties = TableRowProperties' {_trpMinRowHeight = Nothing}
+
 
 -- | Minimum height of the row. The row will be rendered in the Slides editor
 -- at a height equal to or greater than this value in order to show all the
@@ -1560,6 +1610,7 @@ data UpdateTableRowPropertiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateTableRowPropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1580,6 +1631,7 @@ updateTableRowPropertiesRequest =
     , _utrprObjectId = Nothing
     , _utrprFields = Nothing
     }
+
 
 -- | The table row properties to update.
 utrprTableRowProperties :: Lens' UpdateTableRowPropertiesRequest (Maybe TableRowProperties)
@@ -1644,6 +1696,7 @@ newtype MasterProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MasterProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1652,6 +1705,7 @@ newtype MasterProperties =
 masterProperties
     :: MasterProperties
 masterProperties = MasterProperties' {_mpDisplayName = Nothing}
+
 
 -- | The human-readable name of the master.
 mpDisplayName :: Lens' MasterProperties (Maybe Text)
@@ -1680,6 +1734,7 @@ data DeleteTextRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteTextRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1697,6 +1752,7 @@ deleteTextRequest =
     , _dtrObjectId = Nothing
     , _dtrCellLocation = Nothing
     }
+
 
 -- | The range of text to delete, based on TextElement indexes. There is
 -- always an implicit newline character at the end of a shape\'s or table
@@ -1754,6 +1810,7 @@ data InsertTableColumnsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InsertTableColumnsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1774,6 +1831,7 @@ insertTableColumnsRequest =
     , _itcrCellLocation = Nothing
     , _itcrTableObjectId = Nothing
     }
+
 
 -- | Whether to insert new columns to the right of the reference cell
 -- location. - \`True\`: insert to the right. - \`False\`: insert to the
@@ -1831,6 +1889,7 @@ newtype TextContentLists =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextContentLists' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1841,6 +1900,7 @@ textContentLists
     -> TextContentLists
 textContentLists pTclAddtional_ =
   TextContentLists' {_tclAddtional = _Coerce # pTclAddtional_}
+
 
 tclAddtional :: Lens' TextContentLists (HashMap Text List)
 tclAddtional
@@ -1865,6 +1925,7 @@ data Size =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Size' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1875,6 +1936,7 @@ data Size =
 size
     :: Size
 size = Size' {_sHeight = Nothing, _sWidth = Nothing}
+
 
 -- | The height of the object.
 sHeight :: Lens' Size (Maybe Dimension)
@@ -1909,6 +1971,7 @@ data StretchedPictureFill =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StretchedPictureFill' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1920,6 +1983,7 @@ stretchedPictureFill
     :: StretchedPictureFill
 stretchedPictureFill =
   StretchedPictureFill' {_spfSize = Nothing, _spfContentURL = Nothing}
+
 
 -- | The original size of the picture fill. This field is read-only.
 spfSize :: Lens' StretchedPictureFill (Maybe Size)
@@ -1962,6 +2026,7 @@ newtype TableBOrderFill =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableBOrderFill' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1970,6 +2035,7 @@ newtype TableBOrderFill =
 tableBOrderFill
     :: TableBOrderFill
 tableBOrderFill = TableBOrderFill' {_tbofSolidFill = Nothing}
+
 
 -- | Solid fill.
 tbofSolidFill :: Lens' TableBOrderFill (Maybe SolidFill)
@@ -2000,6 +2066,7 @@ data SheetsChart =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SheetsChart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2020,6 +2087,7 @@ sheetsChart =
     , _scSheetsChartProperties = Nothing
     , _scChartId = Nothing
     }
+
 
 -- | The ID of the Google Sheets spreadsheet that contains the source chart.
 scSpreadsheetId :: Lens' SheetsChart (Maybe Text)
@@ -2077,6 +2145,7 @@ newtype CreateShapeResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateShapeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2085,6 +2154,7 @@ newtype CreateShapeResponse =
 createShapeResponse
     :: CreateShapeResponse
 createShapeResponse = CreateShapeResponse' {_cObjectId = Nothing}
+
 
 -- | The object ID of the created shape.
 cObjectId :: Lens' CreateShapeResponse (Maybe Text)
@@ -2110,6 +2180,7 @@ data DeleteTableColumnRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteTableColumnRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2122,6 +2193,7 @@ deleteTableColumnRequest
 deleteTableColumnRequest =
   DeleteTableColumnRequest'
     {_dtcrCellLocation = Nothing, _dtcrTableObjectId = Nothing}
+
 
 -- | The reference table cell location from which a column will be deleted.
 -- The column this cell spans will be deleted. If this is a merged cell,
@@ -2161,6 +2233,7 @@ newtype TableBOrderRow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableBOrderRow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2169,6 +2242,7 @@ newtype TableBOrderRow =
 tableBOrderRow
     :: TableBOrderRow
 tableBOrderRow = TableBOrderRow' {_tborTableBOrderCells = Nothing}
+
 
 -- | Properties of each border cell. When a border\'s adjacent table cells
 -- are merged, it is not included in the response.
@@ -2202,6 +2276,7 @@ data LineConnection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LineConnection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2214,6 +2289,7 @@ lineConnection
 lineConnection =
   LineConnection'
     {_lcConnectedObjectId = Nothing, _lcConnectionSiteIndex = Nothing}
+
 
 -- | The object ID of the connected page element. Some page elements, such as
 -- groups, tables, and lines do not have connection sites and therefore
@@ -2267,6 +2343,7 @@ data Link =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Link' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2287,6 +2364,7 @@ link =
     , _lRelativeLink = Nothing
     , _lSlideIndex = Nothing
     }
+
 
 -- | If set, indicates this is a link to the external web page at this URL.
 lURL :: Lens' Link (Maybe Text)
@@ -2342,6 +2420,7 @@ data GroupObjectsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupObjectsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2354,6 +2433,7 @@ groupObjectsRequest
 groupObjectsRequest =
   GroupObjectsRequest'
     {_gorGroupObjectId = Nothing, _gorChildrenObjectIds = Nothing}
+
 
 -- | A user-supplied object ID for the group to be created. If you specify an
 -- ID, it must be unique among all pages and page elements in the
@@ -2403,6 +2483,7 @@ data Dimension =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Dimension' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2413,6 +2494,7 @@ data Dimension =
 dimension
     :: Dimension
 dimension = Dimension' {_dMagnitude = Nothing, _dUnit = Nothing}
+
 
 -- | The magnitude.
 dMagnitude :: Lens' Dimension (Maybe Double)
@@ -2449,6 +2531,7 @@ data BatchUpdatePresentationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchUpdatePresentationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2463,6 +2546,7 @@ batchUpdatePresentationResponse
 batchUpdatePresentationResponse =
   BatchUpdatePresentationResponse'
     {_bPresentationId = Nothing, _bReplies = Nothing, _bWriteControl = Nothing}
+
 
 -- | The presentation the updates were applied to.
 bPresentationId :: Lens' BatchUpdatePresentationResponse (Maybe Text)
@@ -2525,6 +2609,7 @@ newtype DuplicateObjectRequestObjectIds =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DuplicateObjectRequestObjectIds' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2536,6 +2621,7 @@ duplicateObjectRequestObjectIds
 duplicateObjectRequestObjectIds pDoroiAddtional_ =
   DuplicateObjectRequestObjectIds'
     {_doroiAddtional = _Coerce # pDoroiAddtional_}
+
 
 doroiAddtional :: Lens' DuplicateObjectRequestObjectIds (HashMap Text Text)
 doroiAddtional
@@ -2563,6 +2649,7 @@ newtype ReplaceAllShapesWithSheetsChartResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplaceAllShapesWithSheetsChartResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2573,6 +2660,7 @@ replaceAllShapesWithSheetsChartResponse
 replaceAllShapesWithSheetsChartResponse =
   ReplaceAllShapesWithSheetsChartResponse'
     {_raswscrOccurrencesChanged = Nothing}
+
 
 -- | The number of shapes replaced with charts.
 raswscrOccurrencesChanged :: Lens' ReplaceAllShapesWithSheetsChartResponse (Maybe Int32)
@@ -2612,6 +2700,7 @@ data CreateTableRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateTableRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2632,6 +2721,7 @@ createTableRequest =
     , _ctrElementProperties = Nothing
     , _ctrColumns = Nothing
     }
+
 
 -- | A user-supplied object ID. If you specify an ID, it must be unique among
 -- all pages and page elements in the presentation. The ID must start with
@@ -2695,6 +2785,7 @@ data TableBOrderProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableBOrderProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2712,6 +2803,7 @@ tableBOrderProperties =
     , _tbopWeight = Nothing
     , _tbopDashStyle = Nothing
     }
+
 
 -- | The fill of the table border.
 tbopTableBOrderFill :: Lens' TableBOrderProperties (Maybe TableBOrderFill)
@@ -2766,6 +2858,7 @@ data Response =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Response' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2810,6 +2903,7 @@ response =
     , _rCreateImage = Nothing
     , _rCreateSlide = Nothing
     }
+
 
 -- | The result of replacing all shapes matching some criteria with an image.
 rReplaceAllShapesWithImage :: Lens' Response (Maybe ReplaceAllShapesWithImageResponse)
@@ -2924,6 +3018,7 @@ newtype OptionalColor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OptionalColor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2932,6 +3027,7 @@ newtype OptionalColor =
 optionalColor
     :: OptionalColor
 optionalColor = OptionalColor' {_ocOpaqueColor = Nothing}
+
 
 -- | If set, this will be used as an opaque color. If unset, this represents
 -- a transparent color.
@@ -2963,6 +3059,7 @@ data DuplicateObjectRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DuplicateObjectRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2974,6 +3071,7 @@ duplicateObjectRequest
     :: DuplicateObjectRequest
 duplicateObjectRequest =
   DuplicateObjectRequest' {_dorObjectId = Nothing, _dorObjectIds = Nothing}
+
 
 -- | The ID of the object to duplicate.
 dorObjectId :: Lens' DuplicateObjectRequest (Maybe Text)
@@ -3022,6 +3120,7 @@ newtype UnGroupObjectsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnGroupObjectsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3030,6 +3129,7 @@ newtype UnGroupObjectsRequest =
 unGroupObjectsRequest
     :: UnGroupObjectsRequest
 unGroupObjectsRequest = UnGroupObjectsRequest' {_ugorObjectIds = Nothing}
+
 
 -- | The object IDs of the objects to ungroup. Only groups that are not
 -- inside other groups can be ungrouped. All the groups should be on the
@@ -3071,6 +3171,7 @@ data Page =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Page' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3106,6 +3207,7 @@ page =
     , _pPageType = Nothing
     , _pRevisionId = Nothing
     }
+
 
 -- | Notes specific properties. Only set if page_type = NOTES.
 pNotesProperties :: Lens' Page (Maybe NotesProperties)
@@ -3209,6 +3311,7 @@ newtype ReplaceAllTextResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplaceAllTextResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3218,6 +3321,7 @@ replaceAllTextResponse
     :: ReplaceAllTextResponse
 replaceAllTextResponse =
   ReplaceAllTextResponse' {_ratrOccurrencesChanged = Nothing}
+
 
 -- | The number of occurrences changed by replacing all text.
 ratrOccurrencesChanged :: Lens' ReplaceAllTextResponse (Maybe Int32)
@@ -3252,6 +3356,7 @@ data Bullet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Bullet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3272,6 +3377,7 @@ bullet =
     , _bNestingLevel = Nothing
     , _bBulletStyle = Nothing
     }
+
 
 -- | The rendered bullet glyph for this paragraph.
 bGlyph :: Lens' Bullet (Maybe Text)
@@ -3322,6 +3428,7 @@ data UpdateImagePropertiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateImagePropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3339,6 +3446,7 @@ updateImagePropertiesRequest =
     , _uiprImageProperties = Nothing
     , _uiprFields = Nothing
     }
+
 
 -- | The object ID of the image the updates are applied to.
 uiprObjectId :: Lens' UpdateImagePropertiesRequest (Maybe Text)
@@ -3390,6 +3498,7 @@ data SlideProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SlideProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3407,6 +3516,7 @@ slideProperties =
     , _spMasterObjectId = Nothing
     , _spNotesPage = Nothing
     }
+
 
 -- | The object ID of the layout that this slide is based on. This property
 -- is read-only.
@@ -3467,6 +3577,7 @@ data Presentation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Presentation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3502,6 +3613,7 @@ presentation =
     , _prePageSize = Nothing
     , _preLayouts = Nothing
     }
+
 
 -- | The slides in the presentation. A slide inherits properties from a slide
 -- layout.
@@ -3621,6 +3733,7 @@ data ThemeColorPair =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThemeColorPair' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3631,6 +3744,7 @@ data ThemeColorPair =
 themeColorPair
     :: ThemeColorPair
 themeColorPair = ThemeColorPair' {_tcpColor = Nothing, _tcpType = Nothing}
+
 
 -- | The concrete color corresponding to the theme color type above.
 tcpColor :: Lens' ThemeColorPair (Maybe RgbColor)
@@ -3673,6 +3787,7 @@ data Shadow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Shadow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3705,6 +3820,7 @@ shadow =
     , _sPropertyState = Nothing
     , _sType = Nothing
     }
+
 
 -- | Transform that encodes the translate, scale, and skew of the shadow,
 -- relative to the alignment position.
@@ -3797,6 +3913,7 @@ data ImageProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3829,6 +3946,7 @@ imageProperties =
     , _ipOutline = Nothing
     , _ipBrightness = Nothing
     }
+
 
 -- | The crop properties of the image. If not set, the image is not cropped.
 -- This property is read-only.
@@ -3918,6 +4036,7 @@ data Line =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Line' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3932,6 +4051,7 @@ line
 line =
   Line'
     {_lLineProperties = Nothing, _lLineCategory = Nothing, _lLineType = Nothing}
+
 
 -- | The properties of the line.
 lLineProperties :: Lens' Line (Maybe LineProperties)
@@ -3976,6 +4096,7 @@ newtype CreateVideoResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateVideoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3984,6 +4105,7 @@ newtype CreateVideoResponse =
 createVideoResponse
     :: CreateVideoResponse
 createVideoResponse = CreateVideoResponse' {_cvrObjectId = Nothing}
+
 
 -- | The object ID of the created video.
 cvrObjectId :: Lens' CreateVideoResponse (Maybe Text)
@@ -4011,6 +4133,7 @@ data LayoutReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LayoutReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4022,6 +4145,7 @@ layoutReference
     :: LayoutReference
 layoutReference =
   LayoutReference' {_lrPredefinedLayout = Nothing, _lrLayoutId = Nothing}
+
 
 -- | Predefined layout.
 lrPredefinedLayout :: Lens' LayoutReference (Maybe LayoutReferencePredefinedLayout)
@@ -4057,6 +4181,7 @@ newtype LineFill =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LineFill' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4065,6 +4190,7 @@ newtype LineFill =
 lineFill
     :: LineFill
 lineFill = LineFill' {_lfSolidFill = Nothing}
+
 
 -- | Solid color fill.
 lfSolidFill :: Lens' LineFill (Maybe SolidFill)
@@ -4095,6 +4221,7 @@ data UpdatePageElementTransformRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdatePageElementTransformRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4112,6 +4239,7 @@ updatePageElementTransformRequest =
     , _upetrObjectId = Nothing
     , _upetrApplyMode = Nothing
     }
+
 
 -- | The input transform matrix used to update the page element.
 upetrTransform :: Lens' UpdatePageElementTransformRequest (Maybe AffineTransform)
@@ -4161,6 +4289,7 @@ data InsertTableRowsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InsertTableRowsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4181,6 +4310,7 @@ insertTableRowsRequest =
     , _itrrCellLocation = Nothing
     , _itrrTableObjectId = Nothing
     }
+
 
 -- | Whether to insert new rows below the reference cell location. -
 -- \`True\`: insert below the cell. - \`False\`: insert above the cell.
@@ -4238,6 +4368,7 @@ data UnmergeTableCellsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnmergeTableCellsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4249,6 +4380,7 @@ unmergeTableCellsRequest
     :: UnmergeTableCellsRequest
 unmergeTableCellsRequest =
   UnmergeTableCellsRequest' {_utcrObjectId = Nothing, _utcrTableRange = Nothing}
+
 
 -- | The object ID of the table.
 utcrObjectId :: Lens' UnmergeTableCellsRequest (Maybe Text)
@@ -4292,6 +4424,7 @@ data Video =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Video' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4312,6 +4445,7 @@ video =
     , _vId = Nothing
     , _vVideoProperties = Nothing
     }
+
 
 -- | An URL to a video. The URL is valid as long as the source video exists
 -- and sharing settings do not change.
@@ -4360,6 +4494,7 @@ data UpdateTableColumnPropertiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateTableColumnPropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4380,6 +4515,7 @@ updateTableColumnPropertiesRequest =
     , _utcprFields = Nothing
     , _utcprColumnIndices = Nothing
     }
+
 
 -- | The object ID of the table.
 utcprObjectId :: Lens' UpdateTableColumnPropertiesRequest (Maybe Text)
@@ -4447,6 +4583,7 @@ data TableCellProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableCellProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4459,6 +4596,7 @@ tableCellProperties
 tableCellProperties =
   TableCellProperties'
     {_tcpTableCellBackgRoundFill = Nothing, _tcpContentAlignment = Nothing}
+
 
 -- | The background fill of the table cell. The default fill matches the fill
 -- for newly created table cells in the Slides editor.
@@ -4500,6 +4638,7 @@ newtype CreateLineResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateLineResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4508,6 +4647,7 @@ newtype CreateLineResponse =
 createLineResponse
     :: CreateLineResponse
 createLineResponse = CreateLineResponse' {_clrObjectId = Nothing}
+
 
 -- | The object ID of the created line.
 clrObjectId :: Lens' CreateLineResponse (Maybe Text)
@@ -4533,6 +4673,7 @@ newtype WordArt =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WordArt' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4541,6 +4682,7 @@ newtype WordArt =
 wordArt
     :: WordArt
 wordArt = WordArt' {_waRenderedText = Nothing}
+
 
 -- | The text rendered as word art.
 waRenderedText :: Lens' WordArt (Maybe Text)
@@ -4568,6 +4710,7 @@ data TableCellBackgRoundFill =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableCellBackgRoundFill' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4580,6 +4723,7 @@ tableCellBackgRoundFill
 tableCellBackgRoundFill =
   TableCellBackgRoundFill'
     {_tcbrfSolidFill = Nothing, _tcbrfPropertyState = Nothing}
+
 
 -- | Solid color fill.
 tcbrfSolidFill :: Lens' TableCellBackgRoundFill (Maybe SolidFill)
@@ -4622,6 +4766,7 @@ data TextRun =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextRun' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4632,6 +4777,7 @@ data TextRun =
 textRun
     :: TextRun
 textRun = TextRun' {_trStyle = Nothing, _trContent = Nothing}
+
 
 -- | The styling applied to this run.
 trStyle :: Lens' TextRun (Maybe TextStyle)
@@ -4667,6 +4813,7 @@ newtype RefreshSheetsChartRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RefreshSheetsChartRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4675,6 +4822,7 @@ newtype RefreshSheetsChartRequest =
 refreshSheetsChartRequest
     :: RefreshSheetsChartRequest
 refreshSheetsChartRequest = RefreshSheetsChartRequest' {_rscrObjectId = Nothing}
+
 
 -- | The object ID of the chart to refresh.
 rscrObjectId :: Lens' RefreshSheetsChartRequest (Maybe Text)
@@ -4703,6 +4851,7 @@ data TableRow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableRow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4720,6 +4869,7 @@ tableRow =
     , _trTableCells = Nothing
     , _trRowHeight = Nothing
     }
+
 
 -- | Properties of the row.
 trTableRowProperties :: Lens' TableRow (Maybe TableRowProperties)
@@ -4769,6 +4919,7 @@ data WeightedFontFamily =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WeightedFontFamily' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4780,6 +4931,7 @@ weightedFontFamily
     :: WeightedFontFamily
 weightedFontFamily =
   WeightedFontFamily' {_wffFontFamily = Nothing, _wffWeight = Nothing}
+
 
 -- | The font family of the text. The font family can be any font from the
 -- Font menu in Slides or from [Google Fonts]
@@ -4831,6 +4983,7 @@ data CreateVideoRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateVideoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4851,6 +5004,7 @@ createVideoRequest =
     , _creSource = Nothing
     , _creId = Nothing
     }
+
 
 -- | A user-supplied object ID. If you specify an ID, it must be unique among
 -- all pages and page elements in the presentation. The ID must start with
@@ -4915,6 +5069,7 @@ data TextContent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextContent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4925,6 +5080,7 @@ data TextContent =
 textContent
     :: TextContent
 textContent = TextContent' {_tcTextElements = Nothing, _tcLists = Nothing}
+
 
 -- | The text contents broken down into its component parts, including
 -- styling information. This property is read-only.
@@ -4967,6 +5123,7 @@ data Shape =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Shape' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4987,6 +5144,7 @@ shape =
     , _sPlaceholder = Nothing
     , _sShapeProperties = Nothing
     }
+
 
 -- | The type of the shape.
 sShapeType :: Lens' Shape (Maybe ShapeShapeType)
@@ -5049,6 +5207,7 @@ data AffineTransform =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AffineTransform' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5078,6 +5237,7 @@ affineTransform =
     , _atUnit = Nothing
     , _atScaleY = Nothing
     }
+
 
 -- | The X coordinate translation element.
 atTranslateX :: Lens' AffineTransform (Maybe Double)
@@ -5151,6 +5311,7 @@ newtype CreateSheetsChartResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateSheetsChartResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5160,6 +5321,7 @@ createSheetsChartResponse
     :: CreateSheetsChartResponse
 createSheetsChartResponse =
   CreateSheetsChartResponse' {_cscrsObjectId = Nothing}
+
 
 -- | The object ID of the created chart.
 cscrsObjectId :: Lens' CreateSheetsChartResponse (Maybe Text)
@@ -5190,6 +5352,7 @@ data Range =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Range' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5202,6 +5365,7 @@ data Range =
 range
     :: Range
 range = Range' {_rEndIndex = Nothing, _rType = Nothing, _rStartIndex = Nothing}
+
 
 -- | The optional zero-based index of the end of the collection. Required for
 -- \`FIXED_RANGE\` ranges.
@@ -5248,6 +5412,7 @@ data CreateImageRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateImageRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5262,6 +5427,7 @@ createImageRequest
 createImageRequest =
   CreateImageRequest'
     {_cirObjectId = Nothing, _cirURL = Nothing, _cirElementProperties = Nothing}
+
 
 -- | A user-supplied object ID. If you specify an ID, it must be unique among
 -- all pages and page elements in the presentation. The ID must start with
@@ -5323,6 +5489,7 @@ data MergeTableCellsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MergeTableCellsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5334,6 +5501,7 @@ mergeTableCellsRequest
     :: MergeTableCellsRequest
 mergeTableCellsRequest =
   MergeTableCellsRequest' {_mtcrObjectId = Nothing, _mtcrTableRange = Nothing}
+
 
 -- | The object ID of the table.
 mtcrObjectId :: Lens' MergeTableCellsRequest (Maybe Text)
@@ -5373,6 +5541,7 @@ newtype WriteControl =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WriteControl' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5381,6 +5550,7 @@ newtype WriteControl =
 writeControl
     :: WriteControl
 writeControl = WriteControl' {_wcRequiredRevisionId = Nothing}
+
 
 -- | The revision ID of the presentation required for the write request. If
 -- specified and the \`required_revision_id\` doesn\'t exactly match the
@@ -5436,6 +5606,7 @@ data TextStyle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextStyle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5480,6 +5651,7 @@ textStyle =
     , _tsBold = Nothing
     , _tsStrikethrough = Nothing
     }
+
 
 -- | The font family of the text. The font family can be any font from the
 -- Font menu in Slides or from [Google Fonts]
@@ -5637,6 +5809,7 @@ data SolidFill =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SolidFill' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5647,6 +5820,7 @@ data SolidFill =
 solidFill
     :: SolidFill
 solidFill = SolidFill' {_sfColor = Nothing, _sfAlpha = Nothing}
+
 
 -- | The color value of the solid fill.
 sfColor :: Lens' SolidFill (Maybe OpaqueColor)
@@ -5688,6 +5862,7 @@ data UpdateTextStyleRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateTextStyleRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5711,6 +5886,7 @@ updateTextStyleRequest =
     , _utsrCellLocation = Nothing
     , _utsrFields = Nothing
     }
+
 
 -- | The style(s) to set on the text. If the value for a particular style
 -- matches that of the parent, that style will be set to inherit. Certain
@@ -5783,6 +5959,7 @@ data Recolor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Recolor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5793,6 +5970,7 @@ data Recolor =
 recolor
     :: Recolor
 recolor = Recolor' {_rName = Nothing, _rRecolorStops = Nothing}
+
 
 -- | The name of the recolor effect. The name is determined from the
 -- \`recolor_stops\` by matching the gradient against the colors in the
@@ -5837,6 +6015,7 @@ data PageProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5848,6 +6027,7 @@ pageProperties
     :: PageProperties
 pageProperties =
   PageProperties' {_ppPageBackgRoundFill = Nothing, _ppColorScheme = Nothing}
+
 
 -- | The background fill of the page. If unset, the background fill is
 -- inherited from a parent page if it exists. If the page has no parent,
@@ -5892,6 +6072,7 @@ data PageBackgRoundFill =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageBackgRoundFill' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5909,6 +6090,7 @@ pageBackgRoundFill =
     , _pbrfSolidFill = Nothing
     , _pbrfPropertyState = Nothing
     }
+
 
 -- | Stretched picture fill.
 pbrfStretchedPictureFill :: Lens' PageBackgRoundFill (Maybe StretchedPictureFill)
@@ -5960,6 +6142,7 @@ newtype NestingLevel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NestingLevel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5968,6 +6151,7 @@ newtype NestingLevel =
 nestingLevel
     :: NestingLevel
 nestingLevel = NestingLevel' {_nlBulletStyle = Nothing}
+
 
 -- | The style of a bullet at this level of nesting.
 nlBulletStyle :: Lens' NestingLevel (Maybe TextStyle)
@@ -5995,6 +6179,7 @@ data OpaqueColor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OpaqueColor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6005,6 +6190,7 @@ data OpaqueColor =
 opaqueColor
     :: OpaqueColor
 opaqueColor = OpaqueColor' {_ocThemeColor = Nothing, _ocRgbColor = Nothing}
+
 
 -- | An opaque theme color.
 ocThemeColor :: Lens' OpaqueColor (Maybe OpaqueColorThemeColor)
@@ -6042,6 +6228,7 @@ data CreateSlideRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateSlideRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6062,6 +6249,7 @@ createSlideRequest =
     , _csrsInsertionIndex = Nothing
     , _csrsPlaceholderIdMAppings = Nothing
     }
+
 
 -- | A user-supplied object ID. If you specify an ID, it must be unique among
 -- all pages and page elements in the presentation. The ID must start with
@@ -6135,6 +6323,7 @@ data TableCellLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableCellLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6146,6 +6335,7 @@ tableCellLocation
     :: TableCellLocation
 tableCellLocation =
   TableCellLocation' {_tclColumnIndex = Nothing, _tclRowIndex = Nothing}
+
 
 -- | The 0-based column index.
 tclColumnIndex :: Lens' TableCellLocation (Maybe Int32)
@@ -6184,6 +6374,7 @@ data UpdateSlidesPositionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateSlidesPositionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6196,6 +6387,7 @@ updateSlidesPositionRequest
 updateSlidesPositionRequest =
   UpdateSlidesPositionRequest'
     {_usprSlideObjectIds = Nothing, _usprInsertionIndex = Nothing}
+
 
 -- | The IDs of the slides in the presentation that should be moved. The
 -- slides in this list must be in existing presentation order, without
@@ -6247,6 +6439,7 @@ data ReplaceAllShapesWithImageRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplaceAllShapesWithImageRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6270,6 +6463,7 @@ replaceAllShapesWithImageRequest =
     , _raswirImageURL = Nothing
     , _raswirReplaceMethod = Nothing
     }
+
 
 -- | The image replace method. If you specify both a \`replace_method\` and
 -- an \`image_replace_method\`, the \`image_replace_method\` takes
@@ -6364,6 +6558,7 @@ data PageElement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageElement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6411,6 +6606,7 @@ pageElement =
     , _peTable = Nothing
     , _peDescription = Nothing
     }
+
 
 -- | The transform of the page element. The visual appearance of the page
 -- element is determined by its absolute transform. To compute the absolute
@@ -6529,6 +6725,7 @@ data ColorStop =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColorStop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6542,6 +6739,7 @@ colorStop
     :: ColorStop
 colorStop =
   ColorStop' {_csColor = Nothing, _csAlpha = Nothing, _csPosition = Nothing}
+
 
 -- | The color of the gradient stop.
 csColor :: Lens' ColorStop (Maybe OpaqueColor)
@@ -6586,6 +6784,7 @@ newtype DeleteObjectRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteObjectRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6594,6 +6793,7 @@ newtype DeleteObjectRequest =
 deleteObjectRequest
     :: DeleteObjectRequest
 deleteObjectRequest = DeleteObjectRequest' {_dObjectId = Nothing}
+
 
 -- | The object ID of the page or page element to delete. If after a delete
 -- operation a group contains only 1 or no page elements, the group is also
@@ -6621,6 +6821,7 @@ newtype CreateSlideResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateSlideResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6629,6 +6830,7 @@ newtype CreateSlideResponse =
 createSlideResponse
     :: CreateSlideResponse
 createSlideResponse = CreateSlideResponse' {_ccObjectId = Nothing}
+
 
 -- | The object ID of the created slide.
 ccObjectId :: Lens' CreateSlideResponse (Maybe Text)
@@ -6654,6 +6856,7 @@ newtype ColorScheme =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColorScheme' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6662,6 +6865,7 @@ newtype ColorScheme =
 colorScheme
     :: ColorScheme
 colorScheme = ColorScheme' {_csColors = Nothing}
+
 
 -- | The ThemeColorType and corresponding concrete color pairs.
 csColors :: Lens' ColorScheme [ThemeColorPair]
@@ -6692,6 +6896,7 @@ data TableCell =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableCell' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6715,6 +6920,7 @@ tableCell =
     , _tcRowSpan = Nothing
     , _tcTableCellProperties = Nothing
     }
+
 
 -- | Column span of the cell.
 tcColumnSpan :: Lens' TableCell (Maybe Int32)
@@ -6775,6 +6981,7 @@ newtype ListNestingLevel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListNestingLevel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6785,6 +6992,7 @@ listNestingLevel
     -> ListNestingLevel
 listNestingLevel pLnlAddtional_ =
   ListNestingLevel' {_lnlAddtional = _Coerce # pLnlAddtional_}
+
 
 lnlAddtional :: Lens' ListNestingLevel (HashMap Text NestingLevel)
 lnlAddtional
@@ -6814,6 +7022,7 @@ data Outline =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Outline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6834,6 +7043,7 @@ outline =
     , _oDashStyle = Nothing
     , _oPropertyState = Nothing
     }
+
 
 -- | The fill of the outline.
 oOutlineFill :: Lens' Outline (Maybe OutlineFill)
@@ -6888,6 +7098,7 @@ data UpdateVideoPropertiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateVideoPropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6905,6 +7116,7 @@ updateVideoPropertiesRequest =
     , _uvprVideoProperties = Nothing
     , _uvprFields = Nothing
     }
+
 
 -- | The object ID of the video the updates are applied to.
 uvprObjectId :: Lens' UpdateVideoPropertiesRequest (Maybe Text)
@@ -6957,6 +7169,7 @@ data VideoProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6980,6 +7193,7 @@ videoProperties =
     , _vpEnd = Nothing
     , _vpOutline = Nothing
     }
+
 
 -- | The time at which to start playback, measured in seconds from the
 -- beginning of the video. If set, the start time should be before the end
@@ -7047,6 +7261,7 @@ data LayoutPlaceholderIdMApping =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LayoutPlaceholderIdMApping' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7064,6 +7279,7 @@ layoutPlaceholderIdMApping =
     , _lpimaLayoutPlaceholderObjectId = Nothing
     , _lpimaLayoutPlaceholder = Nothing
     }
+
 
 -- | A user-supplied object ID for the placeholder identified above that to
 -- be created onto a slide. If you specify an ID, it must be unique among
@@ -7122,6 +7338,7 @@ newtype CreateImageResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateImageResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7130,6 +7347,7 @@ newtype CreateImageResponse =
 createImageResponse
     :: CreateImageResponse
 createImageResponse = CreateImageResponse' {_ciriObjectId = Nothing}
+
 
 -- | The object ID of the created image.
 ciriObjectId :: Lens' CreateImageResponse (Maybe Text)
@@ -7160,6 +7378,7 @@ data TextElement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextElement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7183,6 +7402,7 @@ textElement =
     , _teTextRun = Nothing
     , _teStartIndex = Nothing
     }
+
 
 -- | A marker representing the beginning of a new paragraph. The
 -- \`start_index\` and \`end_index\` of this TextElement represent the
@@ -7256,6 +7476,7 @@ data DeleteParagraphBulletsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteParagraphBulletsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7273,6 +7494,7 @@ deleteParagraphBulletsRequest =
     , _dpbrObjectId = Nothing
     , _dpbrCellLocation = Nothing
     }
+
 
 -- | The range of text to delete bullets from, based on TextElement indexes.
 dpbrTextRange :: Lens' DeleteParagraphBulletsRequest (Maybe Range)
@@ -7321,6 +7543,7 @@ data InsertTextRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InsertTextRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7341,6 +7564,7 @@ insertTextRequest =
     , _itrInsertionIndex = Nothing
     , _itrCellLocation = Nothing
     }
+
 
 -- | The text to be inserted. Inserting a newline character will implicitly
 -- create a new ParagraphMarker at that index. The paragraph style of the
@@ -7409,6 +7633,7 @@ data UpdateTableBOrderPropertiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateTableBOrderPropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7432,6 +7657,7 @@ updateTableBOrderPropertiesRequest =
     , _utboprTableRange = Nothing
     , _utboprFields = Nothing
     }
+
 
 -- | The border position in the table range the updates should apply to. If a
 -- border position is not specified, the updates will apply to all borders
@@ -7507,6 +7733,7 @@ data CreateLineRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateLineRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7527,6 +7754,7 @@ createLineRequest =
     , _clrlLineCategory = Nothing
     , _clrlElementProperties = Nothing
     }
+
 
 -- | The category of the line to be created. The exact line type created is
 -- determined based on the category and how it\'s routed to connect to
@@ -7596,6 +7824,7 @@ data Placeholder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Placeholder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7609,6 +7838,7 @@ placeholder
     :: Placeholder
 placeholder =
   Placeholder' {_pParentObjectId = Nothing, _pType = Nothing, _pIndex = Nothing}
+
 
 -- | The object ID of this shape\'s parent placeholder. If unset, the parent
 -- placeholder shape does not exist, so the shape does not inherit
@@ -7656,6 +7886,7 @@ data LayoutProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LayoutProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7670,6 +7901,7 @@ layoutProperties
 layoutProperties =
   LayoutProperties'
     {_lpMasterObjectId = Nothing, _lpName = Nothing, _lpDisplayName = Nothing}
+
 
 -- | The object ID of the master that this layout is based on.
 lpMasterObjectId :: Lens' LayoutProperties (Maybe Text)
@@ -7714,6 +7946,7 @@ data UpdateShapePropertiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateShapePropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7731,6 +7964,7 @@ updateShapePropertiesRequest =
     , _usprShapeProperties = Nothing
     , _usprFields = Nothing
     }
+
 
 -- | The object ID of the shape the updates are applied to.
 usprObjectId :: Lens' UpdateShapePropertiesRequest (Maybe Text)
@@ -7784,6 +8018,7 @@ data Table =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7810,6 +8045,7 @@ table =
     , _tHorizontalBOrderRows = Nothing
     , _tTableColumns = Nothing
     }
+
 
 -- | Properties and contents of each row. Cells that span multiple rows are
 -- contained in only one of these rows and have a row_span greater than 1.
@@ -7896,6 +8132,7 @@ data UpdateLineCategoryRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateLineCategoryRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7908,6 +8145,7 @@ updateLineCategoryRequest
 updateLineCategoryRequest =
   UpdateLineCategoryRequest'
     {_ulcrObjectId = Nothing, _ulcrLineCategory = Nothing}
+
 
 -- | The object ID of the line the update is applied to. Only a line with a
 -- category indicating it is a \"connector\" can be updated. The line may
@@ -7955,6 +8193,7 @@ data ShapeProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShapeProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7978,6 +8217,7 @@ shapeProperties =
     , _spContentAlignment = Nothing
     , _spShapeBackgRoundFill = Nothing
     }
+
 
 -- | The hyperlink destination of the shape. If unset, there is no link.
 -- Links are not inherited from parent placeholders.
@@ -8048,6 +8288,7 @@ data ShapeBackgRoundFill =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShapeBackgRoundFill' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8059,6 +8300,7 @@ shapeBackgRoundFill
     :: ShapeBackgRoundFill
 shapeBackgRoundFill =
   ShapeBackgRoundFill' {_sbrfSolidFill = Nothing, _sbrfPropertyState = Nothing}
+
 
 -- | Solid color fill.
 sbrfSolidFill :: Lens' ShapeBackgRoundFill (Maybe SolidFill)
@@ -8109,6 +8351,7 @@ data CreateParagraphBulletsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateParagraphBulletsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8129,6 +8372,7 @@ createParagraphBulletsRequest =
     , _cpbrBulletPreset = Nothing
     , _cpbrCellLocation = Nothing
     }
+
 
 -- | The range of text to apply the bullet presets to, based on TextElement
 -- indexes.
@@ -8186,6 +8430,7 @@ data UpdatePageElementAltTextRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdatePageElementAltTextRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8203,6 +8448,7 @@ updatePageElementAltTextRequest =
     , _upeatrTitle = Nothing
     , _upeatrDescription = Nothing
     }
+
 
 -- | The object ID of the page element the updates are applied to.
 upeatrObjectId :: Lens' UpdatePageElementAltTextRequest (Maybe Text)
@@ -8256,6 +8502,7 @@ data UpdateTableCellPropertiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateTableCellPropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8276,6 +8523,7 @@ updateTableCellPropertiesRequest =
     , _uTableRange = Nothing
     , _uFields = Nothing
     }
+
 
 -- | The object ID of the table.
 uObjectId :: Lens' UpdateTableCellPropertiesRequest (Maybe Text)
@@ -8334,6 +8582,7 @@ newtype SheetsChartProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SheetsChartProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8343,6 +8592,7 @@ sheetsChartProperties
     :: SheetsChartProperties
 sheetsChartProperties =
   SheetsChartProperties' {_scpChartImageProperties = Nothing}
+
 
 -- | The properties of the embedded chart image.
 scpChartImageProperties :: Lens' SheetsChartProperties (Maybe ImageProperties)
@@ -8389,6 +8639,7 @@ data ParagraphStyle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ParagraphStyle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8424,6 +8675,7 @@ paragraphStyle =
     , _psSpacingMode = Nothing
     , _psSpaceAbove = Nothing
     }
+
 
 -- | The amount of space between lines, as a percentage of normal, where
 -- normal is represented as 100.0. If unset, the value is inherited from
@@ -8522,6 +8774,7 @@ newtype CreateTableResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateTableResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8530,6 +8783,7 @@ newtype CreateTableResponse =
 createTableResponse
     :: CreateTableResponse
 createTableResponse = CreateTableResponse' {_ctrtObjectId = Nothing}
+
 
 -- | The object ID of the created table.
 ctrtObjectId :: Lens' CreateTableResponse (Maybe Text)
@@ -8556,6 +8810,7 @@ newtype RerouteLineRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RerouteLineRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8564,6 +8819,7 @@ newtype RerouteLineRequest =
 rerouteLineRequest
     :: RerouteLineRequest
 rerouteLineRequest = RerouteLineRequest' {_rlrObjectId = Nothing}
+
 
 -- | The object ID of the line to reroute. Only a line with a category
 -- indicating it is a \"connector\" can be rerouted. The start and end
@@ -8591,6 +8847,7 @@ newtype TableColumnProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableColumnProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8599,6 +8856,7 @@ newtype TableColumnProperties =
 tableColumnProperties
     :: TableColumnProperties
 tableColumnProperties = TableColumnProperties' {_tcpColumnWidth = Nothing}
+
 
 -- | Width of a column.
 tcpColumnWidth :: Lens' TableColumnProperties (Maybe Dimension)
@@ -8626,6 +8884,7 @@ newtype DuplicateObjectResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DuplicateObjectResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8634,6 +8893,7 @@ newtype DuplicateObjectResponse =
 duplicateObjectResponse
     :: DuplicateObjectResponse
 duplicateObjectResponse = DuplicateObjectResponse' {_dupObjectId = Nothing}
+
 
 -- | The ID of the new duplicate object.
 dupObjectId :: Lens' DuplicateObjectResponse (Maybe Text)
@@ -8665,6 +8925,7 @@ data UpdateParagraphStyleRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateParagraphStyleRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8688,6 +8949,7 @@ updateParagraphStyleRequest =
     , _upsrCellLocation = Nothing
     , _upsrFields = Nothing
     }
+
 
 -- | The paragraph\'s style.
 upsrStyle :: Lens' UpdateParagraphStyleRequest (Maybe ParagraphStyle)
@@ -8754,6 +9016,7 @@ data ReplaceAllTextRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplaceAllTextRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8771,6 +9034,7 @@ replaceAllTextRequest =
     , _ratrContainsText = Nothing
     , _ratrReplaceText = Nothing
     }
+
 
 -- | If non-empty, limits the matches to page elements only on the given
 -- pages. Returns a 400 bad request error if given the page object ID of a
@@ -8828,6 +9092,7 @@ data TableRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8842,6 +9107,7 @@ tableRange
 tableRange =
   TableRange'
     {_trColumnSpan = Nothing, _trLocation = Nothing, _trRowSpan = Nothing}
+
 
 -- | The column span of the table range.
 trColumnSpan :: Lens' TableRange (Maybe Int32)
@@ -8926,6 +9192,7 @@ data Request' =
     , _reqUpdateVideoProperties           :: !(Maybe UpdateVideoPropertiesRequest)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Request' with the minimum fields required to make a request.
 --
@@ -9064,6 +9331,7 @@ request' =
     , _reqUpdateTextStyle = Nothing
     , _reqUpdateVideoProperties = Nothing
     }
+
 
 -- | Replaces all shapes matching some criteria with an image.
 reqReplaceAllShapesWithImage :: Lens' Request' (Maybe ReplaceAllShapesWithImageRequest)
@@ -9449,6 +9717,7 @@ data SubstringMatchCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubstringMatchCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9460,6 +9729,7 @@ substringMatchCriteria
     :: SubstringMatchCriteria
 substringMatchCriteria =
   SubstringMatchCriteria' {_smcMatchCase = Nothing, _smcText = Nothing}
+
 
 -- | Indicates whether the search should respect case: - \`True\`: the search
 -- is case sensitive. - \`False\`: the search is case insensitive.

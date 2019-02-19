@@ -75,6 +75,7 @@ data PresentationsPagesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PresentationsPagesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ presentationsPagesGet pPpgPageObjectId_ pPpgPresentationId_ =
     , _ppgPresentationId = pPpgPresentationId_
     , _ppgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ppgXgafv :: Lens' PresentationsPagesGet (Maybe Xgafv)

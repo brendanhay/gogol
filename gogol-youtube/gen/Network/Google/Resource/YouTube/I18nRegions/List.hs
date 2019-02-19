@@ -61,6 +61,7 @@ data I18nRegionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'I18nRegionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ i18nRegionsList
     -> I18nRegionsList
 i18nRegionsList pIrlPart_ =
   I18nRegionsList' {_irlPart = pIrlPart_, _irlHl = "en_US"}
+
 
 -- | The part parameter specifies the i18nRegion resource properties that the
 -- API response will include. Set the parameter value to snippet.

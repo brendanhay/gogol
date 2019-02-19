@@ -75,6 +75,7 @@ data ProjectsLocationsClustersNodePoolsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLocationsClustersNodePoolsUpdate pPlcnpuPayload_ pPlcnpuName_ =
     , _plcnpuName = pPlcnpuName_
     , _plcnpuCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcnpuXgafv :: Lens' ProjectsLocationsClustersNodePoolsUpdate (Maybe Xgafv)

@@ -112,6 +112,7 @@ data RegistrationsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegistrationsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -139,6 +140,7 @@ registrationsCreate pRcPayload_ =
     , _rcPayload = pRcPayload_
     , _rcCallback = Nothing
     }
+
 
 -- | V1 error format.
 rcXgafv :: Lens' RegistrationsCreate (Maybe Xgafv)

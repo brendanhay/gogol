@@ -81,6 +81,7 @@ data AlbumsAddEnrichment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlbumsAddEnrichment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ albumsAddEnrichment pAaeAlbumId_ pAaePayload_ =
     , _aaeBearerToken = Nothing
     , _aaeCallback = Nothing
     }
+
 
 -- | V1 error format.
 aaeXgafv :: Lens' AlbumsAddEnrichment (Maybe Xgafv)

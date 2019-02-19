@@ -85,6 +85,7 @@ data OrganizationsSinksUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsSinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ organizationsSinksUpdate pOsuPayload_ pOsuSinkName_ =
     , _osuSinkName = pOsuSinkName_
     , _osuCallback = Nothing
     }
+
 
 -- | V1 error format.
 osuXgafv :: Lens' OrganizationsSinksUpdate (Maybe Xgafv)

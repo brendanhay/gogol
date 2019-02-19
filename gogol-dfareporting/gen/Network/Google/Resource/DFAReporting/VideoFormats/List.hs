@@ -59,6 +59,7 @@ newtype VideoFormatsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoFormatsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ videoFormatsList
     -> VideoFormatsList
 videoFormatsList pVflProFileId_ =
   VideoFormatsList' {_vflProFileId = _Coerce # pVflProFileId_}
+
 
 -- | User profile ID associated with this request.
 vflProFileId :: Lens' VideoFormatsList Int64

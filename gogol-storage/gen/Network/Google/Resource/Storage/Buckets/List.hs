@@ -72,6 +72,7 @@ data BucketsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ bucketsList pBlProject_ =
     , _blPageToken = Nothing
     , _blMaxResults = 1000
     }
+
 
 -- | A valid API project identifier.
 blProject :: Lens' BucketsList Text

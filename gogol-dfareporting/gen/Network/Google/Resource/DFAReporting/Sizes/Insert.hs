@@ -61,6 +61,7 @@ data SizesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SizesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ sizesInsert
 sizesInsert pSiProFileId_ pSiPayload_ =
   SizesInsert'
     {_siProFileId = _Coerce # pSiProFileId_, _siPayload = pSiPayload_}
+
 
 -- | User profile ID associated with this request.
 siProFileId :: Lens' SizesInsert Int64

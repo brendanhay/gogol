@@ -102,6 +102,7 @@ data CampaignsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CampaignsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -153,6 +154,7 @@ campaignsList pClProFileId_ =
     , _clArchived = Nothing
     , _clMaxResults = 1000
     }
+
 
 -- | Exclude campaigns with these IDs.
 clExcludedIds :: Lens' CampaignsList [Int64]

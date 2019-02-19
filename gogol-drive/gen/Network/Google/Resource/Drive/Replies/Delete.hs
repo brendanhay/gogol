@@ -65,6 +65,7 @@ data RepliesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepliesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ repliesDelete pRdReplyId_ pRdFileId_ pRdCommentId_ =
     , _rdFileId = pRdFileId_
     , _rdCommentId = pRdCommentId_
     }
+
 
 -- | The ID of the reply.
 rdReplyId :: Lens' RepliesDelete Text

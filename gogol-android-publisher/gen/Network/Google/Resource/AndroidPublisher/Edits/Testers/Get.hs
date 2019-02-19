@@ -62,6 +62,7 @@ data EditsTestersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsTestersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ editsTestersGet pEtgTrack_ pEtgPackageName_ pEtgEditId_ =
     , _etgPackageName = pEtgPackageName_
     , _etgEditId = pEtgEditId_
     }
+
 
 -- | The track to read or modify. Acceptable values are: \"alpha\", \"beta\",
 -- \"production\", \"rollout\" or \"internal\".

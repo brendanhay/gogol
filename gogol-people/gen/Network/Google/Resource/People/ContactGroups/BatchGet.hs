@@ -77,6 +77,7 @@ data ContactGroupsBatchGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactGroupsBatchGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ contactGroupsBatchGet =
     , _cgbgResourceNames = Nothing
     , _cgbgCallback = Nothing
     }
+
 
 -- | V1 error format.
 cgbgXgafv :: Lens' ContactGroupsBatchGet (Maybe Xgafv)

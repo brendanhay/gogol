@@ -80,6 +80,7 @@ data ServicesSearch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ servicesSearch pSsParent_ =
     , _ssPageSize = Nothing
     , _ssCallback = Nothing
     }
+
 
 -- | Service for which search is performed. services\/{service} {service} the
 -- name of a service, for example \'service.googleapis.com\'.

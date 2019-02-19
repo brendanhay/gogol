@@ -65,6 +65,7 @@ data OrgUnitsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrgUnitsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ orgUnitsUpdate pOuuPayload_ pOuuOrgUnitPath_ pOuuCustomerId_ =
     , _ouuOrgUnitPath = _Coerce # pOuuOrgUnitPath_
     , _ouuCustomerId = pOuuCustomerId_
     }
+
 
 -- | Multipart request metadata.
 ouuPayload :: Lens' OrgUnitsUpdate OrgUnit

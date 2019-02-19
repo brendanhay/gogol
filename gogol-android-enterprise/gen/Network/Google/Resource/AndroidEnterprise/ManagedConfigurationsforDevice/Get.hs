@@ -70,6 +70,7 @@ data ManagedConfigurationsforDeviceGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfigurationsforDeviceGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ managedConfigurationsforDeviceGet pMcdgEnterpriseId_ pMcdgUserId_ pMcdgDeviceId_
     , _mcdgManagedConfigurationForDeviceId =
         pMcdgManagedConfigurationForDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 mcdgEnterpriseId :: Lens' ManagedConfigurationsforDeviceGet Text

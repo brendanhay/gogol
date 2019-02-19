@@ -78,6 +78,7 @@ data SitesReleasesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesReleasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ sitesReleasesList pSrlParent_ =
     , _srlPageSize = Nothing
     , _srlCallback = Nothing
     }
+
 
 -- | Required. The parent for which to list files, in the format:
 -- 'sites\/site-name'

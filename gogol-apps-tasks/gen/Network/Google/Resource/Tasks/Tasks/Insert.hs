@@ -67,6 +67,7 @@ data TasksInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TasksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ tasksInsert pTiPayload_ pTiTaskList_ =
     , _tiTaskList = pTiTaskList_
     , _tiPrevious = Nothing
     }
+
 
 -- | Parent task identifier. If the task is created at the top level, this
 -- parameter is omitted. Optional.

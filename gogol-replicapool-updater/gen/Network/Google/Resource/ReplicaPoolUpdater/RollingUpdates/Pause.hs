@@ -68,6 +68,7 @@ data RollingUpdatesPause =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollingUpdatesPause' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ rollingUpdatesPause pRupRollingUpdate_ pRupProject_ pRupZone_ =
     , _rupProject = pRupProject_
     , _rupZone = pRupZone_
     }
+
 
 -- | The name of the update.
 rupRollingUpdate :: Lens' RollingUpdatesPause Text

@@ -75,6 +75,7 @@ data ProjectsDeidentifyTemplatesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDeidentifyTemplatesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ projectsDeidentifyTemplatesDelete pPdtdName_ =
     , _pdtdName = pPdtdName_
     , _pdtdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdtdXgafv :: Lens' ProjectsDeidentifyTemplatesDelete (Maybe Xgafv)

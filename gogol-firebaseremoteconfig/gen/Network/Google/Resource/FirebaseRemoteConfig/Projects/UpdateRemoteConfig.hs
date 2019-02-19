@@ -112,6 +112,7 @@ data ProjectsUpdateRemoteConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsUpdateRemoteConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -152,6 +153,7 @@ projectsUpdateRemoteConfig pPurcProject_ pPurcPayload_ =
     , _purcBearerToken = Nothing
     , _purcCallback = Nothing
     }
+
 
 -- | V1 error format.
 purcXgafv :: Lens' ProjectsUpdateRemoteConfig (Maybe Xgafv)

@@ -61,6 +61,7 @@ data ChangeLogsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangeLogsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ changeLogsGet
 changeLogsGet pClgProFileId_ pClgId_ =
   ChangeLogsGet'
     {_clgProFileId = _Coerce # pClgProFileId_, _clgId = _Coerce # pClgId_}
+
 
 -- | User profile ID associated with this request.
 clgProFileId :: Lens' ChangeLogsGet Int64

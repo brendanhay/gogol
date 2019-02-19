@@ -65,6 +65,7 @@ data OrgUnitsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrgUnitsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ orgUnitsPatch pOupPayload_ pOupOrgUnitPath_ pOupCustomerId_ =
     , _oupOrgUnitPath = _Coerce # pOupOrgUnitPath_
     , _oupCustomerId = pOupCustomerId_
     }
+
 
 -- | Multipart request metadata.
 oupPayload :: Lens' OrgUnitsPatch OrgUnit

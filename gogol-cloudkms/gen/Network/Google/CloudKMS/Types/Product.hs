@@ -29,6 +29,7 @@ newtype AsymmetricDecryptResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AsymmetricDecryptResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37,6 +38,7 @@ newtype AsymmetricDecryptResponse =
 asymmetricDecryptResponse
     :: AsymmetricDecryptResponse
 asymmetricDecryptResponse = AsymmetricDecryptResponse' {_adrPlaintext = Nothing}
+
 
 -- | The decrypted data originally encrypted with the matching public key.
 adrPlaintext :: Lens' AsymmetricDecryptResponse (Maybe ByteString)
@@ -65,6 +67,7 @@ data EncryptResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EncryptResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +78,7 @@ data EncryptResponse =
 encryptResponse
     :: EncryptResponse
 encryptResponse = EncryptResponse' {_erName = Nothing, _erCiphertext = Nothing}
+
 
 -- | The resource name of the CryptoKeyVersion used in encryption.
 erName :: Lens' EncryptResponse (Maybe Text)
@@ -110,6 +114,7 @@ newtype LocationSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +125,7 @@ locationSchema
     -> LocationSchema
 locationSchema pLsAddtional_ =
   LocationSchema' {_lsAddtional = _Coerce # pLsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lsAddtional :: Lens' LocationSchema (HashMap Text JSONValue)
@@ -161,6 +167,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -171,6 +178,7 @@ data AuditConfig =
 auditConfig
     :: AuditConfig
 auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -216,6 +224,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -236,6 +245,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -290,6 +300,7 @@ data ListLocationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -301,6 +312,7 @@ listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
   ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -341,6 +353,7 @@ data ListKeyRingsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListKeyRingsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -358,6 +371,7 @@ listKeyRingsResponse =
     , _lkrrTotalSize = Nothing
     , _lkrrKeyRings = Nothing
     }
+
 
 -- | A token to retrieve next page of results. Pass this value in
 -- ListKeyRingsRequest.page_token to retrieve the next page of results.
@@ -405,6 +419,7 @@ newtype AsymmetricSignResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AsymmetricSignResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -413,6 +428,7 @@ newtype AsymmetricSignResponse =
 asymmetricSignResponse
     :: AsymmetricSignResponse
 asymmetricSignResponse = AsymmetricSignResponse' {_asrSignature = Nothing}
+
 
 -- | The created signature.
 asrSignature :: Lens' AsymmetricSignResponse (Maybe ByteString)
@@ -441,6 +457,7 @@ data KeyRing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KeyRing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -451,6 +468,7 @@ data KeyRing =
 keyRing
     :: KeyRing
 keyRing = KeyRing' {_krName = Nothing, _krCreateTime = Nothing}
+
 
 -- | Output only. The resource name for the KeyRing in the format
 -- \`projects\/*\/locations\/*\/keyRings\/*\`.
@@ -483,11 +501,13 @@ data DestroyCryptoKeyVersionRequest =
   DestroyCryptoKeyVersionRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DestroyCryptoKeyVersionRequest' with the minimum fields required to make a request.
 --
 destroyCryptoKeyVersionRequest
     :: DestroyCryptoKeyVersionRequest
 destroyCryptoKeyVersionRequest = DestroyCryptoKeyVersionRequest'
+
 
 instance FromJSON DestroyCryptoKeyVersionRequest
          where
@@ -510,6 +530,7 @@ data Location =
     , _lLocationId  :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -534,6 +555,7 @@ location =
     , _lLabels = Nothing
     , _lLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
@@ -591,6 +613,7 @@ newtype AsymmetricSignRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AsymmetricSignRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -599,6 +622,7 @@ newtype AsymmetricSignRequest =
 asymmetricSignRequest
     :: AsymmetricSignRequest
 asymmetricSignRequest = AsymmetricSignRequest' {_asrDigest = Nothing}
+
 
 -- | Required. The digest of the data to sign. The digest must be produced
 -- with the same digest algorithm as specified by the key version\'s
@@ -626,6 +650,7 @@ data PublicKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PublicKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -636,6 +661,7 @@ data PublicKey =
 publicKey
     :: PublicKey
 publicKey = PublicKey' {_pkPem = Nothing, _pkAlgorithm = Nothing}
+
 
 -- | The public key, encoded in PEM format. For more information, see the
 -- [RFC 7468](https:\/\/tools.ietf.org\/html\/rfc7468) sections for
@@ -673,6 +699,7 @@ newtype DecryptResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DecryptResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -681,6 +708,7 @@ newtype DecryptResponse =
 decryptResponse
     :: DecryptResponse
 decryptResponse = DecryptResponse' {_drPlaintext = Nothing}
+
 
 -- | The decrypted data originally supplied in EncryptRequest.plaintext.
 drPlaintext :: Lens' DecryptResponse (Maybe ByteString)
@@ -710,6 +738,7 @@ data CryptoKeyVersionTemplate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CryptoKeyVersionTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -722,6 +751,7 @@ cryptoKeyVersionTemplate
 cryptoKeyVersionTemplate =
   CryptoKeyVersionTemplate'
     {_ckvtAlgorithm = Nothing, _ckvtProtectionLevel = Nothing}
+
 
 -- | Required. Algorithm to use when creating a CryptoKeyVersion based on
 -- this template. For backwards compatibility, GOOGLE_SYMMETRIC_ENCRYPTION
@@ -763,6 +793,7 @@ data SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -774,6 +805,7 @@ setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
   SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -816,6 +848,7 @@ newtype CryptoKeyLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CryptoKeyLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -826,6 +859,7 @@ cryptoKeyLabels
     -> CryptoKeyLabels
 cryptoKeyLabels pCklAddtional_ =
   CryptoKeyLabels' {_cklAddtional = _Coerce # pCklAddtional_}
+
 
 cklAddtional :: Lens' CryptoKeyLabels (HashMap Text Text)
 cklAddtional
@@ -857,6 +891,7 @@ data CryptoKey =
     , _ckCreateTime       :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CryptoKey' with the minimum fields required to make a request.
 --
@@ -890,6 +925,7 @@ cryptoKey =
     , _ckNextRotationTime = Nothing
     , _ckCreateTime = Nothing
     }
+
 
 -- | A template describing settings for new CryptoKeyVersion instances. The
 -- properties of new CryptoKeyVersion instances created by either
@@ -987,6 +1023,7 @@ data DecryptRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DecryptRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -999,6 +1036,7 @@ decryptRequest
 decryptRequest =
   DecryptRequest'
     {_drAdditionalAuthenticatedData = Nothing, _drCiphertext = Nothing}
+
 
 -- | Optional data that must match the data originally supplied in
 -- EncryptRequest.additional_authenticated_data.
@@ -1041,6 +1079,7 @@ data KeyOperationAttestation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KeyOperationAttestation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1052,6 +1091,7 @@ keyOperationAttestation
     :: KeyOperationAttestation
 keyOperationAttestation =
   KeyOperationAttestation' {_koaFormat = Nothing, _koaContent = Nothing}
+
 
 -- | Output only. The format of the attestation data.
 koaFormat :: Lens' KeyOperationAttestation (Maybe KeyOperationAttestationFormat)
@@ -1090,6 +1130,7 @@ data ListCryptoKeyVersionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListCryptoKeyVersionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1107,6 +1148,7 @@ listCryptoKeyVersionsResponse =
     , _lckvrTotalSize = Nothing
     , _lckvrCryptoKeyVersions = Nothing
     }
+
 
 -- | A token to retrieve next page of results. Pass this value in
 -- ListCryptoKeyVersionsRequest.page_token to retrieve the next page of
@@ -1155,11 +1197,13 @@ data RestoreCryptoKeyVersionRequest =
   RestoreCryptoKeyVersionRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestoreCryptoKeyVersionRequest' with the minimum fields required to make a request.
 --
 restoreCryptoKeyVersionRequest
     :: RestoreCryptoKeyVersionRequest
 restoreCryptoKeyVersionRequest = RestoreCryptoKeyVersionRequest'
+
 
 instance FromJSON RestoreCryptoKeyVersionRequest
          where
@@ -1179,6 +1223,7 @@ newtype UpdateCryptoKeyPrimaryVersionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateCryptoKeyPrimaryVersionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1188,6 +1233,7 @@ updateCryptoKeyPrimaryVersionRequest
     :: UpdateCryptoKeyPrimaryVersionRequest
 updateCryptoKeyPrimaryVersionRequest =
   UpdateCryptoKeyPrimaryVersionRequest' {_uckpvrCryptoKeyVersionId = Nothing}
+
 
 -- | The id of the child CryptoKeyVersion to use as primary.
 uckpvrCryptoKeyVersionId :: Lens' UpdateCryptoKeyPrimaryVersionRequest (Maybe Text)
@@ -1221,6 +1267,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1230,6 +1277,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1263,6 +1311,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1272,6 +1321,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1306,6 +1356,7 @@ data Digest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Digest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1318,6 +1369,7 @@ data Digest =
 digest
     :: Digest
 digest = Digest' {_dSha512 = Nothing, _dSha384 = Nothing, _dSha256 = Nothing}
+
 
 -- | A message digest produced with the SHA-512 algorithm.
 dSha512 :: Lens' Digest (Maybe ByteString)
@@ -1381,6 +1433,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1401,6 +1454,7 @@ policy =
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -1465,6 +1519,7 @@ newtype LocationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1475,6 +1530,7 @@ locationLabels
     -> LocationLabels
 locationLabels pLlAddtional_ =
   LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -1498,6 +1554,7 @@ newtype LocationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1506,6 +1563,7 @@ newtype LocationMetadata =
 locationMetadata
     :: LocationMetadata
 locationMetadata = LocationMetadata' {_lmHSMAvailable = Nothing}
+
 
 -- | Indicates whether CryptoKeys with protection_level HSM can be created in
 -- this location.
@@ -1538,6 +1596,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1549,6 +1608,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -1590,6 +1650,7 @@ data ListCryptoKeysResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListCryptoKeysResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1607,6 +1668,7 @@ listCryptoKeysResponse =
     , _lckrNextPageToken = Nothing
     , _lckrTotalSize = Nothing
     }
+
 
 -- | The list of CryptoKeys.
 lckrCryptoKeys :: Lens' ListCryptoKeysResponse [CryptoKey]
@@ -1656,6 +1718,7 @@ newtype AsymmetricDecryptRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AsymmetricDecryptRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1664,6 +1727,7 @@ newtype AsymmetricDecryptRequest =
 asymmetricDecryptRequest
     :: AsymmetricDecryptRequest
 asymmetricDecryptRequest = AsymmetricDecryptRequest' {_adrCiphertext = Nothing}
+
 
 -- | Required. The data encrypted with the named CryptoKeyVersion\'s public
 -- key using OAEP.
@@ -1706,6 +1770,7 @@ data CryptoKeyVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CryptoKeyVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1741,6 +1806,7 @@ cryptoKeyVersion =
     , _ckvDestroyEventTime = Nothing
     , _ckvCreateTime = Nothing
     }
+
 
 -- | The current state of the CryptoKeyVersion.
 ckvState :: Lens' CryptoKeyVersion (Maybe CryptoKeyVersionState)
@@ -1842,6 +1908,7 @@ data EncryptRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EncryptRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1854,6 +1921,7 @@ encryptRequest
 encryptRequest =
   EncryptRequest'
     {_erAdditionalAuthenticatedData = Nothing, _erPlaintext = Nothing}
+
 
 -- | Optional data that, if specified, must also be provided during
 -- decryption through DecryptRequest.additional_authenticated_data. The
@@ -1904,6 +1972,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1917,6 +1986,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

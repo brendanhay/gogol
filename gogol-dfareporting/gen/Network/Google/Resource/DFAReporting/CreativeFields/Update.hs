@@ -62,6 +62,7 @@ data CreativeFieldsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ creativeFieldsUpdate
 creativeFieldsUpdate pCfuProFileId_ pCfuPayload_ =
   CreativeFieldsUpdate'
     {_cfuProFileId = _Coerce # pCfuProFileId_, _cfuPayload = pCfuPayload_}
+
 
 -- | User profile ID associated with this request.
 cfuProFileId :: Lens' CreativeFieldsUpdate Int64

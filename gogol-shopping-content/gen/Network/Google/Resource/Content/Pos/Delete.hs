@@ -64,6 +64,7 @@ data PosDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ posDelete pPdMerchantId_ pPdStoreCode_ pPdTargetMerchantId_ =
     , _pdStoreCode = pPdStoreCode_
     , _pdTargetMerchantId = _Coerce # pPdTargetMerchantId_
     }
+
 
 -- | The ID of the POS or inventory data provider.
 pdMerchantId :: Lens' PosDelete Word64

@@ -94,6 +94,7 @@ data ProjectsDlpJobsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDlpJobsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +137,7 @@ projectsDlpJobsList pPdjlParent_ =
     , _pdjlPageSize = Nothing
     , _pdjlCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id.
 pdjlParent :: Lens' ProjectsDlpJobsList Text

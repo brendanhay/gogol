@@ -107,6 +107,7 @@ data UsersDeleteCompanyRelation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDeleteCompanyRelation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -155,6 +156,7 @@ usersDeleteCompanyRelation pUdcrUserId_ =
     , _udcrRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _udcrCallback = Nothing
     }
+
 
 -- | V1 error format.
 udcrXgafv :: Lens' UsersDeleteCompanyRelation (Maybe Xgafv)

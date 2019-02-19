@@ -68,6 +68,7 @@ data InstancesRotateServerCa =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesRotateServerCa' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ instancesRotateServerCa
 instancesRotateServerCa pIProject_ pIPayload_ pIInstance_ =
   InstancesRotateServerCa'
     {_iProject = pIProject_, _iPayload = pIPayload_, _iInstance = pIInstance_}
+
 
 -- | Project ID of the project that contains the instance.
 iProject :: Lens' InstancesRotateServerCa Text

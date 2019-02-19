@@ -79,6 +79,7 @@ data DebuggerDebuggeesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DebuggerDebuggeesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ debuggerDebuggeesList =
     , _ddlClientVersion = Nothing
     , _ddlCallback = Nothing
     }
+
 
 -- | V1 error format.
 ddlXgafv :: Lens' DebuggerDebuggeesList (Maybe Xgafv)

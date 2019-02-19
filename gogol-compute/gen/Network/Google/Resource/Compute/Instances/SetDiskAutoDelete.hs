@@ -75,6 +75,7 @@ data InstancesSetDiskAutoDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesSetDiskAutoDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ instancesSetDiskAutoDelete pIsdadProject_ pIsdadAutoDelete_ pIsdadZone_ pIsdadDe
     , _isdadDeviceName = pIsdadDeviceName_
     , _isdadInstance = pIsdadInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

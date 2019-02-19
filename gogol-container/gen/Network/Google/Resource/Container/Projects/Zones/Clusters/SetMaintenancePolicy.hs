@@ -85,6 +85,7 @@ data ProjectsZonesClustersSetMaintenancePolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersSetMaintenancePolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +125,7 @@ projectsZonesClustersSetMaintenancePolicy pPzcsmpZone_ pPzcsmpPayload_ pPzcsmpCl
     , _pzcsmpProjectId = pPzcsmpProjectId_
     , _pzcsmpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcsmpXgafv :: Lens' ProjectsZonesClustersSetMaintenancePolicy (Maybe Xgafv)

@@ -67,6 +67,7 @@ newtype ServiceAccountkeysList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccountkeysList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ serviceAccountkeysList
     -> ServiceAccountkeysList
 serviceAccountkeysList pSalEnterpriseId_ =
   ServiceAccountkeysList' {_salEnterpriseId = pSalEnterpriseId_}
+
 
 -- | The ID of the enterprise.
 salEnterpriseId :: Lens' ServiceAccountkeysList Text

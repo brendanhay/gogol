@@ -60,6 +60,7 @@ newtype RoomsDismiss =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomsDismiss' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ roomsDismiss
     :: Text -- ^ 'rdRoomId'
     -> RoomsDismiss
 roomsDismiss pRdRoomId_ = RoomsDismiss' {_rdRoomId = pRdRoomId_}
+
 
 -- | The ID of the room.
 rdRoomId :: Lens' RoomsDismiss Text

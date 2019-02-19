@@ -61,6 +61,7 @@ data AccountsContainersEnvironmentsReauthorize =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersEnvironmentsReauthorize' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ accountsContainersEnvironmentsReauthorize
 accountsContainersEnvironmentsReauthorize pAcerPath_ pAcerPayload_ =
   AccountsContainersEnvironmentsReauthorize'
     {_acerPath = pAcerPath_, _acerPayload = pAcerPayload_}
+
 
 -- | GTM Environment\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/environments\/{environment_id}

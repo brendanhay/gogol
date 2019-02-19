@@ -64,6 +64,7 @@ data PagesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ pagesGet
     -> PagesGet
 pagesGet pPgBlogId_ pPgPageId_ =
   PagesGet' {_pgBlogId = pPgBlogId_, _pgPageId = pPgPageId_, _pgView = Nothing}
+
 
 -- | ID of the blog containing the page.
 pgBlogId :: Lens' PagesGet Text

@@ -68,6 +68,7 @@ data RepliesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepliesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ repliesGet pRgReplyId_ pRgFileId_ pRgCommentId_ =
     , _rgCommentId = pRgCommentId_
     , _rgIncludeDeleted = False
     }
+
 
 -- | The ID of the reply.
 rgReplyId :: Lens' RepliesGet Text

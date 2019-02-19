@@ -81,6 +81,7 @@ data ProjectsUpdatePolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsUpdatePolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsUpdatePolicy pPupPayload_ pPupName_ =
     , _pupName = pPupName_
     , _pupCallback = Nothing
     }
+
 
 -- | V1 error format.
 pupXgafv :: Lens' ProjectsUpdatePolicy (Maybe Xgafv)

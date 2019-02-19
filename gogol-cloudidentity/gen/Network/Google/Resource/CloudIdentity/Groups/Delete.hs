@@ -70,6 +70,7 @@ data GroupsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ groupsDelete pGdName_ =
     , _gdName = pGdName_
     , _gdCallback = Nothing
     }
+
 
 -- | V1 error format.
 gdXgafv :: Lens' GroupsDelete (Maybe Xgafv)

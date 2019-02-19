@@ -64,6 +64,7 @@ data ImagesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImagesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ imagesGet
     -> ImagesGet
 imagesGet pImaImage_ pImaProject_ =
   ImagesGet' {_imaImage = pImaImage_, _imaProject = pImaProject_}
+
 
 -- | Name of the image resource to return.
 imaImage :: Lens' ImagesGet Text

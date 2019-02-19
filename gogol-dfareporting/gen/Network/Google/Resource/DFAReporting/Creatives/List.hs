@@ -118,6 +118,7 @@ data CreativesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -178,6 +179,7 @@ creativesList pCProFileId_ =
     , _cArchived = Nothing
     , _cMaxResults = 1000
     }
+
 
 -- | Select only creatives with these rendering IDs.
 cRenderingIds :: Lens' CreativesList [Int64]

@@ -73,6 +73,7 @@ data NodeGroupsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ nodeGroupsInsert pNgiProject_ pNgiInitialNodeCount_ pNgiZone_ pNgiPayload_ =
     , _ngiZone = pNgiZone_
     , _ngiPayload = pNgiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

@@ -66,6 +66,7 @@ data PlayListsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ playListsInsert pPliPart_ pPliPayload_ =
     , _pliOnBehalfOfContentOwner = Nothing
     , _pliOnBehalfOfContentOwnerChannel = Nothing
     }
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

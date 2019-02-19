@@ -75,6 +75,7 @@ data AppsDomainMAppingsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsDomainMAppingsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ appsDomainMAppingsGet pAdmagAppsId_ pAdmagDomainMAppingsId_ =
     , _admagDomainMAppingsId = pAdmagDomainMAppingsId_
     , _admagCallback = Nothing
     }
+
 
 -- | V1 error format.
 admagXgafv :: Lens' AppsDomainMAppingsGet (Maybe Xgafv)

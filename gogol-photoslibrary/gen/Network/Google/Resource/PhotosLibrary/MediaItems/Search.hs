@@ -88,6 +88,7 @@ data MediaItemsSearch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MediaItemsSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ mediaItemsSearch pMisPayload_ =
     , _misBearerToken = Nothing
     , _misCallback = Nothing
     }
+
 
 -- | V1 error format.
 misXgafv :: Lens' MediaItemsSearch (Maybe Xgafv)

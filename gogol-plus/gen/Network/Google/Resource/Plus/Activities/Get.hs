@@ -57,6 +57,7 @@ newtype ActivitiesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivitiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ activitiesGet
     :: Text -- ^ 'agActivityId'
     -> ActivitiesGet
 activitiesGet pAgActivityId_ = ActivitiesGet' {_agActivityId = pAgActivityId_}
+
 
 -- | The ID of the activity to get.
 agActivityId :: Lens' ActivitiesGet Text

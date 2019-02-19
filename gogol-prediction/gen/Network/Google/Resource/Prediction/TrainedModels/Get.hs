@@ -61,6 +61,7 @@ data TrainedModelsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrainedModelsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ trainedModelsGet
     -> TrainedModelsGet
 trainedModelsGet pTmgProject_ pTmgId_ =
   TrainedModelsGet' {_tmgProject = pTmgProject_, _tmgId = pTmgId_}
+
 
 -- | The project associated with the model.
 tmgProject :: Lens' TrainedModelsGet Text

@@ -76,6 +76,7 @@ data ServicesSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ servicesSetIAMPolicy pSsipPayload_ pSsipResource_ =
     , _ssipResource = pSsipResource_
     , _ssipCallback = Nothing
     }
+
 
 -- | V1 error format.
 ssipXgafv :: Lens' ServicesSetIAMPolicy (Maybe Xgafv)

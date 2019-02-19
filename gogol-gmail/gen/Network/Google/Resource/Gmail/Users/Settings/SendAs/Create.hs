@@ -78,6 +78,7 @@ data UsersSettingsSendAsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsSendAsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ usersSettingsSendAsCreate
 usersSettingsSendAsCreate pUssacPayload_ =
   UsersSettingsSendAsCreate'
     {_ussacPayload = pUssacPayload_, _ussacUserId = "me"}
+
 
 -- | Multipart request metadata.
 ussacPayload :: Lens' UsersSettingsSendAsCreate SendAs

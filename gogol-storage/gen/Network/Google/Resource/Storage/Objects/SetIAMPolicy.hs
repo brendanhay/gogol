@@ -71,6 +71,7 @@ data ObjectsSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectsSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ objectsSetIAMPolicy pOsipBucket_ pOsipPayload_ pOsipObject_ =
     , _osipObject = pOsipObject_
     , _osipGeneration = Nothing
     }
+
 
 -- | Name of the bucket in which the object resides.
 osipBucket :: Lens' ObjectsSetIAMPolicy Text

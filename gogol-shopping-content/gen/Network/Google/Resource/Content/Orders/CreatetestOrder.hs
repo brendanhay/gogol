@@ -61,6 +61,7 @@ data OrdersCreatetestOrder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCreatetestOrder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ ordersCreatetestOrder
 ordersCreatetestOrder pOcocMerchantId_ pOcocPayload_ =
   OrdersCreatetestOrder'
     {_ococMerchantId = _Coerce # pOcocMerchantId_, _ococPayload = pOcocPayload_}
+
 
 -- | The ID of the account that should manage the order. This cannot be a
 -- multi-client account.

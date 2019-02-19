@@ -84,6 +84,7 @@ data AppsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ appsPatch pApPayload_ pApAppsId_ =
     , _apAppsId = pApAppsId_
     , _apCallback = Nothing
     }
+
 
 -- | V1 error format.
 apXgafv :: Lens' AppsPatch (Maybe Xgafv)

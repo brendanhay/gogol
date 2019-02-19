@@ -66,6 +66,7 @@ data CirclesAddPeople =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CirclesAddPeople' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ circlesAddPeople
 circlesAddPeople pCapCircleId_ =
   CirclesAddPeople'
     {_capEmail = Nothing, _capUserId = Nothing, _capCircleId = pCapCircleId_}
+
 
 -- | Email of the people to add to the circle. Optional, can be repeated.
 capEmail :: Lens' CirclesAddPeople [Text]

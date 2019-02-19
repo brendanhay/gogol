@@ -74,6 +74,7 @@ data ProjectsReposPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsReposPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsReposPatch pPrpPayload_ pPrpName_ =
     , _prpName = pPrpName_
     , _prpCallback = Nothing
     }
+
 
 -- | V1 error format.
 prpXgafv :: Lens' ProjectsReposPatch (Maybe Xgafv)

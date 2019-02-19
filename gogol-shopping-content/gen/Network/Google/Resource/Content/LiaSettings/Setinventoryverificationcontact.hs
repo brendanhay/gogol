@@ -76,6 +76,7 @@ data LiaSettingsSetinventoryverificationcontact =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsSetinventoryverificationcontact' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ liaSettingsSetinventoryverificationcontact pLssContactEmail_ pLssMerchantId_ pLs
     , _lssContactName = pLssContactName_
     , _lssLanguage = pLssLanguage_
     }
+
 
 -- | The email of the inventory verification contact.
 lssContactEmail :: Lens' LiaSettingsSetinventoryverificationcontact Text

@@ -94,6 +94,7 @@ data VideosList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideosList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -142,6 +143,7 @@ videosList pVlPart_ =
     , _vlPageToken = Nothing
     , _vlMaxResults = 5
     }
+
 
 -- | The chart parameter identifies the chart that you want to retrieve.
 vlChart :: Lens' VideosList (Maybe VideosListChart)

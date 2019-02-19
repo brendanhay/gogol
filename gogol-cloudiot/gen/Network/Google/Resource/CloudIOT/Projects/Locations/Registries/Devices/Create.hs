@@ -75,6 +75,7 @@ data ProjectsLocationsRegistriesDevicesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLocationsRegistriesDevicesCreate pPlrdcParent_ pPlrdcPayload_ =
     , _plrdcPayload = pPlrdcPayload_
     , _plrdcCallback = Nothing
     }
+
 
 -- | The name of the device registry where this device should be created. For
 -- example,

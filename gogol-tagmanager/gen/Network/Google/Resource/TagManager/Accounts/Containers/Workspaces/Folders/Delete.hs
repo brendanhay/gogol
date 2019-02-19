@@ -57,6 +57,7 @@ newtype AccountsContainersWorkspacesFoldersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ accountsContainersWorkspacesFoldersDelete
     -> AccountsContainersWorkspacesFoldersDelete
 accountsContainersWorkspacesFoldersDelete pAcwfdPath_ =
   AccountsContainersWorkspacesFoldersDelete' {_acwfdPath = pAcwfdPath_}
+
 
 -- | GTM Folder\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/folders\/{folder_id}

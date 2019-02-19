@@ -63,6 +63,7 @@ newtype AchievementsReset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementsReset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ achievementsReset
     -> AchievementsReset
 achievementsReset pArAchievementId_ =
   AchievementsReset' {_arAchievementId = pArAchievementId_}
+
 
 -- | The ID of the achievement used by this method.
 arAchievementId :: Lens' AchievementsReset Text

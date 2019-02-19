@@ -75,6 +75,7 @@ data ProjectsDatabasesDocumentsWrite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesDocumentsWrite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsDatabasesDocumentsWrite pPddwDatabase_ pPddwPayload_ =
     , _pddwPayload = pPddwPayload_
     , _pddwCallback = Nothing
     }
+
 
 -- | V1 error format.
 pddwXgafv :: Lens' ProjectsDatabasesDocumentsWrite (Maybe Xgafv)

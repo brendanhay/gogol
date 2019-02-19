@@ -73,6 +73,7 @@ data ManagementGoalsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementGoalsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ managementGoalsList pMglWebPropertyId_ pMglProFileId_ pMglAccountId_ =
     , _mglStartIndex = Nothing
     , _mglMaxResults = Nothing
     }
+
 
 -- | Web property ID to retrieve goals for. Can either be a specific web
 -- property ID or \'~all\', which refers to all the web properties that

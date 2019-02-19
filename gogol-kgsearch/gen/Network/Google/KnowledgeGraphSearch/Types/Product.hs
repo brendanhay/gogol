@@ -32,6 +32,7 @@ data SearchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -46,6 +47,7 @@ searchResponse
 searchResponse =
   SearchResponse'
     {_srContext = Nothing, _srItemListElement = Nothing, _srType = Nothing}
+
 
 -- | The local context applicable for the response. See more details at
 -- http:\/\/www.w3.org\/TR\/json-ld\/#context-definitions.

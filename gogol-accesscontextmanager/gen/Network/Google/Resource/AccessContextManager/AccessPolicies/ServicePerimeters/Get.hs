@@ -71,6 +71,7 @@ data AccessPoliciesServicePerimetersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessPoliciesServicePerimetersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ accessPoliciesServicePerimetersGet pApspgName_ =
     , _apspgName = pApspgName_
     , _apspgCallback = Nothing
     }
+
 
 -- | V1 error format.
 apspgXgafv :: Lens' AccessPoliciesServicePerimetersGet (Maybe Xgafv)

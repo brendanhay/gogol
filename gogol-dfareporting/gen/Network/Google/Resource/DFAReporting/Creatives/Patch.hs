@@ -64,6 +64,7 @@ data CreativesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ creativesPatch pCppProFileId_ pCppPayload_ pCppId_ =
     , _cppPayload = pCppPayload_
     , _cppId = _Coerce # pCppId_
     }
+
 
 -- | User profile ID associated with this request.
 cppProFileId :: Lens' CreativesPatch Int64

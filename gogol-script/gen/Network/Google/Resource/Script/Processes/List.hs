@@ -109,6 +109,7 @@ data ProcessesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProcessesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -165,6 +166,7 @@ processesList =
     , _plUserProcessFilterStartTime = Nothing
     , _plCallback = Nothing
     }
+
 
 -- | Optional field used to limit returned processes to those having one of
 -- the specified user access levels.

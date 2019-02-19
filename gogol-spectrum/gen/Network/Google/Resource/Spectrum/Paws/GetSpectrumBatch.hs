@@ -61,6 +61,7 @@ newtype PawsGetSpectrumBatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsGetSpectrumBatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ pawsGetSpectrumBatch
     -> PawsGetSpectrumBatch
 pawsGetSpectrumBatch pPgsbPayload_ =
   PawsGetSpectrumBatch' {_pgsbPayload = pPgsbPayload_}
+
 
 -- | Multipart request metadata.
 pgsbPayload :: Lens' PawsGetSpectrumBatch PawsGetSpectrumBatchRequest

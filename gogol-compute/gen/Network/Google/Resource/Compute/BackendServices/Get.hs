@@ -65,6 +65,7 @@ data BackendServicesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServicesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ backendServicesGet
 backendServicesGet pBsgProject_ pBsgBackendService_ =
   BackendServicesGet'
     {_bsgProject = pBsgProject_, _bsgBackendService = pBsgBackendService_}
+
 
 -- | Project ID for this request.
 bsgProject :: Lens' BackendServicesGet Text

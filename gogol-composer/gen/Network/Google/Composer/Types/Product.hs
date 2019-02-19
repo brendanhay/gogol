@@ -65,6 +65,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -126,6 +128,7 @@ newtype OperationSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +139,7 @@ operationSchema
     -> OperationSchema
 operationSchema pOsAddtional_ =
   OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -161,6 +165,7 @@ data ListImageVersionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListImageVersionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -173,6 +178,7 @@ listImageVersionsResponse
 listImageVersionsResponse =
   ListImageVersionsResponse'
     {_livrNextPageToken = Nothing, _livrImageVersions = Nothing}
+
 
 -- | The page token used to query for the next page if one exists.
 livrNextPageToken :: Lens' ListImageVersionsResponse (Maybe Text)
@@ -213,6 +219,7 @@ data ListEnvironmentsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListEnvironmentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -225,6 +232,7 @@ listEnvironmentsResponse
 listEnvironmentsResponse =
   ListEnvironmentsResponse'
     {_lerNextPageToken = Nothing, _lerEnvironments = Nothing}
+
 
 -- | The page token used to query for the next page if one exists.
 lerNextPageToken :: Lens' ListEnvironmentsResponse (Maybe Text)
@@ -269,6 +277,7 @@ data EnvironmentConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnvironmentConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -295,6 +304,7 @@ environmentConfig =
     , _ecGkeCluster = Nothing
     , _ecAirflowURI = Nothing
     }
+
 
 -- | The configuration used for the Kubernetes Engine cluster.
 ecNodeConfig :: Lens' EnvironmentConfig (Maybe NodeConfig)
@@ -368,6 +378,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -380,6 +391,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -427,6 +439,7 @@ data NodeConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -459,6 +472,7 @@ nodeConfig =
     , _ncMachineType = Nothing
     , _ncTags = Nothing
     }
+
 
 -- | Optional. The disk size in GB used for node VMs. Minimum size is 20GB.
 -- If unspecified, defaults to 100GB. Cannot be updated.
@@ -598,6 +612,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -621,6 +636,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -688,11 +704,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -718,6 +736,7 @@ newtype SoftwareConfigEnvVariables =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SoftwareConfigEnvVariables' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -728,6 +747,7 @@ softwareConfigEnvVariables
     -> SoftwareConfigEnvVariables
 softwareConfigEnvVariables pScevAddtional_ =
   SoftwareConfigEnvVariables' {_scevAddtional = _Coerce # pScevAddtional_}
+
 
 scevAddtional :: Lens' SoftwareConfigEnvVariables (HashMap Text Text)
 scevAddtional
@@ -755,6 +775,7 @@ data ImageVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -772,6 +793,7 @@ imageVersion =
     , _ivSupportedPythonVersions = Nothing
     , _ivIsDefault = Nothing
     }
+
 
 -- | The string identifier of the ImageVersion, in the form:
 -- \"composer-x.y.z-airflow-a.b(.c)\"
@@ -827,6 +849,7 @@ data Environment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Environment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -856,6 +879,7 @@ environment =
     , _eLabels = Nothing
     , _eCreateTime = Nothing
     }
+
 
 -- | The current state of the environment.
 eState :: Lens' Environment (Maybe EnvironmentState)
@@ -940,6 +964,7 @@ newtype SoftwareConfigAirflowConfigOverrides =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SoftwareConfigAirflowConfigOverrides' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -951,6 +976,7 @@ softwareConfigAirflowConfigOverrides
 softwareConfigAirflowConfigOverrides pScacoAddtional_ =
   SoftwareConfigAirflowConfigOverrides'
     {_scacoAddtional = _Coerce # pScacoAddtional_}
+
 
 scacoAddtional :: Lens' SoftwareConfigAirflowConfigOverrides (HashMap Text Text)
 scacoAddtional
@@ -979,6 +1005,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -989,6 +1016,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1018,6 +1046,7 @@ newtype SoftwareConfigPypiPackages =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SoftwareConfigPypiPackages' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1028,6 +1057,7 @@ softwareConfigPypiPackages
     -> SoftwareConfigPypiPackages
 softwareConfigPypiPackages pScppAddtional_ =
   SoftwareConfigPypiPackages' {_scppAddtional = _Coerce # pScppAddtional_}
+
 
 scppAddtional :: Lens' SoftwareConfigPypiPackages (HashMap Text Text)
 scppAddtional
@@ -1058,6 +1088,7 @@ data SoftwareConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SoftwareConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1081,6 +1112,7 @@ softwareConfig =
     , _scAirflowConfigOverrides = Nothing
     , _scEnvVariables = Nothing
     }
+
 
 -- | The version of the software running in the environment. This
 -- encapsulates both the version of Cloud Composer functionality and the
@@ -1191,6 +1223,7 @@ newtype EnvironmentLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnvironmentLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1201,6 +1234,7 @@ environmentLabels
     -> EnvironmentLabels
 environmentLabels pElAddtional_ =
   EnvironmentLabels' {_elAddtional = _Coerce # pElAddtional_}
+
 
 elAddtional :: Lens' EnvironmentLabels (HashMap Text Text)
 elAddtional
@@ -1229,6 +1263,7 @@ data OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1255,6 +1290,7 @@ operationMetadata =
     , _omOperationType = Nothing
     , _omCreateTime = Nothing
     }
+
 
 -- | Output only. The current operation state.
 omState :: Lens' OperationMetadata (Maybe OperationMetadataState)
@@ -1329,6 +1365,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1339,6 +1376,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)

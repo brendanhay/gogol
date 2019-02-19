@@ -60,6 +60,7 @@ data AccountsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ accountsInsert
 accountsInsert pAMerchantId_ pAPayload_ =
   AccountsInsert'
     {_aMerchantId = _Coerce # pAMerchantId_, _aPayload = pAPayload_}
+
 
 -- | The ID of the managing account. This must be a multi-client account.
 aMerchantId :: Lens' AccountsInsert Word64

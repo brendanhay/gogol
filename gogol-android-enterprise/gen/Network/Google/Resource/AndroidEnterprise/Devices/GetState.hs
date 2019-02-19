@@ -74,6 +74,7 @@ data DevicesGetState =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DevicesGetState' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ devicesGetState pDgsEnterpriseId_ pDgsUserId_ pDgsDeviceId_ =
     , _dgsUserId = pDgsUserId_
     , _dgsDeviceId = pDgsDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 dgsEnterpriseId :: Lens' DevicesGetState Text

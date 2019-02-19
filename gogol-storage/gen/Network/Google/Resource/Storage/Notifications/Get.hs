@@ -64,6 +64,7 @@ data NotificationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ notificationsGet pNgNotification_ pNgBucket_ =
     , _ngBucket = pNgBucket_
     , _ngUserProject = Nothing
     }
+
 
 -- | Notification ID
 ngNotification :: Lens' NotificationsGet Text

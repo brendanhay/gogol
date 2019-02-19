@@ -32,6 +32,7 @@ data Parent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Parent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44,6 +45,7 @@ data Parent =
 parent
     :: Parent
 parent = Parent' {_pIsRoot = Nothing, _pId = Nothing, _pTitle = Nothing}
+
 
 -- | Whether this is the root folder.
 pIsRoot :: Lens' Parent (Maybe Bool)
@@ -81,6 +83,7 @@ newtype Photo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Photo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +92,7 @@ newtype Photo =
 photo
     :: Photo
 photo = Photo' {_pURL = Nothing}
+
 
 -- | The URL of the photo.
 pURL :: Lens' Photo (Maybe Text)
@@ -119,6 +123,7 @@ data Event =
     , _eMove                 :: !(Maybe Move)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Event' with the minimum fields required to make a request.
 --
@@ -155,6 +160,7 @@ event =
     , _eTarget = Nothing
     , _eMove = Nothing
     }
+
 
 -- | The main type of event that occurred.
 ePrimaryEventType :: Lens' Event (Maybe EventPrimaryEventType)
@@ -252,6 +258,7 @@ data ListActivitiesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListActivitiesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -264,6 +271,7 @@ listActivitiesResponse
 listActivitiesResponse =
   ListActivitiesResponse'
     {_larNextPageToken = Nothing, _larActivities = Nothing}
+
 
 -- | Token for the next page of results.
 larNextPageToken :: Lens' ListActivitiesResponse (Maybe Text)
@@ -305,6 +313,7 @@ data PermissionChange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PermissionChange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -317,6 +326,7 @@ permissionChange
 permissionChange =
   PermissionChange'
     {_pcAddedPermissions = Nothing, _pcRemovedPermissions = Nothing}
+
 
 -- | Lists all Permission objects added.
 pcAddedPermissions :: Lens' PermissionChange [Permission]
@@ -362,6 +372,7 @@ data User =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -385,6 +396,7 @@ user =
     , _uIsMe = Nothing
     , _uPermissionId = Nothing
     }
+
 
 -- | The profile photo of the user. Not present if the user has no profile
 -- photo.
@@ -444,6 +456,7 @@ data Activity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Activity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -454,6 +467,7 @@ data Activity =
 activity
     :: Activity
 activity = Activity' {_aSingleEvents = Nothing, _aCombinedEvent = Nothing}
+
 
 -- | A list of all the Events that make up the Activity.
 aSingleEvents :: Lens' Activity [Event]
@@ -494,6 +508,7 @@ data Rename =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Rename' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -504,6 +519,7 @@ data Rename =
 rename
     :: Rename
 rename = Rename' {_rNewTitle = Nothing, _rOldTitle = Nothing}
+
 
 -- | The new title.
 rNewTitle :: Lens' Rename (Maybe Text)
@@ -545,6 +561,7 @@ data Permission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -571,6 +588,7 @@ permission =
     , _pType = Nothing
     , _pPermissionId = Nothing
     }
+
 
 -- | Whether the permission requires a link to the file.
 pWithLink :: Lens' Permission (Maybe Bool)
@@ -632,6 +650,7 @@ data Target =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Target' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -644,6 +663,7 @@ data Target =
 target
     :: Target
 target = Target' {_tMimeType = Nothing, _tName = Nothing, _tId = Nothing}
+
 
 -- | The MIME type of the target.
 tMimeType :: Lens' Target (Maybe Text)
@@ -686,6 +706,7 @@ data Move =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Move' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -696,6 +717,7 @@ data Move =
 move
     :: Move
 move = Move' {_mAddedParents = Nothing, _mRemovedParents = Nothing}
+
 
 -- | The added parent(s).
 mAddedParents :: Lens' Move [Parent]

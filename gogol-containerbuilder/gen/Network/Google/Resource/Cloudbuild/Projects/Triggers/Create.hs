@@ -76,6 +76,7 @@ data ProjectsTriggersCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTriggersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsTriggersCreate pPtcPayload_ pPtcProjectId_ =
     , _ptcProjectId = pPtcProjectId_
     , _ptcCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptcXgafv :: Lens' ProjectsTriggersCreate (Maybe Xgafv)

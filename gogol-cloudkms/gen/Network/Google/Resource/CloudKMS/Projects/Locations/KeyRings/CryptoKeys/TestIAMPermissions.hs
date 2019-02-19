@@ -85,6 +85,7 @@ data ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsLocationsKeyRingsCryptoKeysTestIAMPermissions pPlkrcktipPayload_ pPlkrck
     , _plkrcktipResource = pPlkrcktipResource_
     , _plkrcktipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrcktipXgafv :: Lens' ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions (Maybe Xgafv)

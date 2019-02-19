@@ -63,6 +63,7 @@ data UsersPhotosPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersPhotosPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ usersPhotosPatch
     -> UsersPhotosPatch
 usersPhotosPatch pUppPayload_ pUppUserKey_ =
   UsersPhotosPatch' {_uppPayload = pUppPayload_, _uppUserKey = pUppUserKey_}
+
 
 -- | Multipart request metadata.
 uppPayload :: Lens' UsersPhotosPatch UserPhoto

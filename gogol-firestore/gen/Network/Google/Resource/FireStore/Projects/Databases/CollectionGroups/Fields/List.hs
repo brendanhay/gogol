@@ -91,6 +91,7 @@ data ProjectsDatabasesCollectionGroupsFieldsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesCollectionGroupsFieldsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +128,7 @@ projectsDatabasesCollectionGroupsFieldsList pPdcgflParent_ =
     , _pdcgflPageSize = Nothing
     , _pdcgflCallback = Nothing
     }
+
 
 -- | A parent name of the form
 -- \`projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\`

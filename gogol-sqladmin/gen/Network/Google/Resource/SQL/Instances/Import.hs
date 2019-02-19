@@ -68,6 +68,7 @@ data InstancesImport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesImport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ instancesImport pIiProject_ pIiPayload_ pIiInstance_ =
     , _iiPayload = pIiPayload_
     , _iiInstance = pIiInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 iiProject :: Lens' InstancesImport Text

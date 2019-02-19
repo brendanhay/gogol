@@ -74,6 +74,7 @@ data ProjectsMetricsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsMetricsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsMetricsCreate pPmcParent_ pPmcPayload_ =
     , _pmcPayload = pPmcPayload_
     , _pmcCallback = Nothing
     }
+
 
 -- | The resource name of the project in which to create the metric:
 -- \"projects\/[PROJECT_ID]\" The new metric must be provided in the

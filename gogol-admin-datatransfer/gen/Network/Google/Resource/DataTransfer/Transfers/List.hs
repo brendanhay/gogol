@@ -76,6 +76,7 @@ data TransfersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransfersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ transfersList =
     , _tlPageToken = Nothing
     , _tlMaxResults = Nothing
     }
+
 
 -- | Status of the transfer.
 tlStatus :: Lens' TransfersList (Maybe Text)

@@ -64,6 +64,7 @@ data NetworksGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ networksGet
     -> NetworksGet
 networksGet pNgProject_ pNgNetwork_ =
   NetworksGet' {_ngProject = pNgProject_, _ngNetwork = pNgNetwork_}
+
 
 -- | Project ID for this request.
 ngProject :: Lens' NetworksGet Text

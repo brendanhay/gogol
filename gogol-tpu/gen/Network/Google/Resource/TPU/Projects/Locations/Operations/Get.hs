@@ -74,6 +74,7 @@ data ProjectsLocationsOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ projectsLocationsOperationsGet pPlogName_ =
     , _plogName = pPlogName_
     , _plogCallback = Nothing
     }
+
 
 -- | V1 error format.
 plogXgafv :: Lens' ProjectsLocationsOperationsGet (Maybe Xgafv)

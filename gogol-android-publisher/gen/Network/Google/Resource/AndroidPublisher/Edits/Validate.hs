@@ -63,6 +63,7 @@ data EditsValidate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsValidate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ editsValidate
     -> EditsValidate
 editsValidate pEvPackageName_ pEvEditId_ =
   EditsValidate' {_evPackageName = pEvPackageName_, _evEditId = pEvEditId_}
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

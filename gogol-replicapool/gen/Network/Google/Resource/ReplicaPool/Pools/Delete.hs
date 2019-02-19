@@ -68,6 +68,7 @@ data PoolsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PoolsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ poolsDelete pPdPoolName_ pPdZone_ pPdPayload_ pPdProjectName_ =
     , _pdPayload = pPdPayload_
     , _pdProjectName = pPdProjectName_
     }
+
 
 -- | The name of the replica pool for this request.
 pdPoolName :: Lens' PoolsDelete Text

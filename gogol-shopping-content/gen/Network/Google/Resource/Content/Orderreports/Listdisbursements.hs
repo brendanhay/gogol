@@ -71,6 +71,7 @@ data OrderreportsListdisbursements =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderreportsListdisbursements' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ orderreportsListdisbursements pOlMerchantId_ pOlDisbursementStartDate_ =
     , _olDisbursementStartDate = pOlDisbursementStartDate_
     , _olMaxResults = Nothing
     }
+
 
 -- | The last date which disbursements occurred. In ISO 8601 format. Default:
 -- current date.

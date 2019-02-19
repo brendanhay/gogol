@@ -78,6 +78,7 @@ data ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsLocationsRegistriesGroupsDevicesConfigVersionsList pPlrgdcvlName_ =
     , _plrgdcvlName = pPlrgdcvlName_
     , _plrgdcvlCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrgdcvlXgafv :: Lens' ProjectsLocationsRegistriesGroupsDevicesConfigVersionsList (Maybe Xgafv)

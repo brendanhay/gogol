@@ -67,6 +67,7 @@ data SecurityPoliciesAddRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPoliciesAddRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ securityPoliciesAddRule pSparProject_ pSparPayload_ pSparSecurityPolicy_ =
     , _sparPayload = pSparPayload_
     , _sparSecurityPolicy = pSparSecurityPolicy_
     }
+
 
 -- | Project ID for this request.
 sparProject :: Lens' SecurityPoliciesAddRule Text

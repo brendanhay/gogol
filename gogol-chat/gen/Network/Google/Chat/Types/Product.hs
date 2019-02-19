@@ -33,6 +33,7 @@ data Card =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Card' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -53,6 +54,7 @@ card =
     , _cHeader = Nothing
     , _cSections = Nothing
     }
+
 
 -- | The actions of this card.
 cCardActions :: Lens' Card [CardAction]
@@ -104,6 +106,7 @@ data Space =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Space' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +119,7 @@ data Space =
 space
     :: Space
 space = Space' {_sName = Nothing, _sDisplayName = Nothing, _sType = Nothing}
+
 
 -- | Resource name of the space, in the form \"spaces\/*\". Example:
 -- spaces\/AAAAMpdlehYs
@@ -164,6 +168,7 @@ data KeyValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KeyValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -196,6 +201,7 @@ keyValue =
     , _kvContentMultiline = Nothing
     , _kvBottomLabel = Nothing
     }
+
 
 -- | The onclick action. Only the top label, bottom label and content region
 -- are clickable.
@@ -276,6 +282,7 @@ data WidgetMarkup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WidgetMarkup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -296,6 +303,7 @@ widgetMarkup =
     , _wmButtons = Nothing
     , _wmTextParagraph = Nothing
     }
+
 
 -- | Display a key value item in this widget.
 wmKeyValue :: Lens' WidgetMarkup (Maybe KeyValue)
@@ -348,6 +356,7 @@ data OnClick =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OnClick' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -358,6 +367,7 @@ data OnClick =
 onClick
     :: OnClick
 onClick = OnClick' {_ocAction = Nothing, _ocOpenLink = Nothing}
+
 
 -- | A form action will be trigger by this onclick if specified.
 ocAction :: Lens' OnClick (Maybe FormAction)
@@ -400,6 +410,7 @@ data Annotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Annotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -420,6 +431,7 @@ annotation =
     , _aUserMention = Nothing
     , _aStartIndex = Nothing
     }
+
 
 -- | Length of the substring in the plain-text message body this annotation
 -- corresponds to.
@@ -472,6 +484,7 @@ data Image =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -485,6 +498,7 @@ image
     :: Image
 image =
   Image' {_iOnClick = Nothing, _iAspectRatio = Nothing, _iImageURL = Nothing}
+
 
 -- | The onclick action.
 iOnClick :: Lens' Image (Maybe OnClick)
@@ -530,6 +544,7 @@ data ActionParameter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActionParameter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -540,6 +555,7 @@ data ActionParameter =
 actionParameter
     :: ActionParameter
 actionParameter = ActionParameter' {_apValue = Nothing, _apKey = Nothing}
+
 
 -- | The value of the parameter.
 apValue :: Lens' ActionParameter (Maybe Text)
@@ -574,6 +590,7 @@ data Membership =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Membership' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -594,6 +611,7 @@ membership =
     , _mMember = Nothing
     , _mCreateTime = Nothing
     }
+
 
 -- | State of the membership.
 mState :: Lens' Membership (Maybe MembershipState)
@@ -643,11 +661,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -671,6 +691,7 @@ data DeprecatedEvent =
     , _deThreadKey                 :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeprecatedEvent' with the minimum fields required to make a request.
 --
@@ -707,6 +728,7 @@ deprecatedEvent =
     , _deMessage = Nothing
     , _deThreadKey = Nothing
     }
+
 
 -- | The room or DM in which the event occurred.
 deSpace :: Lens' DeprecatedEvent (Maybe Space)
@@ -800,6 +822,7 @@ newtype TextParagraph =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextParagraph' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -808,6 +831,7 @@ newtype TextParagraph =
 textParagraph
     :: TextParagraph
 textParagraph = TextParagraph' {_tpText = Nothing}
+
 
 tpText :: Lens' TextParagraph (Maybe Text)
 tpText = lens _tpText (\ s a -> s{_tpText = a})
@@ -831,6 +855,7 @@ data Button =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Button' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -841,6 +866,7 @@ data Button =
 button
     :: Button
 button = Button' {_bTextButton = Nothing, _bImageButton = Nothing}
+
 
 -- | A button with text and onclick action.
 bTextButton :: Lens' Button (Maybe TextButton)
@@ -875,6 +901,7 @@ data ListSpacesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSpacesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -886,6 +913,7 @@ listSpacesResponse
     :: ListSpacesResponse
 listSpacesResponse =
   ListSpacesResponse' {_lsrNextPageToken = Nothing, _lsrSpaces = Nothing}
+
 
 -- | Continuation token to retrieve the next page of results. It will be
 -- empty for the last page of results. Tokens expire in an hour. An error
@@ -928,6 +956,7 @@ data User =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -940,6 +969,7 @@ data User =
 user
     :: User
 user = User' {_uName = Nothing, _uDisplayName = Nothing, _uType = Nothing}
+
 
 -- | Resource name, in the format \"users\/*\".
 uName :: Lens' User (Maybe Text)
@@ -979,6 +1009,7 @@ newtype OpenLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OpenLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -987,6 +1018,7 @@ newtype OpenLink =
 openLink
     :: OpenLink
 openLink = OpenLink' {_olURL = Nothing}
+
 
 -- | The URL to open.
 olURL :: Lens' OpenLink (Maybe Text)
@@ -1013,6 +1045,7 @@ data CardAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CardAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1023,6 +1056,7 @@ data CardAction =
 cardAction
     :: CardAction
 cardAction = CardAction' {_caOnClick = Nothing, _caActionLabel = Nothing}
+
 
 -- | The onclick action for this action item.
 caOnClick :: Lens' CardAction (Maybe OnClick)
@@ -1059,6 +1093,7 @@ data ActionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1069,6 +1104,7 @@ data ActionResponse =
 actionResponse
     :: ActionResponse
 actionResponse = ActionResponse' {_arURL = Nothing, _arType = Nothing}
+
 
 -- | URL for users to auth or config. (Only for REQUEST_CONFIG response
 -- types.)
@@ -1102,6 +1138,7 @@ data FormAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FormAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1113,6 +1150,7 @@ formAction
     :: FormAction
 formAction =
   FormAction' {_faActionMethodName = Nothing, _faParameters = Nothing}
+
 
 -- | Apps Script function to invoke when the containing element is
 -- clicked\/activated.
@@ -1152,6 +1190,7 @@ data ListMembershipsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListMembershipsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1164,6 +1203,7 @@ listMembershipsResponse
 listMembershipsResponse =
   ListMembershipsResponse'
     {_lmrNextPageToken = Nothing, _lmrMemberships = Nothing}
+
 
 -- | Continuation token to retrieve the next page of results. It will be
 -- empty for the last page of results.
@@ -1215,6 +1255,7 @@ data Message =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Message' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1259,6 +1300,7 @@ message =
     , _mesFallbackText = Nothing
     , _mesCreateTime = Nothing
     }
+
 
 -- | Output only. Annotations associated with the text in this message.
 mesAnnotations :: Lens' Message [Annotation]
@@ -1380,6 +1422,7 @@ data CardHeader =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CardHeader' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1400,6 +1443,7 @@ cardHeader =
     , _chTitle = Nothing
     , _chImageStyle = Nothing
     }
+
 
 -- | The subtitle of the card header.
 chSubtitle :: Lens' CardHeader (Maybe Text)
@@ -1450,6 +1494,7 @@ data TextButton =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextButton' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1460,6 +1505,7 @@ data TextButton =
 textButton
     :: TextButton
 textButton = TextButton' {_tbOnClick = Nothing, _tbText = Nothing}
+
 
 -- | The onclick action of the button.
 tbOnClick :: Lens' TextButton (Maybe OnClick)
@@ -1492,6 +1538,7 @@ newtype Thread =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Thread' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1500,6 +1547,7 @@ newtype Thread =
 thread
     :: Thread
 thread = Thread' {_tName = Nothing}
+
 
 -- | Resource name, in the form \"spaces\/*\/threads\/*\". Example:
 -- spaces\/AAAAMpdlehY\/threads\/UMxbHmzDlr4
@@ -1525,6 +1573,7 @@ data UserMentionMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserMentionMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1536,6 +1585,7 @@ userMentionMetadata
     :: UserMentionMetadata
 userMentionMetadata =
   UserMentionMetadata' {_ummUser = Nothing, _ummType = Nothing}
+
 
 -- | The user mentioned.
 ummUser :: Lens' UserMentionMetadata (Maybe User)
@@ -1570,6 +1620,7 @@ data ImageButton =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageButton' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1590,6 +1641,7 @@ imageButton =
     , _ibName = Nothing
     , _ibIconURL = Nothing
     }
+
 
 -- | The onclick action.
 ibOnClick :: Lens' ImageButton (Maybe OnClick)
@@ -1641,6 +1693,7 @@ data Section =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Section' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1651,6 +1704,7 @@ data Section =
 section
     :: Section
 section = Section' {_sWidgets = Nothing, _sHeader = Nothing}
+
 
 -- | A section must contain at least 1 widget.
 sWidgets :: Lens' Section [WidgetMarkup]

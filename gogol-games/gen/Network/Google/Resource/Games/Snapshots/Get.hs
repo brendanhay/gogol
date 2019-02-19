@@ -60,6 +60,7 @@ data SnapshotsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ snapshotsGet
     -> SnapshotsGet
 snapshotsGet pSSnapshotId_ =
   SnapshotsGet' {_sLanguage = Nothing, _sSnapshotId = pSSnapshotId_}
+
 
 -- | The preferred language to use for strings returned by this method.
 sLanguage :: Lens' SnapshotsGet (Maybe Text)

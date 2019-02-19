@@ -76,6 +76,7 @@ data TargetPoolsSetBackup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolsSetBackup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ targetPoolsSetBackup pTpsbProject_ pTpsbTargetPool_ pTpsbPayload_ pTpsbRegion_ =
     , _tpsbFailoverRatio = Nothing
     , _tpsbRegion = pTpsbRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

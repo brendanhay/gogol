@@ -67,6 +67,7 @@ data ManagementCustomDimensionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementCustomDimensionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ managementCustomDimensionsGet pMcdgWebPropertyId_ pMcdgAccountId_ pMcdgCustomDim
     , _mcdgAccountId = pMcdgAccountId_
     , _mcdgCustomDimensionId = pMcdgCustomDimensionId_
     }
+
 
 -- | Web property ID for the custom dimension to retrieve.
 mcdgWebPropertyId :: Lens' ManagementCustomDimensionsGet Text

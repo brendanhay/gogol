@@ -75,6 +75,7 @@ data ContactGroupsMembersModify =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactGroupsMembersModify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ contactGroupsMembersModify pCgmmResourceName_ pCgmmPayload_ =
     , _cgmmPayload = pCgmmPayload_
     , _cgmmCallback = Nothing
     }
+
 
 -- | V1 error format.
 cgmmXgafv :: Lens' ContactGroupsMembersModify (Maybe Xgafv)

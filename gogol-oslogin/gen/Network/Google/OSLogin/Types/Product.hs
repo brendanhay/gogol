@@ -29,6 +29,7 @@ newtype LoginProFileSSHPublicKeys =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LoginProFileSSHPublicKeys' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39,6 +40,7 @@ loginProFileSSHPublicKeys
     -> LoginProFileSSHPublicKeys
 loginProFileSSHPublicKeys pLpfspkAddtional_ =
   LoginProFileSSHPublicKeys' {_lpfspkAddtional = _Coerce # pLpfspkAddtional_}
+
 
 lpfspkAddtional :: Lens' LoginProFileSSHPublicKeys (HashMap Text SSHPublicKey)
 lpfspkAddtional
@@ -66,11 +68,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -90,6 +94,7 @@ data LoginProFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LoginProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +112,7 @@ loginProFile =
     , _lpfSSHPublicKeys = Nothing
     , _lpfName = Nothing
     }
+
 
 -- | The list of POSIX accounts associated with the user.
 lpfPosixAccounts :: Lens' LoginProFile [PosixAccount]
@@ -152,6 +158,7 @@ newtype ImportSSHPublicKeyResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImportSSHPublicKeyResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -161,6 +168,7 @@ importSSHPublicKeyResponse
     :: ImportSSHPublicKeyResponse
 importSSHPublicKeyResponse =
   ImportSSHPublicKeyResponse' {_ispkrLoginProFile = Nothing}
+
 
 -- | The login profile information for the user.
 ispkrLoginProFile :: Lens' ImportSSHPublicKeyResponse (Maybe LoginProFile)
@@ -192,6 +200,7 @@ data SSHPublicKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSHPublicKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -209,6 +218,7 @@ sshPublicKey =
     , _spkKey = Nothing
     , _spkExpirationTimeUsec = Nothing
     }
+
 
 -- | Output only. The SHA-256 fingerprint of the SSH public key.
 spkFingerprint :: Lens' SSHPublicKey (Maybe Text)
@@ -263,6 +273,7 @@ data PosixAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosixAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -301,6 +312,7 @@ posixAccount =
     , _paSystemId = Nothing
     , _paHomeDirectory = Nothing
     }
+
 
 -- | The GECOS (user information) entry for this account.
 paGecos :: Lens' PosixAccount (Maybe Text)

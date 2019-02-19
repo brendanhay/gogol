@@ -65,6 +65,7 @@ data ZoneOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZoneOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ zoneOperationsGet pZogProject_ pZogOperation_ pZogZone_ =
     , _zogOperation = pZogOperation_
     , _zogZone = pZogZone_
     }
+
 
 -- | Name of the project scoping this request.
 zogProject :: Lens' ZoneOperationsGet Text

@@ -59,6 +59,7 @@ newtype ProductsSearch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ newtype ProductsSearch =
 productsSearch
     :: ProductsSearch
 productsSearch = ProductsSearch' {_psPqlQuery = Nothing}
+
 
 -- | The pql query used to query for products.
 psPqlQuery :: Lens' ProductsSearch (Maybe Text)

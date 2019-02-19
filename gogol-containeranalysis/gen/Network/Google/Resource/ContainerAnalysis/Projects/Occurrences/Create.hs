@@ -74,6 +74,7 @@ data ProjectsOccurrencesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsOccurrencesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsOccurrencesCreate pPocParent_ pPocPayload_ =
     , _pocPayload = pPocPayload_
     , _pocCallback = Nothing
     }
+
 
 -- | The name of the project in the form of \`projects\/[PROJECT_ID]\`, under
 -- which the occurrence is to be created.

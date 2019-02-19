@@ -66,6 +66,7 @@ data AcceleratorTypesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ acceleratorTypesGet pAtgAcceleratorType_ pAtgProject_ pAtgZone_ =
     , _atgProject = pAtgProject_
     , _atgZone = pAtgZone_
     }
+
 
 -- | Name of the accelerator type to return.
 atgAcceleratorType :: Lens' AcceleratorTypesGet Text

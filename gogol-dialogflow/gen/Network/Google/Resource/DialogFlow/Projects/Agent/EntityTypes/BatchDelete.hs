@@ -76,6 +76,7 @@ data ProjectsAgentEntityTypesBatchDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentEntityTypesBatchDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsAgentEntityTypesBatchDelete pPaetbdParent_ pPaetbdPayload_ =
     , _paetbdPayload = pPaetbdPayload_
     , _paetbdCallback = Nothing
     }
+
 
 -- | Required. The name of the agent to delete all entities types for.
 -- Format: \`projects\/\/agent\`.

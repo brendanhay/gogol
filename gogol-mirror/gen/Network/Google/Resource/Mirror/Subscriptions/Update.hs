@@ -61,6 +61,7 @@ data SubscriptionsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ subscriptionsUpdate
     -> SubscriptionsUpdate
 subscriptionsUpdate pSuPayload_ pSuId_ =
   SubscriptionsUpdate' {_suPayload = pSuPayload_, _suId = pSuId_}
+
 
 -- | Multipart request metadata.
 suPayload :: Lens' SubscriptionsUpdate Subscription

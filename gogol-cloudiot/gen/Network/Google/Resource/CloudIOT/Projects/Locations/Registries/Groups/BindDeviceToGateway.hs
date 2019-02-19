@@ -75,6 +75,7 @@ data ProjectsLocationsRegistriesGroupsBindDeviceToGateway =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsBindDeviceToGateway' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLocationsRegistriesGroupsBindDeviceToGateway pPlrgbdtgParent_ pPlrgbdtgP
     , _plrgbdtgPayload = pPlrgbdtgPayload_
     , _plrgbdtgCallback = Nothing
     }
+
 
 -- | The name of the registry. For example,
 -- \`projects\/example-project\/locations\/us-central1\/registries\/my-registry\`.

@@ -29,6 +29,7 @@ data OperationWarningsItemDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationWarningsItemDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40,6 +41,7 @@ operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
   OperationWarningsItemDataItem' {_owidiValue = Nothing, _owidiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
@@ -79,6 +81,7 @@ newtype ConfigFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConfigFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +90,7 @@ newtype ConfigFile =
 configFile
     :: ConfigFile
 configFile = ConfigFile' {_cfContent = Nothing}
+
 
 -- | The contents of the file.
 cfContent :: Lens' ConfigFile (Maybe Text)
@@ -129,6 +133,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -146,6 +151,7 @@ auditConfig =
     , _acAuditLogConfigs = Nothing
     , _acExemptedMembers = Nothing
     }
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -201,6 +207,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -221,6 +228,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -276,6 +284,7 @@ data OperationsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -288,6 +297,7 @@ operationsListResponse
 operationsListResponse =
   OperationsListResponse'
     {_olrNextPageToken = Nothing, _olrOperations = Nothing}
+
 
 -- | Output only. A token used to continue a truncated list request.
 olrNextPageToken :: Lens' OperationsListResponse (Maybe Text)
@@ -327,6 +337,7 @@ data ResourceUpdateWarningsItemDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceUpdateWarningsItemDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -339,6 +350,7 @@ resourceUpdateWarningsItemDataItem
 resourceUpdateWarningsItemDataItem =
   ResourceUpdateWarningsItemDataItem'
     {_ruwidiValue = Nothing, _ruwidiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ruwidiValue :: Lens' ResourceUpdateWarningsItemDataItem (Maybe Text)
@@ -382,6 +394,7 @@ data TypesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TypesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -393,6 +406,7 @@ typesListResponse
     :: TypesListResponse
 typesListResponse =
   TypesListResponse' {_tlrNextPageToken = Nothing, _tlrTypes = Nothing}
+
 
 -- | A token used to continue a truncated list request.
 tlrNextPageToken :: Lens' TypesListResponse (Maybe Text)
@@ -447,6 +461,7 @@ data LogConfigCounterOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogConfigCounterOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -458,6 +473,7 @@ logConfigCounterOptions
     :: LogConfigCounterOptions
 logConfigCounterOptions =
   LogConfigCounterOptions' {_lccoField = Nothing, _lccoMetric = Nothing}
+
 
 -- | The field value to attribute.
 lccoField :: Lens' LogConfigCounterOptions (Maybe Text)
@@ -517,6 +533,7 @@ data Operation =
     , _oClientOperationId   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -595,6 +612,7 @@ operation =
     , _oTargetLink = Nothing
     , _oClientOperationId = Nothing
     }
+
 
 -- | [Output Only] The unique target ID, which identifies a specific
 -- incarnation of the target resource.
@@ -805,6 +823,7 @@ newtype TestPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -813,6 +832,7 @@ newtype TestPermissionsResponse =
 testPermissionsResponse
     :: TestPermissionsResponse
 testPermissionsResponse = TestPermissionsResponse' {_tprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -846,6 +866,7 @@ data ResourcesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -857,6 +878,7 @@ resourcesListResponse
     :: ResourcesListResponse
 resourcesListResponse =
   ResourcesListResponse' {_rlrNextPageToken = Nothing, _rlrResources = Nothing}
+
 
 -- | A token used to continue a truncated list request.
 rlrNextPageToken :: Lens' ResourcesListResponse (Maybe Text)
@@ -897,6 +919,7 @@ data DeploymentUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -911,6 +934,7 @@ deploymentUpdate
 deploymentUpdate =
   DeploymentUpdate'
     {_duManifest = Nothing, _duLabels = Nothing, _duDescription = Nothing}
+
 
 -- | Output only. URL of the manifest representing the update configuration
 -- of this deployment.
@@ -969,6 +993,7 @@ data ResourceUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1001,6 +1026,7 @@ resourceUpdate =
     , _ruFinalProperties = Nothing
     , _ruProperties = Nothing
     }
+
 
 -- | Output only. The state of the resource.
 ruState :: Lens' ResourceUpdate (Maybe Text)
@@ -1084,6 +1110,7 @@ data DeploymentLabelEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentLabelEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1095,6 +1122,7 @@ deploymentLabelEntry
     :: DeploymentLabelEntry
 deploymentLabelEntry =
   DeploymentLabelEntry' {_dleValue = Nothing, _dleKey = Nothing}
+
 
 dleValue :: Lens' DeploymentLabelEntry (Maybe Text)
 dleValue = lens _dleValue (\ s a -> s{_dleValue = a})
@@ -1130,6 +1158,7 @@ data Rule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Rule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1159,6 +1188,7 @@ rule =
     , _rPermissions = Nothing
     , _rDescription = Nothing
     }
+
 
 -- | Required
 rAction :: Lens' Rule (Maybe Text)
@@ -1239,6 +1269,7 @@ newtype TestPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1247,6 +1278,7 @@ newtype TestPermissionsRequest =
 testPermissionsRequest
     :: TestPermissionsRequest
 testPermissionsRequest = TestPermissionsRequest' {_tPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \'resource\'. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed.
@@ -1284,6 +1316,7 @@ data Manifest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Manifest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1316,6 +1349,7 @@ manifest =
     , _mName = Nothing
     , _mId = Nothing
     }
+
 
 -- | Output only. Creation timestamp in RFC3339 text format.
 mInsertTime :: Lens' Manifest (Maybe Text)
@@ -1392,6 +1426,7 @@ data ResourceUpdateWarningsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceUpdateWarningsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1406,6 +1441,7 @@ resourceUpdateWarningsItem
 resourceUpdateWarningsItem =
   ResourceUpdateWarningsItem'
     {_ruwiData = Nothing, _ruwiCode = Nothing, _ruwiMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -1451,6 +1487,7 @@ newtype DeploymentsCancelPreviewRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentsCancelPreviewRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1460,6 +1497,7 @@ deploymentsCancelPreviewRequest
     :: DeploymentsCancelPreviewRequest
 deploymentsCancelPreviewRequest =
   DeploymentsCancelPreviewRequest' {_dcprFingerprint = Nothing}
+
 
 -- | Specifies a fingerprint for cancelPreview() requests. A fingerprint is a
 -- randomly generated value that must be provided in cancelPreview()
@@ -1499,6 +1537,7 @@ data LogConfigCloudAuditOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogConfigCloudAuditOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1511,6 +1550,7 @@ logConfigCloudAuditOptions
 logConfigCloudAuditOptions =
   LogConfigCloudAuditOptions'
     {_lccaoAuthorizationLoggingOptions = Nothing, _lccaoLogName = Nothing}
+
 
 -- | Information used by the Cloud Audit Logging pipeline.
 lccaoAuthorizationLoggingOptions :: Lens' LogConfigCloudAuditOptions (Maybe AuthorizationLoggingOptions)
@@ -1559,6 +1599,7 @@ data Resource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Resource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1603,6 +1644,7 @@ resource =
     , _rUpdate = Nothing
     , _rProperties = Nothing
     }
+
 
 -- | Output only. Creation timestamp in RFC3339 text format.
 rInsertTime :: Lens' Resource (Maybe Text)
@@ -1710,6 +1752,7 @@ newtype LogConfigDataAccessOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogConfigDataAccessOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1719,6 +1762,7 @@ logConfigDataAccessOptions
     :: LogConfigDataAccessOptions
 logConfigDataAccessOptions =
   LogConfigDataAccessOptions' {_lcdaoLogMode = Nothing}
+
 
 -- | Whether Gin logging should happen in a fail-closed manner at the caller.
 -- This is relevant only in the LocalIAM implementation, for now. NOTE:
@@ -1750,6 +1794,7 @@ data DeploymentUpdateLabelEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentUpdateLabelEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1761,6 +1806,7 @@ deploymentUpdateLabelEntry
     :: DeploymentUpdateLabelEntry
 deploymentUpdateLabelEntry =
   DeploymentUpdateLabelEntry' {_duleValue = Nothing, _duleKey = Nothing}
+
 
 duleValue :: Lens' DeploymentUpdateLabelEntry (Maybe Text)
 duleValue
@@ -1793,6 +1839,7 @@ data ResourceUpdateErrorErrorsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceUpdateErrorErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1807,6 +1854,7 @@ resourceUpdateErrorErrorsItem
 resourceUpdateErrorErrorsItem =
   ResourceUpdateErrorErrorsItem'
     {_rueeiLocation = Nothing, _rueeiCode = Nothing, _rueeiMessage = Nothing}
+
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -1852,6 +1900,7 @@ data ManifestsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManifestsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1863,6 +1912,7 @@ manifestsListResponse
     :: ManifestsListResponse
 manifestsListResponse =
   ManifestsListResponse' {_mlrNextPageToken = Nothing, _mlrManifests = Nothing}
+
 
 -- | Output only. A token used to continue a truncated list request.
 mlrNextPageToken :: Lens' ManifestsListResponse (Maybe Text)
@@ -1902,6 +1952,7 @@ newtype OperationError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1910,6 +1961,7 @@ newtype OperationError =
 operationError
     :: OperationError
 operationError = OperationError' {_oeErrors = Nothing}
+
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -1939,6 +1991,7 @@ data GlobalSetPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GlobalSetPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1953,6 +2006,7 @@ globalSetPolicyRequest
 globalSetPolicyRequest =
   GlobalSetPolicyRequest'
     {_gsprEtag = Nothing, _gsprBindings = Nothing, _gsprPolicy = Nothing}
+
 
 -- | Flatten Policy to create a backward compatible wire-format. Deprecated.
 -- Use \'policy\' to specify the etag.
@@ -2002,6 +2056,7 @@ newtype AuthorizationLoggingOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthorizationLoggingOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2011,6 +2066,7 @@ authorizationLoggingOptions
     :: AuthorizationLoggingOptions
 authorizationLoggingOptions =
   AuthorizationLoggingOptions' {_aloPermissionType = Nothing}
+
 
 -- | The type of the permission that was checked.
 aloPermissionType :: Lens' AuthorizationLoggingOptions (Maybe Text)
@@ -2061,6 +2117,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2087,6 +2144,7 @@ policy =
     , _pBindings = Nothing
     , _pIAMOwned = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -2175,6 +2233,7 @@ data Type =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2198,6 +2257,7 @@ type' =
     , _tName = Nothing
     , _tId = Nothing
     }
+
 
 -- | Output only. Creation timestamp in RFC3339 text format.
 tInsertTime :: Lens' Type (Maybe Text)
@@ -2252,6 +2312,7 @@ data ImportFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImportFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2262,6 +2323,7 @@ data ImportFile =
 importFile
     :: ImportFile
 importFile = ImportFile' {_ifContent = Nothing, _ifName = Nothing}
+
 
 -- | The contents of the file.
 ifContent :: Lens' ImportFile (Maybe Text)
@@ -2295,6 +2357,7 @@ data OperationErrorErrorsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationErrorErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2309,6 +2372,7 @@ operationErrorErrorsItem
 operationErrorErrorsItem =
   OperationErrorErrorsItem'
     {_oeeiLocation = Nothing, _oeeiCode = Nothing, _oeeiMessage = Nothing}
+
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -2350,6 +2414,7 @@ newtype DeploymentsStopRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentsStopRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2358,6 +2423,7 @@ newtype DeploymentsStopRequest =
 deploymentsStopRequest
     :: DeploymentsStopRequest
 deploymentsStopRequest = DeploymentsStopRequest' {_dsrFingerprint = Nothing}
+
 
 -- | Specifies a fingerprint for stop() requests. A fingerprint is a randomly
 -- generated value that must be provided in stop() requests to perform
@@ -2394,6 +2460,7 @@ data ResourceWarningsItemDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceWarningsItemDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2405,6 +2472,7 @@ resourceWarningsItemDataItem
     :: ResourceWarningsItemDataItem
 resourceWarningsItemDataItem =
   ResourceWarningsItemDataItem' {_rwidiValue = Nothing, _rwidiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 rwidiValue :: Lens' ResourceWarningsItemDataItem (Maybe Text)
@@ -2449,6 +2517,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2460,6 +2529,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe Text)
@@ -2500,6 +2570,7 @@ newtype ResourceUpdateError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceUpdateError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2508,6 +2579,7 @@ newtype ResourceUpdateError =
 resourceUpdateError
     :: ResourceUpdateError
 resourceUpdateError = ResourceUpdateError' {_rueErrors = Nothing}
+
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -2541,6 +2613,7 @@ data Condition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2567,6 +2640,7 @@ condition =
     , _cSys = Nothing
     , _cSvc = Nothing
     }
+
 
 -- | An operator to apply the subject with.
 cOp :: Lens' Condition (Maybe Text)
@@ -2625,6 +2699,7 @@ data DeploymentsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2637,6 +2712,7 @@ deploymentsListResponse
 deploymentsListResponse =
   DeploymentsListResponse'
     {_dlrNextPageToken = Nothing, _dlrDeployments = Nothing}
+
 
 -- | Output only. A token used to continue a truncated list request.
 dlrNextPageToken :: Lens' DeploymentsListResponse (Maybe Text)
@@ -2677,6 +2753,7 @@ data ResourceWarningsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceWarningsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2691,6 +2768,7 @@ resourceWarningsItem
 resourceWarningsItem =
   ResourceWarningsItem'
     {_rwiData = Nothing, _rwiCode = Nothing, _rwiMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -2736,6 +2814,7 @@ data LogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2750,6 +2829,7 @@ logConfig
 logConfig =
   LogConfig'
     {_lcCloudAudit = Nothing, _lcDataAccess = Nothing, _lcCounter = Nothing}
+
 
 -- | Cloud audit options.
 lcCloudAudit :: Lens' LogConfig (Maybe LogConfigCloudAuditOptions)
@@ -2791,6 +2871,7 @@ newtype ResourceAccessControl =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceAccessControl' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2799,6 +2880,7 @@ newtype ResourceAccessControl =
 resourceAccessControl
     :: ResourceAccessControl
 resourceAccessControl = ResourceAccessControl' {_racGcpIAMPolicy = Nothing}
+
 
 -- | The GCP IAM Policy to set on the resource.
 racGcpIAMPolicy :: Lens' ResourceAccessControl (Maybe Text)
@@ -2828,6 +2910,7 @@ data TargetConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2839,6 +2922,7 @@ targetConfiguration
     :: TargetConfiguration
 targetConfiguration =
   TargetConfiguration' {_tcConfig = Nothing, _tcImports = Nothing}
+
 
 -- | The configuration to use for this deployment.
 tcConfig :: Lens' TargetConfiguration (Maybe ConfigFile)
@@ -2877,6 +2961,7 @@ data OperationWarningsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationWarningsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2891,6 +2976,7 @@ operationWarningsItem
 operationWarningsItem =
   OperationWarningsItem'
     {_owiData = Nothing, _owiCode = Nothing, _owiMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -2936,6 +3022,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2949,6 +3036,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -3019,6 +3107,7 @@ data Deployment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3063,6 +3152,7 @@ deployment =
     , _dUpdate = Nothing
     , _dTarget = Nothing
     }
+
 
 -- | Output only. Creation timestamp in RFC3339 text format.
 dInsertTime :: Lens' Deployment (Maybe Text)

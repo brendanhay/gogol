@@ -79,6 +79,7 @@ data ProjectsTracesSpansCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTracesSpansCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsTracesSpansCreate pPtscPayload_ pPtscName_ =
     , _ptscName = pPtscName_
     , _ptscCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptscXgafv :: Lens' ProjectsTracesSpansCreate (Maybe Xgafv)

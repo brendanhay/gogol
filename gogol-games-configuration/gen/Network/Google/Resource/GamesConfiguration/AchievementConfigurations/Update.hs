@@ -61,6 +61,7 @@ data AchievementConfigurationsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementConfigurationsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ achievementConfigurationsUpdate
 achievementConfigurationsUpdate pAcuAchievementId_ pAcuPayload_ =
   AchievementConfigurationsUpdate'
     {_acuAchievementId = pAcuAchievementId_, _acuPayload = pAcuPayload_}
+
 
 -- | The ID of the achievement used by this method.
 acuAchievementId :: Lens' AchievementConfigurationsUpdate Text

@@ -62,6 +62,7 @@ data ContentCategoriesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContentCategoriesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ contentCategoriesInsert
 contentCategoriesInsert pCciProFileId_ pCciPayload_ =
   ContentCategoriesInsert'
     {_cciProFileId = _Coerce # pCciProFileId_, _cciPayload = pCciPayload_}
+
 
 -- | User profile ID associated with this request.
 cciProFileId :: Lens' ContentCategoriesInsert Int64

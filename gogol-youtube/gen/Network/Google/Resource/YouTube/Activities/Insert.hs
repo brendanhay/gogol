@@ -72,6 +72,7 @@ data ActivitiesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivitiesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ activitiesInsert
     -> ActivitiesInsert
 activitiesInsert pAiPart_ pAiPayload_ =
   ActivitiesInsert' {_aiPart = pAiPart_, _aiPayload = pAiPayload_}
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

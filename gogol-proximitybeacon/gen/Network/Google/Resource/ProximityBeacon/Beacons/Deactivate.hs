@@ -87,6 +87,7 @@ data BeaconsDeactivate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconsDeactivate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ beaconsDeactivate pBdBeaconName_ =
     , _bdProjectId = Nothing
     , _bdCallback = Nothing
     }
+
 
 -- | V1 error format.
 bdXgafv :: Lens' BeaconsDeactivate (Maybe Xgafv)

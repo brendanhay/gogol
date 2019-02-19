@@ -88,6 +88,7 @@ data ProjectsJobsAggregated =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobsAggregated' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -130,6 +131,7 @@ projectsJobsAggregated pPjaProjectId_ =
     , _pjaPageSize = Nothing
     , _pjaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjaXgafv :: Lens' ProjectsJobsAggregated (Maybe Xgafv)

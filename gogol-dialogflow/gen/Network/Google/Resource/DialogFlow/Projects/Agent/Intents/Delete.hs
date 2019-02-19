@@ -73,6 +73,7 @@ data ProjectsAgentIntentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentIntentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ projectsAgentIntentsDelete pPaidName_ =
     , _paidName = pPaidName_
     , _paidCallback = Nothing
     }
+
 
 -- | V1 error format.
 paidXgafv :: Lens' ProjectsAgentIntentsDelete (Maybe Xgafv)

@@ -78,6 +78,7 @@ data AccountsCreativesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCreativesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ accountsCreativesUpdate pAcucCreativeId_ pAcucPayload_ pAcucAccountId_ =
     , _acucAccountId = pAcucAccountId_
     , _acucCallback = Nothing
     }
+
 
 -- | V1 error format.
 acucXgafv :: Lens' AccountsCreativesUpdate (Maybe Xgafv)

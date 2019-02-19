@@ -66,6 +66,7 @@ data InstancesTruncateLog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesTruncateLog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ instancesTruncateLog pItlProject_ pItlPayload_ pItlInstance_ =
     , _itlPayload = pItlPayload_
     , _itlInstance = pItlInstance_
     }
+
 
 -- | Project ID of the Cloud SQL project.
 itlProject :: Lens' InstancesTruncateLog Text

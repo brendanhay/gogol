@@ -29,6 +29,7 @@ newtype VersionLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VersionLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39,6 +40,7 @@ versionLabels
     -> VersionLabels
 versionLabels pVlAddtional_ =
   VersionLabels' {_vlAddtional = _Coerce # pVlAddtional_}
+
 
 vlAddtional :: Lens' VersionLabels (HashMap Text Text)
 vlAddtional
@@ -62,6 +64,7 @@ data PopulateVersionFilesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PopulateVersionFilesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +77,7 @@ populateVersionFilesResponse
 populateVersionFilesResponse =
   PopulateVersionFilesResponse'
     {_pvfrUploadURL = Nothing, _pvfrUploadRequiredHashes = Nothing}
+
 
 -- | The URL to which the files should be uploaded, in the format:
 -- \"https:\/\/upload-firebasehosting.googleapis.com\/upload\/sites\/site-name\/versions\/versionID\/files\".
@@ -119,6 +123,7 @@ data CertDNSChallenge =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CertDNSChallenge' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -130,6 +135,7 @@ certDNSChallenge
     :: CertDNSChallenge
 certDNSChallenge =
   CertDNSChallenge' {_cdcToken = Nothing, _cdcDomainName = Nothing}
+
 
 -- | The value that must be present as a TXT record on the domain name to
 -- satisfy the challenge.
@@ -167,11 +173,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -187,6 +195,7 @@ newtype PopulateVersionFilesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PopulateVersionFilesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -196,6 +205,7 @@ populateVersionFilesRequest
     :: PopulateVersionFilesRequest
 populateVersionFilesRequest =
   PopulateVersionFilesRequest' {_pvfrFiles = Nothing}
+
 
 -- | A set of file paths to the hashes corresponding to assets that should be
 -- added to the version. Note that a file path to an empty hash will remove
@@ -232,6 +242,7 @@ data ServingConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServingConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -258,6 +269,7 @@ servingConfig =
     , _scHeaders = Nothing
     , _scTrailingSlashBehavior = Nothing
     }
+
 
 -- | Defines whether to drop the file extension from uploaded files.
 scCleanURLs :: Lens' ServingConfig (Maybe Bool)
@@ -337,6 +349,7 @@ data Domain =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Domain' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -363,6 +376,7 @@ domain =
     , _dDomainRedirect = Nothing
     , _dSite = Nothing
     }
+
 
 -- | Output only. Additional status of the domain association.
 dStatus :: Lens' Domain (Maybe DomainStatus)
@@ -427,6 +441,7 @@ data ListReleasesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListReleasesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -438,6 +453,7 @@ listReleasesResponse
     :: ListReleasesResponse
 listReleasesResponse =
   ListReleasesResponse' {_lrrNextPageToken = Nothing, _lrrReleases = Nothing}
+
 
 -- | If there are additional releases remaining beyond the ones in this
 -- response, then supply this token in the next
@@ -487,6 +503,7 @@ data DomainProvisioning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainProvisioning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -519,6 +536,7 @@ domainProvisioning =
     , _dpCertChallengeHTTP = Nothing
     , _dpCertChallengeDiscoveredTxt = Nothing
     }
+
 
 -- | The list of IPs to which the domain is expected to resolve.
 dpExpectedIPs :: Lens' DomainProvisioning [Text]
@@ -618,6 +636,7 @@ data Release =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Release' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -644,6 +663,7 @@ release =
     , _rType = Nothing
     , _rMessage = Nothing
     }
+
 
 -- | Output only. The time at which the version is set to be public.
 rReleaseTime :: Lens' Release (Maybe UTCTime)
@@ -710,6 +730,7 @@ data VersionFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VersionFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -723,6 +744,7 @@ versionFile
     :: VersionFile
 versionFile =
   VersionFile' {_vfStatus = Nothing, _vfHash = Nothing, _vfPath = Nothing}
+
 
 -- | Output only. The current status of a particular file in the specified
 -- version.
@@ -765,6 +787,7 @@ data Header =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Header' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -775,6 +798,7 @@ data Header =
 header
     :: Header
 header = Header' {_hHeaders = Nothing, _hGlob = Nothing}
+
 
 -- | Required. The additional headers to add to the response.
 hHeaders :: Lens' Header (Maybe HeaderHeaders)
@@ -810,6 +834,7 @@ data ActingUser =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActingUser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -820,6 +845,7 @@ data ActingUser =
 actingUser
     :: ActingUser
 actingUser = ActingUser' {_auEmail = Nothing, _auImageURL = Nothing}
+
 
 -- | The email address of the user when the user performed the action.
 auEmail :: Lens' ActingUser (Maybe Text)
@@ -866,6 +892,7 @@ data Version =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Version' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -910,6 +937,7 @@ version =
     , _vDeleteUser = Nothing
     , _vCreateTime = Nothing
     }
+
 
 -- | The deploy status of a version.
 -- For a successful deploy, call the
@@ -1034,6 +1062,7 @@ data ListDomainsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDomainsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1045,6 +1074,7 @@ listDomainsResponse
     :: ListDomainsResponse
 listDomainsResponse =
   ListDomainsResponse' {_ldrNextPageToken = Nothing, _ldrDomains = Nothing}
+
 
 -- | The pagination token, if more results exist.
 ldrNextPageToken :: Lens' ListDomainsResponse (Maybe Text)
@@ -1087,6 +1117,7 @@ data Redirect =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Redirect' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1100,6 +1131,7 @@ redirect
     :: Redirect
 redirect =
   Redirect' {_rLocation = Nothing, _rGlob = Nothing, _rStatusCode = Nothing}
+
 
 -- | Required. The value to put in the HTTP location header of the response.
 -- The location can contain capture group values from the pattern using a
@@ -1153,6 +1185,7 @@ data CloudRunRewrite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudRunRewrite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1164,6 +1197,7 @@ cloudRunRewrite
     :: CloudRunRewrite
 cloudRunRewrite =
   CloudRunRewrite' {_crrServiceId = Nothing, _crrRegion = Nothing}
+
 
 -- | Required. User supplied ID of the Cloud Run service.
 crrServiceId :: Lens' CloudRunRewrite (Maybe Text)
@@ -1202,6 +1236,7 @@ data DomainRedirect =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainRedirect' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1212,6 +1247,7 @@ data DomainRedirect =
 domainRedirect
     :: DomainRedirect
 domainRedirect = DomainRedirect' {_drDomainName = Nothing, _drType = Nothing}
+
 
 -- | Required. The domain name to redirect to.
 drDomainName :: Lens' DomainRedirect (Maybe Text)
@@ -1252,6 +1288,7 @@ data Rewrite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Rewrite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1275,6 +1312,7 @@ rewrite =
     , _rewGlob = Nothing
     , _rewDynamicLinks = Nothing
     }
+
 
 -- | The function to proxy requests to. Must match the exported function name
 -- exactly.
@@ -1333,6 +1371,7 @@ newtype PopulateVersionFilesRequestFiles =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PopulateVersionFilesRequestFiles' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1344,6 +1383,7 @@ populateVersionFilesRequestFiles
 populateVersionFilesRequestFiles pPvfrfAddtional_ =
   PopulateVersionFilesRequestFiles'
     {_pvfrfAddtional = _Coerce # pPvfrfAddtional_}
+
 
 pvfrfAddtional :: Lens' PopulateVersionFilesRequestFiles (HashMap Text Text)
 pvfrfAddtional
@@ -1372,6 +1412,7 @@ newtype HeaderHeaders =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HeaderHeaders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1382,6 +1423,7 @@ headerHeaders
     -> HeaderHeaders
 headerHeaders pHhAddtional_ =
   HeaderHeaders' {_hhAddtional = _Coerce # pHhAddtional_}
+
 
 hhAddtional :: Lens' HeaderHeaders (HashMap Text Text)
 hhAddtional
@@ -1406,6 +1448,7 @@ data CertHTTPChallenge =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CertHTTPChallenge' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1417,6 +1460,7 @@ certHTTPChallenge
     :: CertHTTPChallenge
 certHTTPChallenge =
   CertHTTPChallenge' {_chttpcPath = Nothing, _chttpcToken = Nothing}
+
 
 -- | The URL path on which to serve the specified token to satisfy the
 -- certificate challenge.
@@ -1453,6 +1497,7 @@ data ListVersionFilesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListVersionFilesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1464,6 +1509,7 @@ listVersionFilesResponse
     :: ListVersionFilesResponse
 listVersionFilesResponse =
   ListVersionFilesResponse' {_lvfrNextPageToken = Nothing, _lvfrFiles = Nothing}
+
 
 -- | The pagination token, if more results exist.
 lvfrNextPageToken :: Lens' ListVersionFilesResponse (Maybe Text)
@@ -1503,6 +1549,7 @@ newtype SiteConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1511,6 +1558,7 @@ newtype SiteConfig =
 siteConfig
     :: SiteConfig
 siteConfig = SiteConfig' {_scMaxVersions = Nothing}
+
 
 -- | The number of FINALIZED versions that will be held for a site before
 -- automatic deletion. When a new version is deployed, content for versions

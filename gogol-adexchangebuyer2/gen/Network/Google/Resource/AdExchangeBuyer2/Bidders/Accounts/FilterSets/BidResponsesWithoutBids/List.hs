@@ -83,6 +83,7 @@ data BiddersAccountsFilterSetsBidResponsesWithoutBidsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BiddersAccountsFilterSetsBidResponsesWithoutBidsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ biddersAccountsFilterSetsBidResponsesWithoutBidsList pBafsbrwblFilterSetName_ =
     , _bafsbrwblPageSize = Nothing
     , _bafsbrwblCallback = Nothing
     }
+
 
 -- | V1 error format.
 bafsbrwblXgafv :: Lens' BiddersAccountsFilterSetsBidResponsesWithoutBidsList (Maybe Xgafv)

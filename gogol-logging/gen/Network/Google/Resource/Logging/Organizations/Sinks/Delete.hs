@@ -72,6 +72,7 @@ data OrganizationsSinksDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsSinksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ organizationsSinksDelete pOsdSinkName_ =
     , _osdSinkName = pOsdSinkName_
     , _osdCallback = Nothing
     }
+
 
 -- | V1 error format.
 osdXgafv :: Lens' OrganizationsSinksDelete (Maybe Xgafv)

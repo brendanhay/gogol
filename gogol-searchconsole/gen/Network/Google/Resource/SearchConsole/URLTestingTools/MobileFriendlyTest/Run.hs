@@ -73,6 +73,7 @@ data URLTestingToolsMobileFriendlyTestRun =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLTestingToolsMobileFriendlyTestRun' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ urlTestingToolsMobileFriendlyTestRun pUttmftrPayload_ =
     , _uttmftrPayload = pUttmftrPayload_
     , _uttmftrCallback = Nothing
     }
+
 
 -- | V1 error format.
 uttmftrXgafv :: Lens' URLTestingToolsMobileFriendlyTestRun (Maybe Xgafv)

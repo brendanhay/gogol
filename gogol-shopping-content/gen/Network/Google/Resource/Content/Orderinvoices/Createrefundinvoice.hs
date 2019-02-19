@@ -75,6 +75,7 @@ data OrderinvoicesCreaterefundinvoice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderinvoicesCreaterefundinvoice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ orderinvoicesCreaterefundinvoice pOcMerchantId_ pOcPayload_ pOcOrderId_ =
     , _ocPayload = pOcPayload_
     , _ocOrderId = pOcOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

@@ -75,6 +75,7 @@ data ObjectsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ objectsTestIAMPermissions pOtipBucket_ pOtipObject_ pOtipPermissions_ =
     , _otipPermissions = _Coerce # pOtipPermissions_
     , _otipGeneration = Nothing
     }
+
 
 -- | Name of the bucket in which the object resides.
 otipBucket :: Lens' ObjectsTestIAMPermissions Text

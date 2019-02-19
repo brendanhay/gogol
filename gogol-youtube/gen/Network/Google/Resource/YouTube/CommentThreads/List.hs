@@ -92,6 +92,7 @@ data CommentThreadsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentThreadsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -134,6 +135,7 @@ commentThreadsList pCtlPart_ =
     , _ctlTextFormat = CTLTFHTML
     , _ctlMaxResults = 20
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- commentThread resource properties that the API response will include.

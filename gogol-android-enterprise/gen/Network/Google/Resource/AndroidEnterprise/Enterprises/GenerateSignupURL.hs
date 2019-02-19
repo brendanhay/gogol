@@ -58,6 +58,7 @@ newtype EnterprisesGenerateSignupURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesGenerateSignupURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ enterprisesGenerateSignupURL
     :: EnterprisesGenerateSignupURL
 enterprisesGenerateSignupURL =
   EnterprisesGenerateSignupURL' {_egsuCallbackURL = Nothing}
+
 
 -- | The callback URL to which the Admin will be redirected after
 -- successfully creating an enterprise. Before redirecting there the system

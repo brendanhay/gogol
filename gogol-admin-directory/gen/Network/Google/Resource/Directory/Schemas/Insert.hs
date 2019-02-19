@@ -62,6 +62,7 @@ data SchemasInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SchemasInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ schemasInsert
     -> SchemasInsert
 schemasInsert pSiPayload_ pSiCustomerId_ =
   SchemasInsert' {_siPayload = pSiPayload_, _siCustomerId = pSiCustomerId_}
+
 
 -- | Multipart request metadata.
 siPayload :: Lens' SchemasInsert Schema

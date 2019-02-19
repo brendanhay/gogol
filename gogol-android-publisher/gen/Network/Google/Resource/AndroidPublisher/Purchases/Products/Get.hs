@@ -67,6 +67,7 @@ data PurchasesProductsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PurchasesProductsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ purchasesProductsGet pPpgPackageName_ pPpgToken_ pPpgProductId_ =
     , _ppgToken = pPpgToken_
     , _ppgProductId = pPpgProductId_
     }
+
 
 -- | The package name of the application the inapp product was sold in (for
 -- example, \'com.some.thing\').

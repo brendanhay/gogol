@@ -84,6 +84,7 @@ data RolesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RolesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ rolesList =
     , _rlPageSize = Nothing
     , _rlCallback = Nothing
     }
+
 
 -- | The resource name of the parent resource in one of the following
 -- formats: \`\` (empty string) -- this refers to curated roles.

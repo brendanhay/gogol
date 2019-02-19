@@ -63,6 +63,7 @@ data AccountsUserPermissionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsUserPermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ accountsUserPermissionsList
 accountsUserPermissionsList pAuplParent_ =
   AccountsUserPermissionsList'
     {_auplParent = pAuplParent_, _auplPageToken = Nothing}
+
 
 -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}
 auplParent :: Lens' AccountsUserPermissionsList Text

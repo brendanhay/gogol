@@ -68,6 +68,7 @@ data MyLibraryBookshelvesMoveVolume =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryBookshelvesMoveVolume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ myLibraryBookshelvesMoveVolume pMlbmvShelf_ pMlbmvVolumeId_ pMlbmvVolumePosition
     , _mlbmvSource = Nothing
     , _mlbmvVolumePosition = _Coerce # pMlbmvVolumePosition_
     }
+
 
 -- | ID of bookshelf with the volume.
 mlbmvShelf :: Lens' MyLibraryBookshelvesMoveVolume Text

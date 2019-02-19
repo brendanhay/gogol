@@ -67,6 +67,7 @@ data TablesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TablesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ tablesDelete pTdDataSetId_ pTdProjectId_ pTdTableId_ =
     , _tdProjectId = pTdProjectId_
     , _tdTableId = pTdTableId_
     }
+
 
 -- | Dataset ID of the table to delete
 tdDataSetId :: Lens' TablesDelete Text

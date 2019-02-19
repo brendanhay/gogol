@@ -72,6 +72,7 @@ data TablesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TablesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ tablesGet pTgDataSetId_ pTgProjectId_ pTgTableId_ =
     , _tgSelectedFields = Nothing
     , _tgTableId = pTgTableId_
     }
+
 
 -- | Dataset ID of the requested table
 tgDataSetId :: Lens' TablesGet Text

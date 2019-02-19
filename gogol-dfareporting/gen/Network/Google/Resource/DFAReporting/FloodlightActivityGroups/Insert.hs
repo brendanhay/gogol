@@ -62,6 +62,7 @@ data FloodlightActivityGroupsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivityGroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ floodlightActivityGroupsInsert
 floodlightActivityGroupsInsert pFagiProFileId_ pFagiPayload_ =
   FloodlightActivityGroupsInsert'
     {_fagiProFileId = _Coerce # pFagiProFileId_, _fagiPayload = pFagiPayload_}
+
 
 -- | User profile ID associated with this request.
 fagiProFileId :: Lens' FloodlightActivityGroupsInsert Int64

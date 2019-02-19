@@ -66,6 +66,7 @@ data BucketsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ bucketsDelete pBdBucket_ =
     , _bdUserProject = Nothing
     , _bdIfMetagenerationNotMatch = Nothing
     }
+
 
 -- | If set, only deletes the bucket if its metageneration matches this
 -- value.

@@ -68,6 +68,7 @@ data CommentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ commentsGet pCgBlogId_ pCgPostId_ pCgCommentId_ =
     , _cgPostId = pCgPostId_
     , _cgCommentId = pCgCommentId_
     }
+
 
 -- | ID of the blog to containing the comment.
 cgBlogId :: Lens' CommentsGet Text

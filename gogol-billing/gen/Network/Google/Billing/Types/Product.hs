@@ -46,6 +46,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -56,6 +57,7 @@ data AuditConfig =
 auditConfig
     :: AuditConfig
 auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -97,6 +99,7 @@ data ListServicesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListServicesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +111,7 @@ listServicesResponse
     :: ListServicesResponse
 listServicesResponse =
   ListServicesResponse' {_lsrNextPageToken = Nothing, _lsrServices = Nothing}
+
 
 -- | A token to retrieve the next page of results. To retrieve the next page,
 -- call \`ListServices\` again with the \`page_token\` field set to this
@@ -153,6 +157,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -173,6 +178,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -231,6 +237,7 @@ data BillingAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -251,6 +258,7 @@ billingAccount =
     , _baName = Nothing
     , _baDisplayName = Nothing
     }
+
 
 -- | If this account is a
 -- [subaccount](https:\/\/cloud.google.com\/billing\/docs\/concepts), then
@@ -312,6 +320,7 @@ data Service =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Service' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -332,6 +341,7 @@ service =
     , _sDisplayName = Nothing
     , _sServiceId = Nothing
     }
+
 
 -- | The business under which the service is offered. Ex.
 -- \"businessEntities\/GCP\", \"businessEntities\/Maps\"
@@ -386,6 +396,7 @@ data ProjectBillingInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectBillingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -406,6 +417,7 @@ projectBillingInfo =
     , _pbiProjectId = Nothing
     , _pbiBillingEnabled = Nothing
     }
+
 
 -- | The resource name for the \`ProjectBillingInfo\`; has the form
 -- \`projects\/{project_id}\/billingInfo\`. For example, the resource name
@@ -466,6 +478,7 @@ data TierRate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TierRate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -476,6 +489,7 @@ data TierRate =
 tierRate
     :: TierRate
 tierRate = TierRate' {_trUnitPrice = Nothing, _trStartUsageAmount = Nothing}
+
 
 -- | The price per unit of usage. Example: unit_price of amount $10 indicates
 -- that each unit will cost $10.
@@ -517,6 +531,7 @@ data Money =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Money' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -529,6 +544,7 @@ data Money =
 money
     :: Money
 money = Money' {_mCurrencyCode = Nothing, _mNanos = Nothing, _mUnits = Nothing}
+
 
 -- | The 3-letter currency code defined in ISO 4217.
 mCurrencyCode :: Lens' Money (Maybe Text)
@@ -581,6 +597,7 @@ data Category =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Category' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -601,6 +618,7 @@ category =
     , _cServiceDisplayName = Nothing
     , _cResourceGroup = Nothing
     }
+
 
 -- | The type of product the SKU refers to. Example: \"Compute\",
 -- \"Storage\", \"Network\", \"ApplicationServices\" etc.
@@ -656,6 +674,7 @@ data SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -667,6 +686,7 @@ setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
   SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -709,6 +729,7 @@ data ListProjectBillingInfoResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListProjectBillingInfoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -721,6 +742,7 @@ listProjectBillingInfoResponse
 listProjectBillingInfoResponse =
   ListProjectBillingInfoResponse'
     {_lpbirNextPageToken = Nothing, _lpbirProjectBillingInfo = Nothing}
+
 
 -- | A token to retrieve the next page of results. To retrieve the next page,
 -- call \`ListProjectBillingInfo\` again with the \`page_token\` field set
@@ -767,6 +789,7 @@ data ListSKUsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSKUsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -778,6 +801,7 @@ listSKUsResponse
     :: ListSKUsResponse
 listSKUsResponse =
   ListSKUsResponse' {_lskurNextPageToken = Nothing, _lskurSKUs = Nothing}
+
 
 -- | A token to retrieve the next page of results. To retrieve the next page,
 -- call \`ListSkus\` again with the \`page_token\` field set to this value.
@@ -828,6 +852,7 @@ data PricingExpression =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PricingExpression' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -857,6 +882,7 @@ pricingExpression =
     , _peBaseUnitDescription = Nothing
     , _peUsageUnit = Nothing
     }
+
 
 -- | The unit of usage in human readable form. Example: \"gibi byte\".
 peUsageUnitDescription :: Lens' PricingExpression (Maybe Text)
@@ -952,6 +978,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -961,6 +988,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -997,6 +1025,7 @@ data AggregationInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AggregationInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1014,6 +1043,7 @@ aggregationInfo =
     , _aiAggregationCount = Nothing
     , _aiAggregationLevel = Nothing
     }
+
 
 aiAggregationInterval :: Lens' AggregationInfo (Maybe AggregationInfoAggregationInterval)
 aiAggregationInterval
@@ -1067,6 +1097,7 @@ data SKU =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SKU' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1096,6 +1127,7 @@ sKU =
     , _skukPricingInfo = Nothing
     , _skukDescription = Nothing
     }
+
 
 -- | The category hierarchy of this SKU, purely for organizational purpose.
 skukCategory :: Lens' SKU (Maybe Category)
@@ -1178,6 +1210,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1187,6 +1220,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1238,6 +1272,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1258,6 +1293,7 @@ policy =
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -1322,6 +1358,7 @@ data ListBillingAccountsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListBillingAccountsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1334,6 +1371,7 @@ listBillingAccountsResponse
 listBillingAccountsResponse =
   ListBillingAccountsResponse'
     {_lbarNextPageToken = Nothing, _lbarBillingAccounts = Nothing}
+
 
 -- | A token to retrieve the next page of results. To retrieve the next page,
 -- call \`ListBillingAccounts\` again with the \`page_token\` field set to
@@ -1381,6 +1419,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1392,6 +1431,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -1435,6 +1475,7 @@ data PricingInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PricingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1458,6 +1499,7 @@ pricingInfo =
     , _piCurrencyConversionRate = Nothing
     , _piEffectiveTime = Nothing
     }
+
 
 -- | An optional human readable summary of the pricing information, has a
 -- maximum length of 256 characters.
@@ -1533,6 +1575,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1546,6 +1589,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

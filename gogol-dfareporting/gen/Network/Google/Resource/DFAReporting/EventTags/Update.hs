@@ -61,6 +61,7 @@ data EventTagsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventTagsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ eventTagsUpdate
 eventTagsUpdate pEtuProFileId_ pEtuPayload_ =
   EventTagsUpdate'
     {_etuProFileId = _Coerce # pEtuProFileId_, _etuPayload = pEtuPayload_}
+
 
 -- | User profile ID associated with this request.
 etuProFileId :: Lens' EventTagsUpdate Int64

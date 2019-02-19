@@ -76,6 +76,7 @@ data ProjectsLocationsInstancesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsInstancesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ projectsLocationsInstancesPatch pPlipPayload_ pPlipName_ =
     , _plipName = pPlipName_
     , _plipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plipXgafv :: Lens' ProjectsLocationsInstancesPatch (Maybe Xgafv)

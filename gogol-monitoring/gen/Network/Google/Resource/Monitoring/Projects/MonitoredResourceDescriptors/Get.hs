@@ -74,6 +74,7 @@ data ProjectsMonitoredResourceDescriptorsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsMonitoredResourceDescriptorsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ projectsMonitoredResourceDescriptorsGet pPmrdgName_ =
     , _pmrdgName = pPmrdgName_
     , _pmrdgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmrdgXgafv :: Lens' ProjectsMonitoredResourceDescriptorsGet (Maybe Xgafv)

@@ -33,6 +33,7 @@ data SystemParameter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SystemParameter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -47,6 +48,7 @@ systemParameter
 systemParameter =
   SystemParameter'
     {_spHTTPHeader = Nothing, _spURLQueryParameter = Nothing, _spName = Nothing}
+
 
 -- | Define the HTTP header name to use for the parameter. It is case
 -- insensitive.
@@ -102,6 +104,7 @@ data MonitoredResourceDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResourceDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -125,6 +128,7 @@ monitoredResourceDescriptor =
     , _mrdType = Nothing
     , _mrdDescription = Nothing
     }
+
 
 -- | Optional. The resource name of the monitored resource descriptor:
 -- \`\"projects\/{project_id}\/monitoredResourceDescriptors\/{type}\"\`
@@ -198,6 +202,7 @@ data DocumentationRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentationRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -215,6 +220,7 @@ documentationRule =
     , _drDeprecationDescription = Nothing
     , _drDescription = Nothing
     }
+
 
 -- | The selector is a comma-separated list of patterns. Each pattern is a
 -- qualified name of the element which may end in \"*\", indicating a
@@ -302,6 +308,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -314,6 +321,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -362,6 +370,7 @@ data BillingDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -373,6 +382,7 @@ billingDestination
     :: BillingDestination
 billingDestination =
   BillingDestination' {_bdMetrics = Nothing, _bdMonitoredResource = Nothing}
+
 
 -- | Names of the metrics to report to this billing destination. Each name
 -- must be defined in Service.metrics section.
@@ -415,6 +425,7 @@ newtype Control =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Control' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -423,6 +434,7 @@ newtype Control =
 control
     :: Control
 control = Control' {_cEnvironment = Nothing}
+
 
 -- | The service control environment to use. If empty, no control plane
 -- feature (like quota and billing) will be enabled.
@@ -452,6 +464,7 @@ data AuthRequirement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthRequirement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -463,6 +476,7 @@ authRequirement
     :: AuthRequirement
 authRequirement =
   AuthRequirement' {_arProviderId = Nothing, _arAudiences = Nothing}
+
 
 -- | id from authentication provider. Example: provider_id: bookstore_auth
 arProviderId :: Lens' AuthRequirement (Maybe Text)
@@ -520,6 +534,7 @@ newtype Context =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Context' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -528,6 +543,7 @@ newtype Context =
 context
     :: Context
 context = Context' {_cRules = Nothing}
+
 
 -- | A list of RPC context rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -557,6 +573,7 @@ data LoggingDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LoggingDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -568,6 +585,7 @@ loggingDestination
     :: LoggingDestination
 loggingDestination =
   LoggingDestination' {_ldMonitoredResource = Nothing, _ldLogs = Nothing}
+
 
 -- | The monitored resource type. The type must be defined in the
 -- Service.monitored_resources section.
@@ -619,6 +637,7 @@ data MetricDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -654,6 +673,7 @@ metricDescriptor =
     , _mdDescription = Nothing
     , _mdUnit = Nothing
     }
+
 
 -- | Whether the metric records instantaneous values, changes to a value,
 -- etc. Some combinations of \`metric_kind\` and \`value_type\` might not
@@ -782,6 +802,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -794,6 +815,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -831,11 +853,13 @@ data CancelOperationRequest =
   CancelOperationRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
 cancelOperationRequest
     :: CancelOperationRequest
 cancelOperationRequest = CancelOperationRequest'
+
 
 instance FromJSON CancelOperationRequest where
         parseJSON
@@ -859,6 +883,7 @@ data BackendRule =
     , _brPathTranslation   :: !(Maybe BackendRulePathTranslation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendRule' with the minimum fields required to make a request.
 --
@@ -889,6 +914,7 @@ backendRule =
     , _brDeadline = Nothing
     , _brPathTranslation = Nothing
     }
+
 
 -- | The JWT audience is used when generating a JWT id token for the backend.
 brJwtAudience :: Lens' BackendRule (Maybe Text)
@@ -970,6 +996,7 @@ newtype SourceContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -978,6 +1005,7 @@ newtype SourceContext =
 sourceContext
     :: SourceContext
 sourceContext = SourceContext' {_scFileName = Nothing}
+
 
 -- | The path-qualified name of the .proto file that contained the associated
 -- protobuf element. For example:
@@ -1006,6 +1034,7 @@ data SearchTenancyUnitsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchTenancyUnitsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1018,6 +1047,7 @@ searchTenancyUnitsResponse
 searchTenancyUnitsResponse =
   SearchTenancyUnitsResponse'
     {_sturTenancyUnits = Nothing, _sturNextPageToken = Nothing}
+
 
 -- | Tenancy Units matching the request.
 sturTenancyUnits :: Lens' SearchTenancyUnitsResponse [TenancyUnit]
@@ -1066,6 +1096,7 @@ data Field =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Field' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1104,6 +1135,7 @@ field =
     , _fNumber = Nothing
     , _fTypeURL = Nothing
     }
+
 
 -- | The field type.
 fKind :: Lens' Field (Maybe FieldKind)
@@ -1200,6 +1232,7 @@ data MetricRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1210,6 +1243,7 @@ data MetricRule =
 metricRule
     :: MetricRule
 metricRule = MetricRule' {_mrSelector = Nothing, _mrMetricCosts = Nothing}
+
 
 -- | Selects the methods to which this rule applies. Refer to selector for
 -- syntax details.
@@ -1286,6 +1320,7 @@ data Service =
     , _sQuota              :: !(Maybe Quota)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Service' with the minimum fields required to make a request.
 --
@@ -1379,6 +1414,7 @@ service =
     , _sLogging = Nothing
     , _sQuota = Nothing
     }
+
 
 -- | Configuration for the service control plane.
 sControl :: Lens' Service (Maybe Control)
@@ -1633,6 +1669,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1656,6 +1693,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -1723,11 +1761,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1745,6 +1785,7 @@ data CustomErrorRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomErrorRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1756,6 +1797,7 @@ customErrorRule
     :: CustomErrorRule
 customErrorRule =
   CustomErrorRule' {_cerIsErrorType = Nothing, _cerSelector = Nothing}
+
 
 -- | Mark this message as possible payload in error response. Otherwise,
 -- objects of this type will be filtered when they appear in error payload.
@@ -1797,6 +1839,7 @@ newtype OptionValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OptionValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1807,6 +1850,7 @@ optionValue
     -> OptionValue
 optionValue pOvAddtional_ =
   OptionValue' {_ovAddtional = _Coerce # pOvAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 ovAddtional :: Lens' OptionValue (HashMap Text JSONValue)
@@ -1833,6 +1877,7 @@ data EnumValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnumValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1846,6 +1891,7 @@ enumValue
     :: EnumValue
 enumValue =
   EnumValue' {_evName = Nothing, _evOptions = Nothing, _evNumber = Nothing}
+
 
 -- | Enum value name.
 evName :: Lens' EnumValue (Maybe Text)
@@ -1896,6 +1942,7 @@ data Authentication =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Authentication' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1906,6 +1953,7 @@ data Authentication =
 authentication
     :: Authentication
 authentication = Authentication' {_aRules = Nothing, _aProviders = Nothing}
+
 
 -- | A list of authentication rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -1978,6 +2026,7 @@ data Mixin =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Mixin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1988,6 +2037,7 @@ data Mixin =
 mixin
     :: Mixin
 mixin = Mixin' {_mRoot = Nothing, _mName = Nothing}
+
 
 -- | If non-empty specifies a path under which inherited HTTP paths are
 -- rooted.
@@ -2019,6 +2069,7 @@ data CustomHTTPPattern =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomHTTPPattern' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2030,6 +2081,7 @@ customHTTPPattern
     :: CustomHTTPPattern
 customHTTPPattern =
   CustomHTTPPattern' {_chttppPath = Nothing, _chttppKind = Nothing}
+
 
 -- | The path matched by this custom verb.
 chttppPath :: Lens' CustomHTTPPattern (Maybe Text)
@@ -2077,6 +2129,7 @@ data UsageRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsageRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2094,6 +2147,7 @@ usageRule =
     , _urAllowUnregisteredCalls = Nothing
     , _urSkipServiceControl = Nothing
     }
+
 
 -- | Selects the methods to which this rule applies. Use \'*\' to indicate
 -- all methods in all APIs. Refer to selector for syntax details.
@@ -2143,6 +2197,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2153,6 +2208,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2180,6 +2236,7 @@ data Page =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Page' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2192,6 +2249,7 @@ data Page =
 page
     :: Page
 page = Page' {_pSubpages = Nothing, _pContent = Nothing, _pName = Nothing}
+
 
 -- | Subpages of this page. The order of subpages specified here will be
 -- honored in the generated docset.
@@ -2257,6 +2315,7 @@ data AuthenticationRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthenticationRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2277,6 +2336,7 @@ authenticationRule =
     , _arAllowWithoutCredential = Nothing
     , _arOAuth = Nothing
     }
+
 
 -- | Requirements for additional authentication providers.
 arRequirements :: Lens' AuthenticationRule [AuthRequirement]
@@ -2332,6 +2392,7 @@ data ServiceAccountConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccountConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2344,6 +2405,7 @@ serviceAccountConfig
 serviceAccountConfig =
   ServiceAccountConfig'
     {_sacAccountId = Nothing, _sacTenantProjectRoles = Nothing}
+
 
 -- | ID of the IAM service account to be created in tenant project. The email
 -- format of the service account will be \"\'.iam.gserviceaccount.com\".
@@ -2390,6 +2452,7 @@ newtype MetricRuleMetricCosts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricRuleMetricCosts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2400,6 +2463,7 @@ metricRuleMetricCosts
     -> MetricRuleMetricCosts
 metricRuleMetricCosts pMrmcAddtional_ =
   MetricRuleMetricCosts' {_mrmcAddtional = _Coerce # pMrmcAddtional_}
+
 
 mrmcAddtional :: Lens' MetricRuleMetricCosts (HashMap Text Int64)
 mrmcAddtional
@@ -2428,6 +2492,7 @@ newtype AuthorizationConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthorizationConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2436,6 +2501,7 @@ newtype AuthorizationConfig =
 authorizationConfig
     :: AuthorizationConfig
 authorizationConfig = AuthorizationConfig' {_acProvider = Nothing}
+
 
 -- | The name of the authorization provider, such as
 -- firebaserules.googleapis.com.
@@ -2463,6 +2529,7 @@ newtype TenantProjectPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TenantProjectPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2471,6 +2538,7 @@ newtype TenantProjectPolicy =
 tenantProjectPolicy
     :: TenantProjectPolicy
 tenantProjectPolicy = TenantProjectPolicy' {_tppPolicyBindings = Nothing}
+
 
 -- | Policy bindings to be applied to the tenant project, in addition to the
 -- \'roles\/owner\' role granted to the Service Consumer Management service
@@ -2507,6 +2575,7 @@ data PolicyBinding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PolicyBinding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2517,6 +2586,7 @@ data PolicyBinding =
 policyBinding
     :: PolicyBinding
 policyBinding = PolicyBinding' {_pbMembers = Nothing, _pbRole = Nothing}
+
 
 -- | Uses the same format as in IAM policy. \`member\` must include both
 -- prefix and ID. For example, \`user:{emailId}\`,
@@ -2556,6 +2626,7 @@ newtype Experimental =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Experimental' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2564,6 +2635,7 @@ newtype Experimental =
 experimental
     :: Experimental
 experimental = Experimental' {_eAuthorization = Nothing}
+
 
 -- | Authorization configuration.
 eAuthorization :: Lens' Experimental (Maybe AuthorizationConfig)
@@ -2591,6 +2663,7 @@ newtype Backend =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Backend' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2599,6 +2672,7 @@ newtype Backend =
 backend
     :: Backend
 backend = Backend' {_bRules = Nothing}
+
 
 -- | A list of API backend rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -2630,6 +2704,7 @@ data TenancyUnit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TenancyUnit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2653,6 +2728,7 @@ tenancyUnit =
     , _tuConsumer = Nothing
     , _tuCreateTime = Nothing
     }
+
 
 -- | \'OutputOnly Google Cloud API name of the service owning this tenancy
 -- unit. For example \'serviceconsumermanagement.googleapis.com\'.
@@ -2736,6 +2812,7 @@ data Monitoring =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Monitoring' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2748,6 +2825,7 @@ monitoring
 monitoring =
   Monitoring'
     {_mProducerDestinations = Nothing, _mConsumerDestinations = Nothing}
+
 
 -- | Monitoring configurations for sending metrics to the producer project.
 -- There can be multiple producer destinations. A monitored resouce type
@@ -2807,6 +2885,7 @@ data LogDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2827,6 +2906,7 @@ logDescriptor =
     , _ldLabels = Nothing
     , _ldDescription = Nothing
     }
+
 
 -- | The name of the log. It must be less than 512 characters long and can
 -- include the following characters: upper- and lower-case alphanumeric
@@ -2891,6 +2971,7 @@ data Method =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Method' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2920,6 +3001,7 @@ method =
     , _metOptions = Nothing
     , _metSyntax = Nothing
     }
+
 
 -- | If true, the request is streamed.
 metRequestStreaming :: Lens' Method (Maybe Bool)
@@ -2999,6 +3081,7 @@ newtype SystemParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SystemParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3007,6 +3090,7 @@ newtype SystemParameters =
 systemParameters
     :: SystemParameters
 systemParameters = SystemParameters' {_spRules = Nothing}
+
 
 -- | Define system parameters. The parameters defined here will override the
 -- default parameters implemented by the system. If this field is missing
@@ -3102,6 +3186,7 @@ data Documentation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Documentation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3125,6 +3210,7 @@ documentation =
     , _dPages = Nothing
     , _dOverview = Nothing
     }
+
 
 -- | A short summary of what the service does. Can only be provided by plain
 -- text.
@@ -3201,6 +3287,7 @@ data MetricDescriptorMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricDescriptorMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3218,6 +3305,7 @@ metricDescriptorMetadata =
     , _mdmIngestDelay = Nothing
     , _mdmLaunchStage = Nothing
     }
+
 
 -- | The sampling period of metric data points. For metrics which are written
 -- periodically, consecutive data points are stored at this time interval,
@@ -3271,6 +3359,7 @@ data SystemParameterRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SystemParameterRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3282,6 +3371,7 @@ systemParameterRule
     :: SystemParameterRule
 systemParameterRule =
   SystemParameterRule' {_sprSelector = Nothing, _sprParameters = Nothing}
+
 
 -- | Selects the methods to which this rule applies. Use \'*\' to indicate
 -- all methods in all APIs. Refer to selector for syntax details.
@@ -3326,6 +3416,7 @@ data LabelDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LabelDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3340,6 +3431,7 @@ labelDescriptor
 labelDescriptor =
   LabelDescriptor'
     {_lKey = Nothing, _lValueType = Nothing, _lDescription = Nothing}
+
 
 -- | The label key.
 lKey :: Lens' LabelDescriptor (Maybe Text)
@@ -3382,6 +3474,7 @@ data Usage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Usage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3399,6 +3492,7 @@ usage =
     , _uRules = Nothing
     , _uProducerNotificationChannel = Nothing
     }
+
 
 -- | Requirements that must be satisfied before a consumer project can use
 -- the service. Each requirement is of the form \/; for example
@@ -3459,6 +3553,7 @@ data HTTP =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTP' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3469,6 +3564,7 @@ data HTTP =
 hTTP
     :: HTTP
 hTTP = HTTP' {_hRules = Nothing, _hFullyDecodeReservedExpansion = Nothing}
+
 
 -- | A list of HTTP configuration rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -3517,6 +3613,7 @@ data Type =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3543,6 +3640,7 @@ type' =
     , _tFields = Nothing
     , _tSyntax = Nothing
     }
+
 
 -- | The source context.
 tSourceContext :: Lens' Type (Maybe SourceContext)
@@ -3622,6 +3720,7 @@ data API =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'API' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3651,6 +3750,7 @@ api =
     , _aOptions = Nothing
     , _aSyntax = Nothing
     }
+
 
 -- | Source context for the protocol buffer service represented by this
 -- message.
@@ -3741,6 +3841,7 @@ data MonitoringDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoringDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3752,6 +3853,7 @@ monitoringDestination
     :: MonitoringDestination
 monitoringDestination =
   MonitoringDestination' {_mdMetrics = Nothing, _mdMonitoredResource = Nothing}
+
 
 -- | Types of the metrics to report to this monitoring destination. Each type
 -- must be defined in Service.metrics section.
@@ -3795,6 +3897,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3805,6 +3908,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -3842,6 +3946,7 @@ data Endpoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Endpoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3865,6 +3970,7 @@ endpoint =
     , _eFeatures = Nothing
     , _eTarget = Nothing
     }
+
 
 -- | DEPRECATED: This field is no longer supported. Instead of using aliases,
 -- please specify multiple google.api.Endpoint for each of the intended
@@ -3946,6 +4052,7 @@ newtype OAuthRequirements =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OAuthRequirements' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3954,6 +4061,7 @@ newtype OAuthRequirements =
 oAuthRequirements
     :: OAuthRequirements
 oAuthRequirements = OAuthRequirements' {_oarCanonicalScopes = Nothing}
+
 
 -- | The list of publicly documented OAuth scopes that are allowed access. An
 -- OAuth token containing any of these scopes will be accepted. Example:
@@ -3994,6 +4102,7 @@ data TenantProjectConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TenantProjectConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4020,6 +4129,7 @@ tenantProjectConfig =
     , _tpcServices = Nothing
     , _tpcBillingConfig = Nothing
     }
+
 
 -- | Folder where project in this tenancy unit must be located This folder
 -- must have been previously created with proper permissions for the caller
@@ -4100,6 +4210,7 @@ data CustomError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4110,6 +4221,7 @@ data CustomError =
 customError
     :: CustomError
 customError = CustomError' {_ceRules = Nothing, _ceTypes = Nothing}
+
 
 -- | The list of custom error rules that apply to individual API messages.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -4161,6 +4273,7 @@ data QuotaLimit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuotaLimit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4199,6 +4312,7 @@ quotaLimit =
     , _qlUnit = Nothing
     , _qlMaxLimit = Nothing
     }
+
 
 -- | Tiered limit values. You must specify this as a key:value pair, with an
 -- integer value that is the maximum number of requests allowed for the
@@ -4330,6 +4444,7 @@ data Option =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Option' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4340,6 +4455,7 @@ data Option =
 option
     :: Option
 option = Option' {_optValue = Nothing, _optName = Nothing}
+
 
 -- | The option\'s value packed in an Any message. If the value is a
 -- primitive, the corresponding wrapper type defined in
@@ -4386,6 +4502,7 @@ newtype Billing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Billing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4394,6 +4511,7 @@ newtype Billing =
 billing
     :: Billing
 billing = Billing' {_bConsumerDestinations = Nothing}
+
 
 -- | Billing configurations for sending metrics to the consumer project.
 -- There can be multiple consumer destinations per service, each one must
@@ -4429,6 +4547,7 @@ newtype SourceInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4437,6 +4556,7 @@ newtype SourceInfo =
 sourceInfo
     :: SourceInfo
 sourceInfo = SourceInfo' {_siSourceFiles = Nothing}
+
 
 -- | All files used during config generation.
 siSourceFiles :: Lens' SourceInfo [SourceInfoSourceFilesItem]
@@ -4468,6 +4588,7 @@ newtype QuotaLimitValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuotaLimitValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4478,6 +4599,7 @@ quotaLimitValues
     -> QuotaLimitValues
 quotaLimitValues pQlvAddtional_ =
   QuotaLimitValues' {_qlvAddtional = _Coerce # pQlvAddtional_}
+
 
 qlvAddtional :: Lens' QuotaLimitValues (HashMap Text Int64)
 qlvAddtional
@@ -4504,6 +4626,7 @@ data AttachTenantProjectRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AttachTenantProjectRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4521,6 +4644,7 @@ attachTenantProjectRequest =
     , _atprExternalResource = Nothing
     , _atprReservedResource = Nothing
     }
+
 
 -- | Tag of the tenant resource after attachment. Must be less than 128
 -- characters. Required.
@@ -4571,6 +4695,7 @@ data Enum' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Enum' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4594,6 +4719,7 @@ enum =
     , _enuOptions = Nothing
     , _enuSyntax = Nothing
     }
+
 
 -- | The source context.
 enuSourceContext :: Lens' Enum' (Maybe SourceContext)
@@ -4667,6 +4793,7 @@ data Logging =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Logging' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4678,6 +4805,7 @@ logging
     :: Logging
 logging =
   Logging' {_lProducerDestinations = Nothing, _lConsumerDestinations = Nothing}
+
 
 -- | Logging configurations for sending logs to the producer project. There
 -- can be multiple producer destinations, each one must have a different
@@ -4727,6 +4855,7 @@ newtype RemoveTenantProjectRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemoveTenantProjectRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4735,6 +4864,7 @@ newtype RemoveTenantProjectRequest =
 removeTenantProjectRequest
     :: RemoveTenantProjectRequest
 removeTenantProjectRequest = RemoveTenantProjectRequest' {_rtprTag = Nothing}
+
 
 -- | Tag of the resource within the tenancy unit.
 rtprTag :: Lens' RemoveTenantProjectRequest (Maybe Text)
@@ -4758,6 +4888,7 @@ newtype SourceInfoSourceFilesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceInfoSourceFilesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4768,6 +4899,7 @@ sourceInfoSourceFilesItem
     -> SourceInfoSourceFilesItem
 sourceInfoSourceFilesItem pSisfiAddtional_ =
   SourceInfoSourceFilesItem' {_sisfiAddtional = _Coerce # pSisfiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sisfiAddtional :: Lens' SourceInfoSourceFilesItem (HashMap Text JSONValue)
@@ -4816,6 +4948,7 @@ data Quota =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4826,6 +4959,7 @@ data Quota =
 quota
     :: Quota
 quota = Quota' {_qLimits = Nothing, _qMetricRules = Nothing}
+
 
 -- | List of \`QuotaLimit\` definitions for the service.
 qLimits :: Lens' Quota [QuotaLimit]
@@ -5023,6 +5157,7 @@ data HTTPRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5061,6 +5196,7 @@ hTTPRule =
     , _httprDelete = Nothing
     , _httprPut = Nothing
     }
+
 
 -- | Selects a method to which this rule applies. Refer to selector for
 -- syntax details.
@@ -5170,6 +5306,7 @@ data ApplyTenantProjectConfigRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplyTenantProjectConfigRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5182,6 +5319,7 @@ applyTenantProjectConfigRequest
 applyTenantProjectConfigRequest =
   ApplyTenantProjectConfigRequest'
     {_atpcrProjectConfig = Nothing, _atpcrTag = Nothing}
+
 
 -- | Configuration that should be applied to the existing tenant project.
 atpcrProjectConfig :: Lens' ApplyTenantProjectConfigRequest (Maybe TenantProjectConfig)
@@ -5218,6 +5356,7 @@ data ListTenancyUnitsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTenancyUnitsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5230,6 +5369,7 @@ listTenancyUnitsResponse
 listTenancyUnitsResponse =
   ListTenancyUnitsResponse'
     {_lturTenancyUnits = Nothing, _lturNextPageToken = Nothing}
+
 
 -- | Tenancy units matching the request.
 lturTenancyUnits :: Lens' ListTenancyUnitsResponse [TenancyUnit]
@@ -5276,6 +5416,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5286,6 +5427,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -5312,6 +5454,7 @@ data TenantResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TenantResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5325,6 +5468,7 @@ tenantResource
     :: TenantResource
 tenantResource =
   TenantResource' {_trStatus = Nothing, _trTag = Nothing, _trResource = Nothing}
+
 
 -- | Status of tenant resource.
 trStatus :: Lens' TenantResource (Maybe TenantResourceStatus)
@@ -5364,6 +5508,7 @@ newtype TenantProjectConfigLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TenantProjectConfigLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5374,6 +5519,7 @@ tenantProjectConfigLabels
     -> TenantProjectConfigLabels
 tenantProjectConfigLabels pTpclAddtional_ =
   TenantProjectConfigLabels' {_tpclAddtional = _Coerce # pTpclAddtional_}
+
 
 tpclAddtional :: Lens' TenantProjectConfigLabels (HashMap Text Text)
 tpclAddtional
@@ -5405,6 +5551,7 @@ data AuthProvider =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthProvider' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5428,6 +5575,7 @@ authProvider =
     , _apAuthorizationURL = Nothing
     , _apIssuer = Nothing
     }
+
 
 -- | URL of the provider\'s public key set to validate signature of the JWT.
 -- See [OpenID
@@ -5504,6 +5652,7 @@ newtype BillingConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5512,6 +5661,7 @@ newtype BillingConfig =
 billingConfig
     :: BillingConfig
 billingConfig = BillingConfig' {_bcBillingAccount = Nothing}
+
 
 -- | Name of the billing account. For example
 -- \`billingAccounts\/012345-567890-ABCDEF\`.
@@ -5540,6 +5690,7 @@ newtype CreateTenancyUnitRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateTenancyUnitRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5549,6 +5700,7 @@ createTenancyUnitRequest
     :: CreateTenancyUnitRequest
 createTenancyUnitRequest =
   CreateTenancyUnitRequest' {_cturTenancyUnitId = Nothing}
+
 
 -- | Optional producer provided identifier of the tenancy unit. Must be no
 -- longer than 40 characters and preferably URI friendly. If it is not
@@ -5589,6 +5741,7 @@ data ContextRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContextRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5612,6 +5765,7 @@ contextRule =
     , _crProvided = Nothing
     , _crAllowedResponseExtensions = Nothing
     }
+
 
 -- | Selects the methods to which this rule applies. Refer to selector for
 -- syntax details.
@@ -5684,6 +5838,7 @@ data AddTenantProjectRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddTenantProjectRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5695,6 +5850,7 @@ addTenantProjectRequest
     :: AddTenantProjectRequest
 addTenantProjectRequest =
   AddTenantProjectRequest' {_aProjectConfig = Nothing, _aTag = Nothing}
+
 
 -- | Configuration of the new tenant project that will be added to tenancy
 -- unit resources.

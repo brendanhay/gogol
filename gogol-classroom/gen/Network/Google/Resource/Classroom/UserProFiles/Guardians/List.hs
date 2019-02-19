@@ -112,6 +112,7 @@ data UserProFilesGuardiansList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserProFilesGuardiansList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -148,6 +149,7 @@ userProFilesGuardiansList pUpfglStudentId_ =
     , _upfglPageSize = Nothing
     , _upfglCallback = Nothing
     }
+
 
 -- | Filter results by the student who the guardian is linked to. The
 -- identifier can be one of the following: * the numeric identifier for the

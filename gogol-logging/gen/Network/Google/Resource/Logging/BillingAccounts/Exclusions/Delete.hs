@@ -70,6 +70,7 @@ data BillingAccountsExclusionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsExclusionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ billingAccountsExclusionsDelete pBaedName_ =
     , _baedName = pBaedName_
     , _baedCallback = Nothing
     }
+
 
 -- | V1 error format.
 baedXgafv :: Lens' BillingAccountsExclusionsDelete (Maybe Xgafv)

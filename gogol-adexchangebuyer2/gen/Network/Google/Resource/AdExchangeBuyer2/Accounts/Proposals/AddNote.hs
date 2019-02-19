@@ -82,6 +82,7 @@ data AccountsProposalsAddNote =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProposalsAddNote' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ accountsProposalsAddNote pApanPayload_ pApanProposalId_ pApanAccountId_ =
     , _apanAccountId = pApanAccountId_
     , _apanCallback = Nothing
     }
+
 
 -- | V1 error format.
 apanXgafv :: Lens' AccountsProposalsAddNote (Maybe Xgafv)

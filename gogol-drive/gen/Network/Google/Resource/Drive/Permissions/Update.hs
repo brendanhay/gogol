@@ -77,6 +77,7 @@ data PermissionsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PermissionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ permissionsUpdate pPuPayload_ pPuFileId_ pPuPermissionId_ =
     , _puSupportsTeamDrives = False
     , _puPermissionId = pPuPermissionId_
     }
+
 
 -- | Multipart request metadata.
 puPayload :: Lens' PermissionsUpdate Permission

@@ -59,6 +59,7 @@ newtype SdfDownload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SdfDownload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ sdfDownload
     :: DownloadRequest -- ^ 'sdPayload'
     -> SdfDownload
 sdfDownload pSdPayload_ = SdfDownload' {_sdPayload = pSdPayload_}
+
 
 -- | Multipart request metadata.
 sdPayload :: Lens' SdfDownload DownloadRequest

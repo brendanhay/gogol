@@ -68,6 +68,7 @@ data UsersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ usersList
     -> UsersList
 usersList pUlEmail_ pUlEnterpriseId_ =
   UsersList' {_ulEmail = pUlEmail_, _ulEnterpriseId = pUlEnterpriseId_}
+
 
 -- | The exact primary email address of the user to look up.
 ulEmail :: Lens' UsersList Text

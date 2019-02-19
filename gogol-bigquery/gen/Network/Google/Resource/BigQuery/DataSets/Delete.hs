@@ -70,6 +70,7 @@ data DataSetsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSetsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ dataSetsDelete pDsdDataSetId_ pDsdProjectId_ =
     , _dsdProjectId = pDsdProjectId_
     , _dsdDeleteContents = Nothing
     }
+
 
 -- | Dataset ID of dataset being deleted
 dsdDataSetId :: Lens' DataSetsDelete Text

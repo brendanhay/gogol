@@ -77,6 +77,7 @@ data ProjectsLocationsFunctionsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsFunctionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsFunctionsPatch pPlfpPayload_ pPlfpName_ =
     , _plfpName = pPlfpName_
     , _plfpCallback = Nothing
     }
+
 
 -- | V1 error format.
 plfpXgafv :: Lens' ProjectsLocationsFunctionsPatch (Maybe Xgafv)

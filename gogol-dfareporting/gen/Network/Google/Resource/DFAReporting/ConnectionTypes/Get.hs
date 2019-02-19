@@ -62,6 +62,7 @@ data ConnectionTypesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConnectionTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ connectionTypesGet
 connectionTypesGet pCtgProFileId_ pCtgId_ =
   ConnectionTypesGet'
     {_ctgProFileId = _Coerce # pCtgProFileId_, _ctgId = _Coerce # pCtgId_}
+
 
 -- | User profile ID associated with this request.
 ctgProFileId :: Lens' ConnectionTypesGet Int64

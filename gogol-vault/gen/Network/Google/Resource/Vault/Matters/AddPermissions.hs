@@ -75,6 +75,7 @@ data MattersAddPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersAddPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ mattersAddPermissions pMapPayload_ pMapMatterId_ =
     , _mapMatterId = pMapMatterId_
     , _mapCallback = Nothing
     }
+
 
 -- | V1 error format.
 mapXgafv :: Lens' MattersAddPermissions (Maybe Xgafv)

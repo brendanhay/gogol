@@ -63,6 +63,7 @@ newtype ScoresResetForAllPlayers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScoresResetForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ scoresResetForAllPlayers
     -> ScoresResetForAllPlayers
 scoresResetForAllPlayers pSrfapLeaderboardId_ =
   ScoresResetForAllPlayers' {_srfapLeaderboardId = pSrfapLeaderboardId_}
+
 
 -- | The ID of the leaderboard.
 srfapLeaderboardId :: Lens' ScoresResetForAllPlayers Text

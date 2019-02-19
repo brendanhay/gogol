@@ -98,6 +98,7 @@ data ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -132,6 +133,7 @@ projectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList pPhespssslExecutionI
     , _phespssslSampleSeriesId = pPhespssslSampleSeriesId_
     , _phespssslPageSize = Nothing
     }
+
 
 -- | A tool results execution ID.
 phespssslExecutionId :: Lens' ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesList Text

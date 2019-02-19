@@ -60,6 +60,7 @@ newtype VerificationCodesInvalidate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VerificationCodesInvalidate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ verificationCodesInvalidate
     -> VerificationCodesInvalidate
 verificationCodesInvalidate pVciUserKey_ =
   VerificationCodesInvalidate' {_vciUserKey = pVciUserKey_}
+
 
 -- | Email or immutable ID of the user
 vciUserKey :: Lens' VerificationCodesInvalidate Text

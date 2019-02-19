@@ -62,6 +62,7 @@ data MembersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MembersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ membersGet
     -> MembersGet
 membersGet pMgMemberKey_ pMgGroupKey_ =
   MembersGet' {_mgMemberKey = pMgMemberKey_, _mgGroupKey = pMgGroupKey_}
+
 
 -- | Email or immutable ID of the member
 mgMemberKey :: Lens' MembersGet Text

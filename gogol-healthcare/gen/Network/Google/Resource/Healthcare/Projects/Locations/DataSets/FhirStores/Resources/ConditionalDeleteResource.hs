@@ -85,6 +85,7 @@ data ProjectsLocationsDataSetsFhirStoresResourcesConditionalDeleteResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsFhirStoresResourcesConditionalDeleteResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsLocationsDataSetsFhirStoresResourcesConditionalDeleteResource pPldsfsrcd
     , _pldsfsrcdrType = pPldsfsrcdrType_
     , _pldsfsrcdrCallback = Nothing
     }
+
 
 -- | The name of the FHIR store this resource belongs to.
 pldsfsrcdrParent :: Lens' ProjectsLocationsDataSetsFhirStoresResourcesConditionalDeleteResource Text

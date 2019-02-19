@@ -71,6 +71,7 @@ data ManagementProFileFilterLinksGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementProFileFilterLinksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ managementProFileFilterLinksGet pMpfflgWebPropertyId_ pMpfflgProFileId_ pMpfflgA
     , _mpfflgAccountId = pMpfflgAccountId_
     , _mpfflgLinkId = pMpfflgLinkId_
     }
+
 
 -- | Web property Id to retrieve profile filter link for.
 mpfflgWebPropertyId :: Lens' ManagementProFileFilterLinksGet Text

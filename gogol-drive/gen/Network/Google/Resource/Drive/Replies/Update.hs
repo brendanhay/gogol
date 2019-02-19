@@ -68,6 +68,7 @@ data RepliesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepliesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ repliesUpdate pRuPayload_ pRuReplyId_ pRuFileId_ pRuCommentId_ =
     , _ruFileId = pRuFileId_
     , _ruCommentId = pRuCommentId_
     }
+
 
 -- | Multipart request metadata.
 ruPayload :: Lens' RepliesUpdate Reply

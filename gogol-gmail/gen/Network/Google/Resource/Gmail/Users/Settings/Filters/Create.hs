@@ -62,6 +62,7 @@ data UsersSettingsFiltersCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsFiltersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ usersSettingsFiltersCreate
     -> UsersSettingsFiltersCreate
 usersSettingsFiltersCreate pUsfcPayload_ =
   UsersSettingsFiltersCreate' {_usfcPayload = pUsfcPayload_, _usfcUserId = "me"}
+
 
 -- | Multipart request metadata.
 usfcPayload :: Lens' UsersSettingsFiltersCreate Filter

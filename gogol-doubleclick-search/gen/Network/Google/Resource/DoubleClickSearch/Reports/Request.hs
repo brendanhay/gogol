@@ -57,6 +57,7 @@ newtype ReportsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ reportsRequest
     :: ReportRequest -- ^ 'rrPayload'
     -> ReportsRequest
 reportsRequest pRrPayload_ = ReportsRequest' {_rrPayload = pRrPayload_}
+
 
 -- | Multipart request metadata.
 rrPayload :: Lens' ReportsRequest ReportRequest

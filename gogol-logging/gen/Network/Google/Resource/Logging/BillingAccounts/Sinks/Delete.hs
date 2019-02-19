@@ -72,6 +72,7 @@ data BillingAccountsSinksDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsSinksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ billingAccountsSinksDelete pBasdSinkName_ =
     , _basdSinkName = pBasdSinkName_
     , _basdCallback = Nothing
     }
+
 
 -- | V1 error format.
 basdXgafv :: Lens' BillingAccountsSinksDelete (Maybe Xgafv)

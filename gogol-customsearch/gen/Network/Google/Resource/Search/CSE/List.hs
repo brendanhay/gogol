@@ -177,6 +177,7 @@ data CSEList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CSEList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -279,6 +280,7 @@ cSEList pCselQ_ =
     , _cselHq = Nothing
     , _cselHighRange = Nothing
     }
+
 
 -- | Returns images of a specific dominant color: red, orange, yellow, green,
 -- teal, blue, purple, pink, white, gray, black and brown.

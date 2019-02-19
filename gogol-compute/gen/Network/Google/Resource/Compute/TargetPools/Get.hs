@@ -67,6 +67,7 @@ data TargetPoolsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ targetPoolsGet pTpgProject_ pTpgTargetPool_ pTpgRegion_ =
     , _tpgTargetPool = pTpgTargetPool_
     , _tpgRegion = pTpgRegion_
     }
+
 
 -- | Project ID for this request.
 tpgProject :: Lens' TargetPoolsGet Text

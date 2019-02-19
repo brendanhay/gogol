@@ -99,6 +99,7 @@ data ProjectsDatabasesOperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -135,6 +136,7 @@ projectsDatabasesOperationsList pPdolName_ =
     , _pdolPageSize = Nothing
     , _pdolCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdolXgafv :: Lens' ProjectsDatabasesOperationsList (Maybe Xgafv)

@@ -76,6 +76,7 @@ data CommentsListByBlog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsListByBlog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ commentsListByBlog pClbbBlogId_ =
     , _clbbPageToken = Nothing
     , _clbbMaxResults = Nothing
     }
+
 
 clbbStatus :: Lens' CommentsListByBlog [CommentsListByBlogStatus]
 clbbStatus

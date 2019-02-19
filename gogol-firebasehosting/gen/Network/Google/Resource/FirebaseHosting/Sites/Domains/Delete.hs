@@ -70,6 +70,7 @@ data SitesDomainsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesDomainsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ sitesDomainsDelete pSddName_ =
     , _sddName = pSddName_
     , _sddCallback = Nothing
     }
+
 
 -- | V1 error format.
 sddXgafv :: Lens' SitesDomainsDelete (Maybe Xgafv)

@@ -76,6 +76,7 @@ data ContactGroupsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactGroupsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ contactGroupsUpdate pCguResourceName_ pCguPayload_ =
     , _cguPayload = pCguPayload_
     , _cguCallback = Nothing
     }
+
 
 -- | V1 error format.
 cguXgafv :: Lens' ContactGroupsUpdate (Maybe Xgafv)

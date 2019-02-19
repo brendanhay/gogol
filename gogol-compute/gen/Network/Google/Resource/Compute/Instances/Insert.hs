@@ -73,6 +73,7 @@ data InstancesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ instancesInsert pIiiProject_ pIiiZone_ pIiiPayload_ =
     , _iiiPayload = pIiiPayload_
     , _iiiSourceInstanceTemplate = Nothing
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

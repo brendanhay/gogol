@@ -77,6 +77,7 @@ data ProjectsInspectTemplatesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInspectTemplatesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsInspectTemplatesPatch pPitpPayload_ pPitpName_ =
     , _pitpName = pPitpName_
     , _pitpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pitpXgafv :: Lens' ProjectsInspectTemplatesPatch (Maybe Xgafv)

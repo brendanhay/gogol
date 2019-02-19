@@ -70,6 +70,7 @@ data ProjectsInstancesDatabasesDropDatabase =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesDropDatabase' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsInstancesDatabasesDropDatabase pPidddDatabase_ =
     , _pidddUploadType = Nothing
     , _pidddCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidddXgafv :: Lens' ProjectsInstancesDatabasesDropDatabase (Maybe Xgafv)

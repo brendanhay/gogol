@@ -67,6 +67,7 @@ data MachineTypesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ machineTypesGet pMtgProject_ pMtgZone_ pMtgMachineType_ =
     , _mtgZone = pMtgZone_
     , _mtgMachineType = pMtgMachineType_
     }
+
 
 -- | Project ID for this request.
 mtgProject :: Lens' MachineTypesGet Text

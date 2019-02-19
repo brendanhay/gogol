@@ -82,6 +82,7 @@ data ProjectsLocationsClustersWellKnownGetOpenidConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersWellKnownGetOpenidConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsLocationsClustersWellKnownGetOpenidConfiguration pPlcwkgocParent_ =
     , _plcwkgocUploadType = Nothing
     , _plcwkgocCallback = Nothing
     }
+
 
 -- | The cluster (project, location, cluster id) to get the discovery
 -- document for. Specified in the format

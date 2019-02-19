@@ -75,6 +75,7 @@ data MattersHoldsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersHoldsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ mattersHoldsDelete pMhdHoldId_ pMhdMatterId_ =
     , _mhdMatterId = pMhdMatterId_
     , _mhdCallback = Nothing
     }
+
 
 -- | V1 error format.
 mhdXgafv :: Lens' MattersHoldsDelete (Maybe Xgafv)

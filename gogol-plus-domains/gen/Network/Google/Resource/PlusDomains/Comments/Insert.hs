@@ -61,6 +61,7 @@ data CommentsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ commentsInsert
     -> CommentsInsert
 commentsInsert pCActivityId_ pCPayload_ =
   CommentsInsert' {_cActivityId = pCActivityId_, _cPayload = pCPayload_}
+
 
 -- | The ID of the activity to reply to.
 cActivityId :: Lens' CommentsInsert Text

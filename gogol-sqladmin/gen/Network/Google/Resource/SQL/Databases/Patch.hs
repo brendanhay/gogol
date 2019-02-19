@@ -70,6 +70,7 @@ data DatabasesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatabasesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ databasesPatch pDpProject_ pDpDatabase_ pDpPayload_ pDpInstance_ =
     , _dpPayload = pDpPayload_
     , _dpInstance = pDpInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 dpProject :: Lens' DatabasesPatch Text

@@ -85,6 +85,7 @@ data BillingAccountsSinksPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsSinksPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ billingAccountsSinksPatch pBaspPayload_ pBaspSinkName_ =
     , _baspSinkName = pBaspSinkName_
     , _baspCallback = Nothing
     }
+
 
 -- | V1 error format.
 baspXgafv :: Lens' BillingAccountsSinksPatch (Maybe Xgafv)

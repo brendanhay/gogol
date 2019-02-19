@@ -84,6 +84,7 @@ data ProjectsOccurrencesTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsOccurrencesTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsOccurrencesTestIAMPermissions pPotipPayload_ pPotipResource_ =
     , _potipResource = pPotipResource_
     , _potipCallback = Nothing
     }
+
 
 -- | V1 error format.
 potipXgafv :: Lens' ProjectsOccurrencesTestIAMPermissions (Maybe Xgafv)

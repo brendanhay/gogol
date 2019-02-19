@@ -62,6 +62,7 @@ data MarketplaceDealsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MarketplaceDealsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ marketplaceDealsList
 marketplaceDealsList pMdlProposalId_ =
   MarketplaceDealsList'
     {_mdlProposalId = pMdlProposalId_, _mdlPqlQuery = Nothing}
+
 
 -- | The proposalId to get deals for. To search across all proposals specify
 -- order_id = \'-\' as part of the URL.

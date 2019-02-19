@@ -71,6 +71,7 @@ data ProjectsAgentSessionsEntityTypesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentSessionsEntityTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsAgentSessionsEntityTypesGet pPaSetgName_ =
     , _paSetgName = pPaSetgName_
     , _paSetgCallback = Nothing
     }
+
 
 -- | V1 error format.
 paSetgXgafv :: Lens' ProjectsAgentSessionsEntityTypesGet (Maybe Xgafv)

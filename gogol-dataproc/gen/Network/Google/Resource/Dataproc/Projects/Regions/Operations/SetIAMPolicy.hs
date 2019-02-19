@@ -76,6 +76,7 @@ data ProjectsRegionsOperationsSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsOperationsSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsRegionsOperationsSetIAMPolicy pProsipPayload_ pProsipResource_ =
     , _prosipResource = pProsipResource_
     , _prosipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prosipXgafv :: Lens' ProjectsRegionsOperationsSetIAMPolicy (Maybe Xgafv)

@@ -62,6 +62,7 @@ data PostsRevert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostsRevert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ postsRevert
     -> PostsRevert
 postsRevert pPrBlogId_ pPrPostId_ =
   PostsRevert' {_prBlogId = pPrBlogId_, _prPostId = pPrPostId_}
+
 
 -- | The ID of the Blog.
 prBlogId :: Lens' PostsRevert Text

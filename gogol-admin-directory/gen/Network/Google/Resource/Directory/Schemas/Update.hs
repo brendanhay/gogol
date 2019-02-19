@@ -65,6 +65,7 @@ data SchemasUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SchemasUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ schemasUpdate pSuPayload_ pSuCustomerId_ pSuSchemaKey_ =
     , _suCustomerId = pSuCustomerId_
     , _suSchemaKey = pSuSchemaKey_
     }
+
 
 -- | Multipart request metadata.
 suPayload :: Lens' SchemasUpdate Schema

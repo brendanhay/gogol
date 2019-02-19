@@ -70,6 +70,7 @@ data ProjectsAttestorsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAttestorsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsAttestorsDelete pPadName_ =
     , _padName = pPadName_
     , _padCallback = Nothing
     }
+
 
 -- | V1 error format.
 padXgafv :: Lens' ProjectsAttestorsDelete (Maybe Xgafv)

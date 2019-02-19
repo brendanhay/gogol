@@ -61,6 +61,7 @@ data VideosReportAbuse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideosReportAbuse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ videosReportAbuse
 videosReportAbuse pVraPayload_ =
   VideosReportAbuse'
     {_vraPayload = pVraPayload_, _vraOnBehalfOfContentOwner = Nothing}
+
 
 -- | Multipart request metadata.
 vraPayload :: Lens' VideosReportAbuse VideoAbuseReport

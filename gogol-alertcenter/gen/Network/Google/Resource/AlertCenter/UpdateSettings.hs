@@ -74,6 +74,7 @@ data UpdateSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ updateSettings pUsPayload_ =
     , _usCustomerId = Nothing
     , _usCallback = Nothing
     }
+
 
 -- | V1 error format.
 usXgafv :: Lens' UpdateSettings (Maybe Xgafv)

@@ -78,6 +78,7 @@ data ProjectsInstancesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsInstancesDelete pPidName_ =
     , _pidName = pPidName_
     , _pidCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidXgafv :: Lens' ProjectsInstancesDelete (Maybe Xgafv)

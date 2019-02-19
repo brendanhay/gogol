@@ -30,6 +30,7 @@ data Groups =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Groups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40,6 +41,7 @@ data Groups =
 groups
     :: Groups
 groups = Groups' {_gKind = "groupsmigration#groups", _gResponseCode = Nothing}
+
 
 -- | The kind of insert resource this is.
 gKind :: Lens' Groups Text

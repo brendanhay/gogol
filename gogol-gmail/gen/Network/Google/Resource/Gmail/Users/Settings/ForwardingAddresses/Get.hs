@@ -63,6 +63,7 @@ data UsersSettingsForwardingAddressesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsForwardingAddressesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ usersSettingsForwardingAddressesGet
 usersSettingsForwardingAddressesGet pUsfagForwardingEmail_ =
   UsersSettingsForwardingAddressesGet'
     {_usfagForwardingEmail = pUsfagForwardingEmail_, _usfagUserId = "me"}
+
 
 -- | The forwarding address to be retrieved.
 usfagForwardingEmail :: Lens' UsersSettingsForwardingAddressesGet Text

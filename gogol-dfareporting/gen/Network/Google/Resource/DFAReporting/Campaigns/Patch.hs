@@ -64,6 +64,7 @@ data CampaignsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CampaignsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ campaignsPatch pCpProFileId_ pCpPayload_ pCpId_ =
     , _cpPayload = pCpPayload_
     , _cpId = _Coerce # pCpId_
     }
+
 
 -- | User profile ID associated with this request.
 cpProFileId :: Lens' CampaignsPatch Int64

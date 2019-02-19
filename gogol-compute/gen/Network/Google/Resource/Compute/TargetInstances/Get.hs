@@ -68,6 +68,7 @@ data TargetInstancesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetInstancesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ targetInstancesGet pTigProject_ pTigTargetInstance_ pTigZone_ =
     , _tigTargetInstance = pTigTargetInstance_
     , _tigZone = pTigZone_
     }
+
 
 -- | Project ID for this request.
 tigProject :: Lens' TargetInstancesGet Text

@@ -61,6 +61,7 @@ newtype ShippingSettingsCustombatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ shippingSettingsCustombatch
     -> ShippingSettingsCustombatch
 shippingSettingsCustombatch pSscPayload_ =
   ShippingSettingsCustombatch' {_sscPayload = pSscPayload_}
+
 
 -- | Multipart request metadata.
 sscPayload :: Lens' ShippingSettingsCustombatch ShippingSettingsCustomBatchRequest

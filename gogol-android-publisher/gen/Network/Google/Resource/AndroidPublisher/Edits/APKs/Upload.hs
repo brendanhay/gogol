@@ -71,6 +71,7 @@ data EditsAPKsUpload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsAPKsUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ editsAPKsUpload
 editsAPKsUpload pEapkuPackageName_ pEapkuEditId_ =
   EditsAPKsUpload'
     {_eapkuPackageName = pEapkuPackageName_, _eapkuEditId = pEapkuEditId_}
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

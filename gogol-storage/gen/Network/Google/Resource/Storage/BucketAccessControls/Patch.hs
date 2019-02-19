@@ -68,6 +68,7 @@ data BucketAccessControlsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketAccessControlsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ bucketAccessControlsPatch pBacpBucket_ pBacpPayload_ pBacpEntity_ =
     , _bacpUserProject = Nothing
     , _bacpEntity = pBacpEntity_
     }
+
 
 -- | Name of a bucket.
 bacpBucket :: Lens' BucketAccessControlsPatch Text

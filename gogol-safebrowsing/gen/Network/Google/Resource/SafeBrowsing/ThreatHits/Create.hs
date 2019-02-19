@@ -73,6 +73,7 @@ data ThreatHitsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThreatHitsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ threatHitsCreate pThcPayload_ =
     , _thcPayload = pThcPayload_
     , _thcCallback = Nothing
     }
+
 
 -- | V1 error format.
 thcXgafv :: Lens' ThreatHitsCreate (Maybe Xgafv)

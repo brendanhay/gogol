@@ -74,6 +74,7 @@ data AccountsProductsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProductsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ accountsProductsDelete pApdParent_ pApdName_ =
     , _apdName = pApdName_
     , _apdCallback = Nothing
     }
+
 
 -- | Parent ID in the format \`accounts\/{account_id}\`. \`account_id\` - The
 -- ID of the Manufacturer Center account.

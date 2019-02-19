@@ -79,6 +79,7 @@ data AppsServicesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsServicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ appsServicesList pAslAppsId_ =
     , _aslPageSize = Nothing
     , _aslCallback = Nothing
     }
+
 
 -- | V1 error format.
 aslXgafv :: Lens' AppsServicesList (Maybe Xgafv)

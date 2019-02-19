@@ -57,6 +57,7 @@ newtype ReportsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ reportsGet
     :: Text -- ^ 'rgReportId'
     -> ReportsGet
 reportsGet pRgReportId_ = ReportsGet' {_rgReportId = pRgReportId_}
+
 
 -- | ID of the report request being polled.
 rgReportId :: Lens' ReportsGet Text

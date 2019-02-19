@@ -65,6 +65,7 @@ data PoolsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PoolsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ poolsInsert pPiZone_ pPiPayload_ pPiProjectName_ =
     , _piPayload = pPiPayload_
     , _piProjectName = pPiProjectName_
     }
+
 
 -- | The zone for this replica pool.
 piZone :: Lens' PoolsInsert Text

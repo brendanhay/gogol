@@ -61,6 +61,7 @@ data AdsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ adsUpdate
     -> AdsUpdate
 adsUpdate pAProFileId_ pAPayload_ =
   AdsUpdate' {_aProFileId = _Coerce # pAProFileId_, _aPayload = pAPayload_}
+
 
 -- | User profile ID associated with this request.
 aProFileId :: Lens' AdsUpdate Int64

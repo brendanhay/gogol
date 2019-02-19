@@ -67,6 +67,7 @@ data LicensesTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicensesTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ licensesTestIAMPermissions pLtipProject_ pLtipPayload_ pLtipResource_ =
     , _ltipPayload = pLtipPayload_
     , _ltipResource = pLtipResource_
     }
+
 
 -- | Project ID for this request.
 ltipProject :: Lens' LicensesTestIAMPermissions Text

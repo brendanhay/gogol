@@ -63,6 +63,7 @@ data MobileDevicesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileDevicesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ mobileDevicesDelete
 mobileDevicesDelete pMddResourceId_ pMddCustomerId_ =
   MobileDevicesDelete'
     {_mddResourceId = pMddResourceId_, _mddCustomerId = pMddCustomerId_}
+
 
 -- | Immutable ID of Mobile Device
 mddResourceId :: Lens' MobileDevicesDelete Text

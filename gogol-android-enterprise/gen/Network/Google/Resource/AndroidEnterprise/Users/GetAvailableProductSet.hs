@@ -62,6 +62,7 @@ data UsersGetAvailableProductSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersGetAvailableProductSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ usersGetAvailableProductSet
 usersGetAvailableProductSet pUgapsEnterpriseId_ pUgapsUserId_ =
   UsersGetAvailableProductSet'
     {_ugapsEnterpriseId = pUgapsEnterpriseId_, _ugapsUserId = pUgapsUserId_}
+
 
 -- | The ID of the enterprise.
 ugapsEnterpriseId :: Lens' UsersGetAvailableProductSet Text

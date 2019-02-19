@@ -70,6 +70,7 @@ data AccountsURLChannelsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsURLChannelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ accountsURLChannelsList pAuclAdClientId_ pAuclAccountId_ =
     , _auclPageToken = Nothing
     , _auclMaxResults = Nothing
     }
+
 
 -- | Ad client for which to list URL channels.
 auclAdClientId :: Lens' AccountsURLChannelsList Text

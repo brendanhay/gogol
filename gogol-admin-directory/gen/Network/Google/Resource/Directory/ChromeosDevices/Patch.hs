@@ -72,6 +72,7 @@ data ChromeosDevicesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeosDevicesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ chromeosDevicesPatch pCdpPayload_ pCdpCustomerId_ pCdpDeviceId_ =
     , _cdpDeviceId = pCdpDeviceId_
     , _cdpProjection = Nothing
     }
+
 
 -- | Multipart request metadata.
 cdpPayload :: Lens' ChromeosDevicesPatch ChromeOSDevice

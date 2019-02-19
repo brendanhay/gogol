@@ -88,6 +88,7 @@ data CoursesAliasesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesAliasesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +120,7 @@ coursesAliasesCreate pCacCourseId_ pCacPayload_ =
     , _cacPayload = pCacPayload_
     , _cacCallback = Nothing
     }
+
 
 -- | V1 error format.
 cacXgafv :: Lens' CoursesAliasesCreate (Maybe Xgafv)

@@ -30,6 +30,7 @@ data ListFoldersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListFoldersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41,6 +42,7 @@ listFoldersResponse
     :: ListFoldersResponse
 listFoldersResponse =
   ListFoldersResponse' {_lfrNextPageToken = Nothing, _lfrFolders = Nothing}
+
 
 -- | A pagination token returned from a previous call to \`ListFolders\` that
 -- indicates from where listing should continue. This field is optional.
@@ -117,6 +119,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -129,6 +132,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -192,6 +196,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -202,6 +207,7 @@ data AuditConfig =
 auditConfig
     :: AuditConfig
 auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -247,6 +253,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -267,6 +274,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -318,11 +326,13 @@ data GetIAMPolicyRequest =
   GetIAMPolicyRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -343,6 +353,7 @@ data SearchFoldersRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchFoldersRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -357,6 +368,7 @@ searchFoldersRequest
 searchFoldersRequest =
   SearchFoldersRequest'
     {_sfrQuery = Nothing, _sfrPageToken = Nothing, _sfrPageSize = Nothing}
+
 
 -- | Search criteria used to select the Folders to return. If no search
 -- criteria is specified then all accessible folders will be returned.
@@ -413,11 +425,13 @@ data UndeleteFolderRequest =
   UndeleteFolderRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UndeleteFolderRequest' with the minimum fields required to make a request.
 --
 undeleteFolderRequest
     :: UndeleteFolderRequest
 undeleteFolderRequest = UndeleteFolderRequest'
+
 
 instance FromJSON UndeleteFolderRequest where
         parseJSON
@@ -440,6 +454,7 @@ data Operation =
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -464,6 +479,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -530,6 +546,7 @@ data SearchFoldersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchFoldersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -541,6 +558,7 @@ searchFoldersResponse
     :: SearchFoldersResponse
 searchFoldersResponse =
   SearchFoldersResponse' {_sfrNextPageToken = Nothing, _sfrFolders = Nothing}
+
 
 -- | A pagination token returned from a previous call to \`SearchFolders\`
 -- that indicates from where searching should continue. This field is
@@ -586,6 +604,7 @@ data ProjectCreationStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectCreationStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -600,6 +619,7 @@ projectCreationStatus
 projectCreationStatus =
   ProjectCreationStatus'
     {_pcsGettable = Nothing, _pcsReady = Nothing, _pcsCreateTime = Nothing}
+
 
 -- | True if the project can be retrieved using GetProject. No other
 -- operations on the project are guaranteed to work until the project
@@ -643,6 +663,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -653,6 +674,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -677,6 +699,7 @@ newtype FolderOperationError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FolderOperationError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -685,6 +708,7 @@ newtype FolderOperationError =
 folderOperationError
     :: FolderOperationError
 folderOperationError = FolderOperationError' {_foeErrorMessageId = Nothing}
+
 
 -- | The type of operation error experienced.
 foeErrorMessageId :: Lens' FolderOperationError (Maybe FolderOperationErrorErrorMessageId)
@@ -718,6 +742,7 @@ data Folder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Folder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -741,6 +766,7 @@ folder =
     , _fLifecycleState = Nothing
     , _fCreateTime = Nothing
     }
+
 
 -- | The Folder’s parent\'s resource name. Updates to the folder\'s parent
 -- must be performed via MoveFolder.
@@ -805,6 +831,7 @@ data SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -816,6 +843,7 @@ setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
   SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -857,6 +885,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -866,6 +895,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -899,6 +929,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -908,6 +939,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -959,6 +991,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -979,6 +1012,7 @@ policy =
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -1045,6 +1079,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1055,6 +1090,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -1082,6 +1118,7 @@ data FolderOperation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FolderOperation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1102,6 +1139,7 @@ folderOperation =
     , _foOperationType = Nothing
     , _foSourceParent = Nothing
     }
+
 
 -- | The resource name of the folder or organization we are either creating
 -- the folder under or moving the folder to.
@@ -1161,6 +1199,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1172,6 +1211,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -1218,6 +1258,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1228,6 +1269,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1252,6 +1294,7 @@ newtype MoveFolderRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MoveFolderRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1260,6 +1303,7 @@ newtype MoveFolderRequest =
 moveFolderRequest
     :: MoveFolderRequest
 moveFolderRequest = MoveFolderRequest' {_mfrDestinationParent = Nothing}
+
 
 -- | The resource name of the Folder or Organization to reparent the folder
 -- under. Must be of the form \`folders\/{folder_id}\` or
@@ -1292,6 +1336,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1305,6 +1350,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

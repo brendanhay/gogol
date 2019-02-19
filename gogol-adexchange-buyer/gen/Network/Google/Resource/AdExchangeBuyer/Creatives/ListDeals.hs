@@ -62,6 +62,7 @@ data CreativesListDeals =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativesListDeals' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ creativesListDeals pCldBuyerCreativeId_ pCldAccountId_ =
     { _cldBuyerCreativeId = pCldBuyerCreativeId_
     , _cldAccountId = _Coerce # pCldAccountId_
     }
+
 
 -- | The buyer-specific id for this creative.
 cldBuyerCreativeId :: Lens' CreativesListDeals Text

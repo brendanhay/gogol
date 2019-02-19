@@ -76,6 +76,7 @@ data ProjectsRegionsClustersSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsClustersSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsRegionsClustersSetIAMPolicy pPrcsipPayload_ pPrcsipResource_ =
     , _prcsipResource = pPrcsipResource_
     , _prcsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prcsipXgafv :: Lens' ProjectsRegionsClustersSetIAMPolicy (Maybe Xgafv)

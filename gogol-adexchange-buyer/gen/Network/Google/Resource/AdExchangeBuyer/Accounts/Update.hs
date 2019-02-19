@@ -63,6 +63,7 @@ data AccountsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ accountsUpdate pAuPayload_ pAuId_ =
     , _auConfirmUnsafeAccountChange = Nothing
     , _auId = _Coerce # pAuId_
     }
+
 
 -- | Multipart request metadata.
 auPayload :: Lens' AccountsUpdate Account

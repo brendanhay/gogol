@@ -111,6 +111,7 @@ data ProjectsBuildsRetry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsBuildsRetry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -146,6 +147,7 @@ projectsBuildsRetry pPbrPayload_ pPbrId_ pPbrProjectId_ =
     , _pbrProjectId = pPbrProjectId_
     , _pbrCallback = Nothing
     }
+
 
 -- | V1 error format.
 pbrXgafv :: Lens' ProjectsBuildsRetry (Maybe Xgafv)

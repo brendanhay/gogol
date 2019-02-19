@@ -31,6 +31,7 @@ data SubscriptionTrialSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionTrialSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43,6 +44,7 @@ subscriptionTrialSettings
 subscriptionTrialSettings =
   SubscriptionTrialSettings'
     {_stsIsInTrial = Nothing, _stsTrialEndTime = Nothing}
+
 
 -- | Determines if a subscription\'s plan is in a 30-day free trial or not: -
 -- true — The plan is in trial. - false — The plan is not in trial.
@@ -81,6 +83,7 @@ newtype ResellernotifyResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResellernotifyResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +92,7 @@ newtype ResellernotifyResource =
 resellernotifyResource
     :: ResellernotifyResource
 resellernotifyResource = ResellernotifyResource' {_rrTopicName = Nothing}
+
 
 -- | Topic name of the PubSub
 rrTopicName :: Lens' ResellernotifyResource (Maybe Text)
@@ -116,6 +120,7 @@ data ResellernotifyGetwatchdetailsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResellernotifyGetwatchdetailsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +133,7 @@ resellernotifyGetwatchdetailsResponse
 resellernotifyGetwatchdetailsResponse =
   ResellernotifyGetwatchdetailsResponse'
     {_rgrTopicName = Nothing, _rgrServiceAccountEmailAddresses = Nothing}
+
 
 -- | Topic name of the PubSub
 rgrTopicName :: Lens' ResellernotifyGetwatchdetailsResponse (Maybe Text)
@@ -179,6 +185,7 @@ data Address =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Address' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -217,6 +224,7 @@ address =
     , _aRegion = Nothing
     , _aAddressLine3 = Nothing
     }
+
 
 -- | The company or company division name. This is required.
 aOrganizationName :: Lens' Address (Maybe Text)
@@ -321,6 +329,7 @@ data Customer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Customer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -353,6 +362,7 @@ customer =
     , _cPhoneNumber = Nothing
     , _cPostalAddress = Nothing
     }
+
 
 -- | Whether the customer\'s primary domain has been verified.
 cCustomerDomainVerified :: Lens' Customer (Maybe Bool)
@@ -452,6 +462,7 @@ data ChangePlanRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangePlanRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -475,6 +486,7 @@ changePlanRequest =
     , _cprPurchaseOrderId = Nothing
     , _cprSeats = Nothing
     }
+
 
 -- | Identifies the resource as a subscription change plan request. Value:
 -- subscriptions#changePlanRequest
@@ -549,6 +561,7 @@ data SubscriptionPlanCommitmentInterval =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionPlanCommitmentInterval' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -561,6 +574,7 @@ subscriptionPlanCommitmentInterval
 subscriptionPlanCommitmentInterval =
   SubscriptionPlanCommitmentInterval'
     {_spciStartTime = Nothing, _spciEndTime = Nothing}
+
 
 -- | An annual commitment plan\'s interval\'s startTime in milliseconds using
 -- UNIX Epoch format. See an example Epoch converter.
@@ -607,6 +621,7 @@ data SubscriptionPlan =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionPlan' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -624,6 +639,7 @@ subscriptionPlan =
     , _spIsCommitmentPlan = Nothing
     , _spPlanName = Nothing
     }
+
 
 -- | In this version of the API, annual commitment plan\'s interval is one
 -- year.
@@ -683,6 +699,7 @@ data Subscriptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Subscriptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -700,6 +717,7 @@ subscriptions =
     , _sKind = "reseller#subscriptions"
     , _sSubscriptions = Nothing
     }
+
 
 -- | The continuation token, used to page through large result sets. Provide
 -- this value in a subsequent request to return the next page of results.
@@ -750,6 +768,7 @@ data Seats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Seats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -770,6 +789,7 @@ seats =
     , _seaLicensedNumberOfSeats = Nothing
     , _seaKind = "subscriptions#seats"
     }
+
 
 -- | The numberOfSeats property holds the customer\'s number of user
 -- licenses. How a user\'s licenses are managed depends on the
@@ -858,6 +878,7 @@ data RenewalSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RenewalSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -870,6 +891,7 @@ renewalSettings
 renewalSettings =
   RenewalSettings'
     {_rsKind = "subscriptions#renewalSettings", _rsRenewalType = Nothing}
+
 
 -- | Identifies the resource as a subscription renewal setting. Value:
 -- subscriptions#renewalSettings
@@ -924,6 +946,7 @@ data Subscription =
     , _subSubscriptionId    :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
 --
@@ -987,6 +1010,7 @@ subscription =
     , _subRenewalSettings = Nothing
     , _subSubscriptionId = Nothing
     }
+
 
 -- | The creationTime property is the date when subscription was created. It
 -- is in milliseconds using the Epoch format. See an example Epoch
@@ -1184,6 +1208,7 @@ data SubscriptionTransferInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionTransferInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1198,6 +1223,7 @@ subscriptionTransferInfo =
     { _stiTransferabilityExpirationTime = Nothing
     , _stiMinimumTransferableSeats = Nothing
     }
+
 
 -- | The time when transfer token or intent to transfer will expire. The time
 -- is in milliseconds using UNIX Epoch format.

@@ -65,6 +65,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -140,6 +142,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -150,6 +153,7 @@ data AuditConfig =
 auditConfig
     :: AuditConfig
 auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -194,6 +198,7 @@ data OperationMetadataV1Beta2 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadataV1Beta2' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -217,6 +222,7 @@ operationMetadataV1Beta2 =
     , _omvbTarget = Nothing
     , _omvbRequest = Nothing
     }
+
 
 -- | Version id of the function created or updated by an API call. This field
 -- is only populated for Create and Update operations.
@@ -282,6 +288,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -302,6 +309,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -356,6 +364,7 @@ data ListLocationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -367,6 +376,7 @@ listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
   ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -406,6 +416,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -418,6 +429,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -455,11 +467,13 @@ data GenerateUploadURLRequest =
   GenerateUploadURLRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateUploadURLRequest' with the minimum fields required to make a request.
 --
 generateUploadURLRequest
     :: GenerateUploadURLRequest
 generateUploadURLRequest = GenerateUploadURLRequest'
+
 
 instance FromJSON GenerateUploadURLRequest where
         parseJSON
@@ -481,6 +495,7 @@ data Location =
     , _lLocationId  :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -505,6 +520,7 @@ location =
     , _lLabels = Nothing
     , _lLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
@@ -567,6 +583,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -590,6 +607,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -655,6 +673,7 @@ newtype GenerateDownloadURLRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateDownloadURLRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -664,6 +683,7 @@ generateDownloadURLRequest
     :: GenerateDownloadURLRequest
 generateDownloadURLRequest =
   GenerateDownloadURLRequest' {_gdurVersionId = Nothing}
+
 
 -- | The optional version of function. If not set, default, current version
 -- is used.
@@ -694,11 +714,13 @@ data Retry =
   Retry'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Retry' with the minimum fields required to make a request.
 --
 retry
     :: Retry
 retry = Retry'
+
 
 instance FromJSON Retry where
         parseJSON = withObject "Retry" (\ o -> pure Retry')
@@ -715,6 +737,7 @@ newtype GenerateUploadURLResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateUploadURLResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -724,6 +747,7 @@ generateUploadURLResponse
     :: GenerateUploadURLResponse
 generateUploadURLResponse =
   GenerateUploadURLResponse' {_guurUploadURL = Nothing}
+
 
 -- | The generated Google Cloud Storage signed URL that should be used for a
 -- function source code upload. The uploaded file should be a zip archive
@@ -754,6 +778,7 @@ newtype FailurePolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FailurePolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -762,6 +787,7 @@ newtype FailurePolicy =
 failurePolicy
     :: FailurePolicy
 failurePolicy = FailurePolicy' {_fpRetry = Nothing}
+
 
 -- | If specified, then the function will be retried in case of a failure.
 fpRetry :: Lens' FailurePolicy (Maybe Retry)
@@ -787,6 +813,7 @@ data CallFunctionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CallFunctionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -801,6 +828,7 @@ callFunctionResponse
 callFunctionResponse =
   CallFunctionResponse'
     {_cfrExecutionId = Nothing, _cfrError = Nothing, _cfrResult = Nothing}
+
 
 -- | Execution id of function invocation.
 cfrExecutionId :: Lens' CallFunctionResponse (Maybe Text)
@@ -844,6 +872,7 @@ newtype HTTPSTrigger =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPSTrigger' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -852,6 +881,7 @@ newtype HTTPSTrigger =
 httpsTrigger
     :: HTTPSTrigger
 httpsTrigger = HTTPSTrigger' {_htURL = Nothing}
+
 
 -- | Output only. The deployed url for the function.
 htURL :: Lens' HTTPSTrigger (Maybe Text)
@@ -874,6 +904,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -884,6 +915,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -908,6 +940,7 @@ newtype CloudFunctionEnvironmentVariables =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudFunctionEnvironmentVariables' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -919,6 +952,7 @@ cloudFunctionEnvironmentVariables
 cloudFunctionEnvironmentVariables pCfevAddtional_ =
   CloudFunctionEnvironmentVariables'
     {_cfevAddtional = _Coerce # pCfevAddtional_}
+
 
 cfevAddtional :: Lens' CloudFunctionEnvironmentVariables (HashMap Text Text)
 cfevAddtional
@@ -947,6 +981,7 @@ newtype OperationMetadataV1Request =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadataV1Request' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -957,6 +992,7 @@ operationMetadataV1Request
     -> OperationMetadataV1Request
 operationMetadataV1Request pOmvrAddtional_ =
   OperationMetadataV1Request' {_omvrAddtional = _Coerce # pOmvrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omvrAddtional :: Lens' OperationMetadataV1Request (HashMap Text JSONValue)
@@ -984,6 +1020,7 @@ data SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -995,6 +1032,7 @@ setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
   SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -1040,6 +1078,7 @@ data EventTrigger =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventTrigger' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1060,6 +1099,7 @@ eventTrigger =
     , _etEventType = Nothing
     , _etResource = Nothing
     }
+
 
 -- | The hostname of the service that should be observed. If no string is
 -- provided, the default service implementing the API will be used. For
@@ -1134,6 +1174,7 @@ data SourceRepository =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceRepository' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1145,6 +1186,7 @@ sourceRepository
     :: SourceRepository
 sourceRepository =
   SourceRepository' {_srURL = Nothing, _srDeployedURL = Nothing}
+
 
 -- | The URL pointing to the hosted repository where the function is defined.
 -- There are supported Cloud Source Repository URLs in the following
@@ -1194,6 +1236,7 @@ data OperationMetadataV1 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadataV1' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1217,6 +1260,7 @@ operationMetadataV1 =
     , _omvTarget = Nothing
     , _omvRequest = Nothing
     }
+
 
 -- | Version id of the function created or updated by an API call. This field
 -- is only populated for Create and Update operations.
@@ -1276,6 +1320,7 @@ newtype GenerateDownloadURLResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateDownloadURLResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1285,6 +1330,7 @@ generateDownloadURLResponse
     :: GenerateDownloadURLResponse
 generateDownloadURLResponse =
   GenerateDownloadURLResponse' {_gdurDownloadURL = Nothing}
+
 
 -- | The generated Google Cloud Storage signed URL that should be used for
 -- function source code download.
@@ -1314,6 +1360,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1323,6 +1370,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1356,6 +1404,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1365,6 +1414,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1416,6 +1466,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1436,6 +1487,7 @@ policy =
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -1500,6 +1552,7 @@ newtype LocationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1510,6 +1563,7 @@ locationLabels
     -> LocationLabels
 locationLabels pLlAddtional_ =
   LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -1534,6 +1588,7 @@ data ListFunctionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListFunctionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1545,6 +1600,7 @@ listFunctionsResponse
     :: ListFunctionsResponse
 listFunctionsResponse =
   ListFunctionsResponse' {_lfrNextPageToken = Nothing, _lfrFunctions = Nothing}
+
 
 -- | If not empty, indicates that there may be more functions that match the
 -- request; this value should be passed in a new
@@ -1586,6 +1642,7 @@ newtype LocationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1596,6 +1653,7 @@ locationMetadata
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
   LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -1623,6 +1681,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1633,6 +1692,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -1662,6 +1722,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1673,6 +1734,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -1732,6 +1794,7 @@ data CloudFunction =
     , _cfDescription          :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloudFunction' with the minimum fields required to make a request.
 --
@@ -1801,6 +1864,7 @@ cloudFunction =
     , _cfVPCConnector = Nothing
     , _cfDescription = Nothing
     }
+
 
 -- | The runtime in which the function is going to run. If empty, defaults to
 -- Node.js 6.
@@ -2009,6 +2073,7 @@ newtype OperationMetadataV1Beta2Request =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadataV1Beta2Request' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2020,6 +2085,7 @@ operationMetadataV1Beta2Request
 operationMetadataV1Beta2Request pOmvbrAddtional_ =
   OperationMetadataV1Beta2Request'
     {_omvbrAddtional = _Coerce # pOmvbrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omvbrAddtional :: Lens' OperationMetadataV1Beta2Request (HashMap Text JSONValue)
@@ -2048,6 +2114,7 @@ newtype CloudFunctionLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudFunctionLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2058,6 +2125,7 @@ cloudFunctionLabels
     -> CloudFunctionLabels
 cloudFunctionLabels pCflAddtional_ =
   CloudFunctionLabels' {_cflAddtional = _Coerce # pCflAddtional_}
+
 
 cflAddtional :: Lens' CloudFunctionLabels (HashMap Text Text)
 cflAddtional
@@ -2088,6 +2156,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2098,6 +2167,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -2122,6 +2192,7 @@ newtype CallFunctionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CallFunctionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2130,6 +2201,7 @@ newtype CallFunctionRequest =
 callFunctionRequest
     :: CallFunctionRequest
 callFunctionRequest = CallFunctionRequest' {_cfrData = Nothing}
+
 
 -- | Input to be passed to the function.
 cfrData :: Lens' CallFunctionRequest (Maybe Text)
@@ -2155,6 +2227,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2168,6 +2241,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

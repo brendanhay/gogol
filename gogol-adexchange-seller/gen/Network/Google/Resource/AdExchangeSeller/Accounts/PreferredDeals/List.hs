@@ -59,6 +59,7 @@ newtype AccountsPreferredDealsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsPreferredDealsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ accountsPreferredDealsList
     -> AccountsPreferredDealsList
 accountsPreferredDealsList pApdlAccountId_ =
   AccountsPreferredDealsList' {_apdlAccountId = pApdlAccountId_}
+
 
 -- | Account owning the deals.
 apdlAccountId :: Lens' AccountsPreferredDealsList Text

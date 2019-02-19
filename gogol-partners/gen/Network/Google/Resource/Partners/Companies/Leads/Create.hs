@@ -76,6 +76,7 @@ data CompaniesLeadsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompaniesLeadsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ companiesLeadsCreate pClcCompanyId_ pClcPayload_ =
     , _clcPayload = pClcPayload_
     , _clcCallback = Nothing
     }
+
 
 -- | V1 error format.
 clcXgafv :: Lens' CompaniesLeadsCreate (Maybe Xgafv)

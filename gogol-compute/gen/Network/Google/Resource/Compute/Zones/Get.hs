@@ -63,6 +63,7 @@ data ZonesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZonesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ zonesGet
     -> ZonesGet
 zonesGet pZgProject_ pZgZone_ =
   ZonesGet' {_zgProject = pZgProject_, _zgZone = pZgZone_}
+
 
 -- | Project ID for this request.
 zgProject :: Lens' ZonesGet Text

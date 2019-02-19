@@ -67,6 +67,7 @@ data VideoCategoriesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoCategoriesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ videoCategoriesList pVclPart_ =
     , _vclHl = "en_US"
     , _vclId = Nothing
     }
+
 
 -- | The part parameter specifies the videoCategory resource properties that
 -- the API response will include. Set the parameter value to snippet.

@@ -84,6 +84,7 @@ data OrganizationsInspectTemplatesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsInspectTemplatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ organizationsInspectTemplatesList pOitlParent_ =
     , _oitlPageSize = Nothing
     , _oitlCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id or
 -- organizations\/my-org-id.

@@ -91,6 +91,7 @@ data ActivitiesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -134,6 +135,7 @@ activitiesList pAlApplicationName_ pAlUserKey_ =
     , _alMaxResults = Nothing
     , _alOrgUnitId = ""
     }
+
 
 -- | Return events which occurred at or after this time.
 alStartTime :: Lens' ActivitiesList (Maybe Text)

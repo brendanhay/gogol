@@ -99,6 +99,7 @@ data AccountsProductsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProductsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -134,6 +135,7 @@ accountsProductsUpdate pApuParent_ pApuPayload_ pApuName_ =
     , _apuName = pApuName_
     , _apuCallback = Nothing
     }
+
 
 -- | Parent ID in the format \`accounts\/{account_id}\`. \`account_id\` - The
 -- ID of the Manufacturer Center account.

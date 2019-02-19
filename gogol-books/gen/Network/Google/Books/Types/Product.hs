@@ -30,6 +30,7 @@ data UserSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -47,6 +48,7 @@ userSettings =
     , _usKind = "books#usersettings"
     , _usNotesExport = Nothing
     }
+
 
 usNotification :: Lens' UserSettings (Maybe UserSettingsNotification)
 usNotification
@@ -91,6 +93,7 @@ data Annotations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Annotations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +114,7 @@ annotations =
     , _aKind = "books#annotations"
     , _aItems = Nothing
     }
+
 
 -- | Total number of annotations found. This may be greater than the number
 -- of notes returned in this response if results have been paginated.
@@ -164,6 +168,7 @@ data AnnotationsData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotationsData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -184,6 +189,7 @@ annotationsData =
     , _adKind = "books#annotationsdata"
     , _adItems = Nothing
     }
+
 
 -- | The total number of volume annotations found.
 adTotalItems :: Lens' AnnotationsData (Maybe Int32)
@@ -233,6 +239,7 @@ newtype UserSettingsNotificationMoreFromAuthors =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserSettingsNotificationMoreFromAuthors' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -242,6 +249,7 @@ userSettingsNotificationMoreFromAuthors
     :: UserSettingsNotificationMoreFromAuthors
 userSettingsNotificationMoreFromAuthors =
   UserSettingsNotificationMoreFromAuthors' {_usnmfaOptedState = Nothing}
+
 
 usnmfaOptedState :: Lens' UserSettingsNotificationMoreFromAuthors (Maybe Text)
 usnmfaOptedState
@@ -278,6 +286,7 @@ data Volumeannotations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Volumeannotations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -301,6 +310,7 @@ volumeannotations =
     , _vItems = Nothing
     , _vVersion = Nothing
     }
+
 
 -- | The total number of volume annotations found.
 vTotalItems :: Lens' Volumeannotations (Maybe Int32)
@@ -363,6 +373,7 @@ data ReviewSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReviewSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -377,6 +388,7 @@ reviewSource
 reviewSource =
   ReviewSource'
     {_rsExtraDescription = Nothing, _rsURL = Nothing, _rsDescription = Nothing}
+
 
 -- | Extra text about the source of the review.
 rsExtraDescription :: Lens' ReviewSource (Maybe Text)
@@ -426,6 +438,7 @@ data AnnotationData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotationData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -461,6 +474,7 @@ annotationData =
     , _annUpdated = Nothing
     , _annLayerId = Nothing
     }
+
 
 -- | Base64 encoded data for this annotation data.
 annEncodedData :: Lens' AnnotationData (Maybe ByteString)
@@ -556,6 +570,7 @@ data Volumeannotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Volumeannotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -606,6 +621,7 @@ volumeannotation =
     , _volUpdated = Nothing
     , _volLayerId = Nothing
     }
+
 
 -- | Excerpt from the volume.
 volSelectedText :: Lens' Volumeannotation (Maybe Text)
@@ -731,6 +747,7 @@ data BooksCloudLoadingResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BooksCloudLoadingResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -751,6 +768,7 @@ booksCloudLoadingResource =
     , _bclrAuthor = Nothing
     , _bclrTitle = Nothing
     }
+
 
 bclrProcessingState :: Lens' BooksCloudLoadingResource (Maybe Text)
 bclrProcessingState
@@ -796,6 +814,7 @@ data VolumeseriesInfoVolumeSeriesItemIssueItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeseriesInfoVolumeSeriesItemIssueItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -808,6 +827,7 @@ volumeseriesInfoVolumeSeriesItemIssueItem
 volumeseriesInfoVolumeSeriesItemIssueItem =
   VolumeseriesInfoVolumeSeriesItemIssueItem'
     {_vivsiiiIssueOrderNumber = Nothing, _vivsiiiIssueDisplayNumber = Nothing}
+
 
 vivsiiiIssueOrderNumber :: Lens' VolumeseriesInfoVolumeSeriesItemIssueItem (Maybe Int32)
 vivsiiiIssueOrderNumber
@@ -865,6 +885,7 @@ data Annotation =
     , _aaLayerId              :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Annotation' with the minimum fields required to make a request.
 --
@@ -925,6 +946,7 @@ annotation =
     , _aaUpdated = Nothing
     , _aaLayerId = Nothing
     }
+
 
 -- | Excerpt from the volume.
 aaSelectedText :: Lens' Annotation (Maybe Text)
@@ -1073,6 +1095,7 @@ newtype ReviewAuthor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReviewAuthor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1081,6 +1104,7 @@ newtype ReviewAuthor =
 reviewAuthor
     :: ReviewAuthor
 reviewAuthor = ReviewAuthor' {_raDisplayName = Nothing}
+
 
 -- | Name of this person.
 raDisplayName :: Lens' ReviewAuthor (Maybe Text)
@@ -1109,6 +1133,7 @@ data GeolayerDataGeoViewport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeolayerDataGeoViewport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1120,6 +1145,7 @@ geolayerDataGeoViewport
     :: GeolayerDataGeoViewport
 geolayerDataGeoViewport =
   GeolayerDataGeoViewport' {_gdgvHi = Nothing, _gdgvLo = Nothing}
+
 
 gdgvHi :: Lens' GeolayerDataGeoViewport (Maybe GeolayerDataGeoViewportHi)
 gdgvHi = lens _gdgvHi (\ s a -> s{_gdgvHi = a})
@@ -1167,6 +1193,7 @@ data VolumeUserInfo =
     , _vuiIsFamilySharingDisabledByFop :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VolumeUserInfo' with the minimum fields required to make a request.
 --
@@ -1233,6 +1260,7 @@ volumeUserInfo =
     , _vuiFamilySharing = Nothing
     , _vuiIsFamilySharingDisabledByFop = Nothing
     }
+
 
 -- | Deprecated: Replaced by familySharing.
 vuiIsFamilySharingAllowed :: Lens' VolumeUserInfo (Maybe Bool)
@@ -1428,6 +1456,7 @@ data Layersummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Layersummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1475,6 +1504,7 @@ layersummary =
     , _lUpdated = Nothing
     , _lLayerId = Nothing
     }
+
 
 -- | Link to get data for this annotation.
 lAnnotationsDataLink :: Lens' Layersummary (Maybe Text)
@@ -1602,6 +1632,7 @@ data VolumeannotationContentRanges =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeannotationContentRanges' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1622,6 +1653,7 @@ volumeannotationContentRanges =
     , _vcrGbTextRange = Nothing
     , _vcrCfiRange = Nothing
     }
+
 
 -- | Range in GB image format for this annotation for version above.
 vcrGbImageRange :: Lens' VolumeannotationContentRanges (Maybe BooksAnnotationsRange)
@@ -1688,6 +1720,7 @@ data VolumeAccessInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeAccessInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1738,6 +1771,7 @@ volumeAccessInfo =
     , _vaiViewOrderURL = Nothing
     , _vaiPublicDomain = Nothing
     }
+
 
 -- | URL to read this volume on the Google Books site. Link will not allow
 -- users to read non-viewable volumes.
@@ -1887,6 +1921,7 @@ data VolumeVolumeInfoPanelizationSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeVolumeInfoPanelizationSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1907,6 +1942,7 @@ volumeVolumeInfoPanelizationSummary =
     , _vvipsContainsEpubBubbles = Nothing
     , _vvipsImageBubbleVersion = Nothing
     }
+
 
 vvipsEpubBubbleVersion :: Lens' VolumeVolumeInfoPanelizationSummary (Maybe Text)
 vvipsEpubBubbleVersion
@@ -1968,6 +2004,7 @@ data VolumeVolumeInfoImageLinks =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeVolumeInfoImageLinks' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1994,6 +2031,7 @@ volumeVolumeInfoImageLinks =
     , _vviilMedium = Nothing
     , _vviilSmallThumbnail = Nothing
     }
+
 
 -- | Image link for thumbnail size (width of ~128 pixels). (In LITE
 -- projection)
@@ -2061,6 +2099,7 @@ newtype VolumeUserInfoUserUploadedVolumeInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeUserInfoUserUploadedVolumeInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2070,6 +2109,7 @@ volumeUserInfoUserUploadedVolumeInfo
     :: VolumeUserInfoUserUploadedVolumeInfo
 volumeUserInfoUserUploadedVolumeInfo =
   VolumeUserInfoUserUploadedVolumeInfo' {_vuiuuviProcessingState = Nothing}
+
 
 vuiuuviProcessingState :: Lens' VolumeUserInfoUserUploadedVolumeInfo (Maybe Text)
 vuiuuviProcessingState
@@ -2104,6 +2144,7 @@ data VolumeUserInfoCopy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeUserInfoCopy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2124,6 +2165,7 @@ volumeUserInfoCopy =
     , _vuicUpdated = Nothing
     , _vuicRemainingCharacterCount = Nothing
     }
+
 
 vuicLimitType :: Lens' VolumeUserInfoCopy (Maybe Text)
 vuicLimitType
@@ -2176,6 +2218,7 @@ newtype BooksVolumesRecommendedRateResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BooksVolumesRecommendedRateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2185,6 +2228,7 @@ booksVolumesRecommendedRateResponse
     :: BooksVolumesRecommendedRateResponse
 booksVolumesRecommendedRateResponse =
   BooksVolumesRecommendedRateResponse' {_bvrrrConsistencyToken = Nothing}
+
 
 bvrrrConsistencyToken :: Lens' BooksVolumesRecommendedRateResponse (Maybe Text)
 bvrrrConsistencyToken
@@ -2215,6 +2259,7 @@ newtype UserSettingsNotificationPriceDrop =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserSettingsNotificationPriceDrop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2224,6 +2269,7 @@ userSettingsNotificationPriceDrop
     :: UserSettingsNotificationPriceDrop
 userSettingsNotificationPriceDrop =
   UserSettingsNotificationPriceDrop' {_usnpdOptedState = Nothing}
+
 
 usnpdOptedState :: Lens' UserSettingsNotificationPriceDrop (Maybe Text)
 usnpdOptedState
@@ -2255,6 +2301,7 @@ data VolumeseriesInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeseriesInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2275,6 +2322,7 @@ volumeseriesInfo =
     , _viShortSeriesBookTitle = Nothing
     , _viVolumeSeries = Nothing
     }
+
 
 -- | The display number string. This should be used only for display purposes
 -- and the actual sequence should be inferred from the below orderNumber.
@@ -2337,6 +2385,7 @@ data Bookshelf =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Bookshelf' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2375,6 +2424,7 @@ bookshelf =
     , _bTitle = Nothing
     , _bDescription = Nothing
     }
+
 
 -- | Whether this bookshelf is PUBLIC or PRIVATE.
 bAccess :: Lens' Bookshelf (Maybe Text)
@@ -2483,6 +2533,7 @@ data Notification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2539,6 +2590,7 @@ notification =
     , _nIconURL = Nothing
     , _nTitle = Nothing
     }
+
 
 nDocType :: Lens' Notification (Maybe Text)
 nDocType = lens _nDocType (\ s a -> s{_nDocType = a})
@@ -2664,6 +2716,7 @@ data AnnotationsSummaryLayersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotationsSummaryLayersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2687,6 +2740,7 @@ annotationsSummaryLayersItem =
     , _asliLayerId = Nothing
     , _asliRemainingCharacterCount = Nothing
     }
+
 
 asliLimitType :: Lens' AnnotationsSummaryLayersItem (Maybe Text)
 asliLimitType
@@ -2747,6 +2801,7 @@ data VolumeSaleInfoOffersItemRentalDuration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeSaleInfoOffersItemRentalDuration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2759,6 +2814,7 @@ volumeSaleInfoOffersItemRentalDuration
 volumeSaleInfoOffersItemRentalDuration =
   VolumeSaleInfoOffersItemRentalDuration'
     {_vsioirdCount = Nothing, _vsioirdUnit = Nothing}
+
 
 vsioirdCount :: Lens' VolumeSaleInfoOffersItemRentalDuration (Maybe Double)
 vsioirdCount
@@ -2796,6 +2852,7 @@ data DictlayerDataDictWordsItemExamplesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemExamplesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2808,6 +2865,7 @@ dictlayerDataDictWordsItemExamplesItem
 dictlayerDataDictWordsItemExamplesItem =
   DictlayerDataDictWordsItemExamplesItem'
     {_dddwieiText = Nothing, _dddwieiSource = Nothing}
+
 
 dddwieiText :: Lens' DictlayerDataDictWordsItemExamplesItem (Maybe Text)
 dddwieiText
@@ -2847,6 +2905,7 @@ data OffersItemsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OffersItemsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2867,6 +2926,7 @@ offersItemsItem =
     , _oiiId = Nothing
     , _oiiGServicesKey = Nothing
     }
+
 
 oiiItems :: Lens' OffersItemsItem [OffersItemsItemItemsItem]
 oiiItems
@@ -2913,6 +2973,7 @@ data AnnotationLayerSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotationLayerSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2930,6 +2991,7 @@ annotationLayerSummary =
     , _alsAllowedCharacterCount = Nothing
     , _alsRemainingCharacterCount = Nothing
     }
+
 
 -- | Type of limitation on this layer. \"limited\" or \"unlimited\" for the
 -- \"copy\" layer.
@@ -2981,6 +3043,7 @@ newtype VolumeSearchInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeSearchInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2989,6 +3052,7 @@ newtype VolumeSearchInfo =
 volumeSearchInfo
     :: VolumeSearchInfo
 volumeSearchInfo = VolumeSearchInfo' {_vsiTextSnippet = Nothing}
+
 
 -- | A text snippet containing the search query.
 vsiTextSnippet :: Lens' VolumeSearchInfo (Maybe Text)
@@ -3015,6 +3079,7 @@ data AnnotationsSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotationsSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3027,6 +3092,7 @@ annotationsSummary
 annotationsSummary =
   AnnotationsSummary'
     {_asKind = "books#annotationsSummary", _asLayers = Nothing}
+
 
 asKind :: Lens' AnnotationsSummary Text
 asKind = lens _asKind (\ s a -> s{_asKind = a})
@@ -3061,6 +3127,7 @@ data Category =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Category' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3071,6 +3138,7 @@ data Category =
 category
     :: Category
 category = Category' {_cKind = "onboarding#category", _cItems = Nothing}
+
 
 -- | Resource type.
 cKind :: Lens' Category Text
@@ -3109,6 +3177,7 @@ data DiscoveryclustersClustersItemBanner_with_content_container =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiscoveryclustersClustersItemBanner_with_content_container' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3135,6 +3204,7 @@ discoveryclustersClustersItemBanner_with_content_container =
     , _dcibImageURL = Nothing
     , _dcibMaskColorArgb = Nothing
     }
+
 
 dcibFillColorArgb :: Lens' DiscoveryclustersClustersItemBanner_with_content_container (Maybe Text)
 dcibFillColorArgb
@@ -3212,6 +3282,7 @@ data Volume =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Volume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3253,6 +3324,7 @@ volume =
     , _vvRecommendedInfo = Nothing
     , _vvVolumeInfo = Nothing
     }
+
 
 -- | User specific information related to this volume. (e.g. page this user
 -- last read or whether they purchased this book)
@@ -3354,6 +3426,7 @@ data GeolayerDataGeoBoundaryItemItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeolayerDataGeoBoundaryItemItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3366,6 +3439,7 @@ geolayerDataGeoBoundaryItemItem
 geolayerDataGeoBoundaryItemItem =
   GeolayerDataGeoBoundaryItemItem'
     {_gdgbiiLatitude = Nothing, _gdgbiiLongitude = Nothing}
+
 
 gdgbiiLatitude :: Lens' GeolayerDataGeoBoundaryItemItem (Maybe Word32)
 gdgbiiLatitude
@@ -3403,6 +3477,7 @@ data Series =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Series' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3413,6 +3488,7 @@ data Series =
 series
     :: Series
 series = Series' {_sKind = "books#series", _sSeries = Nothing}
+
 
 -- | Resource type.
 sKind :: Lens' Series Text
@@ -3451,6 +3527,7 @@ data OffersItemsItemItemsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OffersItemsItemItemsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3477,6 +3554,7 @@ offersItemsItemItemsItem =
     , _oiiiiTitle = Nothing
     , _oiiiiDescription = Nothing
     }
+
 
 oiiiiCanonicalVolumeLink :: Lens' OffersItemsItemItemsItem (Maybe Text)
 oiiiiCanonicalVolumeLink
@@ -3538,6 +3616,7 @@ data DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3550,6 +3629,7 @@ dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
 dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource =
   DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource'
     {_dddwisidieisURL = Nothing, _dddwisidieisAttribution = Nothing}
+
 
 dddwisidieisURL :: Lens' DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource (Maybe Text)
 dddwisidieisURL
@@ -3593,6 +3673,7 @@ data GeolayerDataCommon =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeolayerDataCommon' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3616,6 +3697,7 @@ geolayerDataCommon =
     , _gdcTitle = Nothing
     , _gdcPreviewImageURL = Nothing
     }
+
 
 -- | The description for this location.
 gdcSnippet :: Lens' GeolayerDataCommon (Maybe Text)
@@ -3677,6 +3759,7 @@ data GeolayerDataGeo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeolayerDataGeo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3709,6 +3792,7 @@ geolayerDataGeo =
     , _gdgCountryCode = Nothing
     , _gdgLongitude = Nothing
     }
+
 
 -- | The type of map that should be used for this location. EX: HYBRID,
 -- ROADMAP, SATELLITE, TERRAIN
@@ -3801,6 +3885,7 @@ data DictlayerDataDictWordsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3821,6 +3906,7 @@ dictlayerDataDictWordsItem =
     , _dddwiDerivatives = Nothing
     , _dddwiExamples = Nothing
     }
+
 
 dddwiSenses :: Lens' DictlayerDataDictWordsItem [DictlayerDataDictWordsItemSensesItem]
 dddwiSenses
@@ -3876,6 +3962,7 @@ data CategoryItemsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CategoryItemsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3890,6 +3977,7 @@ categoryItemsItem
 categoryItemsItem =
   CategoryItemsItem'
     {_ciiName = Nothing, _ciiCategoryId = Nothing, _ciiBadgeURL = Nothing}
+
 
 ciiName :: Lens' CategoryItemsItem (Maybe Text)
 ciiName = lens _ciiName (\ s a -> s{_ciiName = a})
@@ -3928,6 +4016,7 @@ data DictlayerDataDictWordsItemDerivativesItemSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemDerivativesItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3940,6 +4029,7 @@ dictlayerDataDictWordsItemDerivativesItemSource
 dictlayerDataDictWordsItemDerivativesItemSource =
   DictlayerDataDictWordsItemDerivativesItemSource'
     {_dddwidisURL = Nothing, _dddwidisAttribution = Nothing}
+
 
 dddwidisURL :: Lens' DictlayerDataDictWordsItemDerivativesItemSource (Maybe Text)
 dddwidisURL
@@ -3980,6 +4070,7 @@ data GeolayerData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeolayerData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3994,6 +4085,7 @@ geolayerData
 geolayerData =
   GeolayerData'
     {_gdKind = "books#geolayerdata", _gdGeo = Nothing, _gdCommon = Nothing}
+
 
 gdKind :: Lens' GeolayerData Text
 gdKind = lens _gdKind (\ s a -> s{_gdKind = a})
@@ -4031,6 +4123,7 @@ data DictlayerDataDictWordsItemSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4043,6 +4136,7 @@ dictlayerDataDictWordsItemSource
 dictlayerDataDictWordsItemSource =
   DictlayerDataDictWordsItemSource'
     {_dddwisURL = Nothing, _dddwisAttribution = Nothing}
+
 
 dddwisURL :: Lens' DictlayerDataDictWordsItemSource (Maybe Text)
 dddwisURL
@@ -4078,6 +4172,7 @@ data DictlayerDataDictWordsItemDerivativesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemDerivativesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4090,6 +4185,7 @@ dictlayerDataDictWordsItemDerivativesItem
 dictlayerDataDictWordsItemDerivativesItem =
   DictlayerDataDictWordsItemDerivativesItem'
     {_dddwidiText = Nothing, _dddwidiSource = Nothing}
+
 
 dddwidiText :: Lens' DictlayerDataDictWordsItemDerivativesItem (Maybe Text)
 dddwidiText
@@ -4128,6 +4224,7 @@ data DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4140,6 +4237,7 @@ dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
 dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem =
   DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem'
     {_dddwisidieiText = Nothing, _dddwisidieiSource = Nothing}
+
 
 dddwisidieiText :: Lens' DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem (Maybe Text)
 dddwisidieiText
@@ -4179,6 +4277,7 @@ newtype UserSettingsNotificationRewardExpirations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserSettingsNotificationRewardExpirations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4188,6 +4287,7 @@ userSettingsNotificationRewardExpirations
     :: UserSettingsNotificationRewardExpirations
 userSettingsNotificationRewardExpirations =
   UserSettingsNotificationRewardExpirations' {_usnreOptedState = Nothing}
+
 
 usnreOptedState :: Lens' UserSettingsNotificationRewardExpirations (Maybe Text)
 usnreOptedState
@@ -4221,6 +4321,7 @@ data DictlayerData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4235,6 +4336,7 @@ dictlayerData
 dictlayerData =
   DictlayerData'
     {_ddKind = "books#dictlayerdata", _ddDict = Nothing, _ddCommon = Nothing}
+
 
 ddKind :: Lens' DictlayerData Text
 ddKind = lens _ddKind (\ s a -> s{_ddKind = a})
@@ -4270,6 +4372,7 @@ data DictlayerDataDictWordsItemSensesItemSynonymsItemSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemSensesItemSynonymsItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4282,6 +4385,7 @@ dictlayerDataDictWordsItemSensesItemSynonymsItemSource
 dictlayerDataDictWordsItemSensesItemSynonymsItemSource =
   DictlayerDataDictWordsItemSensesItemSynonymsItemSource'
     {_dddwisisisURL = Nothing, _dddwisisisAttribution = Nothing}
+
 
 dddwisisisURL :: Lens' DictlayerDataDictWordsItemSensesItemSynonymsItemSource (Maybe Text)
 dddwisisisURL
@@ -4323,6 +4427,7 @@ data Seriesmembership =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Seriesmembership' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4340,6 +4445,7 @@ seriesmembership =
     , _serKind = "books#series#membership"
     , _serMember = Nothing
     }
+
 
 serNextPageToken :: Lens' Seriesmembership (Maybe Text)
 serNextPageToken
@@ -4385,6 +4491,7 @@ data UserSettingsNotification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserSettingsNotification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4408,6 +4515,7 @@ userSettingsNotification =
     , _usnMoreFromAuthors = Nothing
     , _usnMoreFromSeries = Nothing
     }
+
 
 usnRewardExpirations :: Lens' UserSettingsNotification (Maybe UserSettingsNotificationRewardExpirations)
 usnRewardExpirations
@@ -4462,6 +4570,7 @@ data DictlayerDataDictWordsItemSensesItemSynonymsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemSensesItemSynonymsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4474,6 +4583,7 @@ dictlayerDataDictWordsItemSensesItemSynonymsItem
 dictlayerDataDictWordsItemSensesItemSynonymsItem =
   DictlayerDataDictWordsItemSensesItemSynonymsItem'
     {_dddwisisiText = Nothing, _dddwisisiSource = Nothing}
+
 
 dddwisisiText :: Lens' DictlayerDataDictWordsItemSensesItemSynonymsItem (Maybe Text)
 dddwisisiText
@@ -4514,6 +4624,7 @@ data GeolayerDataGeoViewportLo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeolayerDataGeoViewportLo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4526,6 +4637,7 @@ geolayerDataGeoViewportLo
 geolayerDataGeoViewportLo =
   GeolayerDataGeoViewportLo'
     {_gdgvlLatitude = Nothing, _gdgvlLongitude = Nothing}
+
 
 gdgvlLatitude :: Lens' GeolayerDataGeoViewportLo (Maybe Double)
 gdgvlLatitude
@@ -4563,6 +4675,7 @@ data VolumeSaleInfoOffersItemListPrice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeSaleInfoOffersItemListPrice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4575,6 +4688,7 @@ volumeSaleInfoOffersItemListPrice
 volumeSaleInfoOffersItemListPrice =
   VolumeSaleInfoOffersItemListPrice'
     {_vsioilpCurrencyCode = Nothing, _vsioilpAmountInMicros = Nothing}
+
 
 vsioilpCurrencyCode :: Lens' VolumeSaleInfoOffersItemListPrice (Maybe Text)
 vsioilpCurrencyCode
@@ -4622,6 +4736,7 @@ data DownloadAccessRestriction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DownloadAccessRestriction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4666,6 +4781,7 @@ downloadAccessRestriction =
     , _darMessage = Nothing
     , _darNonce = Nothing
     }
+
 
 -- | If deviceAllowed, whether access was just acquired with this request.
 darJustAcquired :: Lens' DownloadAccessRestriction (Maybe Bool)
@@ -4782,6 +4898,7 @@ newtype DictlayerDataCommon =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataCommon' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4790,6 +4907,7 @@ newtype DictlayerDataCommon =
 dictlayerDataCommon
     :: DictlayerDataCommon
 dictlayerDataCommon = DictlayerDataCommon' {_ddcTitle = Nothing}
+
 
 -- | The display title and localized canonical name to use when searching for
 -- this entity on Google search.
@@ -4818,6 +4936,7 @@ data DiscoveryclustersClustersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiscoveryclustersClustersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4844,6 +4963,7 @@ discoveryclustersClustersItem =
     , _dciTitle = Nothing
     , _dciVolumes = Nothing
     }
+
 
 dciBannerWithContentContainer :: Lens' DiscoveryclustersClustersItem (Maybe DiscoveryclustersClustersItemBanner_with_content_container)
 dciBannerWithContentContainer
@@ -4908,6 +5028,7 @@ data VolumeSaleInfoRetailPrice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeSaleInfoRetailPrice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4920,6 +5041,7 @@ volumeSaleInfoRetailPrice
 volumeSaleInfoRetailPrice =
   VolumeSaleInfoRetailPrice'
     {_vsirpAmount = Nothing, _vsirpCurrencyCode = Nothing}
+
 
 -- | Amount in the currency listed below. (In LITE projection.)
 vsirpAmount :: Lens' VolumeSaleInfoRetailPrice (Maybe Double)
@@ -4957,6 +5079,7 @@ data VolumeSaleInfoListPrice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeSaleInfoListPrice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4969,6 +5092,7 @@ volumeSaleInfoListPrice
 volumeSaleInfoListPrice =
   VolumeSaleInfoListPrice'
     {_vsilpAmount = Nothing, _vsilpCurrencyCode = Nothing}
+
 
 -- | Amount in the currency listed below. (In LITE projection.)
 vsilpAmount :: Lens' VolumeSaleInfoListPrice (Maybe Double)
@@ -5005,6 +5129,7 @@ data DictlayerDataDictWordsItemSensesItemConjugationsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemSensesItemConjugationsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5017,6 +5142,7 @@ dictlayerDataDictWordsItemSensesItemConjugationsItem
 dictlayerDataDictWordsItemSensesItemConjugationsItem =
   DictlayerDataDictWordsItemSensesItemConjugationsItem'
     {_dddwisiciValue = Nothing, _dddwisiciType = Nothing}
+
 
 dddwisiciValue :: Lens' DictlayerDataDictWordsItemSensesItemConjugationsItem (Maybe Text)
 dddwisiciValue
@@ -5061,6 +5187,7 @@ data FamilyInfoMembership =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FamilyInfoMembership' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5084,6 +5211,7 @@ familyInfoMembership =
     , _fimAgeGroup = Nothing
     , _fimIsInFamily = Nothing
     }
+
 
 -- | The maximum allowed maturity rating for the user.
 fimAllowedMaturityRating :: Lens' FamilyInfoMembership (Maybe Text)
@@ -5143,6 +5271,7 @@ data Volume2 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Volume2' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5160,6 +5289,7 @@ volume2 =
     , _voloKind = "onboarding#volume"
     , _voloItems = Nothing
     }
+
 
 voloNextPageToken :: Lens' Volume2 (Maybe Text)
 voloNextPageToken
@@ -5211,6 +5341,7 @@ data Review =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Review' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5249,6 +5380,7 @@ review =
     , _rTitle = Nothing
     , _rType = Nothing
     }
+
 
 -- | Star rating for this review. Possible values are ONE, TWO, THREE, FOUR,
 -- FIVE or NOT_RATED.
@@ -5333,6 +5465,7 @@ data VolumeUserInfoRentalPeriod =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeUserInfoRentalPeriod' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5345,6 +5478,7 @@ volumeUserInfoRentalPeriod
 volumeUserInfoRentalPeriod =
   VolumeUserInfoRentalPeriod'
     {_vuirpEndUtcSec = Nothing, _vuirpStartUtcSec = Nothing}
+
 
 vuirpEndUtcSec :: Lens' VolumeUserInfoRentalPeriod (Maybe Int64)
 vuirpEndUtcSec
@@ -5391,6 +5525,7 @@ data VolumeSaleInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeSaleInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5423,6 +5558,7 @@ volumeSaleInfo =
     , _vsiIsEbook = Nothing
     , _vsiSaleability = Nothing
     }
+
 
 -- | The two-letter ISO_3166-1 country code for which this sale information
 -- is valid. (In LITE projection.)
@@ -5516,6 +5652,7 @@ data SeriesSeriesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SeriesSeriesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5539,6 +5676,7 @@ seriesSeriesItem =
     , _ssiTitle = Nothing
     , _ssiSeriesType = Nothing
     }
+
 
 ssiSeriesId :: Lens' SeriesSeriesItem (Maybe Text)
 ssiSeriesId
@@ -5590,6 +5728,7 @@ data Metadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5600,6 +5739,7 @@ data Metadata =
 metadata
     :: Metadata
 metadata = Metadata' {_mKind = "dictionary#metadata", _mItems = Nothing}
+
 
 -- | Resource type.
 mKind :: Lens' Metadata Text
@@ -5634,6 +5774,7 @@ newtype VolumeLayerInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeLayerInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5642,6 +5783,7 @@ newtype VolumeLayerInfo =
 volumeLayerInfo
     :: VolumeLayerInfo
 volumeLayerInfo = VolumeLayerInfo' {_vliLayers = Nothing}
+
 
 -- | A layer should appear here if and only if the layer exists for this
 -- book.
@@ -5672,6 +5814,7 @@ data VolumeVolumeInfoDimensions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeVolumeInfoDimensions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5686,6 +5829,7 @@ volumeVolumeInfoDimensions
 volumeVolumeInfoDimensions =
   VolumeVolumeInfoDimensions'
     {_vvidHeight = Nothing, _vvidWidth = Nothing, _vvidThickness = Nothing}
+
 
 -- | Height or length of this volume (in cm).
 vvidHeight :: Lens' VolumeVolumeInfoDimensions (Maybe Text)
@@ -5729,6 +5873,7 @@ data RequestAccess =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RequestAccess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5746,6 +5891,7 @@ requestAccess =
     , _raKind = "books#requestAccess"
     , _raDownloadAccess = Nothing
     }
+
 
 -- | A concurrent access response.
 raConcurrentAccess :: Lens' RequestAccess (Maybe ConcurrentAccessRestriction)
@@ -5789,6 +5935,7 @@ data FamilyInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FamilyInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5799,6 +5946,7 @@ data FamilyInfo =
 familyInfo
     :: FamilyInfo
 familyInfo = FamilyInfo' {_fiMembership = Nothing, _fiKind = "books#familyInfo"}
+
 
 -- | Family membership info of the user that made the request.
 fiMembership :: Lens' FamilyInfo (Maybe FamilyInfoMembership)
@@ -5837,6 +5985,7 @@ data AnnotationClientVersionRanges =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotationClientVersionRanges' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5860,6 +6009,7 @@ annotationClientVersionRanges =
     , _acvrGbTextRange = Nothing
     , _acvrCfiRange = Nothing
     }
+
 
 -- | Range in GB image format for this annotation sent by client.
 acvrGbImageRange :: Lens' AnnotationClientVersionRanges (Maybe BooksAnnotationsRange)
@@ -5919,6 +6069,7 @@ data DictlayerDataDictWordsItemSensesItemDefinitionsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemSensesItemDefinitionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5931,6 +6082,7 @@ dictlayerDataDictWordsItemSensesItemDefinitionsItem
 dictlayerDataDictWordsItemSensesItemDefinitionsItem =
   DictlayerDataDictWordsItemSensesItemDefinitionsItem'
     {_dddwisidiDefinition = Nothing, _dddwisidiExamples = Nothing}
+
 
 dddwisidiDefinition :: Lens' DictlayerDataDictWordsItemSensesItemDefinitionsItem (Maybe Text)
 dddwisidiDefinition
@@ -5975,6 +6127,7 @@ data VolumeLayerInfoLayersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeLayerInfoLayersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5987,6 +6140,7 @@ volumeLayerInfoLayersItem
 volumeLayerInfoLayersItem =
   VolumeLayerInfoLayersItem'
     {_vliliVolumeAnnotationsVersion = Nothing, _vliliLayerId = Nothing}
+
 
 -- | The current version of this layer\'s volume annotations. Note that this
 -- version applies only to the data in the books.layers.volumeAnnotations.*
@@ -6030,6 +6184,7 @@ data AnnotationCurrentVersionRanges =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotationCurrentVersionRanges' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6053,6 +6208,7 @@ annotationCurrentVersionRanges =
     , _aGbTextRange = Nothing
     , _aCfiRange = Nothing
     }
+
 
 -- | Range in GB image format for this annotation for version above.
 aGbImageRange :: Lens' AnnotationCurrentVersionRanges (Maybe BooksAnnotationsRange)
@@ -6114,6 +6270,7 @@ data VolumeAccessInfoPdf =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeAccessInfoPdf' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6131,6 +6288,7 @@ volumeAccessInfoPdf =
     , _vaipIsAvailable = Nothing
     , _vaipDownloadLink = Nothing
     }
+
 
 -- | URL to retrieve ACS token for pdf download. (In LITE projection.)
 vaipAcsTokenLink :: Lens' VolumeAccessInfoPdf (Maybe Text)
@@ -6176,6 +6334,7 @@ data DictlayerDataDictWordsItemExamplesItemSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemExamplesItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6188,6 +6347,7 @@ dictlayerDataDictWordsItemExamplesItemSource
 dictlayerDataDictWordsItemExamplesItemSource =
   DictlayerDataDictWordsItemExamplesItemSource'
     {_dddwieisURL = Nothing, _dddwieisAttribution = Nothing}
+
 
 dddwieisURL :: Lens' DictlayerDataDictWordsItemExamplesItemSource (Maybe Text)
 dddwieisURL
@@ -6229,6 +6389,7 @@ data VolumeAccessInfoEpub =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeAccessInfoEpub' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6246,6 +6407,7 @@ volumeAccessInfoEpub =
     , _vaieIsAvailable = Nothing
     , _vaieDownloadLink = Nothing
     }
+
 
 -- | URL to retrieve ACS token for epub download. (In LITE projection.)
 vaieAcsTokenLink :: Lens' VolumeAccessInfoEpub (Maybe Text)
@@ -6296,6 +6458,7 @@ data ReadingPosition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReadingPosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6325,6 +6488,7 @@ readingPosition =
     , _rpUpdated = Nothing
     , _rpGbTextPosition = Nothing
     }
+
 
 -- | Position in an EPUB as a CFI.
 rpEpubCfiPosition :: Lens' ReadingPosition (Maybe Text)
@@ -6403,6 +6567,7 @@ data VolumeSaleInfoOffersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeSaleInfoOffersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6426,6 +6591,7 @@ volumeSaleInfoOffersItem =
     , _vsioiRetailPrice = Nothing
     , _vsioiGiftable = Nothing
     }
+
 
 -- | The finsky offer type (e.g., PURCHASE=0 RENTAL=3)
 vsioiFinskyOfferType :: Lens' VolumeSaleInfoOffersItem (Maybe Int32)
@@ -6488,6 +6654,7 @@ data DictlayerDataDict =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6499,6 +6666,7 @@ dictlayerDataDict
     :: DictlayerDataDict
 dictlayerDataDict =
   DictlayerDataDict' {_dddSource = Nothing, _dddWords = Nothing}
+
 
 -- | The source, url and attribution for this dictionary data.
 dddSource :: Lens' DictlayerDataDict (Maybe DictlayerDataDictSource)
@@ -6540,6 +6708,7 @@ data DictlayerDataDictWordsItemSensesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemSensesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6572,6 +6741,7 @@ dictlayerDataDictWordsItemSensesItem =
     , _dddwisiDefinitions = Nothing
     , _dddwisiSyllabification = Nothing
     }
+
 
 dddwisiPronunciationURL :: Lens' DictlayerDataDictWordsItemSensesItem (Maybe Text)
 dddwisiPronunciationURL
@@ -6659,6 +6829,7 @@ newtype VolumeRecommendedInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeRecommendedInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6667,6 +6838,7 @@ newtype VolumeRecommendedInfo =
 volumeRecommendedInfo
     :: VolumeRecommendedInfo
 volumeRecommendedInfo = VolumeRecommendedInfo' {_vriExplanation = Nothing}
+
 
 -- | A text explaining why this volume is recommended.
 vriExplanation :: Lens' VolumeRecommendedInfo (Maybe Text)
@@ -6694,6 +6866,7 @@ data Offers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Offers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6704,6 +6877,7 @@ data Offers =
 offers
     :: Offers
 offers = Offers' {_oKind = "promooffer#offers", _oItems = Nothing}
+
 
 -- | Resource type.
 oKind :: Lens' Offers Text
@@ -6739,6 +6913,7 @@ data Discoveryclusters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Discoveryclusters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6756,6 +6931,7 @@ discoveryclusters =
     , _dTotalClusters = Nothing
     , _dClusters = Nothing
     }
+
 
 -- | Resorce type.
 dKind :: Lens' Discoveryclusters Text
@@ -6801,6 +6977,7 @@ data VolumeseriesInfoVolumeSeriesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeseriesInfoVolumeSeriesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6821,6 +6998,7 @@ volumeseriesInfoVolumeSeriesItem =
     , _vivsiOrderNumber = Nothing
     , _vivsiIssue = Nothing
     }
+
 
 -- | The series id.
 vivsiSeriesId :: Lens' VolumeseriesInfoVolumeSeriesItem (Maybe Text)
@@ -6879,6 +7057,7 @@ data UserSettingsNotesExport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserSettingsNotesExport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6890,6 +7069,7 @@ userSettingsNotesExport
     :: UserSettingsNotesExport
 userSettingsNotesExport =
   UserSettingsNotesExport' {_usneFolderName = Nothing, _usneIsEnabled = Nothing}
+
 
 usneFolderName :: Lens' UserSettingsNotesExport (Maybe Text)
 usneFolderName
@@ -6933,6 +7113,7 @@ data ConcurrentAccessRestriction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConcurrentAccessRestriction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6974,6 +7155,7 @@ concurrentAccessRestriction =
     , _carMessage = Nothing
     , _carNonce = Nothing
     }
+
 
 -- | The maximum number of concurrent access licenses for this volume.
 carMaxConcurrentDevices :: Lens' ConcurrentAccessRestriction (Maybe Int32)
@@ -7083,6 +7265,7 @@ data Volumes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Volumes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7097,6 +7280,7 @@ volumes
 volumes =
   Volumes'
     {_v1TotalItems = Nothing, _v1Kind = "books#volumes", _v1Items = Nothing}
+
 
 -- | Total number of volumes found. This might be greater than the number of
 -- volumes returned in this response if results have been paginated.
@@ -7139,6 +7323,7 @@ newtype UserSettingsNotificationMatchMyInterests =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserSettingsNotificationMatchMyInterests' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7148,6 +7333,7 @@ userSettingsNotificationMatchMyInterests
     :: UserSettingsNotificationMatchMyInterests
 userSettingsNotificationMatchMyInterests =
   UserSettingsNotificationMatchMyInterests' {_usnmmiOptedState = Nothing}
+
 
 usnmmiOptedState :: Lens' UserSettingsNotificationMatchMyInterests (Maybe Text)
 usnmmiOptedState
@@ -7181,6 +7367,7 @@ data Bookshelves =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Bookshelves' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7191,6 +7378,7 @@ data Bookshelves =
 bookshelves
     :: Bookshelves
 bookshelves = Bookshelves' {_booKind = "books#bookshelves", _booItems = Nothing}
+
 
 -- | Resource type.
 booKind :: Lens' Bookshelves Text
@@ -7228,6 +7416,7 @@ data DictlayerDataDictSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7239,6 +7428,7 @@ dictlayerDataDictSource
     :: DictlayerDataDictSource
 dictlayerDataDictSource =
   DictlayerDataDictSource' {_dddsURL = Nothing, _dddsAttribution = Nothing}
+
 
 dddsURL :: Lens' DictlayerDataDictSource (Maybe Text)
 dddsURL = lens _dddsURL (\ s a -> s{_dddsURL = a})
@@ -7271,6 +7461,7 @@ data DownloadAccesses =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DownloadAccesses' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7283,6 +7474,7 @@ downloadAccesses
 downloadAccesses =
   DownloadAccesses'
     {_daKind = "books#downloadAccesses", _daDownloadAccessList = Nothing}
+
 
 -- | Resource type.
 daKind :: Lens' DownloadAccesses Text
@@ -7320,6 +7512,7 @@ data GeolayerDataGeoViewportHi =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeolayerDataGeoViewportHi' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7332,6 +7525,7 @@ geolayerDataGeoViewportHi
 geolayerDataGeoViewportHi =
   GeolayerDataGeoViewportHi'
     {_gdgvhLatitude = Nothing, _gdgvhLongitude = Nothing}
+
 
 gdgvhLatitude :: Lens' GeolayerDataGeoViewportHi (Maybe Double)
 gdgvhLatitude
@@ -7394,6 +7588,7 @@ data VolumeVolumeInfo =
     , _vviPrintType           :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VolumeVolumeInfo' with the minimum fields required to make a request.
 --
@@ -7487,6 +7682,7 @@ volumeVolumeInfo =
     , _vviDescription = Nothing
     , _vviPrintType = Nothing
     }
+
 
 -- | A list of image links for all the sizes that are available. (In LITE
 -- projection.)
@@ -7747,6 +7943,7 @@ data MetadataItemsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetadataItemsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7770,6 +7967,7 @@ metadataItemsItem =
     , _miiDownloadURL = Nothing
     , _miiEncryptedKey = Nothing
     }
+
 
 miiSize :: Lens' MetadataItemsItem (Maybe Int64)
 miiSize
@@ -7824,6 +8022,7 @@ data DictlayerDataDictWordsItemSensesItemSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictlayerDataDictWordsItemSensesItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7836,6 +8035,7 @@ dictlayerDataDictWordsItemSensesItemSource
 dictlayerDataDictWordsItemSensesItemSource =
   DictlayerDataDictWordsItemSensesItemSource'
     {_dddwisisURL = Nothing, _dddwisisAttribution = Nothing}
+
 
 dddwisisURL :: Lens' DictlayerDataDictWordsItemSensesItemSource (Maybe Text)
 dddwisisURL
@@ -7876,6 +8076,7 @@ data VolumeSaleInfoOffersItemRetailPrice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeSaleInfoOffersItemRetailPrice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7888,6 +8089,7 @@ volumeSaleInfoOffersItemRetailPrice
 volumeSaleInfoOffersItemRetailPrice =
   VolumeSaleInfoOffersItemRetailPrice'
     {_vsioirpCurrencyCode = Nothing, _vsioirpAmountInMicros = Nothing}
+
 
 vsioirpCurrencyCode :: Lens' VolumeSaleInfoOffersItemRetailPrice (Maybe Text)
 vsioirpCurrencyCode
@@ -7927,6 +8129,7 @@ data VolumeUserInfoFamilySharing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeUserInfoFamilySharing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7944,6 +8147,7 @@ volumeUserInfoFamilySharing =
     , _vuifsIsSharingAllowed = Nothing
     , _vuifsIsSharingDisabledByFop = Nothing
     }
+
 
 -- | The role of the user in the family.
 vuifsFamilyRole :: Lens' VolumeUserInfoFamilySharing (Maybe Text)
@@ -7991,6 +8195,7 @@ newtype UserSettingsNotificationMoreFromSeries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserSettingsNotificationMoreFromSeries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8000,6 +8205,7 @@ userSettingsNotificationMoreFromSeries
     :: UserSettingsNotificationMoreFromSeries
 userSettingsNotificationMoreFromSeries =
   UserSettingsNotificationMoreFromSeries' {_usnmfsOptedState = Nothing}
+
 
 usnmfsOptedState :: Lens' UserSettingsNotificationMoreFromSeries (Maybe Text)
 usnmfsOptedState
@@ -8032,6 +8238,7 @@ data VolumeVolumeInfoIndustryIdentifiersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumeVolumeInfoIndustryIdentifiersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8044,6 +8251,7 @@ volumeVolumeInfoIndustryIdentifiersItem
 volumeVolumeInfoIndustryIdentifiersItem =
   VolumeVolumeInfoIndustryIdentifiersItem'
     {_vviiiiIdentifier = Nothing, _vviiiiType = Nothing}
+
 
 -- | Industry specific volume identifier.
 vviiiiIdentifier :: Lens' VolumeVolumeInfoIndustryIdentifiersItem (Maybe Text)
@@ -8086,6 +8294,7 @@ data BooksAnnotationsRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BooksAnnotationsRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8106,6 +8315,7 @@ booksAnnotationsRange =
     , _barEndPosition = Nothing
     , _barStartPosition = Nothing
     }
+
 
 -- | The offset from the starting position.
 barStartOffSet :: Lens' BooksAnnotationsRange (Maybe Text)
@@ -8158,6 +8368,7 @@ data Layersummaries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Layersummaries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8175,6 +8386,7 @@ layersummaries =
     , _layKind = "books#layersummaries"
     , _layItems = Nothing
     }
+
 
 -- | The total number of layer summaries found.
 layTotalItems :: Lens' Layersummaries (Maybe Int32)

@@ -59,6 +59,7 @@ newtype RegionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ regionsList
     :: Int64 -- ^ 'rProFileId'
     -> RegionsList
 regionsList pRProFileId_ = RegionsList' {_rProFileId = _Coerce # pRProFileId_}
+
 
 -- | User profile ID associated with this request.
 rProFileId :: Lens' RegionsList Int64

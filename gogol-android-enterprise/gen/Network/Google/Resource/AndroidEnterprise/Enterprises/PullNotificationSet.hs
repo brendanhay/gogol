@@ -87,6 +87,7 @@ newtype EnterprisesPullNotificationSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesPullNotificationSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ enterprisesPullNotificationSet
     :: EnterprisesPullNotificationSet
 enterprisesPullNotificationSet =
   EnterprisesPullNotificationSet' {_epnsRequestMode = Nothing}
+
 
 -- | The request mode for pulling notifications. Specifying
 -- waitForNotifications will cause the request to block and wait until one

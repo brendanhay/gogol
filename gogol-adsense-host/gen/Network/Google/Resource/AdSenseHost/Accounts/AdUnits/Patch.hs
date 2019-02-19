@@ -70,6 +70,7 @@ data AccountsAdUnitsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsAdUnitsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ accountsAdUnitsPatch pAaupAdUnitId_ pAaupPayload_ pAaupAdClientId_ pAaupAccountI
     , _aaupAdClientId = pAaupAdClientId_
     , _aaupAccountId = pAaupAccountId_
     }
+
 
 -- | Ad unit to get.
 aaupAdUnitId :: Lens' AccountsAdUnitsPatch Text

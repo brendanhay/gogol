@@ -67,6 +67,7 @@ data FirewallsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FirewallsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ firewallsInsert
 firewallsInsert pFiProject_ pFiPayload_ =
   FirewallsInsert'
     {_fiRequestId = Nothing, _fiProject = pFiProject_, _fiPayload = pFiPayload_}
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

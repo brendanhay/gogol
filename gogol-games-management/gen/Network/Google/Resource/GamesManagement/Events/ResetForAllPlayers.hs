@@ -62,6 +62,7 @@ newtype EventsResetForAllPlayers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsResetForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ eventsResetForAllPlayers
     -> EventsResetForAllPlayers
 eventsResetForAllPlayers pErfapEventId_ =
   EventsResetForAllPlayers' {_erfapEventId = pErfapEventId_}
+
 
 -- | The ID of the event.
 erfapEventId :: Lens' EventsResetForAllPlayers Text

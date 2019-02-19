@@ -57,6 +57,7 @@ newtype AccountsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ accountsGet
     :: Int32 -- ^ 'agId'
     -> AccountsGet
 accountsGet pAgId_ = AccountsGet' {_agId = _Coerce # pAgId_}
+
 
 -- | The account id
 agId :: Lens' AccountsGet Int32

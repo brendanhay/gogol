@@ -34,6 +34,7 @@ data LatLng =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44,6 +45,7 @@ data LatLng =
 latLng
     :: LatLng
 latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -91,6 +93,7 @@ data Photo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Photo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -135,6 +138,7 @@ photo =
     , _pViewCount = Nothing
     , _pPhotoId = Nothing
     }
+
 
 -- | Output only. The thumbnail URL for showing a preview of the given photo.
 pThumbnailURL :: Lens' Photo (Maybe Text)
@@ -255,6 +259,7 @@ data UpdatePhotoRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdatePhotoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -266,6 +271,7 @@ updatePhotoRequest
     :: UpdatePhotoRequest
 updatePhotoRequest =
   UpdatePhotoRequest' {_uprPhoto = Nothing, _uprUpdateMask = Nothing}
+
 
 -- | Required. Photo object containing the new metadata.
 uprPhoto :: Lens' UpdatePhotoRequest (Maybe Photo)
@@ -347,6 +353,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -359,6 +366,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -407,6 +415,7 @@ data PhotoResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PhotoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -417,6 +426,7 @@ data PhotoResponse =
 photoResponse
     :: PhotoResponse
 photoResponse = PhotoResponse' {_prPhoto = Nothing, _prStatus = Nothing}
+
 
 -- | The Photo resource, if the request was successful.
 prPhoto :: Lens' PhotoResponse (Maybe Photo)
@@ -455,6 +465,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -478,6 +489,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -545,11 +557,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -565,6 +579,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -575,6 +590,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -600,6 +616,7 @@ data ListPhotosResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListPhotosResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -611,6 +628,7 @@ listPhotosResponse
     :: ListPhotosResponse
 listPhotosResponse =
   ListPhotosResponse' {_lprNextPageToken = Nothing, _lprPhotos = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -651,6 +669,7 @@ newtype Connection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Connection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -659,6 +678,7 @@ newtype Connection =
 connection
     :: Connection
 connection = Connection' {_cTarget = Nothing}
+
 
 -- | Required. The destination of the connection from the containing photo to
 -- another photo.
@@ -683,6 +703,7 @@ newtype BatchUpdatePhotosResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchUpdatePhotosResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -691,6 +712,7 @@ newtype BatchUpdatePhotosResponse =
 batchUpdatePhotosResponse
     :: BatchUpdatePhotosResponse
 batchUpdatePhotosResponse = BatchUpdatePhotosResponse' {_buprResults = Nothing}
+
 
 -- | List of results for each individual Photo updated, in the same order as
 -- the request.
@@ -721,6 +743,7 @@ newtype BatchDeletePhotosResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchDeletePhotosResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -729,6 +752,7 @@ newtype BatchDeletePhotosResponse =
 batchDeletePhotosResponse
     :: BatchDeletePhotosResponse
 batchDeletePhotosResponse = BatchDeletePhotosResponse' {_bdprStatus = Nothing}
+
 
 -- | The status for the operation to delete a single Photo in the batch
 -- request.
@@ -764,6 +788,7 @@ data Pose =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Pose' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -793,6 +818,7 @@ pose =
     , _pLevel = Nothing
     , _pPitch = Nothing
     }
+
 
 -- | Roll, measured in degrees. Value must be >= 0 and \<360. A value of 0
 -- means level with the horizon. NaN indicates an unmeasured quantity.
@@ -883,6 +909,7 @@ newtype UploadRef =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UploadRef' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -891,6 +918,7 @@ newtype UploadRef =
 uploadRef
     :: UploadRef
 uploadRef = UploadRef' {_urUploadURL = Nothing}
+
 
 -- | Required. An upload reference should be unique for each user. It follows
 -- the form:
@@ -921,6 +949,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -931,6 +960,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -956,6 +986,7 @@ newtype BatchUpdatePhotosRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchUpdatePhotosRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -965,6 +996,7 @@ batchUpdatePhotosRequest
     :: BatchUpdatePhotosRequest
 batchUpdatePhotosRequest =
   BatchUpdatePhotosRequest' {_buprUpdatePhotoRequests = Nothing}
+
 
 -- | Required. List of UpdatePhotoRequests.
 buprUpdatePhotoRequests :: Lens' BatchUpdatePhotosRequest [UpdatePhotoRequest]
@@ -997,6 +1029,7 @@ newtype BatchDeletePhotosRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchDeletePhotosRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1005,6 +1038,7 @@ newtype BatchDeletePhotosRequest =
 batchDeletePhotosRequest
     :: BatchDeletePhotosRequest
 batchDeletePhotosRequest = BatchDeletePhotosRequest' {_bdprPhotoIds = Nothing}
+
 
 -- | Required. IDs of the Photos. For HTTP GET requests, the URL query
 -- parameter should be \`photoIds=&photoIds=&...\`.
@@ -1037,6 +1071,7 @@ data Place =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Place' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1049,6 +1084,7 @@ data Place =
 place
     :: Place
 place = Place' {_pLanguageCode = Nothing, _pName = Nothing, _pPlaceId = Nothing}
+
 
 -- | Output-only. The language_code that the name is localized with. This
 -- should be the language_code specified in the request, but may be a
@@ -1093,6 +1129,7 @@ data Level =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Level' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1103,6 +1140,7 @@ data Level =
 level
     :: Level
 level = Level' {_lName = Nothing, _lNumber = Nothing}
+
 
 -- | Required. A name assigned to this Level, restricted to 3 characters.
 -- Consider how the elevator buttons would be labeled for this level if
@@ -1146,6 +1184,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1156,6 +1195,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1180,6 +1220,7 @@ newtype BatchGetPhotosResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchGetPhotosResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1188,6 +1229,7 @@ newtype BatchGetPhotosResponse =
 batchGetPhotosResponse
     :: BatchGetPhotosResponse
 batchGetPhotosResponse = BatchGetPhotosResponse' {_bgprResults = Nothing}
+
 
 -- | List of results for each individual Photo requested, in the same order
 -- as the requests in BatchGetPhotos.
@@ -1218,6 +1260,7 @@ newtype PhotoId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PhotoId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1226,6 +1269,7 @@ newtype PhotoId =
 photoId
     :: PhotoId
 photoId = PhotoId' {_piId = Nothing}
+
 
 -- | Required. A unique identifier for a photo.
 piId :: Lens' PhotoId (Maybe Text)

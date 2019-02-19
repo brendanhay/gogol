@@ -31,6 +31,7 @@ data SurveysListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveysListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -51,6 +52,7 @@ surveysListResponse =
     , _slrPageInfo = Nothing
     , _slrResources = Nothing
     }
+
 
 -- | Unique request ID used for logging and debugging. Please include in any
 -- error reporting or troubleshooting requests.
@@ -105,6 +107,7 @@ data MobileAppPanel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileAppPanel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -131,6 +134,7 @@ mobileAppPanel =
     , _mapLanguage = Nothing
     , _mapIsPublicPanel = Nothing
     }
+
 
 mapOwners :: Lens' MobileAppPanel [Text]
 mapOwners
@@ -190,6 +194,7 @@ data TokenPagination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -201,6 +206,7 @@ tokenPagination
     :: TokenPagination
 tokenPagination =
   TokenPagination' {_tpNextPageToken = Nothing, _tpPreviousPageToken = Nothing}
+
 
 tpNextPageToken :: Lens' TokenPagination (Maybe Text)
 tpNextPageToken
@@ -235,6 +241,7 @@ newtype ResultsGetRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultsGetRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -243,6 +250,7 @@ newtype ResultsGetRequest =
 resultsGetRequest
     :: ResultsGetRequest
 resultsGetRequest = ResultsGetRequest' {_rgrResultMask = Nothing}
+
 
 rgrResultMask :: Lens' ResultsGetRequest (Maybe ResultsMask)
 rgrResultMask
@@ -270,6 +278,7 @@ data MobileAppPanelsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileAppPanelsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -290,6 +299,7 @@ mobileAppPanelsListResponse =
     , _maplrPageInfo = Nothing
     , _maplrResources = Nothing
     }
+
 
 -- | Unique request ID used for logging and debugging. Please include in any
 -- error reporting or troubleshooting requests.
@@ -344,6 +354,7 @@ data PageInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -361,6 +372,7 @@ pageInfo =
     , _piTotalResults = Nothing
     , _piStartIndex = Nothing
     }
+
 
 piResultPerPage :: Lens' PageInfo (Maybe Int32)
 piResultPerPage
@@ -404,6 +416,7 @@ data FieldMask =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FieldMask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -414,6 +427,7 @@ data FieldMask =
 fieldMask
     :: FieldMask
 fieldMask = FieldMask' {_fmId = Nothing, _fmFields = Nothing}
+
 
 fmId :: Lens' FieldMask (Maybe Int32)
 fmId
@@ -457,6 +471,7 @@ data Survey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Survey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -498,6 +513,7 @@ survey =
     , _sTitle = Nothing
     , _sDescription = Nothing
     }
+
 
 sAudience :: Lens' Survey (Maybe SurveyAudience)
 sAudience
@@ -587,6 +603,7 @@ newtype SurveysStartResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveysStartResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -595,6 +612,7 @@ newtype SurveysStartResponse =
 surveysStartResponse
     :: SurveysStartResponse
 surveysStartResponse = SurveysStartResponse' {_ssrRequestId = Nothing}
+
 
 -- | Unique request ID used for logging and debugging. Please include in any
 -- error reporting or troubleshooting requests.
@@ -621,6 +639,7 @@ newtype SurveysStopResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveysStopResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -629,6 +648,7 @@ newtype SurveysStopResponse =
 surveysStopResponse
     :: SurveysStopResponse
 surveysStopResponse = SurveysStopResponse' {_sRequestId = Nothing}
+
 
 -- | Unique request ID used for logging and debugging. Please include in any
 -- error reporting or troubleshooting requests.
@@ -655,6 +675,7 @@ data ResultsMask =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultsMask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -665,6 +686,7 @@ data ResultsMask =
 resultsMask
     :: ResultsMask
 resultsMask = ResultsMask' {_rmProjection = Nothing, _rmFields = Nothing}
+
 
 rmProjection :: Lens' ResultsMask (Maybe Text)
 rmProjection
@@ -699,6 +721,7 @@ data SurveyRejection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveyRejection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -709,6 +732,7 @@ data SurveyRejection =
 surveyRejection
     :: SurveyRejection
 surveyRejection = SurveyRejection' {_srExplanation = Nothing, _srType = Nothing}
+
 
 srExplanation :: Lens' SurveyRejection (Maybe Text)
 srExplanation
@@ -741,6 +765,7 @@ data SurveyResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveyResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -751,6 +776,7 @@ data SurveyResults =
 surveyResults
     :: SurveyResults
 surveyResults = SurveyResults' {_srStatus = Nothing, _srSurveyURLId = Nothing}
+
 
 srStatus :: Lens' SurveyResults (Maybe Text)
 srStatus = lens _srStatus (\ s a -> s{_srStatus = a})
@@ -782,6 +808,7 @@ newtype SurveysStartRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveysStartRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -791,6 +818,7 @@ surveysStartRequest
     :: SurveysStartRequest
 surveysStartRequest =
   SurveysStartRequest' {_ssrMaxCostPerResponseNanos = Nothing}
+
 
 -- | Threshold to start a survey automically if the quoted prices is less
 -- than or equal to this value. See Survey.Cost for more details.
@@ -822,6 +850,7 @@ newtype SurveysDeleteResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveysDeleteResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -830,6 +859,7 @@ newtype SurveysDeleteResponse =
 surveysDeleteResponse
     :: SurveysDeleteResponse
 surveysDeleteResponse = SurveysDeleteResponse' {_sdrRequestId = Nothing}
+
 
 -- | Unique request ID used for logging and debugging. Please include in any
 -- error reporting or troubleshooting requests.
@@ -858,6 +888,7 @@ data SurveyQuestionImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveyQuestionImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -872,6 +903,7 @@ surveyQuestionImage
 surveyQuestionImage =
   SurveyQuestionImage'
     {_sqiData = Nothing, _sqiURL = Nothing, _sqiAltText = Nothing}
+
 
 sqiData :: Lens' SurveyQuestionImage (Maybe ByteString)
 sqiData
@@ -914,6 +946,7 @@ data SurveyAudience =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveyAudience' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -943,6 +976,7 @@ surveyAudience =
     , _saCountrySubdivision = Nothing
     , _saPopulationSource = Nothing
     }
+
 
 saCountry :: Lens' SurveyAudience (Maybe Text)
 saCountry
@@ -1012,6 +1046,7 @@ data SurveyCost =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveyCost' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1032,6 +1067,7 @@ surveyCost =
     , _scMaxCostPerResponseNanos = Nothing
     , _scCostPerResponseNanos = Nothing
     }
+
 
 scCurrencyCode :: Lens' SurveyCost (Maybe Text)
 scCurrencyCode
@@ -1100,6 +1136,7 @@ data SurveyQuestion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveyQuestion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1162,6 +1199,7 @@ surveyQuestion =
     , _sqNumStars = Nothing
     , _sqLowValueLabel = Nothing
     }
+
 
 sqImages :: Lens' SurveyQuestion [SurveyQuestionImage]
 sqImages

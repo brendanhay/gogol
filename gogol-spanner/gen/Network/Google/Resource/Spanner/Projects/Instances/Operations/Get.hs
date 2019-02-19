@@ -74,6 +74,7 @@ data ProjectsInstancesOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ projectsInstancesOperationsGet pPiogName_ =
     , _piogName = pPiogName_
     , _piogCallback = Nothing
     }
+
 
 -- | V1 error format.
 piogXgafv :: Lens' ProjectsInstancesOperationsGet (Maybe Xgafv)

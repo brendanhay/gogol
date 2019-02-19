@@ -68,6 +68,7 @@ data SSLPoliciesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLPoliciesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ sslPoliciesPatch pSppSSLPolicy_ pSppProject_ pSppPayload_ =
     , _sppProject = pSppProject_
     , _sppPayload = pSppPayload_
     }
+
 
 -- | Name of the SSL policy to update. The name must be 1-63 characters long,
 -- and comply with RFC1035.

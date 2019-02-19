@@ -83,6 +83,7 @@ data ProjectsAgentIntentsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentIntentsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsAgentIntentsPatch pPaipPayload_ pPaipName_ =
     , _paipName = pPaipName_
     , _paipCallback = Nothing
     }
+
 
 -- | V1 error format.
 paipXgafv :: Lens' ProjectsAgentIntentsPatch (Maybe Xgafv)

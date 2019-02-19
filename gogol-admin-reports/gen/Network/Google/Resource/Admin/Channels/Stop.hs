@@ -61,6 +61,7 @@ newtype ChannelsStop =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelsStop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ channelsStop
     :: Channel -- ^ 'csPayload'
     -> ChannelsStop
 channelsStop pCsPayload_ = ChannelsStop' {_csPayload = pCsPayload_}
+
 
 -- | Multipart request metadata.
 csPayload :: Lens' ChannelsStop Channel

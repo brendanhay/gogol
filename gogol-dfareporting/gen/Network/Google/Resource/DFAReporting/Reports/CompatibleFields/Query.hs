@@ -68,6 +68,7 @@ data ReportsCompatibleFieldsQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsCompatibleFieldsQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ reportsCompatibleFieldsQuery
 reportsCompatibleFieldsQuery pRcfqProFileId_ pRcfqPayload_ =
   ReportsCompatibleFieldsQuery'
     {_rcfqProFileId = _Coerce # pRcfqProFileId_, _rcfqPayload = pRcfqPayload_}
+
 
 -- | The DFA user profile ID.
 rcfqProFileId :: Lens' ReportsCompatibleFieldsQuery Int64

@@ -72,6 +72,7 @@ data ManagementRemarketingAudiencePatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementRemarketingAudiencePatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ managementRemarketingAudiencePatch pMrapWebPropertyId_ pMrapPayload_ pMrapAccoun
     , _mrapAccountId = pMrapAccountId_
     , _mrapRemarketingAudienceId = pMrapRemarketingAudienceId_
     }
+
 
 -- | The web property ID of the remarketing audience to update.
 mrapWebPropertyId :: Lens' ManagementRemarketingAudiencePatch Text

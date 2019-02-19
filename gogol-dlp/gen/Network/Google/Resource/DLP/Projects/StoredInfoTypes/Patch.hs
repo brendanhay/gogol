@@ -81,6 +81,7 @@ data ProjectsStoredInfoTypesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsStoredInfoTypesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsStoredInfoTypesPatch pPsitpPayload_ pPsitpName_ =
     , _psitpName = pPsitpName_
     , _psitpCallback = Nothing
     }
+
 
 -- | V1 error format.
 psitpXgafv :: Lens' ProjectsStoredInfoTypesPatch (Maybe Xgafv)

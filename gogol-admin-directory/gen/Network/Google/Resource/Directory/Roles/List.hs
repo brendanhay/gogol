@@ -65,6 +65,7 @@ data RolesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RolesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ rolesList pRlCustomer_ =
     , _rlPageToken = Nothing
     , _rlMaxResults = Nothing
     }
+
 
 -- | Immutable ID of the G Suite account.
 rlCustomer :: Lens' RolesList Text

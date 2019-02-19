@@ -70,6 +70,7 @@ data SitesGetConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesGetConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ sitesGetConfig pSgcName_ =
     , _sgcName = pSgcName_
     , _sgcCallback = Nothing
     }
+
 
 -- | V1 error format.
 sgcXgafv :: Lens' SitesGetConfig (Maybe Xgafv)

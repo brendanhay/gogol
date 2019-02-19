@@ -84,6 +84,7 @@ data ProjectsRolesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRolesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsRolesList pPrlParent_ =
     , _prlPageSize = Nothing
     , _prlCallback = Nothing
     }
+
 
 -- | The resource name of the parent resource in one of the following
 -- formats: \`\` (empty string) -- this refers to curated roles.

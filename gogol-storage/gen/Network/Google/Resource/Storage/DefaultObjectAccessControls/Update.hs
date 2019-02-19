@@ -68,6 +68,7 @@ data DefaultObjectAccessControlsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DefaultObjectAccessControlsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ defaultObjectAccessControlsUpdate pDoacuBucket_ pDoacuPayload_ pDoacuEntity_ =
     , _doacuUserProject = Nothing
     , _doacuEntity = pDoacuEntity_
     }
+
 
 -- | Name of a bucket.
 doacuBucket :: Lens' DefaultObjectAccessControlsUpdate Text

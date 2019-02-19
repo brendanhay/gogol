@@ -75,6 +75,7 @@ data ProjectsJobsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsJobsPatch pPjpPayload_ pPjpName_ =
     , _pjpName = pPjpName_
     , _pjpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjpXgafv :: Lens' ProjectsJobsPatch (Maybe Xgafv)

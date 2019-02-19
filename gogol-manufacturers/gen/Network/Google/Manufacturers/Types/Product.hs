@@ -31,6 +31,7 @@ data Image =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43,6 +44,7 @@ data Image =
 image
     :: Image
 image = Image' {_iStatus = Nothing, _iImageURL = Nothing, _iType = Nothing}
+
 
 -- | The status of the image. \'OutputOnly
 iStatus :: Lens' Image (Maybe ImageStatus)
@@ -87,6 +89,7 @@ data FeatureDescription =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FeatureDescription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +104,7 @@ featureDescription
 featureDescription =
   FeatureDescription'
     {_fdImage = Nothing, _fdText = Nothing, _fdHeadline = Nothing}
+
 
 -- | An optional image describing the feature.
 fdImage :: Lens' FeatureDescription (Maybe Image)
@@ -142,6 +146,7 @@ data ProductDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -159,6 +164,7 @@ productDetail =
     , _pdAttributeName = Nothing
     , _pdSectionName = Nothing
     }
+
 
 -- | The value of the attribute.
 pdAttributeValue :: Lens' ProductDetail (Maybe Text)
@@ -206,11 +212,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -228,6 +236,7 @@ data DestinationStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DestinationStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -239,6 +248,7 @@ destinationStatus
     :: DestinationStatus
 destinationStatus =
   DestinationStatus' {_dsDestination = Nothing, _dsStatus = Nothing}
+
 
 -- | The name of the destination.
 dsDestination :: Lens' DestinationStatus (Maybe Text)
@@ -275,6 +285,7 @@ data Count =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Count' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -285,6 +296,7 @@ data Count =
 count
     :: Count
 count = Count' {_cValue = Nothing, _cUnit = Nothing}
+
 
 -- | The numeric value of the number of products in a package.
 cValue :: Lens' Count (Maybe Int64)
@@ -319,6 +331,7 @@ data Capacity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Capacity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -329,6 +342,7 @@ data Capacity =
 capacity
     :: Capacity
 capacity = Capacity' {_capValue = Nothing, _capUnit = Nothing}
+
 
 -- | The numeric value of the capacity.
 capValue :: Lens' Capacity (Maybe Int64)
@@ -396,6 +410,7 @@ data Attributes =
     , _aTheme                :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Attributes' with the minimum fields required to make a request.
 --
@@ -510,6 +525,7 @@ attributes =
     , _aDescription = Nothing
     , _aTheme = Nothing
     }
+
 
 -- | The canonical name of the product. For more information, see
 -- https:\/\/support.google.com\/manufacturers\/answer\/6124116#productname.
@@ -822,6 +838,7 @@ data Price =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -832,6 +849,7 @@ data Price =
 price
     :: Price
 price = Price' {_pAmount = Nothing, _pCurrency = Nothing}
+
 
 -- | The numeric value of the price.
 pAmount :: Lens' Price (Maybe Text)
@@ -871,6 +889,7 @@ data Product =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -903,6 +922,7 @@ product =
     , _pContentLanguage = Nothing
     , _pProductId = Nothing
     }
+
 
 -- | Parent ID in the format \`accounts\/{account_id}\`. \`account_id\` - The
 -- ID of the Manufacturer Center account.
@@ -1002,6 +1022,7 @@ data Issue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Issue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1034,6 +1055,7 @@ issue =
     , _issTimestamp = Nothing
     , _issDescription = Nothing
     }
+
 
 -- | If present, the attribute that triggered the issue. For more information
 -- about attributes, see
@@ -1114,6 +1136,7 @@ data ListProductsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListProductsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1125,6 +1148,7 @@ listProductsResponse
     :: ListProductsResponse
 listProductsResponse =
   ListProductsResponse' {_lprNextPageToken = Nothing, _lprProducts = Nothing}
+
 
 -- | The token for the retrieval of the next page of product statuses.
 lprNextPageToken :: Lens' ListProductsResponse (Maybe Text)

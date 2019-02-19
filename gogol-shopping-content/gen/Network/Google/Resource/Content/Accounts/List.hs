@@ -64,6 +64,7 @@ data AccountsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ accountsList pAllMerchantId_ =
     , _allPageToken = Nothing
     , _allMaxResults = Nothing
     }
+
 
 -- | The ID of the managing account. This must be a multi-client account.
 allMerchantId :: Lens' AccountsList Word64

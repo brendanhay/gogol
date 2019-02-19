@@ -74,6 +74,7 @@ data AssetsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AssetsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ assetsGet pAgName_ =
     , _agName = pAgName_
     , _agCallback = Nothing
     }
+
 
 -- | V1 error format.
 agXgafv :: Lens' AssetsGet (Maybe Xgafv)

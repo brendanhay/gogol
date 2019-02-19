@@ -78,6 +78,7 @@ data DevicesSetState =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DevicesSetState' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ devicesSetState pDssEnterpriseId_ pDssPayload_ pDssUserId_ pDssDeviceId_ =
     , _dssUserId = pDssUserId_
     , _dssDeviceId = pDssDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 dssEnterpriseId :: Lens' DevicesSetState Text

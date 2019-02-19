@@ -63,6 +63,7 @@ data UsersThreadsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersThreadsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ usersThreadsDelete
     -> UsersThreadsDelete
 usersThreadsDelete pUtdId_ =
   UsersThreadsDelete' {_utdUserId = "me", _utdId = pUtdId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

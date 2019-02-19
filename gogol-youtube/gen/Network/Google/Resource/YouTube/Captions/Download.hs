@@ -86,6 +86,7 @@ data CaptionsDownload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CaptionsDownload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ captionsDownload pCapaId_ =
     , _capaId = pCapaId_
     , _capaTfmt = Nothing
     }
+
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
 -- of

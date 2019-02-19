@@ -82,6 +82,7 @@ data ProjectsLocationsQueuesGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsQueuesGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsLocationsQueuesGetIAMPolicy pPlqgipPayload_ pPlqgipResource_ =
     , _plqgipResource = pPlqgipResource_
     , _plqgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plqgipXgafv :: Lens' ProjectsLocationsQueuesGetIAMPolicy (Maybe Xgafv)

@@ -78,6 +78,7 @@ data ProjectsGroupsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGroupsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsGroupsUpdate pPguPayload_ pPguName_ =
     , _pguName = pPguName_
     , _pguCallback = Nothing
     }
+
 
 -- | V1 error format.
 pguXgafv :: Lens' ProjectsGroupsUpdate (Maybe Xgafv)

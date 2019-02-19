@@ -63,6 +63,7 @@ newtype ProjectsGetSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGetSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ projectsGetSettings
     -> ProjectsGetSettings
 projectsGetSettings pPgsProjectId_ =
   ProjectsGetSettings' {_pgsProjectId = pPgsProjectId_}
+
 
 -- | A Project id. Required.
 pgsProjectId :: Lens' ProjectsGetSettings Text

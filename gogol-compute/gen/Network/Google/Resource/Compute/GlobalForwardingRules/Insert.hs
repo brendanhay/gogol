@@ -68,6 +68,7 @@ data GlobalForwardingRulesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GlobalForwardingRulesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ globalForwardingRulesInsert pGfriProject_ pGfriPayload_ =
     , _gfriProject = pGfriProject_
     , _gfriPayload = pGfriPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

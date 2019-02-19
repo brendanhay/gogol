@@ -71,6 +71,7 @@ data PlacementsGeneratetags =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementsGeneratetags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ placementsGeneratetags pPgsProFileId_ =
     , _pgsProFileId = _Coerce # pPgsProFileId_
     , _pgsPlacementIds = Nothing
     }
+
 
 -- | Tag formats to generate for these placements. Note:
 -- PLACEMENT_TAG_STANDARD can only be generated for 1x1 placements.

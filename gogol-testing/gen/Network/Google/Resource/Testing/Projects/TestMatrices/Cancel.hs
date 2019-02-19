@@ -86,6 +86,7 @@ data ProjectsTestMatricesCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTestMatricesCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsTestMatricesCancel pPtmcTestMatrixId_ pPtmcProjectId_ =
     , _ptmcProjectId = pPtmcProjectId_
     , _ptmcCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptmcXgafv :: Lens' ProjectsTestMatricesCancel (Maybe Xgafv)

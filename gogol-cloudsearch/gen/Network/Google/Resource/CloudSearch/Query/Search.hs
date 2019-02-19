@@ -79,6 +79,7 @@ data QuerySearch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuerySearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ querySearch pQPayload_ =
     , _qPayload = pQPayload_
     , _qCallback = Nothing
     }
+
 
 -- | V1 error format.
 qXgafv :: Lens' QuerySearch (Maybe Xgafv)

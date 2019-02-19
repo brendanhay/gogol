@@ -29,6 +29,7 @@ newtype LighthouseResultV5CategoryGroups =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseResultV5CategoryGroups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40,6 +41,7 @@ lighthouseResultV5CategoryGroups
 lighthouseResultV5CategoryGroups pLrvcgAddtional_ =
   LighthouseResultV5CategoryGroups'
     {_lrvcgAddtional = _Coerce # pLrvcgAddtional_}
+
 
 -- | A grouping contained in a category that groups similar audits together.
 lrvcgAddtional :: Lens' LighthouseResultV5CategoryGroups (HashMap Text LighthouseResultV5CategoryGroupsAdditional)
@@ -71,6 +73,7 @@ data LighthouseResultV5RuntimeError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseResultV5RuntimeError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +86,7 @@ lighthouseResultV5RuntimeError
 lighthouseResultV5RuntimeError =
   LighthouseResultV5RuntimeError'
     {_lrvreCode = Nothing, _lrvreMessage = Nothing}
+
 
 -- | The enumerated Lighthouse Error code.
 lrvreCode :: Lens' LighthouseResultV5RuntimeError (Maybe Text)
@@ -118,6 +122,7 @@ newtype LighthouseAuditResultV5Details =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseAuditResultV5Details' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +133,7 @@ lighthouseAuditResultV5Details
     -> LighthouseAuditResultV5Details
 lighthouseAuditResultV5Details pLarvdAddtional_ =
   LighthouseAuditResultV5Details' {_larvdAddtional = _Coerce # pLarvdAddtional_}
+
 
 larvdAddtional :: Lens' LighthouseAuditResultV5Details (HashMap Text JSONValue)
 larvdAddtional
@@ -157,6 +163,7 @@ data LighthouseResultV5ConfigSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseResultV5ConfigSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -174,6 +181,7 @@ lighthouseResultV5ConfigSettings =
     , _lrvcsEmulatedFormFactor = Nothing
     , _lrvcsOnlyCategories = Nothing
     }
+
 
 -- | The locale setting.
 lrvcsLocale :: Lens' LighthouseResultV5ConfigSettings (Maybe Text)
@@ -221,6 +229,7 @@ data LighthouseResultV5Environment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseResultV5Environment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -238,6 +247,7 @@ lighthouseResultV5Environment =
     , _lrveBenchmarkIndex = Nothing
     , _lrveNetworkUserAgent = Nothing
     }
+
 
 -- | The user agent string of the version of Chrome used.
 lrveHostUserAgent :: Lens' LighthouseResultV5Environment (Maybe Text)
@@ -284,6 +294,7 @@ data LighthouseResultV5CategoryGroupsAdditional =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseResultV5CategoryGroupsAdditional' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -296,6 +307,7 @@ lighthouseResultV5CategoryGroupsAdditional
 lighthouseResultV5CategoryGroupsAdditional =
   LighthouseResultV5CategoryGroupsAdditional'
     {_lrvcgaTitle = Nothing, _lrvcgaDescription = Nothing}
+
 
 -- | The title of the category group.
 lrvcgaTitle :: Lens' LighthouseResultV5CategoryGroupsAdditional (Maybe Text)
@@ -345,6 +357,7 @@ data LighthouseAuditResultV5 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseAuditResultV5' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -383,6 +396,7 @@ lighthouseAuditResultV5 =
     , _larvErrorMessage = Nothing
     , _larvDescription = Nothing
     }
+
 
 larvScore :: Lens' LighthouseAuditResultV5 (Maybe JSONValue)
 larvScore
@@ -480,6 +494,7 @@ data PagespeedAPIPagespeedResponseV5 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagespeedAPIPagespeedResponseV5' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -512,6 +527,7 @@ pagespeedAPIPagespeedResponseV5 =
     , _paprvLighthouseResult = Nothing
     , _paprvAnalysisUTCTimestamp = Nothing
     }
+
 
 -- | Kind of result.
 paprvKind :: Lens' PagespeedAPIPagespeedResponseV5 Text
@@ -596,6 +612,7 @@ newtype PagespeedAPILoadingExperienceV5Metrics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagespeedAPILoadingExperienceV5Metrics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -607,6 +624,7 @@ pagespeedAPILoadingExperienceV5Metrics
 pagespeedAPILoadingExperienceV5Metrics pPalevmAddtional_ =
   PagespeedAPILoadingExperienceV5Metrics'
     {_palevmAddtional = _Coerce # pPalevmAddtional_}
+
 
 -- | The type of the metric.
 palevmAddtional :: Lens' PagespeedAPILoadingExperienceV5Metrics (HashMap Text PagespeedAPILoadingExperienceV5MetricsAdditional)
@@ -649,6 +667,7 @@ data LighthouseResultV5 =
     , _lrvI18n              :: !(Maybe LighthouseResultV5I18n)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5' with the minimum fields required to make a request.
 --
@@ -700,6 +719,7 @@ lighthouseResultV5 =
     , _lrvAudits = Nothing
     , _lrvI18n = Nothing
     }
+
 
 -- | A top-level error message that, if present, indicates a serious enough
 -- problem that this Lighthouse result may need to be discarded.
@@ -833,6 +853,7 @@ data LighthouseResultV5Categories =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseResultV5Categories' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -856,6 +877,7 @@ lighthouseResultV5Categories =
     , _lrvcSeo = Nothing
     , _lrvcAccessibility = Nothing
     }
+
 
 -- | The best practices category, containing all web best practice related
 -- audits.
@@ -918,6 +940,7 @@ data LighthouseCategoryV5 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseCategoryV5' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -944,6 +967,7 @@ lighthouseCategoryV5 =
     , _lcvTitle = Nothing
     , _lcvDescription = Nothing
     }
+
 
 -- | A description for the manual audits in the category.
 lcvManualDescription :: Lens' LighthouseCategoryV5 (Maybe Text)
@@ -1007,6 +1031,7 @@ data PagespeedAPILoadingExperienceV5MetricsAdditional =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagespeedAPILoadingExperienceV5MetricsAdditional' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1024,6 +1049,7 @@ pagespeedAPILoadingExperienceV5MetricsAdditional =
     , _palevmaPercentile = Nothing
     , _palevmaDistributions = Nothing
     }
+
 
 palevmaCategory :: Lens' PagespeedAPILoadingExperienceV5MetricsAdditional (Maybe Text)
 palevmaCategory
@@ -1076,6 +1102,7 @@ data PagespeedAPILoadingExperienceV5 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagespeedAPILoadingExperienceV5' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1096,6 +1123,7 @@ pagespeedAPILoadingExperienceV5 =
     , _palevId = Nothing
     , _palevOverallCategory = Nothing
     }
+
 
 palevMetrics :: Lens' PagespeedAPILoadingExperienceV5 (Maybe PagespeedAPILoadingExperienceV5Metrics)
 palevMetrics
@@ -1144,6 +1172,7 @@ data PagespeedAPIPagespeedResponseV5Version =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagespeedAPIPagespeedResponseV5Version' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1156,6 +1185,7 @@ pagespeedAPIPagespeedResponseV5Version
 pagespeedAPIPagespeedResponseV5Version =
   PagespeedAPIPagespeedResponseV5Version'
     {_paprvvMinor = Nothing, _paprvvMajor = Nothing}
+
 
 -- | The minor version number of PageSpeed used to generate these results.
 paprvvMinor :: Lens' PagespeedAPIPagespeedResponseV5Version (Maybe Int32)
@@ -1197,6 +1227,7 @@ data PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1214,6 +1245,7 @@ pagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem =
     , _palevmadiProportion = Nothing
     , _palevmadiMin = Nothing
     }
+
 
 palevmadiMax :: Lens' PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem (Maybe Int32)
 palevmadiMax
@@ -1263,6 +1295,7 @@ newtype LighthouseResultV5Timing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseResultV5Timing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1271,6 +1304,7 @@ newtype LighthouseResultV5Timing =
 lighthouseResultV5Timing
     :: LighthouseResultV5Timing
 lighthouseResultV5Timing = LighthouseResultV5Timing' {_lrvtTotal = Nothing}
+
 
 -- | The total duration of Lighthouse\'s run.
 lrvtTotal :: Lens' LighthouseResultV5Timing (Maybe Double)
@@ -1312,6 +1346,7 @@ data LighthouseResultV5I18nRendererFormattedStrings =
     , _lrvirfsNotApplicableAuditsGroupTitle    :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LighthouseResultV5I18nRendererFormattedStrings' with the minimum fields required to make a request.
 --
@@ -1369,6 +1404,7 @@ lighthouseResultV5I18nRendererFormattedStrings =
     , _lrvirfsAuditGroupExpandTooltip = Nothing
     , _lrvirfsNotApplicableAuditsGroupTitle = Nothing
     }
+
 
 -- | The title of the lab data performance category.
 lrvirfsLabDataTitle :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
@@ -1543,6 +1579,7 @@ data LighthouseCategoryV5AuditRefsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseCategoryV5AuditRefsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1557,6 +1594,7 @@ lighthouseCategoryV5AuditRefsItem
 lighthouseCategoryV5AuditRefsItem =
   LighthouseCategoryV5AuditRefsItem'
     {_lcvariGroup = Nothing, _lcvariWeight = Nothing, _lcvariId = Nothing}
+
 
 -- | The category group that the audit belongs to (optional).
 lcvariGroup :: Lens' LighthouseCategoryV5AuditRefsItem (Maybe Text)
@@ -1600,6 +1638,7 @@ newtype LighthouseResultV5I18n =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseResultV5I18n' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1609,6 +1648,7 @@ lighthouseResultV5I18n
     :: LighthouseResultV5I18n
 lighthouseResultV5I18n =
   LighthouseResultV5I18n' {_lrviRendererFormattedStrings = Nothing}
+
 
 -- | Internationalized strings that are formatted to the locale in
 -- configSettings.
@@ -1640,6 +1680,7 @@ newtype LighthouseResultV5Audits =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LighthouseResultV5Audits' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1650,6 +1691,7 @@ lighthouseResultV5Audits
     -> LighthouseResultV5Audits
 lighthouseResultV5Audits pLrvaAddtional_ =
   LighthouseResultV5Audits' {_lrvaAddtional = _Coerce # pLrvaAddtional_}
+
 
 -- | An audit that was performed in this run. Keyed by audit id.
 lrvaAddtional :: Lens' LighthouseResultV5Audits (HashMap Text LighthouseAuditResultV5)

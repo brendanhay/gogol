@@ -72,6 +72,7 @@ data DocumentsClassifyText =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentsClassifyText' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ documentsClassifyText pDctPayload_ =
     , _dctPayload = pDctPayload_
     , _dctCallback = Nothing
     }
+
 
 -- | V1 error format.
 dctXgafv :: Lens' DocumentsClassifyText (Maybe Xgafv)

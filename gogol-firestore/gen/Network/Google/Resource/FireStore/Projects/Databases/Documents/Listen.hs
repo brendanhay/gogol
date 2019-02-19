@@ -75,6 +75,7 @@ data ProjectsDatabasesDocumentsListen =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesDocumentsListen' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsDatabasesDocumentsListen pPddlDatabase_ pPddlPayload_ =
     , _pddlPayload = pPddlPayload_
     , _pddlCallback = Nothing
     }
+
 
 -- | V1 error format.
 pddlXgafv :: Lens' ProjectsDatabasesDocumentsListen (Maybe Xgafv)

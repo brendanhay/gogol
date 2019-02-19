@@ -32,6 +32,7 @@ data RoomJoinRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomJoinRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -52,6 +53,7 @@ roomJoinRequest =
     , _rjrClientAddress = Nothing
     , _rjrCapabilities = Nothing
     }
+
 
 -- | Network diagnostics for the client joining the room.
 rjrNetworkDiagnostics :: Lens' RoomJoinRequest (Maybe NetworkDiagnostics)
@@ -109,6 +111,7 @@ data PlayerName =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerName' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +122,7 @@ data PlayerName =
 playerName
     :: PlayerName
 playerName = PlayerName' {_pnGivenName = Nothing, _pnFamilyName = Nothing}
+
 
 -- | The given name of this player. In some places, this is known as the
 -- first name.
@@ -165,6 +169,7 @@ data Snapshot =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Snapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -206,6 +211,7 @@ snapshot =
     , _sDescription = Nothing
     , _sDriveId = Nothing
     }
+
 
 -- | The timestamp (in millis since Unix epoch) of the last modification to
 -- this snapshot.
@@ -322,6 +328,7 @@ data Room =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Room' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -369,6 +376,7 @@ room =
     , _rRoomId = Nothing
     , _rDescription = Nothing
     }
+
 
 -- | The status of the room. Possible values are: - \"ROOM_INVITING\" - One
 -- or more players have been invited and not responded. -
@@ -507,6 +515,7 @@ data QuestListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuestListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -524,6 +533,7 @@ questListResponse =
     , _qlrKind = "games#questListResponse"
     , _qlrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results.
 qlrNextPageToken :: Lens' QuestListResponse (Maybe Text)
@@ -587,6 +597,7 @@ data TurnBasedMatch =
     , _tbmMatchVersion         :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatch' with the minimum fields required to make a request.
 --
@@ -656,6 +667,7 @@ turnBasedMatch =
     , _tbmRematchId = Nothing
     , _tbmMatchVersion = Nothing
     }
+
 
 -- | The status of the match. Possible values are: - \"MATCH_AUTO_MATCHING\"
 -- - One or more slots need to be filled by auto-matching; the match cannot
@@ -861,6 +873,7 @@ data TurnBasedMatchData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -878,6 +891,7 @@ turnBasedMatchData =
     , _tbmdData = Nothing
     , _tbmdDataAvailable = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#turnBasedMatchData.
@@ -928,6 +942,7 @@ data PlayerEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -951,6 +966,7 @@ playerEvent =
     , _peDefinitionId = Nothing
     , _pePlayerId = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#playerEvent.
@@ -1020,6 +1036,7 @@ data PlayerLeaderboardScore =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerLeaderboardScore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1055,6 +1072,7 @@ playerLeaderboardScore =
     , _plsLeaderboardId = Nothing
     , _plsWriteTimestamp = Nothing
     }
+
 
 -- | Additional information about the score. Values must contain no more than
 -- 64 URI-safe characters as defined by section 2.3 of RFC 3986.
@@ -1163,6 +1181,7 @@ data Application =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1210,6 +1229,7 @@ application =
     , _aDescription = Nothing
     , _aLastUpdatedTimestamp = Nothing
     }
+
 
 -- | A hint to the client UI for what color to use as an app-themed color.
 -- The color is given as an RGB triplet (e.g. \"E0E0E0\").
@@ -1336,6 +1356,7 @@ data ApplicationCategory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationCategory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1353,6 +1374,7 @@ applicationCategory =
     , _acKind = "games#applicationCategory"
     , _acPrimary = Nothing
     }
+
 
 -- | The secondary category.
 acSecondary :: Lens' ApplicationCategory (Maybe Text)
@@ -1396,6 +1418,7 @@ data PlayerScoreListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerScoreListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1410,6 +1433,7 @@ playerScoreListResponse =
     { _pslrSubmittedScores = Nothing
     , _pslrKind = "games#playerScoreListResponse"
     }
+
 
 -- | The score submissions statuses.
 pslrSubmittedScores :: Lens' PlayerScoreListResponse [PlayerScoreResponse]
@@ -1454,6 +1478,7 @@ data NetworkDiagnostics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkDiagnostics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1483,6 +1508,7 @@ networkDiagnostics =
     , _ndIosNetworkType = Nothing
     , _ndAndroidNetworkSubtype = Nothing
     }
+
 
 -- | The Android network type.
 ndAndroidNetworkType :: Lens' NetworkDiagnostics (Maybe Int32)
@@ -1578,6 +1604,7 @@ data TurnBasedMatchTurn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchTurn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1601,6 +1628,7 @@ turnBasedMatchTurn =
     , _tbmtPendingParticipantId = Nothing
     , _tbmtMatchVersion = Nothing
     }
+
 
 -- | The match results for the participants in the match.
 tbmtResults :: Lens' TurnBasedMatchTurn [ParticipantResult]
@@ -1671,6 +1699,7 @@ data QuestCriterion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuestCriterion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1694,6 +1723,7 @@ questCriterion =
     , _qcInitialPlayerProgress = Nothing
     , _qcEventId = Nothing
     }
+
 
 -- | The number of increments the player has made toward the completion count
 -- event increments required to complete the quest. This value will not
@@ -1766,6 +1796,7 @@ data TurnBasedMatchList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1783,6 +1814,7 @@ turnBasedMatchList =
     , _tbmlKind = "games#turnBasedMatchList"
     , _tbmlItems = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 tbmlNextPageToken :: Lens' TurnBasedMatchList (Maybe Text)
@@ -1835,6 +1867,7 @@ data PeerChannelDiagnostics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeerChannelDiagnostics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1867,6 +1900,7 @@ peerChannelDiagnostics =
     , _pcdNumSendFailures = Nothing
     , _pcdNumMessagesSent = Nothing
     }
+
 
 -- | Number of messages lost.
 pcdNumMessagesLost :: Lens' PeerChannelDiagnostics (Maybe Int32)
@@ -1957,6 +1991,7 @@ data RoomList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1971,6 +2006,7 @@ roomList
 roomList =
   RoomList'
     {_rlNextPageToken = Nothing, _rlKind = "games#roomList", _rlItems = Nothing}
+
 
 -- | The pagination token for the next page of results.
 rlNextPageToken :: Lens' RoomList (Maybe Text)
@@ -2017,6 +2053,7 @@ data PushToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PushToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2037,6 +2074,7 @@ pushToken =
     , _ptLanguage = Nothing
     , _ptId = Nothing
     }
+
 
 -- | The revision of the client SDK used by your application, in the same
 -- format that\'s used by revisions.check. Used to send backward compatible
@@ -2094,6 +2132,7 @@ data AchievementUpdateResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementUpdateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2120,6 +2159,7 @@ achievementUpdateResponse =
     , _aurNewlyUnlocked = Nothing
     , _aurCurrentSteps = Nothing
     }
+
 
 -- | Whether the requested updates actually affected the achievement.
 aurUpdateOccurred :: Lens' AchievementUpdateResponse (Maybe Bool)
@@ -2200,6 +2240,7 @@ data LeaderboardEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2235,6 +2276,7 @@ leaderboardEntry =
     , _lePlayer = Nothing
     , _leScoreRank = Nothing
     }
+
 
 -- | Additional information about the score. Values must contain no more than
 -- 64 URI-safe characters as defined by section 2.3 of RFC 3986.
@@ -2330,6 +2372,7 @@ data SnapshotListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2347,6 +2390,7 @@ snapshotListResponse =
     , _slrKind = "games#snapshotListResponse"
     , _slrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results. If there are no more
 -- results, the token is omitted.
@@ -2396,6 +2440,7 @@ data PlayerLevel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerLevel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2416,6 +2461,7 @@ playerLevel =
     , _plMinExperiencePoints = Nothing
     , _plLevel = Nothing
     }
+
 
 -- | The maximum experience points for this level.
 plMaxExperiencePoints :: Lens' PlayerLevel (Maybe Int64)
@@ -2473,6 +2519,7 @@ data AchievementUpdateMultipleResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementUpdateMultipleResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2487,6 +2534,7 @@ achievementUpdateMultipleResponse =
     { _aumrKind = "games#achievementUpdateMultipleResponse"
     , _aumrUpdatedAchievements = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementUpdateListResponse.
@@ -2538,6 +2586,7 @@ data RoomParticipant =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomParticipant' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2576,6 +2625,7 @@ roomParticipant =
     , _rpCapabilities = Nothing
     , _rpAutoMatchedPlayer = Nothing
     }
+
 
 -- | The status of the participant with respect to the room. Possible values
 -- are: - \"PARTICIPANT_INVITED\" - The participant has been invited to
@@ -2695,6 +2745,7 @@ data EventDefinitionListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventDefinitionListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2712,6 +2763,7 @@ eventDefinitionListResponse =
     , _edlrKind = "games#eventDefinitionListResponse"
     , _edlrItems = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 edlrNextPageToken :: Lens' EventDefinitionListResponse (Maybe Text)
@@ -2760,6 +2812,7 @@ data Category =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Category' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2777,6 +2830,7 @@ category =
     , _cCategory = Nothing
     , _cExperiencePoints = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#category.
@@ -2824,6 +2878,7 @@ data InstanceAndroidDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceAndroidDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2844,6 +2899,7 @@ instanceAndroidDetails =
     , _iadKind = "games#instanceAndroidDetails"
     , _iadEnablePiracyCheck = Nothing
     }
+
 
 -- | Android package name which maps to Google Play URL.
 iadPackageName :: Lens' InstanceAndroidDetails (Maybe Text)
@@ -2899,6 +2955,7 @@ data TurnBasedMatchParticipant =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchParticipant' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2925,6 +2982,7 @@ turnBasedMatchParticipant =
     , _tbmpPlayer = Nothing
     , _tbmpAutoMatchedPlayer = Nothing
     }
+
 
 -- | The status of the participant with respect to the match. Possible values
 -- are: - \"PARTICIPANT_NOT_INVITED_YET\" - The participant is slated to be
@@ -3006,6 +3064,7 @@ data AchievementDefinitionsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementDefinitionsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3023,6 +3082,7 @@ achievementDefinitionsListResponse =
     , _adlrKind = "games#achievementDefinitionsListResponse"
     , _adlrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results.
 adlrNextPageToken :: Lens' AchievementDefinitionsListResponse (Maybe Text)
@@ -3076,6 +3136,7 @@ data PlayerScoreResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerScoreResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3102,6 +3163,7 @@ playerScoreResponse =
     , _psrBeatenScoreTimeSpans = Nothing
     , _psrUnbeatenScores = Nothing
     }
+
 
 -- | Additional information about this score. Values will contain no more
 -- than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
@@ -3182,6 +3244,7 @@ data AnonymousPlayer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnonymousPlayer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3199,6 +3262,7 @@ anonymousPlayer =
     , _apKind = "games#anonymousPlayer"
     , _apDisplayName = Nothing
     }
+
 
 -- | The base URL for the image to display for the anonymous player.
 apAvatarImageURL :: Lens' AnonymousPlayer (Maybe Text)
@@ -3245,6 +3309,7 @@ data QuestContribution =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuestContribution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3262,6 +3327,7 @@ questContribution =
     , _qValue = Nothing
     , _qFormattedValue = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#questContribution.
@@ -3308,6 +3374,7 @@ data RoomClientAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomClientAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3320,6 +3387,7 @@ roomClientAddress
 roomClientAddress =
   RoomClientAddress'
     {_rcaKind = "games#roomClientAddress", _rcaXmppAddress = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#roomClientAddress.
@@ -3358,6 +3426,7 @@ data LeaderboardListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3375,6 +3444,7 @@ leaderboardListResponse =
     , _llrKind = "games#leaderboardListResponse"
     , _llrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results.
 llrNextPageToken :: Lens' LeaderboardListResponse (Maybe Text)
@@ -3424,6 +3494,7 @@ data PlayerScore =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerScore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3447,6 +3518,7 @@ playerScore =
     , _psFormattedScore = Nothing
     , _psTimeSpan = Nothing
     }
+
 
 -- | Additional information about this score. Values will contain no more
 -- than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
@@ -3509,6 +3581,7 @@ data TurnBasedAutoMatchingCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedAutoMatchingCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3529,6 +3602,7 @@ turnBasedAutoMatchingCriteria =
     , _tbamcMaxAutoMatchingPlayers = Nothing
     , _tbamcMinAutoMatchingPlayers = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#turnBasedAutoMatchingCriteria.
@@ -3596,6 +3670,7 @@ data SnapshotImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3619,6 +3694,7 @@ snapshotImage =
     , _siMimeType = Nothing
     , _siWidth = Nothing
     }
+
 
 -- | The height of the image.
 siHeight :: Lens' SnapshotImage (Maybe Int32)
@@ -3682,6 +3758,7 @@ data RoomStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3708,6 +3785,7 @@ roomStatus =
     , _rsParticipants = Nothing
     , _rsRoomId = Nothing
     }
+
 
 -- | The status of the room. Possible values are: - \"ROOM_INVITING\" - One
 -- or more players have been invited and not responded. -
@@ -3787,6 +3865,7 @@ data PlayerLeaderboardScoreListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerLeaderboardScoreListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3807,6 +3886,7 @@ playerLeaderboardScoreListResponse =
     , _plslrItems = Nothing
     , _plslrPlayer = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 plslrNextPageToken :: Lens' PlayerLeaderboardScoreListResponse (Maybe Text)
@@ -3869,6 +3949,7 @@ data InstanceIosDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceIosDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3898,6 +3979,7 @@ instanceIosDetails =
     , _iidPreferredForIPhone = Nothing
     , _iidBundleIdentifier = Nothing
     }
+
 
 -- | iTunes App ID.
 iidItunesAppId :: Lens' InstanceIosDetails (Maybe Text)
@@ -3978,6 +4060,7 @@ data EventUpdateResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventUpdateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3998,6 +4081,7 @@ eventUpdateResponse =
     , _eurEventFailures = Nothing
     , _eurKind = "games#eventUpdateResponse"
     }
+
 
 -- | The current status of any updated events
 eurPlayerEvents :: Lens' EventUpdateResponse [PlayerEvent]
@@ -4058,6 +4142,7 @@ data RevisionCheckResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RevisionCheckResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4075,6 +4160,7 @@ revisionCheckResponse =
     , _rcrKind = "games#revisionCheckResponse"
     , _rcrRevisionStatus = Nothing
     }
+
 
 -- | The version of the API this client revision should use when calling API
 -- methods.
@@ -4127,6 +4213,7 @@ data ParticipantResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ParticipantResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4147,6 +4234,7 @@ participantResult =
     , _prResult = Nothing
     , _prPlacing = Nothing
     }
+
 
 -- | The ID of the participant.
 prParticipantId :: Lens' ParticipantResult (Maybe Text)
@@ -4212,6 +4300,7 @@ data Leaderboard =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Leaderboard' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4238,6 +4327,7 @@ leaderboard =
     , _lIconURL = Nothing
     , _lOrder = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#leaderboard.
@@ -4303,6 +4393,7 @@ data MetagameConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetagameConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4320,6 +4411,7 @@ metagameConfig =
     , _mcCurrentVersion = Nothing
     , _mcPlayerLevels = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#metagameConfig.
@@ -4370,6 +4462,7 @@ data CategoryListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CategoryListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4387,6 +4480,7 @@ categoryListResponse =
     , _clrKind = "games#categoryListResponse"
     , _clrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results.
 clrNextPageToken :: Lens' CategoryListResponse (Maybe Text)
@@ -4438,6 +4532,7 @@ data RoomP2PStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomP2PStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4467,6 +4562,7 @@ roomP2PStatus =
     , _rppsConnectionSetupLatencyMillis = Nothing
     , _rppsUnreliableRoundtripLatencyMillis = Nothing
     }
+
 
 -- | The status of the peer in the room. Possible values are: -
 -- \"CONNECTION_ESTABLISHED\" - The client established a P2P connection
@@ -4557,6 +4653,7 @@ data TurnBasedMatchModification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchModification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4574,6 +4671,7 @@ turnBasedMatchModification =
     , _tbmmKind = "games#turnBasedMatchModification"
     , _tbmmModifiedTimestampMillis = Nothing
     }
+
 
 -- | The ID of the participant that modified the match.
 tbmmParticipantId :: Lens' TurnBasedMatchModification (Maybe Text)
@@ -4628,6 +4726,7 @@ data EventDefinition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4660,6 +4759,7 @@ eventDefinition =
     , _edChildEvents = Nothing
     , _edDescription = Nothing
     }
+
 
 -- | Indicates whether the icon image being returned is a default image, or
 -- is game-provided.
@@ -4748,6 +4848,7 @@ data RoomModification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomModification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4765,6 +4866,7 @@ roomModification =
     , _rmKind = "games#roomModification"
     , _rmModifiedTimestampMillis = Nothing
     }
+
 
 -- | The ID of the participant that modified the room.
 rmParticipantId :: Lens' RoomModification (Maybe Text)
@@ -4814,6 +4916,7 @@ data EventUpdateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventUpdateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4831,6 +4934,7 @@ eventUpdateRequest =
     , _eKind = "games#eventUpdateRequest"
     , _eDefinitionId = Nothing
     }
+
 
 -- | The number of times this event occurred in this time period.
 eUpdateCount :: Lens' EventUpdateRequest (Maybe Int64)
@@ -4876,6 +4980,7 @@ data AchievementUnlockResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementUnlockResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4888,6 +4993,7 @@ achievementUnlockResponse
 achievementUnlockResponse =
   AchievementUnlockResponse'
     {_achKind = "games#achievementUnlockResponse", _achNewlyUnlocked = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementUnlockResponse.
@@ -4931,6 +5037,7 @@ data PlayerAchievement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerAchievement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4960,6 +5067,7 @@ playerAchievement =
     , _paCurrentSteps = Nothing
     , _paLastUpdatedTimestamp = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#playerAchievement.
@@ -5044,6 +5152,7 @@ data RoomP2PStatuses =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomP2PStatuses' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5056,6 +5165,7 @@ roomP2PStatuses
 roomP2PStatuses =
   RoomP2PStatuses'
     {_rppssKind = "games#roomP2PStatuses", _rppssUpdates = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#roomP2PStatuses.
@@ -5098,6 +5208,7 @@ data ImageAsset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageAsset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5121,6 +5232,7 @@ imageAsset =
     , _iaWidth = Nothing
     , _iaName = Nothing
     }
+
 
 -- | The height of the asset.
 iaHeight :: Lens' ImageAsset (Maybe Int32)
@@ -5176,6 +5288,7 @@ data AchievementUpdateMultipleRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementUpdateMultipleRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5190,6 +5303,7 @@ achievementUpdateMultipleRequest =
     { _aumruKind = "games#achievementUpdateMultipleRequest"
     , _aumruUpdates = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementUpdateMultipleRequest.
@@ -5233,6 +5347,7 @@ data RoomAutoMatchStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomAutoMatchStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5247,6 +5362,7 @@ roomAutoMatchStatus =
     { _ramsKind = "games#roomAutoMatchStatus"
     , _ramsWaitEstimateSeconds = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#roomAutoMatchStatus.
@@ -5290,6 +5406,7 @@ data AchievementUpdateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementUpdateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5313,6 +5430,7 @@ achievementUpdateRequest =
     , _auruSetStepsAtLeastPayload = Nothing
     , _auruIncrementPayload = Nothing
     }
+
 
 -- | The achievement this update is being applied to.
 auruAchievementId :: Lens' AchievementUpdateRequest (Maybe Text)
@@ -5383,6 +5501,7 @@ data LeaderboardScoreRank =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardScoreRank' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5406,6 +5525,7 @@ leaderboardScoreRank =
     , _lsrFormattedNumScores = Nothing
     , _lsrRank = Nothing
     }
+
 
 -- | The number of scores in the leaderboard.
 lsrNumScores :: Lens' LeaderboardScoreRank (Maybe Int64)
@@ -5473,6 +5593,7 @@ data RoomCreateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomCreateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5505,6 +5626,7 @@ roomCreateRequest =
     , _rooAutoMatchingCriteria = Nothing
     , _rooCapabilities = Nothing
     }
+
 
 -- | A randomly generated numeric ID. This number is used at the server to
 -- ensure that the request is handled correctly across retries.
@@ -5598,6 +5720,7 @@ data PlayerListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5615,6 +5738,7 @@ playerListResponse =
     , _plrKind = "games#playerListResponse"
     , _plrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results.
 plrNextPageToken :: Lens' PlayerListResponse (Maybe Text)
@@ -5665,6 +5789,7 @@ data LeaderboardScores =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardScores' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5691,6 +5816,7 @@ leaderboardScores =
     , _lsItems = Nothing
     , _lsPrevPageToken = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 lsNextPageToken :: Lens' LeaderboardScores (Maybe Text)
@@ -5774,6 +5900,7 @@ data AchievementDefinition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5821,6 +5948,7 @@ achievementDefinition =
     , _adIsRevealedIconURLDefault = Nothing
     , _adUnlockedIconURL = Nothing
     }
+
 
 -- | The type of the achievement. Possible values are: - \"STANDARD\" -
 -- Achievement is either locked or unlocked. - \"INCREMENTAL\" -
@@ -5954,6 +6082,7 @@ data TurnBasedMatchCreateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchCreateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5977,6 +6106,7 @@ turnBasedMatchCreateRequest =
     , _tbmcrInvitedPlayerIds = Nothing
     , _tbmcrAutoMatchingCriteria = Nothing
     }
+
 
 -- | A randomly generated numeric ID. This number is used at the server to
 -- ensure that the request is handled correctly across retries.
@@ -6047,6 +6177,7 @@ data EventBatchRecordFailure =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventBatchRecordFailure' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6064,6 +6195,7 @@ eventBatchRecordFailure =
     , _ebrfRange = Nothing
     , _ebrfFailureCause = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventBatchRecordFailure.
@@ -6118,6 +6250,7 @@ data TurnBasedMatchResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6138,6 +6271,7 @@ turnBasedMatchResults =
     , _tbmrData = Nothing
     , _tbmrMatchVersion = Nothing
     }
+
 
 -- | The match results for the participants in the match.
 tbmrResults :: Lens' TurnBasedMatchResults [ParticipantResult]
@@ -6191,6 +6325,7 @@ data PushTokenIdIos =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PushTokenIdIos' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6203,6 +6338,7 @@ pushTokenIdIos
 pushTokenIdIos =
   PushTokenIdIos'
     {_ptiiAPNSDeviceToken = Nothing, _ptiiAPNSEnvironment = Nothing}
+
 
 -- | Device token supplied by an iOS system call to register for remote
 -- notifications. Encode this field as web-safe base64.
@@ -6245,6 +6381,7 @@ data RoomLeaveRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomLeaveRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6262,6 +6399,7 @@ roomLeaveRequest =
     , _rlrReason = Nothing
     , _rlrLeaveDiagnostics = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#roomLeaveRequest.
@@ -6324,6 +6462,7 @@ data Played =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Played' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6338,6 +6477,7 @@ played
 played =
   Played'
     {_pKind = "games#played", _pAutoMatched = Nothing, _pTimeMillis = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#played.
@@ -6385,6 +6525,7 @@ data AchievementIncrementResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementIncrementResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6402,6 +6543,7 @@ achievementIncrementResponse =
     , _airNewlyUnlocked = Nothing
     , _airCurrentSteps = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementIncrementResponse.
@@ -6450,6 +6592,7 @@ data AchievementRevealResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementRevealResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6462,6 +6605,7 @@ achievementRevealResponse
 achievementRevealResponse =
   AchievementRevealResponse'
     {_arrKind = "games#achievementRevealResponse", _arrCurrentState = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementRevealResponse.
@@ -6503,6 +6647,7 @@ data AchievementSetStepsAtLeastResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementSetStepsAtLeastResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6520,6 +6665,7 @@ achievementSetStepsAtLeastResponse =
     , _assalrNewlyUnlocked = Nothing
     , _assalrCurrentSteps = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementSetStepsAtLeastResponse.
@@ -6572,6 +6718,7 @@ data PlayerAchievementListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerAchievementListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6589,6 +6736,7 @@ playerAchievementListResponse =
     , _palrKind = "games#playerAchievementListResponse"
     , _palrItems = Nothing
     }
+
 
 -- | Token corresponding to the next page of results.
 palrNextPageToken :: Lens' PlayerAchievementListResponse (Maybe Text)
@@ -6638,6 +6786,7 @@ data EventRecordRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventRecordRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6658,6 +6807,7 @@ eventRecordRequest =
     , _errCurrentTimeMillis = Nothing
     , _errTimePeriods = Nothing
     }
+
 
 -- | The request ID used to identify this attempt to record events.
 errRequestId :: Lens' EventRecordRequest (Maybe Int64)
@@ -6717,6 +6867,7 @@ data RoomAutoMatchingCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomAutoMatchingCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6737,6 +6888,7 @@ roomAutoMatchingCriteria =
     , _ramcMaxAutoMatchingPlayers = Nothing
     , _ramcMinAutoMatchingPlayers = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#roomAutoMatchingCriteria.
@@ -6802,6 +6954,7 @@ data QuestMilestone =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuestMilestone' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6825,6 +6978,7 @@ questMilestone =
     , _qmCompletionRewardData = Nothing
     , _qmCriteria = Nothing
     }
+
 
 -- | The current state of the milestone. Possible values are: -
 -- \"COMPLETED_NOT_CLAIMED\" - The milestone is complete, but has not yet
@@ -6894,6 +7048,7 @@ data PeerSessionDiagnostics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeerSessionDiagnostics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6917,6 +7072,7 @@ peerSessionDiagnostics =
     , _psdUnreliableChannel = Nothing
     , _psdReliableChannel = Nothing
     }
+
 
 -- | Connected time in milliseconds.
 psdConnectedTimestampMillis :: Lens' PeerSessionDiagnostics (Maybe Int64)
@@ -6980,6 +7136,7 @@ data PushTokenId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PushTokenId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6990,6 +7147,7 @@ data PushTokenId =
 pushTokenId
     :: PushTokenId
 pushTokenId = PushTokenId' {_ptiIos = Nothing, _ptiKind = "games#pushTokenId"}
+
 
 -- | A push token ID for iOS devices.
 ptiIos :: Lens' PushTokenId (Maybe PushTokenIdIos)
@@ -7025,6 +7183,7 @@ data EventPeriodUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventPeriodUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7042,6 +7201,7 @@ eventPeriodUpdate =
     , _epuTimePeriod = Nothing
     , _epuUpdates = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventPeriodUpdate.
@@ -7091,6 +7251,7 @@ data TurnBasedMatchSync =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchSync' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7111,6 +7272,7 @@ turnBasedMatchSync =
     , _tbmsKind = "games#turnBasedMatchSync"
     , _tbmsItems = Nothing
     }
+
 
 -- | True if there were more matches available to fetch at the time the
 -- response was generated (which were not returned due to page size
@@ -7169,6 +7331,7 @@ data ScoreSubmission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScoreSubmission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7192,6 +7355,7 @@ scoreSubmission =
     , _scoKind = "games#scoreSubmission"
     , _scoLeaderboardId = Nothing
     }
+
 
 -- | Signature Values will contain URI-safe characters as defined by section
 -- 2.3 of RFC 3986.
@@ -7258,6 +7422,7 @@ data RoomLeaveDiagnostics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomLeaveDiagnostics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7290,6 +7455,7 @@ roomLeaveDiagnostics =
     , _rldIosNetworkType = Nothing
     , _rldAndroidNetworkSubtype = Nothing
     }
+
 
 -- | Diagnostics about all peer sessions.
 rldPeerSession :: Lens' RoomLeaveDiagnostics [PeerSessionDiagnostics]
@@ -7394,6 +7560,7 @@ data AggregateStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AggregateStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7417,6 +7584,7 @@ aggregateStats =
     , _asMin = Nothing
     , _asSum = Nothing
     }
+
 
 -- | The maximum amount.
 asMax :: Lens' AggregateStats (Maybe Int64)
@@ -7477,6 +7645,7 @@ data InstanceWebDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceWebDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7494,6 +7663,7 @@ instanceWebDetails =
     , _iwdKind = "games#instanceWebDetails"
     , _iwdLaunchURL = Nothing
     }
+
 
 -- | Indicates that this instance is the default for new installations.
 iwdPreferred :: Lens' InstanceWebDetails (Maybe Bool)
@@ -7538,6 +7708,7 @@ data TurnBasedMatchRematch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchRematch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7555,6 +7726,7 @@ turnBasedMatchRematch =
     , _tKind = "games#turnBasedMatchRematch"
     , _tPreviousMatch = Nothing
     }
+
 
 -- | The newly created match; a rematch of the old match with the same
 -- participants.
@@ -7604,6 +7776,7 @@ data PlayerExperienceInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerExperienceInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7627,6 +7800,7 @@ playerExperienceInfo =
     , _peiNextLevel = Nothing
     , _peiLastLevelUpTimestampMillis = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#playerExperienceInfo.
@@ -7694,6 +7868,7 @@ data GamesAchievementSetStepsAtLeast =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GamesAchievementSetStepsAtLeast' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7708,6 +7883,7 @@ gamesAchievementSetStepsAtLeast =
     { _gassalKind = "games#GamesAchievementSetStepsAtLeast"
     , _gassalSteps = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#GamesAchievementSetStepsAtLeast.
@@ -7758,6 +7934,7 @@ data Player =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Player' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7802,6 +7979,7 @@ player =
     , _plaPlayerId = Nothing
     , _plaProFileSettings = Nothing
     }
+
 
 -- | The url to the landscape mode player banner image.
 plaBannerURLLandscape :: Lens' Player (Maybe Text)
@@ -7925,6 +8103,7 @@ data GamesAchievementIncrement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GamesAchievementIncrement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7942,6 +8121,7 @@ gamesAchievementIncrement =
     , _gaiKind = "games#GamesAchievementIncrement"
     , _gaiSteps = Nothing
     }
+
 
 -- | The requestId associated with an increment to an achievement.
 gaiRequestId :: Lens' GamesAchievementIncrement (Maybe Int64)
@@ -8001,6 +8181,7 @@ data Quest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Quest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8057,6 +8238,7 @@ quest =
     , _queIsDefaultIconURL = Nothing
     , _queAcceptedTimestampMillis = Nothing
     }
+
 
 -- | The timestamp at which the quest was last updated by the user in
 -- milliseconds since the epoch in UTC. Only present if the player has
@@ -8223,6 +8405,7 @@ data EventChild =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventChild' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8233,6 +8416,7 @@ data EventChild =
 eventChild
     :: EventChild
 eventChild = EventChild' {_ecKind = "games#eventChild", _ecChildId = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventChild.
@@ -8271,6 +8455,7 @@ data ApplicationVerifyResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationVerifyResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8288,6 +8473,7 @@ applicationVerifyResponse =
     , _avrAlternatePlayerId = Nothing
     , _avrPlayerId = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#applicationVerifyResponse.
@@ -8335,6 +8521,7 @@ data PlayerEventListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerEventListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8352,6 +8539,7 @@ playerEventListResponse =
     , _pelrKind = "games#playerEventListResponse"
     , _pelrItems = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 pelrNextPageToken :: Lens' PlayerEventListResponse (Maybe Text)
@@ -8398,6 +8586,7 @@ data TurnBasedMatchDataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchDataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8410,6 +8599,7 @@ turnBasedMatchDataRequest
 turnBasedMatchDataRequest =
   TurnBasedMatchDataRequest'
     {_tbmdrKind = "games#turnBasedMatchDataRequest", _tbmdrData = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#turnBasedMatchDataRequest.
@@ -8449,6 +8639,7 @@ data ProFileSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFileSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8461,6 +8652,7 @@ proFileSettings
 proFileSettings =
   ProFileSettings'
     {_pfsProFileVisible = Nothing, _pfsKind = "games#profileSettings"}
+
 
 -- | The player\'s current profile visibility. This field is visible to both
 -- 1P and 3P APIs.
@@ -8500,6 +8692,7 @@ data EventPeriodRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventPeriodRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8517,6 +8710,7 @@ eventPeriodRange =
     , _eprPeriodStartMillis = Nothing
     , _eprPeriodEndMillis = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventPeriodRange.
@@ -8567,6 +8761,7 @@ data EventRecordFailure =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventRecordFailure' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8584,6 +8779,7 @@ eventRecordFailure =
     , _erfFailureCause = Nothing
     , _erfEventId = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventRecordFailure.
@@ -8631,6 +8827,7 @@ data PlayerScoreSubmissionList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerScoreSubmissionList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8643,6 +8840,7 @@ playerScoreSubmissionList
 playerScoreSubmissionList =
   PlayerScoreSubmissionList'
     {_psslKind = "games#playerScoreSubmissionList", _psslScores = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#playerScoreSubmissionList.
@@ -8688,6 +8886,7 @@ data Instance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8723,6 +8922,7 @@ instance' =
     , _iTurnBasedPlay = Nothing
     , _iRealtimePlay = Nothing
     }
+
 
 -- | Platform dependent details for Android.
 iAndroidInstance :: Lens' Instance (Maybe InstanceAndroidDetails)

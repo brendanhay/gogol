@@ -75,6 +75,7 @@ data EnterprisesEnrollmentTokensCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesEnrollmentTokensCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ enterprisesEnrollmentTokensCreate pEetcParent_ pEetcPayload_ =
     , _eetcPayload = pEetcPayload_
     , _eetcCallback = Nothing
     }
+
 
 -- | The name of the enterprise in the form enterprises\/{enterpriseId}.
 eetcParent :: Lens' EnterprisesEnrollmentTokensCreate Text

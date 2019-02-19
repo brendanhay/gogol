@@ -66,6 +66,7 @@ data ManifestsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManifestsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ manifestsGet pMgProject_ pMgManifest_ pMgDeployment_ =
     , _mgManifest = pMgManifest_
     , _mgDeployment = pMgDeployment_
     }
+
 
 -- | The project ID for this request.
 mgProject :: Lens' ManifestsGet Text

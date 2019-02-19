@@ -34,6 +34,7 @@ data DemoteMasterMySQLReplicaConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DemoteMasterMySQLReplicaConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -60,6 +61,7 @@ demoteMasterMySQLReplicaConfiguration =
     , _dmmsqlrcCaCertificate = Nothing
     , _dmmsqlrcPassword = Nothing
     }
+
 
 -- | This is always sql#demoteMasterMysqlReplicaConfiguration.
 dmmsqlrcKind :: Lens' DemoteMasterMySQLReplicaConfiguration Text
@@ -143,6 +145,7 @@ data SSLCert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -178,6 +181,7 @@ sslCert =
     , _scCreateTime = Nothing
     , _scInstance = Nothing
     }
+
 
 -- | User supplied name. Constrained to [a-zA-Z.-_ ]+.
 scCommonName :: Lens' SSLCert (Maybe Text)
@@ -268,6 +272,7 @@ data DatabasesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatabasesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -279,6 +284,7 @@ databasesListResponse
     :: DatabasesListResponse
 databasesListResponse =
   DatabasesListResponse' {_dlrKind = "sql#databasesList", _dlrItems = Nothing}
+
 
 -- | This is always sql#databasesList.
 dlrKind :: Lens' DatabasesListResponse Text
@@ -315,6 +321,7 @@ newtype InstancesExportRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesExportRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -323,6 +330,7 @@ newtype InstancesExportRequest =
 instancesExportRequest
     :: InstancesExportRequest
 instancesExportRequest = InstancesExportRequest' {_ierExportContext = Nothing}
+
 
 -- | Contains details about the export operation.
 ierExportContext :: Lens' InstancesExportRequest (Maybe ExportContext)
@@ -353,6 +361,7 @@ data InstancesListServerCasResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesListServerCasResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -370,6 +379,7 @@ instancesListServerCasResponse =
     , _ilscrCerts = Nothing
     , _ilscrActiveVersion = Nothing
     }
+
 
 -- | This is always sql#instancesListServerCas.
 ilscrKind :: Lens' InstancesListServerCasResponse Text
@@ -415,6 +425,7 @@ newtype ExportContextSQLExportOptionsMysqlExportOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExportContextSQLExportOptionsMysqlExportOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -425,6 +436,7 @@ exportContextSQLExportOptionsMysqlExportOptions
 exportContextSQLExportOptionsMysqlExportOptions =
   ExportContextSQLExportOptionsMysqlExportOptions'
     {_ecsqleomeoMasterData = Nothing}
+
 
 -- | Option to include SQL statement required to set up replication. If set
 -- to 1, the dump file includes a CHANGE MASTER TO statement with the
@@ -466,6 +478,7 @@ data OnPremisesConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OnPremisesConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -478,6 +491,7 @@ onPremisesConfiguration
 onPremisesConfiguration =
   OnPremisesConfiguration'
     {_opcKind = "sql#onPremisesConfiguration", _opcHostPort = Nothing}
+
 
 -- | This is always sql#onPremisesConfiguration.
 opcKind :: Lens' OnPremisesConfiguration Text
@@ -514,6 +528,7 @@ data OperationsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -531,6 +546,7 @@ operationsListResponse =
     , _olrKind = "sql#operationsList"
     , _olrItems = Nothing
     }
+
 
 -- | The continuation token, used to page through large result sets. Provide
 -- this value in a subsequent request to return the next page of results.
@@ -577,6 +593,7 @@ data APIWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APIWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -587,6 +604,7 @@ data APIWarning =
 apiWarning
     :: APIWarning
 apiWarning = APIWarning' {_awCode = Nothing, _awMessage = Nothing}
+
 
 -- | Code to uniquely identify the warning type.
 awCode :: Lens' APIWarning (Maybe Text)
@@ -624,6 +642,7 @@ data ImportContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImportContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -650,6 +669,7 @@ importContext =
     , _icFileType = Nothing
     , _icImportUser = Nothing
     }
+
 
 -- | The target database for the import. If fileType is SQL, this field is
 -- required only if the import file does not specify a database, and is
@@ -738,6 +758,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -791,6 +812,7 @@ operation =
     , _oOperationType = Nothing
     , _oTargetLink = Nothing
     }
+
 
 -- | Name of the database instance related to this operation.
 oTargetId :: Lens' Operation (Maybe Text)
@@ -943,6 +965,7 @@ data Settings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Settings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1011,6 +1034,7 @@ settings =
     , _sAvailabilityType = Nothing
     , _sStorageAutoResizeLimit = Nothing
     }
+
 
 -- | Configuration to increase storage size automatically. The default value
 -- is true. Not used for First Generation instances.
@@ -1237,6 +1261,7 @@ newtype InstancesRotateServerCaRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesRotateServerCaRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1246,6 +1271,7 @@ instancesRotateServerCaRequest
     :: InstancesRotateServerCaRequest
 instancesRotateServerCaRequest =
   InstancesRotateServerCaRequest' {_irscrRotateServerCaContext = Nothing}
+
 
 -- | Contains details about the rotate server CA operation.
 irscrRotateServerCaContext :: Lens' InstancesRotateServerCaRequest (Maybe RotateServerCaContext)
@@ -1279,6 +1305,7 @@ data IPMApping =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IPMApping' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1293,6 +1320,7 @@ ipMApping
 ipMApping =
   IPMApping'
     {_imaIPAddress = Nothing, _imaTimeToRetire = Nothing, _imaType = Nothing}
+
 
 -- | The IP address assigned.
 imaIPAddress :: Lens' IPMApping (Maybe Text)
@@ -1346,6 +1374,7 @@ data Database =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Database' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1378,6 +1407,7 @@ database =
     , _dCharSet = Nothing
     , _dInstance = Nothing
     }
+
 
 -- | This field is deprecated and will be removed from a future version of
 -- the API.
@@ -1452,6 +1482,7 @@ newtype SSLCertsCreateEphemeralRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertsCreateEphemeralRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1461,6 +1492,7 @@ sslCertsCreateEphemeralRequest
     :: SSLCertsCreateEphemeralRequest
 sslCertsCreateEphemeralRequest =
   SSLCertsCreateEphemeralRequest' {_sccerPublicKey = Nothing}
+
 
 -- | PEM encoded public key to include in the signed certificate.
 sccerPublicKey :: Lens' SSLCertsCreateEphemeralRequest (Maybe Text)
@@ -1492,6 +1524,7 @@ data BinLogCoordinates =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BinLogCoordinates' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1509,6 +1542,7 @@ binLogCoordinates =
     , _blcKind = "sql#binLogCoordinates"
     , _blcBinLogFileName = Nothing
     }
+
 
 -- | Position (offset) within the binary log file.
 blcBinLogPosition :: Lens' BinLogCoordinates (Maybe Int64)
@@ -1555,6 +1589,7 @@ data DatabaseInstanceFailoverReplica =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatabaseInstanceFailoverReplica' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1567,6 +1602,7 @@ databaseInstanceFailoverReplica
 databaseInstanceFailoverReplica =
   DatabaseInstanceFailoverReplica'
     {_difrName = Nothing, _difrAvailable = Nothing}
+
 
 -- | The name of the failover replica. If specified at instance creation, a
 -- failover replica is created for the instance. The name doesn\'t include
@@ -1608,6 +1644,7 @@ data TiersListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TiersListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1619,6 +1656,7 @@ tiersListResponse
     :: TiersListResponse
 tiersListResponse =
   TiersListResponse' {_tlrKind = "sql#tiersList", _tlrItems = Nothing}
+
 
 -- | This is always sql#tiersList.
 tlrKind :: Lens' TiersListResponse Text
@@ -1657,6 +1695,7 @@ data UsersListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1674,6 +1713,7 @@ usersListResponse =
     , _ulrKind = "sql#usersList"
     , _ulrItems = Nothing
     }
+
 
 -- | An identifier that uniquely identifies the operation. You can use this
 -- identifier to retrieve the Operations resource that has information
@@ -1725,6 +1765,7 @@ data ExportContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExportContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1751,6 +1792,7 @@ exportContext =
     , _ecSQLExportOptions = Nothing
     , _ecDatabases = Nothing
     }
+
 
 -- | Options for exporting data as CSV. Exporting in CSV format using the
 -- Cloud SQL Admin API is not supported for PostgreSQL instances.
@@ -1830,6 +1872,7 @@ data OperationErrors =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationErrors' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1841,6 +1884,7 @@ operationErrors
     :: OperationErrors
 operationErrors =
   OperationErrors' {_oeKind = "sql#operationErrors", _oeErrors = Nothing}
+
 
 -- | This is always sql#operationErrors.
 oeKind :: Lens' OperationErrors Text
@@ -1878,6 +1922,7 @@ data SSLCertsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1889,6 +1934,7 @@ sslCertsListResponse
     :: SSLCertsListResponse
 sslCertsListResponse =
   SSLCertsListResponse' {_sclrKind = "sql#sslCertsList", _sclrItems = Nothing}
+
 
 -- | This is always sql#sslCertsList.
 sclrKind :: Lens' SSLCertsListResponse Text
@@ -1925,6 +1971,7 @@ newtype SSLCertsInsertRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertsInsertRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1933,6 +1980,7 @@ newtype SSLCertsInsertRequest =
 sslCertsInsertRequest
     :: SSLCertsInsertRequest
 sslCertsInsertRequest = SSLCertsInsertRequest' {_scirCommonName = Nothing}
+
 
 -- | User supplied name. Must be a distinct name from the other certificates
 -- for this instance.
@@ -1964,6 +2012,7 @@ data IPConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IPConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1984,6 +2033,7 @@ ipConfiguration =
     , _icRequireSSL = Nothing
     , _icIPv4Enabled = Nothing
     }
+
 
 -- | The list of external networks that are allowed to connect to the
 -- instance using the IP. In CIDR notation, also known as \'slash\'
@@ -2047,6 +2097,7 @@ data MaintenanceWindow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MaintenanceWindow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2067,6 +2118,7 @@ maintenanceWindow =
     , _mwHour = Nothing
     , _mwUpdateTrack = Nothing
     }
+
 
 -- | This is always sql#maintenanceWindow.
 mwKind :: Lens' MaintenanceWindow Text
@@ -2120,6 +2172,7 @@ data ImportContextCSVImportOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImportContextCSVImportOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2132,6 +2185,7 @@ importContextCSVImportOptions
 importContextCSVImportOptions =
   ImportContextCSVImportOptions'
     {_iccioColumns = Nothing, _iccioTable = Nothing}
+
 
 -- | The columns to which CSV data is imported. If not specified, all columns
 -- of the database table are loaded with CSV data.
@@ -2170,6 +2224,7 @@ data RotateServerCaContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RotateServerCaContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2182,6 +2237,7 @@ rotateServerCaContext
 rotateServerCaContext =
   RotateServerCaContext'
     {_rsccNextVersion = Nothing, _rsccKind = "sql#rotateServerCaContext"}
+
 
 -- | The fingerprint of the next version to be rotated to. If left
 -- unspecified, will be rotated to the most recently added server CA
@@ -2220,6 +2276,7 @@ newtype ExportContextCSVExportOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExportContextCSVExportOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2229,6 +2286,7 @@ exportContextCSVExportOptions
     :: ExportContextCSVExportOptions
 exportContextCSVExportOptions =
   ExportContextCSVExportOptions' {_ecceoSelectQuery = Nothing}
+
 
 -- | The select query used to extract the data.
 ecceoSelectQuery :: Lens' ExportContextCSVExportOptions (Maybe Text)
@@ -2264,6 +2322,7 @@ data User =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2293,6 +2352,7 @@ user =
     , _uHost = Nothing
     , _uInstance = Nothing
     }
+
 
 -- | This field is deprecated and will be removed from a future version of
 -- the API.
@@ -2388,6 +2448,7 @@ data DatabaseInstance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatabaseInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2471,6 +2532,7 @@ databaseInstance =
     , _datIPAddresses = Nothing
     , _datSuspensionReason = Nothing
     }
+
 
 -- | FIRST_GEN: First Generation instance. MySQL only. SECOND_GEN: Second
 -- Generation instance or PostgreSQL instance. EXTERNAL: A database server
@@ -2723,6 +2785,7 @@ data CloneContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloneContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2743,6 +2806,7 @@ cloneContext =
     , _ccBinLogCoordinates = Nothing
     , _ccKind = "sql#cloneContext"
     }
+
 
 -- | Reserved for future use.
 ccPitrTimestampMs :: Lens' CloneContext (Maybe Int64)
@@ -2805,6 +2869,7 @@ data Flag =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Flag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2837,6 +2902,7 @@ flag =
     , _fMinValue = Nothing
     , _fRequiresRestart = Nothing
     }
+
 
 -- | For INTEGER flags, the maximum allowed value.
 fMaxValue :: Lens' Flag (Maybe Int64)
@@ -2924,6 +2990,7 @@ newtype InstancesFailoverRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesFailoverRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2933,6 +3000,7 @@ instancesFailoverRequest
     :: InstancesFailoverRequest
 instancesFailoverRequest =
   InstancesFailoverRequest' {_ifrFailoverContext = Nothing}
+
 
 -- | Failover Context.
 ifrFailoverContext :: Lens' InstancesFailoverRequest (Maybe FailoverContext)
@@ -2972,6 +3040,7 @@ data BackupRun =
     , _brInstance        :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackupRun' with the minimum fields required to make a request.
 --
@@ -3017,6 +3086,7 @@ backupRun =
     , _brDescription = Nothing
     , _brInstance = Nothing
     }
+
 
 -- | The status of this run.
 brStatus :: Lens' BackupRun (Maybe Text)
@@ -3132,6 +3202,7 @@ data ACLEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ACLEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3152,6 +3223,7 @@ aclEntry =
     , _aeName = Nothing
     , _aeExpirationTime = Nothing
     }
+
 
 -- | This is always sql#aclEntry.
 aeKind :: Lens' ACLEntry Text
@@ -3200,6 +3272,7 @@ data DatabaseFlags =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatabaseFlags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3210,6 +3283,7 @@ data DatabaseFlags =
 databaseFlags
     :: DatabaseFlags
 databaseFlags = DatabaseFlags' {_dfValue = Nothing, _dfName = Nothing}
+
 
 -- | The value of the flag. Booleans should be set to on for true and off for
 -- false. This field must be omitted if the flag doesn\'t take a value.
@@ -3249,6 +3323,7 @@ data Tier =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Tier' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3272,6 +3347,7 @@ tier =
     , _tDiskQuota = Nothing
     , _tRAM = Nothing
     }
+
 
 -- | This is always sql#tier.
 tKind :: Lens' Tier Text
@@ -3338,6 +3414,7 @@ data MySQLReplicaConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MySQLReplicaConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3379,6 +3456,7 @@ mySQLReplicaConfiguration =
     , _msqlrcDumpFilePath = Nothing
     , _msqlrcPassword = Nothing
     }
+
 
 -- | Whether or not to check the master\'s Common Name value in the
 -- certificate that it sends during the SSL handshake.
@@ -3501,6 +3579,7 @@ data SSLCertDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3512,6 +3591,7 @@ sslCertDetail
     :: SSLCertDetail
 sslCertDetail =
   SSLCertDetail' {_scdCertInfo = Nothing, _scdCertPrivateKey = Nothing}
+
 
 -- | The public information about the cert.
 scdCertInfo :: Lens' SSLCertDetail (Maybe SSLCert)
@@ -3548,6 +3628,7 @@ newtype InstancesRestoreBackupRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesRestoreBackupRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3557,6 +3638,7 @@ instancesRestoreBackupRequest
     :: InstancesRestoreBackupRequest
 instancesRestoreBackupRequest =
   InstancesRestoreBackupRequest' {_irbrRestoreBackupContext = Nothing}
+
 
 -- | Parameters required to perform the restore backup operation.
 irbrRestoreBackupContext :: Lens' InstancesRestoreBackupRequest (Maybe RestoreBackupContext)
@@ -3587,6 +3669,7 @@ newtype InstancesDemoteMasterRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesDemoteMasterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3596,6 +3679,7 @@ instancesDemoteMasterRequest
     :: InstancesDemoteMasterRequest
 instancesDemoteMasterRequest =
   InstancesDemoteMasterRequest' {_idmrDemoteMasterContext = Nothing}
+
 
 -- | Contains details about the demoteMaster operation.
 idmrDemoteMasterContext :: Lens' InstancesDemoteMasterRequest (Maybe DemoteMasterContext)
@@ -3628,6 +3712,7 @@ data BackupRunsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackupRunsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3645,6 +3730,7 @@ backupRunsListResponse =
     , _brlrKind = "sql#backupRunsList"
     , _brlrItems = Nothing
     }
+
 
 -- | The continuation token, used to page through large result sets. Provide
 -- this value in a subsequent request to return the next page of results.
@@ -3693,6 +3779,7 @@ data OperationError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3707,6 +3794,7 @@ operationError
 operationError =
   OperationError'
     {_opeKind = "sql#operationError", _opeCode = Nothing, _opeMessage = Nothing}
+
 
 -- | This is always sql#operationError.
 opeKind :: Lens' OperationError Text
@@ -3747,6 +3835,7 @@ data TruncateLogContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TruncateLogContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3759,6 +3848,7 @@ truncateLogContext
 truncateLogContext =
   TruncateLogContext'
     {_tlcKind = "sql#truncateLogContext", _tlcLogType = Nothing}
+
 
 -- | This is always sql#truncateLogContext.
 tlcKind :: Lens' TruncateLogContext Text
@@ -3794,6 +3884,7 @@ newtype InstancesCloneRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesCloneRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3802,6 +3893,7 @@ newtype InstancesCloneRequest =
 instancesCloneRequest
     :: InstancesCloneRequest
 instancesCloneRequest = InstancesCloneRequest' {_icrCloneContext = Nothing}
+
 
 -- | Contains details about the clone operation.
 icrCloneContext :: Lens' InstancesCloneRequest (Maybe CloneContext)
@@ -3832,6 +3924,7 @@ data ReplicaConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplicaConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3849,6 +3942,7 @@ replicaConfiguration =
     , _rcKind = "sql#replicaConfiguration"
     , _rcMysqlReplicaConfiguration = Nothing
     }
+
 
 -- | Specifies if the replica is the failover target. If the field is set to
 -- true the replica will be designated as a failover replica. In case the
@@ -3903,6 +3997,7 @@ data FailoverContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FailoverContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3915,6 +4010,7 @@ failoverContext
 failoverContext =
   FailoverContext'
     {_fcSettingsVersion = Nothing, _fcKind = "sql#failoverContext"}
+
 
 -- | The current settings version of this instance. Request will be rejected
 -- if this version doesn\'t match the current settings version.
@@ -3955,6 +4051,7 @@ data SSLCertsInsertResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertsInsertResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3975,6 +4072,7 @@ sslCertsInsertResponse =
     , _scirKind = "sql#sslCertsInsert"
     , _scirClientCert = Nothing
     }
+
 
 -- | The server Certificate Authority\'s certificate. If this is missing you
 -- can force a new one to be generated by calling resetSslConfig method on
@@ -4032,6 +4130,7 @@ data InstancesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4052,6 +4151,7 @@ instancesListResponse =
     , _ilrItems = Nothing
     , _ilrWarnings = Nothing
     }
+
 
 -- | The continuation token, used to page through large result sets. Provide
 -- this value in a subsequent request to return the next page of results.
@@ -4107,6 +4207,7 @@ data DemoteMasterConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DemoteMasterConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4121,6 +4222,7 @@ demoteMasterConfiguration =
     { _dmcKind = "sql#demoteMasterConfiguration"
     , _dmcMysqlReplicaConfiguration = Nothing
     }
+
 
 -- | This is always sql#demoteMasterConfiguration.
 dmcKind :: Lens' DemoteMasterConfiguration Text
@@ -4166,6 +4268,7 @@ data BackupConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackupConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4189,6 +4292,7 @@ backupConfiguration =
     , _bcKind = "sql#backupConfiguration"
     , _bcBinaryLogEnabled = Nothing
     }
+
 
 -- | Reserved for future use.
 bcReplicationLogArchivingEnabled :: Lens' BackupConfiguration (Maybe Bool)
@@ -4249,6 +4353,7 @@ newtype InstancesImportRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesImportRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4257,6 +4362,7 @@ newtype InstancesImportRequest =
 instancesImportRequest
     :: InstancesImportRequest
 instancesImportRequest = InstancesImportRequest' {_iirImportContext = Nothing}
+
 
 -- | Contains details about the import operation.
 iirImportContext :: Lens' InstancesImportRequest (Maybe ImportContext)
@@ -4291,6 +4397,7 @@ data LocationPreference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationPreference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4308,6 +4415,7 @@ locationPreference =
     , _lpFollowGaeApplication = Nothing
     , _lpZone = Nothing
     }
+
 
 -- | This is always sql#locationPreference.
 lpKind :: Lens' LocationPreference Text
@@ -4353,6 +4461,7 @@ data FlagsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FlagsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4364,6 +4473,7 @@ flagsListResponse
     :: FlagsListResponse
 flagsListResponse =
   FlagsListResponse' {_flrKind = "sql#flagsList", _flrItems = Nothing}
+
 
 -- | This is always sql#flagsList.
 flrKind :: Lens' FlagsListResponse Text
@@ -4400,6 +4510,7 @@ newtype InstancesTruncateLogRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesTruncateLogRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4409,6 +4520,7 @@ instancesTruncateLogRequest
     :: InstancesTruncateLogRequest
 instancesTruncateLogRequest =
   InstancesTruncateLogRequest' {_itlrTruncateLogContext = Nothing}
+
 
 -- | Contains details about the truncate log operation.
 itlrTruncateLogContext :: Lens' InstancesTruncateLogRequest (Maybe TruncateLogContext)
@@ -4441,6 +4553,7 @@ data ExportContextSQLExportOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExportContextSQLExportOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4458,6 +4571,7 @@ exportContextSQLExportOptions =
     , _ecsqleoMysqlExportOptions = Nothing
     , _ecsqleoTables = Nothing
     }
+
 
 -- | Export only schemas.
 ecsqleoSchemaOnly :: Lens' ExportContextSQLExportOptions (Maybe Bool)
@@ -4509,6 +4623,7 @@ data RestoreBackupContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestoreBackupContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4526,6 +4641,7 @@ restoreBackupContext =
     , _rbcBackupRunId = Nothing
     , _rbcKind = "sql#restoreBackupContext"
     }
+
 
 -- | The ID of the instance that the backup was taken from.
 rbcInstanceId :: Lens' RestoreBackupContext (Maybe Text)
@@ -4572,6 +4688,7 @@ data DemoteMasterContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DemoteMasterContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4592,6 +4709,7 @@ demoteMasterContext =
     , _demMasterInstanceName = Nothing
     , _demReplicaConfiguration = Nothing
     }
+
 
 -- | Verify GTID consistency for demote operation. Default value: True.
 -- Second Generation instances only. Setting this flag to false enables you
@@ -4654,6 +4772,7 @@ newtype SettingsUserLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsUserLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4664,6 +4783,7 @@ settingsUserLabels
     -> SettingsUserLabels
 settingsUserLabels pSulAddtional_ =
   SettingsUserLabels' {_sulAddtional = _Coerce # pSulAddtional_}
+
 
 -- | An individual label entry, composed of a key and a value.
 sulAddtional :: Lens' SettingsUserLabels (HashMap Text Text)

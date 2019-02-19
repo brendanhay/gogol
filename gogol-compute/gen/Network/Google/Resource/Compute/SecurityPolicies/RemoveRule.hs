@@ -66,6 +66,7 @@ data SecurityPoliciesRemoveRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPoliciesRemoveRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ securityPoliciesRemoveRule pSprrProject_ pSprrSecurityPolicy_ =
     , _sprrProject = pSprrProject_
     , _sprrSecurityPolicy = pSprrSecurityPolicy_
     }
+
 
 -- | The priority of the rule to remove from the security policy.
 sprrPriority :: Lens' SecurityPoliciesRemoveRule (Maybe Int32)

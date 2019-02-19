@@ -81,6 +81,7 @@ data TableDataList' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableDataList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ tableDataList' pTDataSetId_ pTProjectId_ pTTableId_ =
     , _tStartIndex = Nothing
     , _tMaxResults = Nothing
     }
+
 
 -- | Dataset ID of the table to read
 tDataSetId :: Lens' TableDataList' Text

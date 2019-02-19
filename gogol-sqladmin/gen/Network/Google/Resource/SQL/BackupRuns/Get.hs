@@ -65,6 +65,7 @@ data BackupRunsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackupRunsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ backupRunsGet pBrgProject_ pBrgId_ pBrgInstance_ =
     , _brgId = _Coerce # pBrgId_
     , _brgInstance = pBrgInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 brgProject :: Lens' BackupRunsGet Text

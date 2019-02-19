@@ -64,6 +64,7 @@ data UsersDraftsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDraftsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ usersDraftsGet
     -> UsersDraftsGet
 usersDraftsGet pUdgId_ =
   UsersDraftsGet' {_udgFormat = UDGFFull, _udgUserId = "me", _udgId = pUdgId_}
+
 
 -- | The format to return the draft in.
 udgFormat :: Lens' UsersDraftsGet UsersDraftsGetFormat

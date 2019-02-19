@@ -75,6 +75,7 @@ data FilesCopy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilesCopy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ filesCopy pFPayload_ pFFileId_ =
     , _fFileId = pFFileId_
     , _fSupportsTeamDrives = False
     }
+
 
 -- | Multipart request metadata.
 fPayload :: Lens' FilesCopy File

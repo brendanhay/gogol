@@ -70,6 +70,7 @@ data PostsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ postsInsert pPosBlogId_ pPosPayload_ =
     , _posBlogId = pPosBlogId_
     , _posPayload = pPosPayload_
     }
+
 
 -- | Whether the body content of the post is included with the result
 -- (default: true).

@@ -30,6 +30,7 @@ data AndroidAppAsset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidAppAsset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41,6 +42,7 @@ androidAppAsset
     :: AndroidAppAsset
 androidAppAsset =
   AndroidAppAsset' {_aaaPackageName = Nothing, _aaaCertificate = Nothing}
+
 
 -- | Android App assets are naturally identified by their Java package name.
 -- For example, the Google Maps app uses the package name
@@ -96,6 +98,7 @@ data Statement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Statement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +112,7 @@ statement
     :: Statement
 statement =
   Statement' {_sRelation = Nothing, _sSource = Nothing, _sTarget = Nothing}
+
 
 -- | The relation identifies the use of the statement as intended by the
 -- source asset\'s owner (that is, the person or entity who issued the
@@ -161,6 +165,7 @@ data Asset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Asset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -171,6 +176,7 @@ data Asset =
 asset
     :: Asset
 asset = Asset' {_aAndroidApp = Nothing, _aWeb = Nothing}
+
 
 -- | Set if this is an Android App asset.
 aAndroidApp :: Lens' Asset (Maybe AndroidAppAsset)
@@ -206,6 +212,7 @@ data ListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -226,6 +233,7 @@ listResponse =
     , _lrErrorCode = Nothing
     , _lrStatements = Nothing
     }
+
 
 -- | Human-readable message containing information intended to help end users
 -- understand, reproduce and debug the result. The message will be in
@@ -290,6 +298,7 @@ data CheckResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -310,6 +319,7 @@ checkResponse =
     , _crErrorCode = Nothing
     , _crLinked = Nothing
     }
+
 
 -- | Human-readable message containing information intended to help end users
 -- understand, reproduce and debug the result. The message will be in
@@ -369,6 +379,7 @@ newtype WebAsset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebAsset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -377,6 +388,7 @@ newtype WebAsset =
 webAsset
     :: WebAsset
 webAsset = WebAsset' {_waSite = Nothing}
+
 
 -- | Web assets are identified by a URL that contains only the scheme,
 -- hostname and port parts. The format is http[s]:\/\/[:] Hostnames must be
@@ -416,6 +428,7 @@ newtype CertificateInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CertificateInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -424,6 +437,7 @@ newtype CertificateInfo =
 certificateInfo
     :: CertificateInfo
 certificateInfo = CertificateInfo' {_ciSha256Fingerprint = Nothing}
+
 
 -- | The uppercase SHA-265 fingerprint of the certificate. From the PEM
 -- certificate, it can be acquired like this: $ keytool -printcert -file

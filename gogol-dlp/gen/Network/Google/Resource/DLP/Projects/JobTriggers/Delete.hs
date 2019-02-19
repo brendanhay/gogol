@@ -75,6 +75,7 @@ data ProjectsJobTriggersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobTriggersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ projectsJobTriggersDelete pPjtdName_ =
     , _pjtdName = pPjtdName_
     , _pjtdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjtdXgafv :: Lens' ProjectsJobTriggersDelete (Maybe Xgafv)

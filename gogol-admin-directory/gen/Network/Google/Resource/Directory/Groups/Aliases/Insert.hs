@@ -62,6 +62,7 @@ data GroupsAliasesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsAliasesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ groupsAliasesInsert
 groupsAliasesInsert pGaiGroupKey_ pGaiPayload_ =
   GroupsAliasesInsert'
     {_gaiGroupKey = pGaiGroupKey_, _gaiPayload = pGaiPayload_}
+
 
 -- | Email or immutable ID of the group
 gaiGroupKey :: Lens' GroupsAliasesInsert Text

@@ -60,6 +60,7 @@ newtype ResellernotifyRegister =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResellernotifyRegister' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ resellernotifyRegister
     :: ResellernotifyRegister
 resellernotifyRegister =
   ResellernotifyRegister' {_rrServiceAccountEmailAddress = Nothing}
+
 
 -- | The service account which will own the created Cloud-PubSub topic.
 rrServiceAccountEmailAddress :: Lens' ResellernotifyRegister (Maybe Text)

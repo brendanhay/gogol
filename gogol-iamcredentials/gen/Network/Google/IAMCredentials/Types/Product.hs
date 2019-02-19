@@ -30,6 +30,7 @@ data GenerateIdTokenRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateIdTokenRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -47,6 +48,7 @@ generateIdTokenRequest =
     , _gitrDelegates = Nothing
     , _gitrIncludeEmail = Nothing
     }
+
 
 -- | The audience for the token, such as the API or account that this token
 -- grants access to.
@@ -101,6 +103,7 @@ data GenerateAccessTokenResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateAccessTokenResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +116,7 @@ generateAccessTokenResponse
 generateAccessTokenResponse =
   GenerateAccessTokenResponse'
     {_gatrAccessToken = Nothing, _gatrExpireTime = Nothing}
+
 
 -- | The OAuth 2.0 access token.
 gatrAccessToken :: Lens' GenerateAccessTokenResponse (Maybe Text)
@@ -150,6 +154,7 @@ data SignJwtResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignJwtResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -161,6 +166,7 @@ signJwtResponse
     :: SignJwtResponse
 signJwtResponse =
   SignJwtResponse' {_sjrKeyId = Nothing, _sjrSignedJwt = Nothing}
+
 
 -- | The ID of the key used to sign the JWT.
 sjrKeyId :: Lens' SignJwtResponse (Maybe Text)
@@ -194,6 +200,7 @@ data SignBlobRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignBlobRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -205,6 +212,7 @@ signBlobRequest
     :: SignBlobRequest
 signBlobRequest =
   SignBlobRequest' {_sbrDelegates = Nothing, _sbrPayload = Nothing}
+
 
 -- | The sequence of service accounts in a delegation chain. Each service
 -- account must be granted the \`roles\/iam.serviceAccountTokenCreator\`
@@ -249,6 +257,7 @@ data GenerateIdentityBindingAccessTokenRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateIdentityBindingAccessTokenRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -261,6 +270,7 @@ generateIdentityBindingAccessTokenRequest
 generateIdentityBindingAccessTokenRequest =
   GenerateIdentityBindingAccessTokenRequest'
     {_gibatrJwt = Nothing, _gibatrScope = Nothing}
+
 
 -- | Required. Input token. Must be in JWT format according to RFC7523
 -- (https:\/\/tools.ietf.org\/html\/rfc7523) and must have \'kid\' field in
@@ -333,6 +343,7 @@ data GenerateAccessTokenRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateAccessTokenRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -347,6 +358,7 @@ generateAccessTokenRequest
 generateAccessTokenRequest =
   GenerateAccessTokenRequest'
     {_gatrDelegates = Nothing, _gatrLifetime = Nothing, _gatrScope = Nothing}
+
 
 -- | The sequence of service accounts in a delegation chain. Each service
 -- account must be granted the \`roles\/iam.serviceAccountTokenCreator\`
@@ -407,6 +419,7 @@ data GenerateIdentityBindingAccessTokenResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateIdentityBindingAccessTokenResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -419,6 +432,7 @@ generateIdentityBindingAccessTokenResponse
 generateIdentityBindingAccessTokenResponse =
   GenerateIdentityBindingAccessTokenResponse'
     {_gibatrAccessToken = Nothing, _gibatrExpireTime = Nothing}
+
 
 -- | The OAuth 2.0 access token.
 gibatrAccessToken :: Lens' GenerateIdentityBindingAccessTokenResponse (Maybe Text)
@@ -462,6 +476,7 @@ data SignJwtRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignJwtRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -473,6 +488,7 @@ signJwtRequest
     :: SignJwtRequest
 signJwtRequest =
   SignJwtRequest' {_sjrDelegates = Nothing, _sjrPayload = Nothing}
+
 
 -- | The sequence of service accounts in a delegation chain. Each service
 -- account must be granted the \`roles\/iam.serviceAccountTokenCreator\`
@@ -516,6 +532,7 @@ data SignBlobResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignBlobResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -527,6 +544,7 @@ signBlobResponse
     :: SignBlobResponse
 signBlobResponse =
   SignBlobResponse' {_sbrKeyId = Nothing, _sbrSignedBlob = Nothing}
+
 
 -- | The ID of the key used to sign the blob.
 sbrKeyId :: Lens' SignBlobResponse (Maybe Text)
@@ -561,6 +579,7 @@ newtype GenerateIdTokenResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateIdTokenResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -569,6 +588,7 @@ newtype GenerateIdTokenResponse =
 generateIdTokenResponse
     :: GenerateIdTokenResponse
 generateIdTokenResponse = GenerateIdTokenResponse' {_gitrToken = Nothing}
+
 
 -- | The OpenId Connect ID token.
 gitrToken :: Lens' GenerateIdTokenResponse (Maybe Text)

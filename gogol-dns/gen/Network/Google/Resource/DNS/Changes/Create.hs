@@ -68,6 +68,7 @@ data ChangesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ changesCreate pCcProject_ pCcPayload_ pCcManagedZone_ =
     , _ccManagedZone = pCcManagedZone_
     , _ccClientOperationId = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 ccProject :: Lens' ChangesCreate Text

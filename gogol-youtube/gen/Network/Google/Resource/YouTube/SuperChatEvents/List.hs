@@ -67,6 +67,7 @@ data SuperChatEventsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SuperChatEventsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ superChatEventsList pScelPart_ =
     , _scelPageToken = Nothing
     , _scelMaxResults = 5
     }
+
 
 -- | The part parameter specifies the superChatEvent resource parts that the
 -- API response will include. Supported values are id and snippet.

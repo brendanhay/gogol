@@ -62,6 +62,7 @@ data LiveChatModeratorsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatModeratorsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ liveChatModeratorsInsert
     -> LiveChatModeratorsInsert
 liveChatModeratorsInsert pLPart_ pLPayload_ =
   LiveChatModeratorsInsert' {_lPart = pLPart_, _lPayload = pLPayload_}
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

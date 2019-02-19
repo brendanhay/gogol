@@ -63,6 +63,7 @@ data ResourcesBuildingsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesBuildingsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ resourcesBuildingsDelete
 resourcesBuildingsDelete pRbdBuildingId_ pRbdCustomer_ =
   ResourcesBuildingsDelete'
     {_rbdBuildingId = pRbdBuildingId_, _rbdCustomer = pRbdCustomer_}
+
 
 -- | The ID of the building to delete.
 rbdBuildingId :: Lens' ResourcesBuildingsDelete Text

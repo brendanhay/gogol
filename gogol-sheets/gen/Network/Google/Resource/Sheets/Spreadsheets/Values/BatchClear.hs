@@ -82,6 +82,7 @@ data SpreadsheetsValuesBatchClear =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsValuesBatchClear' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ spreadsheetsValuesBatchClear pSvbcSpreadsheetId_ pSvbcPayload_ =
     , _svbcPayload = pSvbcPayload_
     , _svbcCallback = Nothing
     }
+
 
 -- | V1 error format.
 svbcXgafv :: Lens' SpreadsheetsValuesBatchClear (Maybe Xgafv)

@@ -67,6 +67,7 @@ data VPNTunnelsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VPNTunnelsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ vpnTunnelsGet pVtgProject_ pVtgVPNTunnel_ pVtgRegion_ =
     , _vtgVPNTunnel = pVtgVPNTunnel_
     , _vtgRegion = pVtgRegion_
     }
+
 
 -- | Project ID for this request.
 vtgProject :: Lens' VPNTunnelsGet Text

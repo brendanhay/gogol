@@ -87,6 +87,7 @@ data RemarketingListsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingListsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +125,7 @@ remarketingListsList pRllAdvertiserId_ pRllProFileId_ =
     , _rllSortField = RLLSFID
     , _rllMaxResults = 1000
     }
+
 
 -- | Select only remarketing lists that have this floodlight activity ID.
 rllFloodlightActivityId :: Lens' RemarketingListsList (Maybe Int64)

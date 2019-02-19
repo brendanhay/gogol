@@ -78,6 +78,7 @@ data ProjectsTopicsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTopicsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsTopicsList pPtlProject_ =
     , _ptlPageSize = Nothing
     , _ptlCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptlXgafv :: Lens' ProjectsTopicsList (Maybe Xgafv)

@@ -77,6 +77,7 @@ data SpacesMessagesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpacesMessagesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ spacesMessagesCreate pSmcParent_ pSmcPayload_ =
     , _smcCallback = Nothing
     , _smcThreadKey = Nothing
     }
+
 
 -- | Required. Space resource name, in the form \"spaces\/*\". Example:
 -- spaces\/AAAAMpdlehY

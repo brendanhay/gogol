@@ -73,6 +73,7 @@ data ReplicasDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplicasDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ replicasDelete pRdPoolName_ pRdZone_ pRdPayload_ pRdReplicaName_ pRdProjectName_
     , _rdReplicaName = pRdReplicaName_
     , _rdProjectName = pRdProjectName_
     }
+
 
 -- | The replica pool name for this request.
 rdPoolName :: Lens' ReplicasDelete Text

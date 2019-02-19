@@ -84,6 +84,7 @@ data ProjectsSubscriptionsAcknowledge =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSubscriptionsAcknowledge' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsSubscriptionsAcknowledge pPsaPayload_ pPsaSubscription_ =
     , _psaSubscription = pPsaSubscription_
     , _psaCallback = Nothing
     }
+
 
 -- | V1 error format.
 psaXgafv :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Xgafv)

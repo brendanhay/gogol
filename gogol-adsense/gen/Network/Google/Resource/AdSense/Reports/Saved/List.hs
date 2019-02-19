@@ -61,6 +61,7 @@ data ReportsSavedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsSavedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ reportsSavedList
     :: ReportsSavedList
 reportsSavedList =
   ReportsSavedList' {_rslPageToken = Nothing, _rslMaxResults = Nothing}
+
 
 -- | A continuation token, used to page through saved reports. To retrieve
 -- the next page, set this parameter to the value of \"nextPageToken\" from

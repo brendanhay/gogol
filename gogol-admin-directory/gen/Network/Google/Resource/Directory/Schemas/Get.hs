@@ -62,6 +62,7 @@ data SchemasGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SchemasGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ schemasGet
     -> SchemasGet
 schemasGet pSgCustomerId_ pSgSchemaKey_ =
   SchemasGet' {_sgCustomerId = pSgCustomerId_, _sgSchemaKey = pSgSchemaKey_}
+
 
 -- | Immutable ID of the G Suite account
 sgCustomerId :: Lens' SchemasGet Text

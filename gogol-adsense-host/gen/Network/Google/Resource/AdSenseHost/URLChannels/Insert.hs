@@ -61,6 +61,7 @@ data URLChannelsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLChannelsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ urlChannelsInsert
 urlChannelsInsert pUciPayload_ pUciAdClientId_ =
   URLChannelsInsert'
     {_uciPayload = pUciPayload_, _uciAdClientId = pUciAdClientId_}
+
 
 -- | Multipart request metadata.
 uciPayload :: Lens' URLChannelsInsert URLChannel

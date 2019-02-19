@@ -59,6 +59,7 @@ newtype ProductstatusesCustombatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductstatusesCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ productstatusesCustombatch
     -> ProductstatusesCustombatch
 productstatusesCustombatch pProPayload_ =
   ProductstatusesCustombatch' {_proPayload = pProPayload_}
+
 
 -- | Multipart request metadata.
 proPayload :: Lens' ProductstatusesCustombatch ProductstatusesCustomBatchRequest

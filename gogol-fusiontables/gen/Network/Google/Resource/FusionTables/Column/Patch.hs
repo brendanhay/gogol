@@ -66,6 +66,7 @@ data ColumnPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColumnPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ columnPatch pCpPayload_ pCpTableId_ pCpColumnId_ =
     , _cpTableId = pCpTableId_
     , _cpColumnId = pCpColumnId_
     }
+
 
 -- | Multipart request metadata.
 cpPayload :: Lens' ColumnPatch Column

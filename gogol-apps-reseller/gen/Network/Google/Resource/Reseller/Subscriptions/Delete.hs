@@ -66,6 +66,7 @@ data SubscriptionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ subscriptionsDelete pSdCustomerId_ pSdDeletionType_ pSdSubscriptionId_ =
     , _sdDeletionType = pSdDeletionType_
     , _sdSubscriptionId = pSdSubscriptionId_
     }
+
 
 -- | Either the customer\'s primary domain name or the customer\'s unique
 -- identifier. If using the domain name, we do not recommend using a

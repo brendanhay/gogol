@@ -70,6 +70,7 @@ data ProjectsLocationsEnvironmentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsEnvironmentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsLocationsEnvironmentsDelete pPledName_ =
     , _pledName = pPledName_
     , _pledCallback = Nothing
     }
+
 
 -- | V1 error format.
 pledXgafv :: Lens' ProjectsLocationsEnvironmentsDelete (Maybe Xgafv)

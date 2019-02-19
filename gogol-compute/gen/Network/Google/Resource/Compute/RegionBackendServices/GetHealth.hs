@@ -72,6 +72,7 @@ data RegionBackendServicesGetHealth =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionBackendServicesGetHealth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ regionBackendServicesGetHealth pRbsghProject_ pRbsghPayload_ pRbsghRegion_ pRbsg
     , _rbsghRegion = pRbsghRegion_
     , _rbsghBackendService = pRbsghBackendService_
     }
+
 
 rbsghProject :: Lens' RegionBackendServicesGetHealth Text
 rbsghProject

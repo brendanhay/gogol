@@ -65,6 +65,7 @@ data TargetTCPProxiesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetTCPProxiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ targetTCPProxiesGet
 targetTCPProxiesGet pTtpgProject_ pTtpgTargetTCPProxy_ =
   TargetTCPProxiesGet'
     {_ttpgProject = pTtpgProject_, _ttpgTargetTCPProxy = pTtpgTargetTCPProxy_}
+
 
 -- | Project ID for this request.
 ttpgProject :: Lens' TargetTCPProxiesGet Text

@@ -82,6 +82,7 @@ data ProjectsLocationsTransferConfigsRunsTransferLogsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsTransferConfigsRunsTransferLogsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ projectsLocationsTransferConfigsRunsTransferLogsList pPltcrtllParent_ =
     , _pltcrtllPageSize = Nothing
     , _pltcrtllCallback = Nothing
     }
+
 
 -- | Transfer run name in the form:
 -- \`projects\/{project_id}\/transferConfigs\/{config_Id}\/runs\/{run_id}\`.

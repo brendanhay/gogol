@@ -66,6 +66,7 @@ data AccounttaxList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccounttaxList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ accounttaxList pAl1MerchantId_ =
     , _al1PageToken = Nothing
     , _al1MaxResults = Nothing
     }
+
 
 -- | The ID of the managing account. This must be a multi-client account.
 al1MerchantId :: Lens' AccounttaxList Word64

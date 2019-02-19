@@ -58,6 +58,7 @@ newtype LiveChatMessagesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatMessagesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ liveChatMessagesDelete
     :: Text -- ^ 'lId'
     -> LiveChatMessagesDelete
 liveChatMessagesDelete pLId_ = LiveChatMessagesDelete' {_lId = pLId_}
+
 
 -- | The id parameter specifies the YouTube chat message ID of the resource
 -- that is being deleted.

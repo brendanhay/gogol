@@ -98,6 +98,7 @@ data FoldersPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -132,6 +133,7 @@ foldersPatch pFpPayload_ pFpName_ =
     , _fpName = pFpName_
     , _fpCallback = Nothing
     }
+
 
 -- | V1 error format.
 fpXgafv :: Lens' FoldersPatch (Maybe Xgafv)

@@ -61,6 +61,7 @@ data EditsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ editsInsert
     -> EditsInsert
 editsInsert pEiPackageName_ pEiPayload_ =
   EditsInsert' {_eiPackageName = pEiPackageName_, _eiPayload = pEiPayload_}
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

@@ -77,6 +77,7 @@ data RepresentativesRepresentativeInfoByAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepresentativesRepresentativeInfoByAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ representativesRepresentativeInfoByAddress pRribaPayload_ =
     , _rribaIncludeOffices = True
     , _rribaLevels = Nothing
     }
+
 
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching

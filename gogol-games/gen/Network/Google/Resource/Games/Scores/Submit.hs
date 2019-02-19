@@ -68,6 +68,7 @@ data ScoresSubmit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScoresSubmit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ scoresSubmit pSsScore_ pSsLeaderboardId_ =
     , _ssLeaderboardId = pSsLeaderboardId_
     , _ssLanguage = Nothing
     }
+
 
 -- | Additional information about the score you\'re submitting. Values must
 -- contain no more than 64 URI-safe characters as defined by section 2.3 of

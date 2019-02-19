@@ -79,6 +79,7 @@ data AppsOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ appsOperationsGet pAogAppsId_ pAogOperationsId_ =
     , _aogOperationsId = pAogOperationsId_
     , _aogCallback = Nothing
     }
+
 
 -- | V1 error format.
 aogXgafv :: Lens' AppsOperationsGet (Maybe Xgafv)

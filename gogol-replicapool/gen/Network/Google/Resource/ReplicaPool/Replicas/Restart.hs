@@ -70,6 +70,7 @@ data ReplicasRestart =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplicasRestart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ replicasRestart pRrPoolName_ pRrZone_ pRrReplicaName_ pRrProjectName_ =
     , _rrReplicaName = pRrReplicaName_
     , _rrProjectName = pRrProjectName_
     }
+
 
 -- | The replica pool name for this request.
 rrPoolName :: Lens' ReplicasRestart Text

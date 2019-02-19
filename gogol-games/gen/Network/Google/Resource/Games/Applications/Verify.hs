@@ -63,6 +63,7 @@ newtype ApplicationsVerify =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationsVerify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ applicationsVerify
     -> ApplicationsVerify
 applicationsVerify pAvApplicationId_ =
   ApplicationsVerify' {_avApplicationId = pAvApplicationId_}
+
 
 -- | The application ID from the Google Play developer console.
 avApplicationId :: Lens' ApplicationsVerify Text

@@ -78,6 +78,7 @@ data AccountsCreativesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCreativesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ accountsCreativesCreate pAcccPayload_ pAcccAccountId_ =
     , _acccDuplicateIdMode = Nothing
     , _acccCallback = Nothing
     }
+
 
 -- | V1 error format.
 acccXgafv :: Lens' AccountsCreativesCreate (Maybe Xgafv)

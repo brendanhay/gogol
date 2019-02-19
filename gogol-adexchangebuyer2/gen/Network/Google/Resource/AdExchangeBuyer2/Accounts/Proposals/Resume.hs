@@ -91,6 +91,7 @@ data AccountsProposalsResume =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProposalsResume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ accountsProposalsResume pAprPayload_ pAprProposalId_ pAprAccountId_ =
     , _aprAccountId = pAprAccountId_
     , _aprCallback = Nothing
     }
+
 
 -- | V1 error format.
 aprXgafv :: Lens' AccountsProposalsResume (Maybe Xgafv)

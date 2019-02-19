@@ -83,6 +83,7 @@ data ProjectsJobsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +120,7 @@ projectsJobsList pPjlParent_ =
     , _pjlPageSize = Nothing
     , _pjlCallback = Nothing
     }
+
 
 -- | Required. The name of the project for which to list jobs.
 pjlParent :: Lens' ProjectsJobsList Text

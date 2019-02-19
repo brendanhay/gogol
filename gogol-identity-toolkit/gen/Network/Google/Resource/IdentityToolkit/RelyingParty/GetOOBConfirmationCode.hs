@@ -59,6 +59,7 @@ newtype RelyingPartyGetOOBConfirmationCode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartyGetOOBConfirmationCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ relyingPartyGetOOBConfirmationCode
     -> RelyingPartyGetOOBConfirmationCode
 relyingPartyGetOOBConfirmationCode pRpgoobccPayload_ =
   RelyingPartyGetOOBConfirmationCode' {_rpgoobccPayload = pRpgoobccPayload_}
+
 
 -- | Multipart request metadata.
 rpgoobccPayload :: Lens' RelyingPartyGetOOBConfirmationCode RelyingParty

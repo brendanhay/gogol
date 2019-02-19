@@ -74,6 +74,7 @@ data ProjectsDatabasesDocumentsRunQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesDocumentsRunQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsDatabasesDocumentsRunQuery pPddrqParent_ pPddrqPayload_ =
     , _pddrqPayload = pPddrqPayload_
     , _pddrqCallback = Nothing
     }
+
 
 -- | The parent resource name. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\` or

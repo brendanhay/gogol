@@ -73,6 +73,7 @@ data ThumbnailsSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThumbnailsSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ thumbnailsSet
     -> ThumbnailsSet
 thumbnailsSet pTsVideoId_ =
   ThumbnailsSet' {_tsOnBehalfOfContentOwner = Nothing, _tsVideoId = pTsVideoId_}
+
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the

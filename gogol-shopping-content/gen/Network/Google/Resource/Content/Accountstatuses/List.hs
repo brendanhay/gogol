@@ -67,6 +67,7 @@ data AccountstatusesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountstatusesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ accountstatusesList pA2MerchantId_ =
     , _a2PageToken = Nothing
     , _a2MaxResults = Nothing
     }
+
 
 -- | The ID of the managing account. This must be a multi-client account.
 a2MerchantId :: Lens' AccountstatusesList Word64

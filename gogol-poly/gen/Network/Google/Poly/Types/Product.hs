@@ -34,6 +34,7 @@ data ObjParseError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjParseError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -60,6 +61,7 @@ objParseError =
     , _opeCode = Nothing
     , _opeStartIndex = Nothing
     }
+
 
 -- | Line number at which the problem was found.
 opeLineNumber :: Lens' ObjParseError (Maybe Int32)
@@ -130,6 +132,7 @@ data PresentationParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PresentationParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -147,6 +150,7 @@ presentationParams =
     , _ppOrientingRotation = Nothing
     , _ppColorSpace = Nothing
     }
+
 
 -- | A background color which could be used for displaying the 3D asset in a
 -- \'thumbnail\' or \'palette\' style view. Authors have the option to set
@@ -210,6 +214,7 @@ data ListLikedAssetsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLikedAssetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -227,6 +232,7 @@ listLikedAssetsResponse =
     , _llarTotalSize = Nothing
     , _llarAssets = Nothing
     }
+
 
 -- | The continuation token for retrieving the next page. If empty, indicates
 -- that there are no more pages. To get the next page, submit the same
@@ -276,6 +282,7 @@ newtype RemixInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemixInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -284,6 +291,7 @@ newtype RemixInfo =
 remixInfo
     :: RemixInfo
 remixInfo = RemixInfo' {_riSourceAsset = Nothing}
+
 
 -- | Resource ids for the sources of this remix, of the form:
 -- \`assets\/{ASSET_ID}\`
@@ -319,6 +327,7 @@ data Quaternion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Quaternion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -334,6 +343,7 @@ quaternion
     :: Quaternion
 quaternion =
   Quaternion' {_qW = Nothing, _qZ = Nothing, _qX = Nothing, _qY = Nothing}
+
 
 -- | The scalar component.
 qW :: Lens' Quaternion (Maybe Double)
@@ -391,6 +401,7 @@ data Asset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Asset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -441,6 +452,7 @@ asset =
     , _aDescription = Nothing
     , _aCreateTime = Nothing
     }
+
 
 -- | The thumbnail image for the asset.
 aThumbnail :: Lens' Asset (Maybe File)
@@ -583,6 +595,7 @@ data Format =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Format' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -603,6 +616,7 @@ format =
     , _fFormatComplexity = Nothing
     , _fFormatType = Nothing
     }
+
 
 -- | The root of the file hierarchy. This will always be populated. For some
 -- format_types - such as \`TILT\`, which are self-contained - this is all
@@ -662,6 +676,7 @@ data AssetImportMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AssetImportMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -682,6 +697,7 @@ assetImportMessage =
     , _aimImageError = Nothing
     , _aimCode = Nothing
     }
+
 
 -- | An optional OBJ parse error. Only present for OBJ_PARSE_ERROR.
 aimObjParseError :: Lens' AssetImportMessage (Maybe ObjParseError)
@@ -736,6 +752,7 @@ data StartAssetImportResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StartAssetImportResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -756,6 +773,7 @@ startAssetImportResponse =
     , _sairAssetImportId = Nothing
     , _sairAssetId = Nothing
     }
+
 
 -- | The publish URL for the asset.
 sairPublishURL :: Lens' StartAssetImportResponse (Maybe Text)
@@ -815,6 +833,7 @@ data ImageError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -825,6 +844,7 @@ data ImageError =
 imageError
     :: ImageError
 imageError = ImageError' {_ieFilePath = Nothing, _ieCode = Nothing}
+
 
 -- | The file path in the import of the image that was rejected.
 ieFilePath :: Lens' ImageError (Maybe Text)
@@ -859,6 +879,7 @@ data FormatComplexity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FormatComplexity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -870,6 +891,7 @@ formatComplexity
     :: FormatComplexity
 formatComplexity =
   FormatComplexity' {_fcTriangleCount = Nothing, _fcLodHint = Nothing}
+
 
 -- | The estimated number of triangles.
 fcTriangleCount :: Lens' FormatComplexity (Maybe Int64)
@@ -912,6 +934,7 @@ data ListAssetsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAssetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -926,6 +949,7 @@ listAssetsResponse
 listAssetsResponse =
   ListAssetsResponse'
     {_larNextPageToken = Nothing, _larTotalSize = Nothing, _larAssets = Nothing}
+
 
 -- | The continuation token for retrieving the next page. If empty, indicates
 -- that there are no more pages. To get the next page, submit the same
@@ -975,6 +999,7 @@ data ListUserAssetsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListUserAssetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -992,6 +1017,7 @@ listUserAssetsResponse =
     , _luarTotalSize = Nothing
     , _luarUserAssets = Nothing
     }
+
 
 -- | The continuation token for retrieving the next page. If empty, indicates
 -- that there are no more pages. To get the next page, submit the same
@@ -1044,6 +1070,7 @@ data File =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1057,6 +1084,7 @@ file
     :: File
 file =
   File' {_fURL = Nothing, _fRelativePath = Nothing, _fContentType = Nothing}
+
 
 -- | The URL where the file data can be retrieved.
 fURL :: Lens' File (Maybe Text)
@@ -1101,6 +1129,7 @@ newtype UserAsset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserAsset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1109,6 +1138,7 @@ newtype UserAsset =
 userAsset
     :: UserAsset
 userAsset = UserAsset' {_uaAsset = Nothing}
+
 
 -- | An Asset.
 uaAsset :: Lens' UserAsset (Maybe Asset)

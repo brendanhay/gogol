@@ -59,6 +59,7 @@ newtype CountriesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CountriesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ countriesList
     -> CountriesList
 countriesList pCouProFileId_ =
   CountriesList' {_couProFileId = _Coerce # pCouProFileId_}
+
 
 -- | User profile ID associated with this request.
 couProFileId :: Lens' CountriesList Int64

@@ -85,6 +85,7 @@ data SinksUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ sinksUpdate pSuPayload_ pSuSinkName_ =
     , _suSinkName = pSuSinkName_
     , _suCallback = Nothing
     }
+
 
 -- | V1 error format.
 suXgafv :: Lens' SinksUpdate (Maybe Xgafv)

@@ -66,6 +66,7 @@ data ResourcesFeaturesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesFeaturesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ resourcesFeaturesUpdate pRfuPayload_ pRfuCustomer_ pRfuFeatureKey_ =
     , _rfuCustomer = pRfuCustomer_
     , _rfuFeatureKey = pRfuFeatureKey_
     }
+
 
 -- | Multipart request metadata.
 rfuPayload :: Lens' ResourcesFeaturesUpdate Feature

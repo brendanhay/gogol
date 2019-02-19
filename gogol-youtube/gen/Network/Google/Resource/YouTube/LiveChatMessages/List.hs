@@ -74,6 +74,7 @@ data LiveChatMessagesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatMessagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ liveChatMessagesList pLcmlPart_ pLcmlLiveChatId_ =
     , _lcmlMaxResults = 500
     , _lcmlProFileImageSize = Nothing
     }
+
 
 -- | The part parameter specifies the liveChatComment resource parts that the
 -- API response will include. Supported values are id and snippet.

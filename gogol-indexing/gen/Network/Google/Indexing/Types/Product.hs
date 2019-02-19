@@ -29,6 +29,7 @@ newtype PublishURLNotificationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PublishURLNotificationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38,6 +39,7 @@ publishURLNotificationResponse
     :: PublishURLNotificationResponse
 publishURLNotificationResponse =
   PublishURLNotificationResponse' {_punrURLNotificationMetadata = Nothing}
+
 
 -- | Description of the notification events received for this URL.
 punrURLNotificationMetadata :: Lens' PublishURLNotificationResponse (Maybe URLNotificationMetadata)
@@ -72,6 +74,7 @@ data URLNotificationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLNotificationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +89,7 @@ urlNotificationMetadata
 urlNotificationMetadata =
   URLNotificationMetadata'
     {_unmLatestUpdate = Nothing, _unmLatestRemove = Nothing, _unmURL = Nothing}
+
 
 -- | Latest notification received with type \`URL_UPDATED\`.
 unmLatestUpdate :: Lens' URLNotificationMetadata (Maybe URLNotification)
@@ -131,6 +135,7 @@ data URLNotification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLNotification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -145,6 +150,7 @@ urlNotification
 urlNotification =
   URLNotification'
     {_unURL = Nothing, _unNotifyTime = Nothing, _unType = Nothing}
+
 
 -- | The object of this notification. The URL must be owned by the publisher
 -- of this notification and, in case of \`URL_UPDATED\` notifications, it

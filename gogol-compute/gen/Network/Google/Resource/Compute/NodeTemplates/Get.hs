@@ -67,6 +67,7 @@ data NodeTemplatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ nodeTemplatesGet pNodProject_ pNodNodeTemplate_ pNodRegion_ =
     , _nodNodeTemplate = pNodNodeTemplate_
     , _nodRegion = pNodRegion_
     }
+
 
 -- | Project ID for this request.
 nodProject :: Lens' NodeTemplatesGet Text

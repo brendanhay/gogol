@@ -59,6 +59,7 @@ newtype ReportsListreports =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsListreports' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ reportsListreports
     -> ReportsListreports
 reportsListreports pRlQueryId_ =
   ReportsListreports' {_rlQueryId = _Coerce # pRlQueryId_}
+
 
 -- | Query ID with which the reports are associated.
 rlQueryId :: Lens' ReportsListreports Int64

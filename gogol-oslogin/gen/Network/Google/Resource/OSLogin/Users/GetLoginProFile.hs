@@ -79,6 +79,7 @@ data UsersGetLoginProFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersGetLoginProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ usersGetLoginProFile pUglpfName_ =
     , _uglpfSystemId = Nothing
     , _uglpfCallback = Nothing
     }
+
 
 -- | V1 error format.
 uglpfXgafv :: Lens' UsersGetLoginProFile (Maybe Xgafv)

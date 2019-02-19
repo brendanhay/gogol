@@ -62,6 +62,7 @@ data PagesRevert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagesRevert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ pagesRevert
     -> PagesRevert
 pagesRevert pPagBlogId_ pPagPageId_ =
   PagesRevert' {_pagBlogId = pPagBlogId_, _pagPageId = pPagPageId_}
+
 
 -- | The ID of the blog.
 pagBlogId :: Lens' PagesRevert Text

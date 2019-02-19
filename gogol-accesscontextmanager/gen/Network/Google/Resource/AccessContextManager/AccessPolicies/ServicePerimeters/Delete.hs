@@ -74,6 +74,7 @@ data AccessPoliciesServicePerimetersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessPoliciesServicePerimetersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ accessPoliciesServicePerimetersDelete pApspdName_ =
     , _apspdName = pApspdName_
     , _apspdCallback = Nothing
     }
+
 
 -- | V1 error format.
 apspdXgafv :: Lens' AccessPoliciesServicePerimetersDelete (Maybe Xgafv)

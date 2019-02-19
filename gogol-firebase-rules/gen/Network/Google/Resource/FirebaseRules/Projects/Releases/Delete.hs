@@ -70,6 +70,7 @@ data ProjectsReleasesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsReleasesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsReleasesDelete pPrdName_ =
     , _prdName = pPrdName_
     , _prdCallback = Nothing
     }
+
 
 -- | V1 error format.
 prdXgafv :: Lens' ProjectsReleasesDelete (Maybe Xgafv)

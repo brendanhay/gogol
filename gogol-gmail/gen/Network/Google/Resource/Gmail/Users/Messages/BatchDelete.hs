@@ -65,6 +65,7 @@ data UsersMessagesBatchDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersMessagesBatchDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ usersMessagesBatchDelete
     -> UsersMessagesBatchDelete
 usersMessagesBatchDelete pUmbdPayload_ =
   UsersMessagesBatchDelete' {_umbdPayload = pUmbdPayload_, _umbdUserId = "me"}
+
 
 -- | Multipart request metadata.
 umbdPayload :: Lens' UsersMessagesBatchDelete BatchDeleteMessagesRequest

@@ -79,6 +79,7 @@ data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricSign =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricSign' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricSign pPlkrckckvasP
     , _plkrckckvasName = pPlkrckckvasName_
     , _plkrckckvasCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrckckvasXgafv :: Lens' ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricSign (Maybe Xgafv)

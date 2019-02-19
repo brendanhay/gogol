@@ -66,6 +66,7 @@ data CalendarListUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CalendarListUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ calendarListUpdate pCluCalendarId_ pCluPayload_ =
     , _cluPayload = pCluPayload_
     , _cluColorRgbFormat = Nothing
     }
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

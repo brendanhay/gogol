@@ -67,6 +67,7 @@ data StorelayoutclustersInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StorelayoutclustersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ storelayoutclustersInsert pSEnterpriseId_ pSPageId_ pSPayload_ =
     , _sPageId = pSPageId_
     , _sPayload = pSPayload_
     }
+
 
 -- | The ID of the enterprise.
 sEnterpriseId :: Lens' StorelayoutclustersInsert Text

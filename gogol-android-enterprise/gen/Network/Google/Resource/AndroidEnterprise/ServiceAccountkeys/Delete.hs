@@ -69,6 +69,7 @@ data ServiceAccountkeysDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccountkeysDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ serviceAccountkeysDelete
 serviceAccountkeysDelete pSadKeyId_ pSadEnterpriseId_ =
   ServiceAccountkeysDelete'
     {_sadKeyId = pSadKeyId_, _sadEnterpriseId = pSadEnterpriseId_}
+
 
 -- | The ID of the key.
 sadKeyId :: Lens' ServiceAccountkeysDelete Text

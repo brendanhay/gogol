@@ -57,6 +57,7 @@ newtype ProposalsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProposalsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ proposalsGet
     :: Text -- ^ 'pgProposalId'
     -> ProposalsGet
 proposalsGet pPgProposalId_ = ProposalsGet' {_pgProposalId = pPgProposalId_}
+
 
 -- | Id of the proposal to retrieve.
 pgProposalId :: Lens' ProposalsGet Text

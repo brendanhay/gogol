@@ -34,6 +34,7 @@ data LatLng =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44,6 +45,7 @@ data LatLng =
 latLng
     :: LatLng
 latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -84,6 +86,7 @@ data AttachmentInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AttachmentInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +104,7 @@ attachmentInfo =
     , _aiData = Nothing
     , _aiNamespacedType = Nothing
     }
+
 
 -- | The distance away from the beacon at which this attachment should be
 -- delivered to a mobile app. Setting this to a value greater than zero
@@ -158,6 +162,7 @@ newtype BeaconProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -168,6 +173,7 @@ beaconProperties
     -> BeaconProperties
 beaconProperties pBpAddtional_ =
   BeaconProperties' {_bpAddtional = _Coerce # pBpAddtional_}
+
 
 bpAddtional :: Lens' BeaconProperties (HashMap Text Text)
 bpAddtional
@@ -193,11 +199,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -214,6 +222,7 @@ newtype DeleteAttachmentsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteAttachmentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -223,6 +232,7 @@ deleteAttachmentsResponse
     :: DeleteAttachmentsResponse
 deleteAttachmentsResponse =
   DeleteAttachmentsResponse' {_darNumDeleted = Nothing}
+
 
 -- | The number of attachments that were deleted.
 darNumDeleted :: Lens' DeleteAttachmentsResponse (Maybe Int32)
@@ -253,6 +263,7 @@ data GetInfoForObservedBeaconsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetInfoForObservedBeaconsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -265,6 +276,7 @@ getInfoForObservedBeaconsRequest
 getInfoForObservedBeaconsRequest =
   GetInfoForObservedBeaconsRequest'
     {_gifobrObservations = Nothing, _gifobrNamespacedTypes = Nothing}
+
 
 -- | The beacons that the client has encountered. At least one must be given.
 gifobrObservations :: Lens' GetInfoForObservedBeaconsRequest [Observation]
@@ -316,6 +328,7 @@ data Namespace =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Namespace' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -327,6 +340,7 @@ namespace
     :: Namespace
 namespace =
   Namespace' {_nServingVisibility = Nothing, _nNamespaceName = Nothing}
+
 
 -- | Specifies what clients may receive attachments under this namespace via
 -- \`beaconinfo.getforobserved\`.
@@ -389,6 +403,7 @@ data EphemeralIdRegistration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EphemeralIdRegistration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -415,6 +430,7 @@ ephemeralIdRegistration =
     , _eirInitialEid = Nothing
     , _eirServiceEcdhPublicKey = Nothing
     }
+
 
 -- | Indicates the nominal period between each rotation of the beacon\'s
 -- ephemeral ID. \"Nominal\" because the beacon should randomize the actual
@@ -514,6 +530,7 @@ newtype ListNamespacesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListNamespacesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -522,6 +539,7 @@ newtype ListNamespacesResponse =
 listNamespacesResponse
     :: ListNamespacesResponse
 listNamespacesResponse = ListNamespacesResponse' {_lnrNamespaces = Nothing}
+
 
 -- | The attachments that corresponded to the request params.
 lnrNamespaces :: Lens' ListNamespacesResponse [Namespace]
@@ -561,6 +579,7 @@ data Date =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -573,6 +592,7 @@ data Date =
 date
     :: Date
 date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -629,6 +649,7 @@ data Beacon =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Beacon' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -670,6 +691,7 @@ beacon =
     , _beaAdvertisedId = Nothing
     , _beaProperties = Nothing
     }
+
 
 -- | The location of the beacon, expressed as a latitude and longitude pair.
 -- This location is given when the beacon is registered or updated. It does
@@ -811,6 +833,7 @@ data Diagnostics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Diagnostics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -828,6 +851,7 @@ diagnostics =
     , _dBeaconName = Nothing
     , _dEstimatedLowBatteryDate = Nothing
     }
+
 
 -- | An unordered list of Alerts that the beacon has.
 dAlerts :: Lens' Diagnostics [Text]
@@ -876,6 +900,7 @@ newtype ListBeaconAttachmentsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListBeaconAttachmentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -885,6 +910,7 @@ listBeaconAttachmentsResponse
     :: ListBeaconAttachmentsResponse
 listBeaconAttachmentsResponse =
   ListBeaconAttachmentsResponse' {_lbarAttachments = Nothing}
+
 
 -- | The attachments that corresponded to the request params.
 lbarAttachments :: Lens' ListBeaconAttachmentsResponse [BeaconAttachment]
@@ -916,6 +942,7 @@ newtype IndoorLevel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IndoorLevel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -924,6 +951,7 @@ newtype IndoorLevel =
 indoorLevel
     :: IndoorLevel
 indoorLevel = IndoorLevel' {_ilName = Nothing}
+
 
 -- | The name of this level.
 ilName :: Lens' IndoorLevel (Maybe Text)
@@ -953,6 +981,7 @@ data EphemeralIdRegistrationParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EphemeralIdRegistrationParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -970,6 +999,7 @@ ephemeralIdRegistrationParams =
     , _eirpMaxRotationPeriodExponent = Nothing
     , _eirpServiceEcdhPublicKey = Nothing
     }
+
 
 -- | Indicates the minimum rotation period supported by the service. See
 -- EddystoneEidRegistration.rotation_period_exponent
@@ -1028,6 +1058,7 @@ data BeaconInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1045,6 +1076,7 @@ beaconInfo =
     , _biBeaconName = Nothing
     , _biAdvertisedId = Nothing
     }
+
 
 -- | Attachments matching the type(s) requested. May be empty if no
 -- attachment types were requested.
@@ -1094,6 +1126,7 @@ data Observation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Observation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1108,6 +1141,7 @@ observation
 observation =
   Observation'
     {_oTelemetry = Nothing, _oTimestampMs = Nothing, _oAdvertisedId = Nothing}
+
 
 -- | The array of telemetry bytes received from the beacon. The server is
 -- responsible for parsing it. This field may frequently be empty, as with
@@ -1161,6 +1195,7 @@ data BeaconAttachment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconAttachment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1184,6 +1219,7 @@ beaconAttachment =
     , _baAttachmentName = Nothing
     , _baNamespacedType = Nothing
     }
+
 
 -- | The distance away from the beacon at which this attachment should be
 -- delivered to a mobile app. Setting this to a value greater than zero
@@ -1268,6 +1304,7 @@ data ListDiagnosticsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDiagnosticsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1280,6 +1317,7 @@ listDiagnosticsResponse
 listDiagnosticsResponse =
   ListDiagnosticsResponse'
     {_ldrNextPageToken = Nothing, _ldrDiagnostics = Nothing}
+
 
 -- | Token that can be used for pagination. Returned only if the request
 -- matches more beacons than can be returned in this response.
@@ -1321,6 +1359,7 @@ data AdvertisedId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertisedId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1331,6 +1370,7 @@ data AdvertisedId =
 advertisedId
     :: AdvertisedId
 advertisedId = AdvertisedId' {_aiId = Nothing, _aiType = Nothing}
+
 
 -- | The actual beacon identifier, as broadcast by the beacon hardware. Must
 -- be [base64](http:\/\/tools.ietf.org\/html\/rfc4648#section-4) encoded in
@@ -1368,6 +1408,7 @@ data ListBeaconsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListBeaconsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1385,6 +1426,7 @@ listBeaconsResponse =
     , _lbrBeacons = Nothing
     , _lbrTotalCount = Nothing
     }
+
 
 -- | An opaque pagination token that the client may provide in their next
 -- request to retrieve the next page of results.
@@ -1435,6 +1477,7 @@ newtype GetInfoForObservedBeaconsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetInfoForObservedBeaconsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1444,6 +1487,7 @@ getInfoForObservedBeaconsResponse
     :: GetInfoForObservedBeaconsResponse
 getInfoForObservedBeaconsResponse =
   GetInfoForObservedBeaconsResponse' {_gifobrBeacons = Nothing}
+
 
 -- | Public information about beacons. May be empty if the request matched no
 -- beacons.

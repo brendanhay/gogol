@@ -70,6 +70,7 @@ data InAppProductsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InAppProductsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ inAppProductsList pIaplPackageName_ =
     , _iaplStartIndex = Nothing
     , _iaplMaxResults = Nothing
     }
+
 
 -- | Unique identifier for the Android app with in-app products; for example,
 -- \"com.spiffygame\".

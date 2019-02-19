@@ -65,6 +65,7 @@ data TablesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TablesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ tablesInsert pTiPayload_ pTiDataSetId_ pTiProjectId_ =
     , _tiDataSetId = pTiDataSetId_
     , _tiProjectId = pTiProjectId_
     }
+
 
 -- | Multipart request metadata.
 tiPayload :: Lens' TablesInsert Table

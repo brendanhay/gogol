@@ -66,6 +66,7 @@ data SubscriptionsChangeSeats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsChangeSeats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ subscriptionsChangeSeats pScsPayload_ pScsCustomerId_ pScsSubscriptionId_ =
     , _scsCustomerId = pScsCustomerId_
     , _scsSubscriptionId = pScsSubscriptionId_
     }
+
 
 -- | Multipart request metadata.
 scsPayload :: Lens' SubscriptionsChangeSeats Seats

@@ -74,6 +74,7 @@ data TransferOperationsPause =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferOperationsPause' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ transferOperationsPause pTopPayload_ pTopName_ =
     , _topName = pTopName_
     , _topCallback = Nothing
     }
+
 
 -- | V1 error format.
 topXgafv :: Lens' TransferOperationsPause (Maybe Xgafv)

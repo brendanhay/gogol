@@ -86,6 +86,7 @@ data ProjectsRegionsClustersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsClustersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ projectsRegionsClustersList pPrclRegion_ pPrclProjectId_ =
     , _prclPageSize = Nothing
     , _prclCallback = Nothing
     }
+
 
 -- | V1 error format.
 prclXgafv :: Lens' ProjectsRegionsClustersList (Maybe Xgafv)

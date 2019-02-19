@@ -79,6 +79,7 @@ data ProjectsInstancesAppProFilesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesAppProFilesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsInstancesAppProFilesPatch pPiapfpPayload_ pPiapfpName_ =
     , _piapfpName = pPiapfpName_
     , _piapfpCallback = Nothing
     }
+
 
 -- | V1 error format.
 piapfpXgafv :: Lens' ProjectsInstancesAppProFilesPatch (Maybe Xgafv)

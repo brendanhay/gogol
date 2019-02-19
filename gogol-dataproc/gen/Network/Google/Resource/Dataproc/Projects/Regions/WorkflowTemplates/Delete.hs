@@ -73,6 +73,7 @@ data ProjectsRegionsWorkflowTemplatesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ projectsRegionsWorkflowTemplatesDelete pPrwtdName_ =
     , _prwtdVersion = Nothing
     , _prwtdCallback = Nothing
     }
+
 
 -- | V1 error format.
 prwtdXgafv :: Lens' ProjectsRegionsWorkflowTemplatesDelete (Maybe Xgafv)

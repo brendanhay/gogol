@@ -83,6 +83,7 @@ data AccessPoliciesServicePerimetersPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessPoliciesServicePerimetersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ accessPoliciesServicePerimetersPatch pApsppPayload_ pApsppName_ =
     , _apsppName = pApsppName_
     , _apsppCallback = Nothing
     }
+
 
 -- | V1 error format.
 apsppXgafv :: Lens' AccessPoliciesServicePerimetersPatch (Maybe Xgafv)

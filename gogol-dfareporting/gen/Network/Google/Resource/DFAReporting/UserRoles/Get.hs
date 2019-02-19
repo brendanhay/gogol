@@ -61,6 +61,7 @@ data UserRolesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ userRolesGet
 userRolesGet pUrgProFileId_ pUrgId_ =
   UserRolesGet'
     {_urgProFileId = _Coerce # pUrgProFileId_, _urgId = _Coerce # pUrgId_}
+
 
 -- | User profile ID associated with this request.
 urgProFileId :: Lens' UserRolesGet Int64

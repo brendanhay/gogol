@@ -71,6 +71,7 @@ data InstancesListServerCas =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesListServerCas' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ instancesListServerCas
 instancesListServerCas pIlscProject_ pIlscInstance_ =
   InstancesListServerCas'
     {_ilscProject = pIlscProject_, _ilscInstance = pIlscInstance_}
+
 
 -- | Project ID of the project that contains the instance.
 ilscProject :: Lens' InstancesListServerCas Text

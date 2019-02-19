@@ -76,6 +76,7 @@ data InstallsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstallsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ installsUpdate pIuEnterpriseId_ pIuPayload_ pIuUserId_ pIuInstallId_ pIuDeviceId
     , _iuInstallId = pIuInstallId_
     , _iuDeviceId = pIuDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 iuEnterpriseId :: Lens' InstallsUpdate Text

@@ -67,6 +67,7 @@ data FloodlightActivitiesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivitiesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ floodlightActivitiesPatch pFapProFileId_ pFapPayload_ pFapId_ =
     , _fapPayload = pFapPayload_
     , _fapId = _Coerce # pFapId_
     }
+
 
 -- | User profile ID associated with this request.
 fapProFileId :: Lens' FloodlightActivitiesPatch Int64

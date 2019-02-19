@@ -61,6 +61,7 @@ data ColumnGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColumnGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ columnGet
     -> ColumnGet
 columnGet pCgTableId_ pCgColumnId_ =
   ColumnGet' {_cgTableId = pCgTableId_, _cgColumnId = pCgColumnId_}
+
 
 -- | Table to which the column belongs.
 cgTableId :: Lens' ColumnGet Text

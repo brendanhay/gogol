@@ -83,6 +83,7 @@ data LiveBroadcastsTransition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveBroadcastsTransition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ liveBroadcastsTransition pLbtPart_ pLbtBroadcastStatus_ pLbtId_ =
     , _lbtOnBehalfOfContentOwnerChannel = Nothing
     , _lbtId = pLbtId_
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- liveBroadcast resource properties that the API response will include.

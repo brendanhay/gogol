@@ -70,6 +70,7 @@ data StorelayoutclustersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StorelayoutclustersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ storelayoutclustersUpdate pSuuEnterpriseId_ pSuuPageId_ pSuuPayload_ pSuuCluster
     , _suuPayload = pSuuPayload_
     , _suuClusterId = pSuuClusterId_
     }
+
 
 -- | The ID of the enterprise.
 suuEnterpriseId :: Lens' StorelayoutclustersUpdate Text

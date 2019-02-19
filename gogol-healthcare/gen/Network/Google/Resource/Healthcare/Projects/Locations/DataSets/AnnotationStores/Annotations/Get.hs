@@ -71,6 +71,7 @@ data ProjectsLocationsDataSetsAnnotationStoresAnnotationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsAnnotationStoresAnnotationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsLocationsDataSetsAnnotationStoresAnnotationsGet pPldsasagName_ =
     , _pldsasagName = pPldsasagName_
     , _pldsasagCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldsasagXgafv :: Lens' ProjectsLocationsDataSetsAnnotationStoresAnnotationsGet (Maybe Xgafv)

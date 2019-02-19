@@ -89,6 +89,7 @@ data AccountsProposalsCompleteSetup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProposalsCompleteSetup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +125,7 @@ accountsProposalsCompleteSetup pApcsPayload_ pApcsProposalId_ pApcsAccountId_ =
     , _apcsAccountId = pApcsAccountId_
     , _apcsCallback = Nothing
     }
+
 
 -- | V1 error format.
 apcsXgafv :: Lens' AccountsProposalsCompleteSetup (Maybe Xgafv)

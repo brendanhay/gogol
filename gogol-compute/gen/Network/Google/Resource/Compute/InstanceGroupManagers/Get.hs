@@ -70,6 +70,7 @@ data InstanceGroupManagersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ instanceGroupManagersGet pIgmgProject_ pIgmgInstanceGroupManager_ pIgmgZone_ =
     , _igmgInstanceGroupManager = pIgmgInstanceGroupManager_
     , _igmgZone = pIgmgZone_
     }
+
 
 -- | Project ID for this request.
 igmgProject :: Lens' InstanceGroupManagersGet Text

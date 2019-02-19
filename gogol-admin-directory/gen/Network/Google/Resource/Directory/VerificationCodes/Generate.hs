@@ -60,6 +60,7 @@ newtype VerificationCodesGenerate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VerificationCodesGenerate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ verificationCodesGenerate
     -> VerificationCodesGenerate
 verificationCodesGenerate pVcgUserKey_ =
   VerificationCodesGenerate' {_vcgUserKey = pVcgUserKey_}
+
 
 -- | Email or immutable ID of the user
 vcgUserKey :: Lens' VerificationCodesGenerate Text

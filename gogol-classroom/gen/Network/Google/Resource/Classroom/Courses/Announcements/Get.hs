@@ -83,6 +83,7 @@ data CoursesAnnouncementsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesAnnouncementsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ coursesAnnouncementsGet pCagCourseId_ pCagId_ =
     , _cagId = pCagId_
     , _cagCallback = Nothing
     }
+
 
 -- | V1 error format.
 cagXgafv :: Lens' CoursesAnnouncementsGet (Maybe Xgafv)

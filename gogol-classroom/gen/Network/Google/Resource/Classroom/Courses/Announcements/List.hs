@@ -97,6 +97,7 @@ data CoursesAnnouncementsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesAnnouncementsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +137,7 @@ coursesAnnouncementsList pCalCourseId_ =
     , _calPageSize = Nothing
     , _calCallback = Nothing
     }
+
 
 -- | V1 error format.
 calXgafv :: Lens' CoursesAnnouncementsList (Maybe Xgafv)

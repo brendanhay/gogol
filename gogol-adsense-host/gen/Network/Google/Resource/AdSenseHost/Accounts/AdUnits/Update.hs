@@ -65,6 +65,7 @@ data AccountsAdUnitsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsAdUnitsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ accountsAdUnitsUpdate pAauuPayload_ pAauuAdClientId_ pAauuAccountId_ =
     , _aauuAdClientId = pAauuAdClientId_
     , _aauuAccountId = pAauuAccountId_
     }
+
 
 -- | Multipart request metadata.
 aauuPayload :: Lens' AccountsAdUnitsUpdate AdUnit

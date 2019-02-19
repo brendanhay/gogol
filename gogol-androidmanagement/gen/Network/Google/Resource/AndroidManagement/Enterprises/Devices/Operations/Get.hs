@@ -74,6 +74,7 @@ data EnterprisesDevicesOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesDevicesOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ enterprisesDevicesOperationsGet pEdogName_ =
     , _edogName = pEdogName_
     , _edogCallback = Nothing
     }
+
 
 -- | V1 error format.
 edogXgafv :: Lens' EnterprisesDevicesOperationsGet (Maybe Xgafv)

@@ -82,6 +82,7 @@ data EntriesWrite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntriesWrite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ entriesWrite pEwPayload_ =
     , _ewPayload = pEwPayload_
     , _ewCallback = Nothing
     }
+
 
 -- | V1 error format.
 ewXgafv :: Lens' EntriesWrite (Maybe Xgafv)

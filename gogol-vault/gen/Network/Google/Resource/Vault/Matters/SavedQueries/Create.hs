@@ -75,6 +75,7 @@ data MattersSavedQueriesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersSavedQueriesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ mattersSavedQueriesCreate pMsqcPayload_ pMsqcMatterId_ =
     , _msqcMatterId = pMsqcMatterId_
     , _msqcCallback = Nothing
     }
+
 
 -- | V1 error format.
 msqcXgafv :: Lens' MattersSavedQueriesCreate (Maybe Xgafv)

@@ -67,6 +67,7 @@ data PostsPublish =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostsPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ postsPublish pPppBlogId_ pPppPostId_ =
     , _pppBlogId = pPppBlogId_
     , _pppPostId = pPppPostId_
     }
+
 
 -- | Optional date and time to schedule the publishing of the Blog. If no
 -- publishDate parameter is given, the post is either published at the a

@@ -61,6 +61,7 @@ data StyleDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StyleDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ styleDelete
     -> StyleDelete
 styleDelete pSdStyleId_ pSdTableId_ =
   StyleDelete' {_sdStyleId = _Coerce # pSdStyleId_, _sdTableId = pSdTableId_}
+
 
 -- | Identifier (within a table) for the style being deleted
 sdStyleId :: Lens' StyleDelete Int32

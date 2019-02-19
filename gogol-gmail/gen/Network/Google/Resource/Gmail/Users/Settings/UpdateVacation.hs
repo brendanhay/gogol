@@ -63,6 +63,7 @@ data UsersSettingsUpdateVacation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsUpdateVacation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ usersSettingsUpdateVacation
 usersSettingsUpdateVacation pUsuvPayload_ =
   UsersSettingsUpdateVacation'
     {_usuvPayload = pUsuvPayload_, _usuvUserId = "me"}
+
 
 -- | Multipart request metadata.
 usuvPayload :: Lens' UsersSettingsUpdateVacation VacationSettings

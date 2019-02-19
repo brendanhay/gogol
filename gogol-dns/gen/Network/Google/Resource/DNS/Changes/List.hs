@@ -75,6 +75,7 @@ data ChangesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ changesList pClProject_ pClManagedZone_ =
     , _clMaxResults = Nothing
     , _clSortBy = ChangeSequence
     }
+
 
 -- | Identifies the project addressed by this request.
 clProject :: Lens' ChangesList Text

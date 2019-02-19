@@ -72,6 +72,7 @@ data TargetPoolsGetHealth =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolsGetHealth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ targetPoolsGetHealth pTpghProject_ pTpghTargetPool_ pTpghPayload_ pTpghRegion_ =
     , _tpghPayload = pTpghPayload_
     , _tpghRegion = pTpghRegion_
     }
+
 
 -- | Project ID for this request.
 tpghProject :: Lens' TargetPoolsGetHealth Text

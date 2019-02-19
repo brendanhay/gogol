@@ -81,6 +81,7 @@ data ProjectsLocationsFunctionsGenerateDownloadURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsFunctionsGenerateDownloadURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsLocationsFunctionsGenerateDownloadURL pPlfgduPayload_ pPlfgduName_ =
     , _plfgduName = pPlfgduName_
     , _plfgduCallback = Nothing
     }
+
 
 -- | V1 error format.
 plfgduXgafv :: Lens' ProjectsLocationsFunctionsGenerateDownloadURL (Maybe Xgafv)

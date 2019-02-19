@@ -83,6 +83,7 @@ data AppsDomainMAppingsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsDomainMAppingsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ appsDomainMAppingsCreate pAdmacPayload_ pAdmacAppsId_ =
     , _admacAppsId = pAdmacAppsId_
     , _admacCallback = Nothing
     }
+
 
 -- | V1 error format.
 admacXgafv :: Lens' AppsDomainMAppingsCreate (Maybe Xgafv)

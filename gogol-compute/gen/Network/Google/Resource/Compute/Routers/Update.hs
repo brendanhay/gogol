@@ -73,6 +73,7 @@ data RoutersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoutersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ routersUpdate pRuProject_ pRuRouter_ pRuPayload_ pRuRegion_ =
     , _ruPayload = pRuPayload_
     , _ruRegion = pRuRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

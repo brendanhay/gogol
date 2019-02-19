@@ -62,6 +62,7 @@ data UsersMessagesUntrash =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersMessagesUntrash' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ usersMessagesUntrash
     -> UsersMessagesUntrash
 usersMessagesUntrash pUmuId_ =
   UsersMessagesUntrash' {_umuUserId = "me", _umuId = pUmuId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

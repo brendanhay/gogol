@@ -65,6 +65,7 @@ data InstanceTemplatesGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceTemplatesGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ instanceTemplatesGetIAMPolicy
 instanceTemplatesGetIAMPolicy pItgipProject_ pItgipResource_ =
   InstanceTemplatesGetIAMPolicy'
     {_itgipProject = pItgipProject_, _itgipResource = pItgipResource_}
+
 
 -- | Project ID for this request.
 itgipProject :: Lens' InstanceTemplatesGetIAMPolicy Text

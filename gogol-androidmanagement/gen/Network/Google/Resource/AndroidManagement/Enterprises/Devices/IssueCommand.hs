@@ -77,6 +77,7 @@ data EnterprisesDevicesIssueCommand =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesDevicesIssueCommand' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ enterprisesDevicesIssueCommand pEdicPayload_ pEdicName_ =
     , _edicName = pEdicName_
     , _edicCallback = Nothing
     }
+
 
 -- | V1 error format.
 edicXgafv :: Lens' EnterprisesDevicesIssueCommand (Maybe Xgafv)

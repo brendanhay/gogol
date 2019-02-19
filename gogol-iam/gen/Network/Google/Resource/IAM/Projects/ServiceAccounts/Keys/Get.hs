@@ -74,6 +74,7 @@ data ProjectsServiceAccountsKeysGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServiceAccountsKeysGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ projectsServiceAccountsKeysGet pPsakgName_ =
     , _psakgPublicKeyType = Nothing
     , _psakgCallback = Nothing
     }
+
 
 -- | V1 error format.
 psakgXgafv :: Lens' ProjectsServiceAccountsKeysGet (Maybe Xgafv)

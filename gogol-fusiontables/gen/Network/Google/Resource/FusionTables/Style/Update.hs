@@ -65,6 +65,7 @@ data StyleUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StyleUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ styleUpdate pSuPayload_ pSuStyleId_ pSuTableId_ =
     , _suStyleId = _Coerce # pSuStyleId_
     , _suTableId = pSuTableId_
     }
+
 
 -- | Multipart request metadata.
 suPayload :: Lens' StyleUpdate StyleSetting

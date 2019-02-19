@@ -64,6 +64,7 @@ data BucketsLockRetentionPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketsLockRetentionPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ bucketsLockRetentionPolicy pBlrpIfMetagenerationMatch_ pBlrpBucket_ =
     , _blrpBucket = pBlrpBucket_
     , _blrpUserProject = Nothing
     }
+
 
 -- | Makes the operation conditional on whether bucket\'s current
 -- metageneration matches the given value.

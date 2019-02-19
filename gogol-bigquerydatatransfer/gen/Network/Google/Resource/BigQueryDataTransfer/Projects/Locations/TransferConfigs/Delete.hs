@@ -72,6 +72,7 @@ data ProjectsLocationsTransferConfigsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsTransferConfigsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsLocationsTransferConfigsDelete pPltcdName_ =
     , _pltcdName = pPltcdName_
     , _pltcdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pltcdXgafv :: Lens' ProjectsLocationsTransferConfigsDelete (Maybe Xgafv)

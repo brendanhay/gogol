@@ -66,6 +66,7 @@ data DefaultObjectAccessControlsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DefaultObjectAccessControlsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ defaultObjectAccessControlsDelete pDoacdBucket_ pDoacdEntity_ =
     , _doacdUserProject = Nothing
     , _doacdEntity = pDoacdEntity_
     }
+
 
 -- | Name of a bucket.
 doacdBucket :: Lens' DefaultObjectAccessControlsDelete Text

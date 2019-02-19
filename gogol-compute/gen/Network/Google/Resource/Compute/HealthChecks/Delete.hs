@@ -65,6 +65,7 @@ data HealthChecksDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HealthChecksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ healthChecksDelete pHcdHealthCheck_ pHcdProject_ =
     , _hcdHealthCheck = pHcdHealthCheck_
     , _hcdProject = pHcdProject_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

@@ -61,6 +61,7 @@ newtype PawsRegister =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsRegister' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ pawsRegister
     :: PawsRegisterRequest -- ^ 'prPayload'
     -> PawsRegister
 pawsRegister pPrPayload_ = PawsRegister' {_prPayload = pPrPayload_}
+
 
 -- | Multipart request metadata.
 prPayload :: Lens' PawsRegister PawsRegisterRequest

@@ -70,6 +70,7 @@ data EnterprisesPoliciesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesPoliciesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ enterprisesPoliciesGet pEpgName_ =
     , _epgName = pEpgName_
     , _epgCallback = Nothing
     }
+
 
 -- | V1 error format.
 epgXgafv :: Lens' EnterprisesPoliciesGet (Maybe Xgafv)

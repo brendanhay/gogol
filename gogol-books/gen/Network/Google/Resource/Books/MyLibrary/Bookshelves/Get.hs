@@ -63,6 +63,7 @@ data MyLibraryBookshelvesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryBookshelvesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ myLibraryBookshelvesGet
     -> MyLibraryBookshelvesGet
 myLibraryBookshelvesGet pMlbgShelf_ =
   MyLibraryBookshelvesGet' {_mlbgShelf = pMlbgShelf_, _mlbgSource = Nothing}
+
 
 -- | ID of bookshelf to retrieve.
 mlbgShelf :: Lens' MyLibraryBookshelvesGet Text

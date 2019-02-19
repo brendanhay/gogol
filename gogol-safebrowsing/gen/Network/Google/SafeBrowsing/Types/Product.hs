@@ -31,6 +31,7 @@ newtype ThreatEntryMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThreatEntryMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39,6 +40,7 @@ newtype ThreatEntryMetadata =
 threatEntryMetadata
     :: ThreatEntryMetadata
 threatEntryMetadata = ThreatEntryMetadata' {_temEntries = Nothing}
+
 
 -- | The metadata entries.
 temEntries :: Lens' ThreatEntryMetadata [MetadataEntry]
@@ -68,6 +70,7 @@ data UserInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +81,7 @@ data UserInfo =
 userInfo
     :: UserInfo
 userInfo = UserInfo' {_uiRegionCode = Nothing, _uiUserId = Nothing}
+
 
 -- | The UN M.49 region code associated with the user\'s location.
 uiRegionCode :: Lens' UserInfo (Maybe Text)
@@ -113,6 +117,7 @@ newtype Checksum =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Checksum' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +126,7 @@ newtype Checksum =
 checksum
     :: Checksum
 checksum = Checksum' {_cSha256 = Nothing}
+
 
 -- | The SHA256 hash of the client state; that is, of the sorted list of all
 -- hashes present in the database.
@@ -146,6 +152,7 @@ newtype FindThreatMatchesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FindThreatMatchesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -154,6 +161,7 @@ newtype FindThreatMatchesResponse =
 findThreatMatchesResponse
     :: FindThreatMatchesResponse
 findThreatMatchesResponse = FindThreatMatchesResponse' {_ftmrMatches = Nothing}
+
 
 -- | The threat list matches.
 ftmrMatches :: Lens' FindThreatMatchesResponse [ThreatMatch]
@@ -185,11 +193,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -209,6 +219,7 @@ data ThreatInfo =
     , _tiThreatEntryTypes :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ThreatInfo' with the minimum fields required to make a request.
 --
@@ -230,6 +241,7 @@ threatInfo =
     , _tiPlatformTypes = Nothing
     , _tiThreatEntryTypes = Nothing
     }
+
 
 -- | The threat entries to be checked.
 tiThreatEntries :: Lens' ThreatInfo [ThreatEntry]
@@ -295,6 +307,7 @@ data ThreatHit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThreatHit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -321,6 +334,7 @@ threatHit =
     , _thClientInfo = Nothing
     , _thPlatformType = Nothing
     }
+
 
 -- | Details about the user that encountered the threat.
 thUserInfo :: Lens' ThreatHit (Maybe UserInfo)
@@ -389,6 +403,7 @@ data FetchThreatListUpdatesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FetchThreatListUpdatesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -401,6 +416,7 @@ fetchThreatListUpdatesRequest
 fetchThreatListUpdatesRequest =
   FetchThreatListUpdatesRequest'
     {_ftlurListUpdateRequests = Nothing, _ftlurClient = Nothing}
+
 
 -- | The requested threat list updates.
 ftlurListUpdateRequests :: Lens' FetchThreatListUpdatesRequest [ListUpdateRequest]
@@ -443,6 +459,7 @@ data FindFullHashesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FindFullHashesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -463,6 +480,7 @@ findFullHashesRequest =
     , _ffhrClientStates = Nothing
     , _ffhrClient = Nothing
     }
+
 
 -- | The lists and hashes to be checked.
 ffhrThreatInfo :: Lens' FindFullHashesRequest (Maybe ThreatInfo)
@@ -522,6 +540,7 @@ data Constraints =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Constraints' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -548,6 +567,7 @@ constraints =
     , _cSupportedCompressions = Nothing
     , _cMaxDatabaseEntries = Nothing
     }
+
 
 -- | The maximum size in number of entries. The update will not contain more
 -- entries than this value. This should be a power of 2 between 2**10 and
@@ -631,6 +651,7 @@ data RiceDeltaEncoding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RiceDeltaEncoding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -651,6 +672,7 @@ riceDeltaEncoding =
     , _rdeNumEntries = Nothing
     , _rdeEncodedData = Nothing
     }
+
 
 -- | The offset of the first entry in the encoded data, or, if only a single
 -- integer was encoded, that single integer\'s value. If the field is empty
@@ -711,6 +733,7 @@ newtype ListThreatListsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListThreatListsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -719,6 +742,7 @@ newtype ListThreatListsResponse =
 listThreatListsResponse
     :: ListThreatListsResponse
 listThreatListsResponse = ListThreatListsResponse' {_ltlrThreatLists = Nothing}
+
 
 -- | The lists available for download by the client.
 ltlrThreatLists :: Lens' ListThreatListsResponse [ThreatListDescriptor]
@@ -753,6 +777,7 @@ data ThreatListDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThreatListDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -770,6 +795,7 @@ threatListDescriptor =
     , _tldThreatType = Nothing
     , _tldPlatformType = Nothing
     }
+
 
 -- | The entry types contained in the list.
 tldThreatEntryType :: Lens' ThreatListDescriptor (Maybe ThreatListDescriptorThreatEntryType)
@@ -815,6 +841,7 @@ data ClientInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClientInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -825,6 +852,7 @@ data ClientInfo =
 clientInfo
     :: ClientInfo
 clientInfo = ClientInfo' {_ciClientId = Nothing, _ciClientVersion = Nothing}
+
 
 -- | A client ID that (hopefully) uniquely identifies the client
 -- implementation of the Safe Browsing API.
@@ -862,6 +890,7 @@ data FindThreatMatchesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FindThreatMatchesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -873,6 +902,7 @@ findThreatMatchesRequest
     :: FindThreatMatchesRequest
 findThreatMatchesRequest =
   FindThreatMatchesRequest' {_ftmrThreatInfo = Nothing, _ftmrClient = Nothing}
+
 
 -- | The lists and entries to be checked for matches.
 ftmrThreatInfo :: Lens' FindThreatMatchesRequest (Maybe ThreatInfo)
@@ -912,6 +942,7 @@ data ListUpdateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListUpdateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -935,6 +966,7 @@ listUpdateRequest =
     , _lurThreatType = Nothing
     , _lurPlatformType = Nothing
     }
+
 
 -- | The current state of the client for the requested list (the encrypted
 -- client state that was received from the last successful list update).
@@ -999,6 +1031,7 @@ data ThreatEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThreatEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1012,6 +1045,7 @@ threatEntry
     :: ThreatEntry
 threatEntry =
   ThreatEntry' {_teHash = Nothing, _teURL = Nothing, _teDigest = Nothing}
+
 
 -- | A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
 -- hash. This field is in binary format. For JSON requests, hashes are
@@ -1061,6 +1095,7 @@ data ThreatMatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThreatMatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1087,6 +1122,7 @@ threatMatch =
     , _tmCacheDuration = Nothing
     , _tmThreat = Nothing
     }
+
 
 -- | Optional metadata associated with this threat.
 tmThreatEntryMetadata :: Lens' ThreatMatch (Maybe ThreatEntryMetadata)
@@ -1162,6 +1198,7 @@ data RawHashes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RawHashes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1172,6 +1209,7 @@ data RawHashes =
 rawHashes
     :: RawHashes
 rawHashes = RawHashes' {_rhPrefixSize = Nothing, _rhRawHashes = Nothing}
+
 
 -- | The number of bytes for each prefix encoded below. This field can be
 -- anywhere from 4 (shortest prefix) to 32 (full SHA256 hash).
@@ -1218,6 +1256,7 @@ data ListUpdateResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListUpdateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1250,6 +1289,7 @@ listUpdateResponse =
     , _lRemovals = Nothing
     , _lResponseType = Nothing
     }
+
 
 -- | A set of entries to add to a local threat type\'s list. Repeated to
 -- allow for a combination of compressed and raw data to be sent in a
@@ -1348,6 +1388,7 @@ data ThreatEntrySet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThreatEntrySet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1371,6 +1412,7 @@ threatEntrySet =
     , _tesRawIndices = Nothing
     , _tesCompressionType = Nothing
     }
+
 
 -- | The encoded 4-byte prefixes of SHA256-formatted entries, using a
 -- Golomb-Rice encoding. The hashes are converted to uint32, sorted in
@@ -1435,6 +1477,7 @@ newtype RawIndices =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RawIndices' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1443,6 +1486,7 @@ newtype RawIndices =
 rawIndices
     :: RawIndices
 rawIndices = RawIndices' {_riIndices = Nothing}
+
 
 -- | The indices to remove from a lexicographically-sorted local list.
 riIndices :: Lens' RawIndices [Int32]
@@ -1472,6 +1516,7 @@ data ThreatSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThreatSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1492,6 +1537,7 @@ threatSource =
     , _tsReferrer = Nothing
     , _tsType = Nothing
     }
+
 
 -- | The remote IP of the resource in ASCII format. Either IPv4 or IPv6.
 tsRemoteIP :: Lens' ThreatSource (Maybe Text)
@@ -1539,6 +1585,7 @@ data FindFullHashesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FindFullHashesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1556,6 +1603,7 @@ findFullHashesResponse =
     , _ffhrNegativeCacheDuration = Nothing
     , _ffhrMinimumWaitDuration = Nothing
     }
+
 
 -- | The full hashes that matched the requested prefixes.
 ffhrMatches :: Lens' FindFullHashesResponse [ThreatMatch]
@@ -1610,6 +1658,7 @@ data MetadataEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetadataEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1620,6 +1669,7 @@ data MetadataEntry =
 metadataEntry
     :: MetadataEntry
 metadataEntry = MetadataEntry' {_meValue = Nothing, _meKey = Nothing}
+
 
 -- | The metadata entry value. For JSON requests, the value is
 -- base64-encoded.
@@ -1655,6 +1705,7 @@ data FetchThreatListUpdatesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FetchThreatListUpdatesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1667,6 +1718,7 @@ fetchThreatListUpdatesResponse
 fetchThreatListUpdatesResponse =
   FetchThreatListUpdatesResponse'
     {_ftlurListUpdateResponses = Nothing, _ftlurMinimumWaitDuration = Nothing}
+
 
 -- | The list updates requested by the clients.
 ftlurListUpdateResponses :: Lens' FetchThreatListUpdatesResponse [ListUpdateResponse]

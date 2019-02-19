@@ -67,6 +67,7 @@ data SnapshotsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ snapshotsTestIAMPermissions pStipProject_ pStipPayload_ pStipResource_ =
     , _stipPayload = pStipPayload_
     , _stipResource = pStipResource_
     }
+
 
 -- | Project ID for this request.
 stipProject :: Lens' SnapshotsTestIAMPermissions Text

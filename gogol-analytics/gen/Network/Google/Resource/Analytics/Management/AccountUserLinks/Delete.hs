@@ -62,6 +62,7 @@ data ManagementAccountUserLinksDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementAccountUserLinksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ managementAccountUserLinksDelete
 managementAccountUserLinksDelete pMauldAccountId_ pMauldLinkId_ =
   ManagementAccountUserLinksDelete'
     {_mauldAccountId = pMauldAccountId_, _mauldLinkId = pMauldLinkId_}
+
 
 -- | Account ID to delete the user link for.
 mauldAccountId :: Lens' ManagementAccountUserLinksDelete Text

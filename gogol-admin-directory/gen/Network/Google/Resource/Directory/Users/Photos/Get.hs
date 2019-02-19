@@ -60,6 +60,7 @@ newtype UsersPhotosGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersPhotosGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ usersPhotosGet
     :: Text -- ^ 'upgUserKey'
     -> UsersPhotosGet
 usersPhotosGet pUpgUserKey_ = UsersPhotosGet' {_upgUserKey = pUpgUserKey_}
+
 
 -- | Email or immutable ID of the user
 upgUserKey :: Lens' UsersPhotosGet Text

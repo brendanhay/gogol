@@ -79,6 +79,7 @@ data SettingsDatasourcesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsDatasourcesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ settingsDatasourcesList =
     , _sdlPageSize = Nothing
     , _sdlCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdlXgafv :: Lens' SettingsDatasourcesList (Maybe Xgafv)

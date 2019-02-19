@@ -78,6 +78,7 @@ data ProjectsInstancesTablesDropRowRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesTablesDropRowRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsInstancesTablesDropRowRange pPitdrrPayload_ pPitdrrName_ =
     , _pitdrrName = pPitdrrName_
     , _pitdrrCallback = Nothing
     }
+
 
 -- | V1 error format.
 pitdrrXgafv :: Lens' ProjectsInstancesTablesDropRowRange (Maybe Xgafv)

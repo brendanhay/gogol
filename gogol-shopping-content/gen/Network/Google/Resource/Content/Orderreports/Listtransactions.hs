@@ -77,6 +77,7 @@ data OrderreportsListtransactions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderreportsListtransactions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ orderreportsListtransactions pOlsMerchantId_ pOlsDisbursementId_ pOlsTransaction
     , _olsPageToken = Nothing
     , _olsMaxResults = Nothing
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

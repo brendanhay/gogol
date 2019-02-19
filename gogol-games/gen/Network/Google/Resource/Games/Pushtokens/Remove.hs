@@ -60,6 +60,7 @@ newtype PushtokensRemove =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PushtokensRemove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ pushtokensRemove
     :: PushTokenId -- ^ 'prPayload'
     -> PushtokensRemove
 pushtokensRemove pPrPayload_ = PushtokensRemove' {_prPayload = pPrPayload_}
+
 
 -- | Multipart request metadata.
 prPayload :: Lens' PushtokensRemove PushTokenId

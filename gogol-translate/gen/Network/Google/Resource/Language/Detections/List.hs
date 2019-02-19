@@ -80,6 +80,7 @@ data DetectionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DetectionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ detectionsList pDlQ_ =
     , _dlBearerToken = Nothing
     , _dlCallback = Nothing
     }
+
 
 -- | V1 error format.
 dlXgafv :: Lens' DetectionsList (Maybe Xgafv)

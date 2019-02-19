@@ -61,6 +61,7 @@ data OrderreturnsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderreturnsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ orderreturnsGet
 orderreturnsGet pOggMerchantId_ pOggReturnId_ =
   OrderreturnsGet'
     {_oggMerchantId = _Coerce # pOggMerchantId_, _oggReturnId = pOggReturnId_}
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

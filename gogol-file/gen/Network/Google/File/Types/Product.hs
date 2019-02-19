@@ -29,6 +29,7 @@ newtype InstanceLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39,6 +40,7 @@ instanceLabels
     -> InstanceLabels
 instanceLabels pIlAddtional_ =
   InstanceLabels' {_ilAddtional = _Coerce # pIlAddtional_}
+
 
 ilAddtional :: Lens' InstanceLabels (HashMap Text Text)
 ilAddtional
@@ -98,6 +100,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +113,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -159,6 +163,7 @@ newtype OperationSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -169,6 +174,7 @@ operationSchema
     -> OperationSchema
 operationSchema pOsAddtional_ =
   OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -194,6 +200,7 @@ data ListLocationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -205,6 +212,7 @@ listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
   ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -244,6 +252,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -256,6 +265,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -293,11 +303,13 @@ data CancelOperationRequest =
   CancelOperationRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
 cancelOperationRequest
     :: CancelOperationRequest
 cancelOperationRequest = CancelOperationRequest'
+
 
 instance FromJSON CancelOperationRequest where
         parseJSON
@@ -319,6 +331,7 @@ data Location =
     , _lLocationId  :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -343,6 +356,7 @@ location =
     , _lLabels = Nothing
     , _lLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
@@ -405,6 +419,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -428,6 +443,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -495,11 +511,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -515,6 +533,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -525,6 +544,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -550,6 +570,7 @@ data FileShareConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileShareConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -561,6 +582,7 @@ fileShareConfig
     :: FileShareConfig
 fileShareConfig =
   FileShareConfig' {_fscName = Nothing, _fscCapacityGb = Nothing}
+
 
 -- | The name of the file share (must be 16 characters or less).
 fscName :: Lens' FileShareConfig (Maybe Text)
@@ -600,6 +622,7 @@ data NetworkConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -620,6 +643,7 @@ networkConfig =
     , _ncReservedIPRange = Nothing
     , _ncIPAddresses = Nothing
     }
+
 
 -- | Internet protocol versions for which the instance has IP addresses
 -- assigned. For this version, only MODE_IPV4 is supported.
@@ -684,6 +708,7 @@ newtype LocationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -694,6 +719,7 @@ locationLabels
     -> LocationLabels
 locationLabels pLlAddtional_ =
   LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -718,6 +744,7 @@ newtype LocationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -728,6 +755,7 @@ locationMetadata
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
   LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -758,6 +786,7 @@ data OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -787,6 +816,7 @@ operationMetadata =
     , _omTarget = Nothing
     , _omCreateTime = Nothing
     }
+
 
 -- | [Output only] API version used to start the operation.
 omAPIVersion :: Lens' OperationMetadata (Maybe Text)
@@ -864,6 +894,7 @@ data ListInstancesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -881,6 +912,7 @@ listInstancesResponse =
     , _lirUnreachable = Nothing
     , _lirInstances = Nothing
     }
+
 
 -- | The token you can use to retrieve the next page of results. Not returned
 -- if there are no more results in the list.
@@ -942,6 +974,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -952,6 +985,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -984,6 +1018,7 @@ data Instance =
     , _iCreateTime    :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
@@ -1023,6 +1058,7 @@ instance' =
     , _iDescription = Nothing
     , _iCreateTime = Nothing
     }
+
 
 -- | Server-specified ETag for the instance resource to prevent simultaneous
 -- updates from overwriting each other.

@@ -86,6 +86,7 @@ data OrganizationsStoredInfoTypesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsStoredInfoTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ organizationsStoredInfoTypesList pOsitlParent_ =
     , _ositlPageSize = Nothing
     , _ositlCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id or
 -- organizations\/my-org-id.

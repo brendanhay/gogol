@@ -82,6 +82,7 @@ data AccountsClientsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsClientsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ accountsClientsList pAclcAccountId_ =
     , _aclcPageSize = Nothing
     , _aclcCallback = Nothing
     }
+
 
 -- | V1 error format.
 aclcXgafv :: Lens' AccountsClientsList (Maybe Xgafv)

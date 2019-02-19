@@ -68,6 +68,7 @@ data BucketsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ bucketsTestIAMPermissions pBtipBucket_ pBtipPermissions_ =
     , _btipUserProject = Nothing
     , _btipPermissions = _Coerce # pBtipPermissions_
     }
+
 
 -- | Name of a bucket.
 btipBucket :: Lens' BucketsTestIAMPermissions Text

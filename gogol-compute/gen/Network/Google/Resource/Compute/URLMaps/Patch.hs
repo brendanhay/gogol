@@ -72,6 +72,7 @@ data URLMapsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMapsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ urlMapsPatch pUmpURLMap_ pUmpProject_ pUmpPayload_ =
     , _umpProject = pUmpProject_
     , _umpPayload = pUmpPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

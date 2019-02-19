@@ -77,6 +77,7 @@ data FoldersExclusionsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersExclusionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ foldersExclusionsPatch pFepPayload_ pFepName_ =
     , _fepName = pFepName_
     , _fepCallback = Nothing
     }
+
 
 -- | V1 error format.
 fepXgafv :: Lens' FoldersExclusionsPatch (Maybe Xgafv)

@@ -80,6 +80,7 @@ data FoldersExportAssets =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersExportAssets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ foldersExportAssets pFeaParent_ pFeaPayload_ =
     , _feaPayload = pFeaPayload_
     , _feaCallback = Nothing
     }
+
 
 -- | Required. The relative name of the root asset. This can only be an
 -- organization number (such as \"organizations\/123\"), a project ID (such

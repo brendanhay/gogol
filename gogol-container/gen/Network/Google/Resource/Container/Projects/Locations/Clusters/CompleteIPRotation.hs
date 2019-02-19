@@ -75,6 +75,7 @@ data ProjectsLocationsClustersCompleteIPRotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersCompleteIPRotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLocationsClustersCompleteIPRotation pPlccirPayload_ pPlccirName_ =
     , _plccirName = pPlccirName_
     , _plccirCallback = Nothing
     }
+
 
 -- | V1 error format.
 plccirXgafv :: Lens' ProjectsLocationsClustersCompleteIPRotation (Maybe Xgafv)

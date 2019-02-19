@@ -68,6 +68,7 @@ newtype ArchiveInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ArchiveInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ archiveInsert
     :: Text -- ^ 'aiGroupId'
     -> ArchiveInsert
 archiveInsert pAiGroupId_ = ArchiveInsert' {_aiGroupId = pAiGroupId_}
+
 
 -- | The group ID
 aiGroupId :: Lens' ArchiveInsert Text

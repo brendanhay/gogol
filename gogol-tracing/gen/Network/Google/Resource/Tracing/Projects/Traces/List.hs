@@ -96,6 +96,7 @@ data ProjectsTracesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTracesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -147,6 +148,7 @@ projectsTracesList pPtlParent_ =
     , _ptlPageSize = Nothing
     , _ptlCallback = Nothing
     }
+
 
 -- | ID of the Cloud project where the trace data is stored which is
 -- \`projects\/PROJECT_ID\`.

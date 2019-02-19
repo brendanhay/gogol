@@ -33,6 +33,7 @@ data GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -56,6 +57,7 @@ googleCloudVisionV1p1beta1LocalizedObjectAnnotation =
     , _gcvvloaName = Nothing
     , _gcvvloaMid = Nothing
     }
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -128,6 +130,7 @@ data LatLng =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -138,6 +141,7 @@ data LatLng =
 latLng
     :: LatLng
 latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -175,6 +179,7 @@ data GoogleCloudVisionV1p1beta1OutputConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1OutputConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -187,6 +192,7 @@ googleCloudVisionV1p1beta1OutputConfig
 googleCloudVisionV1p1beta1OutputConfig =
   GoogleCloudVisionV1p1beta1OutputConfig'
     {_gcvvocGcsDestination = Nothing, _gcvvocBatchSize = Nothing}
+
 
 -- | The Google Cloud Storage location to write the output(s) to.
 gcvvocGcsDestination :: Lens' GoogleCloudVisionV1p1beta1OutputConfig (Maybe GoogleCloudVisionV1p1beta1GcsDestination)
@@ -236,6 +242,7 @@ data GoogleCloudVisionV1p3beta1ProductKeyValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ProductKeyValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -248,6 +255,7 @@ googleCloudVisionV1p3beta1ProductKeyValue
 googleCloudVisionV1p3beta1ProductKeyValue =
   GoogleCloudVisionV1p3beta1ProductKeyValue'
     {_gcvvpkvValue = Nothing, _gcvvpkvKey = Nothing}
+
 
 -- | The value of the label attached to the product. Cannot be empty and
 -- cannot exceed 128 bytes.
@@ -289,6 +297,7 @@ newtype GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -299,6 +308,7 @@ googleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse
 googleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse =
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse'
     {_gcvvabafrResponses = Nothing}
+
 
 -- | The list of file annotation responses, one for each request in
 -- AsyncBatchAnnotateFilesRequest.
@@ -339,6 +349,7 @@ data GoogleCloudVisionV1p3beta1ImageAnnotationContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ImageAnnotationContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -351,6 +362,7 @@ googleCloudVisionV1p3beta1ImageAnnotationContext
 googleCloudVisionV1p3beta1ImageAnnotationContext =
   GoogleCloudVisionV1p3beta1ImageAnnotationContext'
     {_gcvviacURI = Nothing, _gcvviacPageNumber = Nothing}
+
 
 -- | The URI of the file used to produce the image.
 gcvviacURI :: Lens' GoogleCloudVisionV1p3beta1ImageAnnotationContext (Maybe Text)
@@ -396,6 +408,7 @@ data GoogleCloudVisionV1p3beta1Property =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Property' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -410,6 +423,7 @@ googleCloudVisionV1p3beta1Property
 googleCloudVisionV1p3beta1Property =
   GoogleCloudVisionV1p3beta1Property'
     {_gcvvpUint64Value = Nothing, _gcvvpValue = Nothing, _gcvvpName = Nothing}
+
 
 -- | Value of numeric properties.
 gcvvpUint64Value :: Lens' GoogleCloudVisionV1p3beta1Property (Maybe Word64)
@@ -456,6 +470,7 @@ data GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -468,6 +483,7 @@ googleCloudVisionV1p2beta1TextAnnotationDetectedLanguage
 googleCloudVisionV1p2beta1TextAnnotationDetectedLanguage =
   GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage'
     {_gcvvtadlLanguageCode = Nothing, _gcvvtadlConfidence = Nothing}
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -514,6 +530,7 @@ data KeyValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KeyValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -524,6 +541,7 @@ data KeyValue =
 keyValue
     :: KeyValue
 keyValue = KeyValue' {_kvValue = Nothing, _kvKey = Nothing}
+
 
 -- | The value of the label attached to the product. Cannot be empty and
 -- cannot exceed 128 bytes.
@@ -568,6 +586,7 @@ data GoogleCloudVisionV1p2beta1AnnotateImageResponse =
     , _gcvvairImagePropertiesAnnotation  :: !(Maybe GoogleCloudVisionV1p2beta1ImageProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AnnotateImageResponse' with the minimum fields required to make a request.
 --
@@ -619,6 +638,7 @@ googleCloudVisionV1p2beta1AnnotateImageResponse =
     , _gcvvairFullTextAnnotation = Nothing
     , _gcvvairImagePropertiesAnnotation = Nothing
     }
+
 
 -- | If present, logo detection has completed successfully.
 gcvvairLogoAnnotations :: Lens' GoogleCloudVisionV1p2beta1AnnotateImageResponse [GoogleCloudVisionV1p2beta1EntityAnnotation]
@@ -785,6 +805,7 @@ data ImportProductSetsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImportProductSetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -797,6 +818,7 @@ importProductSetsResponse
 importProductSetsResponse =
   ImportProductSetsResponse'
     {_ipsrReferenceImages = Nothing, _ipsrStatuses = Nothing}
+
 
 -- | The list of reference_images that are imported successfully.
 ipsrReferenceImages :: Lens' ImportProductSetsResponse [ReferenceImage]
@@ -843,6 +865,7 @@ data GoogleCloudVisionV1p2beta1Symbol =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Symbol' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -863,6 +886,7 @@ googleCloudVisionV1p2beta1Symbol =
     , _gcvvsText = Nothing
     , _gcvvsConfidence = Nothing
     }
+
 
 -- | Additional information detected for the symbol.
 gcvvsProperty :: Lens' GoogleCloudVisionV1p2beta1Symbol (Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
@@ -927,6 +951,7 @@ data GoogleCloudVisionV1p2beta1Paragraph =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Paragraph' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -947,6 +972,7 @@ googleCloudVisionV1p2beta1Paragraph =
     , _gcvvpConfidence = Nothing
     , _gcvvpWords = Nothing
     }
+
 
 -- | Additional information detected for the paragraph.
 gcvvpProperty :: Lens' GoogleCloudVisionV1p2beta1Paragraph (Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
@@ -1046,6 +1072,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1058,6 +1085,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -1118,6 +1146,7 @@ data GoogleCloudVisionV1p2beta1FaceAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1FaceAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1171,6 +1200,7 @@ googleCloudVisionV1p2beta1FaceAnnotation =
     , _gcvvfaJoyLikelihood = Nothing
     , _gcvvfaLandmarks = Nothing
     }
+
 
 -- | Pitch angle, which indicates the upwards\/downwards angle that the face
 -- is pointing relative to the image\'s horizontal plane. Range [-180,180].
@@ -1347,6 +1377,7 @@ newtype OperationSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1357,6 +1388,7 @@ operationSchema
     -> OperationSchema
 operationSchema pOsAddtional_ =
   OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -1384,6 +1416,7 @@ data GoogleCloudVisionV1p1beta1CropHint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1CropHint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1401,6 +1434,7 @@ googleCloudVisionV1p1beta1CropHint =
     , _gcvvchConfidence = Nothing
     , _gcvvchImportanceFraction = Nothing
     }
+
 
 -- | The bounding polygon for the crop region. The coordinates of the
 -- bounding box are in the original image\'s scale.
@@ -1452,6 +1486,7 @@ newtype GoogleCloudVisionV1p2beta1ImageProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ImageProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1461,6 +1496,7 @@ googleCloudVisionV1p2beta1ImageProperties
     :: GoogleCloudVisionV1p2beta1ImageProperties
 googleCloudVisionV1p2beta1ImageProperties =
   GoogleCloudVisionV1p2beta1ImageProperties' {_gcvvipDominantColors = Nothing}
+
 
 -- | If present, dominant colors completed successfully.
 gcvvipDominantColors :: Lens' GoogleCloudVisionV1p2beta1ImageProperties (Maybe GoogleCloudVisionV1p2beta1DominantColorsAnnotation)
@@ -1497,6 +1533,7 @@ data GoogleCloudVisionV1p3beta1ProductSearchResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ProductSearchResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1514,6 +1551,7 @@ googleCloudVisionV1p3beta1ProductSearchResults =
     , _gcvvpsrResults = Nothing
     , _gcvvpsrIndexTime = Nothing
     }
+
 
 -- | List of results grouped by products detected in the query image. Each
 -- entry corresponds to one bounding polygon in the query image, and
@@ -1576,6 +1614,7 @@ data GoogleCloudVisionV1p2beta1OutputConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1OutputConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1588,6 +1627,7 @@ googleCloudVisionV1p2beta1OutputConfig
 googleCloudVisionV1p2beta1OutputConfig =
   GoogleCloudVisionV1p2beta1OutputConfig'
     {_gGcsDestination = Nothing, _gBatchSize = Nothing}
+
 
 -- | The Google Cloud Storage location to write the output(s) to.
 gGcsDestination :: Lens' GoogleCloudVisionV1p2beta1OutputConfig (Maybe GoogleCloudVisionV1p2beta1GcsDestination)
@@ -1636,6 +1676,7 @@ data GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1648,6 +1689,7 @@ googleCloudVisionV1p1beta1TextAnnotationDetectedLanguage
 googleCloudVisionV1p1beta1TextAnnotationDetectedLanguage =
   GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage'
     {_gLanguageCode = Nothing, _gConfidence = Nothing}
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -1695,6 +1737,7 @@ data GoogleCloudVisionV1p1beta1Symbol =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Symbol' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1715,6 +1758,7 @@ googleCloudVisionV1p1beta1Symbol =
     , _gooText = Nothing
     , _gooConfidence = Nothing
     }
+
 
 -- | Additional information detected for the symbol.
 gooProperty :: Lens' GoogleCloudVisionV1p1beta1Symbol (Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
@@ -1776,6 +1820,7 @@ data ImageAnnotationContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageAnnotationContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1787,6 +1832,7 @@ imageAnnotationContext
     :: ImageAnnotationContext
 imageAnnotationContext =
   ImageAnnotationContext' {_iacURI = Nothing, _iacPageNumber = Nothing}
+
 
 -- | The URI of the file used to produce the image.
 iacURI :: Lens' ImageAnnotationContext (Maybe Text)
@@ -1826,6 +1872,7 @@ data GoogleCloudVisionV1p2beta1CropHint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1CropHint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1843,6 +1890,7 @@ googleCloudVisionV1p2beta1CropHint =
     , _gcvvchcConfidence = Nothing
     , _gcvvchcImportanceFraction = Nothing
     }
+
 
 -- | The bounding polygon for the crop region. The coordinates of the
 -- bounding box are in the original image\'s scale.
@@ -1896,6 +1944,7 @@ data Property =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Property' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1909,6 +1958,7 @@ property
     :: Property
 property =
   Property' {_pUint64Value = Nothing, _pValue = Nothing, _pName = Nothing}
+
 
 -- | Value of numeric properties.
 pUint64Value :: Lens' Property (Maybe Word64)
@@ -1961,6 +2011,7 @@ data GoogleCloudVisionV1p1beta1FaceAnnotation =
     , _gLandmarks              :: !(Maybe [GoogleCloudVisionV1p1beta1FaceAnnotationLandmark])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1FaceAnnotation' with the minimum fields required to make a request.
 --
@@ -2015,6 +2066,7 @@ googleCloudVisionV1p1beta1FaceAnnotation =
     , _gJoyLikelihood = Nothing
     , _gLandmarks = Nothing
     }
+
 
 -- | Pitch angle, which indicates the upwards\/downwards angle that the face
 -- is pointing relative to the image\'s horizontal plane. Range [-180,180].
@@ -2181,6 +2233,7 @@ data GoogleCloudVisionV1p3beta1InputConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1InputConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2193,6 +2246,7 @@ googleCloudVisionV1p3beta1InputConfig
 googleCloudVisionV1p3beta1InputConfig =
   GoogleCloudVisionV1p3beta1InputConfig'
     {_gcvvicGcsSource = Nothing, _gcvvicMimeType = Nothing}
+
 
 -- | The Google Cloud Storage location to read the input from.
 gcvvicGcsSource :: Lens' GoogleCloudVisionV1p3beta1InputConfig (Maybe GoogleCloudVisionV1p3beta1GcsSource)
@@ -2237,6 +2291,7 @@ data GoogleCloudVisionV1p3beta1WebDetectionWebPage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1WebDetectionWebPage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2260,6 +2315,7 @@ googleCloudVisionV1p3beta1WebDetectionWebPage =
     , _gcvvwdwpPartialMatchingImages = Nothing
     , _gcvvwdwpFullMatchingImages = Nothing
     }
+
 
 -- | (Deprecated) Overall relevancy score for the web page.
 gcvvwdwpScore :: Lens' GoogleCloudVisionV1p3beta1WebDetectionWebPage (Maybe Double)
@@ -2337,6 +2393,7 @@ data ProductSearchResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductSearchResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2354,6 +2411,7 @@ productSearchResults =
     , _psrResults = Nothing
     , _psrIndexTime = Nothing
     }
+
 
 -- | List of results grouped by products detected in the query image. Each
 -- entry corresponds to one bounding polygon in the query image, and
@@ -2408,6 +2466,7 @@ data Landmark =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Landmark' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2418,6 +2477,7 @@ data Landmark =
 landmark
     :: Landmark
 landmark = Landmark' {_lType = Nothing, _lPosition = Nothing}
+
 
 -- | Face landmark type.
 lType :: Lens' Landmark (Maybe LandmarkType)
@@ -2456,6 +2516,7 @@ data GoogleCloudVisionV1p2beta1SafeSearchAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1SafeSearchAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2479,6 +2540,7 @@ googleCloudVisionV1p2beta1SafeSearchAnnotation =
     , _gcvvssaMedical = Nothing
     , _gcvvssaViolence = Nothing
     }
+
 
 -- | Spoof likelihood. The likelihood that an modification was made to the
 -- image\'s canonical version to make it appear funny or offensive.
@@ -2550,6 +2612,7 @@ data GoogleCloudVisionV1p2beta1OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2567,6 +2630,7 @@ googleCloudVisionV1p2beta1OperationMetadata =
     , _gcvvomUpdateTime = Nothing
     , _gcvvomCreateTime = Nothing
     }
+
 
 -- | Current state of the batch operation.
 gcvvomState :: Lens' GoogleCloudVisionV1p2beta1OperationMetadata (Maybe GoogleCloudVisionV1p2beta1OperationMetadataState)
@@ -2619,6 +2683,7 @@ newtype GoogleCloudVisionV1p3beta1CropHintsAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1CropHintsAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2628,6 +2693,7 @@ googleCloudVisionV1p3beta1CropHintsAnnotation
     :: GoogleCloudVisionV1p3beta1CropHintsAnnotation
 googleCloudVisionV1p3beta1CropHintsAnnotation =
   GoogleCloudVisionV1p3beta1CropHintsAnnotation' {_gcvvchaCropHints = Nothing}
+
 
 -- | Crop hint results.
 gcvvchaCropHints :: Lens' GoogleCloudVisionV1p3beta1CropHintsAnnotation [GoogleCloudVisionV1p3beta1CropHint]
@@ -2667,6 +2733,7 @@ data GoogleCloudVisionV1p1beta1ColorInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ColorInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2684,6 +2751,7 @@ googleCloudVisionV1p1beta1ColorInfo =
     , _gcvvciScore = Nothing
     , _gcvvciPixelFraction = Nothing
     }
+
 
 -- | RGB components of the color.
 gcvvciColor :: Lens' GoogleCloudVisionV1p1beta1ColorInfo (Maybe Color)
@@ -2731,6 +2799,7 @@ newtype GcsSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GcsSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2739,6 +2808,7 @@ newtype GcsSource =
 gcsSource
     :: GcsSource
 gcsSource = GcsSource' {_gsURI = Nothing}
+
 
 -- | Google Cloud Storage URI for the input file. This must only be a Google
 -- Cloud Storage object. Wildcards are not currently supported.
@@ -2764,6 +2834,7 @@ data GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2776,6 +2847,7 @@ googleCloudVisionV1p1beta1TextAnnotationDetectedBreak
 googleCloudVisionV1p1beta1TextAnnotationDetectedBreak =
   GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak'
     {_gcvvtadbIsPrefix = Nothing, _gcvvtadbType = Nothing}
+
 
 -- | True if break prepends the element.
 gcvvtadbIsPrefix :: Lens' GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak (Maybe Bool)
@@ -2817,6 +2889,7 @@ newtype GoogleCloudVisionV1p1beta1DominantColorsAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1DominantColorsAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2826,6 +2899,7 @@ googleCloudVisionV1p1beta1DominantColorsAnnotation
     :: GoogleCloudVisionV1p1beta1DominantColorsAnnotation
 googleCloudVisionV1p1beta1DominantColorsAnnotation =
   GoogleCloudVisionV1p1beta1DominantColorsAnnotation' {_gcvvdcaColors = Nothing}
+
 
 -- | RGB color values with their score and pixel fraction.
 gcvvdcaColors :: Lens' GoogleCloudVisionV1p1beta1DominantColorsAnnotation [GoogleCloudVisionV1p1beta1ColorInfo]
@@ -2863,6 +2937,7 @@ data GoogleCloudVisionV1p3beta1WebDetectionWebLabel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1WebDetectionWebLabel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2875,6 +2950,7 @@ googleCloudVisionV1p3beta1WebDetectionWebLabel
 googleCloudVisionV1p3beta1WebDetectionWebLabel =
   GoogleCloudVisionV1p3beta1WebDetectionWebLabel'
     {_gcvvwdwlLanguageCode = Nothing, _gcvvwdwlLabel = Nothing}
+
 
 -- | The BCP-47 language code for \`label\`, such as \"en-US\" or
 -- \"sr-Latn\". For more information, see
@@ -2923,6 +2999,7 @@ data GoogleCloudVisionV1p2beta1ImageContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ImageContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2946,6 +3023,7 @@ googleCloudVisionV1p2beta1ImageContext =
     , _gcvvicLanguageHints = Nothing
     , _gcvvicLatLongRect = Nothing
     }
+
 
 -- | Parameters for crop hints annotation request.
 gcvvicCropHintsParams :: Lens' GoogleCloudVisionV1p2beta1ImageContext (Maybe GoogleCloudVisionV1p2beta1CropHintsParams)
@@ -3024,6 +3102,7 @@ data TextProperty =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextProperty' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3035,6 +3114,7 @@ textProperty
     :: TextProperty
 textProperty =
   TextProperty' {_tpDetectedLanguages = Nothing, _tpDetectedBreak = Nothing}
+
 
 -- | A list of detected languages together with confidence.
 tpDetectedLanguages :: Lens' TextProperty [DetectedLanguage]
@@ -3081,6 +3161,7 @@ data TextAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3091,6 +3172,7 @@ data TextAnnotation =
 textAnnotation
     :: TextAnnotation
 textAnnotation = TextAnnotation' {_taText = Nothing, _taPages = Nothing}
+
 
 -- | UTF-8 text detected on the pages.
 taText :: Lens' TextAnnotation (Maybe Text)
@@ -3126,6 +3208,7 @@ data GoogleCloudVisionV1p3beta1ProductSearchResultsResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ProductSearchResultsResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3143,6 +3226,7 @@ googleCloudVisionV1p3beta1ProductSearchResultsResult =
     , _gcvvpsrrScore = Nothing
     , _gcvvpsrrProduct = Nothing
     }
+
 
 -- | The resource name of the image from the product that is the closest
 -- match to the query.
@@ -3200,6 +3284,7 @@ data GoogleCloudVisionV1p3beta1Paragraph =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Paragraph' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3220,6 +3305,7 @@ googleCloudVisionV1p3beta1Paragraph =
     , _gcvvpcConfidence = Nothing
     , _gcvvpcWords = Nothing
     }
+
 
 -- | Additional information detected for the paragraph.
 gcvvpcProperty :: Lens' GoogleCloudVisionV1p3beta1Paragraph (Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
@@ -3285,6 +3371,7 @@ data GoogleCloudVisionV1p1beta1WebDetectionWebEntity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1WebDetectionWebEntity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3302,6 +3389,7 @@ googleCloudVisionV1p1beta1WebDetectionWebEntity =
     , _gcvvwdweEntityId = Nothing
     , _gcvvwdweDescription = Nothing
     }
+
 
 -- | Overall relevancy score for the entity. Not normalized and not
 -- comparable across different image queries.
@@ -3356,6 +3444,7 @@ data GoogleCloudVisionV1p2beta1AnnotateFileResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AnnotateFileResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3368,6 +3457,7 @@ googleCloudVisionV1p2beta1AnnotateFileResponse
 googleCloudVisionV1p2beta1AnnotateFileResponse =
   GoogleCloudVisionV1p2beta1AnnotateFileResponse'
     {_gcvvafrResponses = Nothing, _gcvvafrInputConfig = Nothing}
+
 
 -- | Individual responses to images found within the file.
 gcvvafrResponses :: Lens' GoogleCloudVisionV1p2beta1AnnotateFileResponse [GoogleCloudVisionV1p2beta1AnnotateImageResponse]
@@ -3416,6 +3506,7 @@ data GoogleCloudVisionV1p3beta1Word =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Word' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3436,6 +3527,7 @@ googleCloudVisionV1p3beta1Word =
     , _gcvvwSymbols = Nothing
     , _gcvvwConfidence = Nothing
     }
+
 
 -- | Additional information detected for the word.
 gcvvwProperty :: Lens' GoogleCloudVisionV1p3beta1Word (Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
@@ -3503,6 +3595,7 @@ data LocalizedObjectAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocalizedObjectAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3526,6 +3619,7 @@ localizedObjectAnnotation =
     , _loaName = Nothing
     , _loaMid = Nothing
     }
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -3588,6 +3682,7 @@ data GoogleCloudVisionV1p2beta1WebDetection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1WebDetection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3614,6 +3709,7 @@ googleCloudVisionV1p2beta1WebDetection =
     , _gcvvwdFullMatchingImages = Nothing
     , _gcvvwdWebEntities = Nothing
     }
+
 
 -- | The visually similar image results.
 gcvvwdVisuallySimilarImages :: Lens' GoogleCloudVisionV1p2beta1WebDetection [GoogleCloudVisionV1p2beta1WebDetectionWebImage]
@@ -3712,6 +3808,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3735,6 +3832,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -3847,6 +3945,7 @@ data Color =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Color' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3863,6 +3962,7 @@ color
 color =
   Color'
     {_cRed = Nothing, _cAlpha = Nothing, _cGreen = Nothing, _cBlue = Nothing}
+
 
 -- | The amount of red in the color as a value in the interval [0, 1].
 cRed :: Lens' Color (Maybe Double)
@@ -3921,6 +4021,7 @@ data GoogleCloudVisionV1p2beta1ProductKeyValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ProductKeyValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3933,6 +4034,7 @@ googleCloudVisionV1p2beta1ProductKeyValue
 googleCloudVisionV1p2beta1ProductKeyValue =
   GoogleCloudVisionV1p2beta1ProductKeyValue'
     {_gValue = Nothing, _gKey = Nothing}
+
 
 -- | The value of the label attached to the product. Cannot be empty and
 -- cannot exceed 128 bytes.
@@ -3972,6 +4074,7 @@ data GoogleCloudVisionV1p1beta1FaceAnnotationLandmark =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1FaceAnnotationLandmark' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3984,6 +4087,7 @@ googleCloudVisionV1p1beta1FaceAnnotationLandmark
 googleCloudVisionV1p1beta1FaceAnnotationLandmark =
   GoogleCloudVisionV1p1beta1FaceAnnotationLandmark'
     {_gcvvfalType = Nothing, _gcvvfalPosition = Nothing}
+
 
 -- | Face landmark type.
 gcvvfalType :: Lens' GoogleCloudVisionV1p1beta1FaceAnnotationLandmark (Maybe GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkType)
@@ -4025,6 +4129,7 @@ newtype GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4035,6 +4140,7 @@ googleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse
 googleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse =
   GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse'
     {_gResponses = Nothing}
+
 
 -- | The list of file annotation responses, one for each request in
 -- AsyncBatchAnnotateFilesRequest.
@@ -4079,6 +4185,7 @@ data GoogleCloudVisionV1p1beta1EntityAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1EntityAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4114,6 +4221,7 @@ googleCloudVisionV1p1beta1EntityAnnotation =
     , _gcvveaDescription = Nothing
     , _gcvveaProperties = Nothing
     }
+
 
 -- | Overall score of the result. Range [0, 1].
 gcvveaScore :: Lens' GoogleCloudVisionV1p1beta1EntityAnnotation (Maybe Double)
@@ -4244,6 +4352,7 @@ data GoogleCloudVisionV1p3beta1AnnotateImageResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1AnnotateImageResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4294,6 +4403,7 @@ googleCloudVisionV1p3beta1AnnotateImageResponse =
     , _gFullTextAnnotation = Nothing
     , _gImagePropertiesAnnotation = Nothing
     }
+
 
 -- | If present, logo detection has completed successfully.
 gLogoAnnotations :: Lens' GoogleCloudVisionV1p3beta1AnnotateImageResponse [GoogleCloudVisionV1p3beta1EntityAnnotation]
@@ -4451,6 +4561,7 @@ newtype GoogleCloudVisionV1p3beta1ImageProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ImageProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4460,6 +4571,7 @@ googleCloudVisionV1p3beta1ImageProperties
     :: GoogleCloudVisionV1p3beta1ImageProperties
 googleCloudVisionV1p3beta1ImageProperties =
   GoogleCloudVisionV1p3beta1ImageProperties' {_gDominantColors = Nothing}
+
 
 -- | If present, dominant colors completed successfully.
 gDominantColors :: Lens' GoogleCloudVisionV1p3beta1ImageProperties (Maybe GoogleCloudVisionV1p3beta1DominantColorsAnnotation)
@@ -4495,6 +4607,7 @@ data GoogleCloudVisionV1p2beta1ImageSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ImageSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4507,6 +4620,7 @@ googleCloudVisionV1p2beta1ImageSource
 googleCloudVisionV1p2beta1ImageSource =
   GoogleCloudVisionV1p2beta1ImageSource'
     {_gcvvisGcsImageURI = Nothing, _gcvvisImageURI = Nothing}
+
 
 -- | **Use \`image_uri\` instead.** The Google Cloud Storage URI of the form
 -- \`gs:\/\/bucket_name\/object_name\`. Object versioning is not supported.
@@ -4565,6 +4679,7 @@ data GoogleCloudVisionV1p3beta1Page =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Page' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4588,6 +4703,7 @@ googleCloudVisionV1p3beta1Page =
     , _ggWidth = Nothing
     , _ggConfidence = Nothing
     }
+
 
 -- | Additional information detected on the page.
 ggProperty :: Lens' GoogleCloudVisionV1p3beta1Page (Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
@@ -4655,6 +4771,7 @@ data GoogleCloudVisionV1p1beta1Block =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Block' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4678,6 +4795,7 @@ googleCloudVisionV1p1beta1Block =
     , _gcvvbConfidence = Nothing
     , _gcvvbBlockType = Nothing
     }
+
 
 -- | Additional information detected for the block.
 gcvvbProperty :: Lens' GoogleCloudVisionV1p1beta1Block (Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
@@ -4749,6 +4867,7 @@ newtype GoogleCloudVisionV1p3beta1GcsDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1GcsDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4758,6 +4877,7 @@ googleCloudVisionV1p3beta1GcsDestination
     :: GoogleCloudVisionV1p3beta1GcsDestination
 googleCloudVisionV1p3beta1GcsDestination =
   GoogleCloudVisionV1p3beta1GcsDestination' {_gcvvgdURI = Nothing}
+
 
 -- | Google Cloud Storage URI where the results will be stored. Results will
 -- be in JSON format and preceded by its corresponding input URI. This
@@ -4803,6 +4923,7 @@ data GoogleCloudVisionV1p3beta1Product =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Product' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4826,6 +4947,7 @@ googleCloudVisionV1p3beta1Product =
     , _gProductLabels = Nothing
     , _gDescription = Nothing
     }
+
 
 -- | The resource name of the product. Format is:
 -- \`projects\/PROJECT_ID\/locations\/LOC_ID\/products\/PRODUCT_ID\`. This
@@ -4898,6 +5020,7 @@ data BoundingPoly =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BoundingPoly' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4909,6 +5032,7 @@ boundingPoly
     :: BoundingPoly
 boundingPoly =
   BoundingPoly' {_bpNormalizedVertices = Nothing, _bpVertices = Nothing}
+
 
 -- | The bounding polygon normalized vertices.
 bpNormalizedVertices :: Lens' BoundingPoly [NormalizedVertex]
@@ -4951,6 +5075,7 @@ data GoogleCloudVisionV1p1beta1NormalizedVertex =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1NormalizedVertex' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4963,6 +5088,7 @@ googleCloudVisionV1p1beta1NormalizedVertex
 googleCloudVisionV1p1beta1NormalizedVertex =
   GoogleCloudVisionV1p1beta1NormalizedVertex'
     {_gcvvnvX = Nothing, _gcvvnvY = Nothing}
+
 
 -- | X coordinate.
 gcvvnvX :: Lens' GoogleCloudVisionV1p1beta1NormalizedVertex (Maybe Double)
@@ -5004,6 +5130,7 @@ newtype GoogleCloudVisionV1p3beta1LocationInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1LocationInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5013,6 +5140,7 @@ googleCloudVisionV1p3beta1LocationInfo
     :: GoogleCloudVisionV1p3beta1LocationInfo
 googleCloudVisionV1p3beta1LocationInfo =
   GoogleCloudVisionV1p3beta1LocationInfo' {_gcvvliLatLng = Nothing}
+
 
 -- | lat\/long location coordinates.
 gcvvliLatLng :: Lens' GoogleCloudVisionV1p3beta1LocationInfo (Maybe LatLng)
@@ -5046,6 +5174,7 @@ data Vertex =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Vertex' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5056,6 +5185,7 @@ data Vertex =
 vertex
     :: Vertex
 vertex = Vertex' {_vX = Nothing, _vY = Nothing}
+
 
 -- | X coordinate.
 vX :: Lens' Vertex (Maybe Int32)
@@ -5088,6 +5218,7 @@ data GoogleCloudVisionV1p1beta1Position =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Position' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5102,6 +5233,7 @@ googleCloudVisionV1p1beta1Position
 googleCloudVisionV1p1beta1Position =
   GoogleCloudVisionV1p1beta1Position'
     {_gcvvpZ = Nothing, _gcvvpX = Nothing, _gcvvpY = Nothing}
+
 
 -- | Z coordinate (or depth).
 gcvvpZ :: Lens' GoogleCloudVisionV1p1beta1Position (Maybe Double)
@@ -5146,6 +5278,7 @@ newtype GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5156,6 +5289,7 @@ googleCloudVisionV1p1beta1AsyncAnnotateFileResponse
 googleCloudVisionV1p1beta1AsyncAnnotateFileResponse =
   GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse'
     {_gcvvaafrOutputConfig = Nothing}
+
 
 -- | The output location and metadata from AsyncAnnotateFileRequest.
 gcvvaafrOutputConfig :: Lens' GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse (Maybe GoogleCloudVisionV1p1beta1OutputConfig)
@@ -5192,6 +5326,7 @@ data GoogleCloudVisionV1p3beta1WebDetectionWebImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1WebDetectionWebImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5204,6 +5339,7 @@ googleCloudVisionV1p3beta1WebDetectionWebImage
 googleCloudVisionV1p3beta1WebDetectionWebImage =
   GoogleCloudVisionV1p3beta1WebDetectionWebImage'
     {_gcvvwdwiScore = Nothing, _gcvvwdwiURL = Nothing}
+
 
 -- | (Deprecated) Overall relevancy score for the image.
 gcvvwdwiScore :: Lens' GoogleCloudVisionV1p3beta1WebDetectionWebImage (Maybe Double)
@@ -5248,6 +5384,7 @@ data GoogleCloudVisionV1p3beta1Vertex =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Vertex' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5259,6 +5396,7 @@ googleCloudVisionV1p3beta1Vertex
     :: GoogleCloudVisionV1p3beta1Vertex
 googleCloudVisionV1p3beta1Vertex =
   GoogleCloudVisionV1p3beta1Vertex' {_gcvvvX = Nothing, _gcvvvY = Nothing}
+
 
 -- | X coordinate.
 gcvvvX :: Lens' GoogleCloudVisionV1p3beta1Vertex (Maybe Int32)
@@ -5298,6 +5436,7 @@ data WebEntity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebEntity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5312,6 +5451,7 @@ webEntity
 webEntity =
   WebEntity'
     {_weScore = Nothing, _weEntityId = Nothing, _weDescription = Nothing}
+
 
 -- | Overall relevancy score for the entity. Not normalized and not
 -- comparable across different image queries.
@@ -5356,6 +5496,7 @@ newtype GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5366,6 +5507,7 @@ googleCloudVisionV1p2beta1BatchAnnotateImagesResponse
 googleCloudVisionV1p2beta1BatchAnnotateImagesResponse =
   GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse'
     {_gcvvbairResponses = Nothing}
+
 
 -- | Individual responses to image annotation requests within the batch.
 gcvvbairResponses :: Lens' GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse [GoogleCloudVisionV1p2beta1AnnotateImageResponse]
@@ -5402,6 +5544,7 @@ newtype GoogleCloudVisionV1p1beta1GcsSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1GcsSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5411,6 +5554,7 @@ googleCloudVisionV1p1beta1GcsSource
     :: GoogleCloudVisionV1p1beta1GcsSource
 googleCloudVisionV1p1beta1GcsSource =
   GoogleCloudVisionV1p1beta1GcsSource' {_gcvvgsURI = Nothing}
+
 
 -- | Google Cloud Storage URI for the input file. This must only be a Google
 -- Cloud Storage object. Wildcards are not currently supported.
@@ -5441,6 +5585,7 @@ newtype GoogleCloudVisionV1p2beta1CropHintsAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1CropHintsAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5450,6 +5595,7 @@ googleCloudVisionV1p2beta1CropHintsAnnotation
     :: GoogleCloudVisionV1p2beta1CropHintsAnnotation
 googleCloudVisionV1p2beta1CropHintsAnnotation =
   GoogleCloudVisionV1p2beta1CropHintsAnnotation' {_gCropHints = Nothing}
+
 
 -- | Crop hint results.
 gCropHints :: Lens' GoogleCloudVisionV1p2beta1CropHintsAnnotation [GoogleCloudVisionV1p2beta1CropHint]
@@ -5485,6 +5631,7 @@ newtype GcsDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GcsDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5493,6 +5640,7 @@ newtype GcsDestination =
 gcsDestination
     :: GcsDestination
 gcsDestination = GcsDestination' {_gdURI = Nothing}
+
 
 -- | Google Cloud Storage URI where the results will be stored. Results will
 -- be in JSON format and preceded by its corresponding input URI. This
@@ -5527,6 +5675,7 @@ data GoogleCloudVisionV1p3beta1BoundingPoly =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1BoundingPoly' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5539,6 +5688,7 @@ googleCloudVisionV1p3beta1BoundingPoly
 googleCloudVisionV1p3beta1BoundingPoly =
   GoogleCloudVisionV1p3beta1BoundingPoly'
     {_gcvvbpNormalizedVertices = Nothing, _gcvvbpVertices = Nothing}
+
 
 -- | The bounding polygon normalized vertices.
 gcvvbpNormalizedVertices :: Lens' GoogleCloudVisionV1p3beta1BoundingPoly [GoogleCloudVisionV1p3beta1NormalizedVertex]
@@ -5587,6 +5737,7 @@ data GoogleCloudVisionV1p2beta1NormalizedVertex =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1NormalizedVertex' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5598,6 +5749,7 @@ googleCloudVisionV1p2beta1NormalizedVertex
     :: GoogleCloudVisionV1p2beta1NormalizedVertex
 googleCloudVisionV1p2beta1NormalizedVertex =
   GoogleCloudVisionV1p2beta1NormalizedVertex' {_gX = Nothing, _gY = Nothing}
+
 
 -- | X coordinate.
 gX :: Lens' GoogleCloudVisionV1p2beta1NormalizedVertex (Maybe Double)
@@ -5638,6 +5790,7 @@ data GoogleCloudVisionV1p2beta1Position =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Position' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5652,6 +5805,7 @@ googleCloudVisionV1p2beta1Position
 googleCloudVisionV1p2beta1Position =
   GoogleCloudVisionV1p2beta1Position'
     {_gooZ = Nothing, _gooX = Nothing, _gooY = Nothing}
+
 
 -- | Z coordinate (or depth).
 gooZ :: Lens' GoogleCloudVisionV1p2beta1Position (Maybe Double)
@@ -5697,6 +5851,7 @@ data GoogleCloudVisionV1p3beta1TextAnnotationTextProperty =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1TextAnnotationTextProperty' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5709,6 +5864,7 @@ googleCloudVisionV1p3beta1TextAnnotationTextProperty
 googleCloudVisionV1p3beta1TextAnnotationTextProperty =
   GoogleCloudVisionV1p3beta1TextAnnotationTextProperty'
     {_gcvvtatpDetectedLanguages = Nothing, _gcvvtatpDetectedBreak = Nothing}
+
 
 -- | A list of detected languages together with confidence.
 gcvvtatpDetectedLanguages :: Lens' GoogleCloudVisionV1p3beta1TextAnnotationTextProperty [GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage]
@@ -5756,6 +5912,7 @@ newtype LocationInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5764,6 +5921,7 @@ newtype LocationInfo =
 locationInfo
     :: LocationInfo
 locationInfo = LocationInfo' {_liLatLng = Nothing}
+
 
 -- | lat\/long location coordinates.
 liLatLng :: Lens' LocationInfo (Maybe LatLng)
@@ -5786,6 +5944,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5796,6 +5955,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -5824,6 +5984,7 @@ data Page =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Page' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5847,6 +6008,7 @@ page =
     , _pWidth = Nothing
     , _pConfidence = Nothing
     }
+
 
 -- | Additional information detected on the page.
 pProperty :: Lens' Page (Maybe TextProperty)
@@ -5910,6 +6072,7 @@ data ColorInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColorInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5924,6 +6087,7 @@ colorInfo
 colorInfo =
   ColorInfo'
     {_ciColor = Nothing, _ciScore = Nothing, _ciPixelFraction = Nothing}
+
 
 -- | RGB components of the color.
 ciColor :: Lens' ColorInfo (Maybe Color)
@@ -5970,6 +6134,7 @@ data GoogleCloudVisionV1p3beta1OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5984,6 +6149,7 @@ googleCloudVisionV1p3beta1OperationMetadata
 googleCloudVisionV1p3beta1OperationMetadata =
   GoogleCloudVisionV1p3beta1OperationMetadata'
     {_gState = Nothing, _gUpdateTime = Nothing, _gCreateTime = Nothing}
+
 
 -- | Current state of the batch operation.
 gState :: Lens' GoogleCloudVisionV1p3beta1OperationMetadata (Maybe GoogleCloudVisionV1p3beta1OperationMetadataState)
@@ -6036,6 +6202,7 @@ data GoogleCloudVisionV1p2beta1Feature =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Feature' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6050,6 +6217,7 @@ googleCloudVisionV1p2beta1Feature
 googleCloudVisionV1p2beta1Feature =
   GoogleCloudVisionV1p2beta1Feature'
     {_gcvvfModel = Nothing, _gcvvfType = Nothing, _gcvvfMaxResults = Nothing}
+
 
 -- | Model to use for the feature. Supported values: \"builtin\/stable\" (the
 -- default if unset) and \"builtin\/latest\".
@@ -6098,6 +6266,7 @@ data WebLabel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebLabel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6108,6 +6277,7 @@ data WebLabel =
 webLabel
     :: WebLabel
 webLabel = WebLabel' {_wlLanguageCode = Nothing, _wlLabel = Nothing}
+
 
 -- | The BCP-47 language code for \`label\`, such as \"en-US\" or
 -- \"sr-Latn\". For more information, see
@@ -6145,6 +6315,7 @@ data GoogleCloudVisionV1p1beta1ProductKeyValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ProductKeyValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6157,6 +6328,7 @@ googleCloudVisionV1p1beta1ProductKeyValue
 googleCloudVisionV1p1beta1ProductKeyValue =
   GoogleCloudVisionV1p1beta1ProductKeyValue'
     {_gooValue = Nothing, _gooKey = Nothing}
+
 
 -- | The value of the label attached to the product. Cannot be empty and
 -- cannot exceed 128 bytes.
@@ -6197,6 +6369,7 @@ data GoogleCloudVisionV1p1beta1ImageAnnotationContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ImageAnnotationContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6209,6 +6382,7 @@ googleCloudVisionV1p1beta1ImageAnnotationContext
 googleCloudVisionV1p1beta1ImageAnnotationContext =
   GoogleCloudVisionV1p1beta1ImageAnnotationContext'
     {_gURI = Nothing, _gPageNumber = Nothing}
+
 
 -- | The URI of the file used to produce the image.
 gURI :: Lens' GoogleCloudVisionV1p1beta1ImageAnnotationContext (Maybe Text)
@@ -6253,6 +6427,7 @@ data Paragraph =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Paragraph' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6273,6 +6448,7 @@ paragraph =
     , _parConfidence = Nothing
     , _parWords = Nothing
     }
+
 
 -- | Additional information detected for the paragraph.
 parProperty :: Lens' Paragraph (Maybe TextProperty)
@@ -6336,6 +6512,7 @@ data Symbol =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Symbol' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6356,6 +6533,7 @@ symbol =
     , _sText = Nothing
     , _sConfidence = Nothing
     }
+
 
 -- | Additional information detected for the symbol.
 sProperty :: Lens' Symbol (Maybe TextProperty)
@@ -6424,6 +6602,7 @@ data AnnotateImageResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotateImageResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6474,6 +6653,7 @@ annotateImageResponse =
     , _airFullTextAnnotation = Nothing
     , _airImagePropertiesAnnotation = Nothing
     }
+
 
 -- | If present, logo detection has completed successfully.
 airLogoAnnotations :: Lens' AnnotateImageResponse [EntityAnnotation]
@@ -6629,6 +6809,7 @@ data GoogleCloudVisionV1p3beta1OutputConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1OutputConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6641,6 +6822,7 @@ googleCloudVisionV1p3beta1OutputConfig
 googleCloudVisionV1p3beta1OutputConfig =
   GoogleCloudVisionV1p3beta1OutputConfig'
     {_gooGcsDestination = Nothing, _gooBatchSize = Nothing}
+
 
 -- | The Google Cloud Storage location to write the output(s) to.
 gooGcsDestination :: Lens' GoogleCloudVisionV1p3beta1OutputConfig (Maybe GoogleCloudVisionV1p3beta1GcsDestination)
@@ -6688,6 +6870,7 @@ newtype ImageProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6696,6 +6879,7 @@ newtype ImageProperties =
 imageProperties
     :: ImageProperties
 imageProperties = ImageProperties' {_ipDominantColors = Nothing}
+
 
 -- | If present, dominant colors completed successfully.
 ipDominantColors :: Lens' ImageProperties (Maybe DominantColorsAnnotation)
@@ -6728,6 +6912,7 @@ data GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6751,6 +6936,7 @@ googleCloudVisionV1p3beta1LocalizedObjectAnnotation =
     , _gooName = Nothing
     , _gooMid = Nothing
     }
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -6817,6 +7003,7 @@ data GoogleCloudVisionV1p2beta1WebDetectionWebEntity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1WebDetectionWebEntity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6834,6 +7021,7 @@ googleCloudVisionV1p2beta1WebDetectionWebEntity =
     , _gcvvwdwecEntityId = Nothing
     , _gcvvwdwecDescription = Nothing
     }
+
 
 -- | Overall relevancy score for the entity. Not normalized and not
 -- comparable across different image queries.
@@ -6886,6 +7074,7 @@ newtype AsyncBatchAnnotateFilesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AsyncBatchAnnotateFilesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6895,6 +7084,7 @@ asyncBatchAnnotateFilesResponse
     :: AsyncBatchAnnotateFilesResponse
 asyncBatchAnnotateFilesResponse =
   AsyncBatchAnnotateFilesResponse' {_abafrResponses = Nothing}
+
 
 -- | The list of file annotation responses, one for each request in
 -- AsyncBatchAnnotateFilesRequest.
@@ -6930,6 +7120,7 @@ data GoogleCloudVisionV1p3beta1CropHint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1CropHint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6947,6 +7138,7 @@ googleCloudVisionV1p3beta1CropHint =
     , _goooConfidence = Nothing
     , _goooImportanceFraction = Nothing
     }
+
 
 -- | The bounding polygon for the crop region. The coordinates of the
 -- bounding box are in the original image\'s scale.
@@ -7012,6 +7204,7 @@ data FaceAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FaceAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7065,6 +7258,7 @@ faceAnnotation =
     , _faJoyLikelihood = Nothing
     , _faLandmarks = Nothing
     }
+
 
 -- | Pitch angle, which indicates the upwards\/downwards angle that the face
 -- is pointing relative to the image\'s horizontal plane. Range [-180,180].
@@ -7228,6 +7422,7 @@ data GoogleCloudVisionV1p1beta1Property =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Property' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7245,6 +7440,7 @@ googleCloudVisionV1p1beta1Property =
     , _gcvvpcValue = Nothing
     , _gcvvpcName = Nothing
     }
+
 
 -- | Value of numeric properties.
 gcvvpcUint64Value :: Lens' GoogleCloudVisionV1p1beta1Property (Maybe Word64)
@@ -7292,6 +7488,7 @@ data GoogleCloudVisionV1p1beta1ProductSearchResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ProductSearchResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7309,6 +7506,7 @@ googleCloudVisionV1p1beta1ProductSearchResults =
     , _gResults = Nothing
     , _gIndexTime = Nothing
     }
+
 
 -- | List of results grouped by products detected in the query image. Each
 -- entry corresponds to one bounding polygon in the query image, and
@@ -7369,6 +7567,7 @@ data GoogleCloudVisionV1p2beta1LatLongRect =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1LatLongRect' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7381,6 +7580,7 @@ googleCloudVisionV1p2beta1LatLongRect
 googleCloudVisionV1p2beta1LatLongRect =
   GoogleCloudVisionV1p2beta1LatLongRect'
     {_gcvvllrMaxLatLng = Nothing, _gcvvllrMinLatLng = Nothing}
+
 
 -- | Max lat\/long pair.
 gcvvllrMaxLatLng :: Lens' GoogleCloudVisionV1p2beta1LatLongRect (Maybe LatLng)
@@ -7421,6 +7621,7 @@ data DetectedBreak =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DetectedBreak' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7431,6 +7632,7 @@ data DetectedBreak =
 detectedBreak
     :: DetectedBreak
 detectedBreak = DetectedBreak' {_dbIsPrefix = Nothing, _dbType = Nothing}
+
 
 -- | True if break prepends the element.
 dbIsPrefix :: Lens' DetectedBreak (Maybe Bool)
@@ -7466,6 +7668,7 @@ data Result =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Result' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7478,6 +7681,7 @@ data Result =
 result
     :: Result
 result = Result' {_rImage = Nothing, _rScore = Nothing, _rProduct = Nothing}
+
 
 -- | The resource name of the image from the product that is the closest
 -- match to the query.
@@ -7521,6 +7725,7 @@ data GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7533,6 +7738,7 @@ googleCloudVisionV1p1beta1ProductSearchResultsGroupedResult
 googleCloudVisionV1p1beta1ProductSearchResultsGroupedResult =
   GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult'
     {_gcvvpsrgrResults = Nothing, _gcvvpsrgrBoundingPoly = Nothing}
+
 
 -- | List of results, one for each product match.
 gcvvpsrgrResults :: Lens' GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult [GoogleCloudVisionV1p1beta1ProductSearchResultsResult]
@@ -7585,6 +7791,7 @@ data GoogleCloudVisionV1p1beta1SafeSearchAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1SafeSearchAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7608,6 +7815,7 @@ googleCloudVisionV1p1beta1SafeSearchAnnotation =
     , _gMedical = Nothing
     , _gViolence = Nothing
     }
+
 
 -- | Spoof likelihood. The likelihood that an modification was made to the
 -- image\'s canonical version to make it appear funny or offensive.
@@ -7674,6 +7882,7 @@ data GoogleCloudVisionV1p2beta1Product =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Product' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7697,6 +7906,7 @@ googleCloudVisionV1p2beta1Product =
     , _ggProductLabels = Nothing
     , _ggDescription = Nothing
     }
+
 
 -- | The resource name of the product. Format is:
 -- \`projects\/PROJECT_ID\/locations\/LOC_ID\/products\/PRODUCT_ID\`. This
@@ -7774,6 +7984,7 @@ data Block =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Block' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7797,6 +8008,7 @@ block =
     , _bConfidence = Nothing
     , _bBlockType = Nothing
     }
+
 
 -- | Additional information detected for the block.
 bProperty :: Lens' Block (Maybe TextProperty)
@@ -7865,6 +8077,7 @@ data GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7885,6 +8098,7 @@ googleCloudVisionV1p2beta1AsyncAnnotateFileRequest =
     , _gOutputConfig = Nothing
     , _gImageContext = Nothing
     }
+
 
 -- | Required. Information about the input file.
 gInputConfig :: Lens' GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest (Maybe GoogleCloudVisionV1p2beta1InputConfig)
@@ -7945,6 +8159,7 @@ newtype GoogleCloudVisionV1p2beta1DominantColorsAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1DominantColorsAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7954,6 +8169,7 @@ googleCloudVisionV1p2beta1DominantColorsAnnotation
     :: GoogleCloudVisionV1p2beta1DominantColorsAnnotation
 googleCloudVisionV1p2beta1DominantColorsAnnotation =
   GoogleCloudVisionV1p2beta1DominantColorsAnnotation' {_gColors = Nothing}
+
 
 -- | RGB color values with their score and pixel fraction.
 gColors :: Lens' GoogleCloudVisionV1p2beta1DominantColorsAnnotation [GoogleCloudVisionV1p2beta1ColorInfo]
@@ -7994,6 +8210,7 @@ data GoogleCloudVisionV1p3beta1TextAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1TextAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8006,6 +8223,7 @@ googleCloudVisionV1p3beta1TextAnnotation
 googleCloudVisionV1p3beta1TextAnnotation =
   GoogleCloudVisionV1p3beta1TextAnnotation'
     {_gcvvtaText = Nothing, _gcvvtaPages = Nothing}
+
 
 -- | UTF-8 text detected on the pages.
 gcvvtaText :: Lens' GoogleCloudVisionV1p3beta1TextAnnotation (Maybe Text)
@@ -8047,6 +8265,7 @@ newtype AsyncAnnotateFileResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AsyncAnnotateFileResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8056,6 +8275,7 @@ asyncAnnotateFileResponse
     :: AsyncAnnotateFileResponse
 asyncAnnotateFileResponse =
   AsyncAnnotateFileResponse' {_aafrOutputConfig = Nothing}
+
 
 -- | The output location and metadata from AsyncAnnotateFileRequest.
 aafrOutputConfig :: Lens' AsyncAnnotateFileResponse (Maybe OutputConfig)
@@ -8086,6 +8306,7 @@ data InputConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InputConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8096,6 +8317,7 @@ data InputConfig =
 inputConfig
     :: InputConfig
 inputConfig = InputConfig' {_icGcsSource = Nothing, _icMimeType = Nothing}
+
 
 -- | The Google Cloud Storage location to read the input from.
 icGcsSource :: Lens' InputConfig (Maybe GcsSource)
@@ -8139,6 +8361,7 @@ data EntityAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8174,6 +8397,7 @@ entityAnnotation =
     , _eaDescription = Nothing
     , _eaProperties = Nothing
     }
+
 
 -- | Overall score of the result. Range [0, 1].
 eaScore :: Lens' EntityAnnotation (Maybe Double)
@@ -8282,6 +8506,7 @@ data ReferenceImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReferenceImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8296,6 +8521,7 @@ referenceImage
 referenceImage =
   ReferenceImage'
     {_riURI = Nothing, _riName = Nothing, _riBoundingPolys = Nothing}
+
 
 -- | The Google Cloud Storage URI of the reference image. The URI must start
 -- with \`gs:\/\/\`. Required.
@@ -8350,6 +8576,7 @@ data BatchOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8364,6 +8591,7 @@ batchOperationMetadata
 batchOperationMetadata =
   BatchOperationMetadata'
     {_bomState = Nothing, _bomEndTime = Nothing, _bomSubmitTime = Nothing}
+
 
 -- | The current state of the batch operation.
 bomState :: Lens' BatchOperationMetadata (Maybe BatchOperationMetadataState)
@@ -8413,6 +8641,7 @@ data GoogleCloudVisionV1p3beta1WebDetection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1WebDetection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8439,6 +8668,7 @@ googleCloudVisionV1p3beta1WebDetection =
     , _gFullMatchingImages = Nothing
     , _gWebEntities = Nothing
     }
+
 
 -- | The visually similar image results.
 gVisuallySimilarImages :: Lens' GoogleCloudVisionV1p3beta1WebDetection [GoogleCloudVisionV1p3beta1WebDetectionWebImage]
@@ -8531,6 +8761,7 @@ data DetectedLanguage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DetectedLanguage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8542,6 +8773,7 @@ detectedLanguage
     :: DetectedLanguage
 detectedLanguage =
   DetectedLanguage' {_dlLanguageCode = Nothing, _dlConfidence = Nothing}
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -8582,6 +8814,7 @@ data GoogleCloudVisionV1p3beta1AnnotateFileResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1AnnotateFileResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8594,6 +8827,7 @@ googleCloudVisionV1p3beta1AnnotateFileResponse
 googleCloudVisionV1p3beta1AnnotateFileResponse =
   GoogleCloudVisionV1p3beta1AnnotateFileResponse'
     {_gooResponses = Nothing, _gooInputConfig = Nothing}
+
 
 -- | Individual responses to images found within the file.
 gooResponses :: Lens' GoogleCloudVisionV1p3beta1AnnotateFileResponse [GoogleCloudVisionV1p3beta1AnnotateImageResponse]
@@ -8640,6 +8874,7 @@ data GoogleCloudVisionV1p2beta1ProductSearchResultsResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ProductSearchResultsResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8654,6 +8889,7 @@ googleCloudVisionV1p2beta1ProductSearchResultsResult
 googleCloudVisionV1p2beta1ProductSearchResultsResult =
   GoogleCloudVisionV1p2beta1ProductSearchResultsResult'
     {_gImage = Nothing, _gScore = Nothing, _gProduct = Nothing}
+
 
 -- | The resource name of the image from the product that is the closest
 -- match to the query.
@@ -8705,6 +8941,7 @@ data GoogleCloudVisionV1p2beta1Word =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Word' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8725,6 +8962,7 @@ googleCloudVisionV1p2beta1Word =
     , _gcvvwcSymbols = Nothing
     , _gcvvwcConfidence = Nothing
     }
+
 
 -- | Additional information detected for the word.
 gcvvwcProperty :: Lens' GoogleCloudVisionV1p2beta1Word (Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
@@ -8792,6 +9030,7 @@ data GoogleCloudVisionV1p1beta1Word =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Word' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8812,6 +9051,7 @@ googleCloudVisionV1p1beta1Word =
     , _gcvvw1Symbols = Nothing
     , _gcvvw1Confidence = Nothing
     }
+
 
 -- | Additional information detected for the word.
 gcvvw1Property :: Lens' GoogleCloudVisionV1p1beta1Word (Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
@@ -8878,6 +9118,7 @@ data GoogleCloudVisionV1p1beta1ProductSearchResultsResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ProductSearchResultsResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8895,6 +9136,7 @@ googleCloudVisionV1p1beta1ProductSearchResultsResult =
     , _gcvvpsrrcScore = Nothing
     , _gcvvpsrrcProduct = Nothing
     }
+
 
 -- | The resource name of the image from the product that is the closest
 -- match to the query.
@@ -8952,6 +9194,7 @@ data GoogleCloudVisionV1p3beta1ImportProductSetsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ImportProductSetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8964,6 +9207,7 @@ googleCloudVisionV1p3beta1ImportProductSetsResponse
 googleCloudVisionV1p3beta1ImportProductSetsResponse =
   GoogleCloudVisionV1p3beta1ImportProductSetsResponse'
     {_gcvvipsrReferenceImages = Nothing, _gcvvipsrStatuses = Nothing}
+
 
 -- | The list of reference_images that are imported successfully.
 gcvvipsrReferenceImages :: Lens' GoogleCloudVisionV1p3beta1ImportProductSetsResponse [GoogleCloudVisionV1p3beta1ReferenceImage]
@@ -9015,6 +9259,7 @@ newtype GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9025,6 +9270,7 @@ googleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse
 googleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse =
   GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse'
     {_gcvvabafrcResponses = Nothing}
+
 
 -- | The list of file annotation responses, one for each request in
 -- AsyncBatchAnnotateFilesRequest.
@@ -9063,6 +9309,7 @@ newtype GoogleCloudVisionV1p1beta1ImageProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1ImageProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9072,6 +9319,7 @@ googleCloudVisionV1p1beta1ImageProperties
     :: GoogleCloudVisionV1p1beta1ImageProperties
 googleCloudVisionV1p1beta1ImageProperties =
   GoogleCloudVisionV1p1beta1ImageProperties' {_gcvvipsDominantColors = Nothing}
+
 
 -- | If present, dominant colors completed successfully.
 gcvvipsDominantColors :: Lens' GoogleCloudVisionV1p1beta1ImageProperties (Maybe GoogleCloudVisionV1p1beta1DominantColorsAnnotation)
@@ -9108,6 +9356,7 @@ data GoogleCloudVisionV1p3beta1WebDetectionWebEntity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1WebDetectionWebEntity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9122,6 +9371,7 @@ googleCloudVisionV1p3beta1WebDetectionWebEntity
 googleCloudVisionV1p3beta1WebDetectionWebEntity =
   GoogleCloudVisionV1p3beta1WebDetectionWebEntity'
     {_goooScore = Nothing, _goooEntityId = Nothing, _goooDescription = Nothing}
+
 
 -- | Overall relevancy score for the entity. Not normalized and not
 -- comparable across different image queries.
@@ -9185,6 +9435,7 @@ data GoogleCloudVisionV1p1beta1AnnotateImageResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1AnnotateImageResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9235,6 +9486,7 @@ googleCloudVisionV1p1beta1AnnotateImageResponse =
     , _gooFullTextAnnotation = Nothing
     , _gooImagePropertiesAnnotation = Nothing
     }
+
 
 -- | If present, logo detection has completed successfully.
 gooLogoAnnotations :: Lens' GoogleCloudVisionV1p1beta1AnnotateImageResponse [GoogleCloudVisionV1p1beta1EntityAnnotation]
@@ -9396,6 +9648,7 @@ data GoogleCloudVisionV1p3beta1FaceAnnotationLandmark =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1FaceAnnotationLandmark' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9408,6 +9661,7 @@ googleCloudVisionV1p3beta1FaceAnnotationLandmark
 googleCloudVisionV1p3beta1FaceAnnotationLandmark =
   GoogleCloudVisionV1p3beta1FaceAnnotationLandmark'
     {_gType = Nothing, _gPosition = Nothing}
+
 
 -- | Face landmark type.
 gType :: Lens' GoogleCloudVisionV1p3beta1FaceAnnotationLandmark (Maybe GoogleCloudVisionV1p3beta1FaceAnnotationLandmarkType)
@@ -9452,6 +9706,7 @@ data GoogleCloudVisionV1p3beta1BatchOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1BatchOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9469,6 +9724,7 @@ googleCloudVisionV1p3beta1BatchOperationMetadata =
     , _gcvvbomEndTime = Nothing
     , _gcvvbomSubmitTime = Nothing
     }
+
 
 -- | The current state of the batch operation.
 gcvvbomState :: Lens' GoogleCloudVisionV1p3beta1BatchOperationMetadata (Maybe GoogleCloudVisionV1p3beta1BatchOperationMetadataState)
@@ -9522,6 +9778,7 @@ data WebImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9532,6 +9789,7 @@ data WebImage =
 webImage
     :: WebImage
 webImage = WebImage' {_wiScore = Nothing, _wiURL = Nothing}
+
 
 -- | (Deprecated) Overall relevancy score for the image.
 wiScore :: Lens' WebImage (Maybe Double)
@@ -9567,6 +9825,7 @@ data GoogleCloudVisionV1p1beta1Paragraph =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Paragraph' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9587,6 +9846,7 @@ googleCloudVisionV1p1beta1Paragraph =
     , _gcvvp1Confidence = Nothing
     , _gcvvp1Words = Nothing
     }
+
 
 -- | Additional information detected for the paragraph.
 gcvvp1Property :: Lens' GoogleCloudVisionV1p1beta1Paragraph (Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
@@ -9655,6 +9915,7 @@ data WebDetection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebDetection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9681,6 +9942,7 @@ webDetection =
     , _wdFullMatchingImages = Nothing
     , _wdWebEntities = Nothing
     }
+
 
 -- | The visually similar image results.
 wdVisuallySimilarImages :: Lens' WebDetection [WebImage]
@@ -9771,6 +10033,7 @@ data AnnotateFileResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotateFileResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9782,6 +10045,7 @@ annotateFileResponse
     :: AnnotateFileResponse
 annotateFileResponse =
   AnnotateFileResponse' {_afrResponses = Nothing, _afrInputConfig = Nothing}
+
 
 -- | Individual responses to images found within the file.
 afrResponses :: Lens' AnnotateFileResponse [AnnotateImageResponse]
@@ -9828,6 +10092,7 @@ data GoogleCloudVisionV1p3beta1EntityAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1EntityAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9863,6 +10128,7 @@ googleCloudVisionV1p3beta1EntityAnnotation =
     , _gcvveacDescription = Nothing
     , _gcvveacProperties = Nothing
     }
+
 
 -- | Overall score of the result. Range [0, 1].
 gcvveacScore :: Lens' GoogleCloudVisionV1p3beta1EntityAnnotation (Maybe Double)
@@ -9983,6 +10249,7 @@ data GroupedResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupedResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9993,6 +10260,7 @@ data GroupedResult =
 groupedResult
     :: GroupedResult
 groupedResult = GroupedResult' {_grResults = Nothing, _grBoundingPoly = Nothing}
+
 
 -- | List of results, one for each product match.
 grResults :: Lens' GroupedResult [Result]
@@ -10034,6 +10302,7 @@ data GoogleCloudVisionV1p3beta1ReferenceImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ReferenceImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10051,6 +10320,7 @@ googleCloudVisionV1p3beta1ReferenceImage =
     , _gcvvriName = Nothing
     , _gcvvriBoundingPolys = Nothing
     }
+
 
 -- | The Google Cloud Storage URI of the reference image. The URI must start
 -- with \`gs:\/\/\`. Required.
@@ -10112,6 +10382,7 @@ data GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10135,6 +10406,7 @@ googleCloudVisionV1p2beta1LocalizedObjectAnnotation =
     , _gcvvloacName = Nothing
     , _gcvvloacMid = Nothing
     }
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -10207,6 +10479,7 @@ data GoogleCloudVisionV1p3beta1Block =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Block' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10230,6 +10503,7 @@ googleCloudVisionV1p3beta1Block =
     , _gcvvbcConfidence = Nothing
     , _gcvvbcBlockType = Nothing
     }
+
 
 -- | Additional information detected for the block.
 gcvvbcProperty :: Lens' GoogleCloudVisionV1p3beta1Block (Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
@@ -10303,6 +10577,7 @@ data GoogleCloudVisionV1p2beta1Vertex =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Vertex' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10314,6 +10589,7 @@ googleCloudVisionV1p2beta1Vertex
     :: GoogleCloudVisionV1p2beta1Vertex
 googleCloudVisionV1p2beta1Vertex =
   GoogleCloudVisionV1p2beta1Vertex' {_gcvvvcX = Nothing, _gcvvvcY = Nothing}
+
 
 -- | X coordinate.
 gcvvvcX :: Lens' GoogleCloudVisionV1p2beta1Vertex (Maybe Int32)
@@ -10351,6 +10627,7 @@ newtype GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10361,6 +10638,7 @@ googleCloudVisionV1p3beta1AsyncAnnotateFileResponse
 googleCloudVisionV1p3beta1AsyncAnnotateFileResponse =
   GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse'
     {_gooOutputConfig = Nothing}
+
 
 -- | The output location and metadata from AsyncAnnotateFileRequest.
 gooOutputConfig :: Lens' GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse (Maybe GoogleCloudVisionV1p3beta1OutputConfig)
@@ -10397,6 +10675,7 @@ data GoogleCloudVisionV1p2beta1TextAnnotationTextProperty =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1TextAnnotationTextProperty' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10409,6 +10688,7 @@ googleCloudVisionV1p2beta1TextAnnotationTextProperty
 googleCloudVisionV1p2beta1TextAnnotationTextProperty =
   GoogleCloudVisionV1p2beta1TextAnnotationTextProperty'
     {_gDetectedLanguages = Nothing, _gDetectedBreak = Nothing}
+
 
 -- | A list of detected languages together with confidence.
 gDetectedLanguages :: Lens' GoogleCloudVisionV1p2beta1TextAnnotationTextProperty [GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage]
@@ -10456,6 +10736,7 @@ data GoogleCloudVisionV1p2beta1BoundingPoly =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1BoundingPoly' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10468,6 +10749,7 @@ googleCloudVisionV1p2beta1BoundingPoly
 googleCloudVisionV1p2beta1BoundingPoly =
   GoogleCloudVisionV1p2beta1BoundingPoly'
     {_gNormalizedVertices = Nothing, _gVertices = Nothing}
+
 
 -- | The bounding polygon normalized vertices.
 gNormalizedVertices :: Lens' GoogleCloudVisionV1p2beta1BoundingPoly [GoogleCloudVisionV1p2beta1NormalizedVertex]
@@ -10516,6 +10798,7 @@ data GoogleCloudVisionV1p3beta1Position =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Position' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10530,6 +10813,7 @@ googleCloudVisionV1p3beta1Position
 googleCloudVisionV1p3beta1Position =
   GoogleCloudVisionV1p3beta1Position'
     {_gcvvpcZ = Nothing, _gcvvpcX = Nothing, _gcvvpcY = Nothing}
+
 
 -- | Z coordinate (or depth).
 gcvvpcZ :: Lens' GoogleCloudVisionV1p3beta1Position (Maybe Double)
@@ -10574,6 +10858,7 @@ newtype GoogleCloudVisionV1p1beta1GcsDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1GcsDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10583,6 +10868,7 @@ googleCloudVisionV1p1beta1GcsDestination
     :: GoogleCloudVisionV1p1beta1GcsDestination
 googleCloudVisionV1p1beta1GcsDestination =
   GoogleCloudVisionV1p1beta1GcsDestination' {_gooURI = Nothing}
+
 
 -- | Google Cloud Storage URI where the results will be stored. Results will
 -- be in JSON format and preceded by its corresponding input URI. This
@@ -10623,6 +10909,7 @@ newtype GoogleCloudVisionV1p1beta1LocationInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1LocationInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10632,6 +10919,7 @@ googleCloudVisionV1p1beta1LocationInfo
     :: GoogleCloudVisionV1p1beta1LocationInfo
 googleCloudVisionV1p1beta1LocationInfo =
   GoogleCloudVisionV1p1beta1LocationInfo' {_gLatLng = Nothing}
+
 
 -- | lat\/long location coordinates.
 gLatLng :: Lens' GoogleCloudVisionV1p1beta1LocationInfo (Maybe LatLng)
@@ -10665,6 +10953,7 @@ data GoogleCloudVisionV1p1beta1Product =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Product' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10688,6 +10977,7 @@ googleCloudVisionV1p1beta1Product =
     , _gcvvp1ProductLabels = Nothing
     , _gcvvp1Description = Nothing
     }
+
 
 -- | The resource name of the product. Format is:
 -- \`projects\/PROJECT_ID\/locations\/LOC_ID\/products\/PRODUCT_ID\`. This
@@ -10764,6 +11054,7 @@ data GoogleCloudVisionV1p3beta1NormalizedVertex =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1NormalizedVertex' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10776,6 +11067,7 @@ googleCloudVisionV1p3beta1NormalizedVertex
 googleCloudVisionV1p3beta1NormalizedVertex =
   GoogleCloudVisionV1p3beta1NormalizedVertex'
     {_gcvvnvcX = Nothing, _gcvvnvcY = Nothing}
+
 
 -- | X coordinate.
 gcvvnvcX :: Lens' GoogleCloudVisionV1p3beta1NormalizedVertex (Maybe Double)
@@ -10818,6 +11110,7 @@ data GoogleCloudVisionV1p2beta1WebDetectionWebImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1WebDetectionWebImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10830,6 +11123,7 @@ googleCloudVisionV1p2beta1WebDetectionWebImage
 googleCloudVisionV1p2beta1WebDetectionWebImage =
   GoogleCloudVisionV1p2beta1WebDetectionWebImage'
     {_gcvvwdwicScore = Nothing, _gcvvwdwicURL = Nothing}
+
 
 -- | (Deprecated) Overall relevancy score for the image.
 gcvvwdwicScore :: Lens' GoogleCloudVisionV1p2beta1WebDetectionWebImage (Maybe Double)
@@ -10876,6 +11170,7 @@ data GoogleCloudVisionV1p1beta1Page =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Page' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10899,6 +11194,7 @@ googleCloudVisionV1p1beta1Page =
     , _g2Width = Nothing
     , _g2Confidence = Nothing
     }
+
 
 -- | Additional information detected on the page.
 g2Property :: Lens' GoogleCloudVisionV1p1beta1Page (Maybe GoogleCloudVisionV1p1beta1TextAnnotationTextProperty)
@@ -10964,6 +11260,7 @@ data GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10976,6 +11273,7 @@ googleCloudVisionV1p2beta1ProductSearchResultsGroupedResult
 googleCloudVisionV1p2beta1ProductSearchResultsGroupedResult =
   GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult'
     {_gcvvpsrgrcResults = Nothing, _gcvvpsrgrcBoundingPoly = Nothing}
+
 
 -- | List of results, one for each product match.
 gcvvpsrgrcResults :: Lens' GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult [GoogleCloudVisionV1p2beta1ProductSearchResultsResult]
@@ -11025,6 +11323,7 @@ data GoogleCloudVisionV1p3beta1Symbol =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1Symbol' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11045,6 +11344,7 @@ googleCloudVisionV1p3beta1Symbol =
     , _gcvvscText = Nothing
     , _gcvvscConfidence = Nothing
     }
+
 
 -- | Additional information detected for the symbol.
 gcvvscProperty :: Lens' GoogleCloudVisionV1p3beta1Symbol (Maybe GoogleCloudVisionV1p3beta1TextAnnotationTextProperty)
@@ -11109,6 +11409,7 @@ data CropHint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CropHint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11126,6 +11427,7 @@ cropHint =
     , _chConfidence = Nothing
     , _chImportanceFraction = Nothing
     }
+
 
 -- | The bounding polygon for the crop region. The coordinates of the
 -- bounding box are in the original image\'s scale.
@@ -11174,6 +11476,7 @@ data GoogleCloudVisionV1p2beta1Image =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Image' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11186,6 +11489,7 @@ googleCloudVisionV1p2beta1Image
 googleCloudVisionV1p2beta1Image =
   GoogleCloudVisionV1p2beta1Image'
     {_gcvviContent = Nothing, _gcvviSource = Nothing}
+
 
 -- | Image content, represented as a stream of bytes. Note: As with all
 -- \`bytes\` fields, protobuffers use a pure binary representation, whereas
@@ -11228,6 +11532,7 @@ data GoogleCloudVisionV1p1beta1InputConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1InputConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11240,6 +11545,7 @@ googleCloudVisionV1p1beta1InputConfig
 googleCloudVisionV1p1beta1InputConfig =
   GoogleCloudVisionV1p1beta1InputConfig'
     {_gGcsSource = Nothing, _gMimeType = Nothing}
+
 
 -- | The Google Cloud Storage location to read the input from.
 gGcsSource :: Lens' GoogleCloudVisionV1p1beta1InputConfig (Maybe GoogleCloudVisionV1p1beta1GcsSource)
@@ -11280,6 +11586,7 @@ data GoogleCloudVisionV1p2beta1ImageAnnotationContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ImageAnnotationContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11292,6 +11599,7 @@ googleCloudVisionV1p2beta1ImageAnnotationContext
 googleCloudVisionV1p2beta1ImageAnnotationContext =
   GoogleCloudVisionV1p2beta1ImageAnnotationContext'
     {_gcvviaccURI = Nothing, _gcvviaccPageNumber = Nothing}
+
 
 -- | The URI of the file used to produce the image.
 gcvviaccURI :: Lens' GoogleCloudVisionV1p2beta1ImageAnnotationContext (Maybe Text)
@@ -11337,6 +11645,7 @@ data GoogleCloudVisionV1p2beta1ProductSearchResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ProductSearchResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11354,6 +11663,7 @@ googleCloudVisionV1p2beta1ProductSearchResults =
     , _gcvvpsrsResults = Nothing
     , _gcvvpsrsIndexTime = Nothing
     }
+
 
 -- | List of results grouped by products detected in the query image. Each
 -- entry corresponds to one bounding polygon in the query image, and
@@ -11417,6 +11727,7 @@ data GoogleCloudVisionV1p2beta1Property =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Property' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11431,6 +11742,7 @@ googleCloudVisionV1p2beta1Property
 googleCloudVisionV1p2beta1Property =
   GoogleCloudVisionV1p2beta1Property'
     {_goooUint64Value = Nothing, _goooValue = Nothing, _goooName = Nothing}
+
 
 -- | Value of numeric properties.
 goooUint64Value :: Lens' GoogleCloudVisionV1p2beta1Property (Maybe Word64)
@@ -11489,6 +11801,7 @@ data GoogleCloudVisionV1p3beta1FaceAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1FaceAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11542,6 +11855,7 @@ googleCloudVisionV1p3beta1FaceAnnotation =
     , _gcvvfacJoyLikelihood = Nothing
     , _gcvvfacLandmarks = Nothing
     }
+
 
 -- | Pitch angle, which indicates the upwards\/downwards angle that the face
 -- is pointing relative to the image\'s horizontal plane. Range [-180,180].
@@ -11716,6 +12030,7 @@ data GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11728,6 +12043,7 @@ googleCloudVisionV1p3beta1TextAnnotationDetectedLanguage
 googleCloudVisionV1p3beta1TextAnnotationDetectedLanguage =
   GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage'
     {_gcvvtadlcLanguageCode = Nothing, _gcvvtadlcConfidence = Nothing}
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -11777,6 +12093,7 @@ data GoogleCloudVisionV1p1beta1WebDetectionWebPage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1WebDetectionWebPage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11800,6 +12117,7 @@ googleCloudVisionV1p1beta1WebDetectionWebPage =
     , _gcvvwdwpcPartialMatchingImages = Nothing
     , _gcvvwdwpcFullMatchingImages = Nothing
     }
+
 
 -- | (Deprecated) Overall relevancy score for the web page.
 gcvvwdwpcScore :: Lens' GoogleCloudVisionV1p1beta1WebDetectionWebPage (Maybe Double)
@@ -11876,6 +12194,7 @@ data OutputConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OutputConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11887,6 +12206,7 @@ outputConfig
     :: OutputConfig
 outputConfig =
   OutputConfig' {_ocGcsDestination = Nothing, _ocBatchSize = Nothing}
+
 
 -- | The Google Cloud Storage location to write the output(s) to.
 ocGcsDestination :: Lens' OutputConfig (Maybe GcsDestination)
@@ -11931,6 +12251,7 @@ data GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11943,6 +12264,7 @@ googleCloudVisionV1p3beta1TextAnnotationDetectedBreak
 googleCloudVisionV1p3beta1TextAnnotationDetectedBreak =
   GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak'
     {_gooIsPrefix = Nothing, _gooType = Nothing}
+
 
 -- | True if break prepends the element.
 gooIsPrefix :: Lens' GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak (Maybe Bool)
@@ -11989,6 +12311,7 @@ data GoogleCloudVisionV1p2beta1TextAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1TextAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12001,6 +12324,7 @@ googleCloudVisionV1p2beta1TextAnnotation
 googleCloudVisionV1p2beta1TextAnnotation =
   GoogleCloudVisionV1p2beta1TextAnnotation'
     {_gText = Nothing, _gPages = Nothing}
+
 
 -- | UTF-8 text detected on the pages.
 gText :: Lens' GoogleCloudVisionV1p2beta1TextAnnotation (Maybe Text)
@@ -12045,6 +12369,7 @@ data SafeSearchAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SafeSearchAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12068,6 +12393,7 @@ safeSearchAnnotation =
     , _ssaMedical = Nothing
     , _ssaViolence = Nothing
     }
+
 
 -- | Spoof likelihood. The likelihood that an modification was made to the
 -- image\'s canonical version to make it appear funny or offensive.
@@ -12126,6 +12452,7 @@ data GoogleCloudVisionV1p1beta1WebDetectionWebLabel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1WebDetectionWebLabel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12138,6 +12465,7 @@ googleCloudVisionV1p1beta1WebDetectionWebLabel
 googleCloudVisionV1p1beta1WebDetectionWebLabel =
   GoogleCloudVisionV1p1beta1WebDetectionWebLabel'
     {_gcvvwdwlcLanguageCode = Nothing, _gcvvwdwlcLabel = Nothing}
+
 
 -- | The BCP-47 language code for \`label\`, such as \"en-US\" or
 -- \"sr-Latn\". For more information, see
@@ -12182,6 +12510,7 @@ newtype GoogleCloudVisionV1p3beta1DominantColorsAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1DominantColorsAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12191,6 +12520,7 @@ googleCloudVisionV1p3beta1DominantColorsAnnotation
     :: GoogleCloudVisionV1p3beta1DominantColorsAnnotation
 googleCloudVisionV1p3beta1DominantColorsAnnotation =
   GoogleCloudVisionV1p3beta1DominantColorsAnnotation' {_gooColors = Nothing}
+
 
 -- | RGB color values with their score and pixel fraction.
 gooColors :: Lens' GoogleCloudVisionV1p3beta1DominantColorsAnnotation [GoogleCloudVisionV1p3beta1ColorInfo]
@@ -12228,6 +12558,7 @@ data GoogleCloudVisionV1p3beta1ColorInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ColorInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12245,6 +12576,7 @@ googleCloudVisionV1p3beta1ColorInfo =
     , _gcvvcicScore = Nothing
     , _gcvvcicPixelFraction = Nothing
     }
+
 
 -- | RGB components of the color.
 gcvvcicColor :: Lens' GoogleCloudVisionV1p3beta1ColorInfo (Maybe Color)
@@ -12292,6 +12624,7 @@ newtype GoogleCloudVisionV1p2beta1CropHintsParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1CropHintsParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12301,6 +12634,7 @@ googleCloudVisionV1p2beta1CropHintsParams
     :: GoogleCloudVisionV1p2beta1CropHintsParams
 googleCloudVisionV1p2beta1CropHintsParams =
   GoogleCloudVisionV1p2beta1CropHintsParams' {_gcvvchpAspectRatios = Nothing}
+
 
 -- | Aspect ratios in floats, representing the ratio of the width to the
 -- height of the image. For example, if the desired aspect ratio is 4\/3,
@@ -12343,6 +12677,7 @@ newtype GoogleCloudVisionV1p1beta1CropHintsAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1CropHintsAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12352,6 +12687,7 @@ googleCloudVisionV1p1beta1CropHintsAnnotation
     :: GoogleCloudVisionV1p1beta1CropHintsAnnotation
 googleCloudVisionV1p1beta1CropHintsAnnotation =
   GoogleCloudVisionV1p1beta1CropHintsAnnotation' {_gooCropHints = Nothing}
+
 
 -- | Crop hint results.
 gooCropHints :: Lens' GoogleCloudVisionV1p1beta1CropHintsAnnotation [GoogleCloudVisionV1p1beta1CropHint]
@@ -12387,6 +12723,7 @@ newtype GoogleCloudVisionV1p2beta1GcsSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1GcsSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12396,6 +12733,7 @@ googleCloudVisionV1p2beta1GcsSource
     :: GoogleCloudVisionV1p2beta1GcsSource
 googleCloudVisionV1p2beta1GcsSource =
   GoogleCloudVisionV1p2beta1GcsSource' {_gcvvgscURI = Nothing}
+
 
 -- | Google Cloud Storage URI for the input file. This must only be a Google
 -- Cloud Storage object. Wildcards are not currently supported.
@@ -12427,6 +12765,7 @@ data OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12441,6 +12780,7 @@ operationMetadata
 operationMetadata =
   OperationMetadata'
     {_omState = Nothing, _omUpdateTime = Nothing, _omCreateTime = Nothing}
+
 
 -- | Current state of the batch operation.
 omState :: Lens' OperationMetadata (Maybe OperationMetadataState)
@@ -12487,6 +12827,7 @@ data Product =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12510,6 +12851,7 @@ product =
     , _proProductLabels = Nothing
     , _proDescription = Nothing
     }
+
 
 -- | The resource name of the product. Format is:
 -- \`projects\/PROJECT_ID\/locations\/LOC_ID\/products\/PRODUCT_ID\`. This
@@ -12585,6 +12927,7 @@ data GoogleCloudVisionV1p2beta1Block =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Block' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12608,6 +12951,7 @@ googleCloudVisionV1p2beta1Block =
     , _gcvvb1Confidence = Nothing
     , _gcvvb1BlockType = Nothing
     }
+
 
 -- | Additional information detected for the block.
 gcvvb1Property :: Lens' GoogleCloudVisionV1p2beta1Block (Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
@@ -12685,6 +13029,7 @@ data GoogleCloudVisionV1p3beta1SafeSearchAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1SafeSearchAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12708,6 +13053,7 @@ googleCloudVisionV1p3beta1SafeSearchAnnotation =
     , _gooMedical = Nothing
     , _gooViolence = Nothing
     }
+
 
 -- | Spoof likelihood. The likelihood that an modification was made to the
 -- image\'s canonical version to make it appear funny or offensive.
@@ -12778,6 +13124,7 @@ data GoogleCloudVisionV1p1beta1TextAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1TextAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12790,6 +13137,7 @@ googleCloudVisionV1p1beta1TextAnnotation
 googleCloudVisionV1p1beta1TextAnnotation =
   GoogleCloudVisionV1p1beta1TextAnnotation'
     {_gcvvtacText = Nothing, _gcvvtacPages = Nothing}
+
 
 -- | UTF-8 text detected on the pages.
 gcvvtacText :: Lens' GoogleCloudVisionV1p1beta1TextAnnotation (Maybe Text)
@@ -12834,6 +13182,7 @@ data GoogleCloudVisionV1p2beta1ProductSearchParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ProductSearchParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12854,6 +13203,7 @@ googleCloudVisionV1p2beta1ProductSearchParams =
     , _gcvvpspProductSet = Nothing
     , _gcvvpspFilter = Nothing
     }
+
 
 -- | The list of product categories to search in. Currently, we only consider
 -- the first category, and either \"homegoods\", \"apparel\", or \"toys\"
@@ -12930,6 +13280,7 @@ data WebPage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebPage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12953,6 +13304,7 @@ webPage =
     , _wpPartialMatchingImages = Nothing
     , _wpFullMatchingImages = Nothing
     }
+
 
 -- | (Deprecated) Overall relevancy score for the web page.
 wpScore :: Lens' WebPage (Maybe Double)
@@ -13017,6 +13369,7 @@ newtype DominantColorsAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DominantColorsAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13025,6 +13378,7 @@ newtype DominantColorsAnnotation =
 dominantColorsAnnotation
     :: DominantColorsAnnotation
 dominantColorsAnnotation = DominantColorsAnnotation' {_dcaColors = Nothing}
+
 
 -- | RGB color values with their score and pixel fraction.
 dcaColors :: Lens' DominantColorsAnnotation [ColorInfo]
@@ -13054,6 +13408,7 @@ data GoogleCloudVisionV1p2beta1WebDetectionWebLabel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1WebDetectionWebLabel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13066,6 +13421,7 @@ googleCloudVisionV1p2beta1WebDetectionWebLabel
 googleCloudVisionV1p2beta1WebDetectionWebLabel =
   GoogleCloudVisionV1p2beta1WebDetectionWebLabel'
     {_ggLanguageCode = Nothing, _ggLabel = Nothing}
+
 
 -- | The BCP-47 language code for \`label\`, such as \"en-US\" or
 -- \"sr-Latn\". For more information, see
@@ -13110,6 +13466,7 @@ data GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13122,6 +13479,7 @@ googleCloudVisionV1p3beta1ProductSearchResultsGroupedResult
 googleCloudVisionV1p3beta1ProductSearchResultsGroupedResult =
   GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult'
     {_ggResults = Nothing, _ggBoundingPoly = Nothing}
+
 
 -- | List of results, one for each product match.
 ggResults :: Lens' GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult [GoogleCloudVisionV1p3beta1ProductSearchResultsResult]
@@ -13167,6 +13525,7 @@ newtype GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13177,6 +13536,7 @@ googleCloudVisionV1p2beta1AsyncAnnotateFileResponse
 googleCloudVisionV1p2beta1AsyncAnnotateFileResponse =
   GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse'
     {_gcvvaafrcOutputConfig = Nothing}
+
 
 -- | The output location and metadata from AsyncAnnotateFileRequest.
 gcvvaafrcOutputConfig :: Lens' GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse (Maybe GoogleCloudVisionV1p2beta1OutputConfig)
@@ -13220,6 +13580,7 @@ data GoogleCloudVisionV1p2beta1EntityAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1EntityAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13255,6 +13616,7 @@ googleCloudVisionV1p2beta1EntityAnnotation =
     , _gcvvea1Description = Nothing
     , _gcvvea1Properties = Nothing
     }
+
 
 -- | Overall score of the result. Range [0, 1].
 gcvvea1Score :: Lens' GoogleCloudVisionV1p2beta1EntityAnnotation (Maybe Double)
@@ -13374,6 +13736,7 @@ newtype GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13384,6 +13747,7 @@ googleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
 googleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest =
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest'
     {_gcvvabafrRequests = Nothing}
+
 
 -- | Individual async file annotation requests for this batch.
 gcvvabafrRequests :: Lens' GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest [GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest]
@@ -13424,6 +13788,7 @@ data GoogleCloudVisionV1p2beta1WebDetectionWebPage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1WebDetectionWebPage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13447,6 +13812,7 @@ googleCloudVisionV1p2beta1WebDetectionWebPage =
     , _ggPartialMatchingImages = Nothing
     , _ggFullMatchingImages = Nothing
     }
+
 
 -- | (Deprecated) Overall relevancy score for the web page.
 ggScore :: Lens' GoogleCloudVisionV1p2beta1WebDetectionWebPage (Maybe Double)
@@ -13524,6 +13890,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13534,6 +13901,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -13561,6 +13929,7 @@ data Word =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Word' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13581,6 +13950,7 @@ word =
     , _wSymbols = Nothing
     , _wConfidence = Nothing
     }
+
 
 -- | Additional information detected for the word.
 wProperty :: Lens' Word (Maybe TextProperty)
@@ -13641,6 +14011,7 @@ data GoogleCloudVisionV1p2beta1InputConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1InputConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13653,6 +14024,7 @@ googleCloudVisionV1p2beta1InputConfig
 googleCloudVisionV1p2beta1InputConfig =
   GoogleCloudVisionV1p2beta1InputConfig'
     {_gooGcsSource = Nothing, _gooMimeType = Nothing}
+
 
 -- | The Google Cloud Storage location to read the input from.
 gooGcsSource :: Lens' GoogleCloudVisionV1p2beta1InputConfig (Maybe GoogleCloudVisionV1p2beta1GcsSource)
@@ -13696,6 +14068,7 @@ data GoogleCloudVisionV1p1beta1WebDetection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1WebDetection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13722,6 +14095,7 @@ googleCloudVisionV1p1beta1WebDetection =
     , _gooFullMatchingImages = Nothing
     , _gooWebEntities = Nothing
     }
+
 
 -- | The visually similar image results.
 gooVisuallySimilarImages :: Lens' GoogleCloudVisionV1p1beta1WebDetection [GoogleCloudVisionV1p1beta1WebDetectionWebImage]
@@ -13815,6 +14189,7 @@ data GoogleCloudVisionV1p2beta1FaceAnnotationLandmark =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1FaceAnnotationLandmark' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13827,6 +14202,7 @@ googleCloudVisionV1p2beta1FaceAnnotationLandmark
 googleCloudVisionV1p2beta1FaceAnnotationLandmark =
   GoogleCloudVisionV1p2beta1FaceAnnotationLandmark'
     {_gcvvfalcType = Nothing, _gcvvfalcPosition = Nothing}
+
 
 -- | Face landmark type.
 gcvvfalcType :: Lens' GoogleCloudVisionV1p2beta1FaceAnnotationLandmark (Maybe GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkType)
@@ -13872,6 +14248,7 @@ data GoogleCloudVisionV1p2beta1AnnotateImageRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1AnnotateImageRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13889,6 +14266,7 @@ googleCloudVisionV1p2beta1AnnotateImageRequest =
     , _gcvvairFeatures = Nothing
     , _gcvvairImageContext = Nothing
     }
+
 
 -- | The image to be processed.
 gcvvairImage :: Lens' GoogleCloudVisionV1p2beta1AnnotateImageRequest (Maybe GoogleCloudVisionV1p2beta1Image)
@@ -13942,6 +14320,7 @@ data GoogleCloudVisionV1p1beta1AnnotateFileResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1AnnotateFileResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13954,6 +14333,7 @@ googleCloudVisionV1p1beta1AnnotateFileResponse
 googleCloudVisionV1p1beta1AnnotateFileResponse =
   GoogleCloudVisionV1p1beta1AnnotateFileResponse'
     {_gcvvafrcResponses = Nothing, _gcvvafrcInputConfig = Nothing}
+
 
 -- | Individual responses to images found within the file.
 gcvvafrcResponses :: Lens' GoogleCloudVisionV1p1beta1AnnotateFileResponse [GoogleCloudVisionV1p1beta1AnnotateImageResponse]
@@ -14003,6 +14383,7 @@ data GoogleCloudVisionV1p2beta1Page =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1Page' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14026,6 +14407,7 @@ googleCloudVisionV1p2beta1Page =
     , _goo3Width = Nothing
     , _goo3Confidence = Nothing
     }
+
 
 -- | Additional information detected on the page.
 goo3Property :: Lens' GoogleCloudVisionV1p2beta1Page (Maybe GoogleCloudVisionV1p2beta1TextAnnotationTextProperty)
@@ -14091,6 +14473,7 @@ data GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14103,6 +14486,7 @@ googleCloudVisionV1p2beta1TextAnnotationDetectedBreak
 googleCloudVisionV1p2beta1TextAnnotationDetectedBreak =
   GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak'
     {_gcvvtadbcIsPrefix = Nothing, _gcvvtadbcType = Nothing}
+
 
 -- | True if break prepends the element.
 gcvvtadbcIsPrefix :: Lens' GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak (Maybe Bool)
@@ -14145,6 +14529,7 @@ newtype GoogleCloudVisionV1p2beta1WebDetectionParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1WebDetectionParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14155,6 +14540,7 @@ googleCloudVisionV1p2beta1WebDetectionParams
 googleCloudVisionV1p2beta1WebDetectionParams =
   GoogleCloudVisionV1p2beta1WebDetectionParams'
     {_gcvvwdpIncludeGeoResults = Nothing}
+
 
 -- | Whether to include results derived from the geo information in the
 -- image.
@@ -14193,6 +14579,7 @@ data GoogleCloudVisionV1p1beta1TextAnnotationTextProperty =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1TextAnnotationTextProperty' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14205,6 +14592,7 @@ googleCloudVisionV1p1beta1TextAnnotationTextProperty
 googleCloudVisionV1p1beta1TextAnnotationTextProperty =
   GoogleCloudVisionV1p1beta1TextAnnotationTextProperty'
     {_gooDetectedLanguages = Nothing, _gooDetectedBreak = Nothing}
+
 
 -- | A list of detected languages together with confidence.
 gooDetectedLanguages :: Lens' GoogleCloudVisionV1p1beta1TextAnnotationTextProperty [GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage]
@@ -14253,6 +14641,7 @@ data GoogleCloudVisionV1p1beta1Vertex =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1Vertex' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14264,6 +14653,7 @@ googleCloudVisionV1p1beta1Vertex
     :: GoogleCloudVisionV1p1beta1Vertex
 googleCloudVisionV1p1beta1Vertex =
   GoogleCloudVisionV1p1beta1Vertex' {_ggX = Nothing, _ggY = Nothing}
+
 
 -- | X coordinate.
 ggX :: Lens' GoogleCloudVisionV1p1beta1Vertex (Maybe Int32)
@@ -14299,6 +14689,7 @@ newtype CropHintsAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CropHintsAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14307,6 +14698,7 @@ newtype CropHintsAnnotation =
 cropHintsAnnotation
     :: CropHintsAnnotation
 cropHintsAnnotation = CropHintsAnnotation' {_chaCropHints = Nothing}
+
 
 -- | Crop hint results.
 chaCropHints :: Lens' CropHintsAnnotation [CropHint]
@@ -14337,6 +14729,7 @@ newtype GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14347,6 +14740,7 @@ googleCloudVisionV1p2beta1BatchAnnotateImagesRequest
 googleCloudVisionV1p2beta1BatchAnnotateImagesRequest =
   GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest'
     {_gcvvbairRequests = Nothing}
+
 
 -- | Individual image annotation requests for this batch.
 gcvvbairRequests :: Lens' GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest [GoogleCloudVisionV1p2beta1AnnotateImageRequest]
@@ -14386,6 +14780,7 @@ data GoogleCloudVisionV1p2beta1ColorInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1ColorInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14403,6 +14798,7 @@ googleCloudVisionV1p2beta1ColorInfo =
     , _gcvvci1Score = Nothing
     , _gcvvci1PixelFraction = Nothing
     }
+
 
 -- | RGB components of the color.
 gcvvci1Color :: Lens' GoogleCloudVisionV1p2beta1ColorInfo (Maybe Color)
@@ -14451,6 +14847,7 @@ data GoogleCloudVisionV1p1beta1BoundingPoly =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1BoundingPoly' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14463,6 +14860,7 @@ googleCloudVisionV1p1beta1BoundingPoly
 googleCloudVisionV1p1beta1BoundingPoly =
   GoogleCloudVisionV1p1beta1BoundingPoly'
     {_gooNormalizedVertices = Nothing, _gooVertices = Nothing}
+
 
 -- | The bounding polygon normalized vertices.
 gooNormalizedVertices :: Lens' GoogleCloudVisionV1p1beta1BoundingPoly [GoogleCloudVisionV1p1beta1NormalizedVertex]
@@ -14509,6 +14907,7 @@ data GoogleCloudVisionV1p1beta1WebDetectionWebImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1WebDetectionWebImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14521,6 +14920,7 @@ googleCloudVisionV1p1beta1WebDetectionWebImage
 googleCloudVisionV1p1beta1WebDetectionWebImage =
   GoogleCloudVisionV1p1beta1WebDetectionWebImage'
     {_gcvvwdwi1Score = Nothing, _gcvvwdwi1URL = Nothing}
+
 
 -- | (Deprecated) Overall relevancy score for the image.
 gcvvwdwi1Score :: Lens' GoogleCloudVisionV1p1beta1WebDetectionWebImage (Maybe Double)
@@ -14567,6 +14967,7 @@ data Position =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Position' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14579,6 +14980,7 @@ data Position =
 position
     :: Position
 position = Position' {_pZ = Nothing, _pX = Nothing, _pY = Nothing}
+
 
 -- | Z coordinate (or depth).
 pZ :: Lens' Position (Maybe Double)
@@ -14615,6 +15017,7 @@ newtype GoogleCloudVisionV1p3beta1GcsSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p3beta1GcsSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14624,6 +15027,7 @@ googleCloudVisionV1p3beta1GcsSource
     :: GoogleCloudVisionV1p3beta1GcsSource
 googleCloudVisionV1p3beta1GcsSource =
   GoogleCloudVisionV1p3beta1GcsSource' {_ggURI = Nothing}
+
 
 -- | Google Cloud Storage URI for the input file. This must only be a Google
 -- Cloud Storage object. Wildcards are not currently supported.
@@ -14652,6 +15056,7 @@ newtype GoogleCloudVisionV1p2beta1LocationInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1LocationInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14661,6 +15066,7 @@ googleCloudVisionV1p2beta1LocationInfo
     :: GoogleCloudVisionV1p2beta1LocationInfo
 googleCloudVisionV1p2beta1LocationInfo =
   GoogleCloudVisionV1p2beta1LocationInfo' {_gooLatLng = Nothing}
+
 
 -- | lat\/long location coordinates.
 gooLatLng :: Lens' GoogleCloudVisionV1p2beta1LocationInfo (Maybe LatLng)
@@ -14693,6 +15099,7 @@ data NormalizedVertex =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NormalizedVertex' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14703,6 +15110,7 @@ data NormalizedVertex =
 normalizedVertex
     :: NormalizedVertex
 normalizedVertex = NormalizedVertex' {_nvX = Nothing, _nvY = Nothing}
+
 
 -- | X coordinate.
 nvX :: Lens' NormalizedVertex (Maybe Double)
@@ -14736,6 +15144,7 @@ data GoogleCloudVisionV1p1beta1OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p1beta1OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14750,6 +15159,7 @@ googleCloudVisionV1p1beta1OperationMetadata
 googleCloudVisionV1p1beta1OperationMetadata =
   GoogleCloudVisionV1p1beta1OperationMetadata'
     {_gooState = Nothing, _gooUpdateTime = Nothing, _gooCreateTime = Nothing}
+
 
 -- | Current state of the batch operation.
 gooState :: Lens' GoogleCloudVisionV1p1beta1OperationMetadata (Maybe GoogleCloudVisionV1p1beta1OperationMetadataState)
@@ -14800,6 +15210,7 @@ newtype GoogleCloudVisionV1p2beta1GcsDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVisionV1p2beta1GcsDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14809,6 +15220,7 @@ googleCloudVisionV1p2beta1GcsDestination
     :: GoogleCloudVisionV1p2beta1GcsDestination
 googleCloudVisionV1p2beta1GcsDestination =
   GoogleCloudVisionV1p2beta1GcsDestination' {_gcvvgdcURI = Nothing}
+
 
 -- | Google Cloud Storage URI where the results will be stored. Results will
 -- be in JSON format and preceded by its corresponding input URI. This

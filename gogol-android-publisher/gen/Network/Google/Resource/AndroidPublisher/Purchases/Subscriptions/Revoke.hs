@@ -70,6 +70,7 @@ data PurchasesSubscriptionsRevoke =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PurchasesSubscriptionsRevoke' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ purchasesSubscriptionsRevoke pPPackageName_ pPToken_ pPSubscriptionId_ =
     , _pToken = pPToken_
     , _pSubscriptionId = pPSubscriptionId_
     }
+
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').

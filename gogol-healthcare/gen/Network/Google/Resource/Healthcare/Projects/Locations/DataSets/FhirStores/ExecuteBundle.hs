@@ -78,6 +78,7 @@ data ProjectsLocationsDataSetsFhirStoresExecuteBundle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsFhirStoresExecuteBundle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsLocationsDataSetsFhirStoresExecuteBundle pPldsfsebParent_ pPldsfsebPaylo
     , _pldsfsebPayload = pPldsfsebPayload_
     , _pldsfsebCallback = Nothing
     }
+
 
 -- | Name of the FHIR store in which this bundle will be executed.
 pldsfsebParent :: Lens' ProjectsLocationsDataSetsFhirStoresExecuteBundle Text

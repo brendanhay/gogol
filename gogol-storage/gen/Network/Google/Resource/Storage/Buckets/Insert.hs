@@ -75,6 +75,7 @@ data BucketsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ bucketsInsert pBiProject_ pBiPayload_ =
     , _biUserProject = Nothing
     , _biProjection = Nothing
     }
+
 
 -- | A valid API project identifier.
 biProject :: Lens' BucketsInsert Text

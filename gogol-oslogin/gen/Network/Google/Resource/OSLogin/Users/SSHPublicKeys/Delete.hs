@@ -70,6 +70,7 @@ data UsersSSHPublicKeysDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSSHPublicKeysDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ usersSSHPublicKeysDelete pUspkdName_ =
     , _uspkdName = pUspkdName_
     , _uspkdCallback = Nothing
     }
+
 
 -- | V1 error format.
 uspkdXgafv :: Lens' UsersSSHPublicKeysDelete (Maybe Xgafv)

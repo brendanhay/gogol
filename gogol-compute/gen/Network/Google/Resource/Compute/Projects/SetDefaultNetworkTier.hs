@@ -69,6 +69,7 @@ data ProjectsSetDefaultNetworkTier =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSetDefaultNetworkTier' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ projectsSetDefaultNetworkTier pPsdntProject_ pPsdntPayload_ =
     , _psdntProject = pPsdntProject_
     , _psdntPayload = pPsdntPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

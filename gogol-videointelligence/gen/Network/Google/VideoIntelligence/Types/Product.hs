@@ -28,6 +28,7 @@ newtype GoogleRpc_StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleRpc_StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38,6 +39,7 @@ googleRpc_StatusDetailsItem
     -> GoogleRpc_StatusDetailsItem
 googleRpc_StatusDetailsItem pGrsdiAddtional_ =
   GoogleRpc_StatusDetailsItem' {_grsdiAddtional = _Coerce # pGrsdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 grsdiAddtional :: Lens' GoogleRpc_StatusDetailsItem (HashMap Text JSONValue)
@@ -66,6 +68,7 @@ newtype GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +79,7 @@ googleCloudVideointelligenceV1beta2_ExplicitContentAnnotation
 googleCloudVideointelligenceV1beta2_ExplicitContentAnnotation =
   GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation'
     {_gcvvecaFrames = Nothing}
+
 
 -- | All video frames where explicit content was detected.
 gcvvecaFrames :: Lens' GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation [GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame]
@@ -114,6 +118,7 @@ data GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -131,6 +136,7 @@ googleCloudVideointelligenceV1_SpeechRecognitionAlternative =
     , _gcvvsraWords = Nothing
     , _gcvvsraTranscript = Nothing
     }
+
 
 -- | The confidence estimate between 0.0 and 1.0. A higher number indicates
 -- an estimated greater likelihood that the recognized words are correct.
@@ -192,6 +198,7 @@ newtype GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -202,6 +209,7 @@ googleCloudVideointelligenceV1beta2_AnnotateVideoResponse
 googleCloudVideointelligenceV1beta2_AnnotateVideoResponse =
   GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse'
     {_gcvvavrAnnotationResults = Nothing}
+
 
 -- | Annotation results for all videos specified in \`AnnotateVideoRequest\`.
 gcvvavrAnnotationResults :: Lens' GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse [GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults]
@@ -246,6 +254,7 @@ data GoogleCloudVideointelligenceV1_WordInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_WordInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -269,6 +278,7 @@ googleCloudVideointelligenceV1_WordInfo =
     , _gcvvwiWord = Nothing
     , _gcvvwiSpeakerTag = Nothing
     }
+
 
 -- | Time offset relative to the beginning of the audio, and corresponding to
 -- the start of the spoken word. This field is only set if
@@ -352,6 +362,7 @@ data GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -364,6 +375,7 @@ googleCloudVideointelligenceV1p1beta1_ExplicitContentFrame
 googleCloudVideointelligenceV1p1beta1_ExplicitContentFrame =
   GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame'
     {_gcvvecfTimeOffSet = Nothing, _gcvvecfPornographyLikelihood = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -413,6 +425,7 @@ data GoogleCloudVideointelligenceV1beta2_Entity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_Entity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -430,6 +443,7 @@ googleCloudVideointelligenceV1beta2_Entity =
     , _gcvveEntityId = Nothing
     , _gcvveDescription = Nothing
     }
+
 
 -- | Language code for \`description\` in BCP-47 format.
 gcvveLanguageCode :: Lens' GoogleCloudVideointelligenceV1beta2_Entity (Maybe Text)
@@ -484,6 +498,7 @@ data GoogleCloudVideointelligenceV1p2beta1_TextAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_TextAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -496,6 +511,7 @@ googleCloudVideointelligenceV1p2beta1_TextAnnotation
 googleCloudVideointelligenceV1p2beta1_TextAnnotation =
   GoogleCloudVideointelligenceV1p2beta1_TextAnnotation'
     {_gcvvtaText = Nothing, _gcvvtaSegments = Nothing}
+
 
 -- | The detected text.
 gcvvtaText :: Lens' GoogleCloudVideointelligenceV1p2beta1_TextAnnotation (Maybe Text)
@@ -540,6 +556,7 @@ data GoogleCloudVideointelligenceV1p2beta1_VideoSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_VideoSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -552,6 +569,7 @@ googleCloudVideointelligenceV1p2beta1_VideoSegment
 googleCloudVideointelligenceV1p2beta1_VideoSegment =
   GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
     {_gcvvvsStartTimeOffSet = Nothing, _gcvvvsEndTimeOffSet = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the start of the segment (inclusive).
@@ -603,6 +621,7 @@ data GoogleCloudVideointelligenceV1_VideoAnnotationProgress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_VideoAnnotationProgress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -623,6 +642,7 @@ googleCloudVideointelligenceV1_VideoAnnotationProgress =
     , _gcvvvapProgressPercent = Nothing
     , _gcvvvapUpdateTime = Nothing
     }
+
 
 -- | Time when the request was received.
 gcvvvapStartTime :: Lens' GoogleCloudVideointelligenceV1_VideoAnnotationProgress (Maybe UTCTime)
@@ -687,6 +707,7 @@ newtype GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -697,6 +718,7 @@ googleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig
 googleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig =
   GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig'
     {_gcvvecdcModel = Nothing}
+
 
 -- | Model to use for explicit content detection. Supported values:
 -- \"builtin\/stable\" (the default if unset) and \"builtin\/latest\".
@@ -733,6 +755,7 @@ data GoogleCloudVideointelligenceV1beta2_LabelFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_LabelFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -745,6 +768,7 @@ googleCloudVideointelligenceV1beta2_LabelFrame
 googleCloudVideointelligenceV1beta2_LabelFrame =
   GoogleCloudVideointelligenceV1beta2_LabelFrame'
     {_gcvvlfTimeOffSet = Nothing, _gcvvlfConfidence = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -791,6 +815,7 @@ data GoogleCloudVideointelligenceV1_SpeechTranscription =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_SpeechTranscription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -803,6 +828,7 @@ googleCloudVideointelligenceV1_SpeechTranscription
 googleCloudVideointelligenceV1_SpeechTranscription =
   GoogleCloudVideointelligenceV1_SpeechTranscription'
     {_gcvvstAlternatives = Nothing, _gcvvstLanguageCode = Nothing}
+
 
 -- | May contain one or more recognition hypotheses (up to the maximum
 -- specified in \`max_alternatives\`). These alternatives are ordered in
@@ -857,6 +883,7 @@ newtype GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -867,6 +894,7 @@ googleCloudVideointelligenceV1beta2_AnnotateVideoProgress
 googleCloudVideointelligenceV1beta2_AnnotateVideoProgress =
   GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress'
     {_gcvvavpAnnotationProgress = Nothing}
+
 
 -- | Progress metadata for all videos specified in \`AnnotateVideoRequest\`.
 gcvvavpAnnotationProgress :: Lens' GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress [GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress]
@@ -907,6 +935,7 @@ data GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -919,6 +948,7 @@ googleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame
 googleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame =
   GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame'
     {_gcvvotfTimeOffSet = Nothing, _gcvvotfNormalizedBoundingBox = Nothing}
+
 
 -- | The timestamp of the frame in microseconds.
 gcvvotfTimeOffSet :: Lens' GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame (Maybe Scientific)
@@ -968,6 +998,7 @@ data GoogleCloudVideointelligenceV1_LabelAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_LabelAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -988,6 +1019,7 @@ googleCloudVideointelligenceV1_LabelAnnotation =
     , _gcvvlaSegments = Nothing
     , _gcvvlaEntity = Nothing
     }
+
 
 -- | Common categories for the detected entity. E.g. when the label is
 -- \`Terrier\` the category is likely \`dog\`. And in some cases there
@@ -1056,6 +1088,7 @@ data GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1070,6 +1103,7 @@ googleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative
 googleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative =
   GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative'
     {_gConfidence = Nothing, _gWords = Nothing, _gTranscript = Nothing}
+
 
 -- | The confidence estimate between 0.0 and 1.0. A higher number indicates
 -- an estimated greater likelihood that the recognized words are correct.
@@ -1132,6 +1166,7 @@ data GoogleCloudVideointelligenceV1p2beta1_WordInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_WordInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1155,6 +1190,7 @@ googleCloudVideointelligenceV1p2beta1_WordInfo =
     , _gooWord = Nothing
     , _gooSpeakerTag = Nothing
     }
+
 
 -- | Time offset relative to the beginning of the audio, and corresponding to
 -- the start of the spoken word. This field is only set if
@@ -1237,6 +1273,7 @@ data GoogleCloudVideointelligenceV1p1beta1_LabelFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_LabelFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1249,6 +1286,7 @@ googleCloudVideointelligenceV1p1beta1_LabelFrame
 googleCloudVideointelligenceV1p1beta1_LabelFrame =
   GoogleCloudVideointelligenceV1p1beta1_LabelFrame'
     {_gcvvlfcTimeOffSet = Nothing, _gcvvlfcConfidence = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -1294,6 +1332,7 @@ newtype GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1304,6 +1343,7 @@ googleCloudVideointelligenceV1p2beta1_TextDetectionConfig
 googleCloudVideointelligenceV1p2beta1_TextDetectionConfig =
   GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig'
     {_gcvvtdcLanguageHints = Nothing}
+
 
 -- | Language hint can be specified if the language to be detected is known a
 -- priori. It can increase the accuracy of the detection. Language hint
@@ -1346,6 +1386,7 @@ newtype GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1356,6 +1397,7 @@ googleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
 googleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation =
   GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation'
     {_gFrames = Nothing}
+
 
 -- | All video frames where explicit content was detected.
 gFrames :: Lens' GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation [GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame]
@@ -1391,6 +1433,7 @@ data GoogleCloudVideointelligenceV1p1beta1_Entity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_Entity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1405,6 +1448,7 @@ googleCloudVideointelligenceV1p1beta1_Entity
 googleCloudVideointelligenceV1p1beta1_Entity =
   GoogleCloudVideointelligenceV1p1beta1_Entity'
     {_gLanguageCode = Nothing, _gEntityId = Nothing, _gDescription = Nothing}
+
 
 -- | Language code for \`description\` in BCP-47 format.
 gLanguageCode :: Lens' GoogleCloudVideointelligenceV1p1beta1_Entity (Maybe Text)
@@ -1456,6 +1500,7 @@ newtype GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1466,6 +1511,7 @@ googleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse
 googleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse =
   GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse'
     {_gAnnotationResults = Nothing}
+
 
 -- | Annotation results for all videos specified in \`AnnotateVideoRequest\`.
 gAnnotationResults :: Lens' GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse [GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults]
@@ -1505,6 +1551,7 @@ newtype GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1515,6 +1562,7 @@ googleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress
 googleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress =
   GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress'
     {_gAnnotationProgress = Nothing}
+
 
 -- | Progress metadata for all videos specified in \`AnnotateVideoRequest\`.
 gAnnotationProgress :: Lens' GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress [GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress]
@@ -1559,6 +1607,7 @@ data GoogleCloudVideointelligenceV1_VideoAnnotationResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_VideoAnnotationResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1591,6 +1640,7 @@ googleCloudVideointelligenceV1_VideoAnnotationResults =
     , _gcvvvarSegmentLabelAnnotations = Nothing
     , _gcvvvarExplicitAnnotation = Nothing
     }
+
 
 -- | Shot annotations. Each shot is represented as a video segment.
 gcvvvarShotAnnotations :: Lens' GoogleCloudVideointelligenceV1_VideoAnnotationResults [GoogleCloudVideointelligenceV1_VideoSegment]
@@ -1706,6 +1756,7 @@ data GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1729,6 +1780,7 @@ googleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation =
     , _gcvvotaSegment = Nothing
     , _gcvvotaEntity = Nothing
     }
+
 
 -- | Information corresponding to all frames where this object track appears.
 -- Non-streaming batch mode: it may be one or multiple ObjectTrackingFrame
@@ -1810,6 +1862,7 @@ newtype GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1820,6 +1873,7 @@ googleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress
 googleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress =
   GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress'
     {_gcvvavpsAnnotationProgress = Nothing}
+
 
 -- | Progress metadata for all videos specified in \`AnnotateVideoRequest\`.
 gcvvavpsAnnotationProgress :: Lens' GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress [GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress]
@@ -1861,6 +1915,7 @@ newtype GoogleLongrunning_OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunning_OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1872,6 +1927,7 @@ googleLongrunning_OperationMetadata
 googleLongrunning_OperationMetadata pGlomAddtional_ =
   GoogleLongrunning_OperationMetadata'
     {_glomAddtional = _Coerce # pGlomAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glomAddtional :: Lens' GoogleLongrunning_OperationMetadata (HashMap Text JSONValue)
@@ -1902,6 +1958,7 @@ data GoogleCloudVideointelligenceV1p1beta1_LabelSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_LabelSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1914,6 +1971,7 @@ googleCloudVideointelligenceV1p1beta1_LabelSegment
 googleCloudVideointelligenceV1p1beta1_LabelSegment =
   GoogleCloudVideointelligenceV1p1beta1_LabelSegment'
     {_gcvvlsConfidence = Nothing, _gcvvlsSegment = Nothing}
+
 
 -- | Confidence that the label is accurate. Range: [0, 1].
 gcvvlsConfidence :: Lens' GoogleCloudVideointelligenceV1p1beta1_LabelSegment (Maybe Double)
@@ -1958,6 +2016,7 @@ data GoogleCloudVideointelligenceV1p2beta1_LabelFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_LabelFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1970,6 +2029,7 @@ googleCloudVideointelligenceV1p2beta1_LabelFrame
 googleCloudVideointelligenceV1p2beta1_LabelFrame =
   GoogleCloudVideointelligenceV1p2beta1_LabelFrame'
     {_ggTimeOffSet = Nothing, _ggConfidence = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -2016,6 +2076,7 @@ data GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2036,6 +2097,7 @@ googleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress =
     , _gProgressPercent = Nothing
     , _gUpdateTime = Nothing
     }
+
 
 -- | Time when the request was received.
 gStartTime :: Lens' GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress (Maybe UTCTime)
@@ -2099,6 +2161,7 @@ data GoogleCloudVideointelligenceV1p2beta1_Entity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_Entity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2116,6 +2179,7 @@ googleCloudVideointelligenceV1p2beta1_Entity =
     , _gooEntityId = Nothing
     , _gooDescription = Nothing
     }
+
 
 -- | Language code for \`description\` in BCP-47 format.
 gooLanguageCode :: Lens' GoogleCloudVideointelligenceV1p2beta1_Entity (Maybe Text)
@@ -2172,6 +2236,7 @@ data GoogleCloudVideointelligenceV1p1beta1_WordInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_WordInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2195,6 +2260,7 @@ googleCloudVideointelligenceV1p1beta1_WordInfo =
     , _gcvvwicWord = Nothing
     , _gcvvwicSpeakerTag = Nothing
     }
+
 
 -- | Time offset relative to the beginning of the audio, and corresponding to
 -- the start of the spoken word. This field is only set if
@@ -2284,6 +2350,7 @@ data GoogleLongrunning_Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunning_Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2307,6 +2374,7 @@ googleLongrunning_Operation =
     , _gloName = Nothing
     , _gloMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -2375,6 +2443,7 @@ data GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2392,6 +2461,7 @@ googleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative =
     , _gcvvsracWords = Nothing
     , _gcvvsracTranscript = Nothing
     }
+
 
 -- | The confidence estimate between 0.0 and 1.0. A higher number indicates
 -- an estimated greater likelihood that the recognized words are correct.
@@ -2453,6 +2523,7 @@ data GoogleCloudVideointelligenceV1_ExplicitContentFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_ExplicitContentFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2465,6 +2536,7 @@ googleCloudVideointelligenceV1_ExplicitContentFrame
 googleCloudVideointelligenceV1_ExplicitContentFrame =
   GoogleCloudVideointelligenceV1_ExplicitContentFrame'
     {_gTimeOffSet = Nothing, _gPornographyLikelihood = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -2512,6 +2584,7 @@ data GoogleCloudVideointelligenceV1beta2_VideoSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_VideoSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2524,6 +2597,7 @@ googleCloudVideointelligenceV1beta2_VideoSegment
 googleCloudVideointelligenceV1beta2_VideoSegment =
   GoogleCloudVideointelligenceV1beta2_VideoSegment'
     {_gStartTimeOffSet = Nothing, _gEndTimeOffSet = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the start of the segment (inclusive).
@@ -2580,6 +2654,7 @@ data GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2618,6 +2693,7 @@ googleCloudVideointelligenceV1p2beta1_VideoAnnotationResults =
     , _gcvvvarsSegmentLabelAnnotations = Nothing
     , _gcvvvarsExplicitAnnotation = Nothing
     }
+
 
 -- | Shot annotations. Each shot is represented as a video segment.
 gcvvvarsShotAnnotations :: Lens' GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults [GoogleCloudVideointelligenceV1p2beta1_VideoSegment]
@@ -2753,6 +2829,7 @@ data GoogleCloudVideointelligenceV1beta2_LabelSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_LabelSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2765,6 +2842,7 @@ googleCloudVideointelligenceV1beta2_LabelSegment
 googleCloudVideointelligenceV1beta2_LabelSegment =
   GoogleCloudVideointelligenceV1beta2_LabelSegment'
     {_gcvvlscConfidence = Nothing, _gcvvlscSegment = Nothing}
+
 
 -- | Confidence that the label is accurate. Range: [0, 1].
 gcvvlscConfidence :: Lens' GoogleCloudVideointelligenceV1beta2_LabelSegment (Maybe Double)
@@ -2815,6 +2893,7 @@ newtype GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2825,6 +2904,7 @@ googleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly
 googleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly =
   GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly'
     {_gcvvnbpVertices = Nothing}
+
 
 -- | Normalized vertices of the bounding polygon.
 gcvvnbpVertices :: Lens' GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly [GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex]
@@ -2867,6 +2947,7 @@ data GoogleCloudVideointelligenceV1beta2_WordInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_WordInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2890,6 +2971,7 @@ googleCloudVideointelligenceV1beta2_WordInfo =
     , _goooWord = Nothing
     , _goooSpeakerTag = Nothing
     }
+
 
 -- | Time offset relative to the beginning of the audio, and corresponding to
 -- the start of the spoken word. This field is only set if
@@ -2974,6 +3056,7 @@ newtype GoogleCloudVideointelligenceV1_ExplicitContentAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_ExplicitContentAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2984,6 +3067,7 @@ googleCloudVideointelligenceV1_ExplicitContentAnnotation
 googleCloudVideointelligenceV1_ExplicitContentAnnotation =
   GoogleCloudVideointelligenceV1_ExplicitContentAnnotation'
     {_gooFrames = Nothing}
+
 
 -- | All video frames where explicit content was detected.
 gooFrames :: Lens' GoogleCloudVideointelligenceV1_ExplicitContentAnnotation [GoogleCloudVideointelligenceV1_ExplicitContentFrame]
@@ -3020,6 +3104,7 @@ newtype GoogleCloudVideointelligenceV1_AnnotateVideoResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_AnnotateVideoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3030,6 +3115,7 @@ googleCloudVideointelligenceV1_AnnotateVideoResponse
 googleCloudVideointelligenceV1_AnnotateVideoResponse =
   GoogleCloudVideointelligenceV1_AnnotateVideoResponse'
     {_gooAnnotationResults = Nothing}
+
 
 -- | Annotation results for all videos specified in \`AnnotateVideoRequest\`.
 gooAnnotationResults :: Lens' GoogleCloudVideointelligenceV1_AnnotateVideoResponse [GoogleCloudVideointelligenceV1_VideoAnnotationResults]
@@ -3069,6 +3155,7 @@ data GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3081,6 +3168,7 @@ googleCloudVideointelligenceV1p2beta1_NormalizedVertex
 googleCloudVideointelligenceV1p2beta1_NormalizedVertex =
   GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex'
     {_gcvvnvX = Nothing, _gcvvnvY = Nothing}
+
 
 -- | X coordinate.
 gcvvnvX :: Lens' GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex (Maybe Double)
@@ -3125,6 +3213,7 @@ data GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3145,6 +3234,7 @@ googleCloudVideointelligenceV1p2beta1_LabelAnnotation =
     , _gcvvlacSegments = Nothing
     , _gcvvlacEntity = Nothing
     }
+
 
 -- | Common categories for the detected entity. E.g. when the label is
 -- \`Terrier\` the category is likely \`dog\`. And in some cases there
@@ -3217,6 +3307,7 @@ data GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3234,6 +3325,7 @@ googleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative =
     , _gcvvsra1Words = Nothing
     , _gcvvsra1Transcript = Nothing
     }
+
 
 -- | The confidence estimate between 0.0 and 1.0. A higher number indicates
 -- an estimated greater likelihood that the recognized words are correct.
@@ -3295,6 +3387,7 @@ data GoogleCloudVideointelligenceV1p1beta1_VideoSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_VideoSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3307,6 +3400,7 @@ googleCloudVideointelligenceV1p1beta1_VideoSegment
 googleCloudVideointelligenceV1p1beta1_VideoSegment =
   GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
     {_gooStartTimeOffSet = Nothing, _gooEndTimeOffSet = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the start of the segment (inclusive).
@@ -3358,6 +3452,7 @@ data GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3378,6 +3473,7 @@ googleCloudVideointelligenceV1p1beta1_LabelAnnotation =
     , _ggSegments = Nothing
     , _ggEntity = Nothing
     }
+
 
 -- | Common categories for the detected entity. E.g. when the label is
 -- \`Terrier\` the category is likely \`dog\`. And in some cases there
@@ -3444,6 +3540,7 @@ data GoogleCloudVideointelligenceV1_LabelFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_LabelFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3456,6 +3553,7 @@ googleCloudVideointelligenceV1_LabelFrame
 googleCloudVideointelligenceV1_LabelFrame =
   GoogleCloudVideointelligenceV1_LabelFrame'
     {_gcvvlf1TimeOffSet = Nothing, _gcvvlf1Confidence = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -3505,6 +3603,7 @@ data GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3531,6 +3630,7 @@ googleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest =
     , _gcvvavrLocationId = Nothing
     , _gcvvavrOutputURI = Nothing
     }
+
 
 -- | Input video location. Currently, only [Google Cloud
 -- Storage](https:\/\/cloud.google.com\/storage\/) URIs are supported,
@@ -3629,6 +3729,7 @@ data GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3641,6 +3742,7 @@ googleCloudVideointelligenceV1p2beta1_ExplicitContentFrame
 googleCloudVideointelligenceV1p2beta1_ExplicitContentFrame =
   GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame'
     {_gooTimeOffSet = Nothing, _gooPornographyLikelihood = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -3690,6 +3792,7 @@ data GoogleCloudVideointelligenceV1_Entity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_Entity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3707,6 +3810,7 @@ googleCloudVideointelligenceV1_Entity =
     , _gcvvecEntityId = Nothing
     , _gcvvecDescription = Nothing
     }
+
 
 -- | Language code for \`description\` in BCP-47 format.
 gcvvecLanguageCode :: Lens' GoogleCloudVideointelligenceV1_Entity (Maybe Text)
@@ -3758,6 +3862,7 @@ data GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3778,6 +3883,7 @@ googleCloudVideointelligenceV1beta2_VideoAnnotationProgress =
     , _gcvvvapsProgressPercent = Nothing
     , _gcvvvapsUpdateTime = Nothing
     }
+
 
 -- | Time when the request was received.
 gcvvvapsStartTime :: Lens' GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress (Maybe UTCTime)
@@ -3843,6 +3949,7 @@ data GoogleCloudVideointelligenceV1beta2_SpeechTranscription =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_SpeechTranscription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3855,6 +3962,7 @@ googleCloudVideointelligenceV1beta2_SpeechTranscription
 googleCloudVideointelligenceV1beta2_SpeechTranscription =
   GoogleCloudVideointelligenceV1beta2_SpeechTranscription'
     {_gcvvstcAlternatives = Nothing, _gcvvstcLanguageCode = Nothing}
+
 
 -- | May contain one or more recognition hypotheses (up to the maximum
 -- specified in \`max_alternatives\`). These alternatives are ordered in
@@ -3908,6 +4016,7 @@ newtype GoogleCloudVideointelligenceV1p2beta1_SpeechContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_SpeechContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3918,6 +4027,7 @@ googleCloudVideointelligenceV1p2beta1_SpeechContext
 googleCloudVideointelligenceV1p2beta1_SpeechContext =
   GoogleCloudVideointelligenceV1p2beta1_SpeechContext'
     {_gcvvscPhrases = Nothing}
+
 
 -- | *Optional* A list of strings containing words and phrases \"hints\" so
 -- that the speech recognition is more likely to recognize them. This can
@@ -3967,6 +4077,7 @@ data GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3999,6 +4110,7 @@ googleCloudVideointelligenceV1p1beta1_VideoAnnotationResults =
     , _gooSegmentLabelAnnotations = Nothing
     , _gooExplicitAnnotation = Nothing
     }
+
 
 -- | Shot annotations. Each shot is represented as a video segment.
 gooShotAnnotations :: Lens' GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults [GoogleCloudVideointelligenceV1p1beta1_VideoSegment]
@@ -4110,6 +4222,7 @@ newtype GoogleCloudVideointelligenceV1_AnnotateVideoProgress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_AnnotateVideoProgress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4120,6 +4233,7 @@ googleCloudVideointelligenceV1_AnnotateVideoProgress
 googleCloudVideointelligenceV1_AnnotateVideoProgress =
   GoogleCloudVideointelligenceV1_AnnotateVideoProgress'
     {_gooAnnotationProgress = Nothing}
+
 
 -- | Progress metadata for all videos specified in \`AnnotateVideoRequest\`.
 gooAnnotationProgress :: Lens' GoogleCloudVideointelligenceV1_AnnotateVideoProgress [GoogleCloudVideointelligenceV1_VideoAnnotationProgress]
@@ -4165,6 +4279,7 @@ newtype GoogleLongrunning_OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunning_OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4176,6 +4291,7 @@ googleLongrunning_OperationResponse
 googleLongrunning_OperationResponse pGlorAddtional_ =
   GoogleLongrunning_OperationResponse'
     {_glorAddtional = _Coerce # pGlorAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glorAddtional :: Lens' GoogleLongrunning_OperationResponse (HashMap Text JSONValue)
@@ -4208,6 +4324,7 @@ data GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4228,6 +4345,7 @@ googleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress =
     , _gcvvvapcProgressPercent = Nothing
     , _gcvvvapcUpdateTime = Nothing
     }
+
 
 -- | Time when the request was received.
 gcvvvapcStartTime :: Lens' GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress (Maybe UTCTime)
@@ -4295,6 +4413,7 @@ data GoogleCloudVideointelligenceV1p2beta1_TextFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_TextFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4307,6 +4426,7 @@ googleCloudVideointelligenceV1p2beta1_TextFrame
 googleCloudVideointelligenceV1p2beta1_TextFrame =
   GoogleCloudVideointelligenceV1p2beta1_TextFrame'
     {_gcvvtfRotatedBoundingBox = Nothing, _gcvvtfTimeOffSet = Nothing}
+
 
 -- | Bounding polygon of the detected text for this frame.
 gcvvtfRotatedBoundingBox :: Lens' GoogleCloudVideointelligenceV1p2beta1_TextFrame (Maybe GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly)
@@ -4355,6 +4475,7 @@ data GoogleCloudVideointelligenceV1beta2_LabelAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_LabelAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4375,6 +4496,7 @@ googleCloudVideointelligenceV1beta2_LabelAnnotation =
     , _goooSegments = Nothing
     , _goooEntity = Nothing
     }
+
 
 -- | Common categories for the detected entity. E.g. when the label is
 -- \`Terrier\` the category is likely \`dog\`. And in some cases there
@@ -4442,6 +4564,7 @@ data GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4454,6 +4577,7 @@ googleCloudVideointelligenceV1p1beta1_SpeechTranscription
 googleCloudVideointelligenceV1p1beta1_SpeechTranscription =
   GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription'
     {_ggAlternatives = Nothing, _ggLanguageCode = Nothing}
+
 
 -- | May contain one or more recognition hypotheses (up to the maximum
 -- specified in \`max_alternatives\`). These alternatives are ordered in
@@ -4513,6 +4637,7 @@ data GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4545,6 +4670,7 @@ googleCloudVideointelligenceV1beta2_VideoAnnotationResults =
     , _gcvvvarcSegmentLabelAnnotations = Nothing
     , _gcvvvarcExplicitAnnotation = Nothing
     }
+
 
 -- | Shot annotations. Each shot is represented as a video segment.
 gcvvvarcShotAnnotations :: Lens' GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults [GoogleCloudVideointelligenceV1beta2_VideoSegment]
@@ -4658,6 +4784,7 @@ data GoogleCloudVideointelligenceV1p2beta1_LabelSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_LabelSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4670,6 +4797,7 @@ googleCloudVideointelligenceV1p2beta1_LabelSegment
 googleCloudVideointelligenceV1p2beta1_LabelSegment =
   GoogleCloudVideointelligenceV1p2beta1_LabelSegment'
     {_gcvvls1Confidence = Nothing, _gcvvls1Segment = Nothing}
+
 
 -- | Confidence that the label is accurate. Range: [0, 1].
 gcvvls1Confidence :: Lens' GoogleCloudVideointelligenceV1p2beta1_LabelSegment (Maybe Double)
@@ -4718,6 +4846,7 @@ data GoogleCloudVideointelligenceV1p2beta1_VideoContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_VideoContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4744,6 +4873,7 @@ googleCloudVideointelligenceV1p2beta1_VideoContext =
     , _gcvvvcTextDetectionConfig = Nothing
     , _gcvvvcShotChangeDetectionConfig = Nothing
     }
+
 
 -- | Config for SPEECH_TRANSCRIPTION.
 gcvvvcSpeechTranscriptionConfig :: Lens' GoogleCloudVideointelligenceV1p2beta1_VideoContext (Maybe GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig)
@@ -4834,6 +4964,7 @@ data GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4854,6 +4985,7 @@ googleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox =
     , _gcvvnbbRight = Nothing
     , _gcvvnbbTop = Nothing
     }
+
 
 -- | Bottom Y coordinate.
 gcvvnbbBottom :: Lens' GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox (Maybe Double)
@@ -4916,6 +5048,7 @@ data GoogleCloudVideointelligenceV1p2beta1_TextSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_TextSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4933,6 +5066,7 @@ googleCloudVideointelligenceV1p2beta1_TextSegment =
     , _gcvvtsConfidence = Nothing
     , _gcvvtsSegment = Nothing
     }
+
 
 -- | Information related to the frames where OCR detected text appears.
 gcvvtsFrames :: Lens' GoogleCloudVideointelligenceV1p2beta1_TextSegment [GoogleCloudVideointelligenceV1p2beta1_TextFrame]
@@ -4988,6 +5122,7 @@ data GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5000,6 +5135,7 @@ googleCloudVideointelligenceV1p2beta1_SpeechTranscription
 googleCloudVideointelligenceV1p2beta1_SpeechTranscription =
   GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription'
     {_goooAlternatives = Nothing, _goooLanguageCode = Nothing}
+
 
 -- | May contain one or more recognition hypotheses (up to the maximum
 -- specified in \`max_alternatives\`). These alternatives are ordered in
@@ -5088,6 +5224,7 @@ data GoogleRpc_Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleRpc_Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5102,6 +5239,7 @@ googleRpc_Status
 googleRpc_Status =
   GoogleRpc_Status'
     {_grsDetails = Nothing, _grsCode = Nothing, _grsMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -5151,6 +5289,7 @@ data GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5168,6 +5307,7 @@ googleCloudVideointelligenceV1p2beta1_LabelDetectionConfig =
     , _gcvvldcStationaryCamera = Nothing
     , _gcvvldcModel = Nothing
     }
+
 
 -- | What labels should be detected with LABEL_DETECTION, in addition to
 -- video-level labels or segment-level labels. If unspecified, defaults to
@@ -5226,6 +5366,7 @@ data GoogleCloudVideointelligenceV1_VideoSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_VideoSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5238,6 +5379,7 @@ googleCloudVideointelligenceV1_VideoSegment
 googleCloudVideointelligenceV1_VideoSegment =
   GoogleCloudVideointelligenceV1_VideoSegment'
     {_gcvvvscStartTimeOffSet = Nothing, _gcvvvscEndTimeOffSet = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the start of the segment (inclusive).
@@ -5287,6 +5429,7 @@ newtype GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5297,6 +5440,7 @@ googleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
 googleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation =
   GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation'
     {_gcvvecacFrames = Nothing}
+
 
 -- | All video frames where explicit content was detected.
 gcvvecacFrames :: Lens' GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation [GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame]
@@ -5333,6 +5477,7 @@ newtype GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5343,6 +5488,7 @@ googleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig
 googleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig =
   GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig'
     {_gcvvscdcModel = Nothing}
+
 
 -- | Model to use for shot change detection. Supported values:
 -- \"builtin\/stable\" (the default if unset) and \"builtin\/latest\".
@@ -5380,6 +5526,7 @@ newtype GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5390,6 +5537,7 @@ googleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse
 googleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse =
   GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse'
     {_gcvvavrcAnnotationResults = Nothing}
+
 
 -- | Annotation results for all videos specified in \`AnnotateVideoRequest\`.
 gcvvavrcAnnotationResults :: Lens' GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse [GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults]
@@ -5429,6 +5577,7 @@ data GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5441,6 +5590,7 @@ googleCloudVideointelligenceV1beta2_ExplicitContentFrame
 googleCloudVideointelligenceV1beta2_ExplicitContentFrame =
   GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame'
     {_gcvvecfcTimeOffSet = Nothing, _gcvvecfcPornographyLikelihood = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -5496,6 +5646,7 @@ data GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5531,6 +5682,7 @@ googleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig =
     , _gcvvstccDiarizationSpeakerCount = Nothing
     , _gcvvstccEnableWordConfidence = Nothing
     }
+
 
 -- | *Optional* A means to provide context to assist the speech recognition.
 gcvvstccSpeechContexts :: Lens' GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig [GoogleCloudVideointelligenceV1p2beta1_SpeechContext]
@@ -5671,6 +5823,7 @@ data GoogleCloudVideointelligenceV1_LabelSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_LabelSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5683,6 +5836,7 @@ googleCloudVideointelligenceV1_LabelSegment
 googleCloudVideointelligenceV1_LabelSegment =
   GoogleCloudVideointelligenceV1_LabelSegment'
     {_g2Confidence = Nothing, _g2Segment = Nothing}
+
 
 -- | Confidence that the label is accurate. Range: [0, 1].
 g2Confidence :: Lens' GoogleCloudVideointelligenceV1_LabelSegment (Maybe Double)

@@ -59,6 +59,7 @@ newtype ConnectionTypesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConnectionTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ connectionTypesList
     -> ConnectionTypesList
 connectionTypesList pCtlProFileId_ =
   ConnectionTypesList' {_ctlProFileId = _Coerce # pCtlProFileId_}
+
 
 -- | User profile ID associated with this request.
 ctlProFileId :: Lens' ConnectionTypesList Int64

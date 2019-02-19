@@ -64,6 +64,7 @@ data StorelayoutclustersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StorelayoutclustersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ storelayoutclustersList
 storelayoutclustersList pSllEnterpriseId_ pSllPageId_ =
   StorelayoutclustersList'
     {_sllEnterpriseId = pSllEnterpriseId_, _sllPageId = pSllPageId_}
+
 
 -- | The ID of the enterprise.
 sllEnterpriseId :: Lens' StorelayoutclustersList Text

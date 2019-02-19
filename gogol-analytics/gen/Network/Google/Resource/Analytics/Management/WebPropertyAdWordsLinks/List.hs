@@ -70,6 +70,7 @@ data ManagementWebPropertyAdWordsLinksList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ managementWebPropertyAdWordsLinksList pMwpawllWebPropertyId_ pMwpawllAccountId_ 
     , _mwpawllStartIndex = Nothing
     , _mwpawllMaxResults = Nothing
     }
+
 
 -- | Web property ID to retrieve the Google Ads links for.
 mwpawllWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksList Text

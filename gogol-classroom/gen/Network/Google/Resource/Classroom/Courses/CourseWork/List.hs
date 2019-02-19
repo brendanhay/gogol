@@ -97,6 +97,7 @@ data CoursesCourseWorkList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesCourseWorkList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +137,7 @@ coursesCourseWorkList pCcwlCourseId_ =
     , _ccwlPageSize = Nothing
     , _ccwlCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccwlXgafv :: Lens' CoursesCourseWorkList (Maybe Xgafv)

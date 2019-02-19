@@ -70,6 +70,7 @@ data GroupsMembershipsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsMembershipsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ groupsMembershipsGet pGmgName_ =
     , _gmgName = pGmgName_
     , _gmgCallback = Nothing
     }
+
 
 -- | V1 error format.
 gmgXgafv :: Lens' GroupsMembershipsGet (Maybe Xgafv)

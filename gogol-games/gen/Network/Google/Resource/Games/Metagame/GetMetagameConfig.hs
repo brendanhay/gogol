@@ -53,11 +53,13 @@ data MetagameGetMetagameConfig =
   MetagameGetMetagameConfig'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetagameGetMetagameConfig' with the minimum fields required to make a request.
 --
 metagameGetMetagameConfig
     :: MetagameGetMetagameConfig
 metagameGetMetagameConfig = MetagameGetMetagameConfig'
+
 
 instance GoogleRequest MetagameGetMetagameConfig
          where

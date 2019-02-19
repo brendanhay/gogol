@@ -87,6 +87,7 @@ data ObjectsWatchAll =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectsWatchAll' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +128,7 @@ objectsWatchAll pOwaBucket_ pOwaPayload_ =
     , _owaDelimiter = Nothing
     , _owaMaxResults = 1000
     }
+
 
 -- | Filter results to objects whose names begin with this prefix.
 owaPrefix :: Lens' ObjectsWatchAll (Maybe Text)

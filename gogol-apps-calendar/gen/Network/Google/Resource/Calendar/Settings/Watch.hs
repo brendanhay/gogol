@@ -69,6 +69,7 @@ data SettingsWatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ settingsWatch pSwPayload_ =
     , _swPageToken = Nothing
     , _swMaxResults = Nothing
     }
+
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
 -- results from the previous list request. It makes the result of this list

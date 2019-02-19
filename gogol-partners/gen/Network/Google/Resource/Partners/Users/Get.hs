@@ -107,6 +107,7 @@ data UsersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -158,6 +159,7 @@ usersGet pUgUserId_ =
     , _ugRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _ugCallback = Nothing
     }
+
 
 -- | V1 error format.
 ugXgafv :: Lens' UsersGet (Maybe Xgafv)

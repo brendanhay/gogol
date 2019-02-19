@@ -67,6 +67,7 @@ data InstallsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstallsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ installsList pIlEnterpriseId_ pIlUserId_ pIlDeviceId_ =
     , _ilUserId = pIlUserId_
     , _ilDeviceId = pIlDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 ilEnterpriseId :: Lens' InstallsList Text

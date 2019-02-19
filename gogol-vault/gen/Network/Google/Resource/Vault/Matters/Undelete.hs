@@ -75,6 +75,7 @@ data MattersUndelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ mattersUndelete pMuPayload_ pMuMatterId_ =
     , _muMatterId = pMuMatterId_
     , _muCallback = Nothing
     }
+
 
 -- | V1 error format.
 muXgafv :: Lens' MattersUndelete (Maybe Xgafv)

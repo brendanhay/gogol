@@ -74,6 +74,7 @@ data SettingsDatasourcesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsDatasourcesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ settingsDatasourcesDelete pSddName_ =
     , _sddDebugOptionsEnableDebugging = Nothing
     , _sddCallback = Nothing
     }
+
 
 -- | V1 error format.
 sddXgafv :: Lens' SettingsDatasourcesDelete (Maybe Xgafv)

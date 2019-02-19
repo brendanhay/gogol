@@ -87,6 +87,7 @@ data ProjectsLocationsDataSetsDicomStoresDicomWebDicomWebDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsDicomStoresDicomWebDicomWebDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ projectsLocationsDataSetsDicomStoresDicomWebDicomWebDelete pPldsdsdwdwdParent_ p
     , _pldsdsdwdwdCallback = Nothing
     , _pldsdsdwdwdDicomWebPath = pPldsdsdwdwdDicomWebPath_
     }
+
 
 -- | The name of the DICOM store that is being accessed (e.g.,
 -- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`).

@@ -74,6 +74,7 @@ data ProjectsScanConfigsScanRunsStop =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsScanConfigsScanRunsStop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsScanConfigsScanRunsStop pPscsrsPayload_ pPscsrsName_ =
     , _pscsrsName = pPscsrsName_
     , _pscsrsCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscsrsXgafv :: Lens' ProjectsScanConfigsScanRunsStop (Maybe Xgafv)

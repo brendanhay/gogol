@@ -66,6 +66,7 @@ data PretargetingConfigPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PretargetingConfigPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ pretargetingConfigPatch pPcpPayload_ pPcpAccountId_ pPcpConfigId_ =
     , _pcpAccountId = _Coerce # pPcpAccountId_
     , _pcpConfigId = _Coerce # pPcpConfigId_
     }
+
 
 -- | Multipart request metadata.
 pcpPayload :: Lens' PretargetingConfigPatch PretargetingConfig

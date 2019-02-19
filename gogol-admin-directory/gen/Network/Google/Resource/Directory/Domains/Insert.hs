@@ -62,6 +62,7 @@ data DomainsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ domainsInsert
     -> DomainsInsert
 domainsInsert pDiPayload_ pDiCustomer_ =
   DomainsInsert' {_diPayload = pDiPayload_, _diCustomer = pDiCustomer_}
+
 
 -- | Multipart request metadata.
 diPayload :: Lens' DomainsInsert Domains

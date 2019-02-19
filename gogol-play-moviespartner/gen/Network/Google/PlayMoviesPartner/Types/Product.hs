@@ -65,6 +65,7 @@ data Avail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Avail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -172,6 +173,7 @@ avail =
     , _aSeasonAltId = Nothing
     , _aTitleInternalAlias = Nothing
     }
+
 
 -- | Other identifier referring to the Edit, as defined by partner. Example:
 -- \"GOOGLER_2006\"
@@ -476,6 +478,7 @@ data ListAvailsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAvailsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -490,6 +493,7 @@ listAvailsResponse
 listAvailsResponse =
   ListAvailsResponse'
     {_larNextPageToken = Nothing, _larAvails = Nothing, _larTotalSize = Nothing}
+
 
 -- | See _List methods rules_ for info about this field.
 larNextPageToken :: Lens' ListAvailsResponse (Maybe Text)
@@ -538,6 +542,7 @@ data ListOrdersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOrdersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -552,6 +557,7 @@ listOrdersResponse
 listOrdersResponse =
   ListOrdersResponse'
     {_lorNextPageToken = Nothing, _lorTotalSize = Nothing, _lorOrders = Nothing}
+
 
 -- | See _List methods rules_ for info about this field.
 lorNextPageToken :: Lens' ListOrdersResponse (Maybe Text)
@@ -599,6 +605,7 @@ data ListStoreInfosResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListStoreInfosResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -616,6 +623,7 @@ listStoreInfosResponse =
     , _lsirTotalSize = Nothing
     , _lsirStoreInfos = Nothing
     }
+
 
 -- | See \'List methods rules\' for info about this field.
 lsirNextPageToken :: Lens' ListStoreInfosResponse (Maybe Text)
@@ -687,6 +695,7 @@ data Order =
     , _oEpisodeName            :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
 --
@@ -765,6 +774,7 @@ order =
     , _oOrderId = Nothing
     , _oEpisodeName = Nothing
     }
+
 
 -- | High-level status of the order.
 oStatus :: Lens' Order (Maybe OrderStatus)
@@ -996,6 +1006,7 @@ data StoreInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StoreInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1079,6 +1090,7 @@ storeInfo =
     , _siSeasonId = Nothing
     , _siShowId = Nothing
     }
+
 
 -- | Title-level EIDR ID. Example: \"10.5240\/1489-49A2-3956-4B2D-FE16-5\".
 siTitleLevelEidr :: Lens' StoreInfo (Maybe Text)

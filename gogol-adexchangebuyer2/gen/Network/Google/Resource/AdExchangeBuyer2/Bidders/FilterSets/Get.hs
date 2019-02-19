@@ -72,6 +72,7 @@ data BiddersFilterSetsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BiddersFilterSetsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ biddersFilterSetsGet pBfsgName_ =
     , _bfsgName = pBfsgName_
     , _bfsgCallback = Nothing
     }
+
 
 -- | V1 error format.
 bfsgXgafv :: Lens' BiddersFilterSetsGet (Maybe Xgafv)

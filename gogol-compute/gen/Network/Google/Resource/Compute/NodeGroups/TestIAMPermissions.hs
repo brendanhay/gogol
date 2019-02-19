@@ -70,6 +70,7 @@ data NodeGroupsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ nodeGroupsTestIAMPermissions pNgtipProject_ pNgtipZone_ pNgtipPayload_ pNgtipRes
     , _ngtipPayload = pNgtipPayload_
     , _ngtipResource = pNgtipResource_
     }
+
 
 -- | Project ID for this request.
 ngtipProject :: Lens' NodeGroupsTestIAMPermissions Text

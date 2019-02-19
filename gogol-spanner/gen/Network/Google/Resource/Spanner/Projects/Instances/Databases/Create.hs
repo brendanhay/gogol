@@ -83,6 +83,7 @@ data ProjectsInstancesDatabasesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ projectsInstancesDatabasesCreate pPidcParent_ pPidcPayload_ =
     , _pidcPayload = pPidcPayload_
     , _pidcCallback = Nothing
     }
+
 
 -- | Required. The name of the instance that will serve the new database.
 -- Values are of the form \`projects\/\/instances\/\`.

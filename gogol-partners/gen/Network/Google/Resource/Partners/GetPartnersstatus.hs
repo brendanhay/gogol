@@ -103,6 +103,7 @@ data GetPartnersstatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetPartnersstatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -147,6 +148,7 @@ getPartnersstatus =
     , _gpRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _gpCallback = Nothing
     }
+
 
 -- | V1 error format.
 gpXgafv :: Lens' GetPartnersstatus (Maybe Xgafv)

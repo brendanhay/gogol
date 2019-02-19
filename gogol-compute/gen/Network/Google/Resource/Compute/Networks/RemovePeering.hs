@@ -70,6 +70,7 @@ data NetworksRemovePeering =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworksRemovePeering' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ networksRemovePeering pNrpProject_ pNrpNetwork_ pNrpPayload_ =
     , _nrpNetwork = pNrpNetwork_
     , _nrpPayload = pNrpPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

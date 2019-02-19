@@ -65,6 +65,7 @@ data ApplicationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ applicationsList
 applicationsList =
   ApplicationsList'
     {_alCustomerId = Nothing, _alPageToken = Nothing, _alMaxResults = Nothing}
+
 
 -- | Immutable ID of the Google Apps account.
 alCustomerId :: Lens' ApplicationsList (Maybe Text)

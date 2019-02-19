@@ -31,6 +31,7 @@ newtype NetworkPolicyConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkPolicyConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39,6 +40,7 @@ newtype NetworkPolicyConfig =
 networkPolicyConfig
     :: NetworkPolicyConfig
 networkPolicyConfig = NetworkPolicyConfig' {_npcDisabled = Nothing}
+
 
 -- | Whether NetworkPolicy is enabled for this cluster.
 npcDisabled :: Lens' NetworkPolicyConfig (Maybe Bool)
@@ -70,6 +72,7 @@ data UpdateNodePoolRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateNodePoolRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +102,7 @@ updateNodePoolRequest =
     , _unprNodeVersion = Nothing
     , _unprProjectId = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -190,6 +194,7 @@ data UpdateMasterRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateMasterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -213,6 +218,7 @@ updateMasterRequest =
     , _umrProjectId = Nothing
     , _umrMasterVersion = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -283,6 +289,7 @@ data StartIPRotationRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StartIPRotationRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -306,6 +313,7 @@ startIPRotationRequest =
     , _sirrClusterId = Nothing
     , _sirrProjectId = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -374,6 +382,7 @@ data SetLegacyAbacRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetLegacyAbacRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -397,6 +406,7 @@ setLegacyAbacRequest =
     , _slarClusterId = Nothing
     , _slarProjectId = Nothing
     }
+
 
 -- | Whether ABAC authorization will be enabled in the cluster.
 slarEnabled :: Lens' SetLegacyAbacRequest (Maybe Bool)
@@ -460,6 +470,7 @@ newtype HorizontalPodAutoscaling =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HorizontalPodAutoscaling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -468,6 +479,7 @@ newtype HorizontalPodAutoscaling =
 horizontalPodAutoscaling
     :: HorizontalPodAutoscaling
 horizontalPodAutoscaling = HorizontalPodAutoscaling' {_hpaDisabled = Nothing}
+
 
 -- | Whether the Horizontal Pod Autoscaling feature is enabled in the
 -- cluster. When enabled, it ensures that a Heapster pod is running in the
@@ -501,6 +513,7 @@ data SetMasterAuthRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetMasterAuthRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -527,6 +540,7 @@ setMasterAuthRequest =
     , _smarProjectId = Nothing
     , _smarUpdate = Nothing
     }
+
 
 -- | The exact form of action to be taken on the master auth.
 smarAction :: Lens' SetMasterAuthRequest (Maybe SetMasterAuthRequestAction)
@@ -595,6 +609,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -606,6 +621,7 @@ listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
   ListOperationsResponse' {_lorOperations = Nothing, _lorMissingZones = Nothing}
+
 
 -- | A list of operations in the project in the specified zone.
 lorOperations :: Lens' ListOperationsResponse [Operation]
@@ -651,6 +667,7 @@ data CreateClusterRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateClusterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -671,6 +688,7 @@ createClusterRequest =
     , _ccrZone = Nothing
     , _ccrProjectId = Nothing
     }
+
 
 -- | The parent (project and location) where the cluster will be created.
 -- Specified in the format \'projects\/*\/locations\/*\'.
@@ -761,6 +779,7 @@ data Cluster =
     , _cCreateTime                     :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Cluster' with the minimum fields required to make a request.
 --
@@ -887,6 +906,7 @@ cluster =
     , _cMonitoringService = Nothing
     , _cCreateTime = Nothing
     }
+
 
 -- | [Output only] The current status of this cluster.
 cStatus :: Lens' Cluster (Maybe ClusterStatus)
@@ -1292,6 +1312,7 @@ data CancelOperationRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1312,6 +1333,7 @@ cancelOperationRequest =
     , _corProjectId = Nothing
     , _corOperationId = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the operation resides.
@@ -1368,6 +1390,7 @@ data UpdateClusterRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateClusterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1391,6 +1414,7 @@ updateClusterRequest =
     , _ucrProjectId = Nothing
     , _ucrUpdate = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -1453,6 +1477,7 @@ data SetAddonsConfigRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetAddonsConfigRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1476,6 +1501,7 @@ setAddonsConfigRequest =
     , _sacrClusterId = Nothing
     , _sacrProjectId = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -1552,6 +1578,7 @@ data NodeConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1602,6 +1629,7 @@ nodeConfig =
     , _ncTags = Nothing
     , _ncPreemptible = Nothing
     }
+
 
 -- | The number of local SSD disks to be attached to the node. The limit for
 -- this value is dependant upon the maximum number of disks available on a
@@ -1790,6 +1818,7 @@ newtype HTTPLoadBalancing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPLoadBalancing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1798,6 +1827,7 @@ newtype HTTPLoadBalancing =
 hTTPLoadBalancing
     :: HTTPLoadBalancing
 hTTPLoadBalancing = HTTPLoadBalancing' {_httplbDisabled = Nothing}
+
 
 -- | Whether the HTTP Load Balancing controller is enabled in the cluster.
 -- When enabled, it runs a small pod in the cluster that manages the load
@@ -1838,6 +1868,7 @@ data Operation =
     , _oDetail             :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -1886,6 +1917,7 @@ operation =
     , _oTargetLink = Nothing
     , _oDetail = Nothing
     }
+
 
 -- | Which conditions caused the current node pool state.
 oNodepoolConditions :: Lens' Operation [StatusCondition]
@@ -2009,6 +2041,7 @@ newtype ClusterResourceLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClusterResourceLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2019,6 +2052,7 @@ clusterResourceLabels
     -> ClusterResourceLabels
 clusterResourceLabels pCrlAddtional_ =
   ClusterResourceLabels' {_crlAddtional = _Coerce # pCrlAddtional_}
+
 
 crlAddtional :: Lens' ClusterResourceLabels (HashMap Text Text)
 crlAddtional
@@ -2045,11 +2079,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -2071,6 +2107,7 @@ data SetNodePoolAutoscalingRequest =
     , _snparProjectId   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetNodePoolAutoscalingRequest' with the minimum fields required to make a request.
 --
@@ -2098,6 +2135,7 @@ setNodePoolAutoscalingRequest =
     , _snparClusterId = Nothing
     , _snparProjectId = Nothing
     }
+
 
 -- | Autoscaling configuration for the node pool.
 snparAutoscaling :: Lens' SetNodePoolAutoscalingRequest (Maybe NodePoolAutoscaling)
@@ -2176,6 +2214,7 @@ data CompleteIPRotationRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompleteIPRotationRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2196,6 +2235,7 @@ completeIPRotationRequest =
     , _cirrClusterId = Nothing
     , _cirrProjectId = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -2254,6 +2294,7 @@ data NodeManagement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeManagement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2271,6 +2312,7 @@ nodeManagement =
     , _nmAutoRepair = Nothing
     , _nmUpgradeOptions = Nothing
     }
+
 
 -- | A flag that specifies whether node auto-upgrade is enabled for the node
 -- pool. If enabled, node auto-upgrade helps keep the nodes in your node
@@ -2325,6 +2367,7 @@ data NodeTaint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTaint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2338,6 +2381,7 @@ nodeTaint
     :: NodeTaint
 nodeTaint =
   NodeTaint' {_ntEffect = Nothing, _ntValue = Nothing, _ntKey = Nothing}
+
 
 -- | Effect for taint.
 ntEffect :: Lens' NodeTaint (Maybe NodeTaintEffect)
@@ -2378,6 +2422,7 @@ data NodePoolAutoscaling =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodePoolAutoscaling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2395,6 +2440,7 @@ nodePoolAutoscaling =
     , _npaEnabled = Nothing
     , _npaMinNodeCount = Nothing
     }
+
 
 -- | Maximum number of nodes in the NodePool. Must be >= min_node_count.
 -- There has to enough quota to scale up the cluster.
@@ -2446,6 +2492,7 @@ data SetMaintenancePolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetMaintenancePolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2469,6 +2516,7 @@ setMaintenancePolicyRequest =
     , _smprMaintenancePolicy = Nothing
     , _smprProjectId = Nothing
     }
+
 
 -- | The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -2530,6 +2578,7 @@ newtype KubernetesDashboard =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KubernetesDashboard' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2538,6 +2587,7 @@ newtype KubernetesDashboard =
 kubernetesDashboard
     :: KubernetesDashboard
 kubernetesDashboard = KubernetesDashboard' {_kdDisabled = Nothing}
+
 
 -- | Whether the Kubernetes Dashboard is enabled for this cluster.
 kdDisabled :: Lens' KubernetesDashboard (Maybe Bool)
@@ -2563,6 +2613,7 @@ newtype ClientCertificateConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClientCertificateConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2572,6 +2623,7 @@ clientCertificateConfig
     :: ClientCertificateConfig
 clientCertificateConfig =
   ClientCertificateConfig' {_cccIssueClientCertificate = Nothing}
+
 
 -- | Issue a client certificate.
 cccIssueClientCertificate :: Lens' ClientCertificateConfig (Maybe Bool)
@@ -2609,6 +2661,7 @@ data SetLabelsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetLabelsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2635,6 +2688,7 @@ setLabelsRequest =
     , _slrProjectId = Nothing
     , _slrLabelFingerprint = Nothing
     }
+
 
 -- | The labels to set for that cluster.
 slrResourceLabels :: Lens' SetLabelsRequest (Maybe SetLabelsRequestResourceLabels)
@@ -2714,6 +2768,7 @@ data GetOpenIdConfigResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetOpenIdConfigResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2743,6 +2798,7 @@ getOpenIdConfigResponse =
     , _goicrIssuer = Nothing
     , _goicrSubjectTypesSupported = Nothing
     }
+
 
 -- | NOLINT
 goicrIdTokenSigningAlgValuesSupported :: Lens' GetOpenIdConfigResponse [Text]
@@ -2841,6 +2897,7 @@ data JWK =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JWK' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2876,6 +2933,7 @@ jwk =
     , _jKty = Nothing
     , _jY = Nothing
     }
+
 
 -- | NOLINT
 jCrv :: Lens' JWK (Maybe Text)
@@ -2945,6 +3003,7 @@ newtype MaintenanceWindow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MaintenanceWindow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2953,6 +3012,7 @@ newtype MaintenanceWindow =
 maintenanceWindow
     :: MaintenanceWindow
 maintenanceWindow = MaintenanceWindow' {_mwDailyMaintenanceWindow = Nothing}
+
 
 -- | DailyMaintenanceWindow specifies a daily maintenance operation window.
 mwDailyMaintenanceWindow :: Lens' MaintenanceWindow (Maybe DailyMaintenanceWindow)
@@ -2992,6 +3052,7 @@ data IPAllocationPolicy =
     , _iapCreateSubnetwork           :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IPAllocationPolicy' with the minimum fields required to make a request.
 --
@@ -3034,6 +3095,7 @@ ipAllocationPolicy =
     , _iapServicesIPv4CIdRBlock = Nothing
     , _iapCreateSubnetwork = Nothing
     }
+
 
 -- | The name of the secondary range to be used as for the services CIDR
 -- block. The secondary range will be used for service ClusterIPs. This
@@ -3185,6 +3247,7 @@ data AddonsConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddonsConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3205,6 +3268,7 @@ addonsConfig =
     , _acHTTPLoadBalancing = Nothing
     , _acKubernetesDashboard = Nothing
     }
+
 
 -- | Configuration for NetworkPolicy. This only tracks whether the addon is
 -- enabled or not on the Master, it does not track whether network policy
@@ -3267,6 +3331,7 @@ data NetworkConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3277,6 +3342,7 @@ data NetworkConfig =
 networkConfig
     :: NetworkConfig
 networkConfig = NetworkConfig' {_ncNetwork = Nothing, _ncSubnetwork = Nothing}
+
 
 -- | Output only. The relative name of the Google Compute Engine
 -- network(\/compute\/docs\/networks-and-firewalls#networks) to which the
@@ -3332,6 +3398,7 @@ data NodePool =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodePool' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3373,6 +3440,7 @@ nodePool =
     , _npConditions = Nothing
     , _npInstanceGroupURLs = Nothing
     }
+
 
 -- | [Output only] The status of the nodes in this pool instance.
 npStatus :: Lens' NodePool (Maybe NodePoolStatus)
@@ -3489,6 +3557,7 @@ data SetNodePoolManagementRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetNodePoolManagementRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3515,6 +3584,7 @@ setNodePoolManagementRequest =
     , _snpmrClusterId = Nothing
     , _snpmrProjectId = Nothing
     }
+
 
 -- | NodeManagement configuration for the node pool.
 snpmrManagement :: Lens' SetNodePoolManagementRequest (Maybe NodeManagement)
@@ -3593,6 +3663,7 @@ data MasterAuthorizedNetworksConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MasterAuthorizedNetworksConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3605,6 +3676,7 @@ masterAuthorizedNetworksConfig
 masterAuthorizedNetworksConfig =
   MasterAuthorizedNetworksConfig'
     {_mancEnabled = Nothing, _mancCIdRBlocks = Nothing}
+
 
 -- | Whether or not master authorized networks is enabled.
 mancEnabled :: Lens' MasterAuthorizedNetworksConfig (Maybe Bool)
@@ -3646,6 +3718,7 @@ newtype LegacyAbac =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LegacyAbac' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3654,6 +3727,7 @@ newtype LegacyAbac =
 legacyAbac
     :: LegacyAbac
 legacyAbac = LegacyAbac' {_laEnabled = Nothing}
+
 
 -- | Whether the ABAC authorizer is enabled for this cluster. When enabled,
 -- identities in the system, including service accounts, nodes, and
@@ -3688,6 +3762,7 @@ data MasterAuth =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MasterAuth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3714,6 +3789,7 @@ masterAuth =
     , _maPassword = Nothing
     , _maClusterCaCertificate = Nothing
     }
+
 
 -- | [Output only] Base64-encoded private key used by clients to authenticate
 -- to the cluster endpoint.
@@ -3794,6 +3870,7 @@ data StatusCondition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusCondition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3804,6 +3881,7 @@ data StatusCondition =
 statusCondition
     :: StatusCondition
 statusCondition = StatusCondition' {_scCode = Nothing, _scMessage = Nothing}
+
 
 -- | Machine-friendly representation of the condition
 scCode :: Lens' StatusCondition (Maybe StatusConditionCode)
@@ -3848,6 +3926,7 @@ newtype NodeConfigMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeConfigMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3858,6 +3937,7 @@ nodeConfigMetadata
     -> NodeConfigMetadata
 nodeConfigMetadata pNcmAddtional_ =
   NodeConfigMetadata' {_ncmAddtional = _Coerce # pNcmAddtional_}
+
 
 ncmAddtional :: Lens' NodeConfigMetadata (HashMap Text Text)
 ncmAddtional
@@ -3887,6 +3967,7 @@ newtype NodeConfigLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeConfigLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3897,6 +3978,7 @@ nodeConfigLabels
     -> NodeConfigLabels
 nodeConfigLabels pNclAddtional_ =
   NodeConfigLabels' {_nclAddtional = _Coerce # pNclAddtional_}
+
 
 nclAddtional :: Lens' NodeConfigLabels (HashMap Text Text)
 nclAddtional
@@ -3924,6 +4006,7 @@ data ServerConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServerConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3947,6 +4030,7 @@ serverConfig =
     , _scDefaultClusterVersion = Nothing
     , _scValidMasterVersions = Nothing
     }
+
 
 -- | Default image type.
 scDefaultImageType :: Lens' ServerConfig (Maybe Text)
@@ -4018,6 +4102,7 @@ data AutoUpgradeOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoUpgradeOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4030,6 +4115,7 @@ autoUpgradeOptions
 autoUpgradeOptions =
   AutoUpgradeOptions'
     {_auoAutoUpgradeStartTime = Nothing, _auoDescription = Nothing}
+
 
 -- | [Output only] This field is set when upgrades are about to commence with
 -- the approximate start time for the upgrades, in
@@ -4076,6 +4162,7 @@ data SetNodePoolSizeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetNodePoolSizeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4102,6 +4189,7 @@ setNodePoolSizeRequest =
     , _snpsrClusterId = Nothing
     , _snpsrProjectId = Nothing
     }
+
 
 -- | The desired node count for the pool.
 snpsrNodeCount :: Lens' SetNodePoolSizeRequest (Maybe Int32)
@@ -4181,6 +4269,7 @@ data SetMonitoringServiceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetMonitoringServiceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4204,6 +4293,7 @@ setMonitoringServiceRequest =
     , _smsrProjectId = Nothing
     , _smsrMonitoringService = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -4273,6 +4363,7 @@ data SetLoggingServiceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetLoggingServiceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4296,6 +4387,7 @@ setLoggingServiceRequest =
     , _slsrProjectId = Nothing
     , _slsrLoggingService = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -4362,6 +4454,7 @@ newtype MaintenancePolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MaintenancePolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4370,6 +4463,7 @@ newtype MaintenancePolicy =
 maintenancePolicy
     :: MaintenancePolicy
 maintenancePolicy = MaintenancePolicy' {_mpWindow = Nothing}
+
 
 -- | Specifies the maintenance window in which maintenance may be performed.
 mpWindow :: Lens' MaintenancePolicy (Maybe MaintenanceWindow)
@@ -4394,6 +4488,7 @@ data CIdRBlock =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CIdRBlock' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4404,6 +4499,7 @@ data CIdRBlock =
 cIdRBlock
     :: CIdRBlock
 cIdRBlock = CIdRBlock' {_cirbCIdRBlock = Nothing, _cirbDisplayName = Nothing}
+
 
 -- | cidr_block must be specified in CIDR notation.
 cirbCIdRBlock :: Lens' CIdRBlock (Maybe Text)
@@ -4441,6 +4537,7 @@ data AcceleratorConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4453,6 +4550,7 @@ acceleratorConfig
 acceleratorConfig =
   AcceleratorConfig'
     {_acAcceleratorCount = Nothing, _acAcceleratorType = Nothing}
+
 
 -- | The number of the accelerator cards exposed to an instance.
 acAcceleratorCount :: Lens' AcceleratorConfig (Maybe Int64)
@@ -4496,6 +4594,7 @@ data SetLocationsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetLocationsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4519,6 +4618,7 @@ setLocationsRequest =
     , _sProjectId = Nothing
     , _sLocations = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -4588,6 +4688,7 @@ data SetNetworkPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetNetworkPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4611,6 +4712,7 @@ setNetworkPolicyRequest =
     , _snprProjectId = Nothing
     , _snprNetworkPolicy = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -4678,6 +4780,7 @@ data PrivateClusterConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PrivateClusterConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4701,6 +4804,7 @@ privateClusterConfig =
     , _pccMasterIPv4CIdRBlock = Nothing
     , _pccPrivateEndpoint = Nothing
     }
+
 
 -- | Whether nodes have internal IP addresses only. If enabled, all nodes are
 -- given only RFC 1918 private addresses and communicate with the master
@@ -4772,6 +4876,7 @@ data DailyMaintenanceWindow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DailyMaintenanceWindow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4783,6 +4888,7 @@ dailyMaintenanceWindow
     :: DailyMaintenanceWindow
 dailyMaintenanceWindow =
   DailyMaintenanceWindow' {_dmwStartTime = Nothing, _dmwDuration = Nothing}
+
 
 -- | Time within the maintenance window to start the maintenance operations.
 -- Time format should be in
@@ -4823,6 +4929,7 @@ data ListClustersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListClustersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4834,6 +4941,7 @@ listClustersResponse
     :: ListClustersResponse
 listClustersResponse =
   ListClustersResponse' {_lcrClusters = Nothing, _lcrMissingZones = Nothing}
+
 
 -- | A list of clusters in the project in the specified zone, or across all
 -- ones.
@@ -4886,6 +4994,7 @@ data ClusterUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClusterUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4921,6 +5030,7 @@ clusterUpdate =
     , _cuDesiredLocations = Nothing
     , _cuDesiredMonitoringService = Nothing
     }
+
 
 -- | Autoscaler configuration for the node pool specified in
 -- desired_node_pool_id. If there is only one pool in the cluster and
@@ -5057,6 +5167,7 @@ data RollbackNodePoolUpgradeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollbackNodePoolUpgradeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5080,6 +5191,7 @@ rollbackNodePoolUpgradeRequest =
     , _rnpurClusterId = Nothing
     , _rnpurProjectId = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -5149,6 +5261,7 @@ data NetworkPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5159,6 +5272,7 @@ data NetworkPolicy =
 networkPolicy
     :: NetworkPolicy
 networkPolicy = NetworkPolicy' {_npEnabled = Nothing, _npProvider = Nothing}
+
 
 -- | Whether network policy is enabled on the cluster.
 npEnabled :: Lens' NetworkPolicy (Maybe Bool)
@@ -5193,6 +5307,7 @@ newtype ListNodePoolsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListNodePoolsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5201,6 +5316,7 @@ newtype ListNodePoolsResponse =
 listNodePoolsResponse
     :: ListNodePoolsResponse
 listNodePoolsResponse = ListNodePoolsResponse' {_lnprNodePools = Nothing}
+
 
 -- | A list of node pools for a cluster.
 lnprNodePools :: Lens' ListNodePoolsResponse [NodePool]
@@ -5232,6 +5348,7 @@ newtype GetJSONWebKeysResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetJSONWebKeysResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5240,6 +5357,7 @@ newtype GetJSONWebKeysResponse =
 getJSONWebKeysResponse
     :: GetJSONWebKeysResponse
 getJSONWebKeysResponse = GetJSONWebKeysResponse' {_gjwkrKeys = Nothing}
+
 
 -- | The public component of the keys used by the cluster to sign token
 -- requests.
@@ -5273,6 +5391,7 @@ data CreateNodePoolRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateNodePoolRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5296,6 +5415,7 @@ createNodePoolRequest =
     , _cnprClusterId = Nothing
     , _cnprProjectId = Nothing
     }
+
 
 -- | The parent (project, location, cluster id) where the node pool will be
 -- created. Specified in the format
@@ -5359,6 +5479,7 @@ newtype SetLabelsRequestResourceLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetLabelsRequestResourceLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5369,6 +5490,7 @@ setLabelsRequestResourceLabels
     -> SetLabelsRequestResourceLabels
 setLabelsRequestResourceLabels pSlrrlAddtional_ =
   SetLabelsRequestResourceLabels' {_slrrlAddtional = _Coerce # pSlrrlAddtional_}
+
 
 slrrlAddtional :: Lens' SetLabelsRequestResourceLabels (HashMap Text Text)
 slrrlAddtional

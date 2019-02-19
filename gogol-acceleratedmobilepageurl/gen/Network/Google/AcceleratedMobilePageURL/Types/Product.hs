@@ -31,6 +31,7 @@ data AmpURLError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AmpURLError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -48,6 +49,7 @@ ampURLError =
     , _aueErrorCode = Nothing
     , _aueErrorMessage = Nothing
     }
+
 
 -- | The original non-AMP URL.
 aueOriginalURL :: Lens' AmpURLError (Maybe Text)
@@ -92,6 +94,7 @@ data BatchGetAmpURLsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchGetAmpURLsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +106,7 @@ batchGetAmpURLsResponse
     :: BatchGetAmpURLsResponse
 batchGetAmpURLsResponse =
   BatchGetAmpURLsResponse' {_bgaurAmpURLs = Nothing, _bgaurURLErrors = Nothing}
+
 
 -- | For each URL in BatchAmpUrlsRequest, the URL response. The response
 -- might not be in the same order as URLs in the batch request. If
@@ -147,6 +151,7 @@ data BatchGetAmpURLsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchGetAmpURLsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -158,6 +163,7 @@ batchGetAmpURLsRequest
     :: BatchGetAmpURLsRequest
 batchGetAmpURLsRequest =
   BatchGetAmpURLsRequest' {_bgaurURLs = Nothing, _bgaurLookupStrategy = Nothing}
+
 
 -- | List of URLs to look up for the paired AMP URLs. The URLs are
 -- case-sensitive. Up to 50 URLs per lookup (see [Usage
@@ -200,6 +206,7 @@ data AmpURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AmpURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -214,6 +221,7 @@ ampURL
 ampURL =
   AmpURL'
     {_auOriginalURL = Nothing, _auAmpURL = Nothing, _auCdnAmpURL = Nothing}
+
 
 -- | The original non-AMP URL.
 auOriginalURL :: Lens' AmpURL (Maybe Text)

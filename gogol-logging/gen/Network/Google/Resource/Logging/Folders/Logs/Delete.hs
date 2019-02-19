@@ -74,6 +74,7 @@ data FoldersLogsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersLogsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ foldersLogsDelete pFldLogName_ =
     , _fldLogName = pFldLogName_
     , _fldCallback = Nothing
     }
+
 
 -- | V1 error format.
 fldXgafv :: Lens' FoldersLogsDelete (Maybe Xgafv)

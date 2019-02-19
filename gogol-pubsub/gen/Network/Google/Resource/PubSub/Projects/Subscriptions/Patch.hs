@@ -76,6 +76,7 @@ data ProjectsSubscriptionsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSubscriptionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsSubscriptionsPatch pPspPayload_ pPspName_ =
     , _pspName = pPspName_
     , _pspCallback = Nothing
     }
+
 
 -- | V1 error format.
 pspXgafv :: Lens' ProjectsSubscriptionsPatch (Maybe Xgafv)

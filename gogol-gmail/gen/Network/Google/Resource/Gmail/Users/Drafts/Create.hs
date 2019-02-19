@@ -71,6 +71,7 @@ data UsersDraftsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDraftsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ usersDraftsCreate
     -> UsersDraftsCreate
 usersDraftsCreate pUdcPayload_ =
   UsersDraftsCreate' {_udcPayload = pUdcPayload_, _udcUserId = "me"}
+
 
 -- | Multipart request metadata.
 udcPayload :: Lens' UsersDraftsCreate Draft

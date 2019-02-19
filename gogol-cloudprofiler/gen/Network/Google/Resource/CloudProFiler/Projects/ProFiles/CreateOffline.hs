@@ -78,6 +78,7 @@ data ProjectsProFilesCreateOffline =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsProFilesCreateOffline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsProFilesCreateOffline pPpfcoParent_ pPpfcoPayload_ =
     , _ppfcoPayload = pPpfcoPayload_
     , _ppfcoCallback = Nothing
     }
+
 
 -- | Parent project to create the profile in.
 ppfcoParent :: Lens' ProjectsProFilesCreateOffline Text

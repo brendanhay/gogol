@@ -77,6 +77,7 @@ data ProjectsAgentSessionsContextsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentSessionsContextsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsAgentSessionsContextsPatch pPascpPayload_ pPascpName_ =
     , _pascpName = pPascpName_
     , _pascpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pascpXgafv :: Lens' ProjectsAgentSessionsContextsPatch (Maybe Xgafv)

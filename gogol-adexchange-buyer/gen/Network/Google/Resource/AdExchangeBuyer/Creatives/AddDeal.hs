@@ -64,6 +64,7 @@ data CreativesAddDeal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativesAddDeal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ creativesAddDeal pCadBuyerCreativeId_ pCadDealId_ pCadAccountId_ =
     , _cadDealId = _Coerce # pCadDealId_
     , _cadAccountId = _Coerce # pCadAccountId_
     }
+
 
 -- | The buyer-specific id for this creative.
 cadBuyerCreativeId :: Lens' CreativesAddDeal Text

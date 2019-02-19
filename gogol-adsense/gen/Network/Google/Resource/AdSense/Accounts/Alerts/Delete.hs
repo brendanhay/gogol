@@ -63,6 +63,7 @@ data AccountsAlertsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsAlertsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ accountsAlertsDelete
 accountsAlertsDelete pAadAlertId_ pAadAccountId_ =
   AccountsAlertsDelete'
     {_aadAlertId = pAadAlertId_, _aadAccountId = pAadAccountId_}
+
 
 -- | Alert to delete.
 aadAlertId :: Lens' AccountsAlertsDelete Text

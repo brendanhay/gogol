@@ -87,6 +87,7 @@ data SpreadsheetsValuesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsValuesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +128,7 @@ spreadsheetsValuesGet pSvgSpreadsheetId_ pSvgRange_ =
     , _svgMajorDimension = Nothing
     , _svgCallback = Nothing
     }
+
 
 -- | V1 error format.
 svgXgafv :: Lens' SpreadsheetsValuesGet (Maybe Xgafv)

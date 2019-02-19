@@ -70,6 +70,7 @@ data ServiceAccountkeysInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccountkeysInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ serviceAccountkeysInsert
 serviceAccountkeysInsert pSaiEnterpriseId_ pSaiPayload_ =
   ServiceAccountkeysInsert'
     {_saiEnterpriseId = pSaiEnterpriseId_, _saiPayload = pSaiPayload_}
+
 
 -- | The ID of the enterprise.
 saiEnterpriseId :: Lens' ServiceAccountkeysInsert Text

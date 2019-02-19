@@ -85,6 +85,7 @@ data AppsServicesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsServicesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ appsServicesPatch pAspPayload_ pAspAppsId_ pAspServicesId_ =
     , _aspServicesId = pAspServicesId_
     , _aspCallback = Nothing
     }
+
 
 -- | V1 error format.
 aspXgafv :: Lens' AppsServicesPatch (Maybe Xgafv)

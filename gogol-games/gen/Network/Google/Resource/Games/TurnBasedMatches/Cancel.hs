@@ -58,6 +58,7 @@ newtype TurnBasedMatchesCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchesCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ turnBasedMatchesCancel
     -> TurnBasedMatchesCancel
 turnBasedMatchesCancel pTbmcMatchId_ =
   TurnBasedMatchesCancel' {_tbmcMatchId = pTbmcMatchId_}
+
 
 -- | The ID of the match.
 tbmcMatchId :: Lens' TurnBasedMatchesCancel Text

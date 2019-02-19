@@ -79,6 +79,7 @@ data AppsDomainMAppingsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsDomainMAppingsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ appsDomainMAppingsList pAdmalAppsId_ =
     , _admalPageSize = Nothing
     , _admalCallback = Nothing
     }
+
 
 -- | V1 error format.
 admalXgafv :: Lens' AppsDomainMAppingsList (Maybe Xgafv)

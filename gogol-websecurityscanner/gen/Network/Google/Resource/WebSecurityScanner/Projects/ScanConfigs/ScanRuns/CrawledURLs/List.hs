@@ -79,6 +79,7 @@ data ProjectsScanConfigsScanRunsCrawledURLsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsScanConfigsScanRunsCrawledURLsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsScanConfigsScanRunsCrawledURLsList pPscsrculParent_ =
     , _pscsrculPageSize = Nothing
     , _pscsrculCallback = Nothing
     }
+
 
 -- | Required. The parent resource name, which should be a scan run resource
 -- name in the format

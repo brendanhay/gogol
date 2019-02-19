@@ -85,6 +85,7 @@ data CoursesAliasesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesAliasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ coursesAliasesList pCalaCourseId_ =
     , _calaPageSize = Nothing
     , _calaCallback = Nothing
     }
+
 
 -- | V1 error format.
 calaXgafv :: Lens' CoursesAliasesList (Maybe Xgafv)

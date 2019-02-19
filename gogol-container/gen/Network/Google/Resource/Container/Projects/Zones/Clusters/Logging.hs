@@ -84,6 +84,7 @@ data ProjectsZonesClustersLogging =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersLogging' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsZonesClustersLogging pPzclZone_ pPzclPayload_ pPzclClusterId_ pPzclProje
     , _pzclProjectId = pPzclProjectId_
     , _pzclCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzclXgafv :: Lens' ProjectsZonesClustersLogging (Maybe Xgafv)

@@ -77,6 +77,7 @@ data ProjectsGetContent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGetContent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsGetContent pPgcScriptId_ =
     , _pgcScriptId = pPgcScriptId_
     , _pgcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgcXgafv :: Lens' ProjectsGetContent (Maybe Xgafv)

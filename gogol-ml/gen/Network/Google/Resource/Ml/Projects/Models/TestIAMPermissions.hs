@@ -86,6 +86,7 @@ data ProjectsModelsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsModelsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsModelsTestIAMPermissions pPmtipPayload_ pPmtipResource_ =
     , _pmtipResource = pPmtipResource_
     , _pmtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmtipXgafv :: Lens' ProjectsModelsTestIAMPermissions (Maybe Xgafv)

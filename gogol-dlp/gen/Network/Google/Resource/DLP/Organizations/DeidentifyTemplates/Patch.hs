@@ -79,6 +79,7 @@ data OrganizationsDeidentifyTemplatesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsDeidentifyTemplatesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ organizationsDeidentifyTemplatesPatch pOdtpPayload_ pOdtpName_ =
     , _odtpName = pOdtpName_
     , _odtpCallback = Nothing
     }
+
 
 -- | V1 error format.
 odtpXgafv :: Lens' OrganizationsDeidentifyTemplatesPatch (Maybe Xgafv)

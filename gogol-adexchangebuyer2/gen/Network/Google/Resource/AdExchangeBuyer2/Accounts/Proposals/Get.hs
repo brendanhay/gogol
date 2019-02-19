@@ -77,6 +77,7 @@ data AccountsProposalsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProposalsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ accountsProposalsGet pAProposalId_ pAAccountId_ =
     , _aAccountId = pAAccountId_
     , _aCallback = Nothing
     }
+
 
 -- | V1 error format.
 aXgafv :: Lens' AccountsProposalsGet (Maybe Xgafv)

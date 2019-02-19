@@ -61,6 +61,7 @@ data FilesGenerateIds =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilesGenerateIds' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ data FilesGenerateIds =
 filesGenerateIds
     :: FilesGenerateIds
 filesGenerateIds = FilesGenerateIds' {_fgiSpace = "drive", _fgiCount = 10}
+
 
 -- | The space in which the IDs can be used to create new files. Supported
 -- values are \'drive\' and \'appDataFolder\'.

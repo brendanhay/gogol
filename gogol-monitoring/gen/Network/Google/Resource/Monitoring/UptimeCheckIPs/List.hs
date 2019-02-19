@@ -75,6 +75,7 @@ data UptimeCheckIPsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UptimeCheckIPsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ uptimeCheckIPsList =
     , _ucilPageSize = Nothing
     , _ucilCallback = Nothing
     }
+
 
 -- | V1 error format.
 ucilXgafv :: Lens' UptimeCheckIPsList (Maybe Xgafv)

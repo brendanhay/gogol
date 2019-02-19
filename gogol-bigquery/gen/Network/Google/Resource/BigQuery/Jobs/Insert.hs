@@ -71,6 +71,7 @@ data JobsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ jobsInsert
     -> JobsInsert
 jobsInsert pJiPayload_ pJiProjectId_ =
   JobsInsert' {_jiPayload = pJiPayload_, _jiProjectId = pJiProjectId_}
+
 
 -- | Multipart request metadata.
 jiPayload :: Lens' JobsInsert Job

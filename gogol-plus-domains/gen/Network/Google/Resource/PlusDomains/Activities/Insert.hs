@@ -64,6 +64,7 @@ data ActivitiesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivitiesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ activitiesInsert
 activitiesInsert pAiPayload_ pAiUserId_ =
   ActivitiesInsert'
     {_aiPayload = pAiPayload_, _aiUserId = pAiUserId_, _aiPreview = Nothing}
+
 
 -- | Multipart request metadata.
 aiPayload :: Lens' ActivitiesInsert Activity

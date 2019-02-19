@@ -67,6 +67,7 @@ data DefaultObjectAccessControlsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DefaultObjectAccessControlsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ defaultObjectAccessControlsGet pDoacgBucket_ pDoacgEntity_ =
     , _doacgUserProject = Nothing
     , _doacgEntity = pDoacgEntity_
     }
+
 
 -- | Name of a bucket.
 doacgBucket :: Lens' DefaultObjectAccessControlsGet Text

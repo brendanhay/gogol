@@ -85,6 +85,7 @@ data RegionInstanceGroupManagersListManagedInstances =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagersListManagedInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ regionInstanceGroupManagersListManagedInstances pRigmlmiProject_ pRigmlmiInstanc
     , _rigmlmiPageToken = Nothing
     , _rigmlmiMaxResults = 500
     }
+
 
 -- | Project ID for this request.
 rigmlmiProject :: Lens' RegionInstanceGroupManagersListManagedInstances Text

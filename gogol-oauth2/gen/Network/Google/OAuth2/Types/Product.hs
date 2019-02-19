@@ -36,6 +36,7 @@ data TokenInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TokenInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ tokenInfo =
     , _tiTokenHandle = Nothing
     , _tiIssuedTo = Nothing
     }
+
 
 -- | Who is the intended audience for this token. In general the same as
 -- issued_to.
@@ -156,6 +158,7 @@ newtype JWK =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JWK' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -164,6 +167,7 @@ newtype JWK =
 jwk
     :: JWK
 jwk = JWK' {_jKeys = Nothing}
+
 
 jKeys :: Lens' JWK [JWKKeysItem]
 jKeys
@@ -192,6 +196,7 @@ data JWKKeysItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JWKKeysItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -218,6 +223,7 @@ jwkKeysItem =
     , _jkiE = Nothing
     , _jkiKty = "RSA"
     }
+
 
 jkiAlg :: Lens' JWKKeysItem Text
 jkiAlg = lens _jkiAlg (\ s a -> s{_jkiAlg = a})
@@ -274,6 +280,7 @@ data UserInfoplus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserInfoplus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -315,6 +322,7 @@ userInfoplus =
     , _uiVerifiedEmail = True
     , _uiId = Nothing
     }
+
 
 -- | The hosted domain e.g. example.com if the user is Google apps user.
 uiHd :: Lens' UserInfoplus (Maybe Text)

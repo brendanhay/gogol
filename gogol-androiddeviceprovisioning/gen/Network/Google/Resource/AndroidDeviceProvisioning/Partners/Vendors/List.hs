@@ -78,6 +78,7 @@ data PartnersVendorsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersVendorsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ partnersVendorsList pPvlParent_ =
     , _pvlPageSize = Nothing
     , _pvlCallback = Nothing
     }
+
 
 -- | Required. The resource name in the format \`partners\/[PARTNER_ID]\`.
 pvlParent :: Lens' PartnersVendorsList Text

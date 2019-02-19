@@ -64,6 +64,7 @@ data EditsDetailsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsDetailsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ editsDetailsGet
 editsDetailsGet pEdgPackageName_ pEdgEditId_ =
   EditsDetailsGet'
     {_edgPackageName = pEdgPackageName_, _edgEditId = pEdgEditId_}
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

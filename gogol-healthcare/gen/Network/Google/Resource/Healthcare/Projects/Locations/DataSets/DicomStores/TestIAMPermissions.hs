@@ -85,6 +85,7 @@ data ProjectsLocationsDataSetsDicomStoresTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsDicomStoresTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsLocationsDataSetsDicomStoresTestIAMPermissions pPldsdstipPayload_ pPldsd
     , _pldsdstipResource = pPldsdstipResource_
     , _pldsdstipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldsdstipXgafv :: Lens' ProjectsLocationsDataSetsDicomStoresTestIAMPermissions (Maybe Xgafv)

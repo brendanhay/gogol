@@ -67,6 +67,7 @@ data ChannelsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ channelsUpdate pChaPart_ pChaPayload_ =
     , _chaPayload = pChaPayload_
     , _chaOnBehalfOfContentOwner = Nothing
     }
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

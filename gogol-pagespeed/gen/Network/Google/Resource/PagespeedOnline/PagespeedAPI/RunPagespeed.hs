@@ -81,6 +81,7 @@ data PagespeedAPIRunPagespeed =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagespeedAPIRunPagespeed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ pagespeedAPIRunPagespeed pParpURL_ =
     , _parpStrategy = Nothing
     , _parpUtmSource = Nothing
     }
+
 
 -- | Campaign name for analytics.
 parpUtmCampaign :: Lens' PagespeedAPIRunPagespeed (Maybe Text)

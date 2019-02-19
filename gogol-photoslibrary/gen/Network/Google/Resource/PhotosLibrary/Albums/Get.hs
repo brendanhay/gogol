@@ -77,6 +77,7 @@ data AlbumsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlbumsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ albumsGet pAgAlbumId_ =
     , _agBearerToken = Nothing
     , _agCallback = Nothing
     }
+
 
 -- | V1 error format.
 agXgafv :: Lens' AlbumsGet (Maybe Xgafv)

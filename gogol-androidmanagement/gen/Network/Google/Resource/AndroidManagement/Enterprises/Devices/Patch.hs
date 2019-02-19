@@ -76,6 +76,7 @@ data EnterprisesDevicesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesDevicesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ enterprisesDevicesPatch pEdpPayload_ pEdpName_ =
     , _edpName = pEdpName_
     , _edpCallback = Nothing
     }
+
 
 -- | V1 error format.
 edpXgafv :: Lens' EnterprisesDevicesPatch (Maybe Xgafv)

@@ -66,6 +66,7 @@ data CreativeFieldValuesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldValuesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ creativeFieldValuesGet pCfvgCreativeFieldId_ pCfvgProFileId_ pCfvgId_ =
     , _cfvgProFileId = _Coerce # pCfvgProFileId_
     , _cfvgId = _Coerce # pCfvgId_
     }
+
 
 -- | Creative field ID for this creative field value.
 cfvgCreativeFieldId :: Lens' CreativeFieldValuesGet Int64

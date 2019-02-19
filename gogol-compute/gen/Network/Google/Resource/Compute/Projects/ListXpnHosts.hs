@@ -76,6 +76,7 @@ data ProjectsListXpnHosts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsListXpnHosts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ projectsListXpnHosts pPlxhProject_ pPlxhPayload_ =
     , _plxhPageToken = Nothing
     , _plxhMaxResults = 500
     }
+
 
 -- | Project ID for this request.
 plxhProject :: Lens' ProjectsListXpnHosts Text

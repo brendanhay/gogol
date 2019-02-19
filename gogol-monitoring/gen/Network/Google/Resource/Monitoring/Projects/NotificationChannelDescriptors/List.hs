@@ -84,6 +84,7 @@ data ProjectsNotificationChannelDescriptorsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotificationChannelDescriptorsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsNotificationChannelDescriptorsList pPncdlName_ =
     , _pncdlPageSize = Nothing
     , _pncdlCallback = Nothing
     }
+
 
 -- | V1 error format.
 pncdlXgafv :: Lens' ProjectsNotificationChannelDescriptorsList (Maybe Xgafv)

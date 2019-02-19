@@ -79,6 +79,7 @@ data AccountsClientsUsersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsClientsUsersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ accountsClientsUsersGet pAcugUserId_ pAcugAccountId_ pAcugClientAccountId_ =
     , _acugClientAccountId = _Coerce # pAcugClientAccountId_
     , _acugCallback = Nothing
     }
+
 
 -- | V1 error format.
 acugXgafv :: Lens' AccountsClientsUsersGet (Maybe Xgafv)

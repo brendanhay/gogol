@@ -75,6 +75,7 @@ data ProjectsDatabasesOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ projectsDatabasesOperationsGet pPdogName_ =
     , _pdogName = pPdogName_
     , _pdogCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdogXgafv :: Lens' ProjectsDatabasesOperationsGet (Maybe Xgafv)

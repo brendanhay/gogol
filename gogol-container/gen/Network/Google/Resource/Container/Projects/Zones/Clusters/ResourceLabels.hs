@@ -84,6 +84,7 @@ data ProjectsZonesClustersResourceLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersResourceLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsZonesClustersResourceLabels pPzcrlZone_ pPzcrlPayload_ pPzcrlClusterId_ 
     , _pzcrlProjectId = pPzcrlProjectId_
     , _pzcrlCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcrlXgafv :: Lens' ProjectsZonesClustersResourceLabels (Maybe Xgafv)

@@ -95,6 +95,7 @@ data ActivitiesWatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivitiesWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -142,6 +143,7 @@ activitiesWatch pAwPayload_ pAwApplicationName_ pAwUserKey_ =
     , _awMaxResults = Nothing
     , _awOrgUnitId = ""
     }
+
 
 -- | Return events which occurred at or after this time.
 awStartTime :: Lens' ActivitiesWatch (Maybe Text)

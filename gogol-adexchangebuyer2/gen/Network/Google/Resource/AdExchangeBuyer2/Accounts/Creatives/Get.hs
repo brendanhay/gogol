@@ -75,6 +75,7 @@ data AccountsCreativesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCreativesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ accountsCreativesGet pAcgCreativeId_ pAcgAccountId_ =
     , _acgAccountId = pAcgAccountId_
     , _acgCallback = Nothing
     }
+
 
 -- | V1 error format.
 acgXgafv :: Lens' AccountsCreativesGet (Maybe Xgafv)

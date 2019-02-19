@@ -74,6 +74,7 @@ data GroupItemsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupItemsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ groupItemsInsert pGiiPayload_ =
     , _giiOnBehalfOfContentOwner = Nothing
     , _giiCallback = Nothing
     }
+
 
 -- | V1 error format.
 giiXgafv :: Lens' GroupItemsInsert (Maybe Xgafv)

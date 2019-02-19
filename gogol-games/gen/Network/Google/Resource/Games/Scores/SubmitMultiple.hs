@@ -62,6 +62,7 @@ data ScoresSubmitMultiple =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScoresSubmitMultiple' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ scoresSubmitMultiple
     -> ScoresSubmitMultiple
 scoresSubmitMultiple pSsmPayload_ =
   ScoresSubmitMultiple' {_ssmPayload = pSsmPayload_, _ssmLanguage = Nothing}
+
 
 -- | Multipart request metadata.
 ssmPayload :: Lens' ScoresSubmitMultiple PlayerScoreSubmissionList

@@ -33,6 +33,7 @@ data URL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -59,6 +60,7 @@ url =
     , _uLongURL = Nothing
     , _uId = Nothing
     }
+
 
 -- | Status of the target URL. Possible values: \"OK\", \"MALWARE\",
 -- \"PHISHING\", or \"REMOVED\". A URL might be marked \"REMOVED\" if it
@@ -121,6 +123,7 @@ data StringCount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StringCount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -131,6 +134,7 @@ data StringCount =
 stringCount
     :: StringCount
 stringCount = StringCount' {_scCount = Nothing, _scId = Nothing}
+
 
 -- | Number of clicks for this top entry, e.g. for this particular country or
 -- browser.
@@ -168,6 +172,7 @@ data AnalyticsSnapshot =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyticsSnapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -194,6 +199,7 @@ analyticsSnapshot =
     , _asLongURLClicks = Nothing
     , _asBrowsers = Nothing
     }
+
 
 -- | Top platforms or OSes, e.g. \"Windows\"; sorted by (descending) click
 -- counts. Only present if this data is available.
@@ -277,6 +283,7 @@ data AnalyticsSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyticsSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -300,6 +307,7 @@ analyticsSummary =
     , _asTwoHours = Nothing
     , _asMonth = Nothing
     }
+
 
 -- | Click analytics over the last week.
 asWeek :: Lens' AnalyticsSummary (Maybe AnalyticsSnapshot)
@@ -354,6 +362,7 @@ data URLHistory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLHistory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -377,6 +386,7 @@ urlHistory =
     , _uhKind = "urlshortener#urlHistory"
     , _uhItems = Nothing
     }
+
 
 -- | Total number of short URLs associated with this user (may be
 -- approximate).

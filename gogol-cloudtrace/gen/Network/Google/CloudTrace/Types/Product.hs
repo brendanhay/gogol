@@ -46,6 +46,7 @@ data Span =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Span' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ span =
     , _sLinks = Nothing
     , _sSpanId = Nothing
     }
+
 
 -- | An optional final status for this span.
 sStatus :: Lens' Span (Maybe Status)
@@ -229,6 +231,7 @@ data TruncatableString =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TruncatableString' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -240,6 +243,7 @@ truncatableString
     :: TruncatableString
 truncatableString =
   TruncatableString' {_tsValue = Nothing, _tsTruncatedByteCount = Nothing}
+
 
 -- | The shortened string. For example, if the original string is 500 bytes
 -- long and the limit of the string is 128 bytes, then \`value\` contains
@@ -317,6 +321,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -329,6 +334,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -379,6 +385,7 @@ newtype AttributesAttributeMap =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AttributesAttributeMap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -389,6 +396,7 @@ attributesAttributeMap
     -> AttributesAttributeMap
 attributesAttributeMap pAamAddtional_ =
   AttributesAttributeMap' {_aamAddtional = _Coerce # pAamAddtional_}
+
 
 aamAddtional :: Lens' AttributesAttributeMap (HashMap Text AttributeValue)
 aamAddtional
@@ -414,6 +422,7 @@ data Annotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Annotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -424,6 +433,7 @@ data Annotation =
 annotation
     :: Annotation
 annotation = Annotation' {_aAttributes = Nothing, _aDescription = Nothing}
+
 
 -- | A set of attributes on the annotation. You can have up to 4 attributes
 -- per Annotation.
@@ -462,6 +472,7 @@ data AttributeValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AttributeValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -476,6 +487,7 @@ attributeValue
 attributeValue =
   AttributeValue'
     {_avBoolValue = Nothing, _avIntValue = Nothing, _avStringValue = Nothing}
+
 
 -- | A Boolean value represented by \`true\` or \`false\`.
 avBoolValue :: Lens' AttributeValue (Maybe Bool)
@@ -522,6 +534,7 @@ data MessageEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MessageEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -542,6 +555,7 @@ messageEvent =
     , _meType = Nothing
     , _meCompressedSizeBytes = Nothing
     }
+
 
 -- | An identifier for the MessageEvent\'s message that can be used to match
 -- SENT and RECEIVED MessageEvents. It is recommended to be unique within a
@@ -602,11 +616,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -629,6 +645,7 @@ data Link =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Link' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -649,6 +666,7 @@ link =
     , _lType = Nothing
     , _lSpanId = Nothing
     }
+
 
 -- | The [TRACE_ID] for a trace within a project.
 lTraceId :: Lens' Link (Maybe Text)
@@ -693,6 +711,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -703,6 +722,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -728,6 +748,7 @@ data StackTrace =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StackTrace' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -739,6 +760,7 @@ stackTrace
     :: StackTrace
 stackTrace =
   StackTrace' {_stStackTraceHashId = Nothing, _stStackFrames = Nothing}
+
 
 -- | The hash ID is used to conserve network bandwidth for duplicate stack
 -- traces within a single trace. Often multiple spans will have identical
@@ -781,6 +803,7 @@ newtype BatchWriteSpansRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchWriteSpansRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -789,6 +812,7 @@ newtype BatchWriteSpansRequest =
 batchWriteSpansRequest
     :: BatchWriteSpansRequest
 batchWriteSpansRequest = BatchWriteSpansRequest' {_bwsrSpans = Nothing}
+
 
 -- | A list of new spans. The span names must not match existing spans, or
 -- the results are undefined.
@@ -819,6 +843,7 @@ data Attributes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Attributes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -830,6 +855,7 @@ attributes
     :: Attributes
 attributes =
   Attributes' {_aDroppedAttributesCount = Nothing, _aAttributeMap = Nothing}
+
 
 -- | The number of attributes that were discarded. Attributes can be
 -- discarded because their keys are too long or because there are too many
@@ -876,6 +902,7 @@ data Module =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Module' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -886,6 +913,7 @@ data Module =
 module'
     :: Module
 module' = Module' {_mBuildId = Nothing, _mModule = Nothing}
+
 
 -- | A unique identifier for the module, usually a hash of its contents (up
 -- to 128 bytes).
@@ -923,6 +951,7 @@ data TimeEvents =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeEvents' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -940,6 +969,7 @@ timeEvents =
     , _teDroppedAnnotationsCount = Nothing
     , _teTimeEvent = Nothing
     }
+
 
 -- | The number of dropped message events in all the included time events. If
 -- the value is 0, then no message events were dropped.
@@ -993,6 +1023,7 @@ data StackFrames =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StackFrames' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1003,6 +1034,7 @@ data StackFrames =
 stackFrames
     :: StackFrames
 stackFrames = StackFrames' {_sfDroppedFramesCount = Nothing, _sfFrame = Nothing}
+
 
 -- | The number of stack frames that were dropped because there were too many
 -- stack frames. If this value is 0, then no stack frames were dropped.
@@ -1048,6 +1080,7 @@ data StackFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StackFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1077,6 +1110,7 @@ stackFrame =
     , _sfColumnNumber = Nothing
     , _sfFileName = Nothing
     }
+
 
 -- | The binary module from where the code was loaded.
 sfLoadModule :: Lens' StackFrame (Maybe Module)
@@ -1161,6 +1195,7 @@ data Links =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Links' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1171,6 +1206,7 @@ data Links =
 links
     :: Links
 links = Links' {_lDroppedLinksCount = Nothing, _lLink = Nothing}
+
 
 -- | The number of dropped links after the maximum size was enforced. If this
 -- value is 0, then no links were dropped.
@@ -1212,6 +1248,7 @@ data TimeEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1226,6 +1263,7 @@ timeEvent
 timeEvent =
   TimeEvent'
     {_teMessageEvent = Nothing, _teAnnotation = Nothing, _teTime = Nothing}
+
 
 -- | An event describing a message sent\/received between Spans.
 teMessageEvent :: Lens' TimeEvent (Maybe MessageEvent)

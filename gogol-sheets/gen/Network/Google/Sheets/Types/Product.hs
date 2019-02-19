@@ -31,6 +31,7 @@ data PivotGroupSortValueBucket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PivotGroupSortValueBucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43,6 +44,7 @@ pivotGroupSortValueBucket
 pivotGroupSortValueBucket =
   PivotGroupSortValueBucket'
     {_pgsvbBuckets = Nothing, _pgsvbValuesIndex = Nothing}
+
 
 -- | Determines the bucket from which values are chosen to sort. For example,
 -- in a pivot table with one row group & two column groups, the row group
@@ -92,6 +94,7 @@ data ValueRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ValueRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +109,7 @@ valueRange
 valueRange =
   ValueRange'
     {_vrValues = Nothing, _vrRange = Nothing, _vrMajorDimension = Nothing}
+
 
 -- | The data that was read or to be written. This is an array of arrays, the
 -- outer array representing all the data and each inner array representing
@@ -168,6 +172,7 @@ data SortRangeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SortRangeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -179,6 +184,7 @@ sortRangeRequest
     :: SortRangeRequest
 sortRangeRequest =
   SortRangeRequest' {_srrSortSpecs = Nothing, _srrRange = Nothing}
+
 
 -- | The sort order per column. Later specifications are used when values are
 -- equal in the earlier specifications.
@@ -215,6 +221,7 @@ newtype DeleteNamedRangeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteNamedRangeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -223,6 +230,7 @@ newtype DeleteNamedRangeRequest =
 deleteNamedRangeRequest
     :: DeleteNamedRangeRequest
 deleteNamedRangeRequest = DeleteNamedRangeRequest' {_dnrrNamedRangeId = Nothing}
+
 
 -- | The ID of the named range to delete.
 dnrrNamedRangeId :: Lens' DeleteNamedRangeRequest (Maybe Text)
@@ -252,6 +260,7 @@ data UpdateNamedRangeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateNamedRangeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -263,6 +272,7 @@ updateNamedRangeRequest
     :: UpdateNamedRangeRequest
 updateNamedRangeRequest =
   UpdateNamedRangeRequest' {_unrrNamedRange = Nothing, _unrrFields = Nothing}
+
 
 -- | The named range to update with the new properties.
 unrrNamedRange :: Lens' UpdateNamedRangeRequest (Maybe NamedRange)
@@ -300,6 +310,7 @@ newtype ChartData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChartData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -308,6 +319,7 @@ newtype ChartData =
 chartData
     :: ChartData
 chartData = ChartData' {_cdSourceRange = Nothing}
+
 
 -- | The source ranges of the data.
 cdSourceRange :: Lens' ChartData (Maybe ChartSourceRange)
@@ -334,6 +346,7 @@ newtype BatchClearValuesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchClearValuesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -342,6 +355,7 @@ newtype BatchClearValuesRequest =
 batchClearValuesRequest
     :: BatchClearValuesRequest
 batchClearValuesRequest = BatchClearValuesRequest' {_bcvrRanges = Nothing}
+
 
 -- | The ranges to clear, in A1 notation.
 bcvrRanges :: Lens' BatchClearValuesRequest [Text]
@@ -370,6 +384,7 @@ newtype CreateDeveloperMetadataResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateDeveloperMetadataResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -379,6 +394,7 @@ createDeveloperMetadataResponse
     :: CreateDeveloperMetadataResponse
 createDeveloperMetadataResponse =
   CreateDeveloperMetadataResponse' {_cdmrDeveloperMetadata = Nothing}
+
 
 -- | The developer metadata that was created.
 cdmrDeveloperMetadata :: Lens' CreateDeveloperMetadataResponse (Maybe DeveloperMetadata)
@@ -420,6 +436,7 @@ newtype DateTimeRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DateTimeRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -428,6 +445,7 @@ newtype DateTimeRule =
 dateTimeRule
     :: DateTimeRule
 dateTimeRule = DateTimeRule' {_dtrType = Nothing}
+
 
 -- | The type of date-time grouping to apply.
 dtrType :: Lens' DateTimeRule (Maybe DateTimeRuleType)
@@ -456,6 +474,7 @@ data SpreadsheetProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -482,6 +501,7 @@ spreadsheetProperties =
     , _spTitle = Nothing
     , _spTimeZone = Nothing
     }
+
 
 -- | The default format of all cells in the spreadsheet.
 -- CellData.effectiveFormat will not be set if the cell\'s format is equal
@@ -558,6 +578,7 @@ data BOrders =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BOrders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -578,6 +599,7 @@ bOrders =
     , _boRight = Nothing
     , _boTop = Nothing
     }
+
 
 -- | The bottom border of the cell.
 boBottom :: Lens' BOrders (Maybe BOrder)
@@ -622,6 +644,7 @@ newtype BatchClearValuesByDataFilterRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchClearValuesByDataFilterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -631,6 +654,7 @@ batchClearValuesByDataFilterRequest
     :: BatchClearValuesByDataFilterRequest
 batchClearValuesByDataFilterRequest =
   BatchClearValuesByDataFilterRequest' {_bcvbdfrDataFilters = Nothing}
+
 
 -- | The DataFilters used to determine which ranges to clear.
 bcvbdfrDataFilters :: Lens' BatchClearValuesByDataFilterRequest [DataFilter]
@@ -666,6 +690,7 @@ data TextFormatRun =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextFormatRun' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -676,6 +701,7 @@ data TextFormatRun =
 textFormatRun
     :: TextFormatRun
 textFormatRun = TextFormatRun' {_tfrFormat = Nothing, _tfrStartIndex = Nothing}
+
 
 -- | The format of this run. Absent values inherit the cell\'s format.
 tfrFormat :: Lens' TextFormatRun (Maybe TextFormat)
@@ -716,6 +742,7 @@ newtype DeleteDimensionGroupRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteDimensionGroupRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -725,6 +752,7 @@ deleteDimensionGroupRequest
     :: DeleteDimensionGroupRequest
 deleteDimensionGroupRequest =
   DeleteDimensionGroupRequest' {_ddgrRange = Nothing}
+
 
 -- | The range of the group to be deleted.
 ddgrRange :: Lens' DeleteDimensionGroupRequest (Maybe DimensionRange)
@@ -751,6 +779,7 @@ data UpdateDimensionGroupRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateDimensionGroupRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -763,6 +792,7 @@ updateDimensionGroupRequest
 updateDimensionGroupRequest =
   UpdateDimensionGroupRequest'
     {_udgrDimensionGroup = Nothing, _udgrFields = Nothing}
+
 
 -- | The group whose state should be updated. The range and depth of the
 -- group should specify a valid group on the sheet, and all other fields
@@ -805,6 +835,7 @@ newtype AddSheetRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddSheetRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -813,6 +844,7 @@ newtype AddSheetRequest =
 addSheetRequest
     :: AddSheetRequest
 addSheetRequest = AddSheetRequest' {_asrProperties = Nothing}
+
 
 -- | The properties the new sheet should have. All properties are optional.
 -- The sheetId field is optional; if one is not set, an id will be randomly
@@ -843,6 +875,7 @@ data SortSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SortSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -853,6 +886,7 @@ data SortSpec =
 sortSpec
     :: SortSpec
 sortSpec = SortSpec' {_ssSortOrder = Nothing, _ssDimensionIndex = Nothing}
+
 
 -- | The order data should be sorted.
 ssSortOrder :: Lens' SortSpec (Maybe SortSpecSortOrder)
@@ -893,6 +927,7 @@ data DimensionGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DimensionGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -907,6 +942,7 @@ dimensionGroup
 dimensionGroup =
   DimensionGroup'
     {_dgCollapsed = Nothing, _dgRange = Nothing, _dgDepth = Nothing}
+
 
 -- | This field is true if this group is collapsed. A collapsed group remains
 -- collapsed if an overlapping group at a shallower depth is expanded. A
@@ -958,6 +994,7 @@ data CopyPasteRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CopyPasteRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -978,6 +1015,7 @@ copyPasteRequest =
     , _cprPasteOrientation = Nothing
     , _cprPasteType = Nothing
     }
+
 
 -- | The location to paste to. If the range covers a span that\'s a multiple
 -- of the source\'s height or width, then the data will be repeated to fill
@@ -1049,6 +1087,7 @@ data GridRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GridRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1072,6 +1111,7 @@ gridRange =
     , _grStartRowIndex = Nothing
     , _grSheetId = Nothing
     }
+
 
 -- | The end column (exclusive) of the range, or not set if unbounded.
 grEndColumnIndex :: Lens' GridRange (Maybe Int32)
@@ -1137,6 +1177,7 @@ newtype AddFilterViewResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddFilterViewResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1145,6 +1186,7 @@ newtype AddFilterViewResponse =
 addFilterViewResponse
     :: AddFilterViewResponse
 addFilterViewResponse = AddFilterViewResponse' {_afvrFilter = Nothing}
+
 
 -- | The newly added filter view.
 afvrFilter :: Lens' AddFilterViewResponse (Maybe FilterView)
@@ -1172,6 +1214,7 @@ data BooleanCondition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BooleanCondition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1182,6 +1225,7 @@ data BooleanCondition =
 booleanCondition
     :: BooleanCondition
 booleanCondition = BooleanCondition' {_bcValues = Nothing, _bcType = Nothing}
+
 
 -- | The values of the condition. The number of supported values depends on
 -- the condition type. Some support zero values, others one or two values,
@@ -1220,6 +1264,7 @@ newtype AutoResizeDimensionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoResizeDimensionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1229,6 +1274,7 @@ autoResizeDimensionsRequest
     :: AutoResizeDimensionsRequest
 autoResizeDimensionsRequest =
   AutoResizeDimensionsRequest' {_ardrDimensions = Nothing}
+
 
 -- | The dimensions to automatically resize.
 ardrDimensions :: Lens' AutoResizeDimensionsRequest (Maybe DimensionRange)
@@ -1266,6 +1312,7 @@ data BubbleChartSpec =
     , _bcsBubbleSizes         :: !(Maybe ChartData)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BubbleChartSpec' with the minimum fields required to make a request.
 --
@@ -1308,6 +1355,7 @@ bubbleChartSpec =
     , _bcsBubbleOpacity = Nothing
     , _bcsBubbleSizes = Nothing
     }
+
 
 -- | The format of the text inside the bubbles. Underline and Strikethrough
 -- are not supported.
@@ -1431,6 +1479,7 @@ data DeleteRangeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteRangeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1442,6 +1491,7 @@ deleteRangeRequest
     :: DeleteRangeRequest
 deleteRangeRequest =
   DeleteRangeRequest' {_drrShiftDimension = Nothing, _drrRange = Nothing}
+
 
 -- | The dimension from which deleted cells will be replaced with. If ROWS,
 -- existing cells will be shifted upward to replace the deleted cells. If
@@ -1490,6 +1540,7 @@ data Sheet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Sheet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1534,6 +1585,7 @@ sheet =
     , _sFilterViews = Nothing
     , _sProperties = Nothing
     }
+
 
 -- | All column groups on this sheet, ordered by increasing range start
 -- index, then by group depth.
@@ -1671,6 +1723,7 @@ data GridCoordinate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GridCoordinate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1685,6 +1738,7 @@ gridCoordinate
 gridCoordinate =
   GridCoordinate'
     {_gcColumnIndex = Nothing, _gcRowIndex = Nothing, _gcSheetId = Nothing}
+
 
 -- | The column index of the coordinate.
 gcColumnIndex :: Lens' GridCoordinate (Maybe Int32)
@@ -1731,6 +1785,7 @@ data ClearValuesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClearValuesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1742,6 +1797,7 @@ clearValuesResponse
     :: ClearValuesResponse
 clearValuesResponse =
   ClearValuesResponse' {_cvrClearedRange = Nothing, _cvrSpreadsheetId = Nothing}
+
 
 -- | The range (in A1 notation) that was cleared. (If the request was for an
 -- unbounded range or a ranger larger than the bounds of the sheet, this
@@ -1781,6 +1837,7 @@ newtype ClearBasicFilterRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClearBasicFilterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1789,6 +1846,7 @@ newtype ClearBasicFilterRequest =
 clearBasicFilterRequest
     :: ClearBasicFilterRequest
 clearBasicFilterRequest = ClearBasicFilterRequest' {_cbfrSheetId = Nothing}
+
 
 -- | The sheet ID on which the basic filter should be cleared.
 cbfrSheetId :: Lens' ClearBasicFilterRequest (Maybe Int32)
@@ -1819,6 +1877,7 @@ data UpdateEmbeddedObjectPositionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateEmbeddedObjectPositionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1836,6 +1895,7 @@ updateEmbeddedObjectPositionRequest =
     , _ueoprObjectId = Nothing
     , _ueoprFields = Nothing
     }
+
 
 -- | An explicit position to move the embedded object to. If
 -- newPosition.sheetId is set, a new sheet with that ID will be created. If
@@ -1890,6 +1950,7 @@ data BooleanRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BooleanRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1900,6 +1961,7 @@ data BooleanRule =
 booleanRule
     :: BooleanRule
 booleanRule = BooleanRule' {_brFormat = Nothing, _brCondition = Nothing}
+
 
 -- | The format to apply. Conditional formatting can only apply a subset of
 -- formatting: bold, italic, strikethrough, foreground color & background
@@ -1938,6 +2000,7 @@ data BatchGetValuesByDataFilterResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchGetValuesByDataFilterResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1950,6 +2013,7 @@ batchGetValuesByDataFilterResponse
 batchGetValuesByDataFilterResponse =
   BatchGetValuesByDataFilterResponse'
     {_bgvbdfrSpreadsheetId = Nothing, _bgvbdfrValueRanges = Nothing}
+
 
 -- | The ID of the spreadsheet the data was retrieved from.
 bgvbdfrSpreadsheetId :: Lens' BatchGetValuesByDataFilterResponse (Maybe Text)
@@ -1993,6 +2057,7 @@ data SourceAndDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceAndDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2007,6 +2072,7 @@ sourceAndDestination
 sourceAndDestination =
   SourceAndDestination'
     {_sadDimension = Nothing, _sadSource = Nothing, _sadFillLength = Nothing}
+
 
 -- | The dimension that data should be filled into.
 sadDimension :: Lens' SourceAndDestination (Maybe SourceAndDestinationDimension)
@@ -2057,6 +2123,7 @@ data PasteDataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PasteDataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2080,6 +2147,7 @@ pasteDataRequest =
     , _pdrType = Nothing
     , _pdrDelimiter = Nothing
     }
+
 
 -- | The data to insert.
 pdrData :: Lens' PasteDataRequest (Maybe Text)
@@ -2135,6 +2203,7 @@ data AppendCellsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppendCellsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2149,6 +2218,7 @@ appendCellsRequest
 appendCellsRequest =
   AppendCellsRequest'
     {_acrRows = Nothing, _acrSheetId = Nothing, _acrFields = Nothing}
+
 
 -- | The data to append.
 acrRows :: Lens' AppendCellsRequest [RowData]
@@ -2199,6 +2269,7 @@ data FindReplaceResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FindReplaceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2222,6 +2293,7 @@ findReplaceResponse =
     , _frrSheetsChanged = Nothing
     , _frrOccurrencesChanged = Nothing
     }
+
 
 -- | The number of non-formula cells changed.
 frrValuesChanged :: Lens' FindReplaceResponse (Maybe Int32)
@@ -2291,6 +2363,7 @@ newtype AddDimensionGroupResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddDimensionGroupResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2300,6 +2373,7 @@ addDimensionGroupResponse
     :: AddDimensionGroupResponse
 addDimensionGroupResponse =
   AddDimensionGroupResponse' {_adgrDimensionGroups = Nothing}
+
 
 -- | All groups of a dimension after adding a group to that dimension.
 adgrDimensionGroups :: Lens' AddDimensionGroupResponse [DimensionGroup]
@@ -2335,6 +2409,7 @@ data PieChartSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PieChartSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2358,6 +2433,7 @@ pieChartSpec =
     , _pcsSeries = Nothing
     , _pcsThreeDimensional = Nothing
     }
+
 
 -- | The size of the hole in the pie chart.
 pcsPieHole :: Lens' PieChartSpec (Maybe Double)
@@ -2421,6 +2497,7 @@ data BatchUpdateValuesByDataFilterResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchUpdateValuesByDataFilterResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2447,6 +2524,7 @@ batchUpdateValuesByDataFilterResponse =
     , _buvbdfrTotalUpdatedCells = Nothing
     , _buvbdfrTotalUpdatedRows = Nothing
     }
+
 
 -- | The total number of columns where at least one cell in the column was
 -- updated.
@@ -2533,6 +2611,7 @@ data AppendValuesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppendValuesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2550,6 +2629,7 @@ appendValuesResponse =
     , _avrUpdates = Nothing
     , _avrTableRange = Nothing
     }
+
 
 -- | The spreadsheet the updates were applied to.
 avrSpreadsheetId :: Lens' AppendValuesResponse (Maybe Text)
@@ -2597,6 +2677,7 @@ data DataValidationRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataValidationRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2617,6 +2698,7 @@ dataValidationRule =
     , _dvrStrict = Nothing
     , _dvrCondition = Nothing
     }
+
 
 -- | True if the UI should be customized based on the kind of condition. If
 -- true, \"List\" conditions will show a dropdown.
@@ -2673,6 +2755,7 @@ data FilterView =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterView' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2699,6 +2782,7 @@ filterView =
     , _fvTitle = Nothing
     , _fvCriteria = Nothing
     }
+
 
 -- | The sort order per column. Later specifications are used when values are
 -- equal in the earlier specifications.
@@ -2816,6 +2900,7 @@ data Color =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Color' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2832,6 +2917,7 @@ color
 color =
   Color'
     {_cRed = Nothing, _cAlpha = Nothing, _cGreen = Nothing, _cBlue = Nothing}
+
 
 -- | The amount of red in the color as a value in the interval [0, 1].
 cRed :: Lens' Color (Maybe Double)
@@ -2889,6 +2975,7 @@ newtype DeleteFilterViewRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteFilterViewRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2897,6 +2984,7 @@ newtype DeleteFilterViewRequest =
 deleteFilterViewRequest
     :: DeleteFilterViewRequest
 deleteFilterViewRequest = DeleteFilterViewRequest' {_dfvrFilterId = Nothing}
+
 
 -- | The ID of the filter to delete.
 dfvrFilterId :: Lens' DeleteFilterViewRequest (Maybe Int32)
@@ -2925,6 +3013,7 @@ data UpdateFilterViewRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateFilterViewRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2936,6 +3025,7 @@ updateFilterViewRequest
     :: UpdateFilterViewRequest
 updateFilterViewRequest =
   UpdateFilterViewRequest' {_ufvrFilter = Nothing, _ufvrFields = Nothing}
+
 
 -- | The new properties of the filter view.
 ufvrFilter :: Lens' UpdateFilterViewRequest (Maybe FilterView)
@@ -2978,6 +3068,7 @@ data BasicChartSeries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BasicChartSeries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3001,6 +3092,7 @@ basicChartSeries =
     , _bType = Nothing
     , _bLineStyle = Nothing
     }
+
 
 -- | The minor axis that will specify the range of values for this series.
 -- For example, if charting stocks over time, the \"Volume\" series may
@@ -3068,6 +3160,7 @@ data PivotGroupRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PivotGroupRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3085,6 +3178,7 @@ pivotGroupRule =
     , _pgrManualRule = Nothing
     , _pgrHistogramRule = Nothing
     }
+
 
 -- | A DateTimeRule.
 pgrDateTimeRule :: Lens' PivotGroupRule (Maybe DateTimeRule)
@@ -3129,6 +3223,7 @@ newtype AddProtectedRangeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddProtectedRangeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3138,6 +3233,7 @@ addProtectedRangeRequest
     :: AddProtectedRangeRequest
 addProtectedRangeRequest =
   AddProtectedRangeRequest' {_aprrProtectedRange = Nothing}
+
 
 -- | The protected range to be added. The protectedRangeId field is optional;
 -- if one is not set, an id will be randomly generated. (It is an error to
@@ -3179,6 +3275,7 @@ data RepeatCellRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepeatCellRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3193,6 +3290,7 @@ repeatCellRequest
 repeatCellRequest =
   RepeatCellRequest'
     {_rcrCell = Nothing, _rcrRange = Nothing, _rcrFields = Nothing}
+
 
 -- | The data to write.
 rcrCell :: Lens' RepeatCellRequest (Maybe CellData)
@@ -3235,6 +3333,7 @@ data ConditionValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConditionValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3246,6 +3345,7 @@ conditionValue
     :: ConditionValue
 conditionValue =
   ConditionValue' {_cvRelativeDate = Nothing, _cvUserEnteredValue = Nothing}
+
 
 -- | A relative date (based on the current date). Valid only if the type is
 -- DATE_BEFORE, DATE_AFTER, DATE_ON_OR_BEFORE or DATE_ON_OR_AFTER. Relative
@@ -3288,6 +3388,7 @@ newtype DeleteDimensionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteDimensionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3296,6 +3397,7 @@ newtype DeleteDimensionRequest =
 deleteDimensionRequest
     :: DeleteDimensionRequest
 deleteDimensionRequest = DeleteDimensionRequest' {_ddrRange = Nothing}
+
 
 -- | The dimensions to delete from the sheet.
 ddrRange :: Lens' DeleteDimensionRequest (Maybe DimensionRange)
@@ -3317,11 +3419,13 @@ data ClearValuesRequest =
   ClearValuesRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClearValuesRequest' with the minimum fields required to make a request.
 --
 clearValuesRequest
     :: ClearValuesRequest
 clearValuesRequest = ClearValuesRequest'
+
 
 instance FromJSON ClearValuesRequest where
         parseJSON
@@ -3347,6 +3451,7 @@ data FindReplaceRequest =
     , _frrReplacement     :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FindReplaceRequest' with the minimum fields required to make a request.
 --
@@ -3383,6 +3488,7 @@ findReplaceRequest =
     , _frrSearchByRegex = Nothing
     , _frrReplacement = Nothing
     }
+
 
 -- | True if the search is case sensitive.
 frrMatchCase :: Lens' FindReplaceRequest (Maybe Bool)
@@ -3478,6 +3584,7 @@ data MoveDimensionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MoveDimensionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3489,6 +3596,7 @@ moveDimensionRequest
     :: MoveDimensionRequest
 moveDimensionRequest =
   MoveDimensionRequest' {_mdrDestinationIndex = Nothing, _mdrSource = Nothing}
+
 
 -- | The zero-based start index of where to move the source data to, based on
 -- the coordinates *before* the source data is removed from the grid.
@@ -3538,6 +3646,7 @@ data BatchGetValuesByDataFilterRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchGetValuesByDataFilterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3558,6 +3667,7 @@ batchGetValuesByDataFilterRequest =
     , _bgvbdfrDateTimeRenderOption = Nothing
     , _bgvbdfrMajorDimension = Nothing
     }
+
 
 -- | How values should be represented in the output. The default render
 -- option is ValueRenderOption.FORMATTED_VALUE.
@@ -3630,6 +3740,7 @@ data GradientRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GradientRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3644,6 +3755,7 @@ gradientRule
 gradientRule =
   GradientRule'
     {_grMidpoint = Nothing, _grMaxpoint = Nothing, _grMinpoint = Nothing}
+
 
 -- | An optional midway interpolation point.
 grMidpoint :: Lens' GradientRule (Maybe InterpolationPoint)
@@ -3687,6 +3799,7 @@ data CutPasteRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CutPasteRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3701,6 +3814,7 @@ cutPasteRequest
 cutPasteRequest =
   CutPasteRequest'
     {_cDestination = Nothing, _cSource = Nothing, _cPasteType = Nothing}
+
 
 -- | The top-left coordinate where the data should be pasted.
 cDestination :: Lens' CutPasteRequest (Maybe GridCoordinate)
@@ -3742,6 +3856,7 @@ newtype UpdateEmbeddedObjectPositionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateEmbeddedObjectPositionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3751,6 +3866,7 @@ updateEmbeddedObjectPositionResponse
     :: UpdateEmbeddedObjectPositionResponse
 updateEmbeddedObjectPositionResponse =
   UpdateEmbeddedObjectPositionResponse' {_ueoprPosition = Nothing}
+
 
 -- | The new position of the embedded object.
 ueoprPosition :: Lens' UpdateEmbeddedObjectPositionResponse (Maybe EmbeddedObjectPosition)
@@ -3784,6 +3900,7 @@ data WaterfallChartCustomSubtotal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WaterfallChartCustomSubtotal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3801,6 +3918,7 @@ waterfallChartCustomSubtotal =
     , _wccsSubtotalIndex = Nothing
     , _wccsLabel = Nothing
     }
+
 
 -- | True if the data point at subtotal_index is the subtotal. If false, the
 -- subtotal will be computed and appear after the data point.
@@ -3869,6 +3987,7 @@ data Response =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Response' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3928,6 +4047,7 @@ response =
     , _rDuplicateSheet = Nothing
     , _rAddDimensionGroup = Nothing
     }
+
 
 -- | A reply from adding a filter view.
 rAddFilterView :: Lens' Response (Maybe AddFilterViewResponse)
@@ -4089,6 +4209,7 @@ data FilterCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4100,6 +4221,7 @@ filterCriteria
     :: FilterCriteria
 filterCriteria =
   FilterCriteria' {_fcHiddenValues = Nothing, _fcCondition = Nothing}
+
 
 -- | Values that should be hidden.
 fcHiddenValues :: Lens' FilterCriteria [Text]
@@ -4141,6 +4263,7 @@ data ErrorValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ErrorValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4151,6 +4274,7 @@ data ErrorValue =
 errorValue
     :: ErrorValue
 errorValue = ErrorValue' {_evType = Nothing, _evMessage = Nothing}
+
 
 -- | The type of error.
 evType :: Lens' ErrorValue (Maybe ErrorValueType)
@@ -4188,6 +4312,7 @@ data UpdateConditionalFormatRuleRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateConditionalFormatRuleRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4208,6 +4333,7 @@ updateConditionalFormatRuleRequest =
     , _ucfrrSheetId = Nothing
     , _ucfrrIndex = Nothing
     }
+
 
 -- | The rule that should replace the rule at the given index.
 ucfrrRule :: Lens' UpdateConditionalFormatRuleRequest (Maybe ConditionalFormatRule)
@@ -4265,6 +4391,7 @@ data DeleteConditionalFormatRuleRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteConditionalFormatRuleRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4277,6 +4404,7 @@ deleteConditionalFormatRuleRequest
 deleteConditionalFormatRuleRequest =
   DeleteConditionalFormatRuleRequest'
     {_dcfrrSheetId = Nothing, _dcfrrIndex = Nothing}
+
 
 -- | The sheet the rule is being deleted from.
 dcfrrSheetId :: Lens' DeleteConditionalFormatRuleRequest (Maybe Int32)
@@ -4322,6 +4450,7 @@ data UpdateDeveloperMetadataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateDeveloperMetadataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4339,6 +4468,7 @@ updateDeveloperMetadataRequest =
     , _udmrDeveloperMetadata = Nothing
     , _udmrFields = Nothing
     }
+
 
 -- | The filters matching the developer metadata entries to update.
 udmrDataFilters :: Lens' UpdateDeveloperMetadataRequest [DataFilter]
@@ -4389,6 +4519,7 @@ newtype DeleteDeveloperMetadataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteDeveloperMetadataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4398,6 +4529,7 @@ deleteDeveloperMetadataRequest
     :: DeleteDeveloperMetadataRequest
 deleteDeveloperMetadataRequest =
   DeleteDeveloperMetadataRequest' {_ddmrDataFilter = Nothing}
+
 
 -- | The data filter describing the criteria used to select which developer
 -- metadata entry to delete.
@@ -4433,6 +4565,7 @@ data WaterfallChartSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WaterfallChartSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4459,6 +4592,7 @@ waterfallChartSpec =
     , _wcsHideConnectorLines = Nothing
     , _wcsFirstValueIsTotal = Nothing
     }
+
 
 -- | The stacked type.
 wcsStackedType :: Lens' WaterfallChartSpec (Maybe WaterfallChartSpecStackedType)
@@ -4532,6 +4666,7 @@ data OverlayPosition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OverlayPosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4555,6 +4690,7 @@ overlayPosition =
     , _opWidthPixels = Nothing
     , _opOffSetXPixels = Nothing
     }
+
 
 -- | The height of the object, in pixels. Defaults to 371.
 opHeightPixels :: Lens' OverlayPosition (Maybe Int32)
@@ -4620,6 +4756,7 @@ newtype DeleteEmbeddedObjectRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteEmbeddedObjectRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4629,6 +4766,7 @@ deleteEmbeddedObjectRequest
     :: DeleteEmbeddedObjectRequest
 deleteEmbeddedObjectRequest =
   DeleteEmbeddedObjectRequest' {_deorObjectId = Nothing}
+
 
 -- | The ID of the embedded object to delete.
 deorObjectId :: Lens' DeleteEmbeddedObjectRequest (Maybe Int32)
@@ -4659,6 +4797,7 @@ data DeveloperMetadataLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeveloperMetadataLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4679,6 +4818,7 @@ developerMetadataLocation =
     , _dmlSheetId = Nothing
     , _dmlLocationType = Nothing
     }
+
 
 -- | True when metadata is associated with an entire spreadsheet.
 dmlSpreadsheet :: Lens' DeveloperMetadataLocation (Maybe Bool)
@@ -4740,6 +4880,7 @@ data SheetProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SheetProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4772,6 +4913,7 @@ sheetProperties =
     , _sRightToLeft = Nothing
     , _sIndex = Nothing
     }
+
 
 -- | The color of the tab in the UI.
 sTabColor :: Lens' SheetProperties (Maybe Color)
@@ -4863,6 +5005,7 @@ newtype FilterViewCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterViewCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4873,6 +5016,7 @@ filterViewCriteria
     -> FilterViewCriteria
 filterViewCriteria pFvcAddtional_ =
   FilterViewCriteria' {_fvcAddtional = _Coerce # pFvcAddtional_}
+
 
 fvcAddtional :: Lens' FilterViewCriteria (HashMap Text FilterCriteria)
 fvcAddtional
@@ -4901,6 +5045,7 @@ data BatchUpdateValuesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchUpdateValuesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4927,6 +5072,7 @@ batchUpdateValuesResponse =
     , _buvrTotalUpdatedCells = Nothing
     , _buvrTotalUpdatedRows = Nothing
     }
+
 
 -- | The total number of columns where at least one cell in the column was
 -- updated.
@@ -5008,6 +5154,7 @@ data UpdateSheetPropertiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateSheetPropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5020,6 +5167,7 @@ updateSheetPropertiesRequest
 updateSheetPropertiesRequest =
   UpdateSheetPropertiesRequest'
     {_usprFields = Nothing, _usprProperties = Nothing}
+
 
 -- | The fields that should be updated. At least one field must be specified.
 -- The root \`properties\` is implied and should not be specified. A single
@@ -5062,6 +5210,7 @@ data Spreadsheet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Spreadsheet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5088,6 +5237,7 @@ spreadsheet =
     , _sprDeveloperMetadata = Nothing
     , _sprProperties = Nothing
     }
+
 
 -- | The sheets that are part of a spreadsheet.
 sprSheets :: Lens' Spreadsheet [Sheet]
@@ -5163,6 +5313,7 @@ data CandlestickChartSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CandlestickChartSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5174,6 +5325,7 @@ candlestickChartSpec
     :: CandlestickChartSpec
 candlestickChartSpec =
   CandlestickChartSpec' {_ccsData = Nothing, _ccsDomain = Nothing}
+
 
 -- | The Candlestick chart data. Only one CandlestickData is supported.
 ccsData :: Lens' CandlestickChartSpec [CandlestickData]
@@ -5212,6 +5364,7 @@ data InsertDimensionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InsertDimensionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5223,6 +5376,7 @@ insertDimensionRequest
     :: InsertDimensionRequest
 insertDimensionRequest =
   InsertDimensionRequest' {_idrRange = Nothing, _idrInheritFromBefore = Nothing}
+
 
 -- | The dimensions to insert. Both the start and end indexes must be
 -- bounded.
@@ -5267,6 +5421,7 @@ newtype SearchDeveloperMetadataResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchDeveloperMetadataResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5276,6 +5431,7 @@ searchDeveloperMetadataResponse
     :: SearchDeveloperMetadataResponse
 searchDeveloperMetadataResponse =
   SearchDeveloperMetadataResponse' {_sdmrMatchedDeveloperMetadata = Nothing}
+
 
 -- | The metadata matching the criteria of the search request.
 sdmrMatchedDeveloperMetadata :: Lens' SearchDeveloperMetadataResponse [MatchedDeveloperMetadata]
@@ -5312,6 +5468,7 @@ data InterpolationPoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterpolationPoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5326,6 +5483,7 @@ interpolationPoint
 interpolationPoint =
   InterpolationPoint'
     {_ipColor = Nothing, _ipValue = Nothing, _ipType = Nothing}
+
 
 -- | The color this interpolation point should use.
 ipColor :: Lens' InterpolationPoint (Maybe Color)
@@ -5373,6 +5531,7 @@ data CellData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CellData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5411,6 +5570,7 @@ cellData =
     , _cdHyperlink = Nothing
     , _cdEffectiveValue = Nothing
     }
+
 
 -- | Runs of rich text applied to subsections of the cell. Runs are only
 -- valid on user entered strings, not formulas, bools, or numbers. Runs
@@ -5534,6 +5694,7 @@ newtype ChartSourceRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChartSourceRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5542,6 +5703,7 @@ newtype ChartSourceRange =
 chartSourceRange
     :: ChartSourceRange
 chartSourceRange = ChartSourceRange' {_csrSources = Nothing}
+
 
 -- | The ranges of data for a series or domain. Exactly one dimension must
 -- have a length of 1, and all sources in the list must have the same
@@ -5577,6 +5739,7 @@ newtype AddNamedRangeResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddNamedRangeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5585,6 +5748,7 @@ newtype AddNamedRangeResponse =
 addNamedRangeResponse
     :: AddNamedRangeResponse
 addNamedRangeResponse = AddNamedRangeResponse' {_anrrNamedRange = Nothing}
+
 
 -- | The named range to add.
 anrrNamedRange :: Lens' AddNamedRangeResponse (Maybe NamedRange)
@@ -5613,6 +5777,7 @@ data WaterfallChartDomain =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WaterfallChartDomain' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5624,6 +5789,7 @@ waterfallChartDomain
     :: WaterfallChartDomain
 waterfallChartDomain =
   WaterfallChartDomain' {_wcdReversed = Nothing, _wcdData = Nothing}
+
 
 -- | True to reverse the order of the domain values (horizontal axis).
 wcdReversed :: Lens' WaterfallChartDomain (Maybe Bool)
@@ -5657,6 +5823,7 @@ newtype AddChartResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddChartResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5665,6 +5832,7 @@ newtype AddChartResponse =
 addChartResponse
     :: AddChartResponse
 addChartResponse = AddChartResponse' {_acrChart = Nothing}
+
 
 -- | The newly added chart.
 acrChart :: Lens' AddChartResponse (Maybe EmbeddedChart)
@@ -5691,6 +5859,7 @@ data UpdateChartSpecRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateChartSpecRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5702,6 +5871,7 @@ updateChartSpecRequest
     :: UpdateChartSpecRequest
 updateChartSpecRequest =
   UpdateChartSpecRequest' {_ucsrSpec = Nothing, _ucsrChartId = Nothing}
+
 
 -- | The specification to apply to the chart.
 ucsrSpec :: Lens' UpdateChartSpecRequest (Maybe ChartSpec)
@@ -5736,6 +5906,7 @@ newtype SetBasicFilterRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetBasicFilterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5744,6 +5915,7 @@ newtype SetBasicFilterRequest =
 setBasicFilterRequest
     :: SetBasicFilterRequest
 setBasicFilterRequest = SetBasicFilterRequest' {_sbfrFilter = Nothing}
+
 
 -- | The filter to set.
 sbfrFilter :: Lens' SetBasicFilterRequest (Maybe BasicFilter)
@@ -5770,6 +5942,7 @@ data IterativeCalculationSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IterativeCalculationSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5782,6 +5955,7 @@ iterativeCalculationSettings
 iterativeCalculationSettings =
   IterativeCalculationSettings'
     {_icsMaxIterations = Nothing, _icsConvergenceThreshold = Nothing}
+
 
 -- | When iterative calculation is enabled, the maximum number of calculation
 -- rounds to perform.
@@ -5830,6 +6004,7 @@ data UpdateValuesByDataFilterResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateValuesByDataFilterResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5856,6 +6031,7 @@ updateValuesByDataFilterResponse =
     , _uvbdfrUpdatedColumns = Nothing
     , _uvbdfrDataFilter = Nothing
     }
+
 
 -- | The number of cells updated.
 uvbdfrUpdatedCells :: Lens' UpdateValuesByDataFilterResponse (Maybe Int32)
@@ -5937,6 +6113,7 @@ data GridProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GridProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5966,6 +6143,7 @@ gridProperties =
     , _gpRowGroupControlAfter = Nothing
     , _gpRowCount = Nothing
     }
+
 
 -- | The number of columns that are frozen in the grid.
 gpFrozenColumnCount :: Lens' GridProperties (Maybe Int32)
@@ -6056,6 +6234,7 @@ data HistogramChartSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistogramChartSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6079,6 +6258,7 @@ histogramChartSpec =
     , _hcsOutlierPercentile = Nothing
     , _hcsBucketSize = Nothing
     }
+
 
 -- | The position of the chart legend.
 hcsLegendPosition :: Lens' HistogramChartSpec (Maybe HistogramChartSpecLegendPosition)
@@ -6156,6 +6336,7 @@ newtype BasicFilterCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BasicFilterCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6166,6 +6347,7 @@ basicFilterCriteria
     -> BasicFilterCriteria
 basicFilterCriteria pBfcAddtional_ =
   BasicFilterCriteria' {_bfcAddtional = _Coerce # pBfcAddtional_}
+
 
 bfcAddtional :: Lens' BasicFilterCriteria (HashMap Text FilterCriteria)
 bfcAddtional
@@ -6189,6 +6371,7 @@ newtype AddBandingRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddBandingRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6197,6 +6380,7 @@ newtype AddBandingRequest =
 addBandingRequest
     :: AddBandingRequest
 addBandingRequest = AddBandingRequest' {_abrBandedRange = Nothing}
+
 
 -- | The banded range to add. The bandedRangeId field is optional; if one is
 -- not set, an id will be randomly generated. (It is an error to specify
@@ -6227,6 +6411,7 @@ data UpdateDimensionPropertiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateDimensionPropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6241,6 +6426,7 @@ updateDimensionPropertiesRequest
 updateDimensionPropertiesRequest =
   UpdateDimensionPropertiesRequest'
     {_udprRange = Nothing, _udprFields = Nothing, _udprProperties = Nothing}
+
 
 -- | The rows or columns to update.
 udprRange :: Lens' UpdateDimensionPropertiesRequest (Maybe DimensionRange)
@@ -6292,6 +6478,7 @@ newtype PivotTableCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PivotTableCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6302,6 +6489,7 @@ pivotTableCriteria
     -> PivotTableCriteria
 pivotTableCriteria pPtcAddtional_ =
   PivotTableCriteria' {_ptcAddtional = _Coerce # pPtcAddtional_}
+
 
 ptcAddtional :: Lens' PivotTableCriteria (HashMap Text PivotFilterCriteria)
 ptcAddtional
@@ -6327,6 +6515,7 @@ data AutoFillRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoFillRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6344,6 +6533,7 @@ autoFillRequest =
     , _afrUseAlternateSeries = Nothing
     , _afrRange = Nothing
     }
+
 
 -- | The source and destination areas to autofill. This explicitly lists the
 -- source of the autofill and where to extend that data.
@@ -6406,6 +6596,7 @@ data DeveloperMetadataLookup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeveloperMetadataLookup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6435,6 +6626,7 @@ developerMetadataLookup =
     , _dMetadataLocation = Nothing
     , _dMetadataValue = Nothing
     }
+
 
 -- | Determines how this lookup matches the location. If this field is
 -- specified as EXACT, only developer metadata associated on the exact
@@ -6536,6 +6728,7 @@ data DuplicateSheetRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DuplicateSheetRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6556,6 +6749,7 @@ duplicateSheetRequest =
     , _dsrSourceSheetId = Nothing
     , _dsrNewSheetId = Nothing
     }
+
 
 -- | The name of the new sheet. If empty, a new name is chosen for you.
 dsrNewSheetName :: Lens' DuplicateSheetRequest (Maybe Text)
@@ -6615,6 +6809,7 @@ data TextRotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextRotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6625,6 +6820,7 @@ data TextRotation =
 textRotation
     :: TextRotation
 textRotation = TextRotation' {_trAngle = Nothing, _trVertical = Nothing}
+
 
 -- | The angle between the standard orientation and the desired orientation.
 -- Measured in degrees. Valid values are between -90 and 90. Positive
@@ -6666,6 +6862,7 @@ newtype DuplicateFilterViewResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DuplicateFilterViewResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6675,6 +6872,7 @@ duplicateFilterViewResponse
     :: DuplicateFilterViewResponse
 duplicateFilterViewResponse =
   DuplicateFilterViewResponse' {_dfvrFilter = Nothing}
+
 
 -- | The newly created filter.
 dfvrFilter :: Lens' DuplicateFilterViewResponse (Maybe FilterView)
@@ -6704,6 +6902,7 @@ data BatchUpdateValuesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchUpdateValuesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6727,6 +6926,7 @@ batchUpdateValuesRequest =
     , _buvrResponseDateTimeRenderOption = Nothing
     , _buvrResponseValueRenderOption = Nothing
     }
+
 
 -- | The new values to apply to the spreadsheet.
 buvrData :: Lens' BatchUpdateValuesRequest [ValueRange]
@@ -6804,6 +7004,7 @@ data DataFilterValueRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataFilterValueRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6821,6 +7022,7 @@ dataFilterValueRange =
     , _dfvrDataFilter = Nothing
     , _dfvrMajorDimension = Nothing
     }
+
 
 -- | The data to be written. If the provided values exceed any of the ranges
 -- matched by the data filter then the request will fail. If the provided
@@ -6871,6 +7073,7 @@ newtype AddChartRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddChartRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6879,6 +7082,7 @@ newtype AddChartRequest =
 addChartRequest
     :: AddChartRequest
 addChartRequest = AddChartRequest' {_aChart = Nothing}
+
 
 -- | The chart that should be added to the spreadsheet, including the
 -- position where it should be placed. The chartId field is optional; if
@@ -6907,6 +7111,7 @@ data NamedRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NamedRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6920,6 +7125,7 @@ namedRange
     :: NamedRange
 namedRange =
   NamedRange' {_nrNamedRangeId = Nothing, _nrName = Nothing, _nrRange = Nothing}
+
 
 -- | The ID of the named range.
 nrNamedRangeId :: Lens' NamedRange (Maybe Text)
@@ -6960,6 +7166,7 @@ data MergeCellsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MergeCellsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6971,6 +7178,7 @@ mergeCellsRequest
     :: MergeCellsRequest
 mergeCellsRequest =
   MergeCellsRequest' {_mcrMergeType = Nothing, _mcrRange = Nothing}
+
 
 -- | How the cells should be merged.
 mcrMergeType :: Lens' MergeCellsRequest (Maybe MergeCellsRequestMergeType)
@@ -7016,6 +7224,7 @@ newtype ManualRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManualRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7024,6 +7233,7 @@ newtype ManualRule =
 manualRule
     :: ManualRule
 manualRule = ManualRule' {_mrGroups = Nothing}
+
 
 -- | The list of group names and the corresponding items from the source data
 -- that map to each group name.
@@ -7051,6 +7261,7 @@ newtype TextPosition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextPosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7059,6 +7270,7 @@ newtype TextPosition =
 textPosition
     :: TextPosition
 textPosition = TextPosition' {_tpHorizontalAlignment = Nothing}
+
 
 -- | Horizontal alignment setting for the piece of text.
 tpHorizontalAlignment :: Lens' TextPosition (Maybe TextPositionHorizontalAlignment)
@@ -7090,6 +7302,7 @@ data BOrder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BOrder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7102,6 +7315,7 @@ data BOrder =
 bOrder
     :: BOrder
 bOrder = BOrder' {_boStyle = Nothing, _boColor = Nothing, _boWidth = Nothing}
+
 
 -- | The style of the border.
 boStyle :: Lens' BOrder (Maybe BOrderStyle)
@@ -7144,6 +7358,7 @@ newtype SearchDeveloperMetadataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchDeveloperMetadataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7153,6 +7368,7 @@ searchDeveloperMetadataRequest
     :: SearchDeveloperMetadataRequest
 searchDeveloperMetadataRequest =
   SearchDeveloperMetadataRequest' {_sdmrDataFilters = Nothing}
+
 
 -- | The data filters describing the criteria used to determine which
 -- DeveloperMetadata entries to return. DeveloperMetadata matching any of
@@ -7186,6 +7402,7 @@ newtype CandlestickSeries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CandlestickSeries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7194,6 +7411,7 @@ newtype CandlestickSeries =
 candlestickSeries
     :: CandlestickSeries
 candlestickSeries = CandlestickSeries' {_csData = Nothing}
+
 
 -- | The data of the CandlestickSeries.
 csData :: Lens' CandlestickSeries (Maybe ChartData)
@@ -7221,6 +7439,7 @@ data ExtendedValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExtendedValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7244,6 +7463,7 @@ extendedValue =
     , _evStringValue = Nothing
     , _evFormulaValue = Nothing
     }
+
 
 -- | Represents a boolean value.
 evBoolValue :: Lens' ExtendedValue (Maybe Bool)
@@ -7306,6 +7526,7 @@ newtype AddNamedRangeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddNamedRangeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7314,6 +7535,7 @@ newtype AddNamedRangeRequest =
 addNamedRangeRequest
     :: AddNamedRangeRequest
 addNamedRangeRequest = AddNamedRangeRequest' {_aNamedRange = Nothing}
+
 
 -- | The named range to add. The namedRangeId field is optional; if one is
 -- not set, an id will be randomly generated. (It is an error to specify
@@ -7342,6 +7564,7 @@ newtype PivotFilterCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PivotFilterCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7350,6 +7573,7 @@ newtype PivotFilterCriteria =
 pivotFilterCriteria
     :: PivotFilterCriteria
 pivotFilterCriteria = PivotFilterCriteria' {_pfcVisibleValues = Nothing}
+
 
 -- | Values that should be included. Values not listed here are excluded.
 pfcVisibleValues :: Lens' PivotFilterCriteria [Text]
@@ -7386,6 +7610,7 @@ data DimensionRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DimensionRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7406,6 +7631,7 @@ dimensionRange =
     , _drSheetId = Nothing
     , _drStartIndex = Nothing
     }
+
 
 -- | The dimension of the span.
 drDimension :: Lens' DimensionRange (Maybe DimensionRangeDimension)
@@ -7458,6 +7684,7 @@ data UpdateSpreadsheetPropertiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateSpreadsheetPropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7470,6 +7697,7 @@ updateSpreadsheetPropertiesRequest
 updateSpreadsheetPropertiesRequest =
   UpdateSpreadsheetPropertiesRequest'
     {_uFields = Nothing, _uProperties = Nothing}
+
 
 -- | The fields that should be updated. At least one field must be specified.
 -- The root \'properties\' is implied and should not be specified. A single
@@ -7508,6 +7736,7 @@ data CandlestickDomain =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CandlestickDomain' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7519,6 +7748,7 @@ candlestickDomain
     :: CandlestickDomain
 candlestickDomain =
   CandlestickDomain' {_cdReversed = Nothing, _cdData = Nothing}
+
 
 -- | True to reverse the order of the domain values (horizontal axis).
 cdReversed :: Lens' CandlestickDomain (Maybe Bool)
@@ -7552,6 +7782,7 @@ newtype AddProtectedRangeResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddProtectedRangeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7561,6 +7792,7 @@ addProtectedRangeResponse
     :: AddProtectedRangeResponse
 addProtectedRangeResponse =
   AddProtectedRangeResponse' {_aProtectedRange = Nothing}
+
 
 -- | The newly added protected range.
 aProtectedRange :: Lens' AddProtectedRangeResponse (Maybe ProtectedRange)
@@ -7592,6 +7824,7 @@ data AppendDimensionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppendDimensionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7606,6 +7839,7 @@ appendDimensionRequest
 appendDimensionRequest =
   AppendDimensionRequest'
     {_adrLength = Nothing, _adrDimension = Nothing, _adrSheetId = Nothing}
+
 
 -- | The number of rows or columns to append.
 adrLength :: Lens' AppendDimensionRequest (Maybe Int32)
@@ -7653,6 +7887,7 @@ data PivotValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PivotValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7676,6 +7911,7 @@ pivotValue =
     , _pvCalculatedDisplayType = Nothing
     , _pvSummarizeFunction = Nothing
     }
+
 
 -- | The column offset of the source range that this value reads from. For
 -- example, if the source was \`C10:E15\`, a \`sourceColumnOffset\` of
@@ -7746,6 +7982,7 @@ newtype UnmergeCellsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnmergeCellsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7754,6 +7991,7 @@ newtype UnmergeCellsRequest =
 unmergeCellsRequest
     :: UnmergeCellsRequest
 unmergeCellsRequest = UnmergeCellsRequest' {_ucrRange = Nothing}
+
 
 -- | The range within which all cells should be unmerged. If the range spans
 -- multiple merges, all will be unmerged. The range must not partially span
@@ -7779,6 +8017,7 @@ newtype DeleteSheetRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteSheetRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7787,6 +8026,7 @@ newtype DeleteSheetRequest =
 deleteSheetRequest
     :: DeleteSheetRequest
 deleteSheetRequest = DeleteSheetRequest' {_dsrSheetId = Nothing}
+
 
 -- | The ID of the sheet to delete.
 dsrSheetId :: Lens' DeleteSheetRequest (Maybe Int32)
@@ -7825,6 +8065,7 @@ newtype AddDimensionGroupRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddDimensionGroupRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7833,6 +8074,7 @@ newtype AddDimensionGroupRequest =
 addDimensionGroupRequest
     :: AddDimensionGroupRequest
 addDimensionGroupRequest = AddDimensionGroupRequest' {_adgrRange = Nothing}
+
 
 -- | The range over which to create a group.
 adgrRange :: Lens' AddDimensionGroupRequest (Maybe DimensionRange)
@@ -7859,6 +8101,7 @@ data WaterfallChartColumnStyle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WaterfallChartColumnStyle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7870,6 +8113,7 @@ waterfallChartColumnStyle
     :: WaterfallChartColumnStyle
 waterfallChartColumnStyle =
   WaterfallChartColumnStyle' {_wColor = Nothing, _wLabel = Nothing}
+
 
 -- | The color of the column.
 wColor :: Lens' WaterfallChartColumnStyle (Maybe Color)
@@ -7905,6 +8149,7 @@ data CandlestickData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CandlestickData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7925,6 +8170,7 @@ candlestickData =
     , _cdOpenSeries = Nothing
     , _cdCloseSeries = Nothing
     }
+
 
 -- | The range data (vertical axis) for the low\/minimum value for each
 -- candle. This is the bottom of the candle\'s center line.
@@ -7983,6 +8229,7 @@ data BandedRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BandedRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8003,6 +8250,7 @@ bandedRange =
     , _brRange = Nothing
     , _brColumnProperties = Nothing
     }
+
 
 -- | The id of the banded range.
 brBandedRangeId :: Lens' BandedRange (Maybe Int32)
@@ -8069,6 +8317,7 @@ data UpdateBOrdersRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateBOrdersRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8098,6 +8347,7 @@ updateBOrdersRequest =
     , _uborRight = Nothing
     , _uborTop = Nothing
     }
+
 
 -- | The border to put at the bottom of the range.
 uborBottom :: Lens' UpdateBOrdersRequest (Maybe BOrder)
@@ -8171,6 +8421,7 @@ data BatchUpdateValuesByDataFilterRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchUpdateValuesByDataFilterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8194,6 +8445,7 @@ batchUpdateValuesByDataFilterRequest =
     , _buvbdfrResponseDateTimeRenderOption = Nothing
     , _buvbdfrResponseValueRenderOption = Nothing
     }
+
 
 -- | The new values to apply to the spreadsheet. If more than one range is
 -- matched by the specified DataFilter the specified values will be applied
@@ -8277,6 +8529,7 @@ data EmbeddedChart =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EmbeddedChart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8291,6 +8544,7 @@ embeddedChart
 embeddedChart =
   EmbeddedChart'
     {_ecSpec = Nothing, _ecPosition = Nothing, _ecChartId = Nothing}
+
 
 -- | The specification of the chart.
 ecSpec :: Lens' EmbeddedChart (Maybe ChartSpec)
@@ -8332,6 +8586,7 @@ newtype RowData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RowData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8340,6 +8595,7 @@ newtype RowData =
 rowData
     :: RowData
 rowData = RowData' {_rdValues = Nothing}
+
 
 -- | The values in the row, one per column.
 rdValues :: Lens' RowData [CellData]
@@ -8368,6 +8624,7 @@ data Editors =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Editors' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8382,6 +8639,7 @@ editors
 editors =
   Editors'
     {_eGroups = Nothing, _eUsers = Nothing, _eDomainUsersCanEdit = Nothing}
+
 
 -- | The email addresses of groups with edit access to the protected range.
 eGroups :: Lens' Editors [Text]
@@ -8434,6 +8692,7 @@ data PivotTable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PivotTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8460,6 +8719,7 @@ pivotTable =
     , _ptColumns = Nothing
     , _ptCriteria = Nothing
     }
+
 
 -- | A list of values to include in the pivot table.
 ptValues :: Lens' PivotTable [PivotValue]
@@ -8534,6 +8794,7 @@ data EmbeddedObjectPosition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EmbeddedObjectPosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8551,6 +8812,7 @@ embeddedObjectPosition =
     , _eopSheetId = Nothing
     , _eopNewSheet = Nothing
     }
+
 
 -- | The position at which the object is overlaid on top of a grid.
 eopOverlayPosition :: Lens' EmbeddedObjectPosition (Maybe OverlayPosition)
@@ -8598,6 +8860,7 @@ data BasicFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BasicFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8612,6 +8875,7 @@ basicFilter
 basicFilter =
   BasicFilter'
     {_bfSortSpecs = Nothing, _bfRange = Nothing, _bfCriteria = Nothing}
+
 
 -- | The sort order per column. Later specifications are used when values are
 -- equal in the earlier specifications.
@@ -8659,6 +8923,7 @@ data TextToColumnsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextToColumnsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8676,6 +8941,7 @@ textToColumnsRequest =
     , _ttcrSource = Nothing
     , _ttcrDelimiter = Nothing
     }
+
 
 -- | The delimiter type to use.
 ttcrDelimiterType :: Lens' TextToColumnsRequest (Maybe TextToColumnsRequestDelimiterType)
@@ -8720,6 +8986,7 @@ data GetSpreadsheetByDataFilterRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetSpreadsheetByDataFilterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8732,6 +8999,7 @@ getSpreadsheetByDataFilterRequest
 getSpreadsheetByDataFilterRequest =
   GetSpreadsheetByDataFilterRequest'
     {_gsbdfrDataFilters = Nothing, _gsbdfrIncludeGridData = Nothing}
+
 
 -- | The DataFilters used to select which ranges to retrieve from the
 -- spreadsheet.
@@ -8778,6 +9046,7 @@ data BatchUpdateSpreadsheetRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchUpdateSpreadsheetRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8798,6 +9067,7 @@ batchUpdateSpreadsheetRequest =
     , _busrRequests = Nothing
     , _busrIncludeSpreadsheetInResponse = Nothing
     }
+
 
 -- | True if grid data should be returned. Meaningful only if if
 -- include_spreadsheet_in_response is \'true\'. This parameter is ignored
@@ -8867,6 +9137,7 @@ data UpdateValuesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateValuesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8893,6 +9164,7 @@ updateValuesResponse =
     , _uvrUpdatedData = Nothing
     , _uvrUpdatedColumns = Nothing
     }
+
 
 -- | The number of cells updated.
 uvrUpdatedCells :: Lens' UpdateValuesResponse (Maybe Int32)
@@ -8966,6 +9238,7 @@ newtype DeleteDimensionGroupResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteDimensionGroupResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8975,6 +9248,7 @@ deleteDimensionGroupResponse
     :: DeleteDimensionGroupResponse
 deleteDimensionGroupResponse =
   DeleteDimensionGroupResponse' {_ddgrDimensionGroups = Nothing}
+
 
 -- | All groups of a dimension after deleting a group from that dimension.
 ddgrDimensionGroups :: Lens' DeleteDimensionGroupResponse [DimensionGroup]
@@ -9006,6 +9280,7 @@ newtype CopySheetToAnotherSpreadsheetRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CopySheetToAnotherSpreadsheetRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9016,6 +9291,7 @@ copySheetToAnotherSpreadsheetRequest
 copySheetToAnotherSpreadsheetRequest =
   CopySheetToAnotherSpreadsheetRequest'
     {_cstasrDestinationSpreadsheetId = Nothing}
+
 
 -- | The ID of the spreadsheet to copy the sheet to.
 cstasrDestinationSpreadsheetId :: Lens' CopySheetToAnotherSpreadsheetRequest (Maybe Text)
@@ -9049,6 +9325,7 @@ newtype AddFilterViewRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddFilterViewRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9057,6 +9334,7 @@ newtype AddFilterViewRequest =
 addFilterViewRequest
     :: AddFilterViewRequest
 addFilterViewRequest = AddFilterViewRequest' {_aFilter = Nothing}
+
 
 -- | The filter to add. The filterViewId field is optional; if one is not
 -- set, an id will be randomly generated. (It is an error to specify the ID
@@ -9083,6 +9361,7 @@ data PivotGroupValueMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PivotGroupValueMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9094,6 +9373,7 @@ pivotGroupValueMetadata
     :: PivotGroupValueMetadata
 pivotGroupValueMetadata =
   PivotGroupValueMetadata' {_pgvmValue = Nothing, _pgvmCollapsed = Nothing}
+
 
 -- | The calculated value the metadata corresponds to. (Note that
 -- formulaValue is not valid, because the values will be calculated.)
@@ -9132,6 +9412,7 @@ data BatchClearValuesByDataFilterResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchClearValuesByDataFilterResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9144,6 +9425,7 @@ batchClearValuesByDataFilterResponse
 batchClearValuesByDataFilterResponse =
   BatchClearValuesByDataFilterResponse'
     {_bcvbdfrClearedRanges = Nothing, _bcvbdfrSpreadsheetId = Nothing}
+
 
 -- | The ranges that were cleared, in A1 notation. (If the requests were for
 -- an unbounded range or a ranger larger than the bounds of the sheet, this
@@ -9194,6 +9476,7 @@ data WaterfallChartSeries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WaterfallChartSeries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9220,6 +9503,7 @@ waterfallChartSeries =
     , _wcsSubtotalColumnsStyle = Nothing
     , _wcsPositiveColumnsStyle = Nothing
     }
+
 
 -- | The data being visualized in this series.
 wcsData :: Lens' WaterfallChartSeries (Maybe ChartData)
@@ -9300,6 +9584,7 @@ data UpdateCellsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateCellsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9320,6 +9605,7 @@ updateCellsRequest =
     , _updRange = Nothing
     , _updFields = Nothing
     }
+
 
 -- | The coordinate to start writing data at. Any number of rows and columns
 -- (including a different number of columns per row) may be written.
@@ -9382,6 +9668,7 @@ data CellFormat =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CellFormat' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9423,6 +9710,7 @@ cellFormat =
     , _cfHorizontalAlignment = Nothing
     , _cfPadding = Nothing
     }
+
 
 -- | The borders of the cell.
 cfBOrders :: Lens' CellFormat (Maybe BOrders)
@@ -9530,6 +9818,7 @@ newtype DeleteProtectedRangeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteProtectedRangeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9539,6 +9828,7 @@ deleteProtectedRangeRequest
     :: DeleteProtectedRangeRequest
 deleteProtectedRangeRequest =
   DeleteProtectedRangeRequest' {_dprrProtectedRangeId = Nothing}
+
 
 -- | The ID of the protected range to delete.
 dprrProtectedRangeId :: Lens' DeleteProtectedRangeRequest (Maybe Int32)
@@ -9570,6 +9860,7 @@ data UpdateProtectedRangeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateProtectedRangeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9582,6 +9873,7 @@ updateProtectedRangeRequest
 updateProtectedRangeRequest =
   UpdateProtectedRangeRequest'
     {_uprrProtectedRange = Nothing, _uprrFields = Nothing}
+
 
 -- | The protected range to update with the new properties.
 uprrProtectedRange :: Lens' UpdateProtectedRangeRequest (Maybe ProtectedRange)
@@ -9619,6 +9911,7 @@ newtype AddSheetResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddSheetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9627,6 +9920,7 @@ newtype AddSheetResponse =
 addSheetResponse
     :: AddSheetResponse
 addSheetResponse = AddSheetResponse' {_aProperties = Nothing}
+
 
 -- | The properties of the newly added sheet.
 aProperties :: Lens' AddSheetResponse (Maybe SheetProperties)
@@ -9658,6 +9952,7 @@ data ProtectedRange =
     , _prDescription           :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProtectedRange' with the minimum fields required to make a request.
 --
@@ -9691,6 +9986,7 @@ protectedRange =
     , _prRequestingUserCanEdit = Nothing
     , _prDescription = Nothing
     }
+
 
 -- | The ID of the protected range. This field is read-only.
 prProtectedRangeId :: Lens' ProtectedRange (Maybe Int32)
@@ -9793,6 +10089,7 @@ data BasicChartAxis =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BasicChartAxis' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9813,6 +10110,7 @@ basicChartAxis =
     , _bcaTitle = Nothing
     , _bcaPosition = Nothing
     }
+
 
 -- | The axis title text position.
 bcaTitleTextPosition :: Lens' BasicChartAxis (Maybe TextPosition)
@@ -9867,6 +10165,7 @@ data GridData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GridData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9890,6 +10189,7 @@ gridData =
     , _gdColumnMetadata = Nothing
     , _gdStartColumn = Nothing
     }
+
 
 -- | Metadata about the requested rows in the grid, starting with the row in
 -- start_row.
@@ -9962,6 +10262,7 @@ data NumberFormat =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NumberFormat' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9972,6 +10273,7 @@ data NumberFormat =
 numberFormat
     :: NumberFormat
 numberFormat = NumberFormat' {_nfPattern = Nothing, _nfType = Nothing}
+
 
 -- | Pattern string used for formatting. If not set, a default pattern based
 -- on the user\'s locale will be used if necessary for the given type. See
@@ -10010,6 +10312,7 @@ data BatchUpdateSpreadsheetResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchUpdateSpreadsheetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10027,6 +10330,7 @@ batchUpdateSpreadsheetResponse =
     , _busrReplies = Nothing
     , _busrUpdatedSpreadsheet = Nothing
     }
+
 
 -- | The spreadsheet the updates were applied to.
 busrSpreadsheetId :: Lens' BatchUpdateSpreadsheetResponse (Maybe Text)
@@ -10081,6 +10385,7 @@ data DataFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10098,6 +10403,7 @@ dataFilter =
     , _dfA1Range = Nothing
     , _dfDeveloperMetadataLookup = Nothing
     }
+
 
 -- | Selects data that matches the range described by the GridRange.
 dfGridRange :: Lens' DataFilter (Maybe GridRange)
@@ -10144,6 +10450,7 @@ data SetDataValidationRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetDataValidationRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10155,6 +10462,7 @@ setDataValidationRequest
     :: SetDataValidationRequest
 setDataValidationRequest =
   SetDataValidationRequest' {_sdvrRule = Nothing, _sdvrRange = Nothing}
+
 
 -- | The data validation rule to set on each cell in the range, or empty to
 -- clear the data validation in the range.
@@ -10202,6 +10510,7 @@ data BandingProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BandingProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10222,6 +10531,7 @@ bandingProperties =
     , _bpFooterColor = Nothing
     , _bpFirstBandColor = Nothing
     }
+
 
 -- | The second color that is alternating. (Required)
 bpSecondBandColor :: Lens' BandingProperties (Maybe Color)
@@ -10281,6 +10591,7 @@ newtype DuplicateFilterViewRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DuplicateFilterViewRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10289,6 +10600,7 @@ newtype DuplicateFilterViewRequest =
 duplicateFilterViewRequest
     :: DuplicateFilterViewRequest
 duplicateFilterViewRequest = DuplicateFilterViewRequest' {_dFilterId = Nothing}
+
 
 -- | The ID of the filter being duplicated.
 dFilterId :: Lens' DuplicateFilterViewRequest (Maybe Int32)
@@ -10322,6 +10634,7 @@ data PivotGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PivotGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10354,6 +10667,7 @@ pivotGroup =
     , _pgLabel = Nothing
     , _pgGroupRule = Nothing
     }
+
 
 -- | True if the headings in this pivot group should be repeated. This is
 -- only valid for row groupings and is ignored by columns. By default, we
@@ -10459,6 +10773,7 @@ newtype AddBandingResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddBandingResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10467,6 +10782,7 @@ newtype AddBandingResponse =
 addBandingResponse
     :: AddBandingResponse
 addBandingResponse = AddBandingResponse' {_aBandedRange = Nothing}
+
 
 -- | The banded range that was added.
 aBandedRange :: Lens' AddBandingResponse (Maybe BandedRange)
@@ -10506,6 +10822,7 @@ data OrgChartSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrgChartSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10532,6 +10849,7 @@ orgChartSpec =
     , _ocsLabels = Nothing
     , _ocsParentLabels = Nothing
     }
+
 
 -- | The color of the org chart nodes.
 ocsNodeColor :: Lens' OrgChartSpec (Maybe Color)
@@ -10601,6 +10919,7 @@ newtype RandomizeRangeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RandomizeRangeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10609,6 +10928,7 @@ newtype RandomizeRangeRequest =
 randomizeRangeRequest
     :: RandomizeRangeRequest
 randomizeRangeRequest = RandomizeRangeRequest' {_rrrRange = Nothing}
+
 
 -- | The range to randomize.
 rrrRange :: Lens' RandomizeRangeRequest (Maybe GridRange)
@@ -10633,6 +10953,7 @@ data HistogramSeries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistogramSeries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10643,6 +10964,7 @@ data HistogramSeries =
 histogramSeries
     :: HistogramSeries
 histogramSeries = HistogramSeries' {_hsBarColor = Nothing, _hsData = Nothing}
+
 
 -- | The color of the column representing this series in each bucket. This
 -- field is optional.
@@ -10688,6 +11010,7 @@ data TreemapChartSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TreemapChartSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10732,6 +11055,7 @@ treemapChartSpec =
     , _tcsMinValue = Nothing
     , _tcsParentLabels = Nothing
     }
+
 
 -- | The number of additional data levels beyond the labeled levels to be
 -- shown on the treemap chart. These levels are not interactive and are
@@ -10875,6 +11199,7 @@ data ConditionalFormatRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConditionalFormatRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10892,6 +11217,7 @@ conditionalFormatRule =
     , _cfrGradientRule = Nothing
     , _cfrRanges = Nothing
     }
+
 
 -- | The formatting is either \"on\" or \"off\" according to the rule.
 cfrBooleanRule :: Lens' ConditionalFormatRule (Maybe BooleanRule)
@@ -10949,6 +11275,7 @@ data BasicChartSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BasicChartSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10990,6 +11317,7 @@ basicChartSpec =
     , _basDomains = Nothing
     , _basAxis = Nothing
     }
+
 
 -- | The number of rows or columns in the data that are \"headers\". If not
 -- set, Google Sheets will guess how many rows are headers based on the
@@ -11110,6 +11438,7 @@ data ManualRuleGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManualRuleGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11121,6 +11450,7 @@ manualRuleGroup
     :: ManualRuleGroup
 manualRuleGroup =
   ManualRuleGroup' {_mrgItems = Nothing, _mrgGroupName = Nothing}
+
 
 -- | The items in the source data that should be placed into this group. Each
 -- item may be a string, number, or boolean. Items may appear in at most
@@ -11163,6 +11493,7 @@ data AddConditionalFormatRuleRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddConditionalFormatRuleRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11174,6 +11505,7 @@ addConditionalFormatRuleRequest
     :: AddConditionalFormatRuleRequest
 addConditionalFormatRuleRequest =
   AddConditionalFormatRuleRequest' {_acfrrRule = Nothing, _acfrrIndex = Nothing}
+
 
 -- | The rule to add.
 acfrrRule :: Lens' AddConditionalFormatRuleRequest (Maybe ConditionalFormatRule)
@@ -11222,6 +11554,7 @@ data DeveloperMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeveloperMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11245,6 +11578,7 @@ developerMetadata =
     , _dmMetadataKey = Nothing
     , _dmMetadataValue = Nothing
     }
+
 
 -- | The location where the metadata is associated.
 dmLocation :: Lens' DeveloperMetadata (Maybe DeveloperMetadataLocation)
@@ -11310,6 +11644,7 @@ data TreemapChartColorScale =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TreemapChartColorScale' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11330,6 +11665,7 @@ treemapChartColorScale =
     , _tccsMaxValueColor = Nothing
     , _tccsMidValueColor = Nothing
     }
+
 
 -- | The background color for cells with a color value less than or equal to
 -- minValue. Defaults to #dc3912 if not specified.
@@ -11386,6 +11722,7 @@ newtype DuplicateSheetResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DuplicateSheetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11394,6 +11731,7 @@ newtype DuplicateSheetResponse =
 duplicateSheetResponse
     :: DuplicateSheetResponse
 duplicateSheetResponse = DuplicateSheetResponse' {_dsrProperties = Nothing}
+
 
 -- | The properties of the duplicate sheet.
 dsrProperties :: Lens' DuplicateSheetResponse (Maybe SheetProperties)
@@ -11428,6 +11766,7 @@ data TextFormat =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextFormat' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11457,6 +11796,7 @@ textFormat =
     , _tfBold = Nothing
     , _tfStrikethrough = Nothing
     }
+
 
 -- | The font family.
 tfFontFamily :: Lens' TextFormat (Maybe Text)
@@ -11526,6 +11866,7 @@ newtype CreateDeveloperMetadataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateDeveloperMetadataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11535,6 +11876,7 @@ createDeveloperMetadataRequest
     :: CreateDeveloperMetadataRequest
 createDeveloperMetadataRequest =
   CreateDeveloperMetadataRequest' {_cDeveloperMetadata = Nothing}
+
 
 -- | The developer metadata to create.
 cDeveloperMetadata :: Lens' CreateDeveloperMetadataRequest (Maybe DeveloperMetadata)
@@ -11566,6 +11908,7 @@ data BatchClearValuesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchClearValuesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11578,6 +11921,7 @@ batchClearValuesResponse
 batchClearValuesResponse =
   BatchClearValuesResponse'
     {_bcvrClearedRanges = Nothing, _bcvrSpreadsheetId = Nothing}
+
 
 -- | The ranges that were cleared, in A1 notation. (If the requests were for
 -- an unbounded range or a ranger larger than the bounds of the sheet, this
@@ -11621,6 +11965,7 @@ data MatchedValueRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MatchedValueRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11632,6 +11977,7 @@ matchedValueRange
     :: MatchedValueRange
 matchedValueRange =
   MatchedValueRange' {_mvrValueRange = Nothing, _mvrDataFilters = Nothing}
+
 
 -- | The values matched by the DataFilter.
 mvrValueRange :: Lens' MatchedValueRange (Maybe ValueRange)
@@ -11673,6 +12019,7 @@ data BasicChartDomain =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BasicChartDomain' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11684,6 +12031,7 @@ basicChartDomain
     :: BasicChartDomain
 basicChartDomain =
   BasicChartDomain' {_bcdReversed = Nothing, _bcdDomain = Nothing}
+
 
 -- | True to reverse the order of the domain values (horizontal axis).
 bcdReversed :: Lens' BasicChartDomain (Maybe Bool)
@@ -11739,6 +12087,7 @@ data HistogramRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistogramRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11752,6 +12101,7 @@ histogramRule
     :: HistogramRule
 histogramRule =
   HistogramRule' {_hrStart = Nothing, _hrInterval = Nothing, _hrEnd = Nothing}
+
 
 -- | The minimum value at which items are placed into buckets of constant
 -- size. Values below start are lumped into a single bucket. This field is
@@ -11802,6 +12152,7 @@ data MatchedDeveloperMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MatchedDeveloperMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11814,6 +12165,7 @@ matchedDeveloperMetadata
 matchedDeveloperMetadata =
   MatchedDeveloperMetadata'
     {_mdmDataFilters = Nothing, _mdmDeveloperMetadata = Nothing}
+
 
 -- | All filters matching the returned developer metadata.
 mdmDataFilters :: Lens' MatchedDeveloperMetadata [DataFilter]
@@ -11854,6 +12206,7 @@ data InsertRangeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InsertRangeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11865,6 +12218,7 @@ insertRangeRequest
     :: InsertRangeRequest
 insertRangeRequest =
   InsertRangeRequest' {_irrShiftDimension = Nothing, _irrRange = Nothing}
+
 
 -- | The dimension which will be shifted when inserting cells. If ROWS,
 -- existing cells will be shifted down. If COLUMNS, existing cells will be
@@ -11905,6 +12259,7 @@ data Padding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Padding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11921,6 +12276,7 @@ padding
 padding =
   Padding'
     {_pBottom = Nothing, _pLeft = Nothing, _pRight = Nothing, _pTop = Nothing}
+
 
 -- | The bottom padding of the cell.
 pBottom :: Lens' Padding (Maybe Int32)
@@ -11989,6 +12345,7 @@ data ChartSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChartSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12054,6 +12411,7 @@ chartSpec =
     , _csBasicChart = Nothing
     , _csHiddenDimensionStrategy = Nothing
     }
+
 
 -- | The title text position. This field is optional.
 csTitleTextPosition :: Lens' ChartSpec (Maybe TextPosition)
@@ -12228,6 +12586,7 @@ data DimensionProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DimensionProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12248,6 +12607,7 @@ dimensionProperties =
     , _dpHiddenByUser = Nothing
     , _dpDeveloperMetadata = Nothing
     }
+
 
 -- | True if this dimension is being filtered. This field is read-only.
 dpHiddenByFilter :: Lens' DimensionProperties (Maybe Bool)
@@ -12303,6 +12663,7 @@ data UpdateBandingRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateBandingRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12314,6 +12675,7 @@ updateBandingRequest
     :: UpdateBandingRequest
 updateBandingRequest =
   UpdateBandingRequest' {_ubrBandedRange = Nothing, _ubrFields = Nothing}
+
 
 -- | The banded range to update with the new properties.
 ubrBandedRange :: Lens' UpdateBandingRequest (Maybe BandedRange)
@@ -12353,6 +12715,7 @@ data BatchGetValuesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchGetValuesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12365,6 +12728,7 @@ batchGetValuesResponse
 batchGetValuesResponse =
   BatchGetValuesResponse'
     {_bgvrSpreadsheetId = Nothing, _bgvrValueRanges = Nothing}
+
 
 -- | The ID of the spreadsheet the data was retrieved from.
 bgvrSpreadsheetId :: Lens' BatchGetValuesResponse (Maybe Text)
@@ -12405,6 +12769,7 @@ newtype DeleteBandingRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteBandingRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12413,6 +12778,7 @@ newtype DeleteBandingRequest =
 deleteBandingRequest
     :: DeleteBandingRequest
 deleteBandingRequest = DeleteBandingRequest' {_dbrBandedRangeId = Nothing}
+
 
 -- | The ID of the banded range to delete.
 dbrBandedRangeId :: Lens' DeleteBandingRequest (Maybe Int32)
@@ -12442,6 +12808,7 @@ newtype DeleteDeveloperMetadataResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteDeveloperMetadataResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12451,6 +12818,7 @@ deleteDeveloperMetadataResponse
     :: DeleteDeveloperMetadataResponse
 deleteDeveloperMetadataResponse =
   DeleteDeveloperMetadataResponse' {_ddmrDeletedDeveloperMetadata = Nothing}
+
 
 -- | The metadata that was deleted.
 ddmrDeletedDeveloperMetadata :: Lens' DeleteDeveloperMetadataResponse [DeveloperMetadata]
@@ -12484,6 +12852,7 @@ newtype UpdateDeveloperMetadataResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateDeveloperMetadataResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12493,6 +12862,7 @@ updateDeveloperMetadataResponse
     :: UpdateDeveloperMetadataResponse
 updateDeveloperMetadataResponse =
   UpdateDeveloperMetadataResponse' {_uDeveloperMetadata = Nothing}
+
 
 -- | The updated developer metadata.
 uDeveloperMetadata :: Lens' UpdateDeveloperMetadataResponse [DeveloperMetadata]
@@ -12579,6 +12949,7 @@ data Request' =
     , _reqSetDataValidation            :: !(Maybe SetDataValidationRequest)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Request' with the minimum fields required to make a request.
 --
@@ -12756,6 +13127,7 @@ request' =
     , _reqAppendDimension = Nothing
     , _reqSetDataValidation = Nothing
     }
+
 
 -- | Adds a filter view.
 reqAddFilterView :: Lens' Request' (Maybe AddFilterViewRequest)
@@ -13237,6 +13609,7 @@ data LineStyle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LineStyle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13247,6 +13620,7 @@ data LineStyle =
 lineStyle
     :: LineStyle
 lineStyle = LineStyle' {_lsWidth = Nothing, _lsType = Nothing}
+
 
 -- | The thickness of the line, in px.
 lsWidth :: Lens' LineStyle (Maybe Int32)
@@ -13279,6 +13653,7 @@ newtype DeleteConditionalFormatRuleResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteConditionalFormatRuleResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13288,6 +13663,7 @@ deleteConditionalFormatRuleResponse
     :: DeleteConditionalFormatRuleResponse
 deleteConditionalFormatRuleResponse =
   DeleteConditionalFormatRuleResponse' {_dcfrrRule = Nothing}
+
 
 -- | The rule that was deleted.
 dcfrrRule :: Lens' DeleteConditionalFormatRuleResponse (Maybe ConditionalFormatRule)
@@ -13319,6 +13695,7 @@ data UpdateConditionalFormatRuleResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateConditionalFormatRuleResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13339,6 +13716,7 @@ updateConditionalFormatRuleResponse =
     , _uOldIndex = Nothing
     , _uOldRule = Nothing
     }
+
 
 -- | The new rule that replaced the old rule (if replacing), or the rule that
 -- was moved (if moved)

@@ -61,6 +61,7 @@ newtype AssociationSessionsVerify =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AssociationSessionsVerify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ associationSessionsVerify
     -> AssociationSessionsVerify
 associationSessionsVerify pAsvToken_ =
   AssociationSessionsVerify' {_asvToken = pAsvToken_}
+
 
 -- | The token returned to the association callback URL.
 asvToken :: Lens' AssociationSessionsVerify Text

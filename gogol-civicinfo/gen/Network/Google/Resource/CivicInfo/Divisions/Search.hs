@@ -61,6 +61,7 @@ data DivisionsSearch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DivisionsSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ divisionsSearch
     -> DivisionsSearch
 divisionsSearch pDsPayload_ =
   DivisionsSearch' {_dsPayload = pDsPayload_, _dsQuery = Nothing}
+
 
 -- | Multipart request metadata.
 dsPayload :: Lens' DivisionsSearch DivisionSearchRequest

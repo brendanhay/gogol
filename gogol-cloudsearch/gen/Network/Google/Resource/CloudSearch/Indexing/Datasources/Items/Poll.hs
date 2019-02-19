@@ -98,6 +98,7 @@ data IndexingDatasourcesItemsPoll =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IndexingDatasourcesItemsPoll' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -129,6 +130,7 @@ indexingDatasourcesItemsPoll pIdipdPayload_ pIdipdName_ =
     , _idipdName = pIdipdName_
     , _idipdCallback = Nothing
     }
+
 
 -- | V1 error format.
 idipdXgafv :: Lens' IndexingDatasourcesItemsPoll (Maybe Xgafv)

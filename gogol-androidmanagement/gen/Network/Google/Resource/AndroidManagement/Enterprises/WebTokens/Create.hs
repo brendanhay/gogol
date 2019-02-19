@@ -76,6 +76,7 @@ data EnterprisesWebTokensCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesWebTokensCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ enterprisesWebTokensCreate pEwtcParent_ pEwtcPayload_ =
     , _ewtcPayload = pEwtcPayload_
     , _ewtcCallback = Nothing
     }
+
 
 -- | The name of the enterprise in the form enterprises\/{enterpriseId}.
 ewtcParent :: Lens' EnterprisesWebTokensCreate Text

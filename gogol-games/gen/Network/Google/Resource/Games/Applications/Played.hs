@@ -60,6 +60,7 @@ newtype ApplicationsPlayed =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationsPlayed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ newtype ApplicationsPlayed =
 applicationsPlayed
     :: ApplicationsPlayed
 applicationsPlayed = ApplicationsPlayed' {_apBuiltinGameId = Nothing}
+
 
 -- | Override used only by built-in games in Play Games application.
 apBuiltinGameId :: Lens' ApplicationsPlayed (Maybe Text)

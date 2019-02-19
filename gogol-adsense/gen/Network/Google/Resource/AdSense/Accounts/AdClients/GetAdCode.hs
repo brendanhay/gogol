@@ -62,6 +62,7 @@ data AccountsAdClientsGetAdCode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsAdClientsGetAdCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ accountsAdClientsGetAdCode pAacgacAdClientId_ pAacgacAccountId_ =
     { _aacgacAdClientId = pAacgacAdClientId_
     , _aacgacAccountId = pAacgacAccountId_
     }
+
 
 -- | Ad client to get the code for.
 aacgacAdClientId :: Lens' AccountsAdClientsGetAdCode Text

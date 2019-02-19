@@ -62,6 +62,7 @@ data UsersAliasesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersAliasesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ usersAliasesInsert
     -> UsersAliasesInsert
 usersAliasesInsert pUaiPayload_ pUaiUserKey_ =
   UsersAliasesInsert' {_uaiPayload = pUaiPayload_, _uaiUserKey = pUaiUserKey_}
+
 
 -- | Multipart request metadata.
 uaiPayload :: Lens' UsersAliasesInsert Alias

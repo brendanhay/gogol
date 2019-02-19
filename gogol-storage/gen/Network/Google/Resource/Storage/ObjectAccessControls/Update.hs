@@ -75,6 +75,7 @@ data ObjectAccessControlsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectAccessControlsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ objectAccessControlsUpdate pOacuBucket_ pOacuPayload_ pOacuObject_ pOacuEntity_ 
     , _oacuEntity = pOacuEntity_
     , _oacuGeneration = Nothing
     }
+
 
 -- | Name of a bucket.
 oacuBucket :: Lens' ObjectAccessControlsUpdate Text

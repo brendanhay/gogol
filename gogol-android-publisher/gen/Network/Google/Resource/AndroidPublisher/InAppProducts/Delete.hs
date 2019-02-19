@@ -61,6 +61,7 @@ data InAppProductsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InAppProductsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ inAppProductsDelete
 inAppProductsDelete pIapdPackageName_ pIapdSKU_ =
   InAppProductsDelete'
     {_iapdPackageName = pIapdPackageName_, _iapdSKU = pIapdSKU_}
+
 
 -- | Unique identifier for the Android app with the in-app product; for
 -- example, \"com.spiffygame\".

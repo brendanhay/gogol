@@ -76,6 +76,7 @@ data CampaignCreativeAssociationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CampaignCreativeAssociationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ campaignCreativeAssociationsList pCcalCampaignId_ pCcalProFileId_ =
     , _ccalPageToken = Nothing
     , _ccalMaxResults = 1000
     }
+
 
 -- | Campaign ID in this association.
 ccalCampaignId :: Lens' CampaignCreativeAssociationsList Int64

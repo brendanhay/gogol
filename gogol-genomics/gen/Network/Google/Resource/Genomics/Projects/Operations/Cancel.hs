@@ -86,6 +86,7 @@ data ProjectsOperationsCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsOperationsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsOperationsCancel pPocPayload_ pPocName_ =
     , _pocName = pPocName_
     , _pocCallback = Nothing
     }
+
 
 -- | V1 error format.
 pocXgafv :: Lens' ProjectsOperationsCancel (Maybe Xgafv)

@@ -69,6 +69,7 @@ data ManagementProFilesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementProFilesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ managementProFilesList pMpflWebPropertyId_ pMpflAccountId_ =
     , _mpflStartIndex = Nothing
     , _mpflMaxResults = Nothing
     }
+
 
 -- | Web property ID for the views (profiles) to retrieve. Can either be a
 -- specific web property ID or \'~all\', which refers to all the web

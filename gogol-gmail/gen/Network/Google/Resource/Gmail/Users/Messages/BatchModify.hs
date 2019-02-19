@@ -63,6 +63,7 @@ data UsersMessagesBatchModify =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersMessagesBatchModify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ usersMessagesBatchModify
     -> UsersMessagesBatchModify
 usersMessagesBatchModify pUmbmPayload_ =
   UsersMessagesBatchModify' {_umbmPayload = pUmbmPayload_, _umbmUserId = "me"}
+
 
 -- | Multipart request metadata.
 umbmPayload :: Lens' UsersMessagesBatchModify BatchModifyMessagesRequest

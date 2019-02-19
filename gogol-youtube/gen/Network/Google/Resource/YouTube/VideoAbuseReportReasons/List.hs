@@ -63,6 +63,7 @@ data VideoAbuseReportReasonsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoAbuseReportReasonsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ videoAbuseReportReasonsList
     -> VideoAbuseReportReasonsList
 videoAbuseReportReasonsList pVarrlPart_ =
   VideoAbuseReportReasonsList' {_varrlPart = pVarrlPart_, _varrlHl = "en_US"}
+
 
 -- | The part parameter specifies the videoCategory resource parts that the
 -- API response will include. Supported values are id and snippet.

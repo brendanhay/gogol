@@ -60,6 +60,7 @@ data DatafeedsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ datafeedsGet pDgMerchantId_ pDgDatafeedId_ =
     { _dgMerchantId = _Coerce # pDgMerchantId_
     , _dgDatafeedId = _Coerce # pDgDatafeedId_
     }
+
 
 -- | The ID of the account that manages the datafeed. This account cannot be
 -- a multi-client account.

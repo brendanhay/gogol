@@ -34,6 +34,7 @@ data AudioConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AudioConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -60,6 +61,7 @@ audioConfig =
     , _acSpeakingRate = Nothing
     , _acPitch = Nothing
     }
+
 
 -- | Optional volume gain (in dB) of the normal native volume supported by
 -- the specific voice, in the range [-96.0, 16.0]. If unset, or set to a
@@ -156,6 +158,7 @@ data VoiceSelectionParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VoiceSelectionParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -170,6 +173,7 @@ voiceSelectionParams
 voiceSelectionParams =
   VoiceSelectionParams'
     {_vspLanguageCode = Nothing, _vspSsmlGender = Nothing, _vspName = Nothing}
+
 
 -- | The language (and optionally also the region) of the voice expressed as
 -- a [BCP-47](https:\/\/www.rfc-editor.org\/rfc\/bcp\/bcp47.txt) language
@@ -231,6 +235,7 @@ data SynthesizeSpeechRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SynthesizeSpeechRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -245,6 +250,7 @@ synthesizeSpeechRequest
 synthesizeSpeechRequest =
   SynthesizeSpeechRequest'
     {_ssrAudioConfig = Nothing, _ssrInput = Nothing, _ssrVoice = Nothing}
+
 
 -- | Required. The configuration of the synthesized audio.
 ssrAudioConfig :: Lens' SynthesizeSpeechRequest (Maybe AudioConfig)
@@ -285,6 +291,7 @@ newtype ListVoicesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListVoicesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -293,6 +300,7 @@ newtype ListVoicesResponse =
 listVoicesResponse
     :: ListVoicesResponse
 listVoicesResponse = ListVoicesResponse' {_lvrVoices = Nothing}
+
 
 -- | The list of voices.
 lvrVoices :: Lens' ListVoicesResponse [Voice]
@@ -324,6 +332,7 @@ data SynthesisInput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SynthesisInput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -334,6 +343,7 @@ data SynthesisInput =
 synthesisInput
     :: SynthesisInput
 synthesisInput = SynthesisInput' {_siText = Nothing, _siSsml = Nothing}
+
 
 -- | The raw text to be synthesized.
 siText :: Lens' SynthesisInput (Maybe Text)
@@ -368,6 +378,7 @@ newtype SynthesizeSpeechResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SynthesizeSpeechResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -377,6 +388,7 @@ synthesizeSpeechResponse
     :: SynthesizeSpeechResponse
 synthesizeSpeechResponse =
   SynthesizeSpeechResponse' {_ssrAudioContent = Nothing}
+
 
 -- | The audio data bytes encoded as specified in the request, including the
 -- header (For LINEAR16 audio, we include the WAV header). Note: as with
@@ -412,6 +424,7 @@ data Voice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Voice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -432,6 +445,7 @@ voice =
     , _vSsmlGender = Nothing
     , _vName = Nothing
     }
+
 
 -- | The languages that this voice supports, expressed as
 -- [BCP-47](https:\/\/www.rfc-editor.org\/rfc\/bcp\/bcp47.txt) language

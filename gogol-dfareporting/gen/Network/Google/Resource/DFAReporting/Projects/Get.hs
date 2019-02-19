@@ -61,6 +61,7 @@ data ProjectsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ projectsGet
 projectsGet pProProFileId_ pProId_ =
   ProjectsGet'
     {_proProFileId = _Coerce # pProProFileId_, _proId = _Coerce # pProId_}
+
 
 -- | User profile ID associated with this request.
 proProFileId :: Lens' ProjectsGet Int64

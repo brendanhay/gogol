@@ -75,6 +75,7 @@ data ProjectsUptimeCheckConfigsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsUptimeCheckConfigsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsUptimeCheckConfigsCreate pPucccParent_ pPucccPayload_ =
     , _pucccPayload = pPucccPayload_
     , _pucccCallback = Nothing
     }
+
 
 -- | The project in which to create the uptime check. The format is
 -- projects\/[PROJECT_ID].

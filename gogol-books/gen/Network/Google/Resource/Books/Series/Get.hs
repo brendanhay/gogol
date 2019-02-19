@@ -58,6 +58,7 @@ newtype SeriesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SeriesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ seriesGet
     :: [Text] -- ^ 'sgSeriesId'
     -> SeriesGet
 seriesGet pSgSeriesId_ = SeriesGet' {_sgSeriesId = _Coerce # pSgSeriesId_}
+
 
 -- | String that identifies the series
 sgSeriesId :: Lens' SeriesGet [Text]

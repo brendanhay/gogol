@@ -72,6 +72,7 @@ data ProjectsTransferConfigsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTransferConfigsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsTransferConfigsDelete pPtcdName_ =
     , _ptcdName = pPtcdName_
     , _ptcdCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptcdXgafv :: Lens' ProjectsTransferConfigsDelete (Maybe Xgafv)

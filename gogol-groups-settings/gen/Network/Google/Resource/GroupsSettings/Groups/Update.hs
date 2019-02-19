@@ -60,6 +60,7 @@ data GroupsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ groupsUpdate
     -> GroupsUpdate
 groupsUpdate pGuPayload_ pGuGroupUniqueId_ =
   GroupsUpdate' {_guPayload = pGuPayload_, _guGroupUniqueId = pGuGroupUniqueId_}
+
 
 -- | Multipart request metadata.
 guPayload :: Lens' GroupsUpdate Groups

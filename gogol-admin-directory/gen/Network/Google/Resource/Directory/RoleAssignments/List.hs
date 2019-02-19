@@ -72,6 +72,7 @@ data RoleAssignmentsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoleAssignmentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ roleAssignmentsList pRalCustomer_ =
     , _ralUserKey = Nothing
     , _ralMaxResults = Nothing
     }
+
 
 -- | Immutable ID of a role. If included in the request, returns only role
 -- assignments containing this role ID.

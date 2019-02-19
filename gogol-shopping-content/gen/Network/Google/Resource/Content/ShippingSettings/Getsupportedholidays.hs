@@ -59,6 +59,7 @@ newtype ShippingSettingsGetsupportedholidays =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsGetsupportedholidays' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ shippingSettingsGetsupportedholidays
 shippingSettingsGetsupportedholidays pSsgMerchantId_ =
   ShippingSettingsGetsupportedholidays'
     {_ssgMerchantId = _Coerce # pSsgMerchantId_}
+
 
 -- | The ID of the account for which to retrieve the supported holidays.
 ssgMerchantId :: Lens' ShippingSettingsGetsupportedholidays Word64

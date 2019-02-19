@@ -86,6 +86,7 @@ data BiddersAccountsFilterSetsFilteredBidsDetailsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BiddersAccountsFilterSetsFilteredBidsDetailsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ biddersAccountsFilterSetsFilteredBidsDetailsList pBafsfbdlFilterSetName_ pBafsfb
     , _bafsfbdlPageSize = Nothing
     , _bafsfbdlCallback = Nothing
     }
+
 
 -- | V1 error format.
 bafsfbdlXgafv :: Lens' BiddersAccountsFilterSetsFilteredBidsDetailsList (Maybe Xgafv)

@@ -81,6 +81,7 @@ data ProjectsCompaniesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsCompaniesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsCompaniesList pPclParent_ =
     , _pclPageSize = Nothing
     , _pclCallback = Nothing
     }
+
 
 -- | Required. Resource name of the project under which the company is
 -- created. The format is \"projects\/{project_id}\", for example,

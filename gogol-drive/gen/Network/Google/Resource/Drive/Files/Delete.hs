@@ -66,6 +66,7 @@ data FilesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ filesDelete
     -> FilesDelete
 filesDelete pFdFileId_ =
   FilesDelete' {_fdFileId = pFdFileId_, _fdSupportsTeamDrives = False}
+
 
 -- | The ID of the file.
 fdFileId :: Lens' FilesDelete Text

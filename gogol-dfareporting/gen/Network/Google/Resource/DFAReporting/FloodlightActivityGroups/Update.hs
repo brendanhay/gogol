@@ -62,6 +62,7 @@ data FloodlightActivityGroupsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivityGroupsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ floodlightActivityGroupsUpdate
 floodlightActivityGroupsUpdate pFaguProFileId_ pFaguPayload_ =
   FloodlightActivityGroupsUpdate'
     {_faguProFileId = _Coerce # pFaguProFileId_, _faguPayload = pFaguPayload_}
+
 
 -- | User profile ID associated with this request.
 faguProFileId :: Lens' FloodlightActivityGroupsUpdate Int64

@@ -77,6 +77,7 @@ data InstanceGroupsAddInstances =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsAddInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ instanceGroupsAddInstances pIgaiProject_ pIgaiZone_ pIgaiPayload_ pIgaiInstanceG
     , _igaiPayload = pIgaiPayload_
     , _igaiInstanceGroup = pIgaiInstanceGroup_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

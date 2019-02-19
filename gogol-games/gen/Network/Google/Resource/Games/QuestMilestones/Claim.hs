@@ -69,6 +69,7 @@ data QuestMilestonesClaim =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuestMilestonesClaim' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ questMilestonesClaim pQmcRequestId_ pQmcMilestoneId_ pQmcQuestId_ =
     , _qmcMilestoneId = pQmcMilestoneId_
     , _qmcQuestId = pQmcQuestId_
     }
+
 
 -- | A numeric ID to ensure that the request is handled correctly across
 -- retries. Your client application must generate this ID randomly.

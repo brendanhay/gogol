@@ -72,6 +72,7 @@ data OperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ operationsList pOlProject_ =
     , _olPageToken = Nothing
     , _olMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

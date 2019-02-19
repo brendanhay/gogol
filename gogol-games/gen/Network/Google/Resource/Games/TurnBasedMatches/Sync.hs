@@ -77,6 +77,7 @@ data TurnBasedMatchesSync =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchesSync' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ turnBasedMatchesSync =
     , _tbmsPageToken = Nothing
     , _tbmsMaxResults = Nothing
     }
+
 
 -- | The maximum number of completed or canceled matches to return in the
 -- response. If not set, all matches returned could be completed or

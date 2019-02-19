@@ -88,6 +88,7 @@ data PhotosList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PhotosList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ photosList =
     , _plPageSize = Nothing
     , _plCallback = Nothing
     }
+
 
 -- | V1 error format.
 plXgafv :: Lens' PhotosList (Maybe Xgafv)

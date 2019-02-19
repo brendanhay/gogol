@@ -94,6 +94,7 @@ data BeaconsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +129,7 @@ beaconsUpdate pBuBeaconName_ pBuPayload_ =
     , _buProjectId = Nothing
     , _buCallback = Nothing
     }
+
 
 -- | V1 error format.
 buXgafv :: Lens' BeaconsUpdate (Maybe Xgafv)

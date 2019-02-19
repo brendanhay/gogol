@@ -71,6 +71,7 @@ data ForwardingRulesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingRulesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ forwardingRulesInsert pFriProject_ pFriPayload_ pFriRegion_ =
     , _friPayload = pFriPayload_
     , _friRegion = pFriRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

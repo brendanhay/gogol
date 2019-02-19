@@ -75,6 +75,7 @@ data SettingsDatasourcesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsDatasourcesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ settingsDatasourcesUpdate pSduPayload_ pSduName_ =
     , _sduName = pSduName_
     , _sduCallback = Nothing
     }
+
 
 -- | V1 error format.
 sduXgafv :: Lens' SettingsDatasourcesUpdate (Maybe Xgafv)

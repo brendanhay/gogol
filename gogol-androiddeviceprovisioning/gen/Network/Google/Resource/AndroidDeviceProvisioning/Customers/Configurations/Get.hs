@@ -70,6 +70,7 @@ data CustomersConfigurationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersConfigurationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ customersConfigurationsGet pCcgName_ =
     , _ccgName = pCcgName_
     , _ccgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccgXgafv :: Lens' CustomersConfigurationsGet (Maybe Xgafv)

@@ -76,6 +76,7 @@ data ProjectsPolicySetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsPolicySetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsPolicySetIAMPolicy pPpsipPayload_ pPpsipResource_ =
     , _ppsipResource = pPpsipResource_
     , _ppsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 ppsipXgafv :: Lens' ProjectsPolicySetIAMPolicy (Maybe Xgafv)

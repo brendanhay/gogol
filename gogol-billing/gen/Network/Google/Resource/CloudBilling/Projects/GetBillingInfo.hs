@@ -78,6 +78,7 @@ data ProjectsGetBillingInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGetBillingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsGetBillingInfo pPgbiName_ =
     , _pgbiName = pPgbiName_
     , _pgbiCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgbiXgafv :: Lens' ProjectsGetBillingInfo (Maybe Xgafv)

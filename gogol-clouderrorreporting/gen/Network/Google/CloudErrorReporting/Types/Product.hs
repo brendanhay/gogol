@@ -32,6 +32,7 @@ data ErrorEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ErrorEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -52,6 +53,7 @@ errorEvent =
     , _eeServiceContext = Nothing
     , _eeMessage = Nothing
     }
+
 
 -- | Data about the context in which the error occurred.
 eeContext :: Lens' ErrorEvent (Maybe ErrorContext)
@@ -110,6 +112,7 @@ data ErrorContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ErrorContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -130,6 +133,7 @@ errorContext =
     , _ecSourceReferences = Nothing
     , _ecReportLocation = Nothing
     }
+
 
 -- | The HTTP request which was processed when the error was triggered.
 ecHTTPRequest :: Lens' ErrorContext (Maybe HTTPRequestContext)
@@ -193,6 +197,7 @@ data ErrorGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ErrorGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -207,6 +212,7 @@ errorGroup
 errorGroup =
   ErrorGroup'
     {_egTrackingIssues = Nothing, _egName = Nothing, _egGroupId = Nothing}
+
 
 -- | Associated tracking issues.
 egTrackingIssues :: Lens' ErrorGroup [TrackingIssue]
@@ -251,11 +257,13 @@ data DeleteEventsResponse =
   DeleteEventsResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteEventsResponse' with the minimum fields required to make a request.
 --
 deleteEventsResponse
     :: DeleteEventsResponse
 deleteEventsResponse = DeleteEventsResponse'
+
 
 instance FromJSON DeleteEventsResponse where
         parseJSON
@@ -277,6 +285,7 @@ data ReportedErrorEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportedErrorEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -297,6 +306,7 @@ reportedErrorEvent =
     , _reeServiceContext = Nothing
     , _reeMessage = Nothing
     }
+
 
 -- | [Optional] A description of the context in which the error occurred.
 reeContext :: Lens' ReportedErrorEvent (Maybe ErrorContext)
@@ -374,6 +384,7 @@ data HTTPRequestContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPRequestContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -400,6 +411,7 @@ hTTPRequestContext =
     , _httprcResponseStatusCode = Nothing
     , _httprcUserAgent = Nothing
     }
+
 
 -- | The IP address from which the request originated. This can be IPv4,
 -- IPv6, or a token which is derived from the IP address, depending on the
@@ -470,6 +482,7 @@ newtype TrackingIssue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrackingIssue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -478,6 +491,7 @@ newtype TrackingIssue =
 trackingIssue
     :: TrackingIssue
 trackingIssue = TrackingIssue' {_tiURL = Nothing}
+
 
 -- | A URL pointing to a related entry in an issue tracking system. Example:
 -- https:\/\/github.com\/user\/project\/issues\/4
@@ -504,6 +518,7 @@ data ListEventsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListEventsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -521,6 +536,7 @@ listEventsResponse =
     , _lerTimeRangeBegin = Nothing
     , _lerErrorEvents = Nothing
     }
+
 
 -- | If non-empty, more results are available. Pass this token, along with
 -- the same query parameters as the first request, to view the next page of
@@ -580,6 +596,7 @@ data ErrorGroupStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ErrorGroupStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -615,6 +632,7 @@ errorGroupStats =
     , _egsLastSeenTime = Nothing
     , _egsRepresentative = Nothing
     }
+
 
 -- | Service contexts with a non-zero error count for the given filter
 -- criteria. This list can be truncated if multiple services are affected.
@@ -739,6 +757,7 @@ data ListGroupStatsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListGroupStatsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -756,6 +775,7 @@ listGroupStatsResponse =
     , _lgsrTimeRangeBegin = Nothing
     , _lgsrErrorGroupStats = Nothing
     }
+
 
 -- | If non-empty, more results are available. Pass this token, along with
 -- the same query parameters as the first request, to view the next page of
@@ -811,6 +831,7 @@ data ServiceContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -825,6 +846,7 @@ serviceContext
 serviceContext =
   ServiceContext'
     {_scResourceType = Nothing, _scService = Nothing, _scVersion = Nothing}
+
 
 -- | Type of the MonitoredResource. List of possible values:
 -- https:\/\/cloud.google.com\/monitoring\/api\/resources Value is set
@@ -881,6 +903,7 @@ data TimedCount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimedCount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -894,6 +917,7 @@ timedCount
     :: TimedCount
 timedCount =
   TimedCount' {_tcStartTime = Nothing, _tcCount = Nothing, _tcEndTime = Nothing}
+
 
 -- | Start of the time period to which \`count\` refers (included).
 tcStartTime :: Lens' TimedCount (Maybe UTCTime)
@@ -944,6 +968,7 @@ data SourceLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -958,6 +983,7 @@ sourceLocation
 sourceLocation =
   SourceLocation'
     {_slLineNumber = Nothing, _slFilePath = Nothing, _slFunctionName = Nothing}
+
 
 -- | 1-based. 0 indicates that the line number is unknown.
 slLineNumber :: Lens' SourceLocation (Maybe Int32)
@@ -1006,6 +1032,7 @@ data SourceReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1017,6 +1044,7 @@ sourceReference
     :: SourceReference
 sourceReference =
   SourceReference' {_srRepository = Nothing, _srRevisionId = Nothing}
+
 
 -- | Optional. A URI string identifying the repository. Example:
 -- \"https:\/\/github.com\/GoogleCloudPlatform\/kubernetes.git\"
@@ -1052,11 +1080,13 @@ data ReportErrorEventResponse =
   ReportErrorEventResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportErrorEventResponse' with the minimum fields required to make a request.
 --
 reportErrorEventResponse
     :: ReportErrorEventResponse
 reportErrorEventResponse = ReportErrorEventResponse'
+
 
 instance FromJSON ReportErrorEventResponse where
         parseJSON

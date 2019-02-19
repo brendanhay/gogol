@@ -74,6 +74,7 @@ data ReportsFilesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsFilesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ reportsFilesList pRflReportId_ pRflProFileId_ =
     , _rflSortField = RFLSFLastModifiedTime
     , _rflMaxResults = 10
     }
+
 
 -- | The ID of the parent report.
 rflReportId :: Lens' ReportsFilesList Int64

@@ -30,6 +30,7 @@ data AnalyzeSyntaxRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeSyntaxRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41,6 +42,7 @@ analyzeSyntaxRequest
     :: AnalyzeSyntaxRequest
 analyzeSyntaxRequest =
   AnalyzeSyntaxRequest' {_asrEncodingType = Nothing, _asrDocument = Nothing}
+
 
 -- | The encoding type used by the API to calculate offsets.
 asrEncodingType :: Lens' AnalyzeSyntaxRequest (Maybe AnalyzeSyntaxRequestEncodingType)
@@ -79,6 +81,7 @@ data DependencyEdge =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DependencyEdge' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +93,7 @@ dependencyEdge
     :: DependencyEdge
 dependencyEdge =
   DependencyEdge' {_deHeadTokenIndex = Nothing, _deLabel = Nothing}
+
 
 -- | Represents the head of this token in the dependency tree. This is the
 -- index of the token which has an arc going to this token. The index is
@@ -129,6 +133,7 @@ newtype ClassifyTextRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClassifyTextRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -137,6 +142,7 @@ newtype ClassifyTextRequest =
 classifyTextRequest
     :: ClassifyTextRequest
 classifyTextRequest = ClassifyTextRequest' {_ctrDocument = Nothing}
+
 
 -- | Input document.
 ctrDocument :: Lens' ClassifyTextRequest (Maybe Document)
@@ -198,6 +204,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -210,6 +217,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -258,6 +266,7 @@ data Sentiment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Sentiment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -268,6 +277,7 @@ data Sentiment =
 sentiment
     :: Sentiment
 sentiment = Sentiment' {_sScore = Nothing, _sMagnitude = Nothing}
+
 
 -- | Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
 -- sentiment).
@@ -310,6 +320,7 @@ data Token =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Token' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -330,6 +341,7 @@ token =
     , _tLemma = Nothing
     , _tPartOfSpeech = Nothing
     }
+
 
 -- | Dependency tree parse for this token.
 tDependencyEdge :: Lens' Token (Maybe DependencyEdge)
@@ -377,6 +389,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -387,6 +400,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -412,6 +426,7 @@ data ClassificationCategory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClassificationCategory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -423,6 +438,7 @@ classificationCategory
     :: ClassificationCategory
 classificationCategory =
   ClassificationCategory' {_ccConfidence = Nothing, _ccName = Nothing}
+
 
 -- | The classifier\'s confidence of the category. Number represents how
 -- certain the classifier is that this category represents the given text.
@@ -462,6 +478,7 @@ data AnnotateTextRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotateTextRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -476,6 +493,7 @@ annotateTextRequest
 annotateTextRequest =
   AnnotateTextRequest'
     {_atrEncodingType = Nothing, _atrFeatures = Nothing, _atrDocument = Nothing}
+
 
 -- | The encoding type used by the API to calculate offsets.
 atrEncodingType :: Lens' AnnotateTextRequest (Maybe AnnotateTextRequestEncodingType)
@@ -521,6 +539,7 @@ data EntityMention =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityMention' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -534,6 +553,7 @@ entityMention
     :: EntityMention
 entityMention =
   EntityMention' {_emSentiment = Nothing, _emText = Nothing, _emType = Nothing}
+
 
 -- | For calls to AnalyzeEntitySentiment or if
 -- AnnotateTextRequest.Features.extract_entity_sentiment is set to true,
@@ -576,6 +596,7 @@ data TextSpan =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextSpan' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -586,6 +607,7 @@ data TextSpan =
 textSpan
     :: TextSpan
 textSpan = TextSpan' {_tsBeginOffSet = Nothing, _tsContent = Nothing}
+
 
 -- | The API calculates the beginning offset of the content in the original
 -- document according to the EncodingType specified in the API request.
@@ -624,6 +646,7 @@ data AnalyzeEntitySentimentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeEntitySentimentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -636,6 +659,7 @@ analyzeEntitySentimentRequest
 analyzeEntitySentimentRequest =
   AnalyzeEntitySentimentRequest'
     {_aesrEncodingType = Nothing, _aesrDocument = Nothing}
+
 
 -- | The encoding type used by the API to calculate offsets.
 aesrEncodingType :: Lens' AnalyzeEntitySentimentRequest (Maybe AnalyzeEntitySentimentRequestEncodingType)
@@ -676,6 +700,7 @@ data AnnotateTextResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotateTextResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -702,6 +727,7 @@ annotateTextResponse =
     , _atrSentences = Nothing
     , _atrLanguage = Nothing
     }
+
 
 -- | Entities, along with their semantic information, in the input document.
 -- Populated if the user enables
@@ -790,6 +816,7 @@ data Features =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Features' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -813,6 +840,7 @@ features =
     , _fExtractEntitySentiment = Nothing
     , _fExtractEntities = Nothing
     }
+
 
 -- | Extract syntax information.
 fExtractSyntax :: Lens' Features (Maybe Bool)
@@ -880,6 +908,7 @@ data Document =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Document' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -900,6 +929,7 @@ document =
     , _dGcsContentURI = Nothing
     , _dType = Nothing
     }
+
 
 -- | The content of the input in string format. Cloud audit logging exempt
 -- since it is based on user data.
@@ -959,6 +989,7 @@ data AnalyzeSentimentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeSentimentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -970,6 +1001,7 @@ analyzeSentimentRequest
     :: AnalyzeSentimentRequest
 analyzeSentimentRequest =
   AnalyzeSentimentRequest' {_aEncodingType = Nothing, _aDocument = Nothing}
+
 
 -- | The encoding type used by the API to calculate sentence offsets.
 aEncodingType :: Lens' AnalyzeSentimentRequest (Maybe AnalyzeSentimentRequestEncodingType)
@@ -1006,6 +1038,7 @@ data AnalyzeEntitiesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeEntitiesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1017,6 +1050,7 @@ analyzeEntitiesResponse
     :: AnalyzeEntitiesResponse
 analyzeEntitiesResponse =
   AnalyzeEntitiesResponse' {_aerEntities = Nothing, _aerLanguage = Nothing}
+
 
 -- | The recognized entities in the input document.
 aerEntities :: Lens' AnalyzeEntitiesResponse [Entity]
@@ -1058,6 +1092,7 @@ data AnalyzeSentimentResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeSentimentResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1075,6 +1110,7 @@ analyzeSentimentResponse =
     , _asrSentences = Nothing
     , _asrLanguage = Nothing
     }
+
 
 -- | The overall sentiment of the input document.
 asrDocumentSentiment :: Lens' AnalyzeSentimentResponse (Maybe Sentiment)
@@ -1124,6 +1160,7 @@ data AnalyzeEntitiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeEntitiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1135,6 +1172,7 @@ analyzeEntitiesRequest
     :: AnalyzeEntitiesRequest
 analyzeEntitiesRequest =
   AnalyzeEntitiesRequest' {_aerEncodingType = Nothing, _aerDocument = Nothing}
+
 
 -- | The encoding type used by the API to calculate offsets.
 aerEncodingType :: Lens' AnalyzeEntitiesRequest (Maybe AnalyzeEntitiesRequestEncodingType)
@@ -1177,6 +1215,7 @@ data Entity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Entity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1203,6 +1242,7 @@ entity =
     , _eType = Nothing
     , _eMentions = Nothing
     }
+
 
 -- | For calls to AnalyzeEntitySentiment or if
 -- AnnotateTextRequest.Features.extract_entity_sentiment is set to true,
@@ -1276,6 +1316,7 @@ data AnalyzeEntitySentimentResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeEntitySentimentResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1288,6 +1329,7 @@ analyzeEntitySentimentResponse
 analyzeEntitySentimentResponse =
   AnalyzeEntitySentimentResponse'
     {_aesrEntities = Nothing, _aesrLanguage = Nothing}
+
 
 -- | The recognized entities in the input document with associated
 -- sentiments.
@@ -1331,6 +1373,7 @@ data AnalyzeSyntaxResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyzeSyntaxResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1345,6 +1388,7 @@ analyzeSyntaxResponse
 analyzeSyntaxResponse =
   AnalyzeSyntaxResponse'
     {_aTokens = Nothing, _aSentences = Nothing, _aLanguage = Nothing}
+
 
 -- | Tokens, along with their syntactic information, in the input document.
 aTokens :: Lens' AnalyzeSyntaxResponse [Token]
@@ -1395,6 +1439,7 @@ newtype EntityMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1405,6 +1450,7 @@ entityMetadata
     -> EntityMetadata
 entityMetadata pEmAddtional_ =
   EntityMetadata' {_emAddtional = _Coerce # pEmAddtional_}
+
 
 emAddtional :: Lens' EntityMetadata (HashMap Text Text)
 emAddtional
@@ -1428,6 +1474,7 @@ newtype ClassifyTextResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClassifyTextResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1436,6 +1483,7 @@ newtype ClassifyTextResponse =
 classifyTextResponse
     :: ClassifyTextResponse
 classifyTextResponse = ClassifyTextResponse' {_ctrCategories = Nothing}
+
 
 -- | Categories representing the input document.
 ctrCategories :: Lens' ClassifyTextResponse [ClassificationCategory]
@@ -1478,6 +1526,7 @@ data PartOfSpeech =
     , _posMood        :: !(Maybe PartOfSpeechMood)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartOfSpeech' with the minimum fields required to make a request.
 --
@@ -1523,6 +1572,7 @@ partOfSpeech =
     , _posTense = Nothing
     , _posMood = Nothing
     }
+
 
 -- | The grammatical properness.
 posProper :: Lens' PartOfSpeech (Maybe PartOfSpeechProper)
@@ -1621,6 +1671,7 @@ data Sentence =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Sentence' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1631,6 +1682,7 @@ data Sentence =
 sentence
     :: Sentence
 sentence = Sentence' {_sSentiment = Nothing, _sText = Nothing}
+
 
 -- | For calls to AnalyzeSentiment or if
 -- AnnotateTextRequest.Features.extract_document_sentiment is set to true,

@@ -85,6 +85,7 @@ data FoldersSinksUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersSinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ foldersSinksUpdate pFsuPayload_ pFsuSinkName_ =
     , _fsuSinkName = pFsuSinkName_
     , _fsuCallback = Nothing
     }
+
 
 -- | V1 error format.
 fsuXgafv :: Lens' FoldersSinksUpdate (Maybe Xgafv)

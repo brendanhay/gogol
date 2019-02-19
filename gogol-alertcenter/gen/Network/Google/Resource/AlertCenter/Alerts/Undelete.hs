@@ -85,6 +85,7 @@ data AlertsUndelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlertsUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ alertsUndelete pAuAlertId_ pAuPayload_ =
     , _auPayload = pAuPayload_
     , _auCallback = Nothing
     }
+
 
 -- | V1 error format.
 auXgafv :: Lens' AlertsUndelete (Maybe Xgafv)

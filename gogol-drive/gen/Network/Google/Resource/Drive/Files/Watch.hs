@@ -77,6 +77,7 @@ data FilesWatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilesWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ filesWatch pFwPayload_ pFwFileId_ =
     , _fwFileId = pFwFileId_
     , _fwSupportsTeamDrives = False
     }
+
 
 -- | Multipart request metadata.
 fwPayload :: Lens' FilesWatch Channel

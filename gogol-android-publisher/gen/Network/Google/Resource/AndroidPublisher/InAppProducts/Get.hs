@@ -61,6 +61,7 @@ data InAppProductsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InAppProductsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ inAppProductsGet
     -> InAppProductsGet
 inAppProductsGet pIapgPackageName_ pIapgSKU_ =
   InAppProductsGet' {_iapgPackageName = pIapgPackageName_, _iapgSKU = pIapgSKU_}
+
 
 iapgPackageName :: Lens' InAppProductsGet Text
 iapgPackageName

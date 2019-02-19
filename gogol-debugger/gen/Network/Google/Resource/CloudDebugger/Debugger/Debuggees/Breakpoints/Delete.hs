@@ -79,6 +79,7 @@ data DebuggerDebuggeesBreakpointsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DebuggerDebuggeesBreakpointsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ debuggerDebuggeesBreakpointsDelete pDdbdBreakpointId_ pDdbdDebuggeeId_ =
     , _ddbdClientVersion = Nothing
     , _ddbdCallback = Nothing
     }
+
 
 -- | V1 error format.
 ddbdXgafv :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Xgafv)

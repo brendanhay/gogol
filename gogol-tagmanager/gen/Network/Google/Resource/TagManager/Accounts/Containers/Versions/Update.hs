@@ -63,6 +63,7 @@ data AccountsContainersVersionsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersVersionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ accountsContainersVersionsUpdate pAcvucPath_ pAcvucPayload_ =
     , _acvucFingerprint = Nothing
     , _acvucPayload = pAcvucPayload_
     }
+
 
 -- | GTM ContainerVersion\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}

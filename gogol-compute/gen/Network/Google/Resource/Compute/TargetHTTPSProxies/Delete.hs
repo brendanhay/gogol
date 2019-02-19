@@ -65,6 +65,7 @@ data TargetHTTPSProxiesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPSProxiesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ targetHTTPSProxiesDelete pThpdProject_ pThpdTargetHTTPSProxy_ =
     , _thpdProject = pThpdProject_
     , _thpdTargetHTTPSProxy = pThpdTargetHTTPSProxy_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

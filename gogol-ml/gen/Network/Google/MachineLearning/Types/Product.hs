@@ -46,6 +46,7 @@ data GoogleIAMV1__AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleIAMV1__AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -58,6 +59,7 @@ googleIAMV1__AuditConfig
 googleIAMV1__AuditConfig =
   GoogleIAMV1__AuditConfig'
     {_givacService = Nothing, _givacAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -117,6 +119,7 @@ data GoogleCloudMlV1__Version =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__Version' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -173,6 +176,7 @@ googleCloudMlV1__Version =
     , _gcmvvCreateTime = Nothing
     , _gcmvvIsDefault = Nothing
     }
+
 
 -- | Optional. The machine learning framework Cloud ML Engine uses to train
 -- this version of the model. Valid values are \`TENSORFLOW\`,
@@ -370,6 +374,7 @@ data GoogleCloudMlV1__PredictionOutput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__PredictionOutput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -390,6 +395,7 @@ googleCloudMlV1__PredictionOutput =
     , _gcmvpoPredictionCount = Nothing
     , _gcmvpoOutputPath = Nothing
     }
+
 
 -- | Node hours used by the batch prediction job.
 gcmvpoNodeHours :: Lens' GoogleCloudMlV1__PredictionOutput (Maybe Double)
@@ -448,6 +454,7 @@ newtype GoogleCloudMlV1__HyperparameterOutputHyperparameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__HyperparameterOutputHyperparameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -459,6 +466,7 @@ googleCloudMlV1__HyperparameterOutputHyperparameters
 googleCloudMlV1__HyperparameterOutputHyperparameters pGcmvhohAddtional_ =
   GoogleCloudMlV1__HyperparameterOutputHyperparameters'
     {_gcmvhohAddtional = _Coerce # pGcmvhohAddtional_}
+
 
 gcmvhohAddtional :: Lens' GoogleCloudMlV1__HyperparameterOutputHyperparameters (HashMap Text Text)
 gcmvhohAddtional
@@ -490,6 +498,7 @@ newtype GoogleCloudMlV1__PredictRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__PredictRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -499,6 +508,7 @@ googleCloudMlV1__PredictRequest
     :: GoogleCloudMlV1__PredictRequest
 googleCloudMlV1__PredictRequest =
   GoogleCloudMlV1__PredictRequest' {_gcmvprHTTPBody = Nothing}
+
 
 -- | Required. The prediction request body.
 gcmvprHTTPBody :: Lens' GoogleCloudMlV1__PredictRequest (Maybe GoogleAPI__HTTPBody)
@@ -535,6 +545,7 @@ newtype GoogleLongrunning__OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunning__OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -546,6 +557,7 @@ googleLongrunning__OperationResponse
 googleLongrunning__OperationResponse pGlorAddtional_ =
   GoogleLongrunning__OperationResponse'
     {_glorAddtional = _Coerce # pGlorAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glorAddtional :: Lens' GoogleLongrunning__OperationResponse (HashMap Text JSONValue)
@@ -581,6 +593,7 @@ data GoogleIAMV1__AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleIAMV1__AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -593,6 +606,7 @@ googleIAMV1__AuditLogConfig
 googleIAMV1__AuditLogConfig =
   GoogleIAMV1__AuditLogConfig'
     {_givalcLogType = Nothing, _givalcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 givalcLogType :: Lens' GoogleIAMV1__AuditLogConfig (Maybe GoogleIAMV1__AuditLogConfigLogType)
@@ -634,6 +648,7 @@ data GoogleCloudMlV1__ListModelsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__ListModelsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -646,6 +661,7 @@ googleCloudMlV1__ListModelsResponse
 googleCloudMlV1__ListModelsResponse =
   GoogleCloudMlV1__ListModelsResponse'
     {_gcmvlmrNextPageToken = Nothing, _gcmvlmrModels = Nothing}
+
 
 -- | Optional. Pass this token as the \`page_token\` field of the request for
 -- a subsequent call.
@@ -689,6 +705,7 @@ data GoogleLongrunning__ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunning__ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -701,6 +718,7 @@ googleLongrunning__ListOperationsResponse
 googleLongrunning__ListOperationsResponse =
   GoogleLongrunning__ListOperationsResponse'
     {_gllorNextPageToken = Nothing, _gllorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 gllorNextPageToken :: Lens' GoogleLongrunning__ListOperationsResponse (Maybe Text)
@@ -746,6 +764,7 @@ data GoogleCloudMlV1__AcceleratorConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__AcceleratorConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -758,6 +777,7 @@ googleCloudMlV1__AcceleratorConfig
 googleCloudMlV1__AcceleratorConfig =
   GoogleCloudMlV1__AcceleratorConfig'
     {_gcmvacCount = Nothing, _gcmvacType = Nothing}
+
 
 -- | The number of accelerators to attach to each machine running the job.
 gcmvacCount :: Lens' GoogleCloudMlV1__AcceleratorConfig (Maybe Int64)
@@ -814,6 +834,7 @@ data GoogleIAMV1__Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleIAMV1__Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -834,6 +855,7 @@ googleIAMV1__Policy =
     , _givpVersion = Nothing
     , _givpBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 givpAuditConfigs :: Lens' GoogleIAMV1__Policy [GoogleIAMV1__AuditConfig]
@@ -898,6 +920,7 @@ newtype GoogleIAMV1__TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleIAMV1__TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -907,6 +930,7 @@ googleIAMV1__TestIAMPermissionsResponse
     :: GoogleIAMV1__TestIAMPermissionsResponse
 googleIAMV1__TestIAMPermissionsResponse =
   GoogleIAMV1__TestIAMPermissionsResponse' {_givtiprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -944,6 +968,7 @@ data GoogleCloudMlV1__ListJobsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__ListJobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -956,6 +981,7 @@ googleCloudMlV1__ListJobsResponse
 googleCloudMlV1__ListJobsResponse =
   GoogleCloudMlV1__ListJobsResponse'
     {_gcmvljrNextPageToken = Nothing, _gcmvljrJobs = Nothing}
+
 
 -- | Optional. Pass this token as the \`page_token\` field of the request for
 -- a subsequent call.
@@ -998,6 +1024,7 @@ data GoogleCloudMlV1__ListVersionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__ListVersionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1010,6 +1037,7 @@ googleCloudMlV1__ListVersionsResponse
 googleCloudMlV1__ListVersionsResponse =
   GoogleCloudMlV1__ListVersionsResponse'
     {_gcmvlvrNextPageToken = Nothing, _gcmvlvrVersions = Nothing}
+
 
 -- | Optional. Pass this token as the \`page_token\` field of the request for
 -- a subsequent call.
@@ -1058,6 +1086,7 @@ data GoogleType__Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleType__Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1078,6 +1107,7 @@ googleType__Expr =
     , _gteTitle = Nothing
     , _gteDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -1140,6 +1170,7 @@ data GoogleCloudMlV1__HyperparameterOutput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__HyperparameterOutput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1163,6 +1194,7 @@ googleCloudMlV1__HyperparameterOutput =
     , _gcmvhoTrialId = Nothing
     , _gcmvhoFinalMetric = Nothing
     }
+
 
 -- | True if the trial is stopped early.
 gcmvhoIsTrialStoppedEarly :: Lens' GoogleCloudMlV1__HyperparameterOutput (Maybe Bool)
@@ -1233,6 +1265,7 @@ data GoogleCloudMlV1__GetConfigResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__GetConfigResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1250,6 +1283,7 @@ googleCloudMlV1__GetConfigResponse =
     , _gcmvgcrServiceAccount = Nothing
     , _gcmvgcrServiceAccountProject = Nothing
     }
+
 
 gcmvgcrConfig :: Lens' GoogleCloudMlV1__GetConfigResponse (Maybe GoogleCloudMlV1__Config)
 gcmvgcrConfig
@@ -1297,6 +1331,7 @@ newtype GoogleCloudMlV1__ManualScaling =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__ManualScaling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1306,6 +1341,7 @@ googleCloudMlV1__ManualScaling
     :: GoogleCloudMlV1__ManualScaling
 googleCloudMlV1__ManualScaling =
   GoogleCloudMlV1__ManualScaling' {_gcmvmsNodes = Nothing}
+
 
 -- | The number of nodes to allocate for this model. These nodes are always
 -- up, starting from the time the model is deployed, so the cost of
@@ -1341,6 +1377,7 @@ data GoogleLongrunning__Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunning__Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1364,6 +1401,7 @@ googleLongrunning__Operation =
     , _gloName = Nothing
     , _gloMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -1438,6 +1476,7 @@ data GoogleCloudMlV1__Model =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__Model' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1467,6 +1506,7 @@ googleCloudMlV1__Model =
     , _gcmvmDescription = Nothing
     , _gcmvmOnlinePredictionLogging = Nothing
     }
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a model from overwriting each other. It
@@ -1577,6 +1617,7 @@ data GoogleCloudMlV1__Job =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__Job' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1621,6 +1662,7 @@ googleCloudMlV1__Job =
     , _gcmvjTrainingInput = Nothing
     , _gcmvjCreateTime = Nothing
     }
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a job from overwriting each other. It is
@@ -1744,12 +1786,14 @@ data GoogleCloudMlV1__SetDefaultVersionRequest =
   GoogleCloudMlV1__SetDefaultVersionRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__SetDefaultVersionRequest' with the minimum fields required to make a request.
 --
 googleCloudMlV1__SetDefaultVersionRequest
     :: GoogleCloudMlV1__SetDefaultVersionRequest
 googleCloudMlV1__SetDefaultVersionRequest =
   GoogleCloudMlV1__SetDefaultVersionRequest'
+
 
 instance FromJSON
            GoogleCloudMlV1__SetDefaultVersionRequest
@@ -1778,6 +1822,7 @@ newtype GoogleCloudMlV1__ModelLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__ModelLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1788,6 +1833,7 @@ googleCloudMlV1__ModelLabels
     -> GoogleCloudMlV1__ModelLabels
 googleCloudMlV1__ModelLabels pGcmvmlAddtional_ =
   GoogleCloudMlV1__ModelLabels' {_gcmvmlAddtional = _Coerce # pGcmvmlAddtional_}
+
 
 gcmvmlAddtional :: Lens' GoogleCloudMlV1__ModelLabels (HashMap Text Text)
 gcmvmlAddtional
@@ -1818,6 +1864,7 @@ newtype GoogleCloudMlV1__JobLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__JobLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1828,6 +1875,7 @@ googleCloudMlV1__JobLabels
     -> GoogleCloudMlV1__JobLabels
 googleCloudMlV1__JobLabels pGcmvjlAddtional_ =
   GoogleCloudMlV1__JobLabels' {_gcmvjlAddtional = _Coerce # pGcmvjlAddtional_}
+
 
 gcmvjlAddtional :: Lens' GoogleCloudMlV1__JobLabels (HashMap Text Text)
 gcmvjlAddtional
@@ -1889,6 +1937,7 @@ data GoogleRpc__Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleRpc__Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1903,6 +1952,7 @@ googleRpc__Status
 googleRpc__Status =
   GoogleRpc__Status'
     {_grsDetails = Nothing, _grsCode = Nothing, _grsMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -1951,6 +2001,7 @@ data GoogleCloudMlV1__ReplicaConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__ReplicaConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1963,6 +2014,7 @@ googleCloudMlV1__ReplicaConfig
 googleCloudMlV1__ReplicaConfig =
   GoogleCloudMlV1__ReplicaConfig'
     {_gcmvrcImageURI = Nothing, _gcmvrcAcceleratorConfig = Nothing}
+
 
 -- | The docker image to run on worker. This image must be in Google
 -- Container Registry.
@@ -2000,6 +2052,7 @@ newtype GoogleCloudMlV1__Config =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__Config' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2009,6 +2062,7 @@ googleCloudMlV1__Config
     :: GoogleCloudMlV1__Config
 googleCloudMlV1__Config =
   GoogleCloudMlV1__Config' {_gcmvcTpuServiceAccount = Nothing}
+
 
 -- | The service account Cloud ML uses to run on TPU node.
 gcmvcTpuServiceAccount :: Lens' GoogleCloudMlV1__Config (Maybe Text)
@@ -2046,6 +2100,7 @@ data GoogleCloudMlV1__HyperparameterSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__HyperparameterSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2078,6 +2133,7 @@ googleCloudMlV1__HyperparameterSpec =
     , _gcmvhsMaxParallelTrials = Nothing
     , _gcmvhsHyperparameterMetricTag = Nothing
     }
+
 
 -- | Optional. The prior hyperparameter tuning job id that users hope to
 -- continue with. The job id will be used to find the corresponding vizier
@@ -2188,6 +2244,7 @@ newtype GoogleCloudMlV1__AutoScaling =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__AutoScaling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2197,6 +2254,7 @@ googleCloudMlV1__AutoScaling
     :: GoogleCloudMlV1__AutoScaling
 googleCloudMlV1__AutoScaling =
   GoogleCloudMlV1__AutoScaling' {_gcmvasMinNodes = Nothing}
+
 
 -- | Optional. The minimum number of nodes to allocate for this model. These
 -- nodes are always up, starting from the time the model is deployed.
@@ -2254,6 +2312,7 @@ newtype GoogleLongrunning__OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunning__OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2265,6 +2324,7 @@ googleLongrunning__OperationMetadata
 googleLongrunning__OperationMetadata pGlomAddtional_ =
   GoogleLongrunning__OperationMetadata'
     {_glomAddtional = _Coerce # pGlomAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glomAddtional :: Lens' GoogleLongrunning__OperationMetadata (HashMap Text JSONValue)
@@ -2301,6 +2361,7 @@ data GoogleCloudMlV1__ParameterSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__ParameterSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2330,6 +2391,7 @@ googleCloudMlV1__ParameterSpec =
     , _gcmvpsCategoricalValues = Nothing
     , _gcmvpsMinValue = Nothing
     }
+
 
 -- | Required if type is \`DOUBLE\` or \`INTEGER\`. This field should be
 -- unset if type is \`CATEGORICAL\`. This value should be integers if type
@@ -2426,6 +2488,7 @@ data GoogleIAMV1__Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleIAMV1__Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2440,6 +2503,7 @@ googleIAMV1__Binding
 googleIAMV1__Binding =
   GoogleIAMV1__Binding'
     {_givbMembers = Nothing, _givbRole = Nothing, _givbCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -2501,6 +2565,7 @@ data GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2513,6 +2578,7 @@ googleCloudMlV1_HyperparameterOutput_HyperparameterMetric
 googleCloudMlV1_HyperparameterOutput_HyperparameterMetric =
   GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric'
     {_gcmvhohmTrainingStep = Nothing, _gcmvhohmObjectiveValue = Nothing}
+
 
 -- | The global training step for this metric.
 gcmvhohmTrainingStep :: Lens' GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric (Maybe Int64)
@@ -2559,6 +2625,7 @@ data GoogleIAMV1__SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleIAMV1__SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2571,6 +2638,7 @@ googleIAMV1__SetIAMPolicyRequest
 googleIAMV1__SetIAMPolicyRequest =
   GoogleIAMV1__SetIAMPolicyRequest'
     {_givsiprUpdateMask = Nothing, _givsiprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -2627,6 +2695,7 @@ data GoogleCloudMlV1__PredictionInput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__PredictionInput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2674,6 +2743,7 @@ googleCloudMlV1__PredictionInput =
     , _gcmvpiInputPaths = Nothing
     , _gcmvpiSignatureName = Nothing
     }
+
 
 -- | Use this field if you want to specify a version of the model to use. The
 -- string is formatted the same way as \`model_version\`, with the addition
@@ -2846,6 +2916,7 @@ data GoogleCloudMlV1__TrainingInput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__TrainingInput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2905,6 +2976,7 @@ googleCloudMlV1__TrainingInput =
     , _gcmvtiRegion = Nothing
     , _gcmvtiParameterServerConfig = Nothing
     }
+
 
 -- | Optional. Specifies the type of virtual machine to use for your training
 -- job\'s master worker. The following types are supported:
@@ -3156,6 +3228,7 @@ newtype GoogleRpc__StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleRpc__StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3166,6 +3239,7 @@ googleRpc__StatusDetailsItem
     -> GoogleRpc__StatusDetailsItem
 googleRpc__StatusDetailsItem pGrsdiAddtional_ =
   GoogleRpc__StatusDetailsItem' {_grsdiAddtional = _Coerce # pGrsdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 grsdiAddtional :: Lens' GoogleRpc__StatusDetailsItem (HashMap Text JSONValue)
@@ -3195,11 +3269,13 @@ data GoogleProtobuf__Empty =
   GoogleProtobuf__Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleProtobuf__Empty' with the minimum fields required to make a request.
 --
 googleProtobuf__Empty
     :: GoogleProtobuf__Empty
 googleProtobuf__Empty = GoogleProtobuf__Empty'
+
 
 instance FromJSON GoogleProtobuf__Empty where
         parseJSON
@@ -3218,6 +3294,7 @@ data GoogleCloudMlV1__Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3230,6 +3307,7 @@ googleCloudMlV1__Location
 googleCloudMlV1__Location =
   GoogleCloudMlV1__Location'
     {_gcmvlName = Nothing, _gcmvlCapabilities = Nothing}
+
 
 gcmvlName :: Lens' GoogleCloudMlV1__Location (Maybe Text)
 gcmvlName
@@ -3267,6 +3345,7 @@ newtype GoogleCloudMlV1__OperationMetadataLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__OperationMetadataLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3278,6 +3357,7 @@ googleCloudMlV1__OperationMetadataLabels
 googleCloudMlV1__OperationMetadataLabels pGcmvomlAddtional_ =
   GoogleCloudMlV1__OperationMetadataLabels'
     {_gcmvomlAddtional = _Coerce # pGcmvomlAddtional_}
+
 
 gcmvomlAddtional :: Lens' GoogleCloudMlV1__OperationMetadataLabels (HashMap Text Text)
 gcmvomlAddtional
@@ -3308,6 +3388,7 @@ data GoogleCloudMlV1__Capability =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__Capability' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3320,6 +3401,7 @@ googleCloudMlV1__Capability
 googleCloudMlV1__Capability =
   GoogleCloudMlV1__Capability'
     {_gcmvcAvailableAccelerators = Nothing, _gcmvcType = Nothing}
+
 
 -- | Available accelerators for the capability.
 gcmvcAvailableAccelerators :: Lens' GoogleCloudMlV1__Capability [Text]
@@ -3366,6 +3448,7 @@ data GoogleCloudMlV1__OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3401,6 +3484,7 @@ googleCloudMlV1__OperationMetadata =
     , _gcmvomOperationType = Nothing
     , _gcmvomCreateTime = Nothing
     }
+
 
 -- | The time operation processing started.
 gcmvomStartTime :: Lens' GoogleCloudMlV1__OperationMetadata (Maybe UTCTime)
@@ -3499,6 +3583,7 @@ newtype GoogleAPI__HTTPBodyExtensionsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleAPI__HTTPBodyExtensionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3510,6 +3595,7 @@ googleAPI__HTTPBodyExtensionsItem
 googleAPI__HTTPBodyExtensionsItem pGahttpbeiAddtional_ =
   GoogleAPI__HTTPBodyExtensionsItem'
     {_gahttpbeiAddtional = _Coerce # pGahttpbeiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 gahttpbeiAddtional :: Lens' GoogleAPI__HTTPBodyExtensionsItem (HashMap Text JSONValue)
@@ -3537,11 +3623,13 @@ data GoogleCloudMlV1__CancelJobRequest =
   GoogleCloudMlV1__CancelJobRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__CancelJobRequest' with the minimum fields required to make a request.
 --
 googleCloudMlV1__CancelJobRequest
     :: GoogleCloudMlV1__CancelJobRequest
 googleCloudMlV1__CancelJobRequest = GoogleCloudMlV1__CancelJobRequest'
+
 
 instance FromJSON GoogleCloudMlV1__CancelJobRequest
          where
@@ -3565,6 +3653,7 @@ data GoogleCloudMlV1__TrainingOutput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__TrainingOutput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3585,6 +3674,7 @@ googleCloudMlV1__TrainingOutput =
     , _gcmvtoConsumedMLUnits = Nothing
     , _gcmvtoTrials = Nothing
     }
+
 
 -- | Whether this job is a hyperparameter tuning job.
 gcmvtoIsHyperparameterTuningJob :: Lens' GoogleCloudMlV1__TrainingOutput (Maybe Bool)
@@ -3665,6 +3755,7 @@ data GoogleAPI__HTTPBody =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleAPI__HTTPBody' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3682,6 +3773,7 @@ googleAPI__HTTPBody =
     , _gahttpbData = Nothing
     , _gahttpbContentType = Nothing
     }
+
 
 -- | Application specific response metadata. Must be set in the first
 -- response for streaming APIs.
@@ -3730,6 +3822,7 @@ newtype GoogleIAMV1__TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleIAMV1__TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3739,6 +3832,7 @@ googleIAMV1__TestIAMPermissionsRequest
     :: GoogleIAMV1__TestIAMPermissionsRequest
 googleIAMV1__TestIAMPermissionsRequest =
   GoogleIAMV1__TestIAMPermissionsRequest' {_giamvtiamprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -3777,6 +3871,7 @@ data GoogleCloudMlV1__ListLocationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__ListLocationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3789,6 +3884,7 @@ googleCloudMlV1__ListLocationsResponse
 googleCloudMlV1__ListLocationsResponse =
   GoogleCloudMlV1__ListLocationsResponse'
     {_gcmvllrNextPageToken = Nothing, _gcmvllrLocations = Nothing}
+
 
 -- | Optional. Pass this token as the \`page_token\` field of the request for
 -- a subsequent call.
@@ -3837,6 +3933,7 @@ newtype GoogleCloudMlV1__VersionLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudMlV1__VersionLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3848,6 +3945,7 @@ googleCloudMlV1__VersionLabels
 googleCloudMlV1__VersionLabels pGcmvvlAddtional_ =
   GoogleCloudMlV1__VersionLabels'
     {_gcmvvlAddtional = _Coerce # pGcmvvlAddtional_}
+
 
 gcmvvlAddtional :: Lens' GoogleCloudMlV1__VersionLabels (HashMap Text Text)
 gcmvvlAddtional

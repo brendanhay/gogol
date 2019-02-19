@@ -79,6 +79,7 @@ data PostsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ postsPatch pPosoBlogId_ pPosoPayload_ pPosoPostId_ =
     , _posoPostId = pPosoPostId_
     , _posoPublish = Nothing
     }
+
 
 -- | Whether the body content of the post is included with the result
 -- (default: true).

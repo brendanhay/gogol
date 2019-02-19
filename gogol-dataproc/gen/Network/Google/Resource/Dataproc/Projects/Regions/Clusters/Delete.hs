@@ -86,6 +86,7 @@ data ProjectsRegionsClustersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsClustersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +128,7 @@ projectsRegionsClustersDelete pPrcdClusterName_ pPrcdRegion_ pPrcdProjectId_ =
     , _prcdProjectId = pPrcdProjectId_
     , _prcdCallback = Nothing
     }
+
 
 -- | V1 error format.
 prcdXgafv :: Lens' ProjectsRegionsClustersDelete (Maybe Xgafv)

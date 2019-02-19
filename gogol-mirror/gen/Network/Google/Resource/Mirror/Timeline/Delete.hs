@@ -57,6 +57,7 @@ newtype TimelineDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimelineDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ timelineDelete
     :: Text -- ^ 'tdId'
     -> TimelineDelete
 timelineDelete pTdId_ = TimelineDelete' {_tdId = pTdId_}
+
 
 -- | The ID of the timeline item.
 tdId :: Lens' TimelineDelete Text

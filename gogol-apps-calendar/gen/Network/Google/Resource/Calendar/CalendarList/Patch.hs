@@ -68,6 +68,7 @@ data CalendarListPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CalendarListPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ calendarListPatch pClpCalendarId_ pClpPayload_ =
     , _clpPayload = pClpPayload_
     , _clpColorRgbFormat = Nothing
     }
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

@@ -97,6 +97,7 @@ data SpreadsheetsGetByDataFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsGetByDataFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +129,7 @@ spreadsheetsGetByDataFilter pSgbdfSpreadsheetId_ pSgbdfPayload_ =
     , _sgbdfPayload = pSgbdfPayload_
     , _sgbdfCallback = Nothing
     }
+
 
 -- | V1 error format.
 sgbdfXgafv :: Lens' SpreadsheetsGetByDataFilter (Maybe Xgafv)

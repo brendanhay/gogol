@@ -75,6 +75,7 @@ data ProjectsLocationsClustersSetResourceLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersSetResourceLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLocationsClustersSetResourceLabels pPlcsrlPayload_ pPlcsrlName_ =
     , _plcsrlName = pPlcsrlName_
     , _plcsrlCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcsrlXgafv :: Lens' ProjectsLocationsClustersSetResourceLabels (Maybe Xgafv)

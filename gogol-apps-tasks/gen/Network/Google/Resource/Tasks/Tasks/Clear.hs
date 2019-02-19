@@ -62,6 +62,7 @@ newtype TasksClear =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TasksClear' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ tasksClear
     :: Text -- ^ 'tcTaskList'
     -> TasksClear
 tasksClear pTcTaskList_ = TasksClear' {_tcTaskList = pTcTaskList_}
+
 
 -- | Task list identifier.
 tcTaskList :: Lens' TasksClear Text

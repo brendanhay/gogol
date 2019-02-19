@@ -48,6 +48,7 @@ data GroupLicense =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupLicense' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ groupLicense =
     , _glProductId = Nothing
     , _glAcquisitionKind = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#groupLicense\".
@@ -176,6 +178,7 @@ data StoreLayoutPagesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StoreLayoutPagesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -190,6 +193,7 @@ storeLayoutPagesListResponse =
     { _slplrKind = "androidenterprise#storeLayoutPagesListResponse"
     , _slplrPage = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#storeLayoutPagesListResponse\".
@@ -231,6 +235,7 @@ data EnterpriseAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterpriseAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -243,6 +248,7 @@ enterpriseAccount
 enterpriseAccount =
   EnterpriseAccount'
     {_eaKind = "androidenterprise#enterpriseAccount", _eaAccountEmail = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#enterpriseAccount\".
@@ -284,6 +290,7 @@ data AppRestrictionsSchemaRestrictionRestrictionValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppRestrictionsSchemaRestrictionRestrictionValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -307,6 +314,7 @@ appRestrictionsSchemaRestrictionRestrictionValue =
     , _arsrrvType = Nothing
     , _arsrrvValueString = Nothing
     }
+
 
 -- | The list of string values - this will only be present if type is
 -- multiselect.
@@ -378,6 +386,7 @@ data AdministratorWebTokenSpecPlaySearch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdministratorWebTokenSpecPlaySearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -390,6 +399,7 @@ administratorWebTokenSpecPlaySearch
 administratorWebTokenSpecPlaySearch =
   AdministratorWebTokenSpecPlaySearch'
     {_awtspsEnabled = Nothing, _awtspsApproveApps = Nothing}
+
 
 -- | Whether the managed Play Search apps page is displayed. Default is true.
 awtspsEnabled :: Lens' AdministratorWebTokenSpecPlaySearch (Maybe Bool)
@@ -430,6 +440,7 @@ data DeviceState =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceState' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -442,6 +453,7 @@ deviceState
 deviceState =
   DeviceState'
     {_dsKind = "androidenterprise#deviceState", _dsAccountState = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#deviceState\".
@@ -482,6 +494,7 @@ data GroupLicenseUsersListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupLicenseUsersListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -496,6 +509,7 @@ groupLicenseUsersListResponse =
     { _glulrKind = "androidenterprise#groupLicenseUsersListResponse"
     , _glulrUser = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#groupLicenseUsersListResponse\".
@@ -535,6 +549,7 @@ data TokenPagination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -546,6 +561,7 @@ tokenPagination
     :: TokenPagination
 tokenPagination =
   TokenPagination' {_tpNextPageToken = Nothing, _tpPreviousPageToken = Nothing}
+
 
 tpNextPageToken :: Lens' TokenPagination (Maybe Text)
 tpNextPageToken
@@ -580,6 +596,7 @@ newtype AdministratorWebTokenSpecWebApps =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdministratorWebTokenSpecWebApps' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -589,6 +606,7 @@ administratorWebTokenSpecWebApps
     :: AdministratorWebTokenSpecWebApps
 administratorWebTokenSpecWebApps =
   AdministratorWebTokenSpecWebApps' {_awtswaEnabled = Nothing}
+
 
 -- | Whether the Web Apps page is displayed. Default is true.
 awtswaEnabled :: Lens' AdministratorWebTokenSpecWebApps (Maybe Bool)
@@ -620,6 +638,7 @@ data ApprovalURLInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApprovalURLInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -632,6 +651,7 @@ approvalURLInfo
 approvalURLInfo =
   ApprovalURLInfo'
     {_auiApprovalURL = Nothing, _auiKind = "androidenterprise#approvalUrlInfo"}
+
 
 -- | A URL that displays a product\'s permissions and that can also be used
 -- to approve the product with the Products.approve call.
@@ -671,6 +691,7 @@ data ManagedConfigurationsSettingsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfigurationsSettingsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -685,6 +706,7 @@ managedConfigurationsSettingsListResponse =
     { _mcslrKind = "androidenterprise#managedConfigurationsSettingsListResponse"
     , _mcslrManagedConfigurationsSettings = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#managedConfigurationsSettingsListResponse\".
@@ -742,6 +764,7 @@ data ManagedProperty =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedProperty' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -771,6 +794,7 @@ managedProperty =
     , _mpValueBundleArray = Nothing
     , _mpValueString = Nothing
     }
+
 
 -- | The list of string values - this will only be present if type of the
 -- property is multiselect.
@@ -857,6 +881,7 @@ data StoreLayoutClustersListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StoreLayoutClustersListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -871,6 +896,7 @@ storeLayoutClustersListResponse =
     { _slclrCluster = Nothing
     , _slclrKind = "androidenterprise#storeLayoutClustersListResponse"
     }
+
 
 -- | A store cluster of an enterprise.
 slclrCluster :: Lens' StoreLayoutClustersListResponse [StoreCluster]
@@ -916,6 +942,7 @@ data ManagedConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -936,6 +963,7 @@ managedConfiguration =
     , _mcConfigurationVariables = Nothing
     , _mcProductId = Nothing
     }
+
 
 -- | The set of managed properties for this configuration.
 mcManagedProperty :: Lens' ManagedConfiguration [ManagedProperty]
@@ -998,6 +1026,7 @@ data StoreCluster =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StoreCluster' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1021,6 +1050,7 @@ storeCluster =
     , _scId = Nothing
     , _scProductId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#storeCluster\".
@@ -1097,6 +1127,7 @@ data AdministratorWebTokenSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdministratorWebTokenSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1129,6 +1160,7 @@ administratorWebTokenSpec =
     , _awtsStoreBuilder = Nothing
     , _awtsManagedConfigurations = Nothing
     }
+
 
 -- | The URI of the parent frame hosting the iframe. To prevent XSS, the
 -- iframe may not be hosted at other URIs. This URI must be https.
@@ -1218,6 +1250,7 @@ data ProductVisibility =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductVisibility' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1232,6 +1265,7 @@ productVisibility
 productVisibility =
   ProductVisibility'
     {_pvTracks = Nothing, _pvTrackIds = Nothing, _pvProductId = Nothing}
+
 
 -- | Deprecated. Use trackIds instead.
 pvTracks :: Lens' ProductVisibility [Text]
@@ -1289,6 +1323,7 @@ data Notification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1327,6 +1362,7 @@ notification =
     , _nNewDeviceEvent = Nothing
     , _nTimestampMillis = Nothing
     }
+
 
 -- | The ID of the enterprise for which the notification is sent. This will
 -- always be present.
@@ -1435,6 +1471,7 @@ data PageInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1452,6 +1489,7 @@ pageInfo =
     , _piTotalResults = Nothing
     , _piStartIndex = Nothing
     }
+
 
 piResultPerPage :: Lens' PageInfo (Maybe Int32)
 piResultPerPage
@@ -1500,6 +1538,7 @@ data ProductPermission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductPermission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1511,6 +1550,7 @@ productPermission
     :: ProductPermission
 productPermission =
   ProductPermission' {_ppState = Nothing, _ppPermissionId = Nothing}
+
 
 -- | Whether the permission has been accepted or not.
 ppState :: Lens' ProductPermission (Maybe Text)
@@ -1547,6 +1587,7 @@ data NewPermissionsEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NewPermissionsEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1564,6 +1605,7 @@ newPermissionsEvent =
     , _npeApprovedPermissions = Nothing
     , _npeProductId = Nothing
     }
+
 
 -- | The set of permissions that the app is currently requesting. Use
 -- Permissions.Get on the EMM API to retrieve details about these
@@ -1620,6 +1662,7 @@ data ProductAvailabilityChangeEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductAvailabilityChangeEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1632,6 +1675,7 @@ productAvailabilityChangeEvent
 productAvailabilityChangeEvent =
   ProductAvailabilityChangeEvent'
     {_paceAvailabilityStatus = Nothing, _paceProductId = Nothing}
+
 
 -- | The new state of the product. This field will always be present.
 paceAvailabilityStatus :: Lens' ProductAvailabilityChangeEvent (Maybe Text)
@@ -1672,6 +1716,7 @@ data ProductApprovalEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductApprovalEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1683,6 +1728,7 @@ productApprovalEvent
     :: ProductApprovalEvent
 productApprovalEvent =
   ProductApprovalEvent' {_paeApproved = Nothing, _paeProductId = Nothing}
+
 
 -- | Whether the product was approved or unapproved. This field will always
 -- be present.
@@ -1723,6 +1769,7 @@ data Device =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1743,6 +1790,7 @@ device =
     , _dManagementType = Nothing
     , _dAndroidId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#device\".
@@ -1804,6 +1852,7 @@ data AutoInstallConstraint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoInstallConstraint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1821,6 +1870,7 @@ autoInstallConstraint =
     , _aicDeviceIdleStateConstraint = Nothing
     , _aicNetworkTypeConstraint = Nothing
     }
+
 
 -- | Charging state constraint.
 aicChargingStateConstraint :: Lens' AutoInstallConstraint (Maybe Text)
@@ -1873,6 +1923,7 @@ data ServiceAccountKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccountKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1896,6 +1947,7 @@ serviceAccountKey =
     , _sakType = Nothing
     , _sakPublicData = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#serviceAccountKey\".
@@ -1956,6 +2008,7 @@ data InstallsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstallsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1968,6 +2021,7 @@ installsListResponse
 installsListResponse =
   InstallsListResponse'
     {_ilrKind = "androidenterprise#installsListResponse", _ilrInstall = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#installsListResponse\".
@@ -2015,6 +2069,7 @@ data AppRestrictionsSchemaRestriction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppRestrictionsSchemaRestriction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2047,6 +2102,7 @@ appRestrictionsSchemaRestriction =
     , _arsrDescription = Nothing
     , _arsrNestedRestriction = Nothing
     }
+
 
 -- | The type of the restriction.
 arsrRestrictionType :: Lens' AppRestrictionsSchemaRestriction (Maybe Text)
@@ -2147,6 +2203,7 @@ data ProductPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2167,6 +2224,7 @@ productPolicy =
     , _ppAutoInstallPolicy = Nothing
     , _ppProductId = Nothing
     }
+
 
 -- | Deprecated. Use trackIds instead.
 ppTracks :: Lens' ProductPolicy [Text]
@@ -2224,6 +2282,7 @@ newtype Administrator =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Administrator' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2232,6 +2291,7 @@ newtype Administrator =
 administrator
     :: Administrator
 administrator = Administrator' {_aEmail = Nothing}
+
 
 -- | The admin\'s email address.
 aEmail :: Lens' Administrator (Maybe Text)
@@ -2256,6 +2316,7 @@ data UsersListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2268,6 +2329,7 @@ usersListResponse
 usersListResponse =
   UsersListResponse'
     {_ulrKind = "androidenterprise#usersListResponse", _ulrUser = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#usersListResponse\".
@@ -2304,6 +2366,7 @@ newtype AdministratorWebTokenSpecStoreBuilder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdministratorWebTokenSpecStoreBuilder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2313,6 +2376,7 @@ administratorWebTokenSpecStoreBuilder
     :: AdministratorWebTokenSpecStoreBuilder
 administratorWebTokenSpecStoreBuilder =
   AdministratorWebTokenSpecStoreBuilder' {_awtssbEnabled = Nothing}
+
 
 -- | Whether the Organize apps page is displayed. Default is true.
 awtssbEnabled :: Lens' AdministratorWebTokenSpecStoreBuilder (Maybe Bool)
@@ -2346,6 +2410,7 @@ data AuthenticationToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthenticationToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2358,6 +2423,7 @@ authenticationToken
 authenticationToken =
   AuthenticationToken'
     {_atKind = "androidenterprise#authenticationToken", _atToken = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#authenticationToken\".
@@ -2402,6 +2468,7 @@ data ManagedConfigurationsSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfigurationsSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2425,6 +2492,7 @@ managedConfigurationsSettings =
     , _mcsMcmId = Nothing
     , _mcsName = Nothing
     }
+
 
 -- | The last updated time of the managed configuration settings in
 -- milliseconds since 1970-01-01T00:00:00Z.
@@ -2492,6 +2560,7 @@ data AppVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2515,6 +2584,7 @@ appVersion =
     , _avTrackId = Nothing
     , _avIsProduction = Nothing
     }
+
 
 -- | Deprecated, use trackId instead.
 avTrack :: Lens' AppVersion (Maybe Text)
@@ -2579,6 +2649,7 @@ newtype ManagedPropertyBundle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedPropertyBundle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2587,6 +2658,7 @@ newtype ManagedPropertyBundle =
 managedPropertyBundle
     :: ManagedPropertyBundle
 managedPropertyBundle = ManagedPropertyBundle' {_mpbManagedProperty = Nothing}
+
 
 -- | The list of managed properties.
 mpbManagedProperty :: Lens' ManagedPropertyBundle [ManagedProperty]
@@ -2619,6 +2691,7 @@ data GroupLicensesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupLicensesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2633,6 +2706,7 @@ groupLicensesListResponse =
     { _gllrGroupLicense = Nothing
     , _gllrKind = "androidenterprise#groupLicensesListResponse"
     }
+
 
 -- | A group license for a product approved for use in the enterprise.
 gllrGroupLicense :: Lens' GroupLicensesListResponse [GroupLicense]
@@ -2673,6 +2747,7 @@ data AndroidDevicePolicyConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidDevicePolicyConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2687,6 +2762,7 @@ androidDevicePolicyConfig =
     { _adpcState = Nothing
     , _adpcKind = "androidenterprise#androidDevicePolicyConfig"
     }
+
 
 -- | Deprecated and unused.
 adpcState :: Lens' AndroidDevicePolicyConfig (Maybe Text)
@@ -2726,6 +2802,7 @@ data ProductSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2746,6 +2823,7 @@ productSet =
     , _psProductSetBehavior = Nothing
     , _psProductId = Nothing
     }
+
 
 -- | Additional list of product IDs making up the product set. Unlike the
 -- productID array, in this list It\'s possible to specify which tracks
@@ -2838,6 +2916,7 @@ data Install =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Install' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2858,6 +2937,7 @@ install =
     , _iInstallState = Nothing
     , _iProductId = Nothing
     }
+
 
 -- | The version of the installed product. Guaranteed to be set only if the
 -- install state is \"installed\".
@@ -2916,6 +2996,7 @@ data MaintenanceWindow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MaintenanceWindow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2928,6 +3009,7 @@ maintenanceWindow
 maintenanceWindow =
   MaintenanceWindow'
     {_mwDurationMs = Nothing, _mwStartTimeAfterMidnightMs = Nothing}
+
 
 -- | Duration of the maintenance window, in milliseconds. The duration must
 -- be between 30 minutes and 24 hours (inclusive).
@@ -2968,6 +3050,7 @@ newtype ServiceAccountKeysListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccountKeysListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2977,6 +3060,7 @@ serviceAccountKeysListResponse
     :: ServiceAccountKeysListResponse
 serviceAccountKeysListResponse =
   ServiceAccountKeysListResponse' {_saklrServiceAccountKey = Nothing}
+
 
 -- | The service account credentials.
 saklrServiceAccountKey :: Lens' ServiceAccountKeysListResponse [ServiceAccountKey]
@@ -3011,6 +3095,7 @@ data TrackInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrackInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3021,6 +3106,7 @@ data TrackInfo =
 trackInfo
     :: TrackInfo
 trackInfo = TrackInfo' {_tiTrackAlias = Nothing, _tiTrackId = Nothing}
+
 
 -- | A modifiable name for a track. This is the visible name in the play
 -- developer console.
@@ -3073,6 +3159,7 @@ data User =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3102,6 +3189,7 @@ user =
     , _uManagementType = Nothing
     , _uAccountType = Nothing
     }
+
 
 -- | A unique identifier you create for this user, such as \"user342\" or
 -- \"asset#44418\". Do not use personally identifiable information (PII)
@@ -3189,6 +3277,7 @@ data ManagedConfigurationsForDeviceListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfigurationsForDeviceListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3204,6 +3293,7 @@ managedConfigurationsForDeviceListResponse =
         "androidenterprise#managedConfigurationsForDeviceListResponse"
     , _mcfdlrManagedConfigurationForDevice = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#managedConfigurationsForDeviceListResponse\".
@@ -3252,6 +3342,7 @@ newtype ProductsGenerateApprovalURLResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsGenerateApprovalURLResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3261,6 +3352,7 @@ productsGenerateApprovalURLResponse
     :: ProductsGenerateApprovalURLResponse
 productsGenerateApprovalURLResponse =
   ProductsGenerateApprovalURLResponse' {_pgaurURL = Nothing}
+
 
 -- | A URL that can be rendered in an iframe to display the permissions (if
 -- any) of a product. This URL can be used to approve the product only once
@@ -3300,6 +3392,7 @@ data StorePage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StorePage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3320,6 +3413,7 @@ storePage =
     , _spName = Nothing
     , _spId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#storePage\".
@@ -3373,6 +3467,7 @@ data EnterprisesSendTestPushNotificationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesSendTestPushNotificationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3385,6 +3480,7 @@ enterprisesSendTestPushNotificationResponse
 enterprisesSendTestPushNotificationResponse =
   EnterprisesSendTestPushNotificationResponse'
     {_estpnrTopicName = Nothing, _estpnrMessageId = Nothing}
+
 
 -- | The name of the Cloud Pub\/Sub topic to which notifications for this
 -- enterprise\'s enrolled account will be sent.
@@ -3431,6 +3527,7 @@ data ServiceAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3448,6 +3545,7 @@ serviceAccount =
     , _saKey = Nothing
     , _saName = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#serviceAccount\".
@@ -3494,6 +3592,7 @@ data VariableSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VariableSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3511,6 +3610,7 @@ variableSet =
     , _vsUserValue = Nothing
     , _vsPlaceholder = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#variableSet\".
@@ -3557,6 +3657,7 @@ newtype AppUpdateEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppUpdateEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3565,6 +3666,7 @@ newtype AppUpdateEvent =
 appUpdateEvent
     :: AppUpdateEvent
 appUpdateEvent = AppUpdateEvent' {_aueProductId = Nothing}
+
 
 -- | The id of the product (e.g. \"app:com.google.android.gm\") that was
 -- updated. This field will always be present.
@@ -3592,6 +3694,7 @@ data EnterprisesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3606,6 +3709,7 @@ enterprisesListResponse =
     { _elrKind = "androidenterprise#enterprisesListResponse"
     , _elrEnterprise = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#enterprisesListResponse\".
@@ -3649,6 +3753,7 @@ data NotificationSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3666,6 +3771,7 @@ notificationSet =
     , _nsNotification = Nothing
     , _nsKind = "androidenterprise#notificationSet"
     }
+
 
 -- | The notification set ID, required to mark the notification as received
 -- with the Enterprises.AcknowledgeNotification API. This will be omitted
@@ -3718,6 +3824,7 @@ data AppRestrictionsSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppRestrictionsSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3732,6 +3839,7 @@ appRestrictionsSchema =
     { _arsKind = "androidenterprise#appRestrictionsSchema"
     , _arsRestrictions = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#appRestrictionsSchema\".
@@ -3771,6 +3879,7 @@ newtype WebAppIcon =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebAppIcon' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3779,6 +3888,7 @@ newtype WebAppIcon =
 webAppIcon
     :: WebAppIcon
 webAppIcon = WebAppIcon' {_waiImageData = Nothing}
+
 
 -- | The actual bytes of the image in a base64url encoded string (c.f.
 -- RFC4648, section 5 \"Base 64 Encoding with URL and Filename Safe
@@ -3808,6 +3918,7 @@ data LocalizedText =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocalizedText' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3818,6 +3929,7 @@ data LocalizedText =
 localizedText
     :: LocalizedText
 localizedText = LocalizedText' {_ltText = Nothing, _ltLocale = Nothing}
+
 
 -- | The text localized in the associated locale.
 ltText :: Lens' LocalizedText (Maybe Text)
@@ -3855,6 +3967,7 @@ data UserToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3872,6 +3985,7 @@ userToken =
     , _utToken = Nothing
     , _utUserId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#userToken\".
@@ -3911,6 +4025,7 @@ newtype AdministratorWebTokenSpecPrivateApps =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdministratorWebTokenSpecPrivateApps' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3920,6 +4035,7 @@ administratorWebTokenSpecPrivateApps
     :: AdministratorWebTokenSpecPrivateApps
 administratorWebTokenSpecPrivateApps =
   AdministratorWebTokenSpecPrivateApps' {_awtspaEnabled = Nothing}
+
 
 -- | Whether the Private Apps page is displayed. Default is true.
 awtspaEnabled :: Lens' AdministratorWebTokenSpecPrivateApps (Maybe Bool)
@@ -3952,6 +4068,7 @@ data DevicesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DevicesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3964,6 +4081,7 @@ devicesListResponse
 devicesListResponse =
   DevicesListResponse'
     {_dlrKind = "androidenterprise#devicesListResponse", _dlrDevice = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#devicesListResponse\".
@@ -4002,6 +4120,7 @@ data ProductSigningCertificate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductSigningCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4014,6 +4133,7 @@ productSigningCertificate
 productSigningCertificate =
   ProductSigningCertificate'
     {_pscCertificateHashSha256 = Nothing, _pscCertificateHashSha1 = Nothing}
+
 
 -- | The base64 urlsafe encoded SHA2-256 hash of the certificate.
 pscCertificateHashSha256 :: Lens' ProductSigningCertificate (Maybe Text)
@@ -4071,6 +4191,7 @@ data Enterprise =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Enterprise' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4094,6 +4215,7 @@ enterprise =
     , _eName = Nothing
     , _eId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#enterprise\".
@@ -4156,6 +4278,7 @@ data InstallFailureEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstallFailureEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4179,6 +4302,7 @@ installFailureEvent =
     , _ifeDeviceId = Nothing
     , _ifeProductId = Nothing
     }
+
 
 -- | The reason for the installation failure. This field will always be
 -- present.
@@ -4239,6 +4363,7 @@ data ManagedConfigurationsForUserListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfigurationsForUserListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4253,6 +4378,7 @@ managedConfigurationsForUserListResponse =
     { _mcfulrManagedConfigurationForUser = Nothing
     , _mcfulrKind = "androidenterprise#managedConfigurationsForUserListResponse"
     }
+
 
 -- | A managed configuration for an app for a specific user.
 mcfulrManagedConfigurationForUser :: Lens' ManagedConfigurationsForUserListResponse [ManagedConfiguration]
@@ -4304,6 +4430,7 @@ data ConfigurationVariables =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConfigurationVariables' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4321,6 +4448,7 @@ configurationVariables =
     , _cvMcmId = Nothing
     , _cvVariableSet = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#configurationVariables\".
@@ -4368,6 +4496,7 @@ data StoreLayout =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StoreLayout' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4385,6 +4514,7 @@ storeLayout =
     , _slKind = "androidenterprise#storeLayout"
     , _slHomepageId = Nothing
     }
+
 
 -- | The store layout type. By default, this value is set to \"basic\" if the
 -- homepageId field is not set, and to \"custom\" otherwise. If set to
@@ -4435,6 +4565,7 @@ newtype AppRestrictionsSchemaChangeEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppRestrictionsSchemaChangeEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4444,6 +4575,7 @@ appRestrictionsSchemaChangeEvent
     :: AppRestrictionsSchemaChangeEvent
 appRestrictionsSchemaChangeEvent =
   AppRestrictionsSchemaChangeEvent' {_arsceProductId = Nothing}
+
 
 -- | The id of the product (e.g. \"app:com.google.android.gm\") for which the
 -- app restriction schema changed. This field will always be present.
@@ -4478,6 +4610,7 @@ data NewDeviceEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NewDeviceEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4498,6 +4631,7 @@ newDeviceEvent =
     , _ndeDeviceId = Nothing
     , _ndeManagementType = Nothing
     }
+
 
 -- | The ID of the user. This field will always be present.
 ndeUserId :: Lens' NewDeviceEvent (Maybe Text)
@@ -4554,6 +4688,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4574,6 +4709,7 @@ policy =
     , _pMaintenanceWindow = Nothing
     , _pAutoUpdatePolicy = Nothing
     }
+
 
 -- | The availability granted to the device for the specified products.
 -- \"all\" gives the device access to all products, regardless of approval
@@ -4643,6 +4779,7 @@ data AdministratorWebToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdministratorWebToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4655,6 +4792,7 @@ administratorWebToken
 administratorWebToken =
   AdministratorWebToken'
     {_awtKind = "androidenterprise#administratorWebToken", _awtToken = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#administratorWebToken\".
@@ -4694,6 +4832,7 @@ data SignupInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignupInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4711,6 +4850,7 @@ signupInfo =
     , _siKind = "androidenterprise#signupInfo"
     , _siURL = Nothing
     }
+
 
 -- | An opaque token that will be required, along with the Enterprise Token,
 -- for obtaining the enterprise resource from CompleteSignup.
@@ -4782,6 +4922,7 @@ data Product =
     , _pDetailsURL                 :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
@@ -4863,6 +5004,7 @@ product =
     , _pDescription = Nothing
     , _pDetailsURL = Nothing
     }
+
 
 -- | A list of screenshot links representing the app.
 pScreenshotURLs :: Lens' Product [Text]
@@ -5095,6 +5237,7 @@ data EntitlementsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntitlementsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5109,6 +5252,7 @@ entitlementsListResponse =
     { _entKind = "androidenterprise#entitlementsListResponse"
     , _entEntitlement = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#entitlementsListResponse\".
@@ -5153,6 +5297,7 @@ data ProductPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5170,6 +5315,7 @@ productPermissions =
     , _ppsPermission = Nothing
     , _ppsProductId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#productPermissions\".
@@ -5216,6 +5362,7 @@ newtype AdministratorWebTokenSpecManagedConfigurations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdministratorWebTokenSpecManagedConfigurations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5225,6 +5372,7 @@ administratorWebTokenSpecManagedConfigurations
     :: AdministratorWebTokenSpecManagedConfigurations
 administratorWebTokenSpecManagedConfigurations =
   AdministratorWebTokenSpecManagedConfigurations' {_awtsmcEnabled = Nothing}
+
 
 -- | Whether the Managed Configuration page is displayed. Default is true.
 awtsmcEnabled :: Lens' AdministratorWebTokenSpecManagedConfigurations (Maybe Bool)
@@ -5268,6 +5416,7 @@ data Permission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5288,6 +5437,7 @@ permission =
     , _perDescription = Nothing
     , _perPermissionId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#permission\".
@@ -5339,6 +5489,7 @@ data WebAppsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebAppsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5351,6 +5502,7 @@ webAppsListResponse
 webAppsListResponse =
   WebAppsListResponse'
     {_walrKind = "androidenterprise#webAppsListResponse", _walrWebApp = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#webAppsListResponse\".
@@ -5389,6 +5541,7 @@ data ProductsApproveRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsApproveRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5401,6 +5554,7 @@ productsApproveRequest
 productsApproveRequest =
   ProductsApproveRequest'
     {_parApprovalURLInfo = Nothing, _parApprovedPermissions = Nothing}
+
 
 -- | The approval URL that was shown to the user. Only the permissions shown
 -- to the user with that URL will be accepted, which may not be the
@@ -5451,6 +5605,7 @@ data AutoInstallPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoInstallPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5471,6 +5626,7 @@ autoInstallPolicy =
     , _aipAutoInstallMode = Nothing
     , _aipMinimumVersionCode = Nothing
     }
+
 
 -- | The constraints for auto-installing the app. You can specify a maximum
 -- of one constraint.
@@ -5557,6 +5713,7 @@ data Entitlement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Entitlement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5574,6 +5731,7 @@ entitlement =
     , _eeReason = Nothing
     , _eeProductId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#entitlement\".
@@ -5621,6 +5779,7 @@ data ProductsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5641,6 +5800,7 @@ productsListResponse =
     , _plrKind = "androidenterprise#productsListResponse"
     , _plrProduct = Nothing
     }
+
 
 -- | Pagination information for token pagination.
 plrTokenPagination :: Lens' ProductsListResponse (Maybe TokenPagination)
@@ -5700,6 +5860,7 @@ data WebApp =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebApp' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5729,6 +5890,7 @@ webApp =
     , _waIsPublished = Nothing
     , _waTitle = Nothing
     }
+
 
 -- | The ID of the application.
 waWebAppId :: Lens' WebApp (Maybe Text)

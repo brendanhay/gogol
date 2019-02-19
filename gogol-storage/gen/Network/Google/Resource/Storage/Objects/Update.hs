@@ -90,6 +90,7 @@ data ObjectsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -134,6 +135,7 @@ objectsUpdate pOuBucket_ pOuPayload_ pOuObject_ =
     , _ouProjection = Nothing
     , _ouGeneration = Nothing
     }
+
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.

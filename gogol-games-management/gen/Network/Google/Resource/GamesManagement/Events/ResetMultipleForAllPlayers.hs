@@ -63,6 +63,7 @@ newtype EventsResetMultipleForAllPlayers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsResetMultipleForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ eventsResetMultipleForAllPlayers
     -> EventsResetMultipleForAllPlayers
 eventsResetMultipleForAllPlayers pErmfapPayload_ =
   EventsResetMultipleForAllPlayers' {_ermfapPayload = pErmfapPayload_}
+
 
 -- | Multipart request metadata.
 ermfapPayload :: Lens' EventsResetMultipleForAllPlayers EventsResetMultipleForAllRequest

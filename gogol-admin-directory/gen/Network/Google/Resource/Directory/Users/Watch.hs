@@ -96,6 +96,7 @@ data UsersWatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -144,6 +145,7 @@ usersWatch pUwPayload_ =
     , _uwPageToken = Nothing
     , _uwMaxResults = Nothing
     }
+
 
 -- | Event on which subscription is intended (if subscribing)
 uwEvent :: Lens' UsersWatch (Maybe UsersWatchEvent)

@@ -69,6 +69,7 @@ data LicenseAssignmentsListForProduct =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicenseAssignmentsListForProduct' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ licenseAssignmentsListForProduct pLalfpCustomerId_ pLalfpProductId_ =
     , _lalfpProductId = pLalfpProductId_
     , _lalfpMaxResults = 100
     }
+
 
 -- | CustomerId represents the customer for whom licenseassignments are
 -- queried

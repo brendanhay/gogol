@@ -80,6 +80,7 @@ data ProjectsUptimeCheckConfigsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsUptimeCheckConfigsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsUptimeCheckConfigsList pPucclParent_ =
     , _pucclPageSize = Nothing
     , _pucclCallback = Nothing
     }
+
 
 -- | The project whose uptime check configurations are listed. The format is
 -- projects\/[PROJECT_ID].

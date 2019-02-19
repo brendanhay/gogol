@@ -66,6 +66,7 @@ data UsersSettingsSendAsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsSendAsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ usersSettingsSendAsDelete
 usersSettingsSendAsDelete pUssadSendAsEmail_ =
   UsersSettingsSendAsDelete'
     {_ussadUserId = "me", _ussadSendAsEmail = pUssadSendAsEmail_}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

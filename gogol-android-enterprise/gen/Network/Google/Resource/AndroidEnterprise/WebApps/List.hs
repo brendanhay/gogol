@@ -59,6 +59,7 @@ newtype WebAppsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebAppsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ webAppsList
     -> WebAppsList
 webAppsList pWalEnterpriseId_ =
   WebAppsList' {_walEnterpriseId = pWalEnterpriseId_}
+
 
 -- | The ID of the enterprise.
 walEnterpriseId :: Lens' WebAppsList Text

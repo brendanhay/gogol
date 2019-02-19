@@ -63,6 +63,7 @@ data AccountsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ accountsDelete pAdMerchantId_ pAdAccountId_ =
     , _adForce = False
     , _adAccountId = _Coerce # pAdAccountId_
     }
+
 
 -- | The ID of the managing account. This must be a multi-client account, and
 -- accountId must be the ID of a sub-account of this account.

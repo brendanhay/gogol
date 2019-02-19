@@ -76,6 +76,7 @@ data RegionDisksList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionDisksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ regionDisksList pRdlProject_ pRdlRegion_ =
     , _rdlPageToken = Nothing
     , _rdlMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

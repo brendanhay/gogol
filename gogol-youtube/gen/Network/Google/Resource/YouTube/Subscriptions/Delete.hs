@@ -57,6 +57,7 @@ newtype SubscriptionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ subscriptionsDelete
     :: Text -- ^ 'sdId'
     -> SubscriptionsDelete
 subscriptionsDelete pSdId_ = SubscriptionsDelete' {_sdId = pSdId_}
+
 
 -- | The id parameter specifies the YouTube subscription ID for the resource
 -- that is being deleted. In a subscription resource, the id property

@@ -80,6 +80,7 @@ data ProjectsTopicsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTopicsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsTopicsDelete pPtdTopic_ =
     , _ptdTopic = pPtdTopic_
     , _ptdCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptdXgafv :: Lens' ProjectsTopicsDelete (Maybe Xgafv)

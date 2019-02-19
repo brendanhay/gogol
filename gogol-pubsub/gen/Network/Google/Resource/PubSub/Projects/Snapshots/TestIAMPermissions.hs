@@ -84,6 +84,7 @@ data ProjectsSnapshotsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSnapshotsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsSnapshotsTestIAMPermissions pPstipPayload_ pPstipResource_ =
     , _pstipResource = pPstipResource_
     , _pstipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pstipXgafv :: Lens' ProjectsSnapshotsTestIAMPermissions (Maybe Xgafv)

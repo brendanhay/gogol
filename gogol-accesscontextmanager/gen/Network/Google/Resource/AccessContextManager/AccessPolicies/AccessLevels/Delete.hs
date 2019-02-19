@@ -74,6 +74,7 @@ data AccessPoliciesAccessLevelsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessPoliciesAccessLevelsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ accessPoliciesAccessLevelsDelete pApaldName_ =
     , _apaldName = pApaldName_
     , _apaldCallback = Nothing
     }
+
 
 -- | V1 error format.
 apaldXgafv :: Lens' AccessPoliciesAccessLevelsDelete (Maybe Xgafv)

@@ -83,6 +83,7 @@ data CoursesStudentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesStudentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ coursesStudentsGet pCsgCourseId_ pCsgUserId_ =
     , _csgUserId = pCsgUserId_
     , _csgCallback = Nothing
     }
+
 
 -- | V1 error format.
 csgXgafv :: Lens' CoursesStudentsGet (Maybe Xgafv)

@@ -78,6 +78,7 @@ data ProjectsServicesDisable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServicesDisable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsServicesDisable pPsdPayload_ pPsdName_ =
     , _psdName = pPsdName_
     , _psdCallback = Nothing
     }
+
 
 -- | V1 error format.
 psdXgafv :: Lens' ProjectsServicesDisable (Maybe Xgafv)

@@ -80,6 +80,7 @@ data ProjectsLocationsQueuesPause =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsQueuesPause' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsQueuesPause pProPayload_ pProName_ =
     , _proName = pProName_
     , _proCallback = Nothing
     }
+
 
 -- | V1 error format.
 proXgafv :: Lens' ProjectsLocationsQueuesPause (Maybe Xgafv)

@@ -82,6 +82,7 @@ data ProjectsRegionsClustersCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsClustersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ projectsRegionsClustersCreate pPrccPayload_ pPrccRegion_ pPrccProjectId_ =
     , _prccProjectId = pPrccProjectId_
     , _prccCallback = Nothing
     }
+
 
 -- | V1 error format.
 prccXgafv :: Lens' ProjectsRegionsClustersCreate (Maybe Xgafv)

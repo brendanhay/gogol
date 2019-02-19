@@ -60,6 +60,7 @@ data ProductsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ productsGet
 productsGet pPggMerchantId_ pPggProductId_ =
   ProductsGet'
     {_pggMerchantId = _Coerce # pPggMerchantId_, _pggProductId = pPggProductId_}
+
 
 -- | The ID of the account that contains the product. This account cannot be
 -- a multi-client account.

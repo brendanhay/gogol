@@ -75,6 +75,7 @@ data ProjectsRunQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRunQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsRunQuery pPrqPayload_ pPrqProjectId_ =
     , _prqProjectId = pPrqProjectId_
     , _prqCallback = Nothing
     }
+
 
 -- | V1 error format.
 prqXgafv :: Lens' ProjectsRunQuery (Maybe Xgafv)

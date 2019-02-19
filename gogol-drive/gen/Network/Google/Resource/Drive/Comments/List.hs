@@ -70,6 +70,7 @@ data CommentsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ commentsList pCFileId_ =
     , _cPageSize = 20
     , _cIncludeDeleted = False
     }
+
 
 -- | The minimum value of \'modifiedTime\' for the result comments (RFC 3339
 -- date-time).

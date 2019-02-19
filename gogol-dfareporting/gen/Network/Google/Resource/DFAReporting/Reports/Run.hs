@@ -65,6 +65,7 @@ data ReportsRun =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsRun' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ reportsRun pRrReportId_ pRrProFileId_ =
     , _rrReportId = _Coerce # pRrReportId_
     , _rrProFileId = _Coerce # pRrProFileId_
     }
+
 
 -- | If set and true, tries to run the report synchronously.
 rrSynchronous :: Lens' ReportsRun Bool

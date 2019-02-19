@@ -29,6 +29,7 @@ newtype RepresentativeInfoResponseDivisions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepresentativeInfoResponseDivisions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40,6 +41,7 @@ representativeInfoResponseDivisions
 representativeInfoResponseDivisions pRirdAddtional_ =
   RepresentativeInfoResponseDivisions'
     {_rirdAddtional = _Coerce # pRirdAddtional_}
+
 
 -- | The unique Open Civic Data identifier for this division.
 rirdAddtional :: Lens' RepresentativeInfoResponseDivisions (HashMap Text GeographicDivision)
@@ -79,6 +81,7 @@ data VoterInfoResponse =
     , _virPrecinctId       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VoterInfoResponse' with the minimum fields required to make a request.
 --
@@ -124,6 +127,7 @@ voterInfoResponse =
     , _virPollingLocations = Nothing
     , _virPrecinctId = Nothing
     }
+
 
 -- | When there are multiple elections for a voter address, the
 -- otherElections field is populated in the API response and there are two
@@ -276,6 +280,7 @@ data PollingLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PollingLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -317,6 +322,7 @@ pollingLocation =
     , _plNotes = Nothing
     , _plLongitude = Nothing
     }
+
 
 -- | The services provided by this early vote site or drop off location. This
 -- field is not populated for polling locations.
@@ -431,6 +437,7 @@ data GeographicDivision =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeographicDivision' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -445,6 +452,7 @@ geographicDivision
 geographicDivision =
   GeographicDivision'
     {_gdName = Nothing, _gdOfficeIndices = Nothing, _gdAlsoKnownAs = Nothing}
+
 
 -- | The name of the division.
 gdName :: Lens' GeographicDivision (Maybe Text)
@@ -543,6 +551,7 @@ data StreetSegment =
     , _ssPrecinctOcdId                 :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StreetSegment' with the minimum fields required to make a request.
 --
@@ -687,6 +696,7 @@ streetSegment =
     , _ssCountyFips = Nothing
     , _ssPrecinctOcdId = Nothing
     }
+
 
 ssOriginalId :: Lens' StreetSegment (Maybe Text)
 ssOriginalId
@@ -1042,6 +1052,7 @@ data Candidate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Candidate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1074,6 +1085,7 @@ candidate =
     , _cName = Nothing
     , _cParty = Nothing
     }
+
 
 -- | The email address for the candidate\'s campaign.
 cEmail :: Lens' Candidate (Maybe Text)
@@ -1157,6 +1169,7 @@ data Office =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Office' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1183,6 +1196,7 @@ office =
     , _oName = Nothing
     , _oLevels = Nothing
     }
+
 
 -- | The OCD ID of the division with which this office is associated.
 oDivisionId :: Lens' Office (Maybe Text)
@@ -1258,6 +1272,7 @@ newtype StreetSegmentList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StreetSegmentList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1266,6 +1281,7 @@ newtype StreetSegmentList =
 streetSegmentList
     :: StreetSegmentList
 streetSegmentList = StreetSegmentList' {_sslSegments = Nothing}
+
 
 sslSegments :: Lens' StreetSegmentList [StreetSegment]
 sslSegments
@@ -1306,6 +1322,7 @@ data LivegraphBacktraceRecordInfo =
     , _lbriSubscriberReceiveMsec :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LivegraphBacktraceRecordInfo' with the minimum fields required to make a request.
 --
@@ -1363,6 +1380,7 @@ livegraphBacktraceRecordInfo =
     , _lbriExpId = Nothing
     , _lbriSubscriberReceiveMsec = Nothing
     }
+
 
 lbriDataSourcePublishMsec :: Lens' LivegraphBacktraceRecordInfo (Maybe Int64)
 lbriDataSourcePublishMsec
@@ -1500,6 +1518,7 @@ newtype ElectionsQueryRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ElectionsQueryRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1508,6 +1527,7 @@ newtype ElectionsQueryRequest =
 electionsQueryRequest
     :: ElectionsQueryRequest
 electionsQueryRequest = ElectionsQueryRequest' {_eqrContextParams = Nothing}
+
 
 eqrContextParams :: Lens' ElectionsQueryRequest (Maybe ContextParams)
 eqrContextParams
@@ -1536,6 +1556,7 @@ data Channel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1546,6 +1567,7 @@ data Channel =
 channel
     :: Channel
 channel = Channel' {_cId = Nothing, _cType = Nothing}
+
 
 -- | The unique public identifier for the candidate\'s channel.
 cId :: Lens' Channel (Maybe Text)
@@ -1580,6 +1602,7 @@ data Election =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Election' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1600,6 +1623,7 @@ election =
     , _eName = Nothing
     , _eId = Nothing
     }
+
 
 -- | The political division of the election. Represented as an OCD Division
 -- ID. Voters within these political jurisdictions are covered by this
@@ -1655,6 +1679,7 @@ data RepresentativeInfoResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepresentativeInfoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1678,6 +1703,7 @@ representativeInfoResponse =
     , _rirDivisions = Nothing
     , _rirOffices = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"civicinfo#representativeInfoResponse\".
@@ -1744,6 +1770,7 @@ data VoterInfoSegmentResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VoterInfoSegmentResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1764,6 +1791,7 @@ voterInfoSegmentResult =
     , _visrPostalAddress = Nothing
     , _visrRequest = Nothing
     }
+
 
 visrResponse :: Lens' VoterInfoSegmentResult (Maybe VoterInfoResponse)
 visrResponse
@@ -1814,6 +1842,7 @@ data DivisionSearchResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DivisionSearchResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1828,6 +1857,7 @@ divisionSearchResult
 divisionSearchResult =
   DivisionSearchResult'
     {_dsrAliases = Nothing, _dsrName = Nothing, _dsrOcdId = Nothing}
+
 
 -- | Other Open Civic Data identifiers that refer to the same division -- for
 -- example, those that refer to other political divisions whose boundaries
@@ -1874,6 +1904,7 @@ newtype DivisionSearchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DivisionSearchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1882,6 +1913,7 @@ newtype DivisionSearchRequest =
 divisionSearchRequest
     :: DivisionSearchRequest
 divisionSearchRequest = DivisionSearchRequest' {_dsrContextParams = Nothing}
+
 
 dsrContextParams :: Lens' DivisionSearchRequest (Maybe ContextParams)
 dsrContextParams
@@ -1908,6 +1940,7 @@ newtype FieldMetadataProto =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FieldMetadataProto' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1916,6 +1949,7 @@ newtype FieldMetadataProto =
 fieldMetadataProto
     :: FieldMetadataProto
 fieldMetadataProto = FieldMetadataProto' {_fmpInternal = Nothing}
+
 
 fmpInternal :: Lens' FieldMetadataProto (Maybe InternalFieldMetadataProto)
 fmpInternal
@@ -1939,6 +1973,7 @@ newtype MessageSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MessageSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1947,6 +1982,7 @@ newtype MessageSet =
 messageSet
     :: MessageSet
 messageSet = MessageSet' {_msRecordMessageSetExt = Nothing}
+
 
 msRecordMessageSetExt :: Lens' MessageSet (Maybe LivegraphBacktraceRecordInfo)
 msRecordMessageSetExt
@@ -1988,6 +2024,7 @@ data AdministrativeBody =
     , _abElectionRegistrationURL             :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdministrativeBody' with the minimum fields required to make a request.
 --
@@ -2039,6 +2076,7 @@ administrativeBody =
     , _abVoterServices = Nothing
     , _abElectionRegistrationURL = Nothing
     }
+
 
 -- | The mailing address of this administrative body.
 abCorrespondenceAddress :: Lens' AdministrativeBody (Maybe SimpleAddressType)
@@ -2188,6 +2226,7 @@ newtype RepresentativeInfoRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepresentativeInfoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2197,6 +2236,7 @@ representativeInfoRequest
     :: RepresentativeInfoRequest
 representativeInfoRequest =
   RepresentativeInfoRequest' {_rirContextParams = Nothing}
+
 
 rirContextParams :: Lens' RepresentativeInfoRequest (Maybe ContextParams)
 rirContextParams
@@ -2248,6 +2288,7 @@ data Contest =
     , _conBallotPlacement            :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Contest' with the minimum fields required to make a request.
 --
@@ -2332,6 +2373,7 @@ contest =
     , _conReferendumTitle = Nothing
     , _conBallotPlacement = Nothing
     }
+
 
 -- | The threshold of votes that the referendum needs in order to pass, e.g.
 -- \"two-thirds\". This field is only populated for contests of type
@@ -2591,6 +2633,7 @@ data DivisionSearchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DivisionSearchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2603,6 +2646,7 @@ divisionSearchResponse
 divisionSearchResponse =
   DivisionSearchResponse'
     {_dsrResults = Nothing, _dsrKind = "civicinfo#divisionSearchResponse"}
+
 
 dsrResults :: Lens' DivisionSearchResponse [DivisionSearchResult]
 dsrResults
@@ -2640,6 +2684,7 @@ newtype RepresentativeInfoDataDivisions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepresentativeInfoDataDivisions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2650,6 +2695,7 @@ representativeInfoDataDivisions
     -> RepresentativeInfoDataDivisions
 representativeInfoDataDivisions pRiddAddtional_ =
   RepresentativeInfoDataDivisions' {_riddAddtional = _Coerce # pRiddAddtional_}
+
 
 -- | The unique Open Civic Data identifier for this division.
 riddAddtional :: Lens' RepresentativeInfoDataDivisions (HashMap Text GeographicDivision)
@@ -2682,6 +2728,7 @@ data ElectionOfficial =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ElectionOfficial' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2705,6 +2752,7 @@ electionOfficial =
     , _eoEmailAddress = Nothing
     , _eoTitle = Nothing
     }
+
 
 -- | The fax number of the election official.
 eoFaxNumber :: Lens' ElectionOfficial (Maybe Text)
@@ -2762,6 +2810,7 @@ data PointProto =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PointProto' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2782,6 +2831,7 @@ pointProto =
     , _ppMetadata = Nothing
     , _ppTemporaryData = Nothing
     }
+
 
 ppLatE7 :: Lens' PointProto (Maybe Word32)
 ppLatE7
@@ -2830,6 +2880,7 @@ data RepresentativeInfoData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepresentativeInfoData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2844,6 +2895,7 @@ representativeInfoData
 representativeInfoData =
   RepresentativeInfoData'
     {_ridOfficials = Nothing, _ridDivisions = Nothing, _ridOffices = Nothing}
+
 
 -- | Officials holding the offices listed above. Will only be present if
 -- includeOffices was true in the request.
@@ -2894,6 +2946,7 @@ data Source =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2904,6 +2957,7 @@ data Source =
 source
     :: Source
 source = Source' {_sName = Nothing, _sOfficial = Nothing}
+
 
 -- | The name of the data source.
 sName :: Lens' Source (Maybe Text)
@@ -2936,6 +2990,7 @@ newtype DivisionRepresentativeInfoRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DivisionRepresentativeInfoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2945,6 +3000,7 @@ divisionRepresentativeInfoRequest
     :: DivisionRepresentativeInfoRequest
 divisionRepresentativeInfoRequest =
   DivisionRepresentativeInfoRequest' {_drirContextParams = Nothing}
+
 
 drirContextParams :: Lens' DivisionRepresentativeInfoRequest (Maybe ContextParams)
 drirContextParams
@@ -2978,6 +3034,7 @@ data ElectoralDistrict =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ElectoralDistrict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2998,6 +3055,7 @@ electoralDistrict =
     , _edScope = Nothing
     , _edId = Nothing
     }
+
 
 edKgForeignKey :: Lens' ElectoralDistrict (Maybe Text)
 edKgForeignKey
@@ -3048,6 +3106,7 @@ data VoterInfoRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VoterInfoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3060,6 +3119,7 @@ voterInfoRequest
 voterInfoRequest =
   VoterInfoRequest'
     {_virVoterInfoSegmentResult = Nothing, _virContextParams = Nothing}
+
 
 virVoterInfoSegmentResult :: Lens' VoterInfoRequest (Maybe VoterInfoSegmentResult)
 virVoterInfoSegmentResult
@@ -3102,6 +3162,7 @@ data SimpleAddressType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SimpleAddressType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3131,6 +3192,7 @@ simpleAddressType =
     , _satLine1 = Nothing
     , _satLocationName = Nothing
     }
+
 
 -- | The second line the address, if needed.
 satLine2 :: Lens' SimpleAddressType (Maybe Text)
@@ -3193,6 +3255,7 @@ data InternalSourceSummaryProto =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InternalSourceSummaryProto' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3204,6 +3267,7 @@ internalSourceSummaryProto
     :: InternalSourceSummaryProto
 internalSourceSummaryProto =
   InternalSourceSummaryProto' {_isspDataSet = Nothing, _isspProvider = Nothing}
+
 
 isspDataSet :: Lens' InternalSourceSummaryProto (Maybe Text)
 isspDataSet
@@ -3235,6 +3299,7 @@ newtype LivegraphBacktraceRecordInfoExpInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LivegraphBacktraceRecordInfoExpInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3244,6 +3309,7 @@ livegraphBacktraceRecordInfoExpInfo
     :: LivegraphBacktraceRecordInfoExpInfo
 livegraphBacktraceRecordInfoExpInfo =
   LivegraphBacktraceRecordInfoExpInfo' {_lbrieiDeletedIns = Nothing}
+
 
 lbrieiDeletedIns :: Lens' LivegraphBacktraceRecordInfoExpInfo [Text]
 lbrieiDeletedIns
@@ -3274,6 +3340,7 @@ newtype ContextParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContextParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3282,6 +3349,7 @@ newtype ContextParams =
 contextParams
     :: ContextParams
 contextParams = ContextParams' {_cpClientProFile = Nothing}
+
 
 cpClientProFile :: Lens' ContextParams (Maybe Text)
 cpClientProFile
@@ -3325,6 +3393,7 @@ data PostalAddress =
     , _paSubPremiseName            :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PostalAddress' with the minimum fields required to make a request.
 --
@@ -3394,6 +3463,7 @@ postalAddress =
     , _paThoroughfareName = Nothing
     , _paSubPremiseName = Nothing
     }
+
 
 paAdministrativeAreaName :: Lens' PostalAddress (Maybe Text)
 paAdministrativeAreaName
@@ -3560,6 +3630,7 @@ data InternalFieldMetadataProto =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InternalFieldMetadataProto' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3572,6 +3643,7 @@ internalFieldMetadataProto
 internalFieldMetadataProto =
   InternalFieldMetadataProto'
     {_ifmpSourceSummary = Nothing, _ifmpIsAuto = Nothing}
+
 
 ifmpSourceSummary :: Lens' InternalFieldMetadataProto (Maybe InternalSourceSummaryProto)
 ifmpSourceSummary
@@ -3609,6 +3681,7 @@ data AdministrationRegion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdministrationRegion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3632,6 +3705,7 @@ administrationRegion =
     , _arElectionAdministrationBody = Nothing
     , _arId = Nothing
     }
+
 
 -- | The city or county that provides election information for this voter.
 -- This object can have the same elements as state.
@@ -3703,6 +3777,7 @@ data Provenance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Provenance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3741,6 +3816,7 @@ provenance =
     , _pPrecinctSplitId = Nothing
     , _pPrecinctId = Nothing
     }
+
 
 pTsStreetSegmentId :: Lens' Provenance (Maybe Text)
 pTsStreetSegmentId
@@ -3836,6 +3912,7 @@ data ElectionsQueryResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ElectionsQueryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3848,6 +3925,7 @@ electionsQueryResponse
 electionsQueryResponse =
   ElectionsQueryResponse'
     {_eqrKind = "civicinfo#electionsQueryResponse", _eqrElections = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"civicinfo#electionsQueryResponse\".
@@ -3892,6 +3970,7 @@ data Official =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Official' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3924,6 +4003,7 @@ official =
     , _offEmails = Nothing
     , _offParty = Nothing
     }
+
 
 -- | A URL for a photo of the official.
 offPhotoURL :: Lens' Official (Maybe Text)

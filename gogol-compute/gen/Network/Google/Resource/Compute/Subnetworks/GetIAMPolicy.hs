@@ -68,6 +68,7 @@ data SubnetworksGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworksGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ subnetworksGetIAMPolicy pSgipProject_ pSgipResource_ pSgipRegion_ =
     , _sgipResource = pSgipResource_
     , _sgipRegion = pSgipRegion_
     }
+
 
 -- | Project ID for this request.
 sgipProject :: Lens' SubnetworksGetIAMPolicy Text

@@ -65,6 +65,7 @@ data StatesClear =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatesClear' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ statesClear
 statesClear pScStateKey_ =
   StatesClear'
     {_scStateKey = _Coerce # pScStateKey_, _scCurrentDataVersion = Nothing}
+
 
 -- | The key for the data to be retrieved.
 scStateKey :: Lens' StatesClear Int32

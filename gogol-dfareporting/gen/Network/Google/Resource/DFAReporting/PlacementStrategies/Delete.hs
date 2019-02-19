@@ -61,6 +61,7 @@ data PlacementStrategiesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementStrategiesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ placementStrategiesDelete
 placementStrategiesDelete pPsdProFileId_ pPsdId_ =
   PlacementStrategiesDelete'
     {_psdProFileId = _Coerce # pPsdProFileId_, _psdId = _Coerce # pPsdId_}
+
 
 -- | User profile ID associated with this request.
 psdProFileId :: Lens' PlacementStrategiesDelete Int64

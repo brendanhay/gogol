@@ -65,6 +65,7 @@ data RegionOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ regionOperationsGet pRogProject_ pRogOperation_ pRogRegion_ =
     , _rogOperation = pRogOperation_
     , _rogRegion = pRogRegion_
     }
+
 
 -- | Project ID for this request.
 rogProject :: Lens' RegionOperationsGet Text

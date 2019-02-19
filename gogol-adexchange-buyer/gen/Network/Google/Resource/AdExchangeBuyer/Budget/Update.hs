@@ -65,6 +65,7 @@ data BudgetUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BudgetUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ budgetUpdate pBuPayload_ pBuAccountId_ pBuBillingId_ =
     , _buAccountId = _Coerce # pBuAccountId_
     , _buBillingId = _Coerce # pBuBillingId_
     }
+
 
 -- | Multipart request metadata.
 buPayload :: Lens' BudgetUpdate Budget

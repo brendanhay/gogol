@@ -30,6 +30,7 @@ data JobReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44,6 +45,7 @@ jobReference
 jobReference =
   JobReference'
     {_jrJobId = Nothing, _jrLocation = Nothing, _jrProjectId = Nothing}
+
 
 -- | [Required] The ID of the job. The ID must contain only letters (a-z,
 -- A-Z), numbers (0-9), underscores (_), or dashes (-). The maximum length
@@ -90,6 +92,7 @@ data TableList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +116,7 @@ tableList =
     , _tlKind = "bigquery#tableList"
     , _tlTables = Nothing
     }
+
 
 -- | The total number of tables in the dataset.
 tlTotalItems :: Lens' TableList (Maybe Int32)
@@ -174,6 +178,7 @@ data DataSetListDataSetsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSetListDataSetsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -200,6 +205,7 @@ dataSetListDataSetsItem =
     , _dsldsiId = Nothing
     , _dsldsiLabels = Nothing
     }
+
 
 -- | The geographic location where the data resides.
 dsldsiLocation :: Lens' DataSetListDataSetsItem (Maybe Text)
@@ -270,6 +276,7 @@ data TableDataList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableDataList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -293,6 +300,7 @@ tableDataList =
     , _tdlPageToken = Nothing
     , _tdlTotalRows = Nothing
     }
+
 
 -- | A hash of this page of results.
 tdlEtag :: Lens' TableDataList (Maybe Text)
@@ -354,6 +362,7 @@ data JobConfigurationTableCopy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobConfigurationTableCopy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -380,6 +389,7 @@ jobConfigurationTableCopy =
     , _jctcSourceTable = Nothing
     , _jctcDestinationEncryptionConfiguration = Nothing
     }
+
 
 -- | [Required] The destination table
 jctcDestinationTable :: Lens' JobConfigurationTableCopy (Maybe TableReference)
@@ -475,6 +485,7 @@ data TableListTablesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableListTablesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -516,6 +527,7 @@ tableListTablesItem =
     , _tltiType = Nothing
     , _tltiExpirationTime = Nothing
     }
+
 
 -- | The time when this table was created, in milliseconds since the epoch.
 tltiCreationTime :: Lens' TableListTablesItem (Maybe Int64)
@@ -618,6 +630,7 @@ newtype TableSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -626,6 +639,7 @@ newtype TableSchema =
 tableSchema
     :: TableSchema
 tableSchema = TableSchema' {_tsFields = Nothing}
+
 
 -- | Describes the fields in a table.
 tsFields :: Lens' TableSchema [TableFieldSchema]
@@ -655,6 +669,7 @@ data ProjectList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -678,6 +693,7 @@ projectList =
     , _plKind = "bigquery#projectList"
     , _plProjects = Nothing
     }
+
 
 -- | The total number of projects in the list.
 plTotalItems :: Lens' ProjectList (Maybe Int32)
@@ -735,6 +751,7 @@ data ExplainQueryStep =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExplainQueryStep' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -746,6 +763,7 @@ explainQueryStep
     :: ExplainQueryStep
 explainQueryStep =
   ExplainQueryStep' {_eqsSubsteps = Nothing, _eqsKind = Nothing}
+
 
 -- | Human-readable stage descriptions.
 eqsSubsteps :: Lens' ExplainQueryStep [Text]
@@ -784,6 +802,7 @@ data QueryTimelineSample =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryTimelineSample' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -807,6 +826,7 @@ queryTimelineSample =
     , _qtsElapsedMs = Nothing
     , _qtsCompletedUnits = Nothing
     }
+
 
 -- | Total parallel units of work remaining for the active stages.
 qtsPendingUnits :: Lens' QueryTimelineSample (Maybe Int64)
@@ -874,6 +894,7 @@ data QueryParameterTypeStructTypesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryParameterTypeStructTypesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -888,6 +909,7 @@ queryParameterTypeStructTypesItem
 queryParameterTypeStructTypesItem =
   QueryParameterTypeStructTypesItem'
     {_qptstiName = Nothing, _qptstiType = Nothing, _qptstiDescription = Nothing}
+
 
 -- | [Optional] The name of this field.
 qptstiName :: Lens' QueryParameterTypeStructTypesItem (Maybe Text)
@@ -935,6 +957,7 @@ data BigtableColumnFamily =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BigtableColumnFamily' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -958,6 +981,7 @@ bigtableColumnFamily =
     , _bcfType = Nothing
     , _bcfEncoding = Nothing
     }
+
 
 -- | Identifier of the column family.
 bcfFamilyId :: Lens' BigtableColumnFamily (Maybe Text)
@@ -1040,6 +1064,7 @@ data JobStatistics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobStatistics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1081,6 +1106,7 @@ jobStatistics =
     , _jsExtract = Nothing
     , _jsReservationUsage = Nothing
     }
+
 
 -- | [Output-only] Creation time of this job, in milliseconds since the
 -- epoch. This field will be present on all jobs.
@@ -1204,6 +1230,7 @@ newtype JobConfigurationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobConfigurationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1214,6 +1241,7 @@ jobConfigurationLabels
     -> JobConfigurationLabels
 jobConfigurationLabels pJclAddtional_ =
   JobConfigurationLabels' {_jclAddtional = _Coerce # pJclAddtional_}
+
 
 jclAddtional :: Lens' JobConfigurationLabels (HashMap Text Text)
 jclAddtional
@@ -1249,6 +1277,7 @@ data DataSet =
     , _dsDescription                  :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataSet' with the minimum fields required to make a request.
 --
@@ -1300,6 +1329,7 @@ dataSet =
     , _dsDefaultTableExpirationMs = Nothing
     , _dsDescription = Nothing
     }
+
 
 -- | [Output-only] The time when this dataset was created, in milliseconds
 -- since the epoch.
@@ -1469,6 +1499,7 @@ data RangePartitioningRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RangePartitioningRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1483,6 +1514,7 @@ rangePartitioningRange
 rangePartitioningRange =
   RangePartitioningRange'
     {_rprStart = Nothing, _rprInterval = Nothing, _rprEnd = Nothing}
+
 
 -- | [TrustedTester] [Required] The start of range partitioning, inclusive.
 rprStart :: Lens' RangePartitioningRange (Maybe Int64)
@@ -1527,6 +1559,7 @@ data JobStatisticsReservationUsageItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobStatisticsReservationUsageItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1539,6 +1572,7 @@ jobStatisticsReservationUsageItem
 jobStatisticsReservationUsageItem =
   JobStatisticsReservationUsageItem'
     {_jsruiName = Nothing, _jsruiSlotMs = Nothing}
+
 
 -- | [Output-only] Reservation name or \"unreserved\" for on-demand resources
 -- usage.
@@ -1578,6 +1612,7 @@ data BigtableOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BigtableOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1595,6 +1630,7 @@ bigtableOptions =
     , _boIgnoreUnspecifiedColumnFamilies = Nothing
     , _boColumnFamilies = Nothing
     }
+
 
 -- | [Optional] If field is true, then the rowkey column families will be
 -- read and converted to string. Otherwise they are read with BYTES type
@@ -1654,6 +1690,7 @@ newtype Clustering =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Clustering' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1662,6 +1699,7 @@ newtype Clustering =
 clustering
     :: Clustering
 clustering = Clustering' {_cFields = Nothing}
+
 
 -- | [Repeated] One or more fields on which data should be clustered. Only
 -- top-level, non-repeated, simple-type fields are supported. When you
@@ -1699,6 +1737,7 @@ data ExternalDataConfiguration =
     , _edcCSVOptions           :: !(Maybe CSVOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExternalDataConfiguration' with the minimum fields required to make a request.
 --
@@ -1741,6 +1780,7 @@ externalDataConfiguration =
     , _edcSourceURIs = Nothing
     , _edcCSVOptions = Nothing
     }
+
 
 -- | [Optional] Additional options if sourceFormat is set to BIGTABLE.
 edcBigtableOptions :: Lens' ExternalDataConfiguration (Maybe BigtableOptions)
@@ -1891,6 +1931,7 @@ data TableReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1905,6 +1946,7 @@ tableReference
 tableReference =
   TableReference'
     {_trDataSetId = Nothing, _trProjectId = Nothing, _trTableId = Nothing}
+
 
 -- | [Required] The ID of the dataset containing this table.
 trDataSetId :: Lens' TableReference (Maybe Text)
@@ -1952,6 +1994,7 @@ data ModelDefinitionModelOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModelDefinitionModelOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1966,6 +2009,7 @@ modelDefinitionModelOptions
 modelDefinitionModelOptions =
   ModelDefinitionModelOptions'
     {_mdmoModelType = Nothing, _mdmoLabels = Nothing, _mdmoLossType = Nothing}
+
 
 mdmoModelType :: Lens' ModelDefinitionModelOptions (Maybe Text)
 mdmoModelType
@@ -2007,6 +2051,7 @@ data RangePartitioning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RangePartitioning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2017,6 +2062,7 @@ data RangePartitioning =
 rangePartitioning
     :: RangePartitioning
 rangePartitioning = RangePartitioning' {_rpField = Nothing, _rpRange = Nothing}
+
 
 -- | [TrustedTester] [Required] The table is partitioned by this field. The
 -- field must be a top-level NULLABLE\/REQUIRED field. The only supported
@@ -2055,6 +2101,7 @@ data TableFieldSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableFieldSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2081,6 +2128,7 @@ tableFieldSchema =
     , _tfsDescription = Nothing
     , _tfsFields = Nothing
     }
+
 
 -- | [Optional] The field mode. Possible values include NULLABLE, REQUIRED
 -- and REPEATED. The default value is NULLABLE.
@@ -2163,6 +2211,7 @@ data GetQueryResultsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetQueryResultsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2207,6 +2256,7 @@ getQueryResultsResponse =
     , _gqrrJobComplete = Nothing
     , _gqrrCacheHit = Nothing
     }
+
 
 -- | Reference to the BigQuery Job that was created to run the query. This
 -- field will be present even if the original request timed out, in which
@@ -2343,6 +2393,7 @@ data DataSetList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSetList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2363,6 +2414,7 @@ dataSetList =
     , _dslKind = "bigquery#datasetList"
     , _dslDataSets = Nothing
     }
+
 
 -- | A hash value of the results page. You can use this property to determine
 -- if the page has changed since the last request.
@@ -2428,6 +2480,7 @@ data QueryRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2472,6 +2525,7 @@ queryRequest =
     , _qrMaxResults = Nothing
     , _qrDefaultDataSet = Nothing
     }
+
 
 -- | The geographic location where the job should run. See details at
 -- https:\/\/cloud.google.com\/bigquery\/docs\/locations#specifying_your_location.
@@ -2613,6 +2667,7 @@ data QueryParameter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryParameter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2627,6 +2682,7 @@ queryParameter
 queryParameter =
   QueryParameter'
     {_qpParameterValue = Nothing, _qpParameterType = Nothing, _qpName = Nothing}
+
 
 -- | [Required] The value of this parameter.
 qpParameterValue :: Lens' QueryParameter (Maybe QueryParameterValue)
@@ -2673,6 +2729,7 @@ data IterationResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IterationResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2696,6 +2753,7 @@ iterationResult =
     , _irTrainingLoss = Nothing
     , _irIndex = Nothing
     }
+
 
 -- | [Output-only, Beta] Time taken to run the training iteration in
 -- milliseconds.
@@ -2765,6 +2823,7 @@ newtype JobStatistics4 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobStatistics4' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2773,6 +2832,7 @@ newtype JobStatistics4 =
 jobStatistics4
     :: JobStatistics4
 jobStatistics4 = JobStatistics4' {_jsDestinationURIFileCounts = Nothing}
+
 
 -- | [Output-only] Number of files per destination URI or URI pattern
 -- specified in the extract configuration. These values will be in the same
@@ -2806,6 +2866,7 @@ newtype ProjectReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2814,6 +2875,7 @@ newtype ProjectReference =
 projectReference
     :: ProjectReference
 projectReference = ProjectReference' {_prProjectId = Nothing}
+
 
 -- | [Required] ID of the project. Can be either the numeric ID or the
 -- assigned ID of the project.
@@ -2866,6 +2928,7 @@ data ExplainQueryStage =
     , _eqsWaitMsMax                 :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExplainQueryStage' with the minimum fields required to make a request.
 --
@@ -2962,6 +3025,7 @@ explainQueryStage =
     , _eqsEndMs = Nothing
     , _eqsWaitMsMax = Nothing
     }
+
 
 -- | Milliseconds the average shard spent reading input.
 eqsReadMsAvg :: Lens' ExplainQueryStage (Maybe Int64)
@@ -3248,6 +3312,7 @@ data TrainingRunTrainingOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrainingRunTrainingOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3283,6 +3348,7 @@ trainingRunTrainingOptions =
     , _trtoL2Reg = Nothing
     , _trtoWarmStart = Nothing
     }
+
 
 trtoLineSearchInitLearnRate :: Lens' TrainingRunTrainingOptions (Maybe Double)
 trtoLineSearchInitLearnRate
@@ -3372,6 +3438,7 @@ data BigQueryModelTraining =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BigQueryModelTraining' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3384,6 +3451,7 @@ bigQueryModelTraining
 bigQueryModelTraining =
   BigQueryModelTraining'
     {_bqmtExpectedTotalIterations = Nothing, _bqmtCurrentIteration = Nothing}
+
 
 -- | [Output-only, Beta] Expected number of iterations for the create model
 -- query job specified as num_iterations in the input query. The actual
@@ -3452,6 +3520,7 @@ data JobConfigurationLoad =
     , _jclNullMarker                         :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobConfigurationLoad' with the minimum fields required to make a request.
 --
@@ -3542,6 +3611,7 @@ jobConfigurationLoad =
     , _jclFieldDelimiter = Nothing
     , _jclNullMarker = Nothing
     }
+
 
 -- | [Optional] The number of rows at the top of a CSV file that BigQuery
 -- will skip when loading the data. The default value is 0. This property
@@ -3884,6 +3954,7 @@ data DataSetReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSetReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3895,6 +3966,7 @@ dataSetReference
     :: DataSetReference
 dataSetReference =
   DataSetReference' {_dsrDataSetId = Nothing, _dsrProjectId = Nothing}
+
 
 -- | [Required] A unique ID for this dataset, without the project name. The
 -- ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores
@@ -3931,6 +4003,7 @@ data MaterializedViewDefinition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MaterializedViewDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3943,6 +4016,7 @@ materializedViewDefinition
 materializedViewDefinition =
   MaterializedViewDefinition'
     {_mvdQuery = Nothing, _mvdLastRefreshTime = Nothing}
+
 
 -- | [Required] A query whose result is persisted.
 mvdQuery :: Lens' MaterializedViewDefinition (Maybe Text)
@@ -3982,6 +4056,7 @@ data TableDataInsertAllRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableDataInsertAllRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4005,6 +4080,7 @@ tableDataInsertAllRequest =
     , _tdiarTemplateSuffix = Nothing
     , _tdiarSkipInvalidRows = Nothing
     }
+
 
 -- | The resource type of the response.
 tdiarKind :: Lens' TableDataInsertAllRequest Text
@@ -4077,6 +4153,7 @@ data GetServiceAccountResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetServiceAccountResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4089,6 +4166,7 @@ getServiceAccountResponse
 getServiceAccountResponse =
   GetServiceAccountResponse'
     {_gsarEmail = Nothing, _gsarKind = "bigquery#getServiceAccountResponse"}
+
 
 -- | The service account email address.
 gsarEmail :: Lens' GetServiceAccountResponse (Maybe Text)
@@ -4127,6 +4205,7 @@ data ProjectListProjectsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectListProjectsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4150,6 +4229,7 @@ projectListProjectsItem =
     , _plpiId = Nothing
     , _plpiNumericId = Nothing
     }
+
 
 -- | A descriptive name for this project.
 plpiFriendlyName :: Lens' ProjectListProjectsItem (Maybe Text)
@@ -4212,6 +4292,7 @@ data BigtableColumn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BigtableColumn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4238,6 +4319,7 @@ bigtableColumn =
     , _bcType = Nothing
     , _bcEncoding = Nothing
     }
+
 
 -- | [Required] Qualifier of the column. Columns in the parent column family
 -- that has this exact qualifier are exposed as . field. If the qualifier
@@ -4326,6 +4408,7 @@ data Streamingbuffer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Streamingbuffer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4343,6 +4426,7 @@ streamingbuffer =
     , _sOldestEntryTime = Nothing
     , _sEstimatedRows = Nothing
     }
+
 
 -- | [Output-only] A lower-bound estimate of the number of bytes currently in
 -- the streaming buffer.
@@ -4394,6 +4478,7 @@ newtype TableRow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableRow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4402,6 +4487,7 @@ newtype TableRow =
 tableRow
     :: TableRow
 tableRow = TableRow' {_trF = Nothing}
+
 
 -- | Represents a single row in the result set, consisting of one or more
 -- fields.
@@ -4434,6 +4520,7 @@ data JobListJobsItem =
     , _jljiConfiguration :: !(Maybe JobConfiguration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobListJobsItem' with the minimum fields required to make a request.
 --
@@ -4470,6 +4557,7 @@ jobListJobsItem =
     , _jljiStatistics = Nothing
     , _jljiConfiguration = Nothing
     }
+
 
 -- | Job reference uniquely identifying the job.
 jljiJobReference :: Lens' JobListJobsItem (Maybe JobReference)
@@ -4560,6 +4648,7 @@ data TimePartitioning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimePartitioning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4580,6 +4669,7 @@ timePartitioning =
     , _tpRequirePartitionFilter = Nothing
     , _tpType = Nothing
     }
+
 
 -- | [Beta] [Optional] If not set, the table is partitioned by pseudo column,
 -- referenced via either \'_PARTITIONTIME\' as TIMESTAMP type, or
@@ -4637,6 +4727,7 @@ newtype QueryParameterValueStructValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryParameterValueStructValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4648,6 +4739,7 @@ queryParameterValueStructValues
 queryParameterValueStructValues pQpvsvAddtional_ =
   QueryParameterValueStructValues'
     {_qpvsvAddtional = _Coerce # pQpvsvAddtional_}
+
 
 qpvsvAddtional :: Lens' QueryParameterValueStructValues (HashMap Text QueryParameterValue)
 qpvsvAddtional
@@ -4678,6 +4770,7 @@ newtype DataSetLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSetLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4688,6 +4781,7 @@ dataSetLabels
     -> DataSetLabels
 dataSetLabels pDslAddtional_ =
   DataSetLabels' {_dslAddtional = _Coerce # pDslAddtional_}
+
 
 dslAddtional :: Lens' DataSetLabels (HashMap Text Text)
 dslAddtional
@@ -4716,6 +4810,7 @@ data JobConfiguration =
     , _jcDryRun       :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobConfiguration' with the minimum fields required to make a request.
 --
@@ -4749,6 +4844,7 @@ jobConfiguration =
     , _jcLabels = Nothing
     , _jcDryRun = Nothing
     }
+
 
 -- | [Output-only] The type of the job. Can be QUERY, LOAD, EXTRACT, COPY or
 -- UNKNOWN.
@@ -4838,6 +4934,7 @@ data Job =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4873,6 +4970,7 @@ job =
     , _jStatistics = Nothing
     , _jConfiguration = Nothing
     }
+
 
 -- | [Optional] Reference describing the unique-per-user name of the job.
 jJobReference :: Lens' Job (Maybe JobReference)
@@ -4953,6 +5051,7 @@ newtype EncryptionConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EncryptionConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4961,6 +5060,7 @@ newtype EncryptionConfiguration =
 encryptionConfiguration
     :: EncryptionConfiguration
 encryptionConfiguration = EncryptionConfiguration' {_ecKmsKeyName = Nothing}
+
 
 -- | [Optional] Describes the Cloud KMS encryption key that will be used to
 -- protect destination BigQuery table. The BigQuery Service Account
@@ -4989,6 +5089,7 @@ data TableDataInsertAllResponseInsertErrorsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableDataInsertAllResponseInsertErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5001,6 +5102,7 @@ tableDataInsertAllResponseInsertErrorsItem
 tableDataInsertAllResponseInsertErrorsItem =
   TableDataInsertAllResponseInsertErrorsItem'
     {_tdiarieiErrors = Nothing, _tdiarieiIndex = Nothing}
+
 
 -- | Error information for the row indicated by the index property.
 tdiarieiErrors :: Lens' TableDataInsertAllResponseInsertErrorsItem [ErrorProto]
@@ -5051,6 +5153,7 @@ data JobConfigurationExtract =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobConfigurationExtract' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5080,6 +5183,7 @@ jobConfigurationExtract =
     , _jceDestinationURI = Nothing
     , _jceFieldDelimiter = Nothing
     }
+
 
 -- | [Optional] The exported file format. Possible values include CSV,
 -- NEWLINE_DELIMITED_JSON and AVRO. The default value is CSV. Tables with
@@ -5167,6 +5271,7 @@ data ModelDefinition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModelDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5178,6 +5283,7 @@ modelDefinition
     :: ModelDefinition
 modelDefinition =
   ModelDefinition' {_mdModelOptions = Nothing, _mdTrainingRuns = Nothing}
+
 
 -- | [Output-only, Beta] Model options used for the first training run. These
 -- options are immutable for subsequent training runs. Default values are
@@ -5222,6 +5328,7 @@ data JobCancelResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobCancelResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5234,6 +5341,7 @@ jobCancelResponse
 jobCancelResponse =
   JobCancelResponse'
     {_jcrKind = "bigquery#jobCancelResponse", _jcrJob = Nothing}
+
 
 -- | The resource type of the response.
 jcrKind :: Lens' JobCancelResponse Text
@@ -5266,6 +5374,7 @@ newtype JSONObject =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JSONObject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5275,6 +5384,7 @@ jsonObject
     :: HashMap Text JSONValue -- ^ 'joAddtional'
     -> JSONObject
 jsonObject pJoAddtional_ = JSONObject' {_joAddtional = _Coerce # pJoAddtional_}
+
 
 joAddtional :: Lens' JSONObject (HashMap Text JSONValue)
 joAddtional
@@ -5317,6 +5427,7 @@ data JobConfigurationQuery =
     , _jcqDefaultDataSet                     :: !(Maybe DataSetReference)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobConfigurationQuery' with the minimum fields required to make a request.
 --
@@ -5392,6 +5503,7 @@ jobConfigurationQuery =
     , _jcqDestinationEncryptionConfiguration = Nothing
     , _jcqDefaultDataSet = Nothing
     }
+
 
 -- | [Optional] Describes the table where the query results should be stored.
 -- If not present, a new table will be created to store the results. This
@@ -5658,6 +5770,7 @@ data GoogleSheetsOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleSheetsOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5669,6 +5782,7 @@ googleSheetsOptions
     :: GoogleSheetsOptions
 googleSheetsOptions =
   GoogleSheetsOptions' {_gsoSkipLeadingRows = Nothing, _gsoRange = Nothing}
+
 
 -- | [Optional] The number of rows at the top of a sheet that BigQuery will
 -- skip when reading the data. The default value is 0. This property is
@@ -5717,6 +5831,7 @@ data TableDataInsertAllRequestRowsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableDataInsertAllRequestRowsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5729,6 +5844,7 @@ tableDataInsertAllRequestRowsItem
 tableDataInsertAllRequestRowsItem =
   TableDataInsertAllRequestRowsItem'
     {_tdiarriJSON = Nothing, _tdiarriInsertId = Nothing}
+
 
 -- | [Required] A JSON object that contains a row of data. The object\'s
 -- properties and values must match the destination table\'s schema.
@@ -5770,6 +5886,7 @@ data JobList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5790,6 +5907,7 @@ jobList =
     , _jlKind = "bigquery#jobList"
     , _jlJobs = Nothing
     }
+
 
 -- | A hash of this page of results.
 jlEtag :: Lens' JobList (Maybe Text)
@@ -5840,6 +5958,7 @@ newtype JobConfigurationQueryTableDefinitions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobConfigurationQueryTableDefinitions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5851,6 +5970,7 @@ jobConfigurationQueryTableDefinitions
 jobConfigurationQueryTableDefinitions pJcqtdAddtional_ =
   JobConfigurationQueryTableDefinitions'
     {_jcqtdAddtional = _Coerce # pJcqtdAddtional_}
+
 
 jcqtdAddtional :: Lens' JobConfigurationQueryTableDefinitions (HashMap Text ExternalDataConfiguration)
 jcqtdAddtional
@@ -5879,6 +5999,7 @@ newtype TableCell =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableCell' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5887,6 +6008,7 @@ newtype TableCell =
 tableCell
     :: TableCell
 tableCell = TableCell' {_tcV = Nothing}
+
 
 tcV :: Lens' TableCell (Maybe JSONValue)
 tcV = lens _tcV (\ s a -> s{_tcV = a})
@@ -5909,6 +6031,7 @@ data JobStatistics2ReservationUsageItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobStatistics2ReservationUsageItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5920,6 +6043,7 @@ jobStatistics2ReservationUsageItem
     :: JobStatistics2ReservationUsageItem
 jobStatistics2ReservationUsageItem =
   JobStatistics2ReservationUsageItem' {_jName = Nothing, _jSlotMs = Nothing}
+
 
 -- | [Output-only] Reservation name or \"unreserved\" for on-demand resources
 -- usage.
@@ -5957,6 +6081,7 @@ data QueryParameterValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryParameterValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5971,6 +6096,7 @@ queryParameterValue
 queryParameterValue =
   QueryParameterValue'
     {_qpvStructValues = Nothing, _qpvValue = Nothing, _qpvArrayValues = Nothing}
+
 
 -- | [Optional] The struct field values, in order of the struct type\'s
 -- declaration.
@@ -6017,6 +6143,7 @@ data ViewDefinition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ViewDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6034,6 +6161,7 @@ viewDefinition =
     , _vdQuery = Nothing
     , _vdUseLegacySQL = Nothing
     }
+
 
 -- | Describes user-defined function resources used in the query.
 vdUserDefinedFunctionResources :: Lens' ViewDefinition [UserDefinedFunctionResource]
@@ -6083,6 +6211,7 @@ data UserDefinedFunctionResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserDefinedFunctionResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6095,6 +6224,7 @@ userDefinedFunctionResource
 userDefinedFunctionResource =
   UserDefinedFunctionResource'
     {_udfrResourceURI = Nothing, _udfrInlineCode = Nothing}
+
 
 -- | [Pick one] A code resource to load from a Google Cloud Storage URI
 -- (gs:\/\/bucket\/path).
@@ -6152,6 +6282,7 @@ data JobStatistics2 =
     , _jTotalPartitionsProcessed            :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobStatistics2' with the minimum fields required to make a request.
 --
@@ -6224,6 +6355,7 @@ jobStatistics2 =
     , _jDdlOperationPerformed = Nothing
     , _jTotalPartitionsProcessed = Nothing
     }
+
 
 -- | [Output-only, Beta] Deprecated; do not use.
 jModelTrainingExpectedTotalIteration :: Lens' JobStatistics2 (Maybe Int64)
@@ -6464,6 +6596,7 @@ newtype TableFieldSchemaCategories =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableFieldSchemaCategories' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6472,6 +6605,7 @@ newtype TableFieldSchemaCategories =
 tableFieldSchemaCategories
     :: TableFieldSchemaCategories
 tableFieldSchemaCategories = TableFieldSchemaCategories' {_tfscNames = Nothing}
+
 
 -- | A list of category resource names. For example,
 -- \"projects\/1\/taxonomies\/2\/categories\/3\". At most 5 categories are
@@ -6503,6 +6637,7 @@ data JobStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6516,6 +6651,7 @@ jobStatus
     :: JobStatus
 jobStatus =
   JobStatus' {_jsState = Nothing, _jsErrorResult = Nothing, _jsErrors = Nothing}
+
 
 -- | [Output-only] Running state of the job.
 jsState :: Lens' JobStatus (Maybe Text)
@@ -6568,6 +6704,7 @@ newtype TableLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6578,6 +6715,7 @@ tableLabels
     -> TableLabels
 tableLabels pTlAddtional_ =
   TableLabels' {_tlAddtional = _Coerce # pTlAddtional_}
+
 
 tlAddtional :: Lens' TableLabels (HashMap Text Text)
 tlAddtional
@@ -6601,6 +6739,7 @@ data DestinationTableProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DestinationTableProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6613,6 +6752,7 @@ destinationTableProperties
 destinationTableProperties =
   DestinationTableProperties'
     {_dtpFriendlyName = Nothing, _dtpDescription = Nothing}
+
 
 -- | [Optional] The friendly name for the destination table. This will only
 -- be used if the destination table is newly created. If the table already
@@ -6660,6 +6800,7 @@ data DataSetAccessItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSetAccessItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6689,6 +6830,7 @@ dataSetAccessItem =
     , _dsaiView = Nothing
     , _dsaiUserByEmail = Nothing
     }
+
 
 -- | [Pick one] An email address of a Google Group to grant access to. Maps
 -- to IAM policy member \"group:GROUP\".
@@ -6776,6 +6918,7 @@ data TableDataInsertAllResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableDataInsertAllResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6788,6 +6931,7 @@ tableDataInsertAllResponse
 tableDataInsertAllResponse =
   TableDataInsertAllResponse'
     {_tKind = "bigquery#tableDataInsertAllResponse", _tInsertErrors = Nothing}
+
 
 -- | The resource type of the response.
 tKind :: Lens' TableDataInsertAllResponse Text
@@ -6827,6 +6971,7 @@ data QueryParameterType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryParameterType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6841,6 +6986,7 @@ queryParameterType
 queryParameterType =
   QueryParameterType'
     {_qptStructTypes = Nothing, _qptType = Nothing, _qptArrayType = Nothing}
+
 
 -- | [Optional] The types of the fields of this struct, in order, if this is
 -- a struct.
@@ -6910,6 +7056,7 @@ data Table =
     , _tabDescription               :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
@@ -7003,6 +7150,7 @@ table =
     , _tabExpirationTime = Nothing
     , _tabDescription = Nothing
     }
+
 
 -- | [Optional] Materialized view definition.
 tabMaterializedView :: Lens' Table (Maybe MaterializedViewDefinition)
@@ -7277,6 +7425,7 @@ data ErrorProto =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ErrorProto' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7297,6 +7446,7 @@ errorProto =
     , _epReason = Nothing
     , _epMessage = Nothing
     }
+
 
 -- | Debugging information. This property is internal to Google and should
 -- not be used.
@@ -7349,6 +7499,7 @@ data CSVOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CSVOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7375,6 +7526,7 @@ csvOptions =
     , _coEncoding = Nothing
     , _coFieldDelimiter = Nothing
     }
+
 
 -- | [Optional] The number of rows at the top of a CSV file that BigQuery
 -- will skip when reading the data. The default value is 0. This property
@@ -7466,6 +7618,7 @@ data JobStatistics3 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobStatistics3' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7489,6 +7642,7 @@ jobStatistics3 =
     , _jsInputFileBytes = Nothing
     , _jsBadRecords = Nothing
     }
+
 
 -- | [Output-only] Number of source files in a load job.
 jsInputFiles :: Lens' JobStatistics3 (Maybe Int64)
@@ -7565,6 +7719,7 @@ data QueryResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7606,6 +7761,7 @@ queryResponse =
     , _qJobComplete = Nothing
     , _qCacheHit = Nothing
     }
+
 
 -- | Reference to the Job that was created to run the query. This field will
 -- be present even if the original request timed out, in which case
@@ -7727,6 +7883,7 @@ newtype DataSetListDataSetsItemLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSetListDataSetsItemLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7738,6 +7895,7 @@ dataSetListDataSetsItemLabels
 dataSetListDataSetsItemLabels pDsldsilAddtional_ =
   DataSetListDataSetsItemLabels'
     {_dsldsilAddtional = _Coerce # pDsldsilAddtional_}
+
 
 dsldsilAddtional :: Lens' DataSetListDataSetsItemLabels (HashMap Text Text)
 dsldsilAddtional
@@ -7766,6 +7924,7 @@ data TrainingRun =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrainingRun' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7786,6 +7945,7 @@ trainingRun =
     , _trIterationResults = Nothing
     , _trTrainingOptions = Nothing
     }
+
 
 -- | [Output-only, Beta] Different state applicable for a training run. IN
 -- PROGRESS: Training run is in progress. FAILED: Training run ended due to
@@ -7847,6 +8007,7 @@ newtype TableListTablesItemView =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableListTablesItemView' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7856,6 +8017,7 @@ tableListTablesItemView
     :: TableListTablesItemView
 tableListTablesItemView =
   TableListTablesItemView' {_tltivUseLegacySQL = Nothing}
+
 
 -- | True if view is defined in legacy SQL dialect, false if in standard SQL.
 tltivUseLegacySQL :: Lens' TableListTablesItemView (Maybe Bool)
@@ -7885,6 +8047,7 @@ newtype TableListTablesItemLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableListTablesItemLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7895,6 +8058,7 @@ tableListTablesItemLabels
     -> TableListTablesItemLabels
 tableListTablesItemLabels pTltilAddtional_ =
   TableListTablesItemLabels' {_tltilAddtional = _Coerce # pTltilAddtional_}
+
 
 tltilAddtional :: Lens' TableListTablesItemLabels (HashMap Text Text)
 tltilAddtional

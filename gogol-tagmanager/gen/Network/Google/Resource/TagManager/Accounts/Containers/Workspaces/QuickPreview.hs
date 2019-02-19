@@ -60,6 +60,7 @@ newtype AccountsContainersWorkspacesQuickPreview =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesQuickPreview' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ accountsContainersWorkspacesQuickPreview
     -> AccountsContainersWorkspacesQuickPreview
 accountsContainersWorkspacesQuickPreview pAcwqpPath_ =
   AccountsContainersWorkspacesQuickPreview' {_acwqpPath = pAcwqpPath_}
+
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}

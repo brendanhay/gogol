@@ -102,6 +102,7 @@ data VolumesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -153,6 +154,7 @@ volumesList pVlQ_ =
     , _vlShowPreOrders = Nothing
     , _vlPrintType = Nothing
     }
+
 
 -- | Sort search results.
 vlOrderBy :: Lens' VolumesList (Maybe VolumesListOrderBy)

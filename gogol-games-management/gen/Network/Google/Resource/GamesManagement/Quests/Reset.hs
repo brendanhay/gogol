@@ -62,6 +62,7 @@ newtype QuestsReset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuestsReset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ questsReset
     :: Text -- ^ 'qrQuestId'
     -> QuestsReset
 questsReset pQrQuestId_ = QuestsReset' {_qrQuestId = pQrQuestId_}
+
 
 -- | The ID of the quest.
 qrQuestId :: Lens' QuestsReset Text

@@ -125,6 +125,7 @@ data ProjectsUpdateBillingInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsUpdateBillingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -156,6 +157,7 @@ projectsUpdateBillingInfo pPubiPayload_ pPubiName_ =
     , _pubiName = pPubiName_
     , _pubiCallback = Nothing
     }
+
 
 -- | V1 error format.
 pubiXgafv :: Lens' ProjectsUpdateBillingInfo (Maybe Xgafv)

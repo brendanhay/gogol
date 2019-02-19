@@ -88,6 +88,7 @@ data ControllerDebuggeesRegister =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ControllerDebuggeesRegister' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ controllerDebuggeesRegister pCdrPayload_ =
     , _cdrPayload = pCdrPayload_
     , _cdrCallback = Nothing
     }
+
 
 -- | V1 error format.
 cdrXgafv :: Lens' ControllerDebuggeesRegister (Maybe Xgafv)

@@ -90,6 +90,7 @@ data ServicesGenerateConfigReport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesGenerateConfigReport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ servicesGenerateConfigReport pSgcrPayload_ =
     , _sgcrPayload = pSgcrPayload_
     , _sgcrCallback = Nothing
     }
+
 
 -- | V1 error format.
 sgcrXgafv :: Lens' ServicesGenerateConfigReport (Maybe Xgafv)

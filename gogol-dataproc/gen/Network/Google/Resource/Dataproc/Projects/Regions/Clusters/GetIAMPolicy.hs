@@ -76,6 +76,7 @@ data ProjectsRegionsClustersGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsClustersGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsRegionsClustersGetIAMPolicy pPrcgipPayload_ pPrcgipResource_ =
     , _prcgipResource = pPrcgipResource_
     , _prcgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prcgipXgafv :: Lens' ProjectsRegionsClustersGetIAMPolicy (Maybe Xgafv)

@@ -82,6 +82,7 @@ data CreativeFieldsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ creativeFieldsList pCflProFileId_ =
     , _cflAdvertiserIds = Nothing
     , _cflMaxResults = 1000
     }
+
 
 -- | Allows searching for creative fields by name or ID. Wildcards (*) are
 -- allowed. For example, \"creativefield*2015\" will return creative fields

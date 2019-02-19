@@ -74,6 +74,7 @@ data SitesDomainsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesDomainsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ sitesDomainsCreate pSdcParent_ pSdcPayload_ =
     , _sdcPayload = pSdcPayload_
     , _sdcCallback = Nothing
     }
+
 
 -- | Required. The parent to create the domain association for, in the
 -- format: 'sites\/site-name'

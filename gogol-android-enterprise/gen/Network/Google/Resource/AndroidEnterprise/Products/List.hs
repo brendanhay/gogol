@@ -76,6 +76,7 @@ data ProductsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ productsList pPlEnterpriseId_ =
     , _plApproved = Nothing
     , _plMaxResults = Nothing
     }
+
 
 -- | The ID of the enterprise.
 plEnterpriseId :: Lens' ProductsList Text

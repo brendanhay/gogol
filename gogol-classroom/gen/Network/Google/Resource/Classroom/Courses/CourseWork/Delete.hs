@@ -91,6 +91,7 @@ data CoursesCourseWorkDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesCourseWorkDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ coursesCourseWorkDelete pCcwdCourseId_ pCcwdId_ =
     , _ccwdId = pCcwdId_
     , _ccwdCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccwdXgafv :: Lens' CoursesCourseWorkDelete (Maybe Xgafv)

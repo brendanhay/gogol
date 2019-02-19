@@ -75,6 +75,7 @@ data ProjectsDatabasesDocumentsListCollectionIds =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesDocumentsListCollectionIds' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsDatabasesDocumentsListCollectionIds pPddlciParent_ pPddlciPayload_ =
     , _pddlciPayload = pPddlciPayload_
     , _pddlciCallback = Nothing
     }
+
 
 -- | The parent document. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}\`.

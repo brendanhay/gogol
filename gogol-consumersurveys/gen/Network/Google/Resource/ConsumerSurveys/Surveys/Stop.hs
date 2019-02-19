@@ -59,6 +59,7 @@ newtype SurveysStop =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveysStop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ surveysStop
     :: Text -- ^ 'sResourceId'
     -> SurveysStop
 surveysStop pSResourceId_ = SurveysStop' {_sResourceId = pSResourceId_}
+
 
 sResourceId :: Lens' SurveysStop Text
 sResourceId

@@ -79,6 +79,7 @@ data ProjectsLocationsRegistriesGroupsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ projectsLocationsRegistriesGroupsTestIAMPermissions pPlrgtipPayload_ pPlrgtipRes
     , _plrgtipResource = pPlrgtipResource_
     , _plrgtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrgtipXgafv :: Lens' ProjectsLocationsRegistriesGroupsTestIAMPermissions (Maybe Xgafv)

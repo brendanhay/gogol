@@ -64,6 +64,7 @@ data AccountsContainersWorkspacesBuiltInVariablesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesBuiltInVariablesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ accountsContainersWorkspacesBuiltInVariablesCreate
 accountsContainersWorkspacesBuiltInVariablesCreate pAcwbivcParent_ =
   AccountsContainersWorkspacesBuiltInVariablesCreate'
     {_acwbivcParent = pAcwbivcParent_, _acwbivcType = Nothing}
+
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}

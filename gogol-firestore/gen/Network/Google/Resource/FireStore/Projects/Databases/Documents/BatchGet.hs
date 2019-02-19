@@ -77,6 +77,7 @@ data ProjectsDatabasesDocumentsBatchGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesDocumentsBatchGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsDatabasesDocumentsBatchGet pPddbgDatabase_ pPddbgPayload_ =
     , _pddbgPayload = pPddbgPayload_
     , _pddbgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pddbgXgafv :: Lens' ProjectsDatabasesDocumentsBatchGet (Maybe Xgafv)

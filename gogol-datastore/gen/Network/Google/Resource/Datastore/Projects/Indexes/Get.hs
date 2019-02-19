@@ -76,6 +76,7 @@ data ProjectsIndexesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsIndexesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsIndexesGet pPigProjectId_ pPigIndexId_ =
     , _pigIndexId = pPigIndexId_
     , _pigCallback = Nothing
     }
+
 
 -- | V1 error format.
 pigXgafv :: Lens' ProjectsIndexesGet (Maybe Xgafv)

@@ -81,6 +81,7 @@ data ProjectsInstancesDatabasesSessionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsInstancesDatabasesSessionsList pPidslDatabase_ =
     , _pidslPageSize = Nothing
     , _pidslCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidslXgafv :: Lens' ProjectsInstancesDatabasesSessionsList (Maybe Xgafv)

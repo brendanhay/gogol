@@ -83,6 +83,7 @@ data ProjectsAgentSessionsDetectIntent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentSessionsDetectIntent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ projectsAgentSessionsDetectIntent pPasdiPayload_ pPasdiSession_ =
     , _pasdiSession = pPasdiSession_
     , _pasdiCallback = Nothing
     }
+
 
 -- | V1 error format.
 pasdiXgafv :: Lens' ProjectsAgentSessionsDetectIntent (Maybe Xgafv)

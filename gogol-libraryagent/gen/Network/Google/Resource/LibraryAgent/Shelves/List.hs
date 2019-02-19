@@ -78,6 +78,7 @@ data ShelvesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShelvesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ shelvesList =
     , _slPageSize = Nothing
     , _slCallback = Nothing
     }
+
 
 -- | V1 error format.
 slXgafv :: Lens' ShelvesList (Maybe Xgafv)

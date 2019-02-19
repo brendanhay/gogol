@@ -80,6 +80,7 @@ data FoldersTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ foldersTestIAMPermissions pFtipPayload_ pFtipResource_ =
     , _ftipResource = pFtipResource_
     , _ftipCallback = Nothing
     }
+
 
 -- | V1 error format.
 ftipXgafv :: Lens' FoldersTestIAMPermissions (Maybe Xgafv)

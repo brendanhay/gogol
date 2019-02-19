@@ -59,6 +59,7 @@ newtype GroupsAliasesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsAliasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ groupsAliasesList
     -> GroupsAliasesList
 groupsAliasesList pGalGroupKey_ =
   GroupsAliasesList' {_galGroupKey = pGalGroupKey_}
+
 
 -- | Email or immutable ID of the group
 galGroupKey :: Lens' GroupsAliasesList Text

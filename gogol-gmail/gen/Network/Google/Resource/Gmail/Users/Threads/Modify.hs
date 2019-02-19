@@ -68,6 +68,7 @@ data UsersThreadsModify =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersThreadsModify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ usersThreadsModify
 usersThreadsModify pUtmPayload_ pUtmId_ =
   UsersThreadsModify'
     {_utmPayload = pUtmPayload_, _utmUserId = "me", _utmId = pUtmId_}
+
 
 -- | Multipart request metadata.
 utmPayload :: Lens' UsersThreadsModify ModifyThreadRequest

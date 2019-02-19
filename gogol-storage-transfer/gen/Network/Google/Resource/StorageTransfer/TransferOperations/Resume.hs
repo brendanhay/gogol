@@ -74,6 +74,7 @@ data TransferOperationsResume =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferOperationsResume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ transferOperationsResume pTorPayload_ pTorName_ =
     , _torName = pTorName_
     , _torCallback = Nothing
     }
+
 
 -- | V1 error format.
 torXgafv :: Lens' TransferOperationsResume (Maybe Xgafv)

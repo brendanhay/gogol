@@ -61,6 +61,7 @@ data UserRolesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ userRolesDelete
 userRolesDelete pUrdProFileId_ pUrdId_ =
   UserRolesDelete'
     {_urdProFileId = _Coerce # pUrdProFileId_, _urdId = _Coerce # pUrdId_}
+
 
 -- | User profile ID associated with this request.
 urdProFileId :: Lens' UserRolesDelete Int64

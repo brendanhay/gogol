@@ -74,6 +74,7 @@ data ManagementUnSampledReportsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementUnSampledReportsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ managementUnSampledReportsList pMusrlWebPropertyId_ pMusrlProFileId_ pMusrlAccou
     , _musrlStartIndex = Nothing
     , _musrlMaxResults = Nothing
     }
+
 
 -- | Web property ID to retrieve unsampled reports for. Must be a specific
 -- web property ID, ~all is not supported.

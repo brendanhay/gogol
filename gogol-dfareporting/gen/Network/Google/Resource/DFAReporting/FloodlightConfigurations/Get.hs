@@ -62,6 +62,7 @@ data FloodlightConfigurationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightConfigurationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ floodlightConfigurationsGet
 floodlightConfigurationsGet pFcgProFileId_ pFcgId_ =
   FloodlightConfigurationsGet'
     {_fcgProFileId = _Coerce # pFcgProFileId_, _fcgId = _Coerce # pFcgId_}
+
 
 -- | User profile ID associated with this request.
 fcgProFileId :: Lens' FloodlightConfigurationsGet Int64

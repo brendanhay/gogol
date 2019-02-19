@@ -67,6 +67,7 @@ data TargetingTemplatesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingTemplatesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ targetingTemplatesPatch pTtpProFileId_ pTtpPayload_ pTtpId_ =
     , _ttpPayload = pTtpPayload_
     , _ttpId = _Coerce # pTtpId_
     }
+
 
 -- | User profile ID associated with this request.
 ttpProFileId :: Lens' TargetingTemplatesPatch Int64

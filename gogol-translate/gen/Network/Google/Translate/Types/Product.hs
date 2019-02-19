@@ -29,6 +29,7 @@ newtype DetectLanguageRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DetectLanguageRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37,6 +38,7 @@ newtype DetectLanguageRequest =
 detectLanguageRequest
     :: DetectLanguageRequest
 detectLanguageRequest = DetectLanguageRequest' {_dlrQ = Nothing}
+
 
 -- | The input text upon which to perform language detection. Repeat this
 -- parameter to perform language detection on multiple text inputs.
@@ -65,6 +67,7 @@ data TranslationsResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TranslationsResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +85,7 @@ translationsResource =
     , _trModel = Nothing
     , _trTranslatedText = Nothing
     }
+
 
 -- | The source language of the initial request, detected automatically, if
 -- no source language was passed within the initial request. If the source
@@ -134,6 +138,7 @@ data TranslateTextRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TranslateTextRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -157,6 +162,7 @@ translateTextRequest =
     , _ttrSource = Nothing
     , _ttrTarget = Nothing
     }
+
 
 -- | The format of the source text, in either HTML (default) or plain-text. A
 -- value of \"html\" indicates HTML and a value of \"text\" indicates
@@ -218,6 +224,7 @@ newtype DetectionsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DetectionsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -226,6 +233,7 @@ newtype DetectionsListResponse =
 detectionsListResponse
     :: DetectionsListResponse
 detectionsListResponse = DetectionsListResponse' {_dlrDetections = Nothing}
+
 
 -- | A detections contains detection results of several text
 dlrDetections :: Lens' DetectionsListResponse [[DetectionsResourceItem]]
@@ -256,6 +264,7 @@ newtype GetSupportedLanguagesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetSupportedLanguagesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -265,6 +274,7 @@ getSupportedLanguagesRequest
     :: GetSupportedLanguagesRequest
 getSupportedLanguagesRequest =
   GetSupportedLanguagesRequest' {_gslrTarget = Nothing}
+
 
 -- | The language to use to return localized, human readable names of
 -- supported languages.
@@ -290,6 +300,7 @@ newtype LanguagesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LanguagesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -298,6 +309,7 @@ newtype LanguagesListResponse =
 languagesListResponse
     :: LanguagesListResponse
 languagesListResponse = LanguagesListResponse' {_llrLanguages = Nothing}
+
 
 -- | List of source\/target languages supported by the translation API. If
 -- target parameter is unspecified, the list is sorted by the ASCII code
@@ -332,6 +344,7 @@ data DetectionsResourceItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DetectionsResourceItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -346,6 +359,7 @@ detectionsResourceItem
 detectionsResourceItem =
   DetectionsResourceItem'
     {_driConfidence = Nothing, _driIsReliable = Nothing, _driLanguage = Nothing}
+
 
 -- | The confidence of the detection result of this language.
 driConfidence :: Lens' DetectionsResourceItem (Maybe Double)
@@ -390,6 +404,7 @@ data LanguagesResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LanguagesResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -401,6 +416,7 @@ languagesResource
     :: LanguagesResource
 languagesResource =
   LanguagesResource' {_lrName = Nothing, _lrLanguage = Nothing}
+
 
 -- | Human readable name of the language localized to the target language.
 lrName :: Lens' LanguagesResource (Maybe Text)
@@ -437,6 +453,7 @@ newtype TranslationsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TranslationsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -446,6 +463,7 @@ translationsListResponse
     :: TranslationsListResponse
 translationsListResponse =
   TranslationsListResponse' {_tlrTranslations = Nothing}
+
 
 -- | Translations contains list of translation results of given text
 tlrTranslations :: Lens' TranslationsListResponse [TranslationsResource]

@@ -64,6 +64,7 @@ data PeopleListByCircle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeopleListByCircle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ peopleListByCircle pPlbcCircleId_ =
     , _plbcPageToken = Nothing
     , _plbcMaxResults = 20
     }
+
 
 -- | The ID of the circle to get the members of.
 plbcCircleId :: Lens' PeopleListByCircle Text

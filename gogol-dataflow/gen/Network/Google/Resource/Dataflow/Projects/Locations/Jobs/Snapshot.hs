@@ -83,6 +83,7 @@ data ProjectsLocationsJobsSnapshot =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsJobsSnapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ projectsLocationsJobsSnapshot pPljsJobId_ pPljsLocation_ pPljsPayload_ pPljsProj
     , _pljsProjectId = pPljsProjectId_
     , _pljsCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljsXgafv :: Lens' ProjectsLocationsJobsSnapshot (Maybe Xgafv)

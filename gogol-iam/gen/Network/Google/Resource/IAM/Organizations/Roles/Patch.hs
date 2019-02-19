@@ -76,6 +76,7 @@ data OrganizationsRolesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsRolesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ organizationsRolesPatch pOrpPayload_ pOrpName_ =
     , _orpName = pOrpName_
     , _orpCallback = Nothing
     }
+
 
 -- | V1 error format.
 orpXgafv :: Lens' OrganizationsRolesPatch (Maybe Xgafv)

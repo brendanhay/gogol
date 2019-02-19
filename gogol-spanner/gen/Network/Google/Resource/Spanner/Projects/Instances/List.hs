@@ -81,6 +81,7 @@ data ProjectsInstancesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsInstancesList pPilParent_ =
     , _pilPageSize = Nothing
     , _pilCallback = Nothing
     }
+
 
 -- | Required. The name of the project for which a list of instances is
 -- requested. Values are of the form \`projects\/\`.

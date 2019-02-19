@@ -77,6 +77,7 @@ data MediaItemsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MediaItemsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ mediaItemsGet pMigMediaItemId_ =
     , _migBearerToken = Nothing
     , _migCallback = Nothing
     }
+
 
 -- | V1 error format.
 migXgafv :: Lens' MediaItemsGet (Maybe Xgafv)

@@ -59,6 +59,7 @@ newtype TaskListsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TaskListsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ taskListsDelete
     :: Text -- ^ 'tldTaskList'
     -> TaskListsDelete
 taskListsDelete pTldTaskList_ = TaskListsDelete' {_tldTaskList = pTldTaskList_}
+
 
 -- | Task list identifier.
 tldTaskList :: Lens' TaskListsDelete Text

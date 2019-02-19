@@ -77,6 +77,7 @@ data ProjectsRegionsWorkflowTemplatesGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsRegionsWorkflowTemplatesGetIAMPolicy pPrwtgipPayload_ pPrwtgipResource_ 
     , _prwtgipResource = pPrwtgipResource_
     , _prwtgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prwtgipXgafv :: Lens' ProjectsRegionsWorkflowTemplatesGetIAMPolicy (Maybe Xgafv)

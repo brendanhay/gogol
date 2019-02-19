@@ -84,6 +84,7 @@ data ProjectsZonesClustersLegacyAbac =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersLegacyAbac' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsZonesClustersLegacyAbac pPzclaZone_ pPzclaPayload_ pPzclaClusterId_ pPzc
     , _pzclaProjectId = pPzclaProjectId_
     , _pzclaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzclaXgafv :: Lens' ProjectsZonesClustersLegacyAbac (Maybe Xgafv)

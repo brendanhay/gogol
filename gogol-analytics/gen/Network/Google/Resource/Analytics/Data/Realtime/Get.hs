@@ -73,6 +73,7 @@ data DataRealtimeGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataRealtimeGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ dataRealtimeGet pDrgMetrics_ pDrgIds_ =
     , _drgDimensions = Nothing
     , _drgMaxResults = Nothing
     }
+
 
 -- | A comma-separated list of real time metrics. E.g., \'rt:activeUsers\'.
 -- At least one metric must be specified.

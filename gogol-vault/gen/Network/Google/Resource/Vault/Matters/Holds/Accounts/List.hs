@@ -83,6 +83,7 @@ data MattersHoldsAccountsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersHoldsAccountsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ mattersHoldsAccountsList pMhalHoldId_ pMhalMatterId_ =
     , _mhalMatterId = pMhalMatterId_
     , _mhalCallback = Nothing
     }
+
 
 -- | V1 error format.
 mhalXgafv :: Lens' MattersHoldsAccountsList (Maybe Xgafv)

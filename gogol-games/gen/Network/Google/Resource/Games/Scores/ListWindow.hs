@@ -82,6 +82,7 @@ data ScoresListWindow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScoresListWindow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ scoresListWindow pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
     , _slwPageToken = Nothing
     , _slwMaxResults = Nothing
     }
+
 
 -- | The collection of scores you\'re requesting.
 slwCollection :: Lens' ScoresListWindow ScoresListWindowCollection

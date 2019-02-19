@@ -57,6 +57,7 @@ newtype SettingsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ settingsGet
     :: Text -- ^ 'sgId'
     -> SettingsGet
 settingsGet pSgId_ = SettingsGet' {_sgId = pSgId_}
+
 
 -- | The ID of the setting. The following IDs are valid: - locale - The key
 -- to the user’s language\/locale (BCP 47 identifier) that Glassware should

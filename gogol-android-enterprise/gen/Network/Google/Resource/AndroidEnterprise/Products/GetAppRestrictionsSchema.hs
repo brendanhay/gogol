@@ -76,6 +76,7 @@ data ProductsGetAppRestrictionsSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsGetAppRestrictionsSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ productsGetAppRestrictionsSchema pPgarsEnterpriseId_ pPgarsProductId_ =
     , _pgarsLanguage = Nothing
     , _pgarsProductId = pPgarsProductId_
     }
+
 
 -- | The ID of the enterprise.
 pgarsEnterpriseId :: Lens' ProductsGetAppRestrictionsSchema Text

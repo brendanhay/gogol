@@ -67,6 +67,7 @@ data ManagementCustomDimensionsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementCustomDimensionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ managementCustomDimensionsInsert pMcdiWebPropertyId_ pMcdiPayload_ pMcdiAccountI
     , _mcdiPayload = pMcdiPayload_
     , _mcdiAccountId = pMcdiAccountId_
     }
+
 
 -- | Web property ID for the custom dimension to create.
 mcdiWebPropertyId :: Lens' ManagementCustomDimensionsInsert Text

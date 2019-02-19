@@ -73,6 +73,7 @@ data InstallsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstallsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ installsDelete pIdEnterpriseId_ pIdUserId_ pIdInstallId_ pIdDeviceId_ =
     , _idInstallId = pIdInstallId_
     , _idDeviceId = pIdDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 idEnterpriseId :: Lens' InstallsDelete Text

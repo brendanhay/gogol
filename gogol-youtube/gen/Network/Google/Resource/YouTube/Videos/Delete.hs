@@ -60,6 +60,7 @@ data VideosDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideosDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ videosDelete
     -> VideosDelete
 videosDelete pVdId_ =
   VideosDelete' {_vdOnBehalfOfContentOwner = Nothing, _vdId = pVdId_}
+
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the

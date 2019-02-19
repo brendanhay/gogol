@@ -88,6 +88,7 @@ data LiveBroadcastsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveBroadcastsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +125,7 @@ liveBroadcastsList pLblPart_ =
     , _lblPageToken = Nothing
     , _lblMaxResults = 5
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- liveBroadcast resource properties that the API response will include.

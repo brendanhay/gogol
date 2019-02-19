@@ -63,6 +63,7 @@ data CaptionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CaptionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ captionsDelete pCddId_ =
     , _cddOnBehalfOfContentOwner = Nothing
     , _cddId = pCddId_
     }
+
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
 -- of

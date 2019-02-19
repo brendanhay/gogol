@@ -70,6 +70,7 @@ data MyLibraryBookshelvesRemoveVolume =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryBookshelvesRemoveVolume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ myLibraryBookshelvesRemoveVolume pMlbrvShelf_ pMlbrvVolumeId_ =
     , _mlbrvVolumeId = pMlbrvVolumeId_
     , _mlbrvSource = Nothing
     }
+
 
 -- | The reason for which the book is removed from the library.
 mlbrvReason :: Lens' MyLibraryBookshelvesRemoveVolume (Maybe MyLibraryBookshelvesRemoveVolumeReason)

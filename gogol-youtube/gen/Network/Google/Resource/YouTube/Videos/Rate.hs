@@ -61,6 +61,7 @@ data VideosRate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideosRate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ videosRate
     -> VideosRate
 videosRate pVrRating_ pVrId_ =
   VideosRate' {_vrRating = pVrRating_, _vrId = pVrId_}
+
 
 -- | Specifies the rating to record.
 vrRating :: Lens' VideosRate VideosRateRating

@@ -80,6 +80,7 @@ data PartnersDevicesClaim =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersDevicesClaim' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ partnersDevicesClaim pPdcPartnerId_ pPdcPayload_ =
     , _pdcPayload = pPdcPayload_
     , _pdcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdcXgafv :: Lens' PartnersDevicesClaim (Maybe Xgafv)

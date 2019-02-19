@@ -63,6 +63,7 @@ data RelyingPartyGetProjectConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartyGetProjectConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ relyingPartyGetProjectConfig
 relyingPartyGetProjectConfig =
   RelyingPartyGetProjectConfig'
     {_rpgpcDelegatedProjectNumber = Nothing, _rpgpcProjectNumber = Nothing}
+
 
 -- | Delegated GCP project number of the request.
 rpgpcDelegatedProjectNumber :: Lens' RelyingPartyGetProjectConfig (Maybe Text)

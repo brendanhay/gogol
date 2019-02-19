@@ -68,6 +68,7 @@ data JobsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ jobsGet
 jobsGet pJgJobId_ pJgProjectId_ =
   JobsGet'
     {_jgJobId = pJgJobId_, _jgLocation = Nothing, _jgProjectId = pJgProjectId_}
+
 
 -- | [Required] Job ID of the requested job
 jgJobId :: Lens' JobsGet Text

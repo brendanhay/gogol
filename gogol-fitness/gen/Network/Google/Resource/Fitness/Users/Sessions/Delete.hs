@@ -64,6 +64,7 @@ data UsersSessionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSessionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ usersSessionsDelete pUsdUserId_ pUsdSessionId_ =
     , _usdCurrentTimeMillis = Nothing
     , _usdSessionId = pUsdSessionId_
     }
+
 
 -- | Delete a session for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.

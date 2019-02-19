@@ -79,6 +79,7 @@ data TranslationsTranslate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TranslationsTranslate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ translationsTranslate pTtPayload_ =
     , _ttBearerToken = Nothing
     , _ttCallback = Nothing
     }
+
 
 -- | V1 error format.
 ttXgafv :: Lens' TranslationsTranslate (Maybe Xgafv)

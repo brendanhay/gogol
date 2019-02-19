@@ -73,6 +73,7 @@ data PagesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ pagesList pPlBlogId_ =
     , _plPageToken = Nothing
     , _plMaxResults = Nothing
     }
+
 
 plStatus :: Lens' PagesList [PagesListStatus]
 plStatus

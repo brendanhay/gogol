@@ -70,6 +70,7 @@ data ProjectsCompaniesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsCompaniesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsCompaniesGet pPcgName_ =
     , _pcgName = pPcgName_
     , _pcgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pcgXgafv :: Lens' ProjectsCompaniesGet (Maybe Xgafv)

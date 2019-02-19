@@ -62,6 +62,7 @@ data AchievementsUpdateMultiple =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementsUpdateMultiple' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ achievementsUpdateMultiple
 achievementsUpdateMultiple pAumPayload_ =
   AchievementsUpdateMultiple'
     {_aumBuiltinGameId = Nothing, _aumPayload = pAumPayload_}
+
 
 -- | Override used only by built-in games in Play Games application.
 aumBuiltinGameId :: Lens' AchievementsUpdateMultiple (Maybe Text)

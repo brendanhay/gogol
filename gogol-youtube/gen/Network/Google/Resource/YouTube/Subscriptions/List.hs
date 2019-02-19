@@ -91,6 +91,7 @@ data SubscriptionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +137,7 @@ subscriptionsList pSubPart_ =
     , _subOrder = SLORelevance
     , _subMaxResults = 5
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- subscription resource properties that the API response will include. If

@@ -62,6 +62,7 @@ data CreativeGroupsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeGroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ creativeGroupsInsert
 creativeGroupsInsert pCgiProFileId_ pCgiPayload_ =
   CreativeGroupsInsert'
     {_cgiProFileId = _Coerce # pCgiProFileId_, _cgiPayload = pCgiPayload_}
+
 
 -- | User profile ID associated with this request.
 cgiProFileId :: Lens' CreativeGroupsInsert Int64

@@ -84,6 +84,7 @@ data ProjectsZonesClustersLocations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersLocations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsZonesClustersLocations pPZone_ pPPayload_ pPClusterId_ pPProjectId_ =
     , _pProjectId = pPProjectId_
     , _pCallback = Nothing
     }
+
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsZonesClustersLocations (Maybe Xgafv)

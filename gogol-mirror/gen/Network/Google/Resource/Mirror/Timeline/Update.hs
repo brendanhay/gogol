@@ -71,6 +71,7 @@ data TimelineUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimelineUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ timelineUpdate
     -> TimelineUpdate
 timelineUpdate pTuPayload_ pTuId_ =
   TimelineUpdate' {_tuPayload = pTuPayload_, _tuId = pTuId_}
+
 
 -- | Multipart request metadata.
 tuPayload :: Lens' TimelineUpdate TimelineItem

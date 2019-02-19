@@ -66,6 +66,7 @@ data ResourcesBuildingsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesBuildingsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ resourcesBuildingsList pRblCustomer_ =
     , _rblPageToken = Nothing
     , _rblMaxResults = Nothing
     }
+
 
 -- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your

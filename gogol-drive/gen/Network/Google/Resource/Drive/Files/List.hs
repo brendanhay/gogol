@@ -84,6 +84,7 @@ data FilesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ filesList =
     , _flPageSize = 100
     , _flSupportsTeamDrives = False
     }
+
 
 -- | Comma-separated list of bodies of items (files\/documents) to which the
 -- query applies. Supported bodies are \'user\', \'domain\', \'teamDrive\'

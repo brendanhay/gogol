@@ -65,6 +65,7 @@ data RolesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RolesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ rolesPatch pRpPayload_ pRpRoleId_ pRpCustomer_ =
     , _rpRoleId = pRpRoleId_
     , _rpCustomer = pRpCustomer_
     }
+
 
 -- | Multipart request metadata.
 rpPayload :: Lens' RolesPatch Role

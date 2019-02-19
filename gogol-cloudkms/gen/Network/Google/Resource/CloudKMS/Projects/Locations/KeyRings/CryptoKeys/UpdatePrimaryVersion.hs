@@ -77,6 +77,7 @@ data ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion pPlkrckupvPayload_ pPlkr
     , _plkrckupvName = pPlkrckupvName_
     , _plkrckupvCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrckupvXgafv :: Lens' ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion (Maybe Xgafv)

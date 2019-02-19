@@ -71,6 +71,7 @@ data TurnBasedMatchesRematch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchesRematch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ turnBasedMatchesRematch pTbmrMatchId_ =
     , _tbmrLanguage = Nothing
     , _tbmrMatchId = pTbmrMatchId_
     }
+
 
 -- | A randomly generated numeric ID for each request specified by the
 -- caller. This number is used at the server to ensure that the request is

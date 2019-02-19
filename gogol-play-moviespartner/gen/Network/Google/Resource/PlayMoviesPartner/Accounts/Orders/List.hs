@@ -107,6 +107,7 @@ data AccountsOrdersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsOrdersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -164,6 +165,7 @@ accountsOrdersList pAolAccountId_ =
     , _aolPageSize = Nothing
     , _aolCallback = Nothing
     }
+
 
 -- | Filter Orders that match one of the given status.
 aolStatus :: Lens' AccountsOrdersList [Text]

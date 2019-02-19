@@ -72,6 +72,7 @@ data InstancesSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ instancesSetIAMPolicy pIsipProject_ pIsipZone_ pIsipPayload_ pIsipResource_ =
     , _isipPayload = pIsipPayload_
     , _isipResource = pIsipResource_
     }
+
 
 -- | Project ID for this request.
 isipProject :: Lens' InstancesSetIAMPolicy Text

@@ -73,6 +73,7 @@ data ProjectsGetXpnResources' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGetXpnResources'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsGetXpnResources' pPgxrProject_ =
     , _pgxrPageToken = Nothing
     , _pgxrMaxResults = 500
     }
+
 
 -- | Project ID for this request.
 pgxrProject :: Lens' ProjectsGetXpnResources' Text

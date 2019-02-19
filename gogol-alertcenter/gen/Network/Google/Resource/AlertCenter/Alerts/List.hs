@@ -84,6 +84,7 @@ data AlertsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlertsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ alertsList =
     , _alPageSize = Nothing
     , _alCallback = Nothing
     }
+
 
 -- | V1 error format.
 alXgafv :: Lens' AlertsList (Maybe Xgafv)

@@ -59,6 +59,7 @@ newtype AccountPermissionGroupsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountPermissionGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ accountPermissionGroupsList
     -> AccountPermissionGroupsList
 accountPermissionGroupsList pApglProFileId_ =
   AccountPermissionGroupsList' {_apglProFileId = _Coerce # pApglProFileId_}
+
 
 -- | User profile ID associated with this request.
 apglProFileId :: Lens' AccountPermissionGroupsList Int64

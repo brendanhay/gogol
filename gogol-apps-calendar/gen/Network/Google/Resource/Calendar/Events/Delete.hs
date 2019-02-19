@@ -67,6 +67,7 @@ data EventsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ eventsDelete pEdCalendarId_ pEdEventId_ =
     , _edSendUpdates = Nothing
     , _edEventId = pEdEventId_
     }
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

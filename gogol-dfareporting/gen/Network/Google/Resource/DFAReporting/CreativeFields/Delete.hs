@@ -61,6 +61,7 @@ data CreativeFieldsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ creativeFieldsDelete
 creativeFieldsDelete pCfdProFileId_ pCfdId_ =
   CreativeFieldsDelete'
     {_cfdProFileId = _Coerce # pCfdProFileId_, _cfdId = _Coerce # pCfdId_}
+
 
 -- | User profile ID associated with this request.
 cfdProFileId :: Lens' CreativeFieldsDelete Int64

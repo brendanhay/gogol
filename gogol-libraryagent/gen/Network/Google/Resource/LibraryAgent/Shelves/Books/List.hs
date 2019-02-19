@@ -83,6 +83,7 @@ data ShelvesBooksList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShelvesBooksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ shelvesBooksList pSblParent_ =
     , _sblPageSize = Nothing
     , _sblCallback = Nothing
     }
+
 
 -- | The name of the shelf whose books we\'d like to list.
 sblParent :: Lens' ShelvesBooksList Text

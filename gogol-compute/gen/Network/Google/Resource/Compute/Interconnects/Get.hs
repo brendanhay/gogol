@@ -64,6 +64,7 @@ data InterconnectsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ interconnectsGet
     -> InterconnectsGet
 interconnectsGet pIProject_ pIInterconnect_ =
   InterconnectsGet' {_iProject = pIProject_, _iInterconnect = pIInterconnect_}
+
 
 -- | Project ID for this request.
 iProject :: Lens' InterconnectsGet Text

@@ -57,6 +57,7 @@ newtype AccountsContainersWorkspacesTriggersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesTriggersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ accountsContainersWorkspacesTriggersDelete
     -> AccountsContainersWorkspacesTriggersDelete
 accountsContainersWorkspacesTriggersDelete pAcwtdPath_ =
   AccountsContainersWorkspacesTriggersDelete' {_acwtdPath = pAcwtdPath_}
+
 
 -- | GTM Trigger\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/triggers\/{trigger_id}

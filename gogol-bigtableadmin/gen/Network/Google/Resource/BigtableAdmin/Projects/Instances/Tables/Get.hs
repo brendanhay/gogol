@@ -73,6 +73,7 @@ data ProjectsInstancesTablesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesTablesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ projectsInstancesTablesGet pPitgName_ =
     , _pitgView = Nothing
     , _pitgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pitgXgafv :: Lens' ProjectsInstancesTablesGet (Maybe Xgafv)

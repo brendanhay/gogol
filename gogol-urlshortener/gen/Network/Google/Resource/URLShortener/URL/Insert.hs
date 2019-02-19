@@ -57,6 +57,7 @@ newtype URLInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ urlInsert
     :: URL -- ^ 'uiPayload'
     -> URLInsert
 urlInsert pUiPayload_ = URLInsert' {_uiPayload = pUiPayload_}
+
 
 -- | Multipart request metadata.
 uiPayload :: Lens' URLInsert URL

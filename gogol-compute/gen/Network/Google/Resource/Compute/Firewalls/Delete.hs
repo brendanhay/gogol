@@ -65,6 +65,7 @@ data FirewallsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FirewallsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ firewallsDelete pFdProject_ pFdFirewall_ =
     , _fdProject = pFdProject_
     , _fdFirewall = pFdFirewall_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

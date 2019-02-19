@@ -84,6 +84,7 @@ data ProjectsZonesClustersCompleteIPRotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersCompleteIPRotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsZonesClustersCompleteIPRotation pPzccirZone_ pPzccirPayload_ pPzccirClus
     , _pzccirProjectId = pPzccirProjectId_
     , _pzccirCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzccirXgafv :: Lens' ProjectsZonesClustersCompleteIPRotation (Maybe Xgafv)

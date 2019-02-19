@@ -56,6 +56,7 @@ newtype AccountsContainersEnvironmentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersEnvironmentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ accountsContainersEnvironmentsGet
     -> AccountsContainersEnvironmentsGet
 accountsContainersEnvironmentsGet pAcegPath_ =
   AccountsContainersEnvironmentsGet' {_acegPath = pAcegPath_}
+
 
 -- | GTM Environment\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/environments\/{environment_id}

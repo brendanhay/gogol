@@ -76,6 +76,7 @@ data SSLPoliciesListAvailableFeatures =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLPoliciesListAvailableFeatures' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ sslPoliciesListAvailableFeatures pSplafProject_ =
     , _splafPageToken = Nothing
     , _splafMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

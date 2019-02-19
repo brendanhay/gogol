@@ -77,6 +77,7 @@ data InvitationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InvitationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ invitationsDelete pIdId_ =
     , _idId = pIdId_
     , _idCallback = Nothing
     }
+
 
 -- | V1 error format.
 idXgafv :: Lens' InvitationsDelete (Maybe Xgafv)

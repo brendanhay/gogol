@@ -88,6 +88,7 @@ data TableImportRows =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableImportRows' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ tableImportRows pTirTableId_ =
     , _tirEncoding = Nothing
     , _tirIsStrict = Nothing
     }
+
 
 -- | The index of the first line from which to start importing, inclusive.
 -- Default is 0.

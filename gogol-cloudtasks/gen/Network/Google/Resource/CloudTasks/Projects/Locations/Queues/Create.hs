@@ -88,6 +88,7 @@ data ProjectsLocationsQueuesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsQueuesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +120,7 @@ projectsLocationsQueuesCreate pPlqcParent_ pPlqcPayload_ =
     , _plqcPayload = pPlqcPayload_
     , _plqcCallback = Nothing
     }
+
 
 -- | Required. The location name in which the queue will be created. For
 -- example: \`projects\/PROJECT_ID\/locations\/LOCATION_ID\` The list of

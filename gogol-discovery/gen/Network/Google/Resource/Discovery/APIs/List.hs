@@ -60,6 +60,7 @@ data APIsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APIsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ data APIsList =
 apisList
     :: APIsList
 apisList = APIsList' {_alPreferred = False, _alName = Nothing}
+
 
 -- | Return only the preferred version of an API.
 alPreferred :: Lens' APIsList Bool

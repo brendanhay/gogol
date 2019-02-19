@@ -71,6 +71,7 @@ data ProjectsDatabasesCollectionGroupsIndexesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesCollectionGroupsIndexesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsDatabasesCollectionGroupsIndexesDelete pPdcgidName_ =
     , _pdcgidName = pPdcgidName_
     , _pdcgidCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdcgidXgafv :: Lens' ProjectsDatabasesCollectionGroupsIndexesDelete (Maybe Xgafv)

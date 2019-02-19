@@ -71,6 +71,7 @@ data AccountsCustomChannelsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCustomChannelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ accountsCustomChannelsList pAcclAdClientId_ pAcclAccountId_ =
     , _acclPageToken = Nothing
     , _acclMaxResults = Nothing
     }
+
 
 -- | Ad client for which to list custom channels.
 acclAdClientId :: Lens' AccountsCustomChannelsList Text

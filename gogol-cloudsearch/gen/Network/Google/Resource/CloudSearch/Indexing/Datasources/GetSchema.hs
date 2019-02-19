@@ -75,6 +75,7 @@ data IndexingDatasourcesGetSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IndexingDatasourcesGetSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ indexingDatasourcesGetSchema pIdgsName_ =
     , _idgsDebugOptionsEnableDebugging = Nothing
     , _idgsCallback = Nothing
     }
+
 
 -- | V1 error format.
 idgsXgafv :: Lens' IndexingDatasourcesGetSchema (Maybe Xgafv)

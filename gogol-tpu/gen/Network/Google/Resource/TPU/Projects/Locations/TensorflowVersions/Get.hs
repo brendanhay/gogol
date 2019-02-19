@@ -71,6 +71,7 @@ data ProjectsLocationsTensorflowVersionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsTensorflowVersionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsLocationsTensorflowVersionsGet pPltvgName_ =
     , _pltvgName = pPltvgName_
     , _pltvgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pltvgXgafv :: Lens' ProjectsLocationsTensorflowVersionsGet (Maybe Xgafv)

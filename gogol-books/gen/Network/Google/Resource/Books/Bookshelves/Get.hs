@@ -64,6 +64,7 @@ data BookshelvesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BookshelvesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ bookshelvesGet
 bookshelvesGet pBgUserId_ pBgShelf_ =
   BookshelvesGet'
     {_bgUserId = pBgUserId_, _bgShelf = pBgShelf_, _bgSource = Nothing}
+
 
 -- | ID of user for whom to retrieve bookshelves.
 bgUserId :: Lens' BookshelvesGet Text

@@ -90,6 +90,7 @@ data ProjectsZonesClustersNodePoolsRollback =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsRollback' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -133,6 +134,7 @@ projectsZonesClustersNodePoolsRollback pPzcnprZone_ pPzcnprPayload_ pPzcnprNodeP
     , _pzcnprProjectId = pPzcnprProjectId_
     , _pzcnprCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcnprXgafv :: Lens' ProjectsZonesClustersNodePoolsRollback (Maybe Xgafv)

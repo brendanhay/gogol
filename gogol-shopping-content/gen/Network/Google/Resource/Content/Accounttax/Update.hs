@@ -63,6 +63,7 @@ data AccounttaxUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccounttaxUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ accounttaxUpdate pAuMerchantId_ pAuPayload_ pAuAccountId_ =
     , _auPayload = pAuPayload_
     , _auAccountId = _Coerce # pAuAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

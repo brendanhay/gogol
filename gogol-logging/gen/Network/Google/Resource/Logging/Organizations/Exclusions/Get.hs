@@ -70,6 +70,7 @@ data OrganizationsExclusionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsExclusionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ organizationsExclusionsGet pOegName_ =
     , _oegName = pOegName_
     , _oegCallback = Nothing
     }
+
 
 -- | V1 error format.
 oegXgafv :: Lens' OrganizationsExclusionsGet (Maybe Xgafv)

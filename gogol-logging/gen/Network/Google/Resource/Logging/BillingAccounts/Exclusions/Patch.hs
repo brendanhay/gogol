@@ -77,6 +77,7 @@ data BillingAccountsExclusionsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsExclusionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ billingAccountsExclusionsPatch pBaepPayload_ pBaepName_ =
     , _baepName = pBaepName_
     , _baepCallback = Nothing
     }
+
 
 -- | V1 error format.
 baepXgafv :: Lens' BillingAccountsExclusionsPatch (Maybe Xgafv)

@@ -61,6 +61,7 @@ data ShippingSettingsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ shippingSettingsGet pShiMerchantId_ pShiAccountId_ =
     { _shiMerchantId = _Coerce # pShiMerchantId_
     , _shiAccountId = _Coerce # pShiAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

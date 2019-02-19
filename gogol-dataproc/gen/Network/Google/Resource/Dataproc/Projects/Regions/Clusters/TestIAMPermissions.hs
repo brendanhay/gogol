@@ -85,6 +85,7 @@ data ProjectsRegionsClustersTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsClustersTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsRegionsClustersTestIAMPermissions pPrctipPayload_ pPrctipResource_ =
     , _prctipResource = pPrctipResource_
     , _prctipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prctipXgafv :: Lens' ProjectsRegionsClustersTestIAMPermissions (Maybe Xgafv)

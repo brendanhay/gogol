@@ -77,6 +77,7 @@ data CoursesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ coursesDelete pCdId_ =
     , _cdId = pCdId_
     , _cdCallback = Nothing
     }
+
 
 -- | V1 error format.
 cdXgafv :: Lens' CoursesDelete (Maybe Xgafv)

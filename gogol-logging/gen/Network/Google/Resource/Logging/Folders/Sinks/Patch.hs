@@ -85,6 +85,7 @@ data FoldersSinksPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersSinksPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ foldersSinksPatch pFspPayload_ pFspSinkName_ =
     , _fspSinkName = pFspSinkName_
     , _fspCallback = Nothing
     }
+
 
 -- | V1 error format.
 fspXgafv :: Lens' FoldersSinksPatch (Maybe Xgafv)

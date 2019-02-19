@@ -74,6 +74,7 @@ data ServicesEnable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesEnable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ servicesEnable pSePayload_ pSeName_ =
     , _seName = pSeName_
     , _seCallback = Nothing
     }
+
 
 -- | V1 error format.
 seXgafv :: Lens' ServicesEnable (Maybe Xgafv)

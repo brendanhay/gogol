@@ -61,6 +61,7 @@ newtype LineitemsDownloadlineitems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LineitemsDownloadlineitems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ lineitemsDownloadlineitems
     -> LineitemsDownloadlineitems
 lineitemsDownloadlineitems pLdPayload_ =
   LineitemsDownloadlineitems' {_ldPayload = pLdPayload_}
+
 
 -- | Multipart request metadata.
 ldPayload :: Lens' LineitemsDownloadlineitems DownloadLineItemsRequest

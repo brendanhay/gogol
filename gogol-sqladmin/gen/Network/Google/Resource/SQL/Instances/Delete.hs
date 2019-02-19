@@ -61,6 +61,7 @@ data InstancesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ instancesDelete
     -> InstancesDelete
 instancesDelete pIdProject_ pIdInstance_ =
   InstancesDelete' {_idProject = pIdProject_, _idInstance = pIdInstance_}
+
 
 -- | Project ID of the project that contains the instance to be deleted.
 idProject :: Lens' InstancesDelete Text

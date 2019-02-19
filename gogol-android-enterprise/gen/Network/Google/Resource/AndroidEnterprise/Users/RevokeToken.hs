@@ -62,6 +62,7 @@ data UsersRevokeToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersRevokeToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ usersRevokeToken
 usersRevokeToken pUrtEnterpriseId_ pUrtUserId_ =
   UsersRevokeToken'
     {_urtEnterpriseId = pUrtEnterpriseId_, _urtUserId = pUrtUserId_}
+
 
 -- | The ID of the enterprise.
 urtEnterpriseId :: Lens' UsersRevokeToken Text

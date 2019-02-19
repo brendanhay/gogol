@@ -64,6 +64,7 @@ data NotificationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ notificationsDelete pNdNotification_ pNdBucket_ =
     , _ndBucket = pNdBucket_
     , _ndUserProject = Nothing
     }
+
 
 -- | ID of the notification to delete.
 ndNotification :: Lens' NotificationsDelete Text

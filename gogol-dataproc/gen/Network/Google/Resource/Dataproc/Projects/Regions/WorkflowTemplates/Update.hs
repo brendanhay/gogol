@@ -76,6 +76,7 @@ data ProjectsRegionsWorkflowTemplatesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsRegionsWorkflowTemplatesUpdate pPrwtuPayload_ pPrwtuName_ =
     , _prwtuName = pPrwtuName_
     , _prwtuCallback = Nothing
     }
+
 
 -- | V1 error format.
 prwtuXgafv :: Lens' ProjectsRegionsWorkflowTemplatesUpdate (Maybe Xgafv)

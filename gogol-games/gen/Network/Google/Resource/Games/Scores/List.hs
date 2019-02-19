@@ -74,6 +74,7 @@ data ScoresList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScoresList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ scoresList pSllCollection_ pSllTimeSpan_ pSllLeaderboardId_ =
     , _sllPageToken = Nothing
     , _sllMaxResults = Nothing
     }
+
 
 -- | The collection of scores you\'re requesting.
 sllCollection :: Lens' ScoresList ScoresListCollection

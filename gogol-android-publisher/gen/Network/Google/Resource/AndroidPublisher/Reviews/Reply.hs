@@ -65,6 +65,7 @@ data ReviewsReply =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReviewsReply' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ reviewsReply pRrReviewId_ pRrPackageName_ pRrPayload_ =
     , _rrPackageName = pRrPackageName_
     , _rrPayload = pRrPayload_
     }
+
 
 rrReviewId :: Lens' ReviewsReply Text
 rrReviewId

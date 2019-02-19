@@ -61,6 +61,7 @@ data CreativeGroupsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ creativeGroupsGet
 creativeGroupsGet pCgggProFileId_ pCgggId_ =
   CreativeGroupsGet'
     {_cgggProFileId = _Coerce # pCgggProFileId_, _cgggId = _Coerce # pCgggId_}
+
 
 -- | User profile ID associated with this request.
 cgggProFileId :: Lens' CreativeGroupsGet Int64

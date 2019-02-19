@@ -64,6 +64,7 @@ data LeaderboardsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ leaderboardsList
 leaderboardsList =
   LeaderboardsList'
     {_llLanguage = Nothing, _llPageToken = Nothing, _llMaxResults = Nothing}
+
 
 -- | The preferred language to use for strings returned by this method.
 llLanguage :: Lens' LeaderboardsList (Maybe Text)

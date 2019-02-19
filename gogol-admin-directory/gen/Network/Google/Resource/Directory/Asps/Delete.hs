@@ -62,6 +62,7 @@ data AspsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AspsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ aspsDelete
     -> AspsDelete
 aspsDelete pAdCodeId_ pAdUserKey_ =
   AspsDelete' {_adCodeId = _Coerce # pAdCodeId_, _adUserKey = pAdUserKey_}
+
 
 -- | The unique ID of the ASP to be deleted.
 adCodeId :: Lens' AspsDelete Int32

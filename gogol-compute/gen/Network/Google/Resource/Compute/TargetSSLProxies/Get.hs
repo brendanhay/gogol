@@ -65,6 +65,7 @@ data TargetSSLProxiesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetSSLProxiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ targetSSLProxiesGet
 targetSSLProxiesGet pTspgProject_ pTspgTargetSSLProxy_ =
   TargetSSLProxiesGet'
     {_tspgProject = pTspgProject_, _tspgTargetSSLProxy = pTspgTargetSSLProxy_}
+
 
 -- | Project ID for this request.
 tspgProject :: Lens' TargetSSLProxiesGet Text

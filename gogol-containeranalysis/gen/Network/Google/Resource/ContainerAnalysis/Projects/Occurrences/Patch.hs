@@ -77,6 +77,7 @@ data ProjectsOccurrencesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsOccurrencesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsOccurrencesPatch pPopPayload_ pPopName_ =
     , _popName = pPopName_
     , _popCallback = Nothing
     }
+
 
 -- | V1 error format.
 popXgafv :: Lens' ProjectsOccurrencesPatch (Maybe Xgafv)

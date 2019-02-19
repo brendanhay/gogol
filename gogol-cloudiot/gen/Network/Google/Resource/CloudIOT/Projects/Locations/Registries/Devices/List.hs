@@ -100,6 +100,7 @@ data ProjectsLocationsRegistriesDevicesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -151,6 +152,7 @@ projectsLocationsRegistriesDevicesList pPlrdlParent_ =
     , _plrdlPageSize = Nothing
     , _plrdlCallback = Nothing
     }
+
 
 -- | The device registry path. Required. For example,
 -- \`projects\/my-project\/locations\/us-central1\/registries\/my-registry\`.

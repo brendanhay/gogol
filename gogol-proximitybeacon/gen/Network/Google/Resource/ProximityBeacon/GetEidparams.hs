@@ -81,6 +81,7 @@ data GetEidparams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetEidparams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ getEidparams =
     , _geUploadType = Nothing
     , _geCallback = Nothing
     }
+
 
 -- | V1 error format.
 geXgafv :: Lens' GetEidparams (Maybe Xgafv)

@@ -64,6 +64,7 @@ data ACLInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ACLInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ aclInsert pAiCalendarId_ pAiPayload_ =
     , _aiPayload = pAiPayload_
     , _aiSendNotifications = Nothing
     }
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

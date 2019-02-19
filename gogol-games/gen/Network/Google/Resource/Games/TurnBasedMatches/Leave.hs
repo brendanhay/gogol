@@ -64,6 +64,7 @@ data TurnBasedMatchesLeave =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchesLeave' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ turnBasedMatchesLeave
     -> TurnBasedMatchesLeave
 turnBasedMatchesLeave pTbmlMatchId_ =
   TurnBasedMatchesLeave' {_tbmlLanguage = Nothing, _tbmlMatchId = pTbmlMatchId_}
+
 
 -- | The preferred language to use for strings returned by this method.
 tbmlLanguage :: Lens' TurnBasedMatchesLeave (Maybe Text)

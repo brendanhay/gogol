@@ -77,6 +77,7 @@ data ImageConfigurationsUpload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageConfigurationsUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ imageConfigurationsUpload
 imageConfigurationsUpload pIcuResourceId_ pIcuImageType_ =
   ImageConfigurationsUpload'
     {_icuResourceId = pIcuResourceId_, _icuImageType = pIcuImageType_}
+
 
 -- | The ID of the resource used by this method.
 icuResourceId :: Lens' ImageConfigurationsUpload Text

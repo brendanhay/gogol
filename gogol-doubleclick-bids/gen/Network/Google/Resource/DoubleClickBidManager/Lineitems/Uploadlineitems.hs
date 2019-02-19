@@ -59,6 +59,7 @@ newtype LineitemsUploadlineitems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LineitemsUploadlineitems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ lineitemsUploadlineitems
     -> LineitemsUploadlineitems
 lineitemsUploadlineitems pLuPayload_ =
   LineitemsUploadlineitems' {_luPayload = pLuPayload_}
+
 
 -- | Multipart request metadata.
 luPayload :: Lens' LineitemsUploadlineitems UploadLineItemsRequest

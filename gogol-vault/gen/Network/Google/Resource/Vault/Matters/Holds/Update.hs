@@ -82,6 +82,7 @@ data MattersHoldsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersHoldsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ mattersHoldsUpdate pMhuHoldId_ pMhuPayload_ pMhuMatterId_ =
     , _mhuMatterId = pMhuMatterId_
     , _mhuCallback = Nothing
     }
+
 
 -- | V1 error format.
 mhuXgafv :: Lens' MattersHoldsUpdate (Maybe Xgafv)

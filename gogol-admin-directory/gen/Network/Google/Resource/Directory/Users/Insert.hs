@@ -58,6 +58,7 @@ newtype UsersInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ usersInsert
     :: User -- ^ 'uiPayload'
     -> UsersInsert
 usersInsert pUiPayload_ = UsersInsert' {_uiPayload = pUiPayload_}
+
 
 -- | Multipart request metadata.
 uiPayload :: Lens' UsersInsert User

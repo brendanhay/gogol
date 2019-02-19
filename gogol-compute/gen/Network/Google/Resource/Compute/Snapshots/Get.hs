@@ -64,6 +64,7 @@ data SnapshotsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ snapshotsGet
     -> SnapshotsGet
 snapshotsGet pSggSnapshot_ pSggProject_ =
   SnapshotsGet' {_sggSnapshot = pSggSnapshot_, _sggProject = pSggProject_}
+
 
 -- | Name of the Snapshot resource to return.
 sggSnapshot :: Lens' SnapshotsGet Text

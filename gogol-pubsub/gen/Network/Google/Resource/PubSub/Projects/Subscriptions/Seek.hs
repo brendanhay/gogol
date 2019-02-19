@@ -92,6 +92,7 @@ data ProjectsSubscriptionsSeek =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSubscriptionsSeek' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsSubscriptionsSeek pPssPayload_ pPssSubscription_ =
     , _pssSubscription = pPssSubscription_
     , _pssCallback = Nothing
     }
+
 
 -- | V1 error format.
 pssXgafv :: Lens' ProjectsSubscriptionsSeek (Maybe Xgafv)

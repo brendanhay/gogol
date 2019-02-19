@@ -66,6 +66,7 @@ data LiaSettingsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ liaSettingsList pLslMerchantId_ =
     , _lslPageToken = Nothing
     , _lslMaxResults = Nothing
     }
+
 
 -- | The ID of the managing account. This must be a multi-client account.
 lslMerchantId :: Lens' LiaSettingsList Word64

@@ -112,6 +112,7 @@ data CoursesCourseWorkStudentSubmissionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -158,6 +159,7 @@ coursesCourseWorkStudentSubmissionsList pCcwsslCourseId_ pCcwsslCourseWorkId_ =
     , _ccwsslCallback = Nothing
     , _ccwsslCourseWorkId = pCcwsslCourseWorkId_
     }
+
 
 -- | Requested submission states. If specified, returned student submissions
 -- match one of the specified submission states.

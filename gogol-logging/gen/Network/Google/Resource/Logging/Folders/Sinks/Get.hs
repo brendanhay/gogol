@@ -70,6 +70,7 @@ data FoldersSinksGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersSinksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ foldersSinksGet pFsgSinkName_ =
     , _fsgSinkName = pFsgSinkName_
     , _fsgCallback = Nothing
     }
+
 
 -- | V1 error format.
 fsgXgafv :: Lens' FoldersSinksGet (Maybe Xgafv)

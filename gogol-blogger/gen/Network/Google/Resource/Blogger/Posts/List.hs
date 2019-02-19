@@ -89,6 +89,7 @@ data PostsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -131,6 +132,7 @@ postsList pPllBlogId_ =
     , _pllPageToken = Nothing
     , _pllMaxResults = Nothing
     }
+
 
 -- | Statuses to include in the results.
 pllStatus :: Lens' PostsList [PostsListStatus]

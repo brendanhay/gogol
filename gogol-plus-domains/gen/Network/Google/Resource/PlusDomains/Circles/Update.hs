@@ -60,6 +60,7 @@ data CirclesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CirclesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ circlesUpdate
     -> CirclesUpdate
 circlesUpdate pCuPayload_ pCuCircleId_ =
   CirclesUpdate' {_cuPayload = pCuPayload_, _cuCircleId = pCuCircleId_}
+
 
 -- | Multipart request metadata.
 cuPayload :: Lens' CirclesUpdate Circle

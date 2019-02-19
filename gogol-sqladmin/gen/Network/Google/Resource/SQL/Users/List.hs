@@ -63,6 +63,7 @@ data UsersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ usersList
     -> UsersList
 usersList pUlProject_ pUlInstance_ =
   UsersList' {_ulProject = pUlProject_, _ulInstance = pUlInstance_}
+
 
 -- | Project ID of the project that contains the instance.
 ulProject :: Lens' UsersList Text

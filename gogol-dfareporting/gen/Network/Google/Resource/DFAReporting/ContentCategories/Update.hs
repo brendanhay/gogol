@@ -62,6 +62,7 @@ data ContentCategoriesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContentCategoriesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ contentCategoriesUpdate
 contentCategoriesUpdate pCcuProFileId_ pCcuPayload_ =
   ContentCategoriesUpdate'
     {_ccuProFileId = _Coerce # pCcuProFileId_, _ccuPayload = pCcuPayload_}
+
 
 -- | User profile ID associated with this request.
 ccuProFileId :: Lens' ContentCategoriesUpdate Int64

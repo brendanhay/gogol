@@ -63,6 +63,7 @@ data WebResourcePatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebResourcePatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ webResourcePatch
     -> WebResourcePatch
 webResourcePatch pWrpPayload_ pWrpId_ =
   WebResourcePatch' {_wrpPayload = pWrpPayload_, _wrpId = pWrpId_}
+
 
 -- | Multipart request metadata.
 wrpPayload :: Lens' WebResourcePatch SiteVerificationWebResourceResource

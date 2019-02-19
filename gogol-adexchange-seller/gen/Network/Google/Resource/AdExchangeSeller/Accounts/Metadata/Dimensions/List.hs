@@ -61,6 +61,7 @@ newtype AccountsMetadataDimensionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsMetadataDimensionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ accountsMetadataDimensionsList
     -> AccountsMetadataDimensionsList
 accountsMetadataDimensionsList pAmdlAccountId_ =
   AccountsMetadataDimensionsList' {_amdlAccountId = pAmdlAccountId_}
+
 
 -- | Account with visibility to the dimensions.
 amdlAccountId :: Lens' AccountsMetadataDimensionsList Text

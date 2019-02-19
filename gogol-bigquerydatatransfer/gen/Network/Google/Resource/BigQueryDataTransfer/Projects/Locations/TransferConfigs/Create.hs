@@ -78,6 +78,7 @@ data ProjectsLocationsTransferConfigsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsTransferConfigsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsLocationsTransferConfigsCreate pPltccParent_ pPltccPayload_ =
     , _pltccPayload = pPltccPayload_
     , _pltccCallback = Nothing
     }
+
 
 -- | The BigQuery project id where the transfer configuration should be
 -- created. Must be in the format

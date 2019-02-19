@@ -70,6 +70,7 @@ data OperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ operationsList pOlProject_ pOlInstance_ =
     , _olMaxResults = Nothing
     , _olInstance = pOlInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 olProject :: Lens' OperationsList Text

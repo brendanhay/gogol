@@ -74,6 +74,7 @@ data DocumentsAnalyzeEntitySentiment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentsAnalyzeEntitySentiment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ documentsAnalyzeEntitySentiment pDaesPayload_ =
     , _daesPayload = pDaesPayload_
     , _daesCallback = Nothing
     }
+
 
 -- | V1 error format.
 daesXgafv :: Lens' DocumentsAnalyzeEntitySentiment (Maybe Xgafv)

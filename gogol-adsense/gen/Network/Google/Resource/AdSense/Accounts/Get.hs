@@ -60,6 +60,7 @@ data AccountsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ accountsGet
     -> AccountsGet
 accountsGet pAgAccountId_ =
   AccountsGet' {_agTree = Nothing, _agAccountId = pAgAccountId_}
+
 
 -- | Whether the tree of sub accounts should be returned.
 agTree :: Lens' AccountsGet (Maybe Bool)

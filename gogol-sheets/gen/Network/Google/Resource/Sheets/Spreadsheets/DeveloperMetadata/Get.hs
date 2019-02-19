@@ -80,6 +80,7 @@ data SpreadsheetsDeveloperMetadataGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsDeveloperMetadataGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ spreadsheetsDeveloperMetadataGet pSdmgMetadataId_ pSdmgSpreadsheetId_ =
     , _sdmgUploadType = Nothing
     , _sdmgCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdmgXgafv :: Lens' SpreadsheetsDeveloperMetadataGet (Maybe Xgafv)

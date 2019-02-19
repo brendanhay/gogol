@@ -61,6 +61,7 @@ data AdvertisersInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertisersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ advertisersInsert
 advertisersInsert pAiiProFileId_ pAiiPayload_ =
   AdvertisersInsert'
     {_aiiProFileId = _Coerce # pAiiProFileId_, _aiiPayload = pAiiPayload_}
+
 
 -- | User profile ID associated with this request.
 aiiProFileId :: Lens' AdvertisersInsert Int64

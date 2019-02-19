@@ -74,6 +74,7 @@ data ProjectsDatabasesDocumentsRollback =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesDocumentsRollback' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsDatabasesDocumentsRollback pPddrDatabase_ pPddrPayload_ =
     , _pddrPayload = pPddrPayload_
     , _pddrCallback = Nothing
     }
+
 
 -- | V1 error format.
 pddrXgafv :: Lens' ProjectsDatabasesDocumentsRollback (Maybe Xgafv)

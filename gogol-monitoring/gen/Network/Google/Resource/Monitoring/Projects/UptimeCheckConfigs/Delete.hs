@@ -74,6 +74,7 @@ data ProjectsUptimeCheckConfigsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsUptimeCheckConfigsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ projectsUptimeCheckConfigsDelete pPuccdName_ =
     , _puccdName = pPuccdName_
     , _puccdCallback = Nothing
     }
+
 
 -- | V1 error format.
 puccdXgafv :: Lens' ProjectsUptimeCheckConfigsDelete (Maybe Xgafv)

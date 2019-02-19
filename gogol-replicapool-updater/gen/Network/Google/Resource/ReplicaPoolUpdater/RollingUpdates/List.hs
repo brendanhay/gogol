@@ -74,6 +74,7 @@ data RollingUpdatesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollingUpdatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ rollingUpdatesList pRulProject_ pRulZone_ =
     , _rulPageToken = Nothing
     , _rulMaxResults = 500
     }
+
 
 -- | The Google Developers Console project name.
 rulProject :: Lens' RollingUpdatesList Text

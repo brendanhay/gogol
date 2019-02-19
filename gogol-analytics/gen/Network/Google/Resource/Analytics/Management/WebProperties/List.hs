@@ -65,6 +65,7 @@ data ManagementWebPropertiesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementWebPropertiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ managementWebPropertiesList pMwplAccountId_ =
     , _mwplStartIndex = Nothing
     , _mwplMaxResults = Nothing
     }
+
 
 -- | Account ID to retrieve web properties for. Can either be a specific
 -- account ID or \'~all\', which refers to all the accounts that user has

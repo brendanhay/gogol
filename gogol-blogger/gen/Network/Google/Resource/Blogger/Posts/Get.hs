@@ -73,6 +73,7 @@ data PostsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ postsGet pPggBlogId_ pPggPostId_ =
     , _pggView = Nothing
     , _pggPostId = pPggPostId_
     }
+
 
 -- | Whether the body content of the post is included (default: true). This
 -- should be set to false when the post bodies are not required, to help

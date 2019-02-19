@@ -71,6 +71,7 @@ data RepliesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepliesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ repliesList pRlFileId_ pRlCommentId_ =
     , _rlPageSize = 20
     , _rlIncludeDeleted = False
     }
+
 
 -- | The token for continuing a previous list request on the next page. This
 -- should be set to the value of \'nextPageToken\' from the previous

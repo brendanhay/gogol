@@ -46,6 +46,7 @@ data CalendarListEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CalendarListEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ calendarListEntry =
     , _cleTimeZone = Nothing
     , _cleDescription = Nothing
     }
+
 
 -- | Title of the calendar. Read-only.
 cleSummary :: Lens' CalendarListEntry (Maybe Text)
@@ -297,6 +299,7 @@ newtype ConferenceParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConferenceParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -305,6 +308,7 @@ newtype ConferenceParameters =
 conferenceParameters
     :: ConferenceParameters
 conferenceParameters = ConferenceParameters' {_cpAddOnParameters = Nothing}
+
 
 -- | Additional add-on specific data.
 cpAddOnParameters :: Lens' ConferenceParameters (Maybe ConferenceParametersAddOnParameters)
@@ -368,6 +372,7 @@ data Event =
     , _eOrganizer               :: !(Maybe EventOrganizer)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Event' with the minimum fields required to make a request.
 --
@@ -491,6 +496,7 @@ event =
     , _eDescription = Nothing
     , _eOrganizer = Nothing
     }
+
 
 -- | Title of the event.
 eSummary :: Lens' Event (Maybe Text)
@@ -880,6 +886,7 @@ newtype CalendarListEntryNotificationSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CalendarListEntryNotificationSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -889,6 +896,7 @@ calendarListEntryNotificationSettings
     :: CalendarListEntryNotificationSettings
 calendarListEntryNotificationSettings =
   CalendarListEntryNotificationSettings' {_clensNotifications = Nothing}
+
 
 -- | The list of notifications set for this calendar.
 clensNotifications :: Lens' CalendarListEntryNotificationSettings [CalendarNotification]
@@ -922,6 +930,7 @@ newtype ConferenceProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConferenceProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -931,6 +940,7 @@ conferenceProperties
     :: ConferenceProperties
 conferenceProperties =
   ConferenceProperties' {_cpAllowedConferenceSolutionTypes = Nothing}
+
 
 -- | The types of conference solutions that are supported for this calendar.
 -- The possible values are: - \"eventHangout\" - \"eventNamedHangout\" -
@@ -966,6 +976,7 @@ data ConferenceSolution =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConferenceSolution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -980,6 +991,7 @@ conferenceSolution
 conferenceSolution =
   ConferenceSolution'
     {_csIconURI = Nothing, _csKey = Nothing, _csName = Nothing}
+
 
 -- | The user-visible icon for this solution.
 csIconURI :: Lens' ConferenceSolution (Maybe Text)
@@ -1020,6 +1032,7 @@ data ACLRuleScope =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ACLRuleScope' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1030,6 +1043,7 @@ data ACLRuleScope =
 aclRuleScope
     :: ACLRuleScope
 aclRuleScope = ACLRuleScope' {_arsValue = Nothing, _arsType = Nothing}
+
 
 -- | The email address of a user or group, or the name of a domain, depending
 -- on the scope type. Omitted for type \"default\".
@@ -1068,6 +1082,7 @@ newtype ColorsEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColorsEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1078,6 +1093,7 @@ colorsEvent
     -> ColorsEvent
 colorsEvent pCeAddtional_ =
   ColorsEvent' {_ceAddtional = _Coerce # pCeAddtional_}
+
 
 -- | An event color definition.
 ceAddtional :: Lens' ColorsEvent (HashMap Text ColorDefinition)
@@ -1105,6 +1121,7 @@ data Settings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Settings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1128,6 +1145,7 @@ settings =
     , _sItems = Nothing
     , _sNextSyncToken = Nothing
     }
+
 
 -- | Etag of the collection.
 sEtag :: Lens' Settings (Maybe Text)
@@ -1185,6 +1203,7 @@ newtype FreeBusyRequestItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FreeBusyRequestItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1193,6 +1212,7 @@ newtype FreeBusyRequestItem =
 freeBusyRequestItem
     :: FreeBusyRequestItem
 freeBusyRequestItem = FreeBusyRequestItem' {_fbriId = Nothing}
+
 
 -- | The identifier of a calendar or a group.
 fbriId :: Lens' FreeBusyRequestItem (Maybe Text)
@@ -1219,6 +1239,7 @@ data EventAttachment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventAttachment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1242,6 +1263,7 @@ eventAttachment =
     , _eaTitle = Nothing
     , _eaFileId = Nothing
     }
+
 
 -- | URL link to the attachment. For adding Google Drive file attachments use
 -- the same format as in alternateLink property of the Files resource in
@@ -1306,6 +1328,7 @@ data EntryPoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntryPoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1344,6 +1367,7 @@ entryPoint =
     , _epLabel = Nothing
     , _epAccessCode = Nothing
     }
+
 
 -- | The passcode to access the conference. The maximum length is 128
 -- characters. When creating new conference data, populate only the subset
@@ -1476,6 +1500,7 @@ data TimePeriod =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimePeriod' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1486,6 +1511,7 @@ data TimePeriod =
 timePeriod
     :: TimePeriod
 timePeriod = TimePeriod' {_tpStart = Nothing, _tpEnd = Nothing}
+
 
 -- | The (inclusive) start of the time period.
 tpStart :: Lens' TimePeriod (Maybe UTCTime)
@@ -1519,6 +1545,7 @@ newtype ConferenceSolutionKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConferenceSolutionKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1527,6 +1554,7 @@ newtype ConferenceSolutionKey =
 conferenceSolutionKey
     :: ConferenceSolutionKey
 conferenceSolutionKey = ConferenceSolutionKey' {_cskType = Nothing}
+
 
 -- | The conference solution type. If a client encounters an unfamiliar or
 -- empty type, it should still be able to display the entry points.
@@ -1559,6 +1587,7 @@ data EventCreator =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventCreator' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1579,6 +1608,7 @@ eventCreator =
     , _ecDisplayName = Nothing
     , _ecId = Nothing
     }
+
 
 -- | The creator\'s email address, if available.
 ecEmail :: Lens' EventCreator (Maybe Text)
@@ -1626,6 +1656,7 @@ data Error' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Error' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1636,6 +1667,7 @@ data Error' =
 error'
     :: Error'
 error' = Error'' {_eDomain = Nothing, _eReason = Nothing}
+
 
 -- | Domain, or broad category, of the error.
 eDomain :: Lens' Error' (Maybe Text)
@@ -1674,6 +1706,7 @@ data ColorDefinition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColorDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1685,6 +1718,7 @@ colorDefinition
     :: ColorDefinition
 colorDefinition =
   ColorDefinition' {_cdForegRound = Nothing, _cdBackgRound = Nothing}
+
 
 -- | The foreground color that can be used to write on top of a background
 -- with \'background\' color.
@@ -1728,6 +1762,7 @@ data Channel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1766,6 +1801,7 @@ channel =
     , _cId = Nothing
     , _cType = Nothing
     }
+
 
 -- | A version-specific identifier for the watched resource.
 cResourceURI :: Lens' Channel (Maybe Text)
@@ -1852,6 +1888,7 @@ newtype ConferenceRequestStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConferenceRequestStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1860,6 +1897,7 @@ newtype ConferenceRequestStatus =
 conferenceRequestStatus
     :: ConferenceRequestStatus
 conferenceRequestStatus = ConferenceRequestStatus' {_crsStatusCode = Nothing}
+
 
 -- | The current status of the conference create request. Read-only. The
 -- possible values are: - \"pending\": the conference create request is
@@ -1891,6 +1929,7 @@ data FreeBusyCalendar =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FreeBusyCalendar' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1901,6 +1940,7 @@ data FreeBusyCalendar =
 freeBusyCalendar
     :: FreeBusyCalendar
 freeBusyCalendar = FreeBusyCalendar' {_fbcBusy = Nothing, _fbcErrors = Nothing}
+
 
 -- | List of time ranges during which this calendar should be regarded as
 -- busy.
@@ -1945,6 +1985,7 @@ data ConferenceData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConferenceData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1974,6 +2015,7 @@ conferenceData =
     , _cdNotes = Nothing
     , _cdEntryPoints = Nothing
     }
+
 
 -- | The signature of the conference data. Genereated on server side. Must be
 -- preserved while copying the conference data between events, otherwise
@@ -2069,6 +2111,7 @@ data Setting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Setting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2089,6 +2132,7 @@ setting =
     , _setValue = Nothing
     , _setId = Nothing
     }
+
 
 -- | ETag of the resource.
 setEtag :: Lens' Setting (Maybe Text)
@@ -2134,6 +2178,7 @@ newtype FreeBusyResponseGroups =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FreeBusyResponseGroups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2144,6 +2189,7 @@ freeBusyResponseGroups
     -> FreeBusyResponseGroups
 freeBusyResponseGroups pFbrgAddtional_ =
   FreeBusyResponseGroups' {_fbrgAddtional = _Coerce # pFbrgAddtional_}
+
 
 -- | List of calendars that are members of this group.
 fbrgAddtional :: Lens' FreeBusyResponseGroups (HashMap Text FreeBusyGroup)
@@ -2171,6 +2217,7 @@ data EventReminders =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventReminders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2182,6 +2229,7 @@ eventReminders
     :: EventReminders
 eventReminders =
   EventReminders' {_erOverrides = Nothing, _erUseDefault = Nothing}
+
 
 -- | If the event doesn\'t use the default reminders, this lists the
 -- reminders specific to the event, or, if not set, indicates that no
@@ -2224,6 +2272,7 @@ newtype ColorsCalendar =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColorsCalendar' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2234,6 +2283,7 @@ colorsCalendar
     -> ColorsCalendar
 colorsCalendar pCcAddtional_ =
   ColorsCalendar' {_ccAddtional = _Coerce # pCcAddtional_}
+
 
 -- | A calendar color defintion.
 ccAddtional :: Lens' ColorsCalendar (HashMap Text ColorDefinition)
@@ -2257,6 +2307,7 @@ newtype ConferenceParametersAddOnParametersParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConferenceParametersAddOnParametersParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2268,6 +2319,7 @@ conferenceParametersAddOnParametersParameters
 conferenceParametersAddOnParametersParameters pCpaoppAddtional_ =
   ConferenceParametersAddOnParametersParameters'
     {_cpaoppAddtional = _Coerce # pCpaoppAddtional_}
+
 
 cpaoppAddtional :: Lens' ConferenceParametersAddOnParametersParameters (HashMap Text Text)
 cpaoppAddtional
@@ -2299,6 +2351,7 @@ data CalendarNotification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CalendarNotification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2310,6 +2363,7 @@ calendarNotification
     :: CalendarNotification
 calendarNotification =
   CalendarNotification' {_cnMethod = Nothing, _cnType = Nothing}
+
 
 -- | The method used to deliver the notification. Possible values are: -
 -- \"email\" - Notifications are sent via email. - \"sms\" - Deprecated.
@@ -2356,6 +2410,7 @@ newtype EventExtendedPropertiesPrivate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventExtendedPropertiesPrivate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2366,6 +2421,7 @@ eventExtendedPropertiesPrivate
     -> EventExtendedPropertiesPrivate
 eventExtendedPropertiesPrivate pEeppAddtional_ =
   EventExtendedPropertiesPrivate' {_eeppAddtional = _Coerce # pEeppAddtional_}
+
 
 -- | The name of the private property and the corresponding value.
 eeppAddtional :: Lens' EventExtendedPropertiesPrivate (HashMap Text Text)
@@ -2394,6 +2450,7 @@ newtype ChannelParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2404,6 +2461,7 @@ channelParams
     -> ChannelParams
 channelParams pCpAddtional_ =
   ChannelParams' {_cpAddtional = _Coerce # pCpAddtional_}
+
 
 -- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
@@ -2436,6 +2494,7 @@ data Events =
     , _eveDescription      :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Events' with the minimum fields required to make a request.
 --
@@ -2478,6 +2537,7 @@ events =
     , _eveNextSyncToken = Nothing
     , _eveDescription = Nothing
     }
+
 
 -- | Title of the calendar. Read-only.
 eveSummary :: Lens' Events (Maybe Text)
@@ -2606,6 +2666,7 @@ data EventAttendee =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventAttendee' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2644,6 +2705,7 @@ eventAttendee =
     , _eaOptional = False
     , _eaOrganizer = Nothing
     }
+
 
 -- | The attendee\'s email address, if available. This field must be present
 -- when adding an attendee. It must be a valid email address as per
@@ -2751,6 +2813,7 @@ data Calendar =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Calendar' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2783,6 +2846,7 @@ calendar =
     , _calTimeZone = Nothing
     , _calDescription = Nothing
     }
+
 
 -- | Title of the calendar.
 calSummary :: Lens' Calendar (Maybe Text)
@@ -2864,6 +2928,7 @@ data FreeBusyResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FreeBusyResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2887,6 +2952,7 @@ freeBusyResponse =
     , _fbrCalendars = Nothing
     , _fbrTimeMax = Nothing
     }
+
 
 -- | Expansion of groups.
 fbrGroups :: Lens' FreeBusyResponse (Maybe FreeBusyResponseGroups)
@@ -2943,6 +3009,7 @@ data EventReminder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventReminder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2953,6 +3020,7 @@ data EventReminder =
 eventReminder
     :: EventReminder
 eventReminder = EventReminder' {_erMethod = Nothing, _erMinutes = Nothing}
+
 
 -- | The method used by this reminder. Possible values are: - \"email\" -
 -- Reminders are sent via email. - \"sms\" - Deprecated. Once this feature
@@ -2997,6 +3065,7 @@ data EventExtendedProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventExtendedProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3008,6 +3077,7 @@ eventExtendedProperties
     :: EventExtendedProperties
 eventExtendedProperties =
   EventExtendedProperties' {_eepPrivate = Nothing, _eepShared = Nothing}
+
 
 -- | Properties that are private to the copy of the event that appears on
 -- this calendar.
@@ -3045,6 +3115,7 @@ data EventDateTime =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventDateTime' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3059,6 +3130,7 @@ eventDateTime
 eventDateTime =
   EventDateTime'
     {_edtDate = Nothing, _edtTimeZone = Nothing, _edtDateTime = Nothing}
+
 
 -- | The date, in the format \"yyyy-mm-dd\", if this is an all-day event.
 edtDate :: Lens' EventDateTime (Maybe Day)
@@ -3114,6 +3186,7 @@ data EventOrganizer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventOrganizer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3134,6 +3207,7 @@ eventOrganizer =
     , _eoDisplayName = Nothing
     , _eoId = Nothing
     }
+
 
 -- | The organizer\'s email address, if available. It must be a valid email
 -- address as per RFC5322.
@@ -3185,6 +3259,7 @@ data CalendarList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CalendarList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3208,6 +3283,7 @@ calendarList =
     , _clItems = Nothing
     , _clNextSyncToken = Nothing
     }
+
 
 -- | ETag of the collection.
 clEtag :: Lens' CalendarList (Maybe Text)
@@ -3273,6 +3349,7 @@ data EventGadget =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventGadget' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3305,6 +3382,7 @@ eventGadget =
     , _egTitle = Nothing
     , _egType = Nothing
     }
+
 
 -- | The gadget\'s height in pixels. The height must be an integer greater
 -- than 0. Optional.
@@ -3384,6 +3462,7 @@ newtype EventGadgetPreferences =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventGadgetPreferences' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3394,6 +3473,7 @@ eventGadgetPreferences
     -> EventGadgetPreferences
 eventGadgetPreferences pEgpAddtional_ =
   EventGadgetPreferences' {_egpAddtional = _Coerce # pEgpAddtional_}
+
 
 -- | The preference name and corresponding value.
 egpAddtional :: Lens' EventGadgetPreferences (HashMap Text Text)
@@ -3423,6 +3503,7 @@ data FreeBusyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FreeBusyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3449,6 +3530,7 @@ freeBusyRequest =
     , _fTimeZone = "UTC"
     , _fTimeMax = Nothing
     }
+
 
 -- | Maximal number of calendars for which FreeBusy information is to be
 -- provided. Optional. Maximum value is 50.
@@ -3525,6 +3607,7 @@ data ACLRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ACLRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3548,6 +3631,7 @@ aclRule =
     , _arScope = Nothing
     , _arId = Nothing
     }
+
 
 -- | ETag of the resource.
 arEtag :: Lens' ACLRule (Maybe Text)
@@ -3606,6 +3690,7 @@ data CreateConferenceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateConferenceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3623,6 +3708,7 @@ createConferenceRequest =
     , _ccrRequestId = Nothing
     , _ccrConferenceSolutionKey = Nothing
     }
+
 
 -- | The status of the conference create request.
 ccrStatus :: Lens' CreateConferenceRequest (Maybe ConferenceRequestStatus)
@@ -3669,6 +3755,7 @@ newtype EventExtendedPropertiesShared =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventExtendedPropertiesShared' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3679,6 +3766,7 @@ eventExtendedPropertiesShared
     -> EventExtendedPropertiesShared
 eventExtendedPropertiesShared pEepsAddtional_ =
   EventExtendedPropertiesShared' {_eepsAddtional = _Coerce # pEepsAddtional_}
+
 
 -- | The name of the shared property and the corresponding value.
 eepsAddtional :: Lens' EventExtendedPropertiesShared (HashMap Text Text)
@@ -3706,6 +3794,7 @@ newtype FreeBusyResponseCalendars =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FreeBusyResponseCalendars' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3716,6 +3805,7 @@ freeBusyResponseCalendars
     -> FreeBusyResponseCalendars
 freeBusyResponseCalendars pFbrcAddtional_ =
   FreeBusyResponseCalendars' {_fbrcAddtional = _Coerce # pFbrcAddtional_}
+
 
 -- | Free\/busy expansions for a single calendar.
 fbrcAddtional :: Lens' FreeBusyResponseCalendars (HashMap Text FreeBusyCalendar)
@@ -3745,6 +3835,7 @@ data ACL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ACL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3768,6 +3859,7 @@ acl =
     , _aItems = Nothing
     , _aNextSyncToken = Nothing
     }
+
 
 -- | ETag of the collection.
 aEtag :: Lens' ACL (Maybe Text)
@@ -3828,6 +3920,7 @@ data Colors =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Colors' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3848,6 +3941,7 @@ colors =
     , _colCalendar = Nothing
     , _colUpdated = Nothing
     }
+
 
 -- | A global palette of event colors, mapping from the color ID to its
 -- definition. An event resource may refer to one of these color IDs in its
@@ -3901,6 +3995,7 @@ data FreeBusyGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FreeBusyGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3911,6 +4006,7 @@ data FreeBusyGroup =
 freeBusyGroup
     :: FreeBusyGroup
 freeBusyGroup = FreeBusyGroup' {_fbgCalendars = Nothing, _fbgErrors = Nothing}
+
 
 -- | List of calendars\' identifiers within a group.
 fbgCalendars :: Lens' FreeBusyGroup [Text]
@@ -3949,6 +4045,7 @@ newtype ConferenceParametersAddOnParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConferenceParametersAddOnParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3958,6 +4055,7 @@ conferenceParametersAddOnParameters
     :: ConferenceParametersAddOnParameters
 conferenceParametersAddOnParameters =
   ConferenceParametersAddOnParameters' {_cpaopParameters = Nothing}
+
 
 cpaopParameters :: Lens' ConferenceParametersAddOnParameters (Maybe ConferenceParametersAddOnParametersParameters)
 cpaopParameters
@@ -3990,6 +4088,7 @@ data EventSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4000,6 +4099,7 @@ data EventSource =
 eventSource
     :: EventSource
 eventSource = EventSource' {_esURL = Nothing, _esTitle = Nothing}
+
 
 -- | URL of the source pointing to a resource. The URL scheme must be HTTP or
 -- HTTPS.

@@ -67,6 +67,7 @@ data ChannelSectionsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSectionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ channelSectionsInsert pCsiPart_ pCsiPayload_ =
     , _csiOnBehalfOfContentOwner = Nothing
     , _csiOnBehalfOfContentOwnerChannel = Nothing
     }
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

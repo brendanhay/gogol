@@ -74,6 +74,7 @@ data GroupsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ groupsInsert pGiPayload_ =
     , _giOnBehalfOfContentOwner = Nothing
     , _giCallback = Nothing
     }
+
 
 -- | V1 error format.
 giXgafv :: Lens' GroupsInsert (Maybe Xgafv)

@@ -59,6 +59,7 @@ newtype AccountsContainersVersionsSetLatest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersVersionsSetLatest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ accountsContainersVersionsSetLatest
     -> AccountsContainersVersionsSetLatest
 accountsContainersVersionsSetLatest pAcvslPath_ =
   AccountsContainersVersionsSetLatest' {_acvslPath = pAcvslPath_}
+
 
 -- | GTM ContainerVersion\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}

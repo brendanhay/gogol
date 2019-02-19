@@ -60,6 +60,7 @@ data GroupsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ groupsPatch
     -> GroupsPatch
 groupsPatch pGpPayload_ pGpGroupUniqueId_ =
   GroupsPatch' {_gpPayload = pGpPayload_, _gpGroupUniqueId = pGpGroupUniqueId_}
+
 
 -- | Multipart request metadata.
 gpPayload :: Lens' GroupsPatch Groups

@@ -64,6 +64,7 @@ data CommentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ commentsGet pCgFileId_ pCgCommentId_ =
     , _cgCommentId = pCgCommentId_
     , _cgIncludeDeleted = False
     }
+
 
 -- | The ID of the file.
 cgFileId :: Lens' CommentsGet Text

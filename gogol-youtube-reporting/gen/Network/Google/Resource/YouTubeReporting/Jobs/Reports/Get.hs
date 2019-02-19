@@ -78,6 +78,7 @@ data JobsReportsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobsReportsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ jobsReportsGet pJrgJobId_ pJrgReportId_ =
     , _jrgOnBehalfOfContentOwner = Nothing
     , _jrgCallback = Nothing
     }
+
 
 -- | V1 error format.
 jrgXgafv :: Lens' JobsReportsGet (Maybe Xgafv)

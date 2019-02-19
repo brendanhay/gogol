@@ -81,6 +81,7 @@ data ProjectsLocationsClustersNodePoolsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsLocationsClustersNodePoolsList pPlcnplParent_ =
     , _plcnplProjectId = Nothing
     , _plcnplCallback = Nothing
     }
+
 
 -- | The parent (project, location, cluster id) where the node pools will be
 -- listed. Specified in the format

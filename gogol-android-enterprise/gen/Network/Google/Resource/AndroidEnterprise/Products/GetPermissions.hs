@@ -63,6 +63,7 @@ data ProductsGetPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsGetPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ productsGetPermissions
 productsGetPermissions pPgpEnterpriseId_ pPgpProductId_ =
   ProductsGetPermissions'
     {_pgpEnterpriseId = pPgpEnterpriseId_, _pgpProductId = pPgpProductId_}
+
 
 -- | The ID of the enterprise.
 pgpEnterpriseId :: Lens' ProductsGetPermissions Text

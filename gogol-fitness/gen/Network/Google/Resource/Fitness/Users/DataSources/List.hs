@@ -68,6 +68,7 @@ data UsersDataSourcesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDataSourcesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ usersDataSourcesList
 usersDataSourcesList pUdslUserId_ =
   UsersDataSourcesList'
     {_udslDataTypeName = Nothing, _udslUserId = pUdslUserId_}
+
 
 -- | The names of data types to include in the list. If not specified, all
 -- data sources will be returned.

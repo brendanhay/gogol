@@ -78,6 +78,7 @@ data ProjectsReposTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsReposTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsReposTestIAMPermissions pPrtipPayload_ pPrtipResource_ =
     , _prtipResource = pPrtipResource_
     , _prtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prtipXgafv :: Lens' ProjectsReposTestIAMPermissions (Maybe Xgafv)

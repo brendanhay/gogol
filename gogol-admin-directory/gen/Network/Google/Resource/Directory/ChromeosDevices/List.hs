@@ -84,6 +84,7 @@ data ChromeosDevicesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeosDevicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ chromeosDevicesList pCdlCustomerId_ =
     , _cdlPageToken = Nothing
     , _cdlMaxResults = Nothing
     }
+
 
 -- | Column to use for sorting results
 cdlOrderBy :: Lens' ChromeosDevicesList (Maybe ChromeosDevicesListOrderBy)

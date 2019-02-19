@@ -70,6 +70,7 @@ data EditsListingsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsListingsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ editsListingsPatch pElpPackageName_ pElpPayload_ pElpLanguage_ pElpEditId_ =
     , _elpLanguage = pElpLanguage_
     , _elpEditId = pElpEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

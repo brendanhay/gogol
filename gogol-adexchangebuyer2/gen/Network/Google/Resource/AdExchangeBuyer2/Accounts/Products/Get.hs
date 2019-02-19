@@ -75,6 +75,7 @@ data AccountsProductsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProductsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ accountsProductsGet pApgAccountId_ pApgProductId_ =
     , _apgProductId = pApgProductId_
     , _apgCallback = Nothing
     }
+
 
 -- | V1 error format.
 apgXgafv :: Lens' AccountsProductsGet (Maybe Xgafv)

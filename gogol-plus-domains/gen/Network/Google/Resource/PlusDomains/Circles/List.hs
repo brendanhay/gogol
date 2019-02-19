@@ -64,6 +64,7 @@ data CirclesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CirclesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ circlesList
     -> CirclesList
 circlesList pCUserId_ =
   CirclesList' {_cUserId = pCUserId_, _cPageToken = Nothing, _cMaxResults = 20}
+
 
 -- | The ID of the user to get circles for. The special value \"me\" can be
 -- used to indicate the authenticated user.

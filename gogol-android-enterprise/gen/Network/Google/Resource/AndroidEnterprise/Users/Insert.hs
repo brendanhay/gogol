@@ -69,6 +69,7 @@ data UsersInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ usersInsert
     -> UsersInsert
 usersInsert pUiEnterpriseId_ pUiPayload_ =
   UsersInsert' {_uiEnterpriseId = pUiEnterpriseId_, _uiPayload = pUiPayload_}
+
 
 -- | The ID of the enterprise.
 uiEnterpriseId :: Lens' UsersInsert Text

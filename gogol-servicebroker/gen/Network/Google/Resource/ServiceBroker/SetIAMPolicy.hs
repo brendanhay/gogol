@@ -76,6 +76,7 @@ data SetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ setIAMPolicy pSipPayload_ pSipResource_ =
     , _sipResource = pSipResource_
     , _sipCallback = Nothing
     }
+
 
 -- | V1 error format.
 sipXgafv :: Lens' SetIAMPolicy (Maybe Xgafv)

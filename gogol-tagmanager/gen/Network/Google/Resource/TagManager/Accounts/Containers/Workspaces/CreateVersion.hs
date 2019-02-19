@@ -66,6 +66,7 @@ data AccountsContainersWorkspacesCreateVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesCreateVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ accountsContainersWorkspacesCreateVersion
 accountsContainersWorkspacesCreateVersion pAcwcvPath_ pAcwcvPayload_ =
   AccountsContainersWorkspacesCreateVersion'
     {_acwcvPath = pAcwcvPath_, _acwcvPayload = pAcwcvPayload_}
+
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}

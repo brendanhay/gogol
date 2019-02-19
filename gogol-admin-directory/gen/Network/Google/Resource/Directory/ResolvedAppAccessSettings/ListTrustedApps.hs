@@ -54,12 +54,14 @@ data ResolvedAppAccessSettingsListTrustedApps =
   ResolvedAppAccessSettingsListTrustedApps'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResolvedAppAccessSettingsListTrustedApps' with the minimum fields required to make a request.
 --
 resolvedAppAccessSettingsListTrustedApps
     :: ResolvedAppAccessSettingsListTrustedApps
 resolvedAppAccessSettingsListTrustedApps =
   ResolvedAppAccessSettingsListTrustedApps'
+
 
 instance GoogleRequest
            ResolvedAppAccessSettingsListTrustedApps

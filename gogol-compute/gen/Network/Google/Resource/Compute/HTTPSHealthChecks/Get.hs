@@ -65,6 +65,7 @@ data HTTPSHealthChecksGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPSHealthChecksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ httpsHealthChecksGet pHhcgProject_ pHhcgHTTPSHealthCheck_ =
     { _hhcgProject = pHhcgProject_
     , _hhcgHTTPSHealthCheck = pHhcgHTTPSHealthCheck_
     }
+
 
 -- | Project ID for this request.
 hhcgProject :: Lens' HTTPSHealthChecksGet Text

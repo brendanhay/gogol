@@ -70,6 +70,7 @@ data QuestsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuestsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ questsList pQlPlayerId_ =
     , _qlPlayerId = pQlPlayerId_
     , _qlMaxResults = Nothing
     }
+
 
 -- | The preferred language to use for strings returned by this method.
 qlLanguage :: Lens' QuestsList (Maybe Text)

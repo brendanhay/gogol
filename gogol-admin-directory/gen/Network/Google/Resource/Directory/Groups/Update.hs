@@ -61,6 +61,7 @@ data GroupsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ groupsUpdate
     -> GroupsUpdate
 groupsUpdate pGuGroupKey_ pGuPayload_ =
   GroupsUpdate' {_guGroupKey = pGuGroupKey_, _guPayload = pGuPayload_}
+
 
 -- | Email or immutable ID of the group. If ID, it should match with id of
 -- group object

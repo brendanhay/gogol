@@ -29,6 +29,7 @@ newtype RestMethodResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestMethodResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37,6 +38,7 @@ newtype RestMethodResponse =
 restMethodResponse
     :: RestMethodResponse
 restMethodResponse = RestMethodResponse' {_rmrRef = Nothing}
+
 
 -- | Schema ID for the response schema.
 rmrRef :: Lens' RestMethodResponse (Maybe Text)
@@ -60,6 +62,7 @@ newtype RestDescriptionParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestDescriptionParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +73,7 @@ restDescriptionParameters
     -> RestDescriptionParameters
 restDescriptionParameters pRdpAddtional_ =
   RestDescriptionParameters' {_rdpAddtional = _Coerce # pRdpAddtional_}
+
 
 -- | Description of a single parameter.
 rdpAddtional :: Lens' RestDescriptionParameters (HashMap Text JSONSchema)
@@ -107,6 +111,7 @@ data RestMethod =
     , _rmRequest                 :: !(Maybe RestMethodRequest)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestMethod' with the minimum fields required to make a request.
 --
@@ -161,6 +166,7 @@ restMethod =
     , _rmDescription = Nothing
     , _rmRequest = Nothing
     }
+
 
 -- | Whether this method supports media downloads.
 rmSupportsMediaDownload :: Lens' RestMethod (Maybe Bool)
@@ -308,6 +314,7 @@ data RestResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -318,6 +325,7 @@ data RestResource =
 restResource
     :: RestResource
 restResource = RestResource' {_rrResources = Nothing, _rrMethods = Nothing}
+
 
 -- | Sub-resources on this resource.
 rrResources :: Lens' RestResource (Maybe RestResourceResources)
@@ -352,6 +360,7 @@ newtype RestDescriptionAuthOAuth2Scopes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestDescriptionAuthOAuth2Scopes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -363,6 +372,7 @@ restDescriptionAuthOAuth2Scopes
 restDescriptionAuthOAuth2Scopes pRdaoasAddtional_ =
   RestDescriptionAuthOAuth2Scopes'
     {_rdaoasAddtional = _Coerce # pRdaoasAddtional_}
+
 
 -- | The scope value.
 rdaoasAddtional :: Lens' RestDescriptionAuthOAuth2Scopes (HashMap Text RestDescriptionAuthOAuth2ScopesAdditional)
@@ -391,6 +401,7 @@ newtype RestDescriptionMethods =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestDescriptionMethods' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -401,6 +412,7 @@ restDescriptionMethods
     -> RestDescriptionMethods
 restDescriptionMethods pRdmAddtional_ =
   RestDescriptionMethods' {_rdmAddtional = _Coerce # pRdmAddtional_}
+
 
 -- | An individual method description.
 rdmAddtional :: Lens' RestDescriptionMethods (HashMap Text RestMethod)
@@ -435,6 +447,7 @@ data DirectoryListItemsItem =
     , _dliiDiscoveryRestURL  :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DirectoryListItemsItem' with the minimum fields required to make a request.
 --
@@ -480,6 +493,7 @@ directoryListItemsItem =
     , _dliiDescription = Nothing
     , _dliiDiscoveryRestURL = Nothing
     }
+
 
 -- | A link to the discovery document.
 dliiDiscoveryLink :: Lens' DirectoryListItemsItem (Maybe Text)
@@ -588,6 +602,7 @@ data DirectoryListItemsItemIcons =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DirectoryListItemsItemIcons' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -599,6 +614,7 @@ directoryListItemsItemIcons
     :: DirectoryListItemsItemIcons
 directoryListItemsItemIcons =
   DirectoryListItemsItemIcons' {_dliiiX16 = Nothing, _dliiiX32 = Nothing}
+
 
 -- | The URL of the 16x16 icon.
 dliiiX16 :: Lens' DirectoryListItemsItemIcons (Maybe Text)
@@ -630,6 +646,7 @@ newtype RestResourceResources =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestResourceResources' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -640,6 +657,7 @@ restResourceResources
     -> RestResourceResources
 restResourceResources pRrrAddtional_ =
   RestResourceResources' {_rrrAddtional = _Coerce # pRrrAddtional_}
+
 
 -- | Description for any sub-resources on this resource.
 rrrAddtional :: Lens' RestResourceResources (HashMap Text RestResource)
@@ -665,6 +683,7 @@ newtype RestDescriptionAuthOAuth2 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestDescriptionAuthOAuth2' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -673,6 +692,7 @@ newtype RestDescriptionAuthOAuth2 =
 restDescriptionAuthOAuth2
     :: RestDescriptionAuthOAuth2
 restDescriptionAuthOAuth2 = RestDescriptionAuthOAuth2' {_rdaoaScopes = Nothing}
+
 
 -- | Available OAuth 2.0 scopes.
 rdaoaScopes :: Lens' RestDescriptionAuthOAuth2 (Maybe RestDescriptionAuthOAuth2Scopes)
@@ -698,6 +718,7 @@ newtype RestDescriptionAuthOAuth2ScopesAdditional =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestDescriptionAuthOAuth2ScopesAdditional' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -707,6 +728,7 @@ restDescriptionAuthOAuth2ScopesAdditional
     :: RestDescriptionAuthOAuth2ScopesAdditional
 restDescriptionAuthOAuth2ScopesAdditional =
   RestDescriptionAuthOAuth2ScopesAdditional' {_rdaoasaDescription = Nothing}
+
 
 -- | Description of scope.
 rdaoasaDescription :: Lens' RestDescriptionAuthOAuth2ScopesAdditional (Maybe Text)
@@ -742,6 +764,7 @@ data RestMethodMediaUploadProtocolsSimple =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestMethodMediaUploadProtocolsSimple' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -754,6 +777,7 @@ restMethodMediaUploadProtocolsSimple
 restMethodMediaUploadProtocolsSimple =
   RestMethodMediaUploadProtocolsSimple'
     {_rmmupsPath = Nothing, _rmmupsMultiPart = True}
+
 
 -- | The URI path to be used for upload. Should be used in conjunction with
 -- the basePath property at the api-level.
@@ -794,6 +818,7 @@ data RestDescriptionIcons =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestDescriptionIcons' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -805,6 +830,7 @@ restDescriptionIcons
     :: RestDescriptionIcons
 restDescriptionIcons =
   RestDescriptionIcons' {_rdiX16 = Nothing, _rdiX32 = Nothing}
+
 
 -- | The URL of the 16x16 icon.
 rdiX16 :: Lens' RestDescriptionIcons (Maybe Text)
@@ -839,6 +865,7 @@ data JSONSchemaVariant =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JSONSchemaVariant' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -850,6 +877,7 @@ jsonSchemaVariant
     :: JSONSchemaVariant
 jsonSchemaVariant =
   JSONSchemaVariant' {_jsvDiscriminant = Nothing, _jsvMap = Nothing}
+
 
 -- | The name of the type discriminant property.
 jsvDiscriminant :: Lens' JSONSchemaVariant (Maybe Text)
@@ -886,6 +914,7 @@ newtype RestResourceMethods =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestResourceMethods' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -896,6 +925,7 @@ restResourceMethods
     -> RestResourceMethods
 restResourceMethods pRrmAddtional_ =
   RestResourceMethods' {_rrmAddtional = _Coerce # pRrmAddtional_}
+
 
 -- | Description for any methods on this resource.
 rrmAddtional :: Lens' RestResourceMethods (HashMap Text RestMethod)
@@ -920,6 +950,7 @@ newtype RestDescriptionAuth =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestDescriptionAuth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -928,6 +959,7 @@ newtype RestDescriptionAuth =
 restDescriptionAuth
     :: RestDescriptionAuth
 restDescriptionAuth = RestDescriptionAuth' {_rdaOAuth2 = Nothing}
+
 
 -- | OAuth 2.0 authentication information.
 rdaOAuth2 :: Lens' RestDescriptionAuth (Maybe RestDescriptionAuthOAuth2)
@@ -979,6 +1011,7 @@ data RestDescription =
     , _rdDescription               :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestDescription' with the minimum fields required to make a request.
 --
@@ -1078,6 +1111,7 @@ restDescription =
     , _rdRevision = Nothing
     , _rdDescription = Nothing
     }
+
 
 -- | The ETag for this response.
 rdEtag :: Lens' RestDescription (Maybe Text)
@@ -1334,6 +1368,7 @@ data JSONSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JSONSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1402,6 +1437,7 @@ jsonSchema =
     , _jsDescription = Nothing
     , _jsProperties = Nothing
     }
+
 
 -- | Additional information about this property.
 jsAnnotations :: Lens' JSONSchema (Maybe JSONSchemaAnnotations)
@@ -1577,6 +1613,7 @@ newtype RestDescriptionSchemas =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestDescriptionSchemas' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1587,6 +1624,7 @@ restDescriptionSchemas
     -> RestDescriptionSchemas
 restDescriptionSchemas pRdsAddtional_ =
   RestDescriptionSchemas' {_rdsAddtional = _Coerce # pRdsAddtional_}
+
 
 -- | An individual schema description.
 rdsAddtional :: Lens' RestDescriptionSchemas (HashMap Text JSONSchema)
@@ -1612,6 +1650,7 @@ data JSONSchemaVariantMapItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JSONSchemaVariantMapItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1623,6 +1662,7 @@ jsonSchemaVariantMapItem
     :: JSONSchemaVariantMapItem
 jsonSchemaVariantMapItem =
   JSONSchemaVariantMapItem' {_jsvmiRef = Nothing, _jsvmiTypeValue = Nothing}
+
 
 jsvmiRef :: Lens' JSONSchemaVariantMapItem (Maybe Text)
 jsvmiRef = lens _jsvmiRef (\ s a -> s{_jsvmiRef = a})
@@ -1655,6 +1695,7 @@ newtype RestDescriptionResources =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestDescriptionResources' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1665,6 +1706,7 @@ restDescriptionResources
     -> RestDescriptionResources
 restDescriptionResources pRdrAddtional_ =
   RestDescriptionResources' {_rdrAddtional = _Coerce # pRdrAddtional_}
+
 
 -- | An individual resource description. Contains methods and sub-resources
 -- related to this resource.
@@ -1692,6 +1734,7 @@ data RestMethodMediaUploadProtocols =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestMethodMediaUploadProtocols' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1704,6 +1747,7 @@ restMethodMediaUploadProtocols
 restMethodMediaUploadProtocols =
   RestMethodMediaUploadProtocols'
     {_rmmupSimple = Nothing, _rmmupResumable = Nothing}
+
 
 -- | Supports uploading as a single HTTP request.
 rmmupSimple :: Lens' RestMethodMediaUploadProtocols (Maybe RestMethodMediaUploadProtocolsSimple)
@@ -1740,6 +1784,7 @@ newtype JSONSchemaAnnotations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JSONSchemaAnnotations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1748,6 +1793,7 @@ newtype JSONSchemaAnnotations =
 jsonSchemaAnnotations
     :: JSONSchemaAnnotations
 jsonSchemaAnnotations = JSONSchemaAnnotations' {_jsaRequired = Nothing}
+
 
 -- | A list of methods for which this property is required on requests.
 jsaRequired :: Lens' JSONSchemaAnnotations [Text]
@@ -1777,6 +1823,7 @@ newtype RestMethodParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestMethodParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1787,6 +1834,7 @@ restMethodParameters
     -> RestMethodParameters
 restMethodParameters pRmpAddtional_ =
   RestMethodParameters' {_rmpAddtional = _Coerce # pRmpAddtional_}
+
 
 -- | Details for a single parameter in this method.
 rmpAddtional :: Lens' RestMethodParameters (HashMap Text JSONSchema)
@@ -1814,6 +1862,7 @@ data RestMethodMediaUpload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestMethodMediaUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1828,6 +1877,7 @@ restMethodMediaUpload
 restMethodMediaUpload =
   RestMethodMediaUpload'
     {_rmmuProtocols = Nothing, _rmmuAccept = Nothing, _rmmuMaxSize = Nothing}
+
 
 -- | Supported upload protocols.
 rmmuProtocols :: Lens' RestMethodMediaUpload (Maybe RestMethodMediaUploadProtocols)
@@ -1873,6 +1923,7 @@ newtype JSONSchemaProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JSONSchemaProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1883,6 +1934,7 @@ jsonSchemaProperties
     -> JSONSchemaProperties
 jsonSchemaProperties pJspAddtional_ =
   JSONSchemaProperties' {_jspAddtional = _Coerce # pJspAddtional_}
+
 
 -- | A single property of this object. The value is itself a JSON Schema
 -- object describing this property.
@@ -1910,6 +1962,7 @@ data RestMethodMediaUploadProtocolsResumable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestMethodMediaUploadProtocolsResumable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1922,6 +1975,7 @@ restMethodMediaUploadProtocolsResumable
 restMethodMediaUploadProtocolsResumable =
   RestMethodMediaUploadProtocolsResumable'
     {_rmmuprPath = Nothing, _rmmuprMultiPart = True}
+
 
 -- | The URI path to be used for upload. Should be used in conjunction with
 -- the basePath property at the api-level.
@@ -1964,6 +2018,7 @@ data DirectoryList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DirectoryList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1981,6 +2036,7 @@ directoryList =
     , _dlItems = Nothing
     , _dlDiscoveryVersion = "v1"
     }
+
 
 -- | The kind for this response.
 dlKind :: Lens' DirectoryList Text
@@ -2024,6 +2080,7 @@ data RestMethodRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestMethodRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2035,6 +2092,7 @@ restMethodRequest
     :: RestMethodRequest
 restMethodRequest =
   RestMethodRequest' {_rRef = Nothing, _rParameterName = Nothing}
+
 
 -- | Schema ID for the request schema.
 rRef :: Lens' RestMethodRequest (Maybe Text)

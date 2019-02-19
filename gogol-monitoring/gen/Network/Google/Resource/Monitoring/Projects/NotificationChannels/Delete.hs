@@ -73,6 +73,7 @@ data ProjectsNotificationChannelsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotificationChannelsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ projectsNotificationChannelsDelete pPncdName_ =
     , _pncdName = pPncdName_
     , _pncdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pncdXgafv :: Lens' ProjectsNotificationChannelsDelete (Maybe Xgafv)

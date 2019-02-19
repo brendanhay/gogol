@@ -106,6 +106,7 @@ data CoursesCourseWorkPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesCourseWorkPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -144,6 +145,7 @@ coursesCourseWorkPatch pCcwpCourseId_ pCcwpPayload_ pCcwpId_ =
     , _ccwpId = pCcwpId_
     , _ccwpCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccwpXgafv :: Lens' CoursesCourseWorkPatch (Maybe Xgafv)

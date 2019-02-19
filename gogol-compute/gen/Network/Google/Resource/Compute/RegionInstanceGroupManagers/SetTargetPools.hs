@@ -77,6 +77,7 @@ data RegionInstanceGroupManagersSetTargetPools =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagersSetTargetPools' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ regionInstanceGroupManagersSetTargetPools pRigmstpProject_ pRigmstpInstanceGroup
     , _rigmstpPayload = pRigmstpPayload_
     , _rigmstpRegion = pRigmstpRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

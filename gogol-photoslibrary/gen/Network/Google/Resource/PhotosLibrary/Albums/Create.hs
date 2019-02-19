@@ -78,6 +78,7 @@ data AlbumsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlbumsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ albumsCreate pAcPayload_ =
     , _acBearerToken = Nothing
     , _acCallback = Nothing
     }
+
 
 -- | V1 error format.
 acXgafv :: Lens' AlbumsCreate (Maybe Xgafv)

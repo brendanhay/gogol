@@ -84,6 +84,7 @@ data ProjectsSubscriptionsModifyPushConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSubscriptionsModifyPushConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsSubscriptionsModifyPushConfig pPsmpcPayload_ pPsmpcSubscription_ =
     , _psmpcSubscription = pPsmpcSubscription_
     , _psmpcCallback = Nothing
     }
+
 
 -- | V1 error format.
 psmpcXgafv :: Lens' ProjectsSubscriptionsModifyPushConfig (Maybe Xgafv)

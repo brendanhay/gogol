@@ -71,6 +71,7 @@ data ManagementUnSampledReportsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementUnSampledReportsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ managementUnSampledReportsGet pMusrgWebPropertyId_ pMusrgProFileId_ pMusrgAccoun
     , _musrgAccountId = pMusrgAccountId_
     , _musrgUnSampledReportId = pMusrgUnSampledReportId_
     }
+
 
 -- | Web property ID to retrieve unsampled reports for.
 musrgWebPropertyId :: Lens' ManagementUnSampledReportsGet Text

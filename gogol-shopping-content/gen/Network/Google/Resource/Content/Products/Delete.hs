@@ -60,6 +60,7 @@ data ProductsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ productsDelete
 productsDelete pProMerchantId_ pProProductId_ =
   ProductsDelete'
     {_proMerchantId = _Coerce # pProMerchantId_, _proProductId = pProProductId_}
+
 
 -- | The ID of the account that contains the product. This account cannot be
 -- a multi-client account.

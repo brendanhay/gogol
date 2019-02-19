@@ -81,6 +81,7 @@ data ProjectsNotesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsNotesList pPnlParent_ =
     , _pnlPageSize = Nothing
     , _pnlCallback = Nothing
     }
+
 
 -- | The name of the project to list notes for in the form of
 -- \`projects\/[PROJECT_ID]\`.

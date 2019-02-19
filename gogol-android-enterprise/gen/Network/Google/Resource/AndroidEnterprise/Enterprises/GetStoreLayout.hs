@@ -60,6 +60,7 @@ newtype EnterprisesGetStoreLayout =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesGetStoreLayout' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ enterprisesGetStoreLayout
     -> EnterprisesGetStoreLayout
 enterprisesGetStoreLayout pEgslEnterpriseId_ =
   EnterprisesGetStoreLayout' {_egslEnterpriseId = pEgslEnterpriseId_}
+
 
 -- | The ID of the enterprise.
 egslEnterpriseId :: Lens' EnterprisesGetStoreLayout Text

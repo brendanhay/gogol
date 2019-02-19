@@ -69,6 +69,7 @@ data ManagementProFilesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementProFilesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ managementProFilesUpdate pMpfuWebPropertyId_ pMpfuProFileId_ pMpfuPayload_ pMpfu
     , _mpfuPayload = pMpfuPayload_
     , _mpfuAccountId = pMpfuAccountId_
     }
+
 
 -- | Web property ID to which the view (profile) belongs
 mpfuWebPropertyId :: Lens' ManagementProFilesUpdate Text

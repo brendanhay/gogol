@@ -59,6 +59,7 @@ newtype ShippingSettingsGetsupportedcarriers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsGetsupportedcarriers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ shippingSettingsGetsupportedcarriers
     -> ShippingSettingsGetsupportedcarriers
 shippingSettingsGetsupportedcarriers pSMerchantId_ =
   ShippingSettingsGetsupportedcarriers' {_sMerchantId = _Coerce # pSMerchantId_}
+
 
 -- | The ID of the account for which to retrieve the supported carriers.
 sMerchantId :: Lens' ShippingSettingsGetsupportedcarriers Word64

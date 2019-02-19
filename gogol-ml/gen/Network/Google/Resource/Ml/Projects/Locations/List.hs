@@ -78,6 +78,7 @@ data ProjectsLocationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsList pPllParent_ =
     , _pllPageSize = Nothing
     , _pllCallback = Nothing
     }
+
 
 -- | Required. The name of the project for which available locations are to
 -- be listed (since some locations might be whitelisted for specific

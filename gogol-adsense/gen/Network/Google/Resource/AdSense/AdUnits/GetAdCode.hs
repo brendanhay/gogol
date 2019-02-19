@@ -62,6 +62,7 @@ data AdUnitsGetAdCode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdUnitsGetAdCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ adUnitsGetAdCode
 adUnitsGetAdCode pAugacAdUnitId_ pAugacAdClientId_ =
   AdUnitsGetAdCode'
     {_augacAdUnitId = pAugacAdUnitId_, _augacAdClientId = pAugacAdClientId_}
+
 
 -- | Ad unit to get the code for.
 augacAdUnitId :: Lens' AdUnitsGetAdCode Text

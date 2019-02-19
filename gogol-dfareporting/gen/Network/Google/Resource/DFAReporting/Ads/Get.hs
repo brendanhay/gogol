@@ -61,6 +61,7 @@ data AdsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ adsGet
     -> AdsGet
 adsGet pAdsProFileId_ pAdsId_ =
   AdsGet' {_adsProFileId = _Coerce # pAdsProFileId_, _adsId = _Coerce # pAdsId_}
+
 
 -- | User profile ID associated with this request.
 adsProFileId :: Lens' AdsGet Int64

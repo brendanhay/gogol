@@ -62,6 +62,7 @@ data SSLPoliciesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLPoliciesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ sslPoliciesGet
     -> SSLPoliciesGet
 sslPoliciesGet pSpgSSLPolicy_ pSpgProject_ =
   SSLPoliciesGet' {_spgSSLPolicy = pSpgSSLPolicy_, _spgProject = pSpgProject_}
+
 
 -- | Name of the SSL policy to update. The name must be 1-63 characters long,
 -- and comply with RFC1035.

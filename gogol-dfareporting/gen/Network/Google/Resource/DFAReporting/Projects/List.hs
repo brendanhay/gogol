@@ -82,6 +82,7 @@ data ProjectsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsList pPlProFileId_ =
     , _plAdvertiserIds = Nothing
     , _plMaxResults = 1000
     }
+
 
 -- | Allows searching for projects by name or ID. Wildcards (*) are allowed.
 -- For example, \"project*2015\" will return projects with names like

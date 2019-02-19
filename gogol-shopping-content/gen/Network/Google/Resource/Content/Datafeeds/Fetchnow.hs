@@ -62,6 +62,7 @@ data DatafeedsFetchnow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsFetchnow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ datafeedsFetchnow pDfMerchantId_ pDfDatafeedId_ =
     { _dfMerchantId = _Coerce # pDfMerchantId_
     , _dfDatafeedId = _Coerce # pDfDatafeedId_
     }
+
 
 -- | The ID of the account that manages the datafeed. This account cannot be
 -- a multi-client account.

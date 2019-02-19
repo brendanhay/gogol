@@ -66,6 +66,7 @@ data TeamdrivesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeamdrivesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ teamdrivesList =
     , _tlUseDomainAdminAccess = False
     , _tlPageSize = 10
     }
+
 
 -- | Query string for searching Team Drives.
 tlQ :: Lens' TeamdrivesList (Maybe Text)

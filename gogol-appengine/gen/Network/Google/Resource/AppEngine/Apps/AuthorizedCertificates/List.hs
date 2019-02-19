@@ -82,6 +82,7 @@ data AppsAuthorizedCertificatesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsAuthorizedCertificatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ appsAuthorizedCertificatesList pAaclAppsId_ =
     , _aaclPageSize = Nothing
     , _aaclCallback = Nothing
     }
+
 
 -- | V1 error format.
 aaclXgafv :: Lens' AppsAuthorizedCertificatesList (Maybe Xgafv)

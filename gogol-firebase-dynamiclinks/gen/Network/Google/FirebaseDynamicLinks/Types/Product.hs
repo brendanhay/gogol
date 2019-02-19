@@ -29,6 +29,7 @@ newtype NavigationInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NavigationInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37,6 +38,7 @@ newtype NavigationInfo =
 navigationInfo
     :: NavigationInfo
 navigationInfo = NavigationInfo' {_niEnableForcedRedirect = Nothing}
+
 
 -- | If this option is on, FDL click will be forced to redirect rather than
 -- show an interstitial page.
@@ -67,6 +69,7 @@ newtype DesktopInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DesktopInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +78,7 @@ newtype DesktopInfo =
 desktopInfo
     :: DesktopInfo
 desktopInfo = DesktopInfo' {_diDesktopFallbackLink = Nothing}
+
 
 -- | Link to open on desktop.
 diDesktopFallbackLink :: Lens' DesktopInfo (Maybe Text)
@@ -105,6 +109,7 @@ data Suffix =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Suffix' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +120,7 @@ data Suffix =
 suffix
     :: Suffix
 suffix = Suffix' {_sCustomSuffix = Nothing, _sOption = Nothing}
+
 
 -- | Only applies to Option.CUSTOM.
 sCustomSuffix :: Lens' Suffix (Maybe Text)
@@ -151,6 +157,7 @@ data DynamicLinkWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DynamicLinkWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -168,6 +175,7 @@ dynamicLinkWarning =
     , _dlwWarningDocumentLink = Nothing
     , _dlwWarningMessage = Nothing
     }
+
 
 -- | The warning code.
 dlwWarningCode :: Lens' DynamicLinkWarning (Maybe DynamicLinkWarningWarningCode)
@@ -219,6 +227,7 @@ data ManagedShortLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedShortLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -245,6 +254,7 @@ managedShortLink =
     , _mslFlaggedAttribute = Nothing
     , _mslInfo = Nothing
     }
+
 
 -- | Creation timestamp of the short link.
 mslCreationTime :: Lens' ManagedShortLink (Maybe UTCTime)
@@ -315,6 +325,7 @@ data CreateShortDynamicLinkRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateShortDynamicLinkRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -335,6 +346,7 @@ createShortDynamicLinkRequest =
     , _csdlrDynamicLinkInfo = Nothing
     , _csdlrSdkVersion = Nothing
     }
+
 
 -- | Full long Dynamic Link URL with desired query parameters specified. For
 -- example,
@@ -394,6 +406,7 @@ data SocialMetaTagInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SocialMetaTagInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -411,6 +424,7 @@ socialMetaTagInfo =
     , _smtiSocialDescription = Nothing
     , _smtiSocialTitle = Nothing
     }
+
 
 -- | An image url string. Optional.
 smtiSocialImageLink :: Lens' SocialMetaTagInfo (Maybe Text)
@@ -458,6 +472,7 @@ data CreateShortDynamicLinkResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateShortDynamicLinkResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -475,6 +490,7 @@ createShortDynamicLinkResponse =
     , _csdlrWarning = Nothing
     , _csdlrShortLink = Nothing
     }
+
 
 -- | Preview link to show the link flow chart. (debug info.)
 csdlrPreviewLink :: Lens' CreateShortDynamicLinkResponse (Maybe Text)
@@ -524,6 +540,7 @@ data DynamicLinkEventStat =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DynamicLinkEventStat' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -538,6 +555,7 @@ dynamicLinkEventStat
 dynamicLinkEventStat =
   DynamicLinkEventStat'
     {_dlesEvent = Nothing, _dlesPlatform = Nothing, _dlesCount = Nothing}
+
 
 -- | Link event.
 dlesEvent :: Lens' DynamicLinkEventStat (Maybe DynamicLinkEventStatEvent)
@@ -586,6 +604,7 @@ data IosInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IosInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -615,6 +634,7 @@ iosInfo =
     , _iiIosCustomScheme = Nothing
     , _iiIosFallbackLink = Nothing
     }
+
 
 -- | iOS bundle ID of the app.
 iiIosBundleId :: Lens' IosInfo (Maybe Text)
@@ -703,6 +723,7 @@ data DynamicLinkInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DynamicLinkInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -741,6 +762,7 @@ dynamicLinkInfo =
     , _dliAndroidInfo = Nothing
     , _dliAnalyticsInfo = Nothing
     }
+
 
 -- | Information of navigation behavior of a Firebase Dynamic Links.
 dliNavigationInfo :: Lens' DynamicLinkInfo (Maybe NavigationInfo)
@@ -856,6 +878,7 @@ data AppPreview =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppPreview' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -867,6 +890,7 @@ appPreview
     :: AppPreview
 appPreview =
   AppPreview' {_apOpenButtonText = Nothing, _apSavePositionText = Nothing}
+
 
 -- | Text that appears on the button to open up the app. Optional Defaults to
 -- \"Open\"
@@ -907,6 +931,7 @@ newtype DynamicLinkStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DynamicLinkStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -915,6 +940,7 @@ newtype DynamicLinkStats =
 dynamicLinkStats
     :: DynamicLinkStats
 dynamicLinkStats = DynamicLinkStats' {_dlsLinkEventStats = Nothing}
+
 
 -- | Dynamic Link event stats.
 dlsLinkEventStats :: Lens' DynamicLinkStats [DynamicLinkEventStat]
@@ -950,6 +976,7 @@ data CreateManagedShortLinkRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateManagedShortLinkRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -973,6 +1000,7 @@ createManagedShortLinkRequest =
     , _cmslrSdkVersion = Nothing
     , _cmslrName = Nothing
     }
+
 
 -- | Full long Dynamic Link URL with desired query parameters specified. For
 -- example,
@@ -1046,6 +1074,7 @@ data GetIosReopenAttributionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIosReopenAttributionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1075,6 +1104,7 @@ getIosReopenAttributionResponse =
     , _girarUtmCampaign = Nothing
     , _girarUtmSource = Nothing
     }
+
 
 -- | FDL input value of the \"&imv=\" parameter, minimum app version to be
 -- returned to Google Firebase SDK running on iOS-9.
@@ -1164,6 +1194,7 @@ data GetIosPostInstallAttributionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIosPostInstallAttributionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1196,6 +1227,7 @@ getIosPostInstallAttributionRequest =
     , _gipiarRetrievalMethod = Nothing
     , _gipiarVisualStyle = Nothing
     }
+
 
 -- | iOS version, ie: 9.3.5. Consider adding \"build\".
 gipiarIosVersion :: Lens' GetIosPostInstallAttributionRequest (Maybe Text)
@@ -1295,6 +1327,7 @@ data AndroidInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AndroidInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1315,6 +1348,7 @@ androidInfo =
     , _aiAndroidLink = Nothing
     , _aiAndroidPackageName = Nothing
     }
+
 
 -- | Minimum version code for the Android app. If the installed app’s version
 -- code is lower, then the user is taken to the Play Store.
@@ -1372,6 +1406,7 @@ data AnalyticsInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyticsInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1384,6 +1419,7 @@ analyticsInfo
 analyticsInfo =
   AnalyticsInfo'
     {_aiItunesConnectAnalytics = Nothing, _aiGooglePlayAnalytics = Nothing}
+
 
 -- | iTunes Connect App Analytics.
 aiItunesConnectAnalytics :: Lens' AnalyticsInfo (Maybe ITunesConnectAnalytics)
@@ -1426,6 +1462,7 @@ data ITunesConnectAnalytics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ITunesConnectAnalytics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1442,6 +1479,7 @@ iTunesConnectAnalytics
 iTunesConnectAnalytics =
   ITunesConnectAnalytics'
     {_itcaAt = Nothing, _itcaMt = Nothing, _itcaPt = Nothing, _itcaCt = Nothing}
+
 
 -- | Affiliate token used to create affiliate-coded links.
 itcaAt :: Lens' ITunesConnectAnalytics (Maybe Text)
@@ -1499,6 +1537,7 @@ data GetIosPostInstallAttributionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIosPostInstallAttributionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1549,6 +1588,7 @@ getIosPostInstallAttributionResponse =
     , _gipiarMatchMessage = Nothing
     , _gipiarUtmSource = Nothing
     }
+
 
 -- | The deep-link attributed post-install via one of several techniques
 -- (fingerprint, copy unique).
@@ -1710,6 +1750,7 @@ data CreateManagedShortLinkResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateManagedShortLinkResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1727,6 +1768,7 @@ createManagedShortLinkResponse =
     , _cmslrPreviewLink = Nothing
     , _cmslrWarning = Nothing
     }
+
 
 -- | Short Dynamic Link value. e.g. https:\/\/abcd.app.goo.gl\/wxyz
 cmslrManagedShortLink :: Lens' CreateManagedShortLinkResponse (Maybe ManagedShortLink)
@@ -1776,6 +1818,7 @@ data GetIosReopenAttributionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIosReopenAttributionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1793,6 +1836,7 @@ getIosReopenAttributionRequest =
     , _girarSdkVersion = Nothing
     , _girarBundleId = Nothing
     }
+
 
 -- | FDL link to be verified from an app universal link open. The FDL link
 -- can be one of: 1) short FDL. e.g. .page.link\/, or 2) long FDL. e.g.
@@ -1846,6 +1890,7 @@ data GooglePlayAnalytics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePlayAnalytics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1872,6 +1917,7 @@ googlePlayAnalytics =
     , _gpaGclid = Nothing
     , _gpaUtmSource = Nothing
     }
+
 
 -- | Campaign content; used for A\/B testing and content-targeted ads to
 -- differentiate ads or links that point to the same URL.
@@ -1948,6 +1994,7 @@ data DeviceInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1977,6 +2024,7 @@ deviceInfo =
     , _diLanguageCodeRaw = Nothing
     , _diTimezone = Nothing
     }
+
 
 -- | Device language code setting obtained by executing JavaScript code in
 -- WebView.

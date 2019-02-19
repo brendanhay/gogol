@@ -71,6 +71,7 @@ data ProjectsServiceAccountsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServiceAccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsServiceAccountsGet pPsagName_ =
     , _psagName = pPsagName_
     , _psagCallback = Nothing
     }
+
 
 -- | V1 error format.
 psagXgafv :: Lens' ProjectsServiceAccountsGet (Maybe Xgafv)

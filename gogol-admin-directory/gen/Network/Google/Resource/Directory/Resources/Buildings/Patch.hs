@@ -71,6 +71,7 @@ data ResourcesBuildingsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesBuildingsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ resourcesBuildingsPatch pRbpBuildingId_ pRbpPayload_ pRbpCustomer_ =
     , _rbpCustomer = pRbpCustomer_
     , _rbpCoordinatesSource = SourceUnspecified
     }
+
 
 -- | The ID of the building to update.
 rbpBuildingId :: Lens' ResourcesBuildingsPatch Text

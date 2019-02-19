@@ -79,6 +79,7 @@ data PromoOfferAccept =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PromoOfferAccept' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ promoOfferAccept =
     , _poaProduct = Nothing
     , _poaAndroidId = Nothing
     }
+
 
 -- | device manufacturer
 poaManufacturer :: Lens' PromoOfferAccept (Maybe Text)

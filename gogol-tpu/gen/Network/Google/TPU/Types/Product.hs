@@ -65,6 +65,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -126,6 +128,7 @@ newtype OperationSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +139,7 @@ operationSchema
     -> OperationSchema
 operationSchema pOsAddtional_ =
   OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -161,6 +165,7 @@ data ListLocationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -172,6 +177,7 @@ listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
   ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -211,6 +217,7 @@ data AcceleratorType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -221,6 +228,7 @@ data AcceleratorType =
 acceleratorType
     :: AcceleratorType
 acceleratorType = AcceleratorType' {_atName = Nothing, _atType = Nothing}
+
 
 -- | The resource name.
 atName :: Lens' AcceleratorType (Maybe Text)
@@ -253,6 +261,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -265,6 +274,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -305,6 +315,7 @@ data ListAcceleratorTypesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAcceleratorTypesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -317,6 +328,7 @@ listAcceleratorTypesResponse
 listAcceleratorTypesResponse =
   ListAcceleratorTypesResponse'
     {_latrAcceleratorTypes = Nothing, _latrNextPageToken = Nothing}
+
 
 -- | The listed nodes.
 latrAcceleratorTypes :: Lens' ListAcceleratorTypesResponse [AcceleratorType]
@@ -360,6 +372,7 @@ data Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -383,6 +396,7 @@ location =
     , _lLabels = Nothing
     , _lLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
@@ -445,6 +459,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -468,6 +483,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -534,6 +550,7 @@ data NetworkEndpoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkEndpoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -544,6 +561,7 @@ data NetworkEndpoint =
 networkEndpoint
     :: NetworkEndpoint
 networkEndpoint = NetworkEndpoint' {_neIPAddress = Nothing, _nePort = Nothing}
+
 
 -- | The IP address of this network endpoint.
 neIPAddress :: Lens' NetworkEndpoint (Maybe Text)
@@ -581,11 +599,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -616,6 +636,7 @@ data Node =
     , _nPort              :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Node' with the minimum fields required to make a request.
 --
@@ -673,6 +694,7 @@ node =
     , _nTensorflowVersion = Nothing
     , _nPort = Nothing
     }
+
 
 -- | The type of hardware accelerators associated with this node. Required.
 nAcceleratorType :: Lens' Node (Maybe Text)
@@ -823,6 +845,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -833,6 +856,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -855,11 +879,13 @@ data StopNodeRequest =
   StopNodeRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StopNodeRequest' with the minimum fields required to make a request.
 --
 stopNodeRequest
     :: StopNodeRequest
 stopNodeRequest = StopNodeRequest'
+
 
 instance FromJSON StopNodeRequest where
         parseJSON
@@ -878,6 +904,7 @@ newtype ReimageNodeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReimageNodeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -886,6 +913,7 @@ newtype ReimageNodeRequest =
 reimageNodeRequest
     :: ReimageNodeRequest
 reimageNodeRequest = ReimageNodeRequest' {_rnrTensorflowVersion = Nothing}
+
 
 -- | The version for reimage to create.
 rnrTensorflowVersion :: Lens' ReimageNodeRequest (Maybe Text)
@@ -916,6 +944,7 @@ data ListNodesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListNodesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -933,6 +962,7 @@ listNodesResponse =
     , _lnrUnreachable = Nothing
     , _lnrNodes = Nothing
     }
+
 
 -- | The next page token or empty if none.
 lnrNextPageToken :: Lens' ListNodesResponse (Maybe Text)
@@ -980,6 +1010,7 @@ newtype SchedulingConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SchedulingConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -988,6 +1019,7 @@ newtype SchedulingConfig =
 schedulingConfig
     :: SchedulingConfig
 schedulingConfig = SchedulingConfig' {_scPreemptible = Nothing}
+
 
 scPreemptible :: Lens' SchedulingConfig (Maybe Bool)
 scPreemptible
@@ -1013,6 +1045,7 @@ newtype NodeLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1022,6 +1055,7 @@ nodeLabels
     :: HashMap Text Text -- ^ 'nlAddtional'
     -> NodeLabels
 nodeLabels pNlAddtional_ = NodeLabels' {_nlAddtional = _Coerce # pNlAddtional_}
+
 
 nlAddtional :: Lens' NodeLabels (HashMap Text Text)
 nlAddtional
@@ -1046,6 +1080,7 @@ newtype LocationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1056,6 +1091,7 @@ locationLabels
     -> LocationLabels
 locationLabels pLlAddtional_ =
   LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -1080,6 +1116,7 @@ newtype LocationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1090,6 +1127,7 @@ locationMetadata
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
   LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -1120,6 +1158,7 @@ data OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1149,6 +1188,7 @@ operationMetadata =
     , _omTarget = Nothing
     , _omCreateTime = Nothing
     }
+
 
 -- | [Output only] API version used to start the operation.
 omAPIVersion :: Lens' OperationMetadata (Maybe Text)
@@ -1225,6 +1265,7 @@ data ListTensorFlowVersionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTensorFlowVersionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1237,6 +1278,7 @@ listTensorFlowVersionsResponse
 listTensorFlowVersionsResponse =
   ListTensorFlowVersionsResponse'
     {_ltfvrNextPageToken = Nothing, _ltfvrTensorflowVersions = Nothing}
+
 
 -- | The next page token or empty if none.
 ltfvrNextPageToken :: Lens' ListTensorFlowVersionsResponse (Maybe Text)
@@ -1285,6 +1327,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1295,6 +1338,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1320,6 +1364,7 @@ data TensorFlowVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TensorFlowVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1331,6 +1376,7 @@ tensorFlowVersion
     :: TensorFlowVersion
 tensorFlowVersion =
   TensorFlowVersion' {_tfvName = Nothing, _tfvVersion = Nothing}
+
 
 -- | The resource name.
 tfvName :: Lens' TensorFlowVersion (Maybe Text)
@@ -1362,11 +1408,13 @@ data StartNodeRequest =
   StartNodeRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StartNodeRequest' with the minimum fields required to make a request.
 --
 startNodeRequest
     :: StartNodeRequest
 startNodeRequest = StartNodeRequest'
+
 
 instance FromJSON StartNodeRequest where
         parseJSON

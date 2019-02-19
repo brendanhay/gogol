@@ -67,6 +67,7 @@ data UsersSettingsSendAsVerify =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsSendAsVerify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ usersSettingsSendAsVerify
 usersSettingsSendAsVerify pUssavSendAsEmail_ =
   UsersSettingsSendAsVerify'
     {_ussavUserId = "me", _ussavSendAsEmail = pUssavSendAsEmail_}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

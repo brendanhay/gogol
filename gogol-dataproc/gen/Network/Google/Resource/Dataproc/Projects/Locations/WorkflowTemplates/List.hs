@@ -78,6 +78,7 @@ data ProjectsLocationsWorkflowTemplatesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsWorkflowTemplatesList pPlwtlParent_ =
     , _plwtlPageSize = Nothing
     , _plwtlCallback = Nothing
     }
+
 
 -- | Required. The \"resource name\" of the region, as described in
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names of the form

@@ -72,6 +72,7 @@ data AccountsCustomAppsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCustomAppsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ accountsCustomAppsCreate
 accountsCustomAppsCreate pAcacPayload_ pAcacAccount_ =
   AccountsCustomAppsCreate'
     {_acacPayload = pAcacPayload_, _acacAccount = _Coerce # pAcacAccount_}
+
 
 -- | Multipart request metadata.
 acacPayload :: Lens' AccountsCustomAppsCreate CustomApp

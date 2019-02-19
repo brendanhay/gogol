@@ -70,6 +70,7 @@ data ProjectsAlertPoliciesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAlertPoliciesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsAlertPoliciesGet pPapgName_ =
     , _papgName = pPapgName_
     , _papgCallback = Nothing
     }
+
 
 -- | V1 error format.
 papgXgafv :: Lens' ProjectsAlertPoliciesGet (Maybe Xgafv)

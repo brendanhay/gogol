@@ -61,6 +61,7 @@ data StyleGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StyleGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ styleGet
     -> StyleGet
 styleGet pSgStyleId_ pSgTableId_ =
   StyleGet' {_sgStyleId = _Coerce # pSgStyleId_, _sgTableId = pSgTableId_}
+
 
 -- | Identifier (integer) for a specific style in a table
 sgStyleId :: Lens' StyleGet Int32

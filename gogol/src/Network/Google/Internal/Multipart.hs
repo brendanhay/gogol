@@ -15,7 +15,7 @@ import           Data.ByteString                       (ByteString)
 import qualified Data.ByteString                       as BS
 import           Data.ByteString.Builder.Extra         (byteStringCopy)
 import           Data.Monoid                           ((<>))
-import           Network.Google.Types                  (Body (..))
+import           Network.Google.Types                  (GBody (..))
 import           Network.HTTP.Client
 import           Network.HTTP.Client.MultipartFormData (webkitBoundary)
 import           Network.HTTP.Media                    (RenderHeader (..))
@@ -57,10 +57,10 @@ part (Boundary bs) = copy "--" <> copy bs <> copy "--\r\n"
 copy :: ByteString -> RequestBody
 copy bs = RequestBodyBuilder (fromIntegral (BS.length bs)) (byteStringCopy bs)
 
-renderParts :: Boundary -> [Body] -> RequestBody
+renderParts :: Boundary -> [GBody] -> RequestBody
 renderParts b = (<> part b) . foldMap go
   where
-    go (Body ct x) =
+    go (GBody ct x) =
            start b
         <> copy "Content-Type: "
            <> copy (renderHeader ct)

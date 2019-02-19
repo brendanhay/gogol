@@ -84,6 +84,7 @@ data AccountsProductsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProductsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ accountsProductsList pAplpAccountId_ =
     , _aplpPageSize = Nothing
     , _aplpCallback = Nothing
     }
+
 
 -- | V1 error format.
 aplpXgafv :: Lens' AccountsProductsList (Maybe Xgafv)

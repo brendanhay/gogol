@@ -61,6 +61,7 @@ data AdvertisersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertisersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ advertisersGet
 advertisersGet pAdvProFileId_ pAdvId_ =
   AdvertisersGet'
     {_advProFileId = _Coerce # pAdvProFileId_, _advId = _Coerce # pAdvId_}
+
 
 -- | User profile ID associated with this request.
 advProFileId :: Lens' AdvertisersGet Int64

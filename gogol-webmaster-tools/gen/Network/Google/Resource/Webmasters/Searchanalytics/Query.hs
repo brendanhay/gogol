@@ -73,6 +73,7 @@ data SearchanalyticsQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchanalyticsQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ searchanalyticsQuery
     -> SearchanalyticsQuery
 searchanalyticsQuery pSqSiteURL_ pSqPayload_ =
   SearchanalyticsQuery' {_sqSiteURL = pSqSiteURL_, _sqPayload = pSqPayload_}
+
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/

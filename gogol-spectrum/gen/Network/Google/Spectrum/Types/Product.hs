@@ -29,6 +29,7 @@ newtype GeoLocationPolygon =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeoLocationPolygon' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37,6 +38,7 @@ newtype GeoLocationPolygon =
 geoLocationPolygon
     :: GeoLocationPolygon
 geoLocationPolygon = GeoLocationPolygon' {_glpExterior = Nothing}
+
 
 -- | When the geolocation describes a region, the exterior field refers to a
 -- list of latitude\/longitude points that represent the vertices of a
@@ -78,6 +80,7 @@ data GeoLocationPoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeoLocationPoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +92,7 @@ geoLocationPoint
     :: GeoLocationPoint
 geoLocationPoint =
   GeoLocationPoint' {_glpLatitude = Nothing, _glpLongitude = Nothing}
+
 
 -- | A required floating-point number that expresses the latitude in degrees
 -- using the WGS84 datum. For details on this encoding, see the National
@@ -134,6 +138,7 @@ data PawsInitResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsInitResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -157,6 +162,7 @@ pawsInitResponse =
     , _pirType = Nothing
     , _pirDatabaseChange = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"spectrum#pawsInitResponse\".
@@ -227,6 +233,7 @@ data PawsRegisterResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsRegisterResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -247,6 +254,7 @@ pawsRegisterResponse =
     , _prrType = Nothing
     , _prrDatabaseChange = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"spectrum#pawsRegisterResponse\".
@@ -306,6 +314,7 @@ data PawsNotifySpectrumUseRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsNotifySpectrumUseRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -329,6 +338,7 @@ pawsNotifySpectrumUseRequest =
     , _pnsurType = Nothing
     , _pnsurDeviceDesc = Nothing
     }
+
 
 -- | A spectrum list is required in the spectrum-use notification. The list
 -- specifies the spectrum that the device expects to use, which includes
@@ -411,6 +421,7 @@ data Vcard =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Vcard' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -434,6 +445,7 @@ vcard =
     , _vTel = Nothing
     , _vFn = Nothing
     }
+
 
 -- | An email address that can be used to reach the contact.
 vEmail :: Lens' Vcard (Maybe VcardTypedText)
@@ -482,6 +494,7 @@ newtype DBUpdateSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DBUpdateSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -490,6 +503,7 @@ newtype DBUpdateSpec =
 dbUpdateSpec
     :: DBUpdateSpec
 dbUpdateSpec = DBUpdateSpec' {_dusDatabases = Nothing}
+
 
 -- | A required list of one or more databases. A device should update its
 -- preconfigured list of databases to replace (only) the database that
@@ -528,6 +542,7 @@ data PawsGetSpectrumBatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsGetSpectrumBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -563,6 +578,7 @@ pawsGetSpectrumBatchRequest =
     , _pgsbrCapabilities = Nothing
     , _pgsbrDeviceDesc = Nothing
     }
+
 
 -- | Depending on device type and regulatory domain, antenna characteristics
 -- may be required.
@@ -692,6 +708,7 @@ data GeoSpectrumSchedule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeoSpectrumSchedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -703,6 +720,7 @@ geoSpectrumSchedule
     :: GeoSpectrumSchedule
 geoSpectrumSchedule =
   GeoSpectrumSchedule' {_gssLocation = Nothing, _gssSpectrumSchedules = Nothing}
+
 
 -- | The geolocation identifies the location at which the spectrum schedule
 -- applies. It will always be present.
@@ -745,6 +763,7 @@ newtype VcardTypedText =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VcardTypedText' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -753,6 +772,7 @@ newtype VcardTypedText =
 vcardTypedText
     :: VcardTypedText
 vcardTypedText = VcardTypedText' {_vttText = Nothing}
+
 
 -- | The text string associated with this item. For example, for an org
 -- field: ACME, inc. For an email field: smith\'example.com.
@@ -779,6 +799,7 @@ data SpectrumSchedule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpectrumSchedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -790,6 +811,7 @@ spectrumSchedule
     :: SpectrumSchedule
 spectrumSchedule =
   SpectrumSchedule' {_ssSpectra = Nothing, _ssEventTime = Nothing}
+
 
 -- | A list of spectrum messages representing the usable profile. It will
 -- always be present, but may be empty when there is no available spectrum.
@@ -828,6 +850,7 @@ newtype VcardTelephone =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VcardTelephone' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -836,6 +859,7 @@ newtype VcardTelephone =
 vcardTelephone
     :: VcardTelephone
 vcardTelephone = VcardTelephone' {_vtURI = Nothing}
+
 
 -- | A nested telephone URI of the form: tel:+1-123-456-7890.
 vtURI :: Lens' VcardTelephone (Maybe Text)
@@ -867,6 +891,7 @@ data DeviceOwner =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceOwner' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -877,6 +902,7 @@ data DeviceOwner =
 deviceOwner
     :: DeviceOwner
 deviceOwner = DeviceOwner' {_doOperator = Nothing, _doOwner = Nothing}
+
 
 -- | The vCard contact information for the device operator is optional, but
 -- may be required by specific regulatory domains.
@@ -916,6 +942,7 @@ data EventTime =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventTime' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -926,6 +953,7 @@ data EventTime =
 eventTime
     :: EventTime
 eventTime = EventTime' {_etStartTime = Nothing, _etStopTime = Nothing}
+
 
 -- | The inclusive start of the event. It will be present.
 etStartTime :: Lens' EventTime (Maybe Text)
@@ -969,6 +997,7 @@ data PawsGetSpectrumRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsGetSpectrumRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1004,6 +1033,7 @@ pawsGetSpectrumRequest =
     , _pgsrCapabilities = Nothing
     , _pgsrDeviceDesc = Nothing
     }
+
 
 -- | Depending on device type and regulatory domain, the characteristics of
 -- the antenna may be required.
@@ -1129,6 +1159,7 @@ data AntennaCharacteristics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AntennaCharacteristics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1146,6 +1177,7 @@ antennaCharacteristics =
     , _acHeightType = Nothing
     , _acHeightUncertainty = Nothing
     }
+
 
 -- | The antenna height in meters. Whether the antenna height is required
 -- depends on the device type and the regulatory domain. Note that the
@@ -1199,6 +1231,7 @@ data PawsVerifyDeviceResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsVerifyDeviceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1222,6 +1255,7 @@ pawsVerifyDeviceResponse =
     , _pvdrType = Nothing
     , _pvdrDatabaseChange = Nothing
     }
+
 
 -- | A device validities list is required in the device validation response
 -- to report whether each slave device listed in a previous device
@@ -1295,6 +1329,7 @@ data VcardAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VcardAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1321,6 +1356,7 @@ vcardAddress =
     , _vaCode = Nothing
     , _vaRegion = Nothing
     }
+
 
 -- | An optional post office box number.
 vaPobox :: Lens' VcardAddress (Maybe Text)
@@ -1391,6 +1427,7 @@ data PawsGetSpectrumBatchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsGetSpectrumBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1432,6 +1469,7 @@ pawsGetSpectrumBatchResponse =
     , _pDeviceDesc = Nothing
     , _pMaxTotalBwHz = Nothing
     }
+
 
 -- | For regulatory domains that require a spectrum-usage report from
 -- devices, the database must return true for this parameter if the
@@ -1583,6 +1621,7 @@ data DeviceValidity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceValidity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1597,6 +1636,7 @@ deviceValidity
 deviceValidity =
   DeviceValidity'
     {_dvIsValid = Nothing, _dvReason = Nothing, _dvDeviceDesc = Nothing}
+
 
 -- | The validity status: true if the device is valid for operation, false
 -- otherwise. It will always be present.
@@ -1644,6 +1684,7 @@ data GeoLocationEllipse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeoLocationEllipse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1664,6 +1705,7 @@ geoLocationEllipse =
     , _gleOrientation = Nothing
     , _gleSemiMinorAxis = Nothing
     }
+
 
 -- | A floating-point number that expresses the location uncertainty along
 -- the major axis of the ellipse. May be required by the regulatory domain.
@@ -1732,6 +1774,7 @@ data RulesetInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RulesetInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1752,6 +1795,7 @@ rulesetInfo =
     , _riMaxLocationChange = Nothing
     , _riAuthority = Nothing
     }
+
 
 -- | The identifiers of the rulesets supported for the device\'s location.
 -- The database should include at least one applicable ruleset in the
@@ -1839,6 +1883,7 @@ data PawsRegisterRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsRegisterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1865,6 +1910,7 @@ pawsRegisterRequest =
     , _pawType = Nothing
     , _pawDeviceDesc = Nothing
     }
+
 
 -- | Antenna characteristics, including its height and height type.
 pawAntenna :: Lens' PawsRegisterRequest (Maybe AntennaCharacteristics)
@@ -1931,6 +1977,7 @@ data PawsNotifySpectrumUseResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsNotifySpectrumUseResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1948,6 +1995,7 @@ pawsNotifySpectrumUseResponse =
     , _pnsurnVersion = Nothing
     , _pnsurnType = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"spectrum#pawsNotifySpectrumUseResponse\".
@@ -1995,6 +2043,7 @@ data DatabaseSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatabaseSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2005,6 +2054,7 @@ data DatabaseSpec =
 databaseSpec
     :: DatabaseSpec
 databaseSpec = DatabaseSpec' {_dsURI = Nothing, _dsName = Nothing}
+
 
 -- | The corresponding URI of the database.
 dsURI :: Lens' DatabaseSpec (Maybe Text)
@@ -2037,6 +2087,7 @@ data SpectrumMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpectrumMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2048,6 +2099,7 @@ spectrumMessage
     :: SpectrumMessage
 spectrumMessage =
   SpectrumMessage' {_smBandwidth = Nothing, _smFrequencyRanges = Nothing}
+
 
 -- | The bandwidth (in Hertz) for which permissible power levels are
 -- specified. For example, FCC regulation would require only one spectrum
@@ -2095,6 +2147,7 @@ data GeoLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeoLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2109,6 +2162,7 @@ geoLocation
 geoLocation =
   GeoLocation'
     {_glConfidence = Nothing, _glPoint = Nothing, _glRegion = Nothing}
+
 
 -- | The location confidence level, as an integer percentage, may be
 -- required, depending on the regulatory domain. When the parameter is
@@ -2163,6 +2217,7 @@ data FrequencyRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FrequencyRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2183,6 +2238,7 @@ frequencyRange =
     , _frChannelId = Nothing
     , _frStartHz = Nothing
     }
+
 
 -- | The required exclusive end of the frequency range (in Hertz).
 frStopHz :: Lens' FrequencyRange (Maybe Double)
@@ -2255,6 +2311,7 @@ data PawsGetSpectrumResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsGetSpectrumResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2296,6 +2353,7 @@ pawsGetSpectrumResponse =
     , _pgsrgDeviceDesc = Nothing
     , _pgsrgMaxTotalBwHz = Nothing
     }
+
 
 -- | For regulatory domains that require a spectrum-usage report from
 -- devices, the database must return true for this parameter if the
@@ -2446,6 +2504,7 @@ data PawsVerifyDeviceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsVerifyDeviceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2460,6 +2519,7 @@ pawsVerifyDeviceRequest
 pawsVerifyDeviceRequest =
   PawsVerifyDeviceRequest'
     {_pvdrvVersion = Nothing, _pvdrvDeviceDescs = Nothing, _pvdrvType = Nothing}
+
 
 -- | The PAWS version. Must be exactly 1.0. Required field.
 pvdrvVersion :: Lens' PawsVerifyDeviceRequest (Maybe Text)
@@ -2519,6 +2579,7 @@ data DeviceDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2557,6 +2618,7 @@ deviceDescriptor =
     , _ddEtsiEnDeviceCategory = Nothing
     , _ddSerialNumber = Nothing
     }
+
 
 -- | Specifies the ETSI white space device emissions class. The values are
 -- represented by numeric strings, such as 1, 2, etc. Consult the ETSI
@@ -2687,6 +2749,7 @@ data PawsInitRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsInitRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2707,6 +2770,7 @@ pawsInitRequest =
     , _piriType = Nothing
     , _piriDeviceDesc = Nothing
     }
+
 
 -- | A device\'s geolocation is required.
 piriLocation :: Lens' PawsInitRequest (Maybe GeoLocation)
@@ -2762,6 +2826,7 @@ newtype DeviceCapabilities =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceCapabilities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2770,6 +2835,7 @@ newtype DeviceCapabilities =
 deviceCapabilities
     :: DeviceCapabilities
 deviceCapabilities = DeviceCapabilities' {_dcFrequencyRanges = Nothing}
+
 
 -- | An optional list of frequency ranges supported by the device. Each
 -- element must contain start and stop frequencies in which the device can

@@ -71,6 +71,7 @@ data ProjectsInstancesDatabasesSessionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsInstancesDatabasesSessionsDelete pPidsdName_ =
     , _pidsdName = pPidsdName_
     , _pidsdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidsdXgafv :: Lens' ProjectsInstancesDatabasesSessionsDelete (Maybe Xgafv)

@@ -58,6 +58,7 @@ newtype SubscriptionsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ subscriptionsInsert
     -> SubscriptionsInsert
 subscriptionsInsert pSiPayload_ =
   SubscriptionsInsert' {_siPayload = pSiPayload_}
+
 
 -- | Multipart request metadata.
 siPayload :: Lens' SubscriptionsInsert Subscription

@@ -62,6 +62,7 @@ data DomainAliasesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainAliasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ domainAliasesList
 domainAliasesList pDalCustomer_ =
   DomainAliasesList'
     {_dalCustomer = pDalCustomer_, _dalParentDomainName = Nothing}
+
 
 -- | Immutable ID of the G Suite account.
 dalCustomer :: Lens' DomainAliasesList Text

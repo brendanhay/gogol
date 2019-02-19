@@ -61,6 +61,7 @@ data CountriesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CountriesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ countriesGet
 countriesGet pCgProFileId_ pCgDartId_ =
   CountriesGet'
     {_cgProFileId = _Coerce # pCgProFileId_, _cgDartId = _Coerce # pCgDartId_}
+
 
 -- | User profile ID associated with this request.
 cgProFileId :: Lens' CountriesGet Int64

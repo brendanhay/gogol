@@ -74,6 +74,7 @@ data JobsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ jobsGet pJgJobId_ =
     , _jgOnBehalfOfContentOwner = Nothing
     , _jgCallback = Nothing
     }
+
 
 -- | V1 error format.
 jgXgafv :: Lens' JobsGet (Maybe Xgafv)

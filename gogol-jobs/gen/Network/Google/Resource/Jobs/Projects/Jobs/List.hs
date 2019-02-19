@@ -84,6 +84,7 @@ data ProjectsJobsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsJobsList pPjlParent_ =
     , _pjlPageSize = Nothing
     , _pjlCallback = Nothing
     }
+
 
 -- | Required. The resource name of the project under which the job is
 -- created. The format is \"projects\/{project_id}\", for example,

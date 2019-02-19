@@ -75,6 +75,7 @@ data ProjectsJobTriggersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobTriggersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ projectsJobTriggersGet pPjtgName_ =
     , _pjtgName = pPjtgName_
     , _pjtgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjtgXgafv :: Lens' ProjectsJobTriggersGet (Maybe Xgafv)

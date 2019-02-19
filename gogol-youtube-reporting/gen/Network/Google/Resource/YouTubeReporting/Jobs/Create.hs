@@ -74,6 +74,7 @@ data JobsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ jobsCreate pJcPayload_ =
     , _jcOnBehalfOfContentOwner = Nothing
     , _jcCallback = Nothing
     }
+
 
 -- | V1 error format.
 jcXgafv :: Lens' JobsCreate (Maybe Xgafv)

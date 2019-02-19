@@ -78,6 +78,7 @@ data SinksList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SinksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ sinksList pSlParent_ =
     , _slPageSize = Nothing
     , _slCallback = Nothing
     }
+
 
 -- | Required. The parent resource whose sinks are to be listed:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

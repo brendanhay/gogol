@@ -67,6 +67,7 @@ data ProjectsHistoriesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsHistoriesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ projectsHistoriesGet
 projectsHistoriesGet pPhgHistoryId_ pPhgProjectId_ =
   ProjectsHistoriesGet'
     {_phgHistoryId = pPhgHistoryId_, _phgProjectId = pPhgProjectId_}
+
 
 -- | A History id. Required.
 phgHistoryId :: Lens' ProjectsHistoriesGet Text

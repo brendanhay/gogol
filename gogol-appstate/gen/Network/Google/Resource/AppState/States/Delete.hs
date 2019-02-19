@@ -65,6 +65,7 @@ newtype StatesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ statesDelete
     :: Int32 -- ^ 'sdStateKey'
     -> StatesDelete
 statesDelete pSdStateKey_ = StatesDelete' {_sdStateKey = _Coerce # pSdStateKey_}
+
 
 -- | The key for the data to be retrieved.
 sdStateKey :: Lens' StatesDelete Int32

@@ -68,6 +68,7 @@ data ChromeosDevicesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeosDevicesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ chromeosDevicesGet pCdgCustomerId_ pCdgDeviceId_ =
     , _cdgDeviceId = pCdgDeviceId_
     , _cdgProjection = Nothing
     }
+
 
 -- | Immutable ID of the G Suite account
 cdgCustomerId :: Lens' ChromeosDevicesGet Text

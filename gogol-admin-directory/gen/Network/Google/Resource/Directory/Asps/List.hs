@@ -59,6 +59,7 @@ newtype AspsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AspsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ aspsList
     :: Text -- ^ 'alUserKey'
     -> AspsList
 aspsList pAlUserKey_ = AspsList' {_alUserKey = pAlUserKey_}
+
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.

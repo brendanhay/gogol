@@ -87,6 +87,7 @@ data OperationsWaitExecution =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationsWaitExecution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ operationsWaitExecution pOwePayload_ pOweName_ =
     , _oweName = pOweName_
     , _oweCallback = Nothing
     }
+
 
 -- | V1 error format.
 oweXgafv :: Lens' OperationsWaitExecution (Maybe Xgafv)

@@ -65,6 +65,7 @@ data EnterprisesCompleteSignup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesCompleteSignup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ enterprisesCompleteSignup
 enterprisesCompleteSignup =
   EnterprisesCompleteSignup'
     {_ecsCompletionToken = Nothing, _ecsEnterpriseToken = Nothing}
+
 
 -- | The Completion token initially returned by GenerateSignupUrl.
 ecsCompletionToken :: Lens' EnterprisesCompleteSignup (Maybe Text)

@@ -63,6 +63,7 @@ data MarketplaceDealsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MarketplaceDealsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ marketplaceDealsDelete
 marketplaceDealsDelete pMddPayload_ pMddProposalId_ =
   MarketplaceDealsDelete'
     {_mddPayload = pMddPayload_, _mddProposalId = pMddProposalId_}
+
 
 -- | Multipart request metadata.
 mddPayload :: Lens' MarketplaceDealsDelete DeleteOrderDealsRequest

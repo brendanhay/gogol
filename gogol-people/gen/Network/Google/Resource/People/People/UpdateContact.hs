@@ -92,6 +92,7 @@ data PeopleUpdateContact =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeopleUpdateContact' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ peopleUpdateContact pPucResourceName_ pPucPayload_ =
     , _pucPayload = pPucPayload_
     , _pucCallback = Nothing
     }
+
 
 -- | V1 error format.
 pucXgafv :: Lens' PeopleUpdateContact (Maybe Xgafv)

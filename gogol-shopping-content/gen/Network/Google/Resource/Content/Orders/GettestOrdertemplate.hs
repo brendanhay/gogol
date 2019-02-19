@@ -68,6 +68,7 @@ data OrdersGettestOrdertemplate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersGettestOrdertemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ ordersGettestOrdertemplate pOgoMerchantId_ pOgoTemplateName_ =
     , _ogoTemplateName = pOgoTemplateName_
     , _ogoCountry = Nothing
     }
+
 
 -- | The ID of the account that should manage the order. This cannot be a
 -- multi-client account.

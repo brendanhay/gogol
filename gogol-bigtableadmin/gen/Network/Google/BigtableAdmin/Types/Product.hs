@@ -32,6 +32,7 @@ data SingleClusterRouting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SingleClusterRouting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44,6 +45,7 @@ singleClusterRouting
 singleClusterRouting =
   SingleClusterRouting'
     {_scrAllowTransactionalWrites = Nothing, _scrClusterId = Nothing}
+
 
 -- | Whether or not \`CheckAndMutateRow\` and \`ReadModifyWriteRow\` requests
 -- are allowed by this app profile. It is unsafe to send these requests to
@@ -91,6 +93,7 @@ newtype InstanceLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +104,7 @@ instanceLabels
     -> InstanceLabels
 instanceLabels pIlAddtional_ =
   InstanceLabels' {_ilAddtional = _Coerce # pIlAddtional_}
+
 
 ilAddtional :: Lens' InstanceLabels (HashMap Text Text)
 ilAddtional
@@ -160,6 +164,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -172,6 +177,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -221,6 +227,7 @@ data CreateInstanceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateInstanceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -241,6 +248,7 @@ createInstanceRequest =
     , _cirClusters = Nothing
     , _cirInstance = Nothing
     }
+
 
 -- | The unique name of the project in which to create the new instance.
 -- Values are of the form \`projects\/\`.
@@ -314,6 +322,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -324,6 +333,7 @@ data AuditConfig =
 auditConfig
     :: AuditConfig
 auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -363,11 +373,13 @@ data GenerateConsistencyTokenRequest =
   GenerateConsistencyTokenRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateConsistencyTokenRequest' with the minimum fields required to make a request.
 --
 generateConsistencyTokenRequest
     :: GenerateConsistencyTokenRequest
 generateConsistencyTokenRequest = GenerateConsistencyTokenRequest'
+
 
 instance FromJSON GenerateConsistencyTokenRequest
          where
@@ -388,6 +400,7 @@ newtype ModifyColumnFamiliesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModifyColumnFamiliesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -397,6 +410,7 @@ modifyColumnFamiliesRequest
     :: ModifyColumnFamiliesRequest
 modifyColumnFamiliesRequest =
   ModifyColumnFamiliesRequest' {_mcfrModifications = Nothing}
+
 
 -- | Modifications to be atomically applied to the specified table\'s
 -- families. Entries are applied in order, meaning that earlier
@@ -436,6 +450,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -456,6 +471,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -510,6 +526,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -522,6 +539,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -563,6 +581,7 @@ data CreateClusterRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateClusterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -577,6 +596,7 @@ createClusterRequest
 createClusterRequest =
   CreateClusterRequest'
     {_ccrParent = Nothing, _ccrCluster = Nothing, _ccrClusterId = Nothing}
+
 
 -- | The unique name of the instance in which to create the new cluster.
 -- Values are of the form \`projects\/\/instances\/\`.
@@ -620,11 +640,13 @@ data GetIAMPolicyRequest =
   GetIAMPolicyRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -647,6 +669,7 @@ data Cluster =
     , _cName               :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Cluster' with the minimum fields required to make a request.
 --
@@ -671,6 +694,7 @@ cluster =
     , _cServeNodes = Nothing
     , _cName = Nothing
     }
+
 
 -- | (\`OutputOnly\`) The current state of the cluster.
 cState :: Lens' Cluster (Maybe ClusterType)
@@ -732,6 +756,7 @@ newtype Split =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Split' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -740,6 +765,7 @@ newtype Split =
 split
     :: Split
 split = Split' {_sKey = Nothing}
+
 
 -- | Row key to use as an initial tablet boundary.
 sKey :: Lens' Split (Maybe ByteString)
@@ -765,11 +791,13 @@ data MultiClusterRoutingUseAny =
   MultiClusterRoutingUseAny'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MultiClusterRoutingUseAny' with the minimum fields required to make a request.
 --
 multiClusterRoutingUseAny
     :: MultiClusterRoutingUseAny
 multiClusterRoutingUseAny = MultiClusterRoutingUseAny'
+
 
 instance FromJSON MultiClusterRoutingUseAny where
         parseJSON
@@ -788,6 +816,7 @@ newtype ClusterState =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClusterState' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -796,6 +825,7 @@ newtype ClusterState =
 clusterState
     :: ClusterState
 clusterState = ClusterState' {_csReplicationState = Nothing}
+
 
 -- | (\`OutputOnly\`) The state of replication for the table in this cluster.
 csReplicationState :: Lens' ClusterState (Maybe ClusterStateReplicationState)
@@ -828,6 +858,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -851,6 +882,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -918,11 +950,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -941,6 +975,7 @@ data ListAppProFilesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAppProFilesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -958,6 +993,7 @@ listAppProFilesResponse =
     , _lapfrFailedLocations = Nothing
     , _lapfrAppProFiles = Nothing
     }
+
 
 -- | Set if not all app profiles could be returned in a single response. Pass
 -- this value to \`page_token\` in another request to get the next page of
@@ -1016,6 +1052,7 @@ newtype TableClusterStates =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableClusterStates' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1026,6 +1063,7 @@ tableClusterStates
     -> TableClusterStates
 tableClusterStates pTcsAddtional_ =
   TableClusterStates' {_tcsAddtional = _Coerce # pTcsAddtional_}
+
 
 tcsAddtional :: Lens' TableClusterStates (HashMap Text ClusterState)
 tcsAddtional
@@ -1050,6 +1088,7 @@ newtype TableColumnFamilies =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableColumnFamilies' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1060,6 +1099,7 @@ tableColumnFamilies
     -> TableColumnFamilies
 tableColumnFamilies pTcfAddtional_ =
   TableColumnFamilies' {_tcfAddtional = _Coerce # pTcfAddtional_}
+
 
 tcfAddtional :: Lens' TableColumnFamilies (HashMap Text ColumnFamily)
 tcfAddtional
@@ -1086,6 +1126,7 @@ data CreateTableRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateTableRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1100,6 +1141,7 @@ createTableRequest
 createTableRequest =
   CreateTableRequest'
     {_ctrInitialSplits = Nothing, _ctrTableId = Nothing, _ctrTable = Nothing}
+
 
 -- | The optional list of row keys that will be used to initially split the
 -- table into several tablets (tablets are similar to HBase regions). Given
@@ -1158,6 +1200,7 @@ data CreateClusterMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateClusterMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1178,6 +1221,7 @@ createClusterMetadata =
     , _ccmOriginalRequest = Nothing
     , _ccmFinishTime = Nothing
     }
+
 
 -- | The time at which the original request was received.
 ccmRequestTime :: Lens' CreateClusterMetadata (Maybe UTCTime)
@@ -1239,6 +1283,7 @@ data TableProgress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableProgress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1256,6 +1301,7 @@ tableProgress =
     , _tpEstimatedSizeBytes = Nothing
     , _tpEstimatedCopiedBytes = Nothing
     }
+
 
 tpState :: Lens' TableProgress (Maybe TableProgressState)
 tpState = lens _tpState (\ s a -> s{_tpState = a})
@@ -1302,6 +1348,7 @@ newtype Union =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Union' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1310,6 +1357,7 @@ newtype Union =
 union
     :: Union
 union = Union' {_uRules = Nothing}
+
 
 -- | Delete cells which would be deleted by any element of \`rules\`.
 uRules :: Lens' Union [GcRule]
@@ -1334,6 +1382,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1344,6 +1393,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1373,6 +1423,7 @@ newtype CreateClusterMetadataTables =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateClusterMetadataTables' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1383,6 +1434,7 @@ createClusterMetadataTables
     -> CreateClusterMetadataTables
 createClusterMetadataTables pCcmtAddtional_ =
   CreateClusterMetadataTables' {_ccmtAddtional = _Coerce # pCcmtAddtional_}
+
 
 ccmtAddtional :: Lens' CreateClusterMetadataTables (HashMap Text TableProgress)
 ccmtAddtional
@@ -1406,11 +1458,13 @@ data UpdateAppProFileMetadata =
   UpdateAppProFileMetadata'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateAppProFileMetadata' with the minimum fields required to make a request.
 --
 updateAppProFileMetadata
     :: UpdateAppProFileMetadata
 updateAppProFileMetadata = UpdateAppProFileMetadata'
+
 
 instance FromJSON UpdateAppProFileMetadata where
         parseJSON
@@ -1431,6 +1485,7 @@ data UpdateClusterMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateClusterMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1448,6 +1503,7 @@ updateClusterMetadata =
     , _ucmOriginalRequest = Nothing
     , _ucmFinishTime = Nothing
     }
+
 
 -- | The time at which the original request was received.
 ucmRequestTime :: Lens' UpdateClusterMetadata (Maybe UTCTime)
@@ -1496,6 +1552,7 @@ data SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1507,6 +1564,7 @@ setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
   SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -1549,6 +1607,7 @@ newtype CheckConsistencyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckConsistencyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1558,6 +1617,7 @@ checkConsistencyRequest
     :: CheckConsistencyRequest
 checkConsistencyRequest =
   CheckConsistencyRequest' {_ccrConsistencyToken = Nothing}
+
 
 -- | The token created using GenerateConsistencyToken for the Table.
 ccrConsistencyToken :: Lens' CheckConsistencyRequest (Maybe Text)
@@ -1589,6 +1649,7 @@ data ListTablesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTablesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1600,6 +1661,7 @@ listTablesResponse
     :: ListTablesResponse
 listTablesResponse =
   ListTablesResponse' {_ltrNextPageToken = Nothing, _ltrTables = Nothing}
+
 
 -- | Set if not all tables could be returned in a single response. Pass this
 -- value to \`page_token\` in another request to get the next page of
@@ -1641,6 +1703,7 @@ data PartialUpdateInstanceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartialUpdateInstanceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1653,6 +1716,7 @@ partialUpdateInstanceRequest
 partialUpdateInstanceRequest =
   PartialUpdateInstanceRequest'
     {_puirUpdateMask = Nothing, _puirInstance = Nothing}
+
 
 -- | The subset of Instance fields which should be replaced. Must be
 -- explicitly set.
@@ -1692,6 +1756,7 @@ data GcRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GcRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1712,6 +1777,7 @@ gcRule =
     , _grIntersection = Nothing
     , _grMaxNumVersions = Nothing
     }
+
 
 -- | Delete cells in a column older than the given age. Values must be at
 -- least one millisecond, and will be truncated to microsecond granularity.
@@ -1764,6 +1830,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1773,6 +1840,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1811,6 +1879,7 @@ data AppProFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1834,6 +1903,7 @@ appProFile =
     , _apfName = Nothing
     , _apfDescription = Nothing
     }
+
 
 -- | Use a single-cluster routing policy.
 apfSingleClusterRouting :: Lens' AppProFile (Maybe SingleClusterRouting)
@@ -1904,6 +1974,7 @@ newtype CreateInstanceRequestClusters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateInstanceRequestClusters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1914,6 +1985,7 @@ createInstanceRequestClusters
     -> CreateInstanceRequestClusters
 createInstanceRequestClusters pCircAddtional_ =
   CreateInstanceRequestClusters' {_circAddtional = _Coerce # pCircAddtional_}
+
 
 circAddtional :: Lens' CreateInstanceRequestClusters (HashMap Text Cluster)
 circAddtional
@@ -1941,6 +2013,7 @@ newtype GenerateConsistencyTokenResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GenerateConsistencyTokenResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1950,6 +2023,7 @@ generateConsistencyTokenResponse
     :: GenerateConsistencyTokenResponse
 generateConsistencyTokenResponse =
   GenerateConsistencyTokenResponse' {_gctrConsistencyToken = Nothing}
+
 
 -- | The generated consistency token.
 gctrConsistencyToken :: Lens' GenerateConsistencyTokenResponse (Maybe Text)
@@ -1983,6 +2057,7 @@ data DropRowRangeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DropRowRangeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1995,6 +2070,7 @@ dropRowRangeRequest
 dropRowRangeRequest =
   DropRowRangeRequest'
     {_drrrRowKeyPrefix = Nothing, _drrrDeleteAllDataFromTable = Nothing}
+
 
 -- | Delete all rows that start with this row key prefix. Prefix cannot be
 -- zero length.
@@ -2037,6 +2113,7 @@ data UpdateInstanceMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateInstanceMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2054,6 +2131,7 @@ updateInstanceMetadata =
     , _uimOriginalRequest = Nothing
     , _uimFinishTime = Nothing
     }
+
 
 -- | The time at which the original request was received.
 uimRequestTime :: Lens' UpdateInstanceMetadata (Maybe UTCTime)
@@ -2101,6 +2179,7 @@ newtype Intersection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Intersection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2109,6 +2188,7 @@ newtype Intersection =
 intersection
     :: Intersection
 intersection = Intersection' {_iRules = Nothing}
+
 
 -- | Only delete cells which would be deleted by every element of \`rules\`.
 iRules :: Lens' Intersection [GcRule]
@@ -2134,6 +2214,7 @@ newtype ColumnFamily =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColumnFamily' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2142,6 +2223,7 @@ newtype ColumnFamily =
 columnFamily
     :: ColumnFamily
 columnFamily = ColumnFamily' {_cfGcRule = Nothing}
+
 
 -- | Garbage collection rule specified as a protobuf. Must serialize to at
 -- most 500 bytes. NOTE: Garbage collection executes opportunistically in
@@ -2168,6 +2250,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2177,6 +2260,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -2211,6 +2295,7 @@ data ListClustersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListClustersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2228,6 +2313,7 @@ listClustersResponse =
     , _lcrFailedLocations = Nothing
     , _lcrClusters = Nothing
     }
+
 
 -- | DEPRECATED: This field is unused and ignored.
 lcrNextPageToken :: Lens' ListClustersResponse (Maybe Text)
@@ -2298,6 +2384,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2318,6 +2405,7 @@ policy =
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -2383,6 +2471,7 @@ data CreateInstanceMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateInstanceMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2400,6 +2489,7 @@ createInstanceMetadata =
     , _cimOriginalRequest = Nothing
     , _cimFinishTime = Nothing
     }
+
 
 -- | The time at which the original request was received.
 cimRequestTime :: Lens' CreateInstanceMetadata (Maybe UTCTime)
@@ -2450,6 +2540,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2460,6 +2551,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -2489,6 +2581,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2500,6 +2593,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -2541,6 +2635,7 @@ data ListInstancesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2558,6 +2653,7 @@ listInstancesResponse =
     , _lirFailedLocations = Nothing
     , _lirInstances = Nothing
     }
+
 
 -- | DEPRECATED: This field is unused and ignored.
 lirNextPageToken :: Lens' ListInstancesResponse (Maybe Text)
@@ -2612,6 +2708,7 @@ newtype CheckConsistencyResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckConsistencyResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2620,6 +2717,7 @@ newtype CheckConsistencyResponse =
 checkConsistencyResponse
     :: CheckConsistencyResponse
 checkConsistencyResponse = CheckConsistencyResponse' {_ccrConsistent = Nothing}
+
 
 -- | True only if the token is consistent. A token is consistent if
 -- replication has caught up with the restrictions specified in the
@@ -2652,6 +2750,7 @@ data Modification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Modification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2668,6 +2767,7 @@ modification
 modification =
   Modification'
     {_mDrop = Nothing, _mCreate = Nothing, _mId = Nothing, _mUpdate = Nothing}
+
 
 -- | Drop (delete) the column family with the given ID, or fail if no such
 -- family exists.
@@ -2716,6 +2816,7 @@ data Table =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2736,6 +2837,7 @@ table =
     , _tClusterStates = Nothing
     , _tColumnFamilies = Nothing
     }
+
 
 -- | (\`CreationOnly\`) The granularity (i.e. \`MILLIS\`) at which timestamps
 -- are stored in this table. Timestamps not matching the granularity will
@@ -2802,6 +2904,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2812,6 +2915,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -2838,6 +2942,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2851,6 +2956,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -2915,6 +3021,7 @@ data Instance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2938,6 +3045,7 @@ instance' =
     , _iLabels = Nothing
     , _iType = Nothing
     }
+
 
 -- | (\`OutputOnly\`) The current state of the instance.
 iState :: Lens' Instance (Maybe InstanceState)

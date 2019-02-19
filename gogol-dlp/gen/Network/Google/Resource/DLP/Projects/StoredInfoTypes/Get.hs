@@ -75,6 +75,7 @@ data ProjectsStoredInfoTypesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsStoredInfoTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ projectsStoredInfoTypesGet pPsitgName_ =
     , _psitgName = pPsitgName_
     , _psitgCallback = Nothing
     }
+
 
 -- | V1 error format.
 psitgXgafv :: Lens' ProjectsStoredInfoTypesGet (Maybe Xgafv)

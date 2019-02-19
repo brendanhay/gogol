@@ -67,6 +67,7 @@ data EditsTracksGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsTracksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ editsTracksGet pEtgtTrack_ pEtgtPackageName_ pEtgtEditId_ =
     , _etgtPackageName = pEtgtPackageName_
     , _etgtEditId = pEtgtEditId_
     }
+
 
 -- | The track to read or modify.
 etgtTrack :: Lens' EditsTracksGet Text

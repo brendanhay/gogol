@@ -69,6 +69,7 @@ data ImagesSetLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImagesSetLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ imagesSetLabels pIslsProject_ pIslsPayload_ pIslsResource_ =
     , _islsPayload = pIslsPayload_
     , _islsResource = pIslsResource_
     }
+
 
 -- | Project ID for this request.
 islsProject :: Lens' ImagesSetLabels Text

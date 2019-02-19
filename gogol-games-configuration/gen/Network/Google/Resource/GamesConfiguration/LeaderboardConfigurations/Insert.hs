@@ -62,6 +62,7 @@ data LeaderboardConfigurationsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardConfigurationsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ leaderboardConfigurationsInsert
 leaderboardConfigurationsInsert pLciPayload_ pLciApplicationId_ =
   LeaderboardConfigurationsInsert'
     {_lciPayload = pLciPayload_, _lciApplicationId = pLciApplicationId_}
+
 
 -- | Multipart request metadata.
 lciPayload :: Lens' LeaderboardConfigurationsInsert LeaderboardConfiguration

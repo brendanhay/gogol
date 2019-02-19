@@ -72,6 +72,7 @@ data ObjectAccessControlsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectAccessControlsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ objectAccessControlsGet pOacgBucket_ pOacgObject_ pOacgEntity_ =
     , _oacgEntity = pOacgEntity_
     , _oacgGeneration = Nothing
     }
+
 
 -- | Name of a bucket.
 oacgBucket :: Lens' ObjectAccessControlsGet Text

@@ -96,6 +96,7 @@ data UserProFilesGuardianInvitationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserProFilesGuardianInvitationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +128,7 @@ userProFilesGuardianInvitationsGet pUpfgigStudentId_ pUpfgigInvitationId_ =
     , _upfgigInvitationId = pUpfgigInvitationId_
     , _upfgigCallback = Nothing
     }
+
 
 -- | The ID of the student whose guardian invitation is being requested.
 upfgigStudentId :: Lens' UserProFilesGuardianInvitationsGet Text

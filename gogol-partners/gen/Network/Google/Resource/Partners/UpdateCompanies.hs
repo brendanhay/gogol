@@ -109,6 +109,7 @@ data UpdateCompanies =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateCompanies' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -160,6 +161,7 @@ updateCompanies pUcPayload_ =
     , _ucRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _ucCallback = Nothing
     }
+
 
 -- | V1 error format.
 ucXgafv :: Lens' UpdateCompanies (Maybe Xgafv)

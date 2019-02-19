@@ -65,6 +65,7 @@ data RolesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RolesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ rolesUpdate pRuPayload_ pRuRoleId_ pRuCustomer_ =
     , _ruRoleId = pRuRoleId_
     , _ruCustomer = pRuCustomer_
     }
+
 
 -- | Multipart request metadata.
 ruPayload :: Lens' RolesUpdate Role

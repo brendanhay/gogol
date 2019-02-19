@@ -73,6 +73,7 @@ data ManagedZoneOperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedZoneOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ managedZoneOperationsList pMzolProject_ pMzolManagedZone_ =
     , _mzolMaxResults = Nothing
     , _mzolSortBy = StartTime
     }
+
 
 -- | Identifies the project addressed by this request.
 mzolProject :: Lens' ManagedZoneOperationsList Text

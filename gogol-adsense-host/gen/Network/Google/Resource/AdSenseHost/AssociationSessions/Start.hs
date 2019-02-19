@@ -72,6 +72,7 @@ data AssociationSessionsStart =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AssociationSessionsStart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ associationSessionsStart pAssWebsiteURL_ pAssProductCode_ =
     , _assWebsiteURL = pAssWebsiteURL_
     , _assProductCode = _Coerce # pAssProductCode_
     }
+
 
 -- | The locale of the user\'s hosted website.
 assWebsiteLocale :: Lens' AssociationSessionsStart (Maybe Text)

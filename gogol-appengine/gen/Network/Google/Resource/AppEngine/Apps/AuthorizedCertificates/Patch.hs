@@ -90,6 +90,7 @@ data AppsAuthorizedCertificatesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsAuthorizedCertificatesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +129,7 @@ appsAuthorizedCertificatesPatch pAacpAuthorizedCertificatesId_ pAacpPayload_ pAa
     , _aacpAppsId = pAacpAppsId_
     , _aacpCallback = Nothing
     }
+
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
 aacpAuthorizedCertificatesId :: Lens' AppsAuthorizedCertificatesPatch Text

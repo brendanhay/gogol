@@ -57,6 +57,7 @@ newtype CalendarsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CalendarsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ calendarsGet
     :: Text -- ^ 'cgCalendarId'
     -> CalendarsGet
 calendarsGet pCgCalendarId_ = CalendarsGet' {_cgCalendarId = pCgCalendarId_}
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

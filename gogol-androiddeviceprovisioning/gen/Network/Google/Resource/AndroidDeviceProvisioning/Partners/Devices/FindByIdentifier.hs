@@ -76,6 +76,7 @@ data PartnersDevicesFindByIdentifier =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersDevicesFindByIdentifier' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ partnersDevicesFindByIdentifier pPdfbiPartnerId_ pPdfbiPayload_ =
     , _pdfbiPayload = pPdfbiPayload_
     , _pdfbiCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdfbiXgafv :: Lens' PartnersDevicesFindByIdentifier (Maybe Xgafv)

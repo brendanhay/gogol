@@ -87,6 +87,7 @@ data JobsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ jobsList pJlProjectId_ =
     , _jlAllUsers = Nothing
     , _jlMaxResults = Nothing
     }
+
 
 -- | Max value for job creation time, in milliseconds since the POSIX epoch.
 -- If set, only jobs created before or at this timestamp are returned

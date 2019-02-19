@@ -91,6 +91,7 @@ data ServicesAllocateQuota =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesAllocateQuota' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ servicesAllocateQuota pSaqPayload_ pSaqServiceName_ =
     , _saqServiceName = pSaqServiceName_
     , _saqCallback = Nothing
     }
+
 
 -- | V1 error format.
 saqXgafv :: Lens' ServicesAllocateQuota (Maybe Xgafv)

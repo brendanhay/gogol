@@ -58,6 +58,7 @@ newtype SurveysDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveysDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ surveysDelete
     -> SurveysDelete
 surveysDelete pSdSurveyURLId_ =
   SurveysDelete' {_sdSurveyURLId = pSdSurveyURLId_}
+
 
 -- | External URL ID for the survey.
 sdSurveyURLId :: Lens' SurveysDelete Text

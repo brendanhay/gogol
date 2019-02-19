@@ -77,6 +77,7 @@ data LiveBroadcastsBind =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveBroadcastsBind' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ liveBroadcastsBind pLbbPart_ pLbbId_ =
     , _lbbId = pLbbId_
     , _lbbStreamId = Nothing
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- liveBroadcast resource properties that the API response will include.

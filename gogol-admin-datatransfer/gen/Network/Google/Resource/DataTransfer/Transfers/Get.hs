@@ -58,6 +58,7 @@ newtype TransfersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransfersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ transfersGet
     -> TransfersGet
 transfersGet pTgDataTransferId_ =
   TransfersGet' {_tgDataTransferId = pTgDataTransferId_}
+
 
 -- | ID of the resource to be retrieved. This is returned in the response
 -- from the insert method.

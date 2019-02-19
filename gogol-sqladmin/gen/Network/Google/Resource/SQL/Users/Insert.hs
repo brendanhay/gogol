@@ -65,6 +65,7 @@ data UsersInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ usersInsert pUiProject_ pUiPayload_ pUiInstance_ =
     , _uiPayload = pUiPayload_
     , _uiInstance = pUiInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 uiProject :: Lens' UsersInsert Text

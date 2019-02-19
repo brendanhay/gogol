@@ -63,6 +63,7 @@ newtype PawsVerifyDevice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsVerifyDevice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ pawsVerifyDevice
     :: PawsVerifyDeviceRequest -- ^ 'pvdPayload'
     -> PawsVerifyDevice
 pawsVerifyDevice pPvdPayload_ = PawsVerifyDevice' {_pvdPayload = pPvdPayload_}
+
 
 -- | Multipart request metadata.
 pvdPayload :: Lens' PawsVerifyDevice PawsVerifyDeviceRequest

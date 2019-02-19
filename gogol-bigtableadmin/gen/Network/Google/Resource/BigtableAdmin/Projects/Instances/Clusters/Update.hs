@@ -73,6 +73,7 @@ data ProjectsInstancesClustersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesClustersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ projectsInstancesClustersUpdate pPicuPayload_ pPicuName_ =
     , _picuName = pPicuName_
     , _picuCallback = Nothing
     }
+
 
 -- | V1 error format.
 picuXgafv :: Lens' ProjectsInstancesClustersUpdate (Maybe Xgafv)

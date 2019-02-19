@@ -60,6 +60,7 @@ newtype PretargetingConfigList' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PretargetingConfigList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ pretargetingConfigList'
     -> PretargetingConfigList'
 pretargetingConfigList' pPclAccountId_ =
   PretargetingConfigList'' {_pclAccountId = _Coerce # pPclAccountId_}
+
 
 -- | The account id to get the pretargeting configs for.
 pclAccountId :: Lens' PretargetingConfigList' Int64

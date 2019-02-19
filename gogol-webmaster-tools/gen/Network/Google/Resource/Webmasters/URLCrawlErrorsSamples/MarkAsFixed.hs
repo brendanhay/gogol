@@ -72,6 +72,7 @@ data URLCrawlErrorsSamplesMarkAsFixed =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLCrawlErrorsSamplesMarkAsFixed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ urlCrawlErrorsSamplesMarkAsFixed pUcesmafPlatform_ pUcesmafCategory_ pUcesmafSit
     , _ucesmafSiteURL = pUcesmafSiteURL_
     , _ucesmafURL = pUcesmafURL_
     }
+
 
 -- | The user agent type (platform) that made the request. For example: web
 ucesmafPlatform :: Lens' URLCrawlErrorsSamplesMarkAsFixed URLCrawlErrorsSamplesMarkAsFixedPlatform

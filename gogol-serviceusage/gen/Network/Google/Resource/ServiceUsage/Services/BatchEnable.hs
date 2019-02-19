@@ -79,6 +79,7 @@ data ServicesBatchEnable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesBatchEnable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ servicesBatchEnable pSbeParent_ pSbePayload_ =
     , _sbePayload = pSbePayload_
     , _sbeCallback = Nothing
     }
+
 
 -- | Parent to enable services on. An example name would be:
 -- \`projects\/123\` where \`123\` is the project number (not project ID).

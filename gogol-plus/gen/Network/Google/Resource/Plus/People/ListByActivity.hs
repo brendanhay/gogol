@@ -70,6 +70,7 @@ data PeopleListByActivity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeopleListByActivity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ peopleListByActivity pPlbaActivityId_ pPlbaCollection_ =
     , _plbaPageToken = Nothing
     , _plbaMaxResults = 20
     }
+
 
 -- | The ID of the activity to get the list of people for.
 plbaActivityId :: Lens' PeopleListByActivity Text

@@ -62,6 +62,7 @@ data LicensesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicensesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ licensesGet
     -> LicensesGet
 licensesGet pLgProject_ pLgLicense_ =
   LicensesGet' {_lgProject = pLgProject_, _lgLicense = pLgLicense_}
+
 
 -- | Project ID for this request.
 lgProject :: Lens' LicensesGet Text

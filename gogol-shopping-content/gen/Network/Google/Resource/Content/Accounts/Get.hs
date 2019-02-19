@@ -60,6 +60,7 @@ data AccountsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ accountsGet pAgMerchantId_ pAgAccountId_ =
     { _agMerchantId = _Coerce # pAgMerchantId_
     , _agAccountId = _Coerce # pAgAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

@@ -132,6 +132,7 @@ data PlacementGroupsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -201,6 +202,7 @@ placementGroupsList pPglProFileId_ =
     , _pglMaxResults = 800
     , _pglMinEndDate = Nothing
     }
+
 
 -- | Select only placement groups that are associated with these placement
 -- strategies.

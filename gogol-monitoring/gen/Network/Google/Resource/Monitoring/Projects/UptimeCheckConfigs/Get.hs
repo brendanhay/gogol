@@ -71,6 +71,7 @@ data ProjectsUptimeCheckConfigsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsUptimeCheckConfigsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsUptimeCheckConfigsGet pPuccgName_ =
     , _puccgName = pPuccgName_
     , _puccgCallback = Nothing
     }
+
 
 -- | V1 error format.
 puccgXgafv :: Lens' ProjectsUptimeCheckConfigsGet (Maybe Xgafv)

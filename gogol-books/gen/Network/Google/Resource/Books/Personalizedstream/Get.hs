@@ -67,6 +67,7 @@ data PersonalizedstreamGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonalizedstreamGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ personalizedstreamGet =
     , _pgMaxAllowedMaturityRating = Nothing
     , _pgSource = Nothing
     }
+
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating recommendations.

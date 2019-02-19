@@ -72,6 +72,7 @@ data TasksMove =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TasksMove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ tasksMove pTmTaskList_ pTmTask_ =
     , _tmTask = pTmTask_
     , _tmPrevious = Nothing
     }
+
 
 -- | New parent task identifier. If the task is moved to the top level, this
 -- parameter is omitted. Optional.

@@ -57,6 +57,7 @@ newtype AccountsContainersWorkspacesTriggersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesTriggersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ accountsContainersWorkspacesTriggersGet
     -> AccountsContainersWorkspacesTriggersGet
 accountsContainersWorkspacesTriggersGet pAccPath_ =
   AccountsContainersWorkspacesTriggersGet' {_accPath = pAccPath_}
+
 
 -- | GTM Trigger\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/triggers\/{trigger_id}

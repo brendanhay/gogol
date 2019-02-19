@@ -82,6 +82,7 @@ data ProjectsZonesOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ projectsZonesOperationsGet pPzogZone_ pPzogProjectId_ pPzogOperationId_ =
     , _pzogOperationId = pPzogOperationId_
     , _pzogCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzogXgafv :: Lens' ProjectsZonesOperationsGet (Maybe Xgafv)

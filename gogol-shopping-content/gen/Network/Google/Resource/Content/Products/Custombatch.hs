@@ -59,6 +59,7 @@ newtype ProductsCustombatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ productsCustombatch
     -> ProductsCustombatch
 productsCustombatch pPcPayload_ =
   ProductsCustombatch' {_pcPayload = pPcPayload_}
+
 
 -- | Multipart request metadata.
 pcPayload :: Lens' ProductsCustombatch ProductsCustomBatchRequest

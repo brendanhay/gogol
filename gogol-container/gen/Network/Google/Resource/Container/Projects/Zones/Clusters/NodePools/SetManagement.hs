@@ -90,6 +90,7 @@ data ProjectsZonesClustersNodePoolsSetManagement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsSetManagement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -133,6 +134,7 @@ projectsZonesClustersNodePoolsSetManagement pPzcnpsmZone_ pPzcnpsmPayload_ pPzcn
     , _pzcnpsmProjectId = pPzcnpsmProjectId_
     , _pzcnpsmCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcnpsmXgafv :: Lens' ProjectsZonesClustersNodePoolsSetManagement (Maybe Xgafv)

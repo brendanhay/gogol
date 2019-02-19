@@ -65,6 +65,7 @@ data AdvertisersPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertisersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ advertisersPatch pApProFileId_ pApPayload_ pApId_ =
     , _apPayload = pApPayload_
     , _apId = _Coerce # pApId_
     }
+
 
 -- | User profile ID associated with this request.
 apProFileId :: Lens' AdvertisersPatch Int64

@@ -90,6 +90,7 @@ data EventsInstances =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -133,6 +134,7 @@ eventsInstances pECalendarId_ pEEventId_ =
     , _eTimeMax = Nothing
     , _eEventId = pEEventId_
     }
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

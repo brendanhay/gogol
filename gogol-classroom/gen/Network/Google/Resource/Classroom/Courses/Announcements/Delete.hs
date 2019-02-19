@@ -91,6 +91,7 @@ data CoursesAnnouncementsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesAnnouncementsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ coursesAnnouncementsDelete pCCourseId_ pCId_ =
     , _cId = pCId_
     , _cCallback = Nothing
     }
+
 
 -- | V1 error format.
 cXgafv :: Lens' CoursesAnnouncementsDelete (Maybe Xgafv)

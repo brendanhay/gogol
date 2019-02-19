@@ -87,6 +87,7 @@ data ProjectsZonesClustersSetMasterAuth =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersSetMasterAuth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ projectsZonesClustersSetMasterAuth pPzcsmaZone_ pPzcsmaPayload_ pPzcsmaClusterId
     , _pzcsmaProjectId = pPzcsmaProjectId_
     , _pzcsmaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcsmaXgafv :: Lens' ProjectsZonesClustersSetMasterAuth (Maybe Xgafv)

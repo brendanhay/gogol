@@ -73,6 +73,7 @@ data ApplicationDetailServiceGetAPKDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationDetailServiceGetAPKDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ applicationDetailServiceGetAPKDetails pAdsgapkdPayload_ =
     , _adsgapkdPayload = pAdsgapkdPayload_
     , _adsgapkdCallback = Nothing
     }
+
 
 -- | V1 error format.
 adsgapkdXgafv :: Lens' ApplicationDetailServiceGetAPKDetails (Maybe Xgafv)

@@ -80,6 +80,7 @@ data SitesVersionsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesVersionsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ sitesVersionsCreate pSvcParent_ pSvcPayload_ =
     , _svcPayload = pSvcPayload_
     , _svcCallback = Nothing
     }
+
 
 -- | The self-reported size of the version. This value is used for a
 -- pre-emptive quota check for legacy version uploads.

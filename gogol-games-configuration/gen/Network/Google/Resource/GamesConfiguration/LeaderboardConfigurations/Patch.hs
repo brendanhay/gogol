@@ -63,6 +63,7 @@ data LeaderboardConfigurationsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardConfigurationsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ leaderboardConfigurationsPatch
 leaderboardConfigurationsPatch pLcpPayload_ pLcpLeaderboardId_ =
   LeaderboardConfigurationsPatch'
     {_lcpPayload = pLcpPayload_, _lcpLeaderboardId = pLcpLeaderboardId_}
+
 
 -- | Multipart request metadata.
 lcpPayload :: Lens' LeaderboardConfigurationsPatch LeaderboardConfiguration

@@ -59,6 +59,7 @@ newtype PosCustombatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ posCustombatch
     :: PosCustomBatchRequest -- ^ 'pPayload'
     -> PosCustombatch
 posCustombatch pPPayload_ = PosCustombatch' {_pPayload = pPPayload_}
+
 
 -- | Multipart request metadata.
 pPayload :: Lens' PosCustombatch PosCustomBatchRequest

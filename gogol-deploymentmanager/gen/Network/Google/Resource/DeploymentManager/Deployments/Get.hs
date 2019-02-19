@@ -62,6 +62,7 @@ data DeploymentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ deploymentsGet
     -> DeploymentsGet
 deploymentsGet pDgProject_ pDgDeployment_ =
   DeploymentsGet' {_dgProject = pDgProject_, _dgDeployment = pDgDeployment_}
+
 
 -- | The project ID for this request.
 dgProject :: Lens' DeploymentsGet Text

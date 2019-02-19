@@ -79,6 +79,7 @@ data ProjectsAgentSessionsEntityTypesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentSessionsEntityTypesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ projectsAgentSessionsEntityTypesCreate pPaSetcParent_ pPaSetcPayload_ =
     , _paSetcPayload = pPaSetcPayload_
     , _paSetcCallback = Nothing
     }
+
 
 -- | Required. The session to create a session entity type for. Format:
 -- \`projects\/\/agent\/sessions\/\`.

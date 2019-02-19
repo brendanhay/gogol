@@ -61,6 +61,7 @@ data ColumnInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColumnInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ columnInsert
     -> ColumnInsert
 columnInsert pCiPayload_ pCiTableId_ =
   ColumnInsert' {_ciPayload = pCiPayload_, _ciTableId = pCiTableId_}
+
 
 -- | Multipart request metadata.
 ciPayload :: Lens' ColumnInsert Column

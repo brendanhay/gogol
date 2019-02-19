@@ -30,6 +30,7 @@ newtype LintPolicyResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LintPolicyResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38,6 +39,7 @@ newtype LintPolicyResponse =
 lintPolicyResponse
     :: LintPolicyResponse
 lintPolicyResponse = LintPolicyResponse' {_lprLintResults = Nothing}
+
 
 -- | List of lint results sorted by a composite key, descending order of
 -- severity and ascending order of binding_ordinal. There is no certain
@@ -74,6 +76,7 @@ newtype UndeleteRoleRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UndeleteRoleRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +85,7 @@ newtype UndeleteRoleRequest =
 undeleteRoleRequest
     :: UndeleteRoleRequest
 undeleteRoleRequest = UndeleteRoleRequest' {_urrEtag = Nothing}
+
 
 -- | Used to perform a consistent read-modify-write.
 urrEtag :: Lens' UndeleteRoleRequest (Maybe ByteString)
@@ -124,6 +128,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -134,6 +139,7 @@ data AuditConfig =
 auditConfig
     :: AuditConfig
 auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -179,6 +185,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -199,6 +206,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -252,6 +260,7 @@ newtype AuditableService =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditableService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -260,6 +269,7 @@ newtype AuditableService =
 auditableService
     :: AuditableService
 auditableService = AuditableService' {_asName = Nothing}
+
 
 -- | Public name of the service. For example, the service name for Cloud IAM
 -- is \'iam.googleapis.com\'.
@@ -284,6 +294,7 @@ newtype QueryAuditableServicesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryAuditableServicesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -293,6 +304,7 @@ queryAuditableServicesRequest
     :: QueryAuditableServicesRequest
 queryAuditableServicesRequest =
   QueryAuditableServicesRequest' {_qasrFullResourceName = Nothing}
+
 
 -- | Required. The full resource name to query from the list of auditable
 -- services. The name follows the Google Cloud Platform resource format.
@@ -327,11 +339,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -349,6 +363,7 @@ data QueryTestablePermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryTestablePermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -361,6 +376,7 @@ queryTestablePermissionsResponse
 queryTestablePermissionsResponse =
   QueryTestablePermissionsResponse'
     {_qtprNextPageToken = Nothing, _qtprPermissions = Nothing}
+
 
 -- | To retrieve the next page of results, set
 -- \`QueryTestableRolesRequest.page_token\` to this value.
@@ -405,6 +421,7 @@ newtype AuditData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -413,6 +430,7 @@ newtype AuditData =
 auditData
     :: AuditData
 auditData = AuditData' {_adPolicyDelta = Nothing}
+
 
 -- | Policy delta between the original policy and the newly set policy.
 adPolicyDelta :: Lens' AuditData (Maybe PolicyDelta)
@@ -439,6 +457,7 @@ newtype QueryAuditableServicesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryAuditableServicesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -448,6 +467,7 @@ queryAuditableServicesResponse
     :: QueryAuditableServicesResponse
 queryAuditableServicesResponse =
   QueryAuditableServicesResponse' {_qasrServices = Nothing}
+
 
 -- | The auditable services for a resource.
 qasrServices :: Lens' QueryAuditableServicesResponse [AuditableService]
@@ -495,6 +515,7 @@ data ServiceAccountKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccountKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -524,6 +545,7 @@ serviceAccountKey =
     , _sakValidBeforeTime = Nothing
     , _sakKeyAlgorithm = Nothing
     }
+
 
 -- | The key can be used after this timestamp.
 sakValidAfterTime :: Lens' ServiceAccountKey (Maybe UTCTime)
@@ -619,6 +641,7 @@ data LintResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LintResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -648,6 +671,7 @@ lintResult =
     , _lrFieldName = Nothing
     , _lrLevel = Nothing
     }
+
 
 -- | The validation unit name, for instance
 -- “lintValidationUnits\/ConditionComplexityCheck”.
@@ -740,6 +764,7 @@ data CreateServiceAccountKeyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateServiceAccountKeyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -752,6 +777,7 @@ createServiceAccountKeyRequest
 createServiceAccountKeyRequest =
   CreateServiceAccountKeyRequest'
     {_csakrPrivateKeyType = Nothing, _csakrKeyAlgorithm = Nothing}
+
 
 -- | The output format of the private key. The default value is
 -- \`TYPE_GOOGLE_CREDENTIALS_FILE\`, which is the Google Credentials File
@@ -793,6 +819,7 @@ data SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -804,6 +831,7 @@ setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
   SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -846,6 +874,7 @@ data SignJwtResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignJwtResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -857,6 +886,7 @@ signJwtResponse
     :: SignJwtResponse
 signJwtResponse =
   SignJwtResponse' {_sjrKeyId = Nothing, _sjrSignedJwt = Nothing}
+
 
 -- | The id of the key used to sign the JWT.
 sjrKeyId :: Lens' SignJwtResponse (Maybe Text)
@@ -894,6 +924,7 @@ data BindingDelta =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BindingDelta' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -914,6 +945,7 @@ bindingDelta =
     , _bdMember = Nothing
     , _bdCondition = Nothing
     }
+
 
 -- | The action that was performed on a Binding. Required
 bdAction :: Lens' BindingDelta (Maybe BindingDeltaAction)
@@ -964,6 +996,7 @@ newtype LintPolicyRequestContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LintPolicyRequestContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -974,6 +1007,7 @@ lintPolicyRequestContext
     -> LintPolicyRequestContext
 lintPolicyRequestContext pLprcAddtional_ =
   LintPolicyRequestContext' {_lprcAddtional = _Coerce # pLprcAddtional_}
+
 
 -- | Properties of the object.
 lprcAddtional :: Lens' LintPolicyRequestContext (HashMap Text JSONValue)
@@ -1000,6 +1034,7 @@ newtype SignBlobRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignBlobRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1008,6 +1043,7 @@ newtype SignBlobRequest =
 signBlobRequest
     :: SignBlobRequest
 signBlobRequest = SignBlobRequest' {_sbrBytesToSign = Nothing}
+
 
 -- | The bytes to sign.
 sbrBytesToSign :: Lens' SignBlobRequest (Maybe ByteString)
@@ -1035,6 +1071,7 @@ newtype ListServiceAccountKeysResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListServiceAccountKeysResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1044,6 +1081,7 @@ listServiceAccountKeysResponse
     :: ListServiceAccountKeysResponse
 listServiceAccountKeysResponse =
   ListServiceAccountKeysResponse' {_lsakrKeys = Nothing}
+
 
 -- | The public keys for the service account.
 lsakrKeys :: Lens' ListServiceAccountKeysResponse [ServiceAccountKey]
@@ -1079,6 +1117,7 @@ data Role =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Role' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1108,6 +1147,7 @@ role' =
     , _rTitle = Nothing
     , _rDescription = Nothing
     }
+
 
 -- | The current launch stage of the role. If the \`ALPHA\` launch stage has
 -- been selected for a role, the \`stage\` field will not be included in
@@ -1203,6 +1243,7 @@ data ServiceAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1232,6 +1273,7 @@ serviceAccount =
     , _saProjectId = Nothing
     , _saOAuth2ClientId = Nothing
     }
+
 
 -- | \'OutputOnly The email address of the service account.
 saEmail :: Lens' ServiceAccount (Maybe Text)
@@ -1313,6 +1355,7 @@ data QueryTestablePermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryTestablePermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1330,6 +1373,7 @@ queryTestablePermissionsRequest =
     , _qtprPageToken = Nothing
     , _qtprPageSize = Nothing
     }
+
 
 -- | Required. The full resource name to query from the list of testable
 -- permissions. The name follows the Google Cloud Platform resource format.
@@ -1380,6 +1424,7 @@ data QueryGrantableRolesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryGrantableRolesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1392,6 +1437,7 @@ queryGrantableRolesResponse
 queryGrantableRolesResponse =
   QueryGrantableRolesResponse'
     {_qgrrRoles = Nothing, _qgrrNextPageToken = Nothing}
+
 
 -- | The list of matching roles.
 qgrrRoles :: Lens' QueryGrantableRolesResponse [Role]
@@ -1431,6 +1477,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1440,6 +1487,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1473,6 +1521,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1482,6 +1531,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1533,6 +1583,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1553,6 +1604,7 @@ policy =
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -1616,6 +1668,7 @@ newtype PolicyDelta =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PolicyDelta' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1624,6 +1677,7 @@ newtype PolicyDelta =
 policyDelta
     :: PolicyDelta
 policyDelta = PolicyDelta' {_pdBindingDeltas = Nothing}
+
 
 -- | The delta for Bindings between two policies.
 pdBindingDeltas :: Lens' PolicyDelta [BindingDelta]
@@ -1657,6 +1711,7 @@ data QueryGrantableRolesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryGrantableRolesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1677,6 +1732,7 @@ queryGrantableRolesRequest =
     , _qgrrPageToken = Nothing
     , _qgrrPageSize = Nothing
     }
+
 
 -- | Required. The full resource name to query from the list of grantable
 -- roles. The name follows the Google Cloud Platform resource format. For
@@ -1730,6 +1786,7 @@ newtype SignJwtRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignJwtRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1738,6 +1795,7 @@ newtype SignJwtRequest =
 signJwtRequest
     :: SignJwtRequest
 signJwtRequest = SignJwtRequest' {_sjrPayload = Nothing}
+
 
 -- | The JWT payload to sign, a JSON JWT Claim set.
 sjrPayload :: Lens' SignJwtRequest (Maybe Text)
@@ -1767,6 +1825,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1778,6 +1837,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -1823,6 +1883,7 @@ data Permission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1852,6 +1913,7 @@ permission =
     , _pAPIdisabled = Nothing
     , _pDescription = Nothing
     }
+
 
 -- | The current launch stage of the permission.
 pStage :: Lens' Permission (Maybe PermissionStage)
@@ -1922,6 +1984,7 @@ data SignBlobResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignBlobResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1933,6 +1996,7 @@ signBlobResponse
     :: SignBlobResponse
 signBlobResponse =
   SignBlobResponse' {_sbrSignature = Nothing, _sbrKeyId = Nothing}
+
 
 -- | The signed blob.
 sbrSignature :: Lens' SignBlobResponse (Maybe ByteString)
@@ -1968,6 +2032,7 @@ data ListServiceAccountsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListServiceAccountsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1980,6 +2045,7 @@ listServiceAccountsResponse
 listServiceAccountsResponse =
   ListServiceAccountsResponse'
     {_lsarNextPageToken = Nothing, _lsarAccounts = Nothing}
+
 
 -- | To retrieve the next page of results, set
 -- ListServiceAccountsRequest.page_token to this value.
@@ -2024,6 +2090,7 @@ data LintPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LintPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2047,6 +2114,7 @@ lintPolicyRequest =
     , _lprCondition = Nothing
     , _lprBinding = Nothing
     }
+
 
 -- | \`context\` contains additional *permission-controlled* data that any
 -- lint unit may depend on, in form of \`{key: value}\` pairs. Currently,
@@ -2117,6 +2185,7 @@ data ListRolesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListRolesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2128,6 +2197,7 @@ listRolesResponse
     :: ListRolesResponse
 listRolesResponse =
   ListRolesResponse' {_lrrRoles = Nothing, _lrrNextPageToken = Nothing}
+
 
 -- | The Roles defined on this resource.
 lrrRoles :: Lens' ListRolesResponse [Role]
@@ -2168,6 +2238,7 @@ data CreateServiceAccountRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateServiceAccountRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2180,6 +2251,7 @@ createServiceAccountRequest
 createServiceAccountRequest =
   CreateServiceAccountRequest'
     {_csarServiceAccount = Nothing, _csarAccountId = Nothing}
+
 
 -- | The ServiceAccount resource to create. Currently, only the following
 -- values are user assignable: \`display_name\` .
@@ -2221,6 +2293,7 @@ data CreateRoleRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateRoleRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2232,6 +2305,7 @@ createRoleRequest
     :: CreateRoleRequest
 createRoleRequest =
   CreateRoleRequest' {_crrRoleId = Nothing, _crrRole = Nothing}
+
 
 -- | The role id to use for this role.
 crrRoleId :: Lens' CreateRoleRequest (Maybe Text)
@@ -2267,6 +2341,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2280,6 +2355,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

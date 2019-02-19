@@ -107,6 +107,7 @@ data ProjectsGroupStatsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGroupStatsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -167,6 +168,7 @@ projectsGroupStatsList pPgslProjectName_ =
     , _pgslServiceFilterVersion = Nothing
     , _pgslTimeRangePeriod = Nothing
     }
+
 
 -- | V1 error format.
 pgslXgafv :: Lens' ProjectsGroupStatsList (Maybe Xgafv)

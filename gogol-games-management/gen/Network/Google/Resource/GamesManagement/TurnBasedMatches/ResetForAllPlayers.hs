@@ -57,11 +57,13 @@ data TurnBasedMatchesResetForAllPlayers =
   TurnBasedMatchesResetForAllPlayers'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchesResetForAllPlayers' with the minimum fields required to make a request.
 --
 turnBasedMatchesResetForAllPlayers
     :: TurnBasedMatchesResetForAllPlayers
 turnBasedMatchesResetForAllPlayers = TurnBasedMatchesResetForAllPlayers'
+
 
 instance GoogleRequest
            TurnBasedMatchesResetForAllPlayers

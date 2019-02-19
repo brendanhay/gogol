@@ -61,6 +61,7 @@ data SubscriptionsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ subscriptionsInsert
     -> SubscriptionsInsert
 subscriptionsInsert pSiPart_ pSiPayload_ =
   SubscriptionsInsert' {_siPart = pSiPart_, _siPayload = pSiPayload_}
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

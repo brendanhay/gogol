@@ -67,6 +67,7 @@ data RoutersGetRouterStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoutersGetRouterStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ routersGetRouterStatus pRgrsProject_ pRgrsRouter_ pRgrsRegion_ =
     , _rgrsRouter = pRgrsRouter_
     , _rgrsRegion = pRgrsRegion_
     }
+
 
 -- | Project ID for this request.
 rgrsProject :: Lens' RoutersGetRouterStatus Text

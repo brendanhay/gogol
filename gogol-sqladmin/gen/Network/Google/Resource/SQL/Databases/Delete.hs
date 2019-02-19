@@ -65,6 +65,7 @@ data DatabasesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatabasesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ databasesDelete pDdProject_ pDdDatabase_ pDdInstance_ =
     , _ddDatabase = pDdDatabase_
     , _ddInstance = pDdInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 ddProject :: Lens' DatabasesDelete Text

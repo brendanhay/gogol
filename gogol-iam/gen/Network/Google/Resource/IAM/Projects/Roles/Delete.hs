@@ -85,6 +85,7 @@ data ProjectsRolesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRolesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsRolesDelete pPrdName_ =
     , _prdName = pPrdName_
     , _prdCallback = Nothing
     }
+
 
 -- | V1 error format.
 prdXgafv :: Lens' ProjectsRolesDelete (Maybe Xgafv)

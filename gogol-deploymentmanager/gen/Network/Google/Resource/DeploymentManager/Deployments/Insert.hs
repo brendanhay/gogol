@@ -72,6 +72,7 @@ data DeploymentsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ deploymentsInsert pDiProject_ pDiPayload_ =
     , _diPayload = pDiPayload_
     , _diPreview = Nothing
     }
+
 
 -- | Sets the policy to use for creating new resources.
 diCreatePolicy :: Lens' DeploymentsInsert DeploymentsInsertCreatePolicy

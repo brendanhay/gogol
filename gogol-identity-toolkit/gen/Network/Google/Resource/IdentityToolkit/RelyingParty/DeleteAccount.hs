@@ -60,6 +60,7 @@ newtype RelyingPartyDeleteAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartyDeleteAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ relyingPartyDeleteAccount
     -> RelyingPartyDeleteAccount
 relyingPartyDeleteAccount pRPayload_ =
   RelyingPartyDeleteAccount' {_rPayload = pRPayload_}
+
 
 -- | Multipart request metadata.
 rPayload :: Lens' RelyingPartyDeleteAccount IdentitytoolkitRelyingPartyDeleteAccountRequest

@@ -59,6 +59,7 @@ newtype TransfersInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransfersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ transfersInsert
     :: DataTransfer -- ^ 'tiPayload'
     -> TransfersInsert
 transfersInsert pTiPayload_ = TransfersInsert' {_tiPayload = pTiPayload_}
+
 
 -- | Multipart request metadata.
 tiPayload :: Lens' TransfersInsert DataTransfer

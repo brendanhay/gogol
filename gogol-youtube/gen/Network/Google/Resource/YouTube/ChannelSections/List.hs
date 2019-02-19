@@ -73,6 +73,7 @@ data ChannelSectionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSectionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ channelSectionsList pCslPart_ =
     , _cslOnBehalfOfContentOwner = Nothing
     , _cslId = Nothing
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- channelSection resource properties that the API response will include.

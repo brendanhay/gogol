@@ -82,6 +82,7 @@ data PartnersDevicesFindByOwner =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersDevicesFindByOwner' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ partnersDevicesFindByOwner pPdfboPartnerId_ pPdfboPayload_ =
     , _pdfboPayload = pPdfboPayload_
     , _pdfboCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdfboXgafv :: Lens' PartnersDevicesFindByOwner (Maybe Xgafv)

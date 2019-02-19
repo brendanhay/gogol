@@ -68,6 +68,7 @@ data ManagementWebPropertyAdWordsLinksInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ managementWebPropertyAdWordsLinksInsert pMwpawliWebPropertyId_ pMwpawliPayload_ 
     , _mwpawliPayload = pMwpawliPayload_
     , _mwpawliAccountId = pMwpawliAccountId_
     }
+
 
 -- | Web property ID to create the link for.
 mwpawliWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksInsert Text

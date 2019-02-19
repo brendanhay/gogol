@@ -78,6 +78,7 @@ data ProjectsLocationsDataSetsHl7V2StoresPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsHl7V2StoresPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsLocationsDataSetsHl7V2StoresPatch pPldshvspPayload_ pPldshvspName_ =
     , _pldshvspName = pPldshvspName_
     , _pldshvspCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldshvspXgafv :: Lens' ProjectsLocationsDataSetsHl7V2StoresPatch (Maybe Xgafv)

@@ -70,6 +70,7 @@ data SitesDomainsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesDomainsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ sitesDomainsGet pSdgName_ =
     , _sdgName = pSdgName_
     , _sdgCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdgXgafv :: Lens' SitesDomainsGet (Maybe Xgafv)

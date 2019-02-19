@@ -84,6 +84,7 @@ data ServicesTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ servicesTestIAMPermissions pStipPayload_ pStipResource_ =
     , _stipResource = pStipResource_
     , _stipCallback = Nothing
     }
+
 
 -- | V1 error format.
 stipXgafv :: Lens' ServicesTestIAMPermissions (Maybe Xgafv)

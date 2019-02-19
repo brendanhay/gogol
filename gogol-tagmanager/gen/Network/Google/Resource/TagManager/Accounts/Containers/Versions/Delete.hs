@@ -56,6 +56,7 @@ newtype AccountsContainersVersionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersVersionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ accountsContainersVersionsDelete
     -> AccountsContainersVersionsDelete
 accountsContainersVersionsDelete pAcvdPath_ =
   AccountsContainersVersionsDelete' {_acvdPath = pAcvdPath_}
+
 
 -- | GTM ContainerVersion\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}

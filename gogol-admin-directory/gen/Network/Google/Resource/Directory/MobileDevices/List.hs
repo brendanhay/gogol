@@ -80,6 +80,7 @@ data MobileDevicesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileDevicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ mobileDevicesList pMdlCustomerId_ =
     , _mdlPageToken = Nothing
     , _mdlMaxResults = Nothing
     }
+
 
 -- | Column to use for sorting results
 mdlOrderBy :: Lens' MobileDevicesList (Maybe MobileDevicesListOrderBy)

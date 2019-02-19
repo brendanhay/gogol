@@ -70,6 +70,7 @@ data UsersSettingsDelegatesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsDelegatesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ usersSettingsDelegatesDelete
 usersSettingsDelegatesDelete pUsddDelegateEmail_ =
   UsersSettingsDelegatesDelete'
     {_usddUserId = "me", _usddDelegateEmail = pUsddDelegateEmail_}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

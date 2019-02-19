@@ -76,6 +76,7 @@ data PermissionsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PermissionsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ permissionsCreate pPcPayload_ pPcFileId_ =
     , _pcFileId = pPcFileId_
     , _pcSupportsTeamDrives = False
     }
+
 
 -- | Whether to send a notification email when sharing to users or groups.
 -- This defaults to true for users and groups, and is not allowed for other

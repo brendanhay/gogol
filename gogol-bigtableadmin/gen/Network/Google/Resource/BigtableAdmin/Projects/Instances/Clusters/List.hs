@@ -75,6 +75,7 @@ data ProjectsInstancesClustersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesClustersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsInstancesClustersList pPiclParent_ =
     , _piclPageToken = Nothing
     , _piclCallback = Nothing
     }
+
 
 -- | The unique name of the instance for which a list of clusters is
 -- requested. Values are of the form \`projects\/\/instances\/\`. Use \` =

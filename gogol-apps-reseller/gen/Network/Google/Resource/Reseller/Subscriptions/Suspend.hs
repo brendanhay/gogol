@@ -63,6 +63,7 @@ data SubscriptionsSuspend =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsSuspend' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ subscriptionsSuspend
 subscriptionsSuspend pSsCustomerId_ pSsSubscriptionId_ =
   SubscriptionsSuspend'
     {_ssCustomerId = pSsCustomerId_, _ssSubscriptionId = pSsSubscriptionId_}
+
 
 -- | Either the customer\'s primary domain name or the customer\'s unique
 -- identifier. If using the domain name, we do not recommend using a

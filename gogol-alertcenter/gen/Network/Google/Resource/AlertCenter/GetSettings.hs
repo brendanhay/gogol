@@ -71,6 +71,7 @@ data GetSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ getSettings =
     , _gsCustomerId = Nothing
     , _gsCallback = Nothing
     }
+
 
 -- | V1 error format.
 gsXgafv :: Lens' GetSettings (Maybe Xgafv)

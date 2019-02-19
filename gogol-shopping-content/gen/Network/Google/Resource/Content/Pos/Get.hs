@@ -64,6 +64,7 @@ data PosGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ posGet pPMerchantId_ pPStoreCode_ pPTargetMerchantId_ =
     , _pStoreCode = pPStoreCode_
     , _pTargetMerchantId = _Coerce # pPTargetMerchantId_
     }
+
 
 -- | The ID of the POS or inventory data provider.
 pMerchantId :: Lens' PosGet Word64

@@ -75,6 +75,7 @@ data URLCrawlErrorscountsQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLCrawlErrorscountsQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ urlCrawlErrorscountsQuery pUceqSiteURL_ =
     , _uceqSiteURL = pUceqSiteURL_
     , _uceqLatestCountsOnly = True
     }
+
 
 -- | The user agent type (platform) that made the request. For example: web.
 -- If not specified, returns results for all platforms.

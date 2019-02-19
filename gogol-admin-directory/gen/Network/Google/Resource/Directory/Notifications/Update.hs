@@ -66,6 +66,7 @@ data NotificationsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ notificationsUpdate pNuPayload_ pNuCustomer_ pNuNotificationId_ =
     , _nuCustomer = pNuCustomer_
     , _nuNotificationId = pNuNotificationId_
     }
+
 
 -- | Multipart request metadata.
 nuPayload :: Lens' NotificationsUpdate Notification

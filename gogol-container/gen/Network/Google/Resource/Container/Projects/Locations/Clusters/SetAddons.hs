@@ -74,6 +74,7 @@ data ProjectsLocationsClustersSetAddons =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersSetAddons' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsLocationsClustersSetAddons pPlcsaPayload_ pPlcsaName_ =
     , _plcsaName = pPlcsaName_
     , _plcsaCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcsaXgafv :: Lens' ProjectsLocationsClustersSetAddons (Maybe Xgafv)

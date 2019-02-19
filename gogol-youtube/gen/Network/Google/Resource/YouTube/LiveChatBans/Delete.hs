@@ -58,6 +58,7 @@ newtype LiveChatBansDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatBansDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ liveChatBansDelete
     :: Text -- ^ 'lcbdId'
     -> LiveChatBansDelete
 liveChatBansDelete pLcbdId_ = LiveChatBansDelete' {_lcbdId = pLcbdId_}
+
 
 -- | The id parameter identifies the chat ban to remove. The value uniquely
 -- identifies both the ban and the chat.

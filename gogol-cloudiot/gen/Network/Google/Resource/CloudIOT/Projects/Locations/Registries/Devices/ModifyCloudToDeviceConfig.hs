@@ -80,6 +80,7 @@ data ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsRegistriesDevicesModifyCloudToDeviceConfig pPlrdmctdcPayload_ p
     , _plrdmctdcName = pPlrdmctdcName_
     , _plrdmctdcCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrdmctdcXgafv :: Lens' ProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig (Maybe Xgafv)

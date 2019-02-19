@@ -87,6 +87,7 @@ data ProjectsHistoriesExecutionsStepsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ projectsHistoriesExecutionsStepsPatch pPhespExecutionId_ pPhespStepId_ pPhespPay
     , _phespHistoryId = pPhespHistoryId_
     , _phespProjectId = pPhespProjectId_
     }
+
 
 -- | A unique request ID for server to detect duplicated requests. For
 -- example, a UUID. Optional, but strongly recommended.

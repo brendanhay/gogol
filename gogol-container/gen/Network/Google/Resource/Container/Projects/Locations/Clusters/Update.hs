@@ -74,6 +74,7 @@ data ProjectsLocationsClustersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsLocationsClustersUpdate pPlcuPayload_ pPlcuName_ =
     , _plcuName = pPlcuName_
     , _plcuCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcuXgafv :: Lens' ProjectsLocationsClustersUpdate (Maybe Xgafv)

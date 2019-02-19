@@ -72,6 +72,7 @@ data SinksDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SinksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ sinksDelete pSdSinkName_ =
     , _sdSinkName = pSdSinkName_
     , _sdCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdXgafv :: Lens' SinksDelete (Maybe Xgafv)

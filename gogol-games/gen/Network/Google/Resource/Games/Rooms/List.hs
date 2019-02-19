@@ -63,6 +63,7 @@ data RoomsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ roomsList
 roomsList =
   RoomsList'
     {_rLanguage = Nothing, _rPageToken = Nothing, _rMaxResults = Nothing}
+
 
 -- | The preferred language to use for strings returned by this method.
 rLanguage :: Lens' RoomsList (Maybe Text)

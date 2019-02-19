@@ -70,6 +70,7 @@ data ManagementGoalsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementGoalsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ managementGoalsInsert pMgiWebPropertyId_ pMgiProFileId_ pMgiPayload_ pMgiAccount
     , _mgiPayload = pMgiPayload_
     , _mgiAccountId = pMgiAccountId_
     }
+
 
 -- | Web property ID to create the goal for.
 mgiWebPropertyId :: Lens' ManagementGoalsInsert Text

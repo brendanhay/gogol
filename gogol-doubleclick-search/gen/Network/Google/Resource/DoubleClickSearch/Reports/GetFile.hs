@@ -70,6 +70,7 @@ data ReportsGetFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsGetFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ reportsGetFile pRgfReportId_ pRgfReportFragment_ =
     { _rgfReportId = pRgfReportId_
     , _rgfReportFragment = _Coerce # pRgfReportFragment_
     }
+
 
 -- | ID of the report.
 rgfReportId :: Lens' ReportsGetFile Text

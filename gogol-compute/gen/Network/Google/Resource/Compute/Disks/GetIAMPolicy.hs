@@ -68,6 +68,7 @@ data DisksGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DisksGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ disksGetIAMPolicy pDgipProject_ pDgipZone_ pDgipResource_ =
     , _dgipZone = pDgipZone_
     , _dgipResource = pDgipResource_
     }
+
 
 -- | Project ID for this request.
 dgipProject :: Lens' DisksGetIAMPolicy Text

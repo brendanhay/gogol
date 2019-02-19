@@ -83,6 +83,7 @@ data ProjectsSubscriptionsModifyAckDeadline =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSubscriptionsModifyAckDeadline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ projectsSubscriptionsModifyAckDeadline pPsmadPayload_ pPsmadSubscription_ =
     , _psmadSubscription = pPsmadSubscription_
     , _psmadCallback = Nothing
     }
+
 
 -- | V1 error format.
 psmadXgafv :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Xgafv)

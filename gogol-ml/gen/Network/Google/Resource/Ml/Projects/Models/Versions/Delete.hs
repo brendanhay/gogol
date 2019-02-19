@@ -77,6 +77,7 @@ data ProjectsModelsVersionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsModelsVersionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ projectsModelsVersionsDelete pPmvdName_ =
     , _pmvdName = pPmvdName_
     , _pmvdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmvdXgafv :: Lens' ProjectsModelsVersionsDelete (Maybe Xgafv)

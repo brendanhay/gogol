@@ -67,6 +67,7 @@ data DiskTypesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ diskTypesGet pDtgProject_ pDtgZone_ pDtgDiskType_ =
     , _dtgZone = pDtgZone_
     , _dtgDiskType = pDtgDiskType_
     }
+
 
 -- | Project ID for this request.
 dtgProject :: Lens' DiskTypesGet Text

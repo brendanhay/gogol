@@ -61,6 +61,7 @@ data AccountsSavedadstylesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsSavedadstylesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ accountsSavedadstylesGet
 accountsSavedadstylesGet pAsgSavedAdStyleId_ pAsgAccountId_ =
   AccountsSavedadstylesGet'
     {_asgSavedAdStyleId = pAsgSavedAdStyleId_, _asgAccountId = pAsgAccountId_}
+
 
 -- | Saved ad style to retrieve.
 asgSavedAdStyleId :: Lens' AccountsSavedadstylesGet Text

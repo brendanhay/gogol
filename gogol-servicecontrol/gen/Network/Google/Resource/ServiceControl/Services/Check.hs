@@ -97,6 +97,7 @@ data ServicesCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +129,7 @@ servicesCheck pScPayload_ pScServiceName_ =
     , _scServiceName = pScServiceName_
     , _scCallback = Nothing
     }
+
 
 -- | V1 error format.
 scXgafv :: Lens' ServicesCheck (Maybe Xgafv)

@@ -81,6 +81,7 @@ data ProjectsInstancesTablesGenerateConsistencyToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesTablesGenerateConsistencyToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsInstancesTablesGenerateConsistencyToken pPitgctPayload_ pPitgctName_ =
     , _pitgctName = pPitgctName_
     , _pitgctCallback = Nothing
     }
+
 
 -- | V1 error format.
 pitgctXgafv :: Lens' ProjectsInstancesTablesGenerateConsistencyToken (Maybe Xgafv)

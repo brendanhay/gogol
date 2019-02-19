@@ -98,6 +98,7 @@ data ServicesTenancyUnitsApplyProjectConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesTenancyUnitsApplyProjectConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -129,6 +130,7 @@ servicesTenancyUnitsApplyProjectConfig pStuapcPayload_ pStuapcName_ =
     , _stuapcName = pStuapcName_
     , _stuapcCallback = Nothing
     }
+
 
 -- | V1 error format.
 stuapcXgafv :: Lens' ServicesTenancyUnitsApplyProjectConfig (Maybe Xgafv)

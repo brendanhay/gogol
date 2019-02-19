@@ -87,6 +87,7 @@ data BeaconsAttachmentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconsAttachmentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ beaconsAttachmentsDelete pBadAttachmentName_ =
     , _badProjectId = Nothing
     , _badCallback = Nothing
     }
+
 
 -- | V1 error format.
 badXgafv :: Lens' BeaconsAttachmentsDelete (Maybe Xgafv)

@@ -61,6 +61,7 @@ data ColumnDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColumnDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ columnDelete
     -> ColumnDelete
 columnDelete pCdTableId_ pCdColumnId_ =
   ColumnDelete' {_cdTableId = pCdTableId_, _cdColumnId = pCdColumnId_}
+
 
 -- | Table from which the column is being deleted.
 cdTableId :: Lens' ColumnDelete Text

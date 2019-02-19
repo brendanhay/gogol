@@ -61,6 +61,7 @@ data CustomersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ customersUpdate
     -> CustomersUpdate
 customersUpdate pCuPayload_ pCuCustomerId_ =
   CustomersUpdate' {_cuPayload = pCuPayload_, _cuCustomerId = pCuCustomerId_}
+
 
 -- | Multipart request metadata.
 cuPayload :: Lens' CustomersUpdate Customer

@@ -95,6 +95,7 @@ data ProjectsLocationsWorkflowTemplatesInstantiateInline =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesInstantiateInline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -129,6 +130,7 @@ projectsLocationsWorkflowTemplatesInstantiateInline pPlwtiiParent_ pPlwtiiPayloa
     , _plwtiiPayload = pPlwtiiPayload_
     , _plwtiiCallback = Nothing
     }
+
 
 -- | Required. The \"resource name\" of the workflow template region, as
 -- described in https:\/\/cloud.google.com\/apis\/design\/resource_names of

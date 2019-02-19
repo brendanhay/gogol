@@ -32,6 +32,7 @@ data ErrorSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ErrorSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -49,6 +50,7 @@ errorSummary =
     , _esErrorCode = Nothing
     , _esErrorLogEntries = Nothing
     }
+
 
 -- | Count of this type of error. Required.
 esErrorCount :: Lens' ErrorSummary (Maybe Int64)
@@ -131,6 +133,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -143,6 +146,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -190,6 +194,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -202,6 +207,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -243,6 +249,7 @@ data Schedule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Schedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -260,6 +267,7 @@ schedule =
     , _sScheduleStartDate = Nothing
     , _sStartTimeOfDay = Nothing
     }
+
 
 -- | The last day the recurring transfer will be run. If \`scheduleEndDate\`
 -- is the same as \`scheduleStartDate\`, the transfer will be executed only
@@ -318,6 +326,7 @@ data ObjectConditions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectConditions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -338,6 +347,7 @@ objectConditions =
     , _ocMaxTimeElapsedSinceLastModification = Nothing
     , _ocExcludePrefixes = Nothing
     }
+
 
 -- | If unspecified, \`minTimeElapsedSinceLastModification\` takes a zero
 -- value and \`maxTimeElapsedSinceLastModification\` takes the maximum
@@ -435,6 +445,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -458,6 +469,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -523,11 +535,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -542,11 +556,13 @@ data PauseTransferOperationRequest =
   PauseTransferOperationRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PauseTransferOperationRequest' with the minimum fields required to make a request.
 --
 pauseTransferOperationRequest
     :: PauseTransferOperationRequest
 pauseTransferOperationRequest = PauseTransferOperationRequest'
+
 
 instance FromJSON PauseTransferOperationRequest where
         parseJSON
@@ -565,6 +581,7 @@ newtype GoogleServiceAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleServiceAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -573,6 +590,7 @@ newtype GoogleServiceAccount =
 googleServiceAccount
     :: GoogleServiceAccount
 googleServiceAccount = GoogleServiceAccount' {_gsaAccountEmail = Nothing}
+
 
 -- | Required.
 gsaAccountEmail :: Lens' GoogleServiceAccount (Maybe Text)
@@ -600,6 +618,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -610,6 +629,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -643,6 +663,7 @@ data Date =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -655,6 +676,7 @@ data Date =
 date
     :: Date
 date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -703,6 +725,7 @@ data UpdateTransferJobRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateTransferJobRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -720,6 +743,7 @@ updateTransferJobRequest =
     , _utjrProjectId = Nothing
     , _utjrUpdateTransferJobFieldMask = Nothing
     }
+
 
 -- | The job to update. \`transferJob\` is expected to specify only three
 -- fields: \`description\`, \`transferSpec\`, and \`status\`. An
@@ -790,6 +814,7 @@ data TransferCounters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferCounters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -846,6 +871,7 @@ transferCounters =
     , _tcObjectsFailedToDeleteFromSink = Nothing
     , _tcObjectsFromSourceSkippedBySync = Nothing
     }
+
 
 -- | Bytes found only in the data sink that are scheduled to be deleted.
 tcBytesFoundOnlyFromSink :: Lens' TransferCounters (Maybe Int64)
@@ -1043,6 +1069,7 @@ data TransferJob =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferJob' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1078,6 +1105,7 @@ transferJob =
     , _tjDescription = Nothing
     , _tjLastModificationTime = Nothing
     }
+
 
 -- | This field cannot be changed by user requests.
 tjCreationTime :: Lens' TransferJob (Maybe UTCTime)
@@ -1180,6 +1208,7 @@ newtype GcsData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GcsData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1188,6 +1217,7 @@ newtype GcsData =
 gcsData
     :: GcsData
 gcsData = GcsData' {_gdBucketName = Nothing}
+
 
 -- | Google Cloud Storage bucket name (see [Bucket Name
 -- Requirements](https:\/\/cloud.google.com\/storage\/docs\/naming#requirements)).
@@ -1217,6 +1247,7 @@ data AwsS3Data =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AwsS3Data' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1227,6 +1258,7 @@ data AwsS3Data =
 awsS3Data
     :: AwsS3Data
 awsS3Data = AwsS3Data' {_asdBucketName = Nothing, _asdAwsAccessKey = Nothing}
+
 
 -- | S3 Bucket name (see [Creating a
 -- bucket](http:\/\/docs.aws.amazon.com\/AmazonS3\/latest\/dev\/create-bucket-get-location-example.html)).
@@ -1293,6 +1325,7 @@ newtype HTTPData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1301,6 +1334,7 @@ newtype HTTPData =
 hTTPData
     :: HTTPData
 hTTPData = HTTPData' {_httpdListURL = Nothing}
+
 
 -- | The URL that points to the file that stores the object list entries.
 -- This file must allow public access. Currently, only URLs with HTTP and
@@ -1334,6 +1368,7 @@ data TimeOfDay' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1354,6 +1389,7 @@ timeOfDay =
     , _todMinutes = Nothing
     , _todSeconds = Nothing
     }
+
 
 -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
 todNanos :: Lens' TimeOfDay' (Maybe Int32)
@@ -1410,6 +1446,7 @@ data ErrorLogEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ErrorLogEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1420,6 +1457,7 @@ data ErrorLogEntry =
 errorLogEntry
     :: ErrorLogEntry
 errorLogEntry = ErrorLogEntry' {_eleURL = Nothing, _eleErrorDetails = Nothing}
+
 
 -- | A URL that refers to the target (a data source, a data sink, or an
 -- object) with which the error is associated. Required.
@@ -1457,6 +1495,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1467,6 +1506,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -1494,6 +1534,7 @@ data TransferOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1511,6 +1552,7 @@ transferOptions =
     , _toDeleteObjectsFromSourceAfterTransfer = Nothing
     , _toOverwriteObjectsAlreadyExistingInSink = Nothing
     }
+
 
 -- | Whether objects that exist only in the sink should be deleted. Note that
 -- this option and \`deleteObjectsFromSourceAfterTransfer\` are mutually
@@ -1573,6 +1615,7 @@ data TransferOperation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferOperation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1608,6 +1651,7 @@ transferOperation =
     , _toTransferSpec = Nothing
     , _toErrorBreakdowns = Nothing
     }
+
 
 -- | Status of the transfer operation.
 toStatus :: Lens' TransferOperation (Maybe TransferOperationStatus)
@@ -1702,6 +1746,7 @@ data TransferSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1728,6 +1773,7 @@ transferSpec =
     , _tsGcsDataSink = Nothing
     , _tsTransferOptions = Nothing
     }
+
 
 -- | A Google Cloud Storage data source.
 tsGcsDataSource :: Lens' TransferSpec (Maybe GcsData)
@@ -1803,6 +1849,7 @@ data ListTransferJobsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTransferJobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1815,6 +1862,7 @@ listTransferJobsResponse
 listTransferJobsResponse =
   ListTransferJobsResponse'
     {_ltjrNextPageToken = Nothing, _ltjrTransferJobs = Nothing}
+
 
 -- | The list next page token.
 ltjrNextPageToken :: Lens' ListTransferJobsResponse (Maybe Text)
@@ -1861,6 +1909,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1871,6 +1920,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1893,11 +1943,13 @@ data ResumeTransferOperationRequest =
   ResumeTransferOperationRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResumeTransferOperationRequest' with the minimum fields required to make a request.
 --
 resumeTransferOperationRequest
     :: ResumeTransferOperationRequest
 resumeTransferOperationRequest = ResumeTransferOperationRequest'
+
 
 instance FromJSON ResumeTransferOperationRequest
          where
@@ -1919,6 +1971,7 @@ data AwsAccessKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AwsAccessKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1930,6 +1983,7 @@ awsAccessKey
     :: AwsAccessKey
 awsAccessKey =
   AwsAccessKey' {_aakSecretAccessKey = Nothing, _aakAccessKeyId = Nothing}
+
 
 -- | AWS secret access key. This field is not returned in RPC responses.
 -- Required.

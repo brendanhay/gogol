@@ -83,6 +83,7 @@ data FoldersSinksCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersSinksCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ foldersSinksCreate pFscParent_ pFscPayload_ =
     , _fscPayload = pFscPayload_
     , _fscCallback = Nothing
     }
+
 
 -- | Required. The resource in which to create the sink:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

@@ -60,6 +60,7 @@ data SavedadstylesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SavedadstylesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ savedadstylesList
     :: SavedadstylesList
 savedadstylesList =
   SavedadstylesList' {_slPageToken = Nothing, _slMaxResults = Nothing}
+
 
 -- | A continuation token, used to page through saved ad styles. To retrieve
 -- the next page, set this parameter to the value of \"nextPageToken\" from

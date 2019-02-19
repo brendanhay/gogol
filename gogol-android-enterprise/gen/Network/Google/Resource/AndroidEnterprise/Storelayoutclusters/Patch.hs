@@ -70,6 +70,7 @@ data StorelayoutclustersPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StorelayoutclustersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ storelayoutclustersPatch pSppEnterpriseId_ pSppPageId_ pSppPayload_ pSppClusterI
     , _sppPayload = pSppPayload_
     , _sppClusterId = pSppClusterId_
     }
+
 
 -- | The ID of the enterprise.
 sppEnterpriseId :: Lens' StorelayoutclustersPatch Text

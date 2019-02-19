@@ -64,6 +64,7 @@ data ManagedZonesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedZonesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ managedZonesDelete pMzdProject_ pMzdManagedZone_ =
     , _mzdManagedZone = pMzdManagedZone_
     , _mzdClientOperationId = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 mzdProject :: Lens' ManagedZonesDelete Text

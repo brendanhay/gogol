@@ -68,6 +68,7 @@ data RollingUpdatesRollback =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollingUpdatesRollback' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ rollingUpdatesRollback pRurRollingUpdate_ pRurProject_ pRurZone_ =
     , _rurProject = pRurProject_
     , _rurZone = pRurZone_
     }
+
 
 -- | The name of the update.
 rurRollingUpdate :: Lens' RollingUpdatesRollback Text

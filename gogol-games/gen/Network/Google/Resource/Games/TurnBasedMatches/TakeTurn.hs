@@ -65,6 +65,7 @@ data TurnBasedMatchesTakeTurn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchesTakeTurn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ turnBasedMatchesTakeTurn pTbmttPayload_ pTbmttMatchId_ =
     , _tbmttLanguage = Nothing
     , _tbmttMatchId = pTbmttMatchId_
     }
+
 
 -- | Multipart request metadata.
 tbmttPayload :: Lens' TurnBasedMatchesTakeTurn TurnBasedMatchTurn

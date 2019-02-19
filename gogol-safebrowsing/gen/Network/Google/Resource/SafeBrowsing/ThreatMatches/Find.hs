@@ -72,6 +72,7 @@ data ThreatMatchesFind =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThreatMatchesFind' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ threatMatchesFind pTmfPayload_ =
     , _tmfPayload = pTmfPayload_
     , _tmfCallback = Nothing
     }
+
 
 -- | V1 error format.
 tmfXgafv :: Lens' ThreatMatchesFind (Maybe Xgafv)

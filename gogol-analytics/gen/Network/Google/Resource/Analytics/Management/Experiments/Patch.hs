@@ -74,6 +74,7 @@ data ManagementExperimentsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementExperimentsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ managementExperimentsPatch pMepWebPropertyId_ pMepProFileId_ pMepPayload_ pMepAc
     , _mepAccountId = pMepAccountId_
     , _mepExperimentId = pMepExperimentId_
     }
+
 
 -- | Web property ID of the experiment to update.
 mepWebPropertyId :: Lens' ManagementExperimentsPatch Text

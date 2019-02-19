@@ -64,6 +64,7 @@ data ReportsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ reportsPatch pRpReportId_ pRpProFileId_ pRpPayload_ =
     , _rpProFileId = _Coerce # pRpProFileId_
     , _rpPayload = pRpPayload_
     }
+
 
 -- | The ID of the report.
 rpReportId :: Lens' ReportsPatch Int64

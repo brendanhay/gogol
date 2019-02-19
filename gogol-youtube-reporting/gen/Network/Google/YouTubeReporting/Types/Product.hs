@@ -30,6 +30,7 @@ data ListReportsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListReportsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41,6 +42,7 @@ listReportsResponse
     :: ListReportsResponse
 listReportsResponse =
   ListReportsResponse' {_lrrNextPageToken = Nothing, _lrrReports = Nothing}
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- ListReportsRequest.page_token field in the subsequent call to
@@ -85,6 +87,7 @@ data GDataDiffChecksumsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GDataDiffChecksumsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +111,7 @@ gDataDiffChecksumsResponse =
     , _gddcrObjectVersion = Nothing
     , _gddcrObjectLocation = Nothing
     }
+
 
 -- | gdata
 gddcrChecksumsLocation :: Lens' GDataDiffChecksumsResponse (Maybe GDataCompositeMedia)
@@ -174,6 +178,7 @@ data GDataObjectId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GDataObjectId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -191,6 +196,7 @@ gDataObjectId =
     , _gdoiBucketName = Nothing
     , _gdoiGeneration = Nothing
     }
+
 
 -- | gdata
 gdoiObjectName :: Lens' GDataObjectId (Maybe Text)
@@ -238,11 +244,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -262,6 +270,7 @@ data GDataContentTypeInfo =
     , _gdctiFromURLPath  :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataContentTypeInfo' with the minimum fields required to make a request.
 --
@@ -286,6 +295,7 @@ gDataContentTypeInfo =
     , _gdctiBestGuess = Nothing
     , _gdctiFromURLPath = Nothing
     }
+
 
 -- | gdata
 gdctiFromBytes :: Lens' GDataContentTypeInfo (Maybe Text)
@@ -374,6 +384,7 @@ data GDataMedia =
     , _gdmCompositeMedia        :: !(Maybe [GDataCompositeMedia])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataMedia' with the minimum fields required to make a request.
 --
@@ -473,6 +484,7 @@ gDataMedia =
     , _gdmContentType = Nothing
     , _gdmCompositeMedia = Nothing
     }
+
 
 -- | gdata
 gdmLength :: Lens' GDataMedia (Maybe Int64)
@@ -741,6 +753,7 @@ data Report =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -770,6 +783,7 @@ report =
     , _rCreateTime = Nothing
     , _rJobExpireTime = Nothing
     }
+
 
 -- | The ID of the job that created this report.
 rJobId :: Lens' Report (Maybe Text)
@@ -853,6 +867,7 @@ data GDataCompositeMedia =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GDataCompositeMedia' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -894,6 +909,7 @@ gDataCompositeMedia =
     , _gdcmMD5Hash = Nothing
     , _gdcmCosmoBinaryReference = Nothing
     }
+
 
 -- | gdata
 gdcmLength :: Lens' GDataCompositeMedia (Maybe Int64)
@@ -1003,6 +1019,7 @@ data GDataDownloadParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GDataDownloadParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1015,6 +1032,7 @@ gDataDownloadParameters
 gDataDownloadParameters =
   GDataDownloadParameters'
     {_gddpIgnoreRange = Nothing, _gddpAllowGzipCompression = Nothing}
+
 
 -- | gdata
 gddpIgnoreRange :: Lens' GDataDownloadParameters (Maybe Bool)
@@ -1054,6 +1072,7 @@ data ListReportTypesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListReportTypesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1066,6 +1085,7 @@ listReportTypesResponse
 listReportTypesResponse =
   ListReportTypesResponse'
     {_lrtrNextPageToken = Nothing, _lrtrReportTypes = Nothing}
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- ListReportTypesRequest.page_token field in the subsequent call to
@@ -1111,6 +1131,7 @@ data GDataBlobstore2Info =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GDataBlobstore2Info' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1134,6 +1155,7 @@ gDataBlobstore2Info =
     , _gdbiDownloadReadHandle = Nothing
     , _gdbiUploadMetadataContainer = Nothing
     }
+
 
 -- | gdata
 gdbiBlobGeneration :: Lens' GDataBlobstore2Info (Maybe Int64)
@@ -1203,6 +1225,7 @@ data Job =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1229,6 +1252,7 @@ job =
     , _jExpireTime = Nothing
     , _jCreateTime = Nothing
     }
+
 
 -- | The name of the job (max. 100 characters).
 jName :: Lens' Job (Maybe Text)
@@ -1296,6 +1320,7 @@ data GDataDiffUploadResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GDataDiffUploadResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1308,6 +1333,7 @@ gDataDiffUploadResponse
 gDataDiffUploadResponse =
   GDataDiffUploadResponse'
     {_gddurOriginalObject = Nothing, _gddurObjectVersion = Nothing}
+
 
 -- | gdata
 gddurOriginalObject :: Lens' GDataDiffUploadResponse (Maybe GDataCompositeMedia)
@@ -1344,6 +1370,7 @@ newtype GDataDiffDownloadResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GDataDiffDownloadResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1353,6 +1380,7 @@ gDataDiffDownloadResponse
     :: GDataDiffDownloadResponse
 gDataDiffDownloadResponse =
   GDataDiffDownloadResponse' {_gdddrObjectLocation = Nothing}
+
 
 -- | gdata
 gdddrObjectLocation :: Lens' GDataDiffDownloadResponse (Maybe GDataCompositeMedia)
@@ -1383,6 +1411,7 @@ data ListJobsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListJobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1394,6 +1423,7 @@ listJobsResponse
     :: ListJobsResponse
 listJobsResponse =
   ListJobsResponse' {_ljrNextPageToken = Nothing, _ljrJobs = Nothing}
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- ListJobsRequest.page_token field in the subsequent call to \`ListJobs\`
@@ -1435,6 +1465,7 @@ data GDataDiffUploadRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GDataDiffUploadRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1452,6 +1483,7 @@ gDataDiffUploadRequest =
     , _gObjectVersion = Nothing
     , _gObjectInfo = Nothing
     }
+
 
 -- | gdata
 gChecksumsInfo :: Lens' GDataDiffUploadRequest (Maybe GDataCompositeMedia)
@@ -1496,6 +1528,7 @@ data GDataDiffVersionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GDataDiffVersionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1508,6 +1541,7 @@ gDataDiffVersionResponse
 gDataDiffVersionResponse =
   GDataDiffVersionResponse'
     {_gddvrObjectSizeBytes = Nothing, _gddvrObjectVersion = Nothing}
+
 
 -- | gdata
 gddvrObjectSizeBytes :: Lens' GDataDiffVersionResponse (Maybe Int64)
@@ -1549,6 +1583,7 @@ data ReportType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1569,6 +1604,7 @@ reportType =
     , _rtDeprecateTime = Nothing
     , _rtSystemManaged = Nothing
     }
+
 
 -- | The name of the report type (max. 100 characters).
 rtName :: Lens' ReportType (Maybe Text)

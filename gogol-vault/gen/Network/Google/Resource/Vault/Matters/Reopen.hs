@@ -75,6 +75,7 @@ data MattersReopen =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersReopen' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ mattersReopen pMrPayload_ pMrMatterId_ =
     , _mrMatterId = pMrMatterId_
     , _mrCallback = Nothing
     }
+
 
 -- | V1 error format.
 mrXgafv :: Lens' MattersReopen (Maybe Xgafv)

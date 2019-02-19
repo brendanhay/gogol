@@ -31,6 +31,7 @@ data UpdateMetadataArguments =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateMetadataArguments' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -48,6 +49,7 @@ updateMetadataArguments =
     , _umaDeviceId = Nothing
     , _umaDeviceMetadata = Nothing
     }
+
 
 -- | Device identifier.
 umaDeviceIdentifier :: Lens' UpdateMetadataArguments (Maybe DeviceIdentifier)
@@ -128,6 +130,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -140,6 +143,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -189,6 +193,7 @@ data PartnerClaim =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnerClaim' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -209,6 +214,7 @@ partnerClaim =
     , _pcCustomerId = Nothing
     , _pcDeviceMetadata = Nothing
     }
+
 
 -- | Required. Device identifier of the device.
 pcDeviceIdentifier :: Lens' PartnerClaim (Maybe DeviceIdentifier)
@@ -261,6 +267,7 @@ newtype CustomerUnclaimDeviceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerUnclaimDeviceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -270,6 +277,7 @@ customerUnclaimDeviceRequest
     :: CustomerUnclaimDeviceRequest
 customerUnclaimDeviceRequest =
   CustomerUnclaimDeviceRequest' {_cudrDevice = Nothing}
+
 
 -- | Required. The device to unclaim.
 cudrDevice :: Lens' CustomerUnclaimDeviceRequest (Maybe DeviceReference)
@@ -297,6 +305,7 @@ data FindDevicesByDeviceIdentifierRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FindDevicesByDeviceIdentifierRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -314,6 +323,7 @@ findDevicesByDeviceIdentifierRequest =
     , _fdbdirLimit = Nothing
     , _fdbdirPageToken = Nothing
     }
+
 
 -- | Required. The device identifier to search for.
 fdbdirDeviceIdentifier :: Lens' FindDevicesByDeviceIdentifierRequest (Maybe DeviceIdentifier)
@@ -364,6 +374,7 @@ data FindDevicesByOwnerResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FindDevicesByOwnerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -381,6 +392,7 @@ findDevicesByOwnerResponse =
     , _fdborTotalSize = Nothing
     , _fdborDevices = Nothing
     }
+
 
 -- | A token used to access the next page of results. Omitted if no further
 -- results are available.
@@ -428,6 +440,7 @@ newtype DeviceMetadataEntries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceMetadataEntries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -438,6 +451,7 @@ deviceMetadataEntries
     -> DeviceMetadataEntries
 deviceMetadataEntries pDmeAddtional_ =
   DeviceMetadataEntries' {_dmeAddtional = _Coerce # pDmeAddtional_}
+
 
 dmeAddtional :: Lens' DeviceMetadataEntries (HashMap Text Text)
 dmeAddtional
@@ -464,6 +478,7 @@ data PartnerUnclaim =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnerUnclaim' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -481,6 +496,7 @@ partnerUnclaim =
     , _puSectionType = Nothing
     , _puDeviceId = Nothing
     }
+
 
 -- | Device identifier of the device.
 puDeviceIdentifier :: Lens' PartnerUnclaim (Maybe DeviceIdentifier)
@@ -532,6 +548,7 @@ data Dpc =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Dpc' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -544,6 +561,7 @@ data Dpc =
 dpc
     :: Dpc
 dpc = Dpc' {_dPackageName = Nothing, _dName = Nothing, _dDpcName = Nothing}
+
 
 -- | Output only. The DPC\'s Android application ID that looks like a Java
 -- package name. Zero-touch enrollment installs the DPC app onto a device
@@ -591,6 +609,7 @@ data ListVendorCustomersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListVendorCustomersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -608,6 +627,7 @@ listVendorCustomersResponse =
     , _lvcrNextPageToken = Nothing
     , _lvcrTotalSize = Nothing
     }
+
 
 -- | List of customers of the vendor.
 lvcrCustomers :: Lens' ListVendorCustomersResponse [Company]
@@ -661,6 +681,7 @@ data OperationPerDevice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationPerDevice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -681,6 +702,7 @@ operationPerDevice =
     , _opdClaim = Nothing
     , _opdUnclaim = Nothing
     }
+
 
 -- | A copy of the original metadata-update request received by the server.
 opdUpdateMetadata :: Lens' OperationPerDevice (Maybe UpdateMetadataArguments)
@@ -734,6 +756,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -757,6 +780,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -821,11 +845,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -844,6 +870,7 @@ data PerDeviceStatusInBatch =
     , _pdsibErrorMessage    :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PerDeviceStatusInBatch' with the minimum fields required to make a request.
 --
@@ -865,6 +892,7 @@ perDeviceStatusInBatch =
     , _pdsibDeviceId = Nothing
     , _pdsibErrorMessage = Nothing
     }
+
 
 -- | The result status of the device after processing.
 pdsibStatus :: Lens' PerDeviceStatusInBatch (Maybe PerDeviceStatusInBatchStatus)
@@ -919,6 +947,7 @@ newtype ClaimDevicesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClaimDevicesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -927,6 +956,7 @@ newtype ClaimDevicesRequest =
 claimDevicesRequest
     :: ClaimDevicesRequest
 claimDevicesRequest = ClaimDevicesRequest' {_cdrClaims = Nothing}
+
 
 -- | Required. A list of device claims.
 cdrClaims :: Lens' ClaimDevicesRequest [PartnerClaim]
@@ -959,6 +989,7 @@ data Device =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -985,6 +1016,7 @@ device =
     , _devDeviceMetadata = Nothing
     , _devConfiguration = Nothing
     }
+
 
 -- | The hardware IDs that identify a manufactured device. To learn more,
 -- read [Identifiers](\/zero-touch\/guides\/identifiers).
@@ -1064,6 +1096,7 @@ data ClaimDeviceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClaimDeviceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1084,6 +1117,7 @@ claimDeviceRequest =
     , _cdrCustomerId = Nothing
     , _cdrDeviceMetadata = Nothing
     }
+
 
 -- | Required. The device identifier of the device to claim.
 cdrDeviceIdentifier :: Lens' ClaimDeviceRequest (Maybe DeviceIdentifier)
@@ -1144,6 +1178,7 @@ data DeviceReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1155,6 +1190,7 @@ deviceReference
     :: DeviceReference
 deviceReference =
   DeviceReference' {_drDeviceIdentifier = Nothing, _drDeviceId = Nothing}
+
 
 -- | The hardware IDs of the device.
 drDeviceIdentifier :: Lens' DeviceReference (Maybe DeviceIdentifier)
@@ -1191,6 +1227,7 @@ newtype CustomerRemoveConfigurationRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerRemoveConfigurationRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1200,6 +1237,7 @@ customerRemoveConfigurationRequest
     :: CustomerRemoveConfigurationRequest
 customerRemoveConfigurationRequest =
   CustomerRemoveConfigurationRequest' {_crcrDevice = Nothing}
+
 
 -- | Required. The device to remove the configuration from.
 crcrDevice :: Lens' CustomerRemoveConfigurationRequest (Maybe DeviceReference)
@@ -1234,6 +1272,7 @@ data DeviceIdentifier =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceIdentifier' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1257,6 +1296,7 @@ deviceIdentifier =
     , _diImei = Nothing
     , _diSerialNumber = Nothing
     }
+
 
 -- | The device manufacturer’s name. Matches the device\'s built-in value
 -- returned from \`android.os.Build.MANUFACTURER\`. Allowed values are
@@ -1316,6 +1356,7 @@ newtype UnclaimDevicesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnclaimDevicesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1324,6 +1365,7 @@ newtype UnclaimDevicesRequest =
 unclaimDevicesRequest
     :: UnclaimDevicesRequest
 unclaimDevicesRequest = UnclaimDevicesRequest' {_udrUnclaims = Nothing}
+
 
 -- | Required. The list of devices to unclaim.
 udrUnclaims :: Lens' UnclaimDevicesRequest [PartnerUnclaim]
@@ -1352,6 +1394,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1362,6 +1405,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1388,6 +1432,7 @@ data ListVendorsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListVendorsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1405,6 +1450,7 @@ listVendorsResponse =
     , _lvrTotalSize = Nothing
     , _lvrVendors = Nothing
     }
+
 
 -- | A token to retrieve the next page of results. Omitted if no further
 -- results are available.
@@ -1452,6 +1498,7 @@ newtype CustomerListConfigurationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerListConfigurationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1461,6 +1508,7 @@ customerListConfigurationsResponse
     :: CustomerListConfigurationsResponse
 customerListConfigurationsResponse =
   CustomerListConfigurationsResponse' {_clcrConfigurations = Nothing}
+
 
 -- | The configurations.
 clcrConfigurations :: Lens' CustomerListConfigurationsResponse [Configuration]
@@ -1495,6 +1543,7 @@ data CustomerApplyConfigurationRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerApplyConfigurationRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1507,6 +1556,7 @@ customerApplyConfigurationRequest
 customerApplyConfigurationRequest =
   CustomerApplyConfigurationRequest'
     {_cacrDevice = Nothing, _cacrConfiguration = Nothing}
+
 
 -- | Required. The device the configuration is applied to.
 cacrDevice :: Lens' CustomerApplyConfigurationRequest (Maybe DeviceReference)
@@ -1551,6 +1601,7 @@ data Company =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Company' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1577,6 +1628,7 @@ company =
     , _cName = Nothing
     , _cAdminEmails = Nothing
     }
+
 
 -- | Output only. The ID of the company. Assigned by the server.
 cCompanyId :: Lens' Company (Maybe Int64)
@@ -1655,6 +1707,7 @@ data CustomerListCustomersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerListCustomersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1667,6 +1720,7 @@ customerListCustomersResponse
 customerListCustomersResponse =
   CustomerListCustomersResponse'
     {_clcrCustomers = Nothing, _clcrNextPageToken = Nothing}
+
 
 -- | The customer accounts the calling user is a member of.
 clcrCustomers :: Lens' CustomerListCustomersResponse [Company]
@@ -1712,6 +1766,7 @@ data DeviceClaim =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceClaim' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1729,6 +1784,7 @@ deviceClaim =
     , _dcOwnerCompanyId = Nothing
     , _dcResellerId = Nothing
     }
+
 
 -- | Output only. The type of claim made on the device.
 dcSectionType :: Lens' DeviceClaim (Maybe DeviceClaimSectionType)
@@ -1774,6 +1830,7 @@ newtype UpdateDeviceMetadataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateDeviceMetadataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1783,6 +1840,7 @@ updateDeviceMetadataRequest
     :: UpdateDeviceMetadataRequest
 updateDeviceMetadataRequest =
   UpdateDeviceMetadataRequest' {_udmrDeviceMetadata = Nothing}
+
 
 -- | Required. The metdata to attach to the device.
 udmrDeviceMetadata :: Lens' UpdateDeviceMetadataRequest (Maybe DeviceMetadata)
@@ -1813,6 +1871,7 @@ newtype DeviceMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1821,6 +1880,7 @@ newtype DeviceMetadata =
 deviceMetadata
     :: DeviceMetadata
 deviceMetadata = DeviceMetadata' {_dmEntries = Nothing}
+
 
 -- | Metadata entries recorded as key-value pairs.
 dmEntries :: Lens' DeviceMetadata (Maybe DeviceMetadataEntries)
@@ -1848,6 +1908,7 @@ data FindDevicesByOwnerRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FindDevicesByOwnerRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1868,6 +1929,7 @@ findDevicesByOwnerRequest =
     , _fdborLimit = Nothing
     , _fdborPageToken = Nothing
     }
+
 
 -- | Required. The section type of the device\'s provisioning record.
 fdborSectionType :: Lens' FindDevicesByOwnerRequest (Maybe FindDevicesByOwnerRequestSectionType)
@@ -1926,6 +1988,7 @@ data FindDevicesByDeviceIdentifierResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FindDevicesByDeviceIdentifierResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1943,6 +2006,7 @@ findDevicesByDeviceIdentifierResponse =
     , _fdbdirTotalSize = Nothing
     , _fdbdirDevices = Nothing
     }
+
 
 -- | A token used to access the next page of results. Omitted if no further
 -- results are available.
@@ -1996,6 +2060,7 @@ data UnclaimDeviceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnclaimDeviceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2013,6 +2078,7 @@ unclaimDeviceRequest =
     , _udrSectionType = Nothing
     , _udrDeviceId = Nothing
     }
+
 
 -- | The device identifier you used when you claimed this device.
 udrDeviceIdentifier :: Lens' UnclaimDeviceRequest (Maybe DeviceIdentifier)
@@ -2060,6 +2126,7 @@ data DevicesLongRunningOperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DevicesLongRunningOperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2072,6 +2139,7 @@ devicesLongRunningOperationResponse
 devicesLongRunningOperationResponse =
   DevicesLongRunningOperationResponse'
     {_dlrorSuccessCount = Nothing, _dlrorPerDeviceStatus = Nothing}
+
 
 -- | A summary of how many items in the operation the server processed
 -- successfully. Updated as the operation progresses.
@@ -2133,6 +2201,7 @@ data Configuration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Configuration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2171,6 +2240,7 @@ configuration =
     , _conDpcResourcePath = Nothing
     , _conIsDefault = Nothing
     }
+
 
 -- | Required. The telephone number that device users can call, using another
 -- device, to get help. Zero-touch enrollment shows this number to device
@@ -2289,6 +2359,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2299,6 +2370,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -2325,6 +2397,7 @@ data ListCustomersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListCustomersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2342,6 +2415,7 @@ listCustomersResponse =
     , _lcrNextPageToken = Nothing
     , _lcrTotalSize = Nothing
     }
+
 
 -- | List of customers related to this reseller partner.
 lcrCustomers :: Lens' ListCustomersResponse [Company]
@@ -2394,6 +2468,7 @@ data DevicesLongRunningOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DevicesLongRunningOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2411,6 +2486,7 @@ devicesLongRunningOperationMetadata =
     , _dlromDevicesCount = Nothing
     , _dlromProcessingStatus = Nothing
     }
+
 
 -- | The processing progress of the operation. Measured as a number from 0 to
 -- 100. A value of 10O doesnt always mean the operation completed—check for
@@ -2465,6 +2541,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2475,6 +2552,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -2500,6 +2578,7 @@ data CustomerListDevicesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerListDevicesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2512,6 +2591,7 @@ customerListDevicesResponse
 customerListDevicesResponse =
   CustomerListDevicesResponse'
     {_cldrNextPageToken = Nothing, _cldrDevices = Nothing}
+
 
 -- | A token used to access the next page of results. Omitted if no further
 -- results are available.
@@ -2551,6 +2631,7 @@ newtype UpdateDeviceMetadataInBatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateDeviceMetadataInBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2560,6 +2641,7 @@ updateDeviceMetadataInBatchRequest
     :: UpdateDeviceMetadataInBatchRequest
 updateDeviceMetadataInBatchRequest =
   UpdateDeviceMetadataInBatchRequest' {_udmibrUpdates = Nothing}
+
 
 -- | Required. The list of metadata updates.
 udmibrUpdates :: Lens' UpdateDeviceMetadataInBatchRequest [UpdateMetadataArguments]
@@ -2592,6 +2674,7 @@ newtype CustomerListDpcsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerListDpcsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2600,6 +2683,7 @@ newtype CustomerListDpcsResponse =
 customerListDpcsResponse
     :: CustomerListDpcsResponse
 customerListDpcsResponse = CustomerListDpcsResponse' {_cldrDpcs = Nothing}
+
 
 -- | The list of DPCs available to the customer that support zero-touch
 -- enrollment.
@@ -2630,6 +2714,7 @@ data ClaimDeviceResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClaimDeviceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2641,6 +2726,7 @@ claimDeviceResponse
     :: ClaimDeviceResponse
 claimDeviceResponse =
   ClaimDeviceResponse' {_cdrDeviceName = Nothing, _cdrDeviceId = Nothing}
+
 
 -- | The resource name of the device in the format
 -- \`partners\/[PARTNER_ID]\/devices\/[DEVICE_ID]\`.
@@ -2678,6 +2764,7 @@ newtype CreateCustomerRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateCustomerRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2686,6 +2773,7 @@ newtype CreateCustomerRequest =
 createCustomerRequest
     :: CreateCustomerRequest
 createCustomerRequest = CreateCustomerRequest' {_ccrCustomer = Nothing}
+
 
 -- | Required. The company data to populate the new customer. Must contain a
 -- value for \`companyName\` and at least one \`owner_email\` that\'s

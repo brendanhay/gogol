@@ -72,6 +72,7 @@ data ChromeosDevicesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeosDevicesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ chromeosDevicesUpdate pCduPayload_ pCduCustomerId_ pCduDeviceId_ =
     , _cduDeviceId = pCduDeviceId_
     , _cduProjection = Nothing
     }
+
 
 -- | Multipart request metadata.
 cduPayload :: Lens' ChromeosDevicesUpdate ChromeOSDevice

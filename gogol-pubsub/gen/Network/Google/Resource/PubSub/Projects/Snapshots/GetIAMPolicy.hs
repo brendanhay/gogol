@@ -72,6 +72,7 @@ data ProjectsSnapshotsGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSnapshotsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsSnapshotsGetIAMPolicy pPsgipResource_ =
     , _psgipResource = pPsgipResource_
     , _psgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 psgipXgafv :: Lens' ProjectsSnapshotsGetIAMPolicy (Maybe Xgafv)

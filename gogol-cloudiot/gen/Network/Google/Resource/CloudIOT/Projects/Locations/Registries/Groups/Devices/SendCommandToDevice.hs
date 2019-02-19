@@ -99,6 +99,7 @@ data ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -130,6 +131,7 @@ projectsLocationsRegistriesGroupsDevicesSendCommandToDevice pPlrgdsctdPayload_ p
     , _plrgdsctdName = pPlrgdsctdName_
     , _plrgdsctdCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrgdsctdXgafv :: Lens' ProjectsLocationsRegistriesGroupsDevicesSendCommandToDevice (Maybe Xgafv)

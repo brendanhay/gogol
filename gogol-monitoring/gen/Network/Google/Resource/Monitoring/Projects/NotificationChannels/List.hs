@@ -84,6 +84,7 @@ data ProjectsNotificationChannelsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotificationChannelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsNotificationChannelsList pPnclName_ =
     , _pnclPageSize = Nothing
     , _pnclCallback = Nothing
     }
+
 
 -- | V1 error format.
 pnclXgafv :: Lens' ProjectsNotificationChannelsList (Maybe Xgafv)

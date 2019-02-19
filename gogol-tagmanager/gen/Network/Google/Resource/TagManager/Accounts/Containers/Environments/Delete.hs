@@ -56,6 +56,7 @@ newtype AccountsContainersEnvironmentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersEnvironmentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ accountsContainersEnvironmentsDelete
     -> AccountsContainersEnvironmentsDelete
 accountsContainersEnvironmentsDelete pAcedPath_ =
   AccountsContainersEnvironmentsDelete' {_acedPath = pAcedPath_}
+
 
 -- | GTM Environment\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/environments\/{environment_id}

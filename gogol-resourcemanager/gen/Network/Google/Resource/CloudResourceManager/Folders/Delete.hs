@@ -80,6 +80,7 @@ data FoldersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ foldersDelete pFdName_ =
     , _fdName = pFdName_
     , _fdCallback = Nothing
     }
+
 
 -- | V1 error format.
 fdXgafv :: Lens' FoldersDelete (Maybe Xgafv)

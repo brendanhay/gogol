@@ -94,6 +94,7 @@ data AdvertiserLandingPagesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserLandingPagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +137,7 @@ advertiserLandingPagesList pAlplProFileId_ =
     , _alplArchived = Nothing
     , _alplMaxResults = 1000
     }
+
 
 -- | Select only landing pages that are associated with these campaigns.
 alplCampaignIds :: Lens' AdvertiserLandingPagesList [Int64]

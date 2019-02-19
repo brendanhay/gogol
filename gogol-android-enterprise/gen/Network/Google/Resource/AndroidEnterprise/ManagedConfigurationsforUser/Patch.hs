@@ -79,6 +79,7 @@ data ManagedConfigurationsforUserPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfigurationsforUserPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ managedConfigurationsforUserPatch pMcupEnterpriseId_ pMcupPayload_ pMcupUserId_ 
     , _mcupUserId = pMcupUserId_
     , _mcupManagedConfigurationForUserId = pMcupManagedConfigurationForUserId_
     }
+
 
 -- | The ID of the enterprise.
 mcupEnterpriseId :: Lens' ManagedConfigurationsforUserPatch Text

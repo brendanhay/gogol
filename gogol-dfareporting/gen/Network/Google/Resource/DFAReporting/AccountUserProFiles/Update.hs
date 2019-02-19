@@ -62,6 +62,7 @@ data AccountUserProFilesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountUserProFilesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ accountUserProFilesUpdate pAupfuProFileId_ pAupfuPayload_ =
     { _aupfuProFileId = _Coerce # pAupfuProFileId_
     , _aupfuPayload = pAupfuPayload_
     }
+
 
 -- | User profile ID associated with this request.
 aupfuProFileId :: Lens' AccountUserProFilesUpdate Int64

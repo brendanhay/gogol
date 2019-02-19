@@ -75,6 +75,7 @@ data MattersRemovePermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersRemovePermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ mattersRemovePermissions pMrpPayload_ pMrpMatterId_ =
     , _mrpMatterId = pMrpMatterId_
     , _mrpCallback = Nothing
     }
+
 
 -- | V1 error format.
 mrpXgafv :: Lens' MattersRemovePermissions (Maybe Xgafv)

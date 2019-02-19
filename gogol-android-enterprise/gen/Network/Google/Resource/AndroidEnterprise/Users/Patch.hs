@@ -72,6 +72,7 @@ data UsersPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ usersPatch pUpEnterpriseId_ pUpPayload_ pUpUserId_ =
     , _upPayload = pUpPayload_
     , _upUserId = pUpUserId_
     }
+
 
 -- | The ID of the enterprise.
 upEnterpriseId :: Lens' UsersPatch Text

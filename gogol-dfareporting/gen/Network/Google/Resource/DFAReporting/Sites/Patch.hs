@@ -64,6 +64,7 @@ data SitesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ sitesPatch pSpProFileId_ pSpPayload_ pSpId_ =
     , _spPayload = pSpPayload_
     , _spId = _Coerce # pSpId_
     }
+
 
 -- | User profile ID associated with this request.
 spProFileId :: Lens' SitesPatch Int64

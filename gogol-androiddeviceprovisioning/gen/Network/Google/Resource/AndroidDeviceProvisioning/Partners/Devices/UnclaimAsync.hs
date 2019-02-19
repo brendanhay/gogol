@@ -80,6 +80,7 @@ data PartnersDevicesUnclaimAsync =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersDevicesUnclaimAsync' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ partnersDevicesUnclaimAsync pPduaPartnerId_ pPduaPayload_ =
     , _pduaPayload = pPduaPayload_
     , _pduaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pduaXgafv :: Lens' PartnersDevicesUnclaimAsync (Maybe Xgafv)

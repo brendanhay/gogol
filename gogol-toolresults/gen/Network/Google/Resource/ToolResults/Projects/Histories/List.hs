@@ -78,6 +78,7 @@ data ProjectsHistoriesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsHistoriesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsHistoriesList pPhlProjectId_ =
     , _phlProjectId = pPhlProjectId_
     , _phlPageSize = Nothing
     }
+
 
 -- | If set, only return histories with the given name. Optional.
 phlFilterByName :: Lens' ProjectsHistoriesList (Maybe Text)

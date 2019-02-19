@@ -61,6 +61,7 @@ data CampaignsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CampaignsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ campaignsUpdate
 campaignsUpdate pCuProFileId_ pCuPayload_ =
   CampaignsUpdate'
     {_cuProFileId = _Coerce # pCuProFileId_, _cuPayload = pCuPayload_}
+
 
 -- | User profile ID associated with this request.
 cuProFileId :: Lens' CampaignsUpdate Int64

@@ -62,6 +62,7 @@ data AccountsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ accountsUpdate
 accountsUpdate pAuPath_ pAuPayload_ =
   AccountsUpdate'
     {_auPath = pAuPath_, _auFingerprint = Nothing, _auPayload = pAuPayload_}
+
 
 -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}
 auPath :: Lens' AccountsUpdate Text

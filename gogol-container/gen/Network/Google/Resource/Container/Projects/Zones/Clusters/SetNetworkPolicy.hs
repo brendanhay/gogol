@@ -83,6 +83,7 @@ data ProjectsZonesClustersSetNetworkPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersSetNetworkPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ projectsZonesClustersSetNetworkPolicy pPzcsnpZone_ pPzcsnpPayload_ pPzcsnpCluste
     , _pzcsnpProjectId = pPzcsnpProjectId_
     , _pzcsnpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcsnpXgafv :: Lens' ProjectsZonesClustersSetNetworkPolicy (Maybe Xgafv)

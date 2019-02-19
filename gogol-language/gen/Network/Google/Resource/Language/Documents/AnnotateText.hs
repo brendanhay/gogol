@@ -76,6 +76,7 @@ data DocumentsAnnotateText =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentsAnnotateText' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ documentsAnnotateText pDatPayload_ =
     , _datPayload = pDatPayload_
     , _datCallback = Nothing
     }
+
 
 -- | V1 error format.
 datXgafv :: Lens' DocumentsAnnotateText (Maybe Xgafv)

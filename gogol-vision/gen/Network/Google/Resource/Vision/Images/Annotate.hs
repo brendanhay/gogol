@@ -75,6 +75,7 @@ data ImagesAnnotate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImagesAnnotate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ imagesAnnotate pIaPayload_ =
     , _iaPayload = pIaPayload_
     , _iaCallback = Nothing
     }
+
 
 -- | V1 error format.
 iaXgafv :: Lens' ImagesAnnotate (Maybe Xgafv)

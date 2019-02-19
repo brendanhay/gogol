@@ -94,6 +94,7 @@ data CoursesStudentsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesStudentsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +129,7 @@ coursesStudentsCreate pCscCourseId_ pCscPayload_ =
     , _cscEnrollmentCode = Nothing
     , _cscCallback = Nothing
     }
+
 
 -- | V1 error format.
 cscXgafv :: Lens' CoursesStudentsCreate (Maybe Xgafv)

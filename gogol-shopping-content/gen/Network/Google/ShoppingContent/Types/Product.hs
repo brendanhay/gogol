@@ -28,6 +28,7 @@ newtype OrdersAcknowledgeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersAcknowledgeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36,6 +37,7 @@ newtype OrdersAcknowledgeRequest =
 ordersAcknowledgeRequest
     :: OrdersAcknowledgeRequest
 ordersAcknowledgeRequest = OrdersAcknowledgeRequest' {_oarOperationId = Nothing}
+
 
 -- | The ID of the operation. Unique across all operations for a given order.
 oarOperationId :: Lens' OrdersAcknowledgeRequest (Maybe Text)
@@ -66,6 +68,7 @@ data AccountTax =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountTax' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +83,7 @@ accountTax
 accountTax =
   AccountTax'
     {_atRules = Nothing, _atKind = "content#accountTax", _atAccountId = Nothing}
+
 
 -- | Tax rules. Updating the tax rules will enable US taxes (not reversible).
 -- Defining no rules is equivalent to not charging tax at all.
@@ -124,6 +128,7 @@ data OrderinvoicesCreateRefundInvoiceResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderinvoicesCreateRefundInvoiceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -138,6 +143,7 @@ orderinvoicesCreateRefundInvoiceResponse =
     { _ocrirKind = "content#orderinvoicesCreateRefundInvoiceResponse"
     , _ocrirExecutionStatus = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#orderinvoicesCreateRefundInvoiceResponse\".
@@ -181,6 +187,7 @@ data OrdersUpdateMerchantOrderIdRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersUpdateMerchantOrderIdRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -193,6 +200,7 @@ ordersUpdateMerchantOrderIdRequest
 ordersUpdateMerchantOrderIdRequest =
   OrdersUpdateMerchantOrderIdRequest'
     {_oumoirMerchantOrderId = Nothing, _oumoirOperationId = Nothing}
+
 
 -- | The merchant order id to be assigned to the order. Must be unique per
 -- merchant.
@@ -239,6 +247,7 @@ data OrderReportTransaction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderReportTransaction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -274,6 +283,7 @@ orderReportTransaction =
     , _ortOrderId = Nothing
     , _ortDisbursementAmount = Nothing
     }
+
 
 -- | The ID of the managing account.
 ortMerchantId :: Lens' OrderReportTransaction (Maybe Word64)
@@ -367,6 +377,7 @@ newtype OrdersAdvanceTestOrderResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersAdvanceTestOrderResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -377,6 +388,7 @@ ordersAdvanceTestOrderResponse
 ordersAdvanceTestOrderResponse =
   OrdersAdvanceTestOrderResponse'
     {_oatorKind = "content#ordersAdvanceTestOrderResponse"}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersAdvanceTestOrderResponse\".
@@ -406,6 +418,7 @@ data ProductsCustomBatchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -418,6 +431,7 @@ productsCustomBatchResponse
 productsCustomBatchResponse =
   ProductsCustomBatchResponse'
     {_pcbrEntries = Nothing, _pcbrKind = "content#productsCustomBatchResponse"}
+
 
 -- | The result of the execution of the batch requests.
 pcbrEntries :: Lens' ProductsCustomBatchResponse [ProductsCustomBatchResponseEntry]
@@ -456,6 +470,7 @@ data OrderMerchantProvidedAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderMerchantProvidedAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -467,6 +482,7 @@ orderMerchantProvidedAnnotation
     :: OrderMerchantProvidedAnnotation
 orderMerchantProvidedAnnotation =
   OrderMerchantProvidedAnnotation' {_ompaValue = Nothing, _ompaKey = Nothing}
+
 
 -- | Value for additional merchant provided (as key-value pairs) annotation
 -- about the line item.
@@ -504,6 +520,7 @@ data TestOrderCustomer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestOrderCustomer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -521,6 +538,7 @@ testOrderCustomer =
     , _tocEmail = Nothing
     , _tocMarketingRightsInfo = Nothing
     }
+
 
 -- | Full name of the customer.
 tocFullName :: Lens' TestOrderCustomer (Maybe Text)
@@ -563,6 +581,7 @@ data DatafeedstatusesCustomBatchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedstatusesCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -577,6 +596,7 @@ datafeedstatusesCustomBatchResponse =
     { _dcbrEntries = Nothing
     , _dcbrKind = "content#datafeedstatusesCustomBatchResponse"
     }
+
 
 -- | The result of the execution of the batch requests.
 dcbrEntries :: Lens' DatafeedstatusesCustomBatchResponse [DatafeedstatusesCustomBatchResponseEntry]
@@ -620,6 +640,7 @@ data OrderReturn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderReturn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -643,6 +664,7 @@ orderReturn =
     , _orCreationDate = Nothing
     , _orReasonText = Nothing
     }
+
 
 -- | Quantity that is returned.
 orQuantity :: Lens' OrderReturn (Maybe Word32)
@@ -701,6 +723,7 @@ data AccounttaxCustomBatchResponseEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccounttaxCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -721,6 +744,7 @@ accounttaxCustomBatchResponseEntry =
     , _acbreErrors = Nothing
     , _acbreBatchId = Nothing
     }
+
 
 -- | The retrieved or updated account tax settings.
 acbreAccountTax :: Lens' AccounttaxCustomBatchResponseEntry (Maybe AccountTax)
@@ -784,6 +808,7 @@ data PosSaleResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosSaleResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -822,6 +847,7 @@ posSaleResponse =
     , _psrTimestamp = Nothing
     , _psrSaleId = Nothing
     }
+
 
 -- | The identifier of the merchant\'s store. Either a storeCode inserted via
 -- the API or the code of the store in Google My Business.
@@ -915,6 +941,7 @@ data Amount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Amount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -925,6 +952,7 @@ data Amount =
 amount
     :: Amount
 amount = Amount' {_aTaxAmount = Nothing, _aPriceAmount = Nothing}
+
 
 -- | [required] Tax value.
 aTaxAmount :: Lens' Amount (Maybe Price)
@@ -960,6 +988,7 @@ data AccountsAuthInfoResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsAuthInfoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -974,6 +1003,7 @@ accountsAuthInfoResponse =
     { _aairKind = "content#accountsAuthInfoResponse"
     , _aairAccountIdentifiers = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#accountsAuthInfoResponse\".
@@ -1020,6 +1050,7 @@ data OrderReportDisbursement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderReportDisbursement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1043,6 +1074,7 @@ orderReportDisbursement =
     , _ordDisbursementDate = Nothing
     , _ordDisbursementAmount = Nothing
     }
+
 
 -- | The ID of the managing account.
 ordMerchantId :: Lens' OrderReportDisbursement (Maybe Word64)
@@ -1108,6 +1140,7 @@ data UnitInvoice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnitInvoice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1128,6 +1161,7 @@ unitInvoice =
     , _uiAdditionalCharges = Nothing
     , _uiUnitPrice = Nothing
     }
+
 
 -- | Tax amounts to apply to the unit price.
 uiUnitPriceTaxes :: Lens' UnitInvoice [UnitInvoiceTaxLine]
@@ -1195,6 +1229,7 @@ data PosSale =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosSale' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1233,6 +1268,7 @@ posSale =
     , _psTimestamp = Nothing
     , _psSaleId = Nothing
     }
+
 
 -- | The identifier of the merchant\'s store. Either a storeCode inserted via
 -- the API or the code of the store in Google My Business.
@@ -1330,6 +1366,7 @@ data AccountStatusItemLevelIssue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountStatusItemLevelIssue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1362,6 +1399,7 @@ accountStatusItemLevelIssue =
     , _asiliDescription = Nothing
     , _asiliDetail = Nothing
     }
+
 
 -- | Number of items with this issue.
 asiliNumItems :: Lens' AccountStatusItemLevelIssue (Maybe Int64)
@@ -1444,6 +1482,7 @@ newtype LiaSettingsRequestGmbAccessResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsRequestGmbAccessResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1454,6 +1493,7 @@ liaSettingsRequestGmbAccessResponse
 liaSettingsRequestGmbAccessResponse =
   LiaSettingsRequestGmbAccessResponse'
     {_lsrgarKind = "content#liasettingsRequestGmbAccessResponse"}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#liasettingsRequestGmbAccessResponse\".
@@ -1484,6 +1524,7 @@ data ProductStatusDestinationStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductStatusDestinationStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1496,6 +1537,7 @@ productStatusDestinationStatus
 productStatusDestinationStatus =
   ProductStatusDestinationStatus'
     {_psdsDestination = Nothing, _psdsStatus = Nothing}
+
 
 -- | The name of the destination
 psdsDestination :: Lens' ProductStatusDestinationStatus (Maybe Text)
@@ -1535,6 +1577,7 @@ data AccountTaxTaxRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountTaxTaxRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1558,6 +1601,7 @@ accountTaxTaxRule =
     , _attrLocationId = Nothing
     , _attrRatePercent = Nothing
     }
+
 
 -- | Whether the tax rate is taken from a global tax table or specified
 -- explicitly.
@@ -1622,6 +1666,7 @@ data PostalCodeGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostalCodeGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1636,6 +1681,7 @@ postalCodeGroup
 postalCodeGroup =
   PostalCodeGroup'
     {_pcgCountry = Nothing, _pcgPostalCodeRanges = Nothing, _pcgName = Nothing}
+
 
 -- | The CLDR territory code of the country the postal code group applies to.
 -- Required.
@@ -1680,6 +1726,7 @@ newtype DatafeedsCustomBatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1688,6 +1735,7 @@ newtype DatafeedsCustomBatchRequest =
 datafeedsCustomBatchRequest
     :: DatafeedsCustomBatchRequest
 datafeedsCustomBatchRequest = DatafeedsCustomBatchRequest' {_dEntries = Nothing}
+
 
 -- | The request entries to be processed in the batch.
 dEntries :: Lens' DatafeedsCustomBatchRequest [DatafeedsCustomBatchRequestEntry]
@@ -1715,6 +1763,7 @@ newtype OrdersCancelTestOrderByCustomerResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCancelTestOrderByCustomerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1725,6 +1774,7 @@ ordersCancelTestOrderByCustomerResponse
 ordersCancelTestOrderByCustomerResponse =
   OrdersCancelTestOrderByCustomerResponse'
     {_octobcrKind = "content#ordersCancelTestOrderByCustomerResponse"}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersCancelTestOrderByCustomerResponse\".
@@ -1758,6 +1808,7 @@ data LiaOnDisplayToOrderSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaOnDisplayToOrderSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1770,6 +1821,7 @@ liaOnDisplayToOrderSettings
 liaOnDisplayToOrderSettings =
   LiaOnDisplayToOrderSettings'
     {_lodtosStatus = Nothing, _lodtosShippingCostPolicyURL = Nothing}
+
 
 -- | The status of the ?On display to order? feature.
 lodtosStatus :: Lens' LiaOnDisplayToOrderSettings (Maybe Text)
@@ -1809,6 +1861,7 @@ data AccountAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1832,6 +1885,7 @@ accountAddress =
     , _aaLocality = Nothing
     , _aaRegion = Nothing
     }
+
 
 -- | Street-level part of the address.
 aaStreetAddress :: Lens' AccountAddress (Maybe Text)
@@ -1889,6 +1943,7 @@ data InvoiceSummaryAdditionalChargeSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InvoiceSummaryAdditionalChargeSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1901,6 +1956,7 @@ invoiceSummaryAdditionalChargeSummary
 invoiceSummaryAdditionalChargeSummary =
   InvoiceSummaryAdditionalChargeSummary'
     {_isacsTotalAmount = Nothing, _isacsType = Nothing}
+
 
 -- | [required] Total additional charge for this type.
 isacsTotalAmount :: Lens' InvoiceSummaryAdditionalChargeSummary (Maybe Amount)
@@ -1939,6 +1995,7 @@ data RefundReason =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RefundReason' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1949,6 +2006,7 @@ data RefundReason =
 refundReason
     :: RefundReason
 refundReason = RefundReason' {_rrReasonCode = Nothing, _rrDescription = Nothing}
+
 
 rrReasonCode :: Lens' RefundReason (Maybe Text)
 rrReasonCode
@@ -1984,6 +2042,7 @@ data OrderLineItemShippingDetailsMethod =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderLineItemShippingDetailsMethod' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2004,6 +2063,7 @@ orderLineItemShippingDetailsMethod =
     , _olisdmMaxDaysInTransit = Nothing
     , _olisdmMinDaysInTransit = Nothing
     }
+
 
 -- | The carrier for the shipping. Optional. See shipments[].carrier for a
 -- list of acceptable values.
@@ -2069,6 +2129,7 @@ data Datafeed =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Datafeed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2104,6 +2165,7 @@ datafeed =
     , _dContentType = Nothing
     , _dFileName = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#datafeed\".
@@ -2190,6 +2252,7 @@ data OrdersCreateTestOrderResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCreateTestOrderResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2204,6 +2267,7 @@ ordersCreateTestOrderResponse =
     { _octorKind = "content#ordersCreateTestOrderResponse"
     , _octorOrderId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersCreateTestOrderResponse\".
@@ -2244,6 +2308,7 @@ data AccountsCustomBatchResponseEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2264,6 +2329,7 @@ accountsCustomBatchResponseEntry =
     , _aErrors = Nothing
     , _aBatchId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#accountsCustomBatchResponseEntry\".
@@ -2316,6 +2382,7 @@ data GmbAccounts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GmbAccounts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2326,6 +2393,7 @@ data GmbAccounts =
 gmbAccounts
     :: GmbAccounts
 gmbAccounts = GmbAccounts' {_gaGmbAccounts = Nothing, _gaAccountId = Nothing}
+
 
 -- | A list of GMB accounts which are available to the merchant.
 gaGmbAccounts :: Lens' GmbAccounts [GmbAccountsGmbAccount]
@@ -2365,6 +2433,7 @@ data CustomerReturnReason =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerReturnReason' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2376,6 +2445,7 @@ customerReturnReason
     :: CustomerReturnReason
 customerReturnReason =
   CustomerReturnReason' {_crrReasonCode = Nothing, _crrDescription = Nothing}
+
 
 crrReasonCode :: Lens' CustomerReturnReason (Maybe Text)
 crrReasonCode
@@ -2410,6 +2480,7 @@ data AccountIdentifier =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountIdentifier' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2421,6 +2492,7 @@ accountIdentifier
     :: AccountIdentifier
 accountIdentifier =
   AccountIdentifier' {_aiMerchantId = Nothing, _aiAggregatorId = Nothing}
+
 
 -- | The merchant account ID, set for individual accounts and subaccounts.
 aiMerchantId :: Lens' AccountIdentifier (Maybe Word64)
@@ -2458,6 +2530,7 @@ newtype PosCustomBatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2466,6 +2539,7 @@ newtype PosCustomBatchRequest =
 posCustomBatchRequest
     :: PosCustomBatchRequest
 posCustomBatchRequest = PosCustomBatchRequest' {_pEntries = Nothing}
+
 
 -- | The request entries to be processed in the batch.
 pEntries :: Lens' PosCustomBatchRequest [PosCustomBatchRequestEntry]
@@ -2497,6 +2571,7 @@ data OrderinvoicesCreateChargeInvoiceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderinvoicesCreateChargeInvoiceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2520,6 +2595,7 @@ orderinvoicesCreateChargeInvoiceRequest =
     , _occirInvoiceSummary = Nothing
     , _occirOperationId = Nothing
     }
+
 
 -- | [required] ID of the shipment group.
 occirShipmentGroupId :: Lens' OrderinvoicesCreateChargeInvoiceRequest (Maybe Text)
@@ -2602,6 +2678,7 @@ data OrderLineItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderLineItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2655,6 +2732,7 @@ orderLineItem =
     , _oliProduct = Nothing
     , _oliReturns = Nothing
     }
+
 
 -- | Annotations that are attached to the line item.
 oliAnnotations :: Lens' OrderLineItem [OrderMerchantProvidedAnnotation]
@@ -2810,6 +2888,7 @@ data Service =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Service' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2842,6 +2921,7 @@ service =
     , _sEligibility = Nothing
     , _sMinimumOrderValue = Nothing
     }
+
 
 -- | The CLDR territory code of the country to which the service applies.
 -- Required.
@@ -2929,6 +3009,7 @@ data ProductstatusesCustomBatchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductstatusesCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2943,6 +3024,7 @@ productstatusesCustomBatchResponse =
     { _proEntries = Nothing
     , _proKind = "content#productstatusesCustomBatchResponse"
     }
+
 
 -- | The result of the execution of the batch requests.
 proEntries :: Lens' ProductstatusesCustomBatchResponse [ProductstatusesCustomBatchResponseEntry]
@@ -2983,6 +3065,7 @@ data ProductUnitPricingMeasure =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductUnitPricingMeasure' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2994,6 +3077,7 @@ productUnitPricingMeasure
     :: ProductUnitPricingMeasure
 productUnitPricingMeasure =
   ProductUnitPricingMeasure' {_pupmValue = Nothing, _pupmUnit = Nothing}
+
 
 -- | The measure of an item.
 pupmValue :: Lens' ProductUnitPricingMeasure (Maybe Double)
@@ -3032,6 +3116,7 @@ data OrdersUpdateShipmentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersUpdateShipmentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3058,6 +3143,7 @@ ordersUpdateShipmentRequest =
     , _ousrDeliveryDate = Nothing
     , _ousrOperationId = Nothing
     }
+
 
 -- | The carrier handling the shipment. Not updated if missing. See
 -- shipments[].carrier in the Orders resource representation for a list of
@@ -3128,6 +3214,7 @@ data OrderShipmentLineItemShipment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderShipmentLineItemShipment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3145,6 +3232,7 @@ orderShipmentLineItemShipment =
     , _oslisLineItemId = Nothing
     , _oslisProductId = Nothing
     }
+
 
 -- | The quantity that is shipped.
 oslisQuantity :: Lens' OrderShipmentLineItemShipment (Maybe Word32)
@@ -3193,6 +3281,7 @@ data OrderreportsListTransactionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderreportsListTransactionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3210,6 +3299,7 @@ orderreportsListTransactionsResponse =
     , _oltrTransactions = Nothing
     , _oltrKind = "content#orderreportsListTransactionsResponse"
     }
+
 
 -- | The token for the retrieval of the next page of transactions.
 oltrNextPageToken :: Lens' OrderreportsListTransactionsResponse (Maybe Text)
@@ -3261,6 +3351,7 @@ data LiaSettingsCustomBatchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3275,6 +3366,7 @@ liaSettingsCustomBatchResponse =
     { _lscbrEntries = Nothing
     , _lscbrKind = "content#liasettingsCustomBatchResponse"
     }
+
 
 -- | The result of the execution of the batch requests.
 lscbrEntries :: Lens' LiaSettingsCustomBatchResponse [LiaSettingsCustomBatchResponseEntry]
@@ -3316,6 +3408,7 @@ data LoyaltyPoints =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LoyaltyPoints' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3330,6 +3423,7 @@ loyaltyPoints
 loyaltyPoints =
   LoyaltyPoints'
     {_lpRatio = Nothing, _lpPointsValue = Nothing, _lpName = Nothing}
+
 
 -- | The ratio of a point when converted to currency. Google assumes currency
 -- based on Merchant Center settings. If ratio is left out, it defaults to
@@ -3375,6 +3469,7 @@ newtype LiaSettingsSetPosDataProviderResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsSetPosDataProviderResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3385,6 +3480,7 @@ liaSettingsSetPosDataProviderResponse
 liaSettingsSetPosDataProviderResponse =
   LiaSettingsSetPosDataProviderResponse'
     {_lsspdprKind = "content#liasettingsSetPosDataProviderResponse"}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#liasettingsSetPosDataProviderResponse\".
@@ -3421,6 +3517,7 @@ data AccountStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3444,6 +3541,7 @@ accountStatus =
     , _asProducts = Nothing
     , _asWebsiteClaimed = Nothing
     }
+
 
 -- | A list of account level issues.
 asAccountLevelIssues :: Lens' AccountStatus [AccountStatusAccountLevelIssue]
@@ -3511,6 +3609,7 @@ data ShippingSettingsCustomBatchRequestEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3534,6 +3633,7 @@ shippingSettingsCustomBatchRequestEntry =
     , _sscbreShippingSettings = Nothing
     , _sscbreBatchId = Nothing
     }
+
 
 -- | The ID of the managing account.
 sscbreMerchantId :: Lens' ShippingSettingsCustomBatchRequestEntry (Maybe Word64)
@@ -3609,6 +3709,7 @@ data PosInventoryResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosInventoryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3644,6 +3745,7 @@ posInventoryResponse =
     , _pirContentLanguage = Nothing
     , _pirTimestamp = Nothing
     }
+
 
 -- | The identifier of the merchant\'s store. Either a storeCode inserted via
 -- the API or the code of the store in Google My Business.
@@ -3728,6 +3830,7 @@ newtype AccountstatusesCustomBatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountstatusesCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3737,6 +3840,7 @@ accountstatusesCustomBatchRequest
     :: AccountstatusesCustomBatchRequest
 accountstatusesCustomBatchRequest =
   AccountstatusesCustomBatchRequest' {_acbrEntries = Nothing}
+
 
 -- | The request entries to be processed in the batch.
 acbrEntries :: Lens' AccountstatusesCustomBatchRequest [AccountstatusesCustomBatchRequestEntry]
@@ -3769,6 +3873,7 @@ data AccounttaxListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccounttaxListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3786,6 +3891,7 @@ accounttaxListResponse =
     , _alrKind = "content#accounttaxListResponse"
     , _alrResources = Nothing
     }
+
 
 -- | The token for the retrieval of the next page of account tax settings.
 alrNextPageToken :: Lens' AccounttaxListResponse (Maybe Text)
@@ -3829,6 +3935,7 @@ newtype LiaSettingsRequestInventoryVerificationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsRequestInventoryVerificationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3839,6 +3946,7 @@ liaSettingsRequestInventoryVerificationResponse
 liaSettingsRequestInventoryVerificationResponse =
   LiaSettingsRequestInventoryVerificationResponse'
     {_lsrivrKind = "content#liasettingsRequestInventoryVerificationResponse"}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#liasettingsRequestInventoryVerificationResponse\".
@@ -3873,6 +3981,7 @@ data OrderinvoicesCreateChargeInvoiceResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderinvoicesCreateChargeInvoiceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3887,6 +3996,7 @@ orderinvoicesCreateChargeInvoiceResponse =
     { _occirKind = "content#orderinvoicesCreateChargeInvoiceResponse"
     , _occirExecutionStatus = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#orderinvoicesCreateChargeInvoiceResponse\".
@@ -3929,6 +4039,7 @@ newtype DatafeedsFetchNowResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsFetchNowResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3938,6 +4049,7 @@ datafeedsFetchNowResponse
     :: DatafeedsFetchNowResponse
 datafeedsFetchNowResponse =
   DatafeedsFetchNowResponse' {_dfnrKind = "content#datafeedsFetchNowResponse"}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#datafeedsFetchNowResponse\".
@@ -3965,6 +4077,7 @@ data OrdersGetTestOrderTemplateResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersGetTestOrderTemplateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3979,6 +4092,7 @@ ordersGetTestOrderTemplateResponse =
     { _ogtotrKind = "content#ordersGetTestOrderTemplateResponse"
     , _ogtotrTemplate = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersGetTestOrderTemplateResponse\".
@@ -4026,6 +4140,7 @@ data AccountsCustomBatchRequestEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4058,6 +4173,7 @@ accountsCustomBatchRequestEntry =
     , _accBatchId = Nothing
     , _accLinkRequest = Nothing
     }
+
 
 -- | The ID of the managing account.
 accMerchantId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word64)
@@ -4143,6 +4259,7 @@ data Weight =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Weight' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4153,6 +4270,7 @@ data Weight =
 weight
     :: Weight
 weight = Weight' {_wValue = Nothing, _wUnit = Nothing}
+
 
 -- | The weight represented as a number.
 wValue :: Lens' Weight (Maybe Text)
@@ -4183,6 +4301,7 @@ data OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4195,6 +4314,7 @@ orderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
 orderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption =
   OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption'
     {_ocbrecriroReason = Nothing, _ocbrecriroDescription = Nothing}
+
 
 -- | [required] Reason for the refund.
 ocbrecriroReason :: Lens' OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption (Maybe Text)
@@ -4238,6 +4358,7 @@ data LiaSettingsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4255,6 +4376,7 @@ liaSettingsListResponse =
     , _lslrKind = "content#liasettingsListResponse"
     , _lslrResources = Nothing
     }
+
 
 -- | The token for the retrieval of the next page of LIA settings.
 lslrNextPageToken :: Lens' LiaSettingsListResponse (Maybe Text)
@@ -4302,6 +4424,7 @@ data Error' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Error' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4314,6 +4437,7 @@ data Error' =
 error'
     :: Error'
 error' = Error'' {_eDomain = Nothing, _eReason = Nothing, _eMessage = Nothing}
+
 
 -- | The domain of the error.
 eDomain :: Lens' Error' (Maybe Text)
@@ -4353,6 +4477,7 @@ data ProductstatusesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductstatusesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4370,6 +4495,7 @@ productstatusesListResponse =
     , _plrKind = "content#productstatusesListResponse"
     , _plrResources = Nothing
     }
+
 
 -- | The token for the retrieval of the next page of products statuses.
 plrNextPageToken :: Lens' ProductstatusesListResponse (Maybe Text)
@@ -4416,6 +4542,7 @@ data OrderPromotionItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderPromotionItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4430,6 +4557,7 @@ orderPromotionItem
 orderPromotionItem =
   OrderPromotionItem'
     {_opiQuantity = Nothing, _opiLineItemId = Nothing, _opiProductId = Nothing}
+
 
 -- | The quantity of the associated product.
 opiQuantity :: Lens' OrderPromotionItem (Maybe Int32)
@@ -4471,6 +4599,7 @@ data PosCustomBatchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4483,6 +4612,7 @@ posCustomBatchResponse
 posCustomBatchResponse =
   PosCustomBatchResponse'
     {_posEntries = Nothing, _posKind = "content#posCustomBatchResponse"}
+
 
 -- | The result of the execution of the batch requests.
 posEntries :: Lens' PosCustomBatchResponse [PosCustomBatchResponseEntry]
@@ -4521,6 +4651,7 @@ data OrdersCreateTestOrderRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCreateTestOrderRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4538,6 +4669,7 @@ ordersCreateTestOrderRequest =
     , _octorCountry = Nothing
     , _octorTestOrder = Nothing
     }
+
 
 -- | The test order template to use. Specify as an alternative to testOrder
 -- as a shortcut for retrieving a template and then creating an order using
@@ -4589,6 +4721,7 @@ data AccountUser =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountUser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4612,6 +4745,7 @@ accountUser =
     , _auEmailAddress = Nothing
     , _auPaymentsAnalyst = Nothing
     }
+
 
 -- | Whether user is an admin.
 auAdmin :: Lens' AccountUser (Maybe Bool)
@@ -4671,6 +4805,7 @@ data AccountCustomerService =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountCustomerService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4685,6 +4820,7 @@ accountCustomerService
 accountCustomerService =
   AccountCustomerService'
     {_acsEmail = Nothing, _acsURL = Nothing, _acsPhoneNumber = Nothing}
+
 
 -- | Customer service email.
 acsEmail :: Lens' AccountCustomerService (Maybe Text)
@@ -4726,6 +4862,7 @@ data GmbAccountsGmbAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GmbAccountsGmbAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4746,6 +4883,7 @@ gmbAccountsGmbAccount =
     , _gagaName = Nothing
     , _gagaType = Nothing
     }
+
 
 -- | The email which identifies the GMB account.
 gagaEmail :: Lens' GmbAccountsGmbAccount (Maybe Text)
@@ -4794,6 +4932,7 @@ data OrdersInStoreRefundLineItemResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersInStoreRefundLineItemResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4808,6 +4947,7 @@ ordersInStoreRefundLineItemResponse =
     { _oisrlirKind = "content#ordersInStoreRefundLineItemResponse"
     , _oisrlirExecutionStatus = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersInStoreRefundLineItemResponse\".
@@ -4852,6 +4992,7 @@ data DatafeedsCustomBatchRequestEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4875,6 +5016,7 @@ datafeedsCustomBatchRequestEntry =
     , _dcbreDatafeedId = Nothing
     , _dcbreBatchId = Nothing
     }
+
 
 -- | The ID of the managing account.
 dcbreMerchantId :: Lens' DatafeedsCustomBatchRequestEntry (Maybe Word64)
@@ -4938,6 +5080,7 @@ data OrderCustomerMarketingRightsInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderCustomerMarketingRightsInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4955,6 +5098,7 @@ orderCustomerMarketingRightsInfo =
     , _ocmriMarketingEmailAddress = Nothing
     , _ocmriLastUpdatedTimestamp = Nothing
     }
+
 
 -- | Last known user selection regarding marketing preferences. In certain
 -- cases this selection might not be known, so this field would be empty.
@@ -5012,6 +5156,7 @@ data MerchantOrderReturnItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MerchantOrderReturnItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5038,6 +5183,7 @@ merchantOrderReturnItem =
     , _moriItemId = Nothing
     , _moriProduct = Nothing
     }
+
 
 moriReturnShipmentIds :: Lens' MerchantOrderReturnItem [Text]
 moriReturnShipmentIds
@@ -5107,6 +5253,7 @@ data AccountStatusAccountLevelIssue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountStatusAccountLevelIssue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5136,6 +5283,7 @@ accountStatusAccountLevelIssue =
     , _asaliTitle = Nothing
     , _asaliDetail = Nothing
     }
+
 
 -- | The destination the issue applies to.
 asaliDestination :: Lens' AccountStatusAccountLevelIssue (Maybe Text)
@@ -5213,6 +5361,7 @@ data Value =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5236,6 +5385,7 @@ value =
     , _vSubtableName = Nothing
     , _vNoShipping = Nothing
     }
+
 
 -- | A percentage of the price represented as a number in decimal notation
 -- (e.g., \"5.4\"). Can only be set if all other fields are not set.
@@ -5299,6 +5449,7 @@ data Installment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Installment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5309,6 +5460,7 @@ data Installment =
 installment
     :: Installment
 installment = Installment' {_iAmount = Nothing, _iMonths = Nothing}
+
 
 -- | The amount the buyer has to pay per month.
 iAmount :: Lens' Installment (Maybe Price)
@@ -5354,6 +5506,7 @@ data DatafeedFetchSchedule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedFetchSchedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5389,6 +5542,7 @@ datafeedFetchSchedule =
     , _dfsTimeZone = Nothing
     , _dfsPaused = Nothing
     }
+
 
 -- | The URL where the feed file can be fetched. Google Merchant Center will
 -- support automatic scheduled uploads using the HTTP, HTTPS, FTP, or SFTP
@@ -5484,6 +5638,7 @@ data PosStore =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosStore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5501,6 +5656,7 @@ posStore =
     , _pssKind = "content#posStore"
     , _pssStoreAddress = Nothing
     }
+
 
 -- | A store identifier that is unique for the given merchant.
 pssStoreCode :: Lens' PosStore (Maybe Text)
@@ -5543,6 +5699,7 @@ newtype LiaSettingsSetInventoryVerificationContactResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsSetInventoryVerificationContactResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5555,6 +5712,7 @@ liaSettingsSetInventoryVerificationContactResponse =
     { _lssivcrKind =
         "content#liasettingsSetInventoryVerificationContactResponse"
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#liasettingsSetInventoryVerificationContactResponse\".
@@ -5590,6 +5748,7 @@ data ShippingSettingsGetSupportedCarriersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsGetSupportedCarriersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5604,6 +5763,7 @@ shippingSettingsGetSupportedCarriersResponse =
     { _ssgscrKind = "content#shippingsettingsGetSupportedCarriersResponse"
     , _ssgscrCarriers = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#shippingsettingsGetSupportedCarriersResponse\".
@@ -5651,6 +5811,7 @@ data PosDataProvidersPosDataProvider =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosDataProvidersPosDataProvider' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5668,6 +5829,7 @@ posDataProvidersPosDataProvider =
     , _pdppdpFullName = Nothing
     , _pdppdpDisplayName = Nothing
     }
+
 
 -- | The ID of the account.
 pdppdpProviderId :: Lens' PosDataProvidersPosDataProvider (Maybe Word64)
@@ -5718,6 +5880,7 @@ data HolidaysHoliday =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HolidaysHoliday' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5744,6 +5907,7 @@ holidaysHoliday =
     , _hhId = Nothing
     , _hhType = Nothing
     }
+
 
 -- | Hour of the day in the delivery location\'s timezone on the guaranteed
 -- delivery date by which the order has to arrive at the customer\'s.
@@ -5818,6 +5982,7 @@ data AccountsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5835,6 +6000,7 @@ accountsListResponse =
     , _accKind = "content#accountsListResponse"
     , _accResources = Nothing
     }
+
 
 -- | The token for the retrieval of the next page of accounts.
 accNextPageToken :: Lens' AccountsListResponse (Maybe Text)
@@ -5880,6 +6046,7 @@ data AccountBusinessInformation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountBusinessInformation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5897,6 +6064,7 @@ accountBusinessInformation =
     , _abiPhoneNumber = Nothing
     , _abiCustomerService = Nothing
     }
+
 
 -- | The address of the business.
 abiAddress :: Lens' AccountBusinessInformation (Maybe AccountAddress)
@@ -5941,6 +6109,7 @@ data CarriersCarrier =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CarriersCarrier' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5955,6 +6124,7 @@ carriersCarrier
 carriersCarrier =
   CarriersCarrier'
     {_ccCountry = Nothing, _ccName = Nothing, _ccServices = Nothing}
+
 
 -- | The CLDR country code of the carrier (e.g., \"US\"). Always present.
 ccCountry :: Lens' CarriersCarrier (Maybe Text)
@@ -6002,6 +6172,7 @@ data CarrierRate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CarrierRate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6028,6 +6199,7 @@ carrierRate =
     , _crPercentageAdjustment = Nothing
     , _crCarrierName = Nothing
     }
+
 
 -- | Shipping origin for this carrier rate. Required.
 crOriginPostalCode :: Lens' CarrierRate (Maybe Text)
@@ -6105,6 +6277,7 @@ data ShippingSettingsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6122,6 +6295,7 @@ shippingSettingsListResponse =
     , _sslrKind = "content#shippingsettingsListResponse"
     , _sslrResources = Nothing
     }
+
 
 -- | The token for the retrieval of the next page of shipping settings.
 sslrNextPageToken :: Lens' ShippingSettingsListResponse (Maybe Text)
@@ -6168,6 +6342,7 @@ data OrdersCreateTestReturnResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCreateTestReturnResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6182,6 +6357,7 @@ ordersCreateTestReturnResponse =
     { _octrrKind = "content#ordersCreateTestReturnResponse"
     , _octrrReturnId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersCreateTestReturnResponse\".
@@ -6223,6 +6399,7 @@ data OrdersShipLineItemsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersShipLineItemsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6243,6 +6420,7 @@ ordersShipLineItemsRequest =
     , _oslirLineItems = Nothing
     , _oslirOperationId = Nothing
     }
+
 
 -- | ID of the shipment group. Required for orders that use the orderinvoices
 -- service.
@@ -6303,6 +6481,7 @@ data OrderreturnsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderreturnsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6320,6 +6499,7 @@ orderreturnsListResponse =
     , _olrKind = "content#orderreturnsListResponse"
     , _olrResources = Nothing
     }
+
 
 -- | The token for the retrieval of the next page of returns.
 olrNextPageToken :: Lens' OrderreturnsListResponse (Maybe Text)
@@ -6364,6 +6544,7 @@ data AccountsCustomBatchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6378,6 +6559,7 @@ accountsCustomBatchResponse =
     { _acbrcEntries = Nothing
     , _acbrcKind = "content#accountsCustomBatchResponse"
     }
+
 
 -- | The result of the execution of the batch requests.
 acbrcEntries :: Lens' AccountsCustomBatchResponse [AccountsCustomBatchResponseEntry]
@@ -6420,6 +6602,7 @@ data OrdersUpdateLineItemShippingDetailsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersUpdateLineItemShippingDetailsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6443,6 +6626,7 @@ ordersUpdateLineItemShippingDetailsRequest =
     , _oulisdrOperationId = Nothing
     , _oulisdrProductId = Nothing
     }
+
 
 -- | Updated ship by date, in ISO 8601 format. If not specified only deliver
 -- by date is updated.
@@ -6517,6 +6701,7 @@ data MerchantOrderReturn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MerchantOrderReturn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6543,6 +6728,7 @@ merchantOrderReturn =
     , _morOrderId = Nothing
     , _morOrderReturnId = Nothing
     }
+
 
 morReturnShipments :: Lens' MerchantOrderReturn [ReturnShipment]
 morReturnShipments
@@ -6613,6 +6799,7 @@ data ProductTax =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductTax' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6639,6 +6826,7 @@ productTax =
     , _ptRegion = Nothing
     , _ptLocationId = Nothing
     }
+
 
 -- | Set to true if tax is charged on shipping.
 ptTaxShip :: Lens' ProductTax (Maybe Bool)
@@ -6712,6 +6900,7 @@ data PosCustomBatchRequestEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6744,6 +6933,7 @@ posCustomBatchRequestEntry =
     , _pcbreSale = Nothing
     , _pcbreBatchId = Nothing
     }
+
 
 -- | The ID of the POS data provider.
 pcbreMerchantId :: Lens' PosCustomBatchRequestEntry (Maybe Word64)
@@ -6831,6 +7021,7 @@ data OrderShipment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderShipment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6860,6 +7051,7 @@ orderShipment =
     , _osCreationDate = Nothing
     , _osDeliveryDate = Nothing
     }
+
 
 -- | The carrier handling the shipment. Acceptable values for US are: -
 -- \"gsx\" - \"ups\" - \"usps\" - \"fedex\" - \"dhl\" - \"ecourier\" -
@@ -6935,6 +7127,7 @@ newtype AccountsLinkResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsLinkResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6944,6 +7137,7 @@ accountsLinkResponse
     :: AccountsLinkResponse
 accountsLinkResponse =
   AccountsLinkResponse' {_alrlKind = "content#accountsLinkResponse"}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#accountsLinkResponse\".
@@ -6971,6 +7165,7 @@ data OrderLineItemReturnInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderLineItemReturnInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6988,6 +7183,7 @@ orderLineItemReturnInfo =
     , _oliriPolicyURL = Nothing
     , _oliriDaysToReturn = Nothing
     }
+
 
 -- | Whether the item is returnable.
 oliriIsReturnable :: Lens' OrderLineItemReturnInfo (Maybe Bool)
@@ -7045,6 +7241,7 @@ data Account =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7086,6 +7283,7 @@ account =
     , _aaGoogleMyBusinessLink = Nothing
     , _aaAdultContent = Nothing
     }
+
 
 -- | Users with access to the account. Every account (except for subaccounts)
 -- must have at least one admin user.
@@ -7205,6 +7403,7 @@ data ShipmentTrackingInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShipmentTrackingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7216,6 +7415,7 @@ shipmentTrackingInfo
     :: ShipmentTrackingInfo
 shipmentTrackingInfo =
   ShipmentTrackingInfo' {_stiCarrier = Nothing, _stiTrackingNumber = Nothing}
+
 
 stiCarrier :: Lens' ShipmentTrackingInfo (Maybe Text)
 stiCarrier
@@ -7253,6 +7453,7 @@ data OrdersCancelLineItemRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCancelLineItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7279,6 +7480,7 @@ ordersCancelLineItemRequest =
     , _oclirProductId = Nothing
     , _oclirReasonText = Nothing
     }
+
 
 -- | The quantity to cancel.
 oclirQuantity :: Lens' OrdersCancelLineItemRequest (Maybe Word32)
@@ -7349,6 +7551,7 @@ data ProductShippingWeight =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductShippingWeight' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7360,6 +7563,7 @@ productShippingWeight
     :: ProductShippingWeight
 productShippingWeight =
   ProductShippingWeight' {_pswValue = Nothing, _pswUnit = Nothing}
+
 
 -- | The weight of the product used to calculate the shipping cost of the
 -- item.
@@ -7399,6 +7603,7 @@ data AccountstatusesCustomBatchRequestEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7422,6 +7627,7 @@ accountstatusesCustomBatchRequestEntry =
     , _acbrecMethod = Nothing
     , _acbrecBatchId = Nothing
     }
+
 
 -- | The ID of the managing account.
 acbrecMerchantId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word64)
@@ -7495,6 +7701,7 @@ data DeliveryTime =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeliveryTime' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7521,6 +7728,7 @@ deliveryTime =
     , _dtMaxTransitTimeInDays = Nothing
     , _dtMaxHandlingTimeInDays = Nothing
     }
+
 
 -- | Holiday cutoff definitions. If configured, they specify order cutoff
 -- times for holiday-specific shipping.
@@ -7612,6 +7820,7 @@ data LiaCountrySettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaCountrySettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7641,6 +7850,7 @@ liaCountrySettings =
     , _lcsHostedLocalStorefrontActive = Nothing
     , _lcsOnDisplayToOrder = Nothing
     }
+
 
 -- | The POS data provider linked with this country.
 lcsPosDataProvider :: Lens' LiaCountrySettings (Maybe LiaPosDataProvider)
@@ -7714,6 +7924,7 @@ data OrdersReturnRefundLineItemResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersReturnRefundLineItemResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7728,6 +7939,7 @@ ordersReturnRefundLineItemResponse =
     { _orrlirKind = "content#ordersReturnRefundLineItemResponse"
     , _orrlirExecutionStatus = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersReturnRefundLineItemResponse\".
@@ -7771,6 +7983,7 @@ data ProductstatusesCustomBatchResponseEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7791,6 +8004,7 @@ productstatusesCustomBatchResponseEntry =
     , _pErrors = Nothing
     , _pBatchId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#productstatusesCustomBatchResponseEntry\".
@@ -7848,6 +8062,7 @@ data ShippingSettingsGetSupportedHolidaysResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsGetSupportedHolidaysResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7862,6 +8077,7 @@ shippingSettingsGetSupportedHolidaysResponse =
     { _ssgshrKind = "content#shippingsettingsGetSupportedHolidaysResponse"
     , _ssgshrHolidays = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#shippingsettingsGetSupportedHolidaysResponse\".
@@ -7908,6 +8124,7 @@ data LiaPosDataProvider =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaPosDataProvider' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7920,6 +8137,7 @@ liaPosDataProvider
 liaPosDataProvider =
   LiaPosDataProvider'
     {_lpdpPosExternalAccountId = Nothing, _lpdpPosDataProviderId = Nothing}
+
 
 -- | The account ID by which this merchant is known to the POS data provider.
 lpdpPosExternalAccountId :: Lens' LiaPosDataProvider (Maybe Text)
@@ -7960,6 +8178,7 @@ data DatafeedFormat =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedFormat' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7977,6 +8196,7 @@ datafeedFormat =
     , _dfFileEncoding = Nothing
     , _dfColumnDelimiter = Nothing
     }
+
 
 -- | Specifies how double quotes are interpreted. If not specified, the mode
 -- will be auto-detected. Ignored for non-DSV data feeds.
@@ -8028,6 +8248,7 @@ data LiaSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8045,6 +8266,7 @@ liaSettings =
     , _lsKind = "content#liaSettings"
     , _lsAccountId = Nothing
     }
+
 
 -- | The LIA settings for each country.
 lsCountrySettings :: Lens' LiaSettings [LiaCountrySettings]
@@ -8097,6 +8319,7 @@ data ProductShipping =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductShipping' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8126,6 +8349,7 @@ productShipping =
     , _pRegion = Nothing
     , _pLocationId = Nothing
     }
+
 
 -- | A free-form description of the service class or delivery speed.
 pService :: Lens' ProductShipping (Maybe Text)
@@ -8195,6 +8419,7 @@ newtype ShippingSettingsCustomBatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8204,6 +8429,7 @@ shippingSettingsCustomBatchRequest
     :: ShippingSettingsCustomBatchRequest
 shippingSettingsCustomBatchRequest =
   ShippingSettingsCustomBatchRequest' {_sscbrEntries = Nothing}
+
 
 -- | The request entries to be processed in the batch.
 sscbrEntries :: Lens' ShippingSettingsCustomBatchRequest [ShippingSettingsCustomBatchRequestEntry]
@@ -8239,6 +8465,7 @@ data LiaSettingsCustomBatchResponseEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8265,6 +8492,7 @@ liaSettingsCustomBatchResponseEntry =
     , _lscbrePosDataProviders = Nothing
     , _lscbreBatchId = Nothing
     }
+
 
 -- | The the list of accessible GMB accounts.
 lscbreGmbAccounts :: Lens' LiaSettingsCustomBatchResponseEntry (Maybe GmbAccounts)
@@ -8338,6 +8566,7 @@ newtype AccountsCustomBatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8346,6 +8575,7 @@ newtype AccountsCustomBatchRequest =
 accountsCustomBatchRequest
     :: AccountsCustomBatchRequest
 accountsCustomBatchRequest = AccountsCustomBatchRequest' {_aEntries = Nothing}
+
 
 -- | The request entries to be processed in the batch.
 aEntries :: Lens' AccountsCustomBatchRequest [AccountsCustomBatchRequestEntry]
@@ -8378,6 +8608,7 @@ data PosCustomBatchResponseEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8404,6 +8635,7 @@ posCustomBatchResponseEntry =
     , _pcbrecSale = Nothing
     , _pcbrecBatchId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#posCustomBatchResponseEntry\".
@@ -8472,6 +8704,7 @@ data OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8484,6 +8717,7 @@ orderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
 orderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption =
   OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption'
     {_oReason = Nothing, _oDescription = Nothing}
+
 
 -- | [required] Reason for the return.
 oReason :: Lens' OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption (Maybe Text)
@@ -8524,6 +8758,7 @@ data OrdersListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8541,6 +8776,7 @@ ordersListResponse =
     , _oKind = "content#ordersListResponse"
     , _oResources = Nothing
     }
+
 
 -- | The token for the retrieval of the next page of orders.
 oNextPageToken :: Lens' OrdersListResponse (Maybe Text)
@@ -8585,6 +8821,7 @@ data OrdersUpdateLineItemShippingDetailsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersUpdateLineItemShippingDetailsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8599,6 +8836,7 @@ ordersUpdateLineItemShippingDetailsResponse =
     { _oulisdrKind = "content#ordersUpdateLineItemShippingDetailsResponse"
     , _oulisdrExecutionStatus = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersUpdateLineItemShippingDetailsResponse\".
@@ -8649,6 +8887,7 @@ data Headers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Headers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8672,6 +8911,7 @@ headers =
     , _hWeights = Nothing
     , _hLocations = Nothing
     }
+
 
 -- | A list of inclusive number of items upper bounds. The last value can be
 -- \"infinity\". For example [\"10\", \"50\", \"infinity\"] represents the
@@ -8760,6 +9000,7 @@ data UnitInvoiceAdditionalCharge =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnitInvoiceAdditionalCharge' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8777,6 +9018,7 @@ unitInvoiceAdditionalCharge =
     , _uiacAdditionalChargeAmount = Nothing
     , _uiacType = Nothing
     }
+
 
 -- | Promotions applied to the additional charge.
 uiacAdditionalChargePromotions :: Lens' UnitInvoiceAdditionalCharge [Promotion]
@@ -8824,6 +9066,7 @@ data OrdersShipLineItemsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersShipLineItemsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8838,6 +9081,7 @@ ordersShipLineItemsResponse =
     { _oslirKind = "content#ordersShipLineItemsResponse"
     , _oslirExecutionStatus = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersShipLineItemsResponse\".
@@ -8877,6 +9121,7 @@ data UnitInvoiceTaxLine =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnitInvoiceTaxLine' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8891,6 +9136,7 @@ unitInvoiceTaxLine
 unitInvoiceTaxLine =
   UnitInvoiceTaxLine'
     {_uitlTaxName = Nothing, _uitlTaxType = Nothing, _uitlTaxAmount = Nothing}
+
 
 -- | Optional name of the tax type. This should only be provided if taxType
 -- is otherFeeTax.
@@ -8933,6 +9179,7 @@ newtype OrdersCreateTestReturnRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCreateTestReturnRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8942,6 +9189,7 @@ ordersCreateTestReturnRequest
     :: OrdersCreateTestReturnRequest
 ordersCreateTestReturnRequest =
   OrdersCreateTestReturnRequest' {_octrrItems = Nothing}
+
 
 -- | Returned items.
 octrrItems :: Lens' OrdersCreateTestReturnRequest [OrdersCustomBatchRequestEntryCreateTestReturnReturnItem]
@@ -8973,6 +9221,7 @@ data ShippingSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8990,6 +9239,7 @@ shippingSettings =
     , _ssAccountId = Nothing
     , _ssServices = Nothing
     }
+
 
 -- | A list of postal code groups that can be referred to in services.
 -- Optional.
@@ -9041,6 +9291,7 @@ data ProductAmount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductAmount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9058,6 +9309,7 @@ productAmount =
     , _paTaxAmount = Nothing
     , _paPriceAmount = Nothing
     }
+
 
 -- | Remitted tax value.
 paRemittedTaxAmount :: Lens' ProductAmount (Maybe Price)
@@ -9101,6 +9353,7 @@ data PostalCodeRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostalCodeRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9113,6 +9366,7 @@ postalCodeRange
 postalCodeRange =
   PostalCodeRange'
     {_pcrPostalCodeRangeBegin = Nothing, _pcrPostalCodeRangeEnd = Nothing}
+
 
 -- | A postal code or a pattern of the form prefix* denoting the inclusive
 -- lower bound of the range defining the area. Examples values: \"94108\",
@@ -9160,6 +9414,7 @@ data OrdersUpdateShipmentResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersUpdateShipmentResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9174,6 +9429,7 @@ ordersUpdateShipmentResponse =
     { _ousrKind = "content#ordersUpdateShipmentResponse"
     , _ousrExecutionStatus = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersUpdateShipmentResponse\".
@@ -9210,6 +9466,7 @@ newtype ProductstatusesCustomBatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductstatusesCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9219,6 +9476,7 @@ productstatusesCustomBatchRequest
     :: ProductstatusesCustomBatchRequest
 productstatusesCustomBatchRequest =
   ProductstatusesCustomBatchRequest' {_pcbrcEntries = Nothing}
+
 
 -- | The request entries to be processed in the batch.
 pcbrcEntries :: Lens' ProductstatusesCustomBatchRequest [ProductstatusesCustomBatchRequestEntry]
@@ -9250,6 +9508,7 @@ data AccountYouTubeChannelLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountYouTubeChannelLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9261,6 +9520,7 @@ accountYouTubeChannelLink
     :: AccountYouTubeChannelLink
 accountYouTubeChannelLink =
   AccountYouTubeChannelLink' {_aytclStatus = Nothing, _aytclChannelId = Nothing}
+
 
 -- | Status of the link between this Merchant Center account and the YouTube
 -- channel. Upon retrieval, it represents the actual status of the link and
@@ -9305,6 +9565,7 @@ data AccountAdsLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountAdsLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9315,6 +9576,7 @@ data AccountAdsLink =
 accountAdsLink
     :: AccountAdsLink
 accountAdsLink = AccountAdsLink' {_aalStatus = Nothing, _aalAdsId = Nothing}
+
 
 -- | Status of the link between this Merchant Center account and the Ads
 -- account. Upon retrieval, it represents the actual status of the link and
@@ -9359,6 +9621,7 @@ data LiaAboutPageSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaAboutPageSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9370,6 +9633,7 @@ liaAboutPageSettings
     :: LiaAboutPageSettings
 liaAboutPageSettings =
   LiaAboutPageSettings' {_lapsStatus = Nothing, _lapsURL = Nothing}
+
 
 -- | The status of the verification process for the About page.
 lapsStatus :: Lens' LiaAboutPageSettings (Maybe Text)
@@ -9402,6 +9666,7 @@ newtype LiaSettingsCustomBatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9411,6 +9676,7 @@ liaSettingsCustomBatchRequest
     :: LiaSettingsCustomBatchRequest
 liaSettingsCustomBatchRequest =
   LiaSettingsCustomBatchRequest' {_lEntries = Nothing}
+
 
 -- | The request entries to be processed in the batch.
 lEntries :: Lens' LiaSettingsCustomBatchRequest [LiaSettingsCustomBatchRequestEntry]
@@ -9440,6 +9706,7 @@ data CustomAttribute =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomAttribute' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9454,6 +9721,7 @@ customAttribute
 customAttribute =
   CustomAttribute'
     {_caGroupValues = Nothing, _caValue = Nothing, _caName = Nothing}
+
 
 -- | Subattributes within this attribute group. Exactly one of value or
 -- groupValues must be provided.
@@ -9503,6 +9771,7 @@ data PosInventoryRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosInventoryRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9535,6 +9804,7 @@ posInventoryRequest =
     , _posContentLanguage = Nothing
     , _posTimestamp = Nothing
     }
+
 
 -- | The identifier of the merchant\'s store. Either a storeCode inserted via
 -- the API or the code of the store in Google My Business.
@@ -9612,6 +9882,7 @@ data AccountstatusesCustomBatchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountstatusesCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9626,6 +9897,7 @@ accountstatusesCustomBatchResponse =
     { _acccEntries = Nothing
     , _acccKind = "content#accountstatusesCustomBatchResponse"
     }
+
 
 -- | The result of the execution of the batch requests.
 acccEntries :: Lens' AccountstatusesCustomBatchResponse [AccountstatusesCustomBatchResponseEntry]
@@ -9669,6 +9941,7 @@ data ShippingSettingsCustomBatchResponseEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9689,6 +9962,7 @@ shippingSettingsCustomBatchResponseEntry =
     , _sErrors = Nothing
     , _sBatchId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#shippingsettingsCustomBatchResponseEntry\".
@@ -9754,6 +10028,7 @@ data ProductStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9789,6 +10064,7 @@ productStatus =
     , _ppProductId = Nothing
     , _ppItemLevelIssues = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#productStatus\".
@@ -9882,6 +10158,7 @@ data AccountstatusesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountstatusesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9899,6 +10176,7 @@ accountstatusesListResponse =
     , _alr1Kind = "content#accountstatusesListResponse"
     , _alr1Resources = Nothing
     }
+
 
 -- | The token for the retrieval of the next page of account statuses.
 alr1NextPageToken :: Lens' AccountstatusesListResponse (Maybe Text)
@@ -9945,6 +10223,7 @@ data OrdersSetLineItemMetadataResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersSetLineItemMetadataResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9959,6 +10238,7 @@ ordersSetLineItemMetadataResponse =
     { _oslimrKind = "content#ordersSetLineItemMetadataResponse"
     , _oslimrExecutionStatus = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersSetLineItemMetadataResponse\".
@@ -9998,6 +10278,7 @@ newtype AccounttaxCustomBatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccounttaxCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10007,6 +10288,7 @@ accounttaxCustomBatchRequest
     :: AccounttaxCustomBatchRequest
 accounttaxCustomBatchRequest =
   AccounttaxCustomBatchRequest' {_accEntries = Nothing}
+
 
 -- | The request entries to be processed in the batch.
 accEntries :: Lens' AccounttaxCustomBatchRequest [AccounttaxCustomBatchRequestEntry]
@@ -10039,6 +10321,7 @@ data ProductsCustomBatchRequestEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10062,6 +10345,7 @@ productsCustomBatchRequestEntry =
     , _prorProductId = Nothing
     , _prorBatchId = Nothing
     }
+
 
 -- | The ID of the managing account.
 prorMerchantId :: Lens' ProductsCustomBatchRequestEntry (Maybe Word64)
@@ -10122,6 +10406,7 @@ data AccountGoogleMyBusinessLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountGoogleMyBusinessLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10134,6 +10419,7 @@ accountGoogleMyBusinessLink
 accountGoogleMyBusinessLink =
   AccountGoogleMyBusinessLink'
     {_agmblGmbEmail = Nothing, _agmblStatus = Nothing}
+
 
 -- | The GMB email address of which a specific account within a GMB account.
 -- A sample account within a GMB account could be a business account with
@@ -10177,6 +10463,7 @@ data DatafeedstatusesCustomBatchRequestEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10203,6 +10490,7 @@ datafeedstatusesCustomBatchRequestEntry =
     , _dLanguage = Nothing
     , _dBatchId = Nothing
     }
+
 
 -- | The ID of the managing account.
 dMerchantId :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Word64)
@@ -10275,6 +10563,7 @@ data OrderCustomer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderCustomer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10292,6 +10581,7 @@ orderCustomer =
     , _ocEmail = Nothing
     , _ocMarketingRightsInfo = Nothing
     }
+
 
 -- | Full name of the customer.
 ocFullName :: Lens' OrderCustomer (Maybe Text)
@@ -10333,6 +10623,7 @@ newtype LocationIdSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationIdSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10341,6 +10632,7 @@ newtype LocationIdSet =
 locationIdSet
     :: LocationIdSet
 locationIdSet = LocationIdSet' {_lisLocationIds = Nothing}
+
 
 -- | A non-empty list of location IDs. They must all be of the same location
 -- type (e.g., state).
@@ -10370,6 +10662,7 @@ newtype Row =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Row' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10378,6 +10671,7 @@ newtype Row =
 row
     :: Row
 row = Row' {_rCells = Nothing}
+
 
 -- | The list of cells that constitute the row. Must have the same length as
 -- columnHeaders for two-dimensional tables, a length of 1 for
@@ -10405,6 +10699,7 @@ data OrdersGetByMerchantOrderIdResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersGetByMerchantOrderIdResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10419,6 +10714,7 @@ ordersGetByMerchantOrderIdResponse =
     { _ogbmoirKind = "content#ordersGetByMerchantOrderIdResponse"
     , _ogbmoirOrder = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersGetByMerchantOrderIdResponse\".
@@ -10462,6 +10758,7 @@ data OrdersRejectReturnLineItemRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersRejectReturnLineItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10488,6 +10785,7 @@ ordersRejectReturnLineItemRequest =
     , _orrlirProductId = Nothing
     , _orrlirReasonText = Nothing
     }
+
 
 -- | The quantity to return and refund.
 orrlirQuantity :: Lens' OrdersRejectReturnLineItemRequest (Maybe Word32)
@@ -10561,6 +10859,7 @@ data OrdersCancelRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCancelRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10575,6 +10874,7 @@ ordersCancelRequest
 ordersCancelRequest =
   OrdersCancelRequest'
     {_ocrReason = Nothing, _ocrOperationId = Nothing, _ocrReasonText = Nothing}
+
 
 -- | The reason for the cancellation.
 ocrReason :: Lens' OrdersCancelRequest (Maybe Text)
@@ -10620,6 +10920,7 @@ data ReturnShipment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReturnShipment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10640,6 +10941,7 @@ returnShipment =
     , _rsShipmentId = Nothing
     , _rsCreationDate = Nothing
     }
+
 
 rsShipmentTrackingInfos :: Lens' ReturnShipment [ShipmentTrackingInfo]
 rsShipmentTrackingInfos
@@ -10690,6 +10992,7 @@ newtype OrdersCancelTestOrderByCustomerRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCancelTestOrderByCustomerRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10699,6 +11002,7 @@ ordersCancelTestOrderByCustomerRequest
     :: OrdersCancelTestOrderByCustomerRequest
 ordersCancelTestOrderByCustomerRequest =
   OrdersCancelTestOrderByCustomerRequest' {_octobcrReason = Nothing}
+
 
 -- | The reason for the cancellation.
 octobcrReason :: Lens' OrdersCancelTestOrderByCustomerRequest (Maybe Text)
@@ -10731,6 +11035,7 @@ data TestOrderCustomerMarketingRightsInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestOrderCustomerMarketingRightsInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10745,6 +11050,7 @@ testOrderCustomerMarketingRightsInfo =
     { _tocmriExplicitMarketingPreference = Nothing
     , _tocmriLastUpdatedTimestamp = Nothing
     }
+
 
 -- | Last know user use selection regards marketing preferences. In certain
 -- cases selection might not be known, so this field would be empty.
@@ -10795,6 +11101,7 @@ data ProductStatusItemLevelIssue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductStatusItemLevelIssue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10827,6 +11134,7 @@ productStatusItemLevelIssue =
     , _psiliDescription = Nothing
     , _psiliDetail = Nothing
     }
+
 
 -- | The destination the issue applies to.
 psiliDestination :: Lens' ProductStatusItemLevelIssue (Maybe Text)
@@ -10909,6 +11217,7 @@ data OrderLineItemProductVariantAttribute =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderLineItemProductVariantAttribute' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10921,6 +11230,7 @@ orderLineItemProductVariantAttribute
 orderLineItemProductVariantAttribute =
   OrderLineItemProductVariantAttribute'
     {_olipvaDimension = Nothing, _olipvaValue = Nothing}
+
 
 -- | The dimension of the variant.
 olipvaDimension :: Lens' OrderLineItemProductVariantAttribute (Maybe Text)
@@ -10963,6 +11273,7 @@ data RateGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RateGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10989,6 +11300,7 @@ rateGroup =
     , _rgSingleValue = Nothing
     , _rgSubtables = Nothing
     }
+
 
 -- | A list of carrier rates that can be referred to by mainTable or
 -- singleValue.
@@ -11076,6 +11388,7 @@ data OrderPromotion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderPromotion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11114,6 +11427,7 @@ orderPromotion =
     , _opTaxValue = Nothing
     , _opFunder = Nothing
     }
+
 
 -- | A short title of the promotion to be shown on the checkout page.
 opShortTitle :: Lens' OrderPromotion (Maybe Text)
@@ -11215,6 +11529,7 @@ data AccountStatusProducts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountStatusProducts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11238,6 +11553,7 @@ accountStatusProducts =
     , _aspStatistics = Nothing
     , _aspItemLevelIssues = Nothing
     }
+
 
 -- | The destination the data applies to.
 aspDestination :: Lens' AccountStatusProducts (Maybe Text)
@@ -11298,6 +11614,7 @@ data Price =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11308,6 +11625,7 @@ data Price =
 price
     :: Price
 price = Price' {_pValue = Nothing, _pCurrency = Nothing}
+
 
 -- | The price represented as a number.
 pValue :: Lens' Price (Maybe Text)
@@ -11341,6 +11659,7 @@ data OrderLineItemShippingDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderLineItemShippingDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11358,6 +11677,7 @@ orderLineItemShippingDetails =
     , _olisdMethod = Nothing
     , _olisdDeliverByDate = Nothing
     }
+
 
 -- | The ship by date, in ISO 8601 format.
 olisdShipByDate :: Lens' OrderLineItemShippingDetails (Maybe Text)
@@ -11401,6 +11721,7 @@ data DatafeedsCustomBatchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11413,6 +11734,7 @@ datafeedsCustomBatchResponse
 datafeedsCustomBatchResponse =
   DatafeedsCustomBatchResponse'
     {_datEntries = Nothing, _datKind = "content#datafeedsCustomBatchResponse"}
+
 
 -- | The result of the execution of the batch requests.
 datEntries :: Lens' DatafeedsCustomBatchResponse [DatafeedsCustomBatchResponseEntry]
@@ -11455,6 +11777,7 @@ data InvoiceSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InvoiceSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11481,6 +11804,7 @@ invoiceSummary =
     , _isAdditionalChargeSummaries = Nothing
     , _isPromotionSummaries = Nothing
     }
+
 
 -- | [required] Merchant balance on this invoice. A negative amount means the
 -- merchant is paying, a positive one means the merchant is receiving
@@ -11566,6 +11890,7 @@ data PosListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11578,6 +11903,7 @@ posListResponse
 posListResponse =
   PosListResponse'
     {_plrlKind = "content#posListResponse", _plrlResources = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#posListResponse\".
@@ -11615,6 +11941,7 @@ data OrderDeliveryDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderDeliveryDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11626,6 +11953,7 @@ orderDeliveryDetails
     :: OrderDeliveryDetails
 orderDeliveryDetails =
   OrderDeliveryDetails' {_oddAddress = Nothing, _oddPhoneNumber = Nothing}
+
 
 -- | The delivery address
 oddAddress :: Lens' OrderDeliveryDetails (Maybe OrderAddress)
@@ -11661,6 +11989,7 @@ data OrderLineItemProductFee =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderLineItemProductFee' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11672,6 +12001,7 @@ orderLineItemProductFee
     :: OrderLineItemProductFee
 orderLineItemProductFee =
   OrderLineItemProductFee' {_olipfAmount = Nothing, _olipfName = Nothing}
+
 
 -- | Amount of the fee.
 olipfAmount :: Lens' OrderLineItemProductFee (Maybe Price)
@@ -11706,6 +12036,7 @@ data OrdersCancelResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCancelResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11718,6 +12049,7 @@ ordersCancelResponse
 ordersCancelResponse =
   OrdersCancelResponse'
     {_ocrKind = "content#ordersCancelResponse", _ocrExecutionStatus = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersCancelResponse\".
@@ -11756,6 +12088,7 @@ data OrdersSetLineItemMetadataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersSetLineItemMetadataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11776,6 +12109,7 @@ ordersSetLineItemMetadataRequest =
     , _oslimrOperationId = Nothing
     , _oslimrProductId = Nothing
     }
+
 
 oslimrAnnotations :: Lens' OrdersSetLineItemMetadataRequest [OrderMerchantProvidedAnnotation]
 oslimrAnnotations
@@ -11834,6 +12168,7 @@ data OrdersRejectReturnLineItemResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersRejectReturnLineItemResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11848,6 +12183,7 @@ ordersRejectReturnLineItemResponse =
     { _ordKind = "content#ordersRejectReturnLineItemResponse"
     , _ordExecutionStatus = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersRejectReturnLineItemResponse\".
@@ -11896,6 +12232,7 @@ data TestOrder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestOrder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11937,6 +12274,7 @@ testOrder =
     , _toNotificationMode = Nothing
     , _toShippingCost = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#testOrder\".
@@ -12051,6 +12389,7 @@ data CutoffTime =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CutoffTime' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12064,6 +12403,7 @@ cutoffTime
     :: CutoffTime
 cutoffTime =
   CutoffTime' {_ctHour = Nothing, _ctTimezone = Nothing, _ctMinute = Nothing}
+
 
 -- | Hour of the cutoff time until which an order has to be placed to be
 -- processed in the same day. Required.
@@ -12113,6 +12453,7 @@ data DatafeedstatusesCustomBatchResponseEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12127,6 +12468,7 @@ datafeedstatusesCustomBatchResponseEntry
 datafeedstatusesCustomBatchResponseEntry =
   DatafeedstatusesCustomBatchResponseEntry'
     {_datErrors = Nothing, _datDatafeedStatus = Nothing, _datBatchId = Nothing}
+
 
 -- | A list of errors defined if and only if the request failed.
 datErrors :: Lens' DatafeedstatusesCustomBatchResponseEntry (Maybe Errors)
@@ -12179,6 +12521,7 @@ data OrderRefund =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderRefund' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12202,6 +12545,7 @@ orderRefund =
     , _ordCreationDate = Nothing
     , _ordReasonText = Nothing
     }
+
 
 -- | The amount that is refunded.
 ordAmount :: Lens' OrderRefund (Maybe Price)
@@ -12269,6 +12613,7 @@ data TestOrderLineItemProduct =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestOrderLineItemProduct' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12316,6 +12661,7 @@ testOrderLineItemProduct =
     , _tolipMpn = Nothing
     , _tolipCondition = Nothing
     }
+
 
 -- | URL of an image of the item.
 tolipImageLink :: Lens' TestOrderLineItemProduct (Maybe Text)
@@ -12436,6 +12782,7 @@ data AccounttaxCustomBatchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccounttaxCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12450,6 +12797,7 @@ accounttaxCustomBatchResponse =
     { _acbr1Entries = Nothing
     , _acbr1Kind = "content#accounttaxCustomBatchResponse"
     }
+
 
 -- | The result of the execution of the batch requests.
 acbr1Entries :: Lens' AccounttaxCustomBatchResponse [AccounttaxCustomBatchResponseEntry]
@@ -12488,6 +12836,7 @@ newtype AccountsClaimWebsiteResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsClaimWebsiteResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12498,6 +12847,7 @@ accountsClaimWebsiteResponse
 accountsClaimWebsiteResponse =
   AccountsClaimWebsiteResponse'
     {_acwrKind = "content#accountsClaimWebsiteResponse"}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#accountsClaimWebsiteResponse\".
@@ -12531,6 +12881,7 @@ data OrderAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12563,6 +12914,7 @@ orderAddress =
     , _oaFullAddress = Nothing
     , _oaRegion = Nothing
     }
+
 
 -- | Name of the recipient.
 oaRecipientName :: Lens' OrderAddress (Maybe Text)
@@ -12651,6 +13003,7 @@ data OrdersCustomBatchRequestEntryCreateTestReturnReturnItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCustomBatchRequestEntryCreateTestReturnReturnItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12663,6 +13016,7 @@ ordersCustomBatchRequestEntryCreateTestReturnReturnItem
 ordersCustomBatchRequestEntryCreateTestReturnReturnItem =
   OrdersCustomBatchRequestEntryCreateTestReturnReturnItem'
     {_ocbrectrriQuantity = Nothing, _ocbrectrriLineItemId = Nothing}
+
 
 -- | Quantity that is returned.
 ocbrectrriQuantity :: Lens' OrdersCustomBatchRequestEntryCreateTestReturnReturnItem (Maybe Word32)
@@ -12706,6 +13060,7 @@ data ProductUnitPricingBaseMeasure =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductUnitPricingBaseMeasure' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12717,6 +13072,7 @@ productUnitPricingBaseMeasure
     :: ProductUnitPricingBaseMeasure
 productUnitPricingBaseMeasure =
   ProductUnitPricingBaseMeasure' {_pupbmValue = Nothing, _pupbmUnit = Nothing}
+
 
 -- | The denominator of the unit price.
 pupbmValue :: Lens' ProductUnitPricingBaseMeasure (Maybe Int64)
@@ -12753,6 +13109,7 @@ data LiaSettingsGetAccessibleGmbAccountsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsGetAccessibleGmbAccountsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12770,6 +13127,7 @@ liaSettingsGetAccessibleGmbAccountsResponse =
     , _lsgagarKind = "content#liasettingsGetAccessibleGmbAccountsResponse"
     , _lsgagarAccountId = Nothing
     }
+
 
 -- | A list of GMB accounts which are available to the merchant.
 lsgagarGmbAccounts :: Lens' LiaSettingsGetAccessibleGmbAccountsResponse [GmbAccountsGmbAccount]
@@ -12826,6 +13184,7 @@ data DatafeedsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12843,6 +13202,7 @@ datafeedsListResponse =
     , _dlrKind = "content#datafeedsListResponse"
     , _dlrResources = Nothing
     }
+
 
 -- | The token for the retrieval of the next page of datafeeds.
 dlrNextPageToken :: Lens' DatafeedsListResponse (Maybe Text)
@@ -12889,6 +13249,7 @@ data AccountStatusStatistics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountStatusStatistics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12909,6 +13270,7 @@ accountStatusStatistics =
     , _assActive = Nothing
     , _assDisApproved = Nothing
     }
+
 
 -- | Number of pending offers.
 assPending :: Lens' AccountStatusStatistics (Maybe Int64)
@@ -12965,6 +13327,7 @@ data ProductsCustomBatchResponseEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12985,6 +13348,7 @@ productsCustomBatchResponseEntry =
     , _pcbre1Errors = Nothing
     , _pcbre1BatchId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#productsCustomBatchResponseEntry\".
@@ -13114,6 +13478,7 @@ data Product =
     , _prorAdsGrouping              :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
@@ -13342,6 +13707,7 @@ product =
     , _prorDisplayAdsId = Nothing
     , _prorAdsGrouping = Nothing
     }
+
 
 -- | URL directly to your item\'s landing page for dynamic remarketing
 -- campaigns.
@@ -13995,6 +14361,7 @@ data LiaSettingsCustomBatchRequestEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14036,6 +14403,7 @@ liaSettingsCustomBatchRequestEntry =
     , _lPosDataProviderId = Nothing
     , _lBatchId = Nothing
     }
+
 
 -- | The GMB account. Required only for RequestGmbAccess.
 lGmbEmail :: Lens' LiaSettingsCustomBatchRequestEntry (Maybe Text)
@@ -14146,6 +14514,7 @@ data Errors =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Errors' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14159,6 +14528,7 @@ errors
     :: Errors
 errors =
   Errors' {_errCode = Nothing, _errMessage = Nothing, _errErrors = Nothing}
+
 
 -- | The HTTP status of the first error in errors.
 errCode :: Lens' Errors (Maybe Word32)
@@ -14205,6 +14575,7 @@ data LiaInventorySettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaInventorySettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14225,6 +14596,7 @@ liaInventorySettings =
     , _lisInventoryVerificationContactEmail = Nothing
     , _lisInventoryVerificationContactStatus = Nothing
     }
+
 
 -- | The name of the contact for the inventory verification process.
 lisInventoryVerificationContactName :: Lens' LiaInventorySettings (Maybe Text)
@@ -14285,6 +14657,7 @@ data AccountstatusesCustomBatchResponseEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14299,6 +14672,7 @@ accountstatusesCustomBatchResponseEntry
 accountstatusesCustomBatchResponseEntry =
   AccountstatusesCustomBatchResponseEntry'
     {_aaAccountStatus = Nothing, _aaErrors = Nothing, _aaBatchId = Nothing}
+
 
 -- | The requested account status. Defined if and only if the request was
 -- successful.
@@ -14347,6 +14721,7 @@ data OrdersCancelLineItemResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCancelLineItemResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14361,6 +14736,7 @@ ordersCancelLineItemResponse =
     { _oclirKind = "content#ordersCancelLineItemResponse"
     , _oclirExecutionStatus = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersCancelLineItemResponse\".
@@ -14402,6 +14778,7 @@ data HolidayCutoff =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HolidayCutoff' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14425,6 +14802,7 @@ holidayCutoff =
     , _hcHolidayId = Nothing
     , _hcDeadlineDate = Nothing
     }
+
 
 -- | Hour of the day on the deadline date until which the order has to be
 -- placed to qualify for the delivery guarantee. Possible values are: 0
@@ -14493,6 +14871,7 @@ data TestOrderLineItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestOrderLineItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14513,6 +14892,7 @@ testOrderLineItem =
     , _toliShippingDetails = Nothing
     , _toliProduct = Nothing
     }
+
 
 -- | Number of items ordered.
 toliQuantityOrdered :: Lens' TestOrderLineItem (Maybe Word32)
@@ -14570,6 +14950,7 @@ data ProductstatusesCustomBatchRequestEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14596,6 +14977,7 @@ productstatusesCustomBatchRequestEntry =
     , _p2ProductId = Nothing
     , _p2BatchId = Nothing
     }
+
 
 -- | The ID of the managing account.
 p2MerchantId :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Word64)
@@ -14667,6 +15049,7 @@ data ShippingSettingsCustomBatchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14681,6 +15064,7 @@ shippingSettingsCustomBatchResponse =
     { _shiEntries = Nothing
     , _shiKind = "content#shippingsettingsCustomBatchResponse"
     }
+
 
 -- | The result of the execution of the batch requests.
 shiEntries :: Lens' ShippingSettingsCustomBatchResponse [ShippingSettingsCustomBatchResponseEntry]
@@ -14727,6 +15111,7 @@ data OrdersReturnRefundLineItemRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersReturnRefundLineItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14759,6 +15144,7 @@ ordersReturnRefundLineItemRequest =
     , _orrlirrPriceAmount = Nothing
     , _orrlirrReasonText = Nothing
     }
+
 
 -- | The quantity to return and refund.
 orrlirrQuantity :: Lens' OrdersReturnRefundLineItemRequest (Maybe Word32)
@@ -14852,6 +15238,7 @@ data ShipmentInvoiceLineItemInvoice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShipmentInvoiceLineItemInvoice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14872,6 +15259,7 @@ shipmentInvoiceLineItemInvoice =
     , _siliiLineItemId = Nothing
     , _siliiProductId = Nothing
     }
+
 
 -- | [required] Invoice details for a single unit.
 siliiUnitInvoice :: Lens' ShipmentInvoiceLineItemInvoice (Maybe UnitInvoice)
@@ -14930,6 +15318,7 @@ data OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14947,6 +15336,7 @@ ordersCustomBatchRequestEntryShipLineItemsShipmentInfo =
     , _ocbreslisiTrackingId = Nothing
     , _ocbreslisiShipmentId = Nothing
     }
+
 
 -- | The carrier handling the shipment. See shipments[].carrier in the Orders
 -- resource representation for a list of acceptable values.
@@ -15000,6 +15390,7 @@ data AccountsLinkRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsLinkRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15017,6 +15408,7 @@ accountsLinkRequest =
     , _alrLinkedAccountId = Nothing
     , _alrLinkType = Nothing
     }
+
 
 -- | Action to perform for this link. The \"request\" action is only
 -- available to select merchants.
@@ -15060,6 +15452,7 @@ data Promotion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Promotion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15070,6 +15463,7 @@ data Promotion =
 promotion
     :: Promotion
 promotion = Promotion' {_pPromotionAmount = Nothing, _pPromotionId = Nothing}
+
 
 -- | [required] Amount of the promotion. The values here are the promotion
 -- applied to the unit price pretax and to the total of the tax amounts.
@@ -15108,6 +15502,7 @@ data DatafeedTarget =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedTarget' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15128,6 +15523,7 @@ datafeedTarget =
     , _dtCountry = Nothing
     , _dtLanguage = Nothing
     }
+
 
 -- | The list of destinations to include for this target (corresponds to
 -- checked check boxes in Merchant Center). Default destinations are always
@@ -15190,6 +15586,7 @@ data OrdersUpdateMerchantOrderIdResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersUpdateMerchantOrderIdResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15204,6 +15601,7 @@ ordersUpdateMerchantOrderIdResponse =
     { _oumoirKind = "content#ordersUpdateMerchantOrderIdResponse"
     , _oumoirExecutionStatus = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersUpdateMerchantOrderIdResponse\".
@@ -15245,6 +15643,7 @@ data OrderreportsListDisbursementsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderreportsListDisbursementsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15262,6 +15661,7 @@ orderreportsListDisbursementsResponse =
     , _oldrKind = "content#orderreportsListDisbursementsResponse"
     , _oldrDisbursements = Nothing
     }
+
 
 -- | The token for the retrieval of the next page of disbursements.
 oldrNextPageToken :: Lens' OrderreportsListDisbursementsResponse (Maybe Text)
@@ -15314,6 +15714,7 @@ data DatafeedStatusExample =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedStatusExample' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15328,6 +15729,7 @@ datafeedStatusExample
 datafeedStatusExample =
   DatafeedStatusExample'
     {_dseLineNumber = Nothing, _dseItemId = Nothing, _dseValue = Nothing}
+
 
 -- | Line number in the data feed where the example is found.
 dseLineNumber :: Lens' DatafeedStatusExample (Maybe Word64)
@@ -15370,6 +15772,7 @@ data OrdersAcknowledgeResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersAcknowledgeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15384,6 +15787,7 @@ ordersAcknowledgeResponse =
     { _oarKind = "content#ordersAcknowledgeResponse"
     , _oarExecutionStatus = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersAcknowledgeResponse\".
@@ -15428,6 +15832,7 @@ data PosSaleRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosSaleRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15463,6 +15868,7 @@ posSaleRequest =
     , _psrsTimestamp = Nothing
     , _psrsSaleId = Nothing
     }
+
 
 -- | The identifier of the merchant\'s store. Either a storeCode inserted via
 -- the API or the code of the store in Google My Business.
@@ -15554,6 +15960,7 @@ data Table =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15574,6 +15981,7 @@ table =
     , _tColumnHeaders = Nothing
     , _tRowHeaders = Nothing
     }
+
 
 -- | The list of rows that constitute the table. Must have the same length as
 -- rowHeaders. Required.
@@ -15643,6 +16051,7 @@ data Order =
     , _o1ShippingCost    :: !(Maybe Price)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
 --
@@ -15715,6 +16124,7 @@ order =
     , _o1PaymentStatus = Nothing
     , _o1ShippingCost = Nothing
     }
+
 
 -- | The status of the order.
 o1Status :: Lens' Order (Maybe Text)
@@ -15915,6 +16325,7 @@ data OrderLineItemProduct =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderLineItemProduct' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15971,6 +16382,7 @@ orderLineItemProduct =
     , _olipMpn = Nothing
     , _olipCondition = Nothing
     }
+
 
 -- | URL of an image of the item.
 olipImageLink :: Lens' OrderLineItemProduct (Maybe Text)
@@ -16116,6 +16528,7 @@ data AccounttaxCustomBatchRequestEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccounttaxCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16139,6 +16552,7 @@ accounttaxCustomBatchRequestEntry =
     , _acccMethod = Nothing
     , _acccBatchId = Nothing
     }
+
 
 -- | The account tax settings to update. Only defined if the method is
 -- update.
@@ -16205,6 +16619,7 @@ data DatafeedStatusError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedStatusError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16225,6 +16640,7 @@ datafeedStatusError =
     , _dseMessage = Nothing
     , _dseExamples = Nothing
     }
+
 
 -- | The number of occurrences of the error in the feed.
 dseCount :: Lens' DatafeedStatusError (Maybe Word64)
@@ -16274,6 +16690,7 @@ newtype ProductsCustomBatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16282,6 +16699,7 @@ newtype ProductsCustomBatchRequest =
 productsCustomBatchRequest
     :: ProductsCustomBatchRequest
 productsCustomBatchRequest = ProductsCustomBatchRequest' {_ppEntries = Nothing}
+
 
 -- | The request entries to be processed in the batch.
 ppEntries :: Lens' ProductsCustomBatchRequest [ProductsCustomBatchRequestEntry]
@@ -16310,6 +16728,7 @@ data PosDataProviders =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosDataProviders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16321,6 +16740,7 @@ posDataProviders
     :: PosDataProviders
 posDataProviders =
   PosDataProviders' {_pdpCountry = Nothing, _pdpPosDataProviders = Nothing}
+
 
 -- | Country code.
 pdpCountry :: Lens' PosDataProviders (Maybe Text)
@@ -16367,6 +16787,7 @@ data PosInventory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosInventory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16402,6 +16823,7 @@ posInventory =
     , _piContentLanguage = Nothing
     , _piTimestamp = Nothing
     }
+
 
 -- | The identifier of the merchant\'s store. Either a storeCode inserted via
 -- the API or the code of the store in Google My Business.
@@ -16486,6 +16908,7 @@ data LiaSettingsListPosDataProvidersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsListPosDataProvidersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16500,6 +16923,7 @@ liaSettingsListPosDataProvidersResponse =
     { _lslpdprKind = "content#liasettingsListPosDataProvidersResponse"
     , _lslpdprPosDataProviders = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#liasettingsListPosDataProvidersResponse\".
@@ -16549,6 +16973,7 @@ data OrderinvoicesCreateRefundInvoiceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderinvoicesCreateRefundInvoiceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16572,6 +16997,7 @@ orderinvoicesCreateRefundInvoiceRequest =
     , _ocrirOperationId = Nothing
     , _ocrirReturnOption = Nothing
     }
+
 
 -- | Option to create a refund-only invoice. Exactly one of refundOnlyOption
 -- or returnOption must be provided.
@@ -16653,6 +17079,7 @@ data DatafeedStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16691,6 +17118,7 @@ datafeedStatus =
     , _dsItemsValid = Nothing
     , _dsErrors = Nothing
     }
+
 
 -- | The number of items in the feed that were processed.
 dsItemsTotal :: Lens' DatafeedStatus (Maybe Word64)
@@ -16790,6 +17218,7 @@ newtype DatafeedstatusesCustomBatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedstatusesCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16799,6 +17228,7 @@ datafeedstatusesCustomBatchRequest
     :: DatafeedstatusesCustomBatchRequest
 datafeedstatusesCustomBatchRequest =
   DatafeedstatusesCustomBatchRequest' {_dcbrcEntries = Nothing}
+
 
 -- | The request entries to be processed in the batch.
 dcbrcEntries :: Lens' DatafeedstatusesCustomBatchRequest [DatafeedstatusesCustomBatchRequestEntry]
@@ -16836,6 +17266,7 @@ data OrdersInStoreRefundLineItemRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersInStoreRefundLineItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16868,6 +17299,7 @@ ordersInStoreRefundLineItemRequest =
     , _oisrlirPriceAmount = Nothing
     , _oisrlirReasonText = Nothing
     }
+
 
 -- | The quantity to return and refund.
 oisrlirQuantity :: Lens' OrdersInStoreRefundLineItemRequest (Maybe Word32)
@@ -16959,6 +17391,7 @@ data AccountsCustomBatchRequestEntryLinkRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCustomBatchRequestEntryLinkRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16976,6 +17409,7 @@ accountsCustomBatchRequestEntryLinkRequest =
     , _acbrelrLinkedAccountId = Nothing
     , _acbrelrLinkType = Nothing
     }
+
 
 -- | Action to perform for this link. The \"request\" action is only
 -- available to select merchants.
@@ -17027,6 +17461,7 @@ data ProductShippingDimension =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductShippingDimension' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17038,6 +17473,7 @@ productShippingDimension
     :: ProductShippingDimension
 productShippingDimension =
   ProductShippingDimension' {_psdValue = Nothing, _psdUnit = Nothing}
+
 
 -- | The dimension of the product used to calculate the shipping cost of the
 -- item.
@@ -17075,6 +17511,7 @@ data DatafeedsCustomBatchResponseEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17092,6 +17529,7 @@ datafeedsCustomBatchResponseEntry =
     , _dcbrecErrors = Nothing
     , _dcbrecBatchId = Nothing
     }
+
 
 -- | The requested data feed. Defined if and only if the request was
 -- successful.
@@ -17140,6 +17578,7 @@ data DatafeedstatusesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedstatusesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17157,6 +17596,7 @@ datafeedstatusesListResponse =
     , _dlrlKind = "content#datafeedstatusesListResponse"
     , _dlrlResources = Nothing
     }
+
 
 -- | The token for the retrieval of the next page of datafeed statuses.
 dlrlNextPageToken :: Lens' DatafeedstatusesListResponse (Maybe Text)
@@ -17204,6 +17644,7 @@ data ProductsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17221,6 +17662,7 @@ productsListResponse =
     , _plr1Kind = "content#productsListResponse"
     , _plr1Resources = Nothing
     }
+
 
 -- | The token for the retrieval of the next page of products.
 plr1NextPageToken :: Lens' ProductsListResponse (Maybe Text)
@@ -17267,6 +17709,7 @@ data ShipmentInvoice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShipmentInvoice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17284,6 +17727,7 @@ shipmentInvoice =
     , _siLineItemInvoices = Nothing
     , _siInvoiceSummary = Nothing
     }
+
 
 -- | [required] ID of the shipment group.
 siShipmentGroupId :: Lens' ShipmentInvoice (Maybe Text)
@@ -17334,6 +17778,7 @@ data OrderCancellation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderCancellation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17357,6 +17802,7 @@ orderCancellation =
     , _ocCreationDate = Nothing
     , _ocReasonText = Nothing
     }
+
 
 -- | The quantity that was canceled.
 ocQuantity :: Lens' OrderCancellation (Maybe Word32)

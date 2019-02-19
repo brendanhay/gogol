@@ -70,6 +70,7 @@ data OrganizationsExclusionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsExclusionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ organizationsExclusionsDelete pOedName_ =
     , _oedName = pOedName_
     , _oedCallback = Nothing
     }
+
 
 -- | V1 error format.
 oedXgafv :: Lens' OrganizationsExclusionsDelete (Maybe Xgafv)

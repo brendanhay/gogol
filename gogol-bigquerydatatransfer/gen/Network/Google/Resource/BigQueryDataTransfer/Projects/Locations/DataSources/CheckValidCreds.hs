@@ -83,6 +83,7 @@ data ProjectsLocationsDataSourcesCheckValidCreds =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSourcesCheckValidCreds' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ projectsLocationsDataSourcesCheckValidCreds pPldscvcPayload_ pPldscvcName_ =
     , _pldscvcName = pPldscvcName_
     , _pldscvcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldscvcXgafv :: Lens' ProjectsLocationsDataSourcesCheckValidCreds (Maybe Xgafv)

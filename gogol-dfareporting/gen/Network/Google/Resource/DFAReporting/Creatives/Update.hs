@@ -61,6 +61,7 @@ data CreativesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ creativesUpdate
 creativesUpdate pCreProFileId_ pCrePayload_ =
   CreativesUpdate'
     {_creProFileId = _Coerce # pCreProFileId_, _crePayload = pCrePayload_}
+
 
 -- | User profile ID associated with this request.
 creProFileId :: Lens' CreativesUpdate Int64

@@ -66,6 +66,7 @@ data StorelayoutclustersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StorelayoutclustersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ storelayoutclustersDelete pSddEnterpriseId_ pSddPageId_ pSddClusterId_ =
     , _sddPageId = pSddPageId_
     , _sddClusterId = pSddClusterId_
     }
+
 
 -- | The ID of the enterprise.
 sddEnterpriseId :: Lens' StorelayoutclustersDelete Text

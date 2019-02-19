@@ -72,6 +72,7 @@ data ProjectsSubscriptionsGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSubscriptionsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsSubscriptionsGetIAMPolicy pPsgiampResource_ =
     , _psgiampResource = pPsgiampResource_
     , _psgiampCallback = Nothing
     }
+
 
 -- | V1 error format.
 psgiampXgafv :: Lens' ProjectsSubscriptionsGetIAMPolicy (Maybe Xgafv)

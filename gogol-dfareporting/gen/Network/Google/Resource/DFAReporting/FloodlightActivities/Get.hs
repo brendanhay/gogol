@@ -62,6 +62,7 @@ data FloodlightActivitiesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivitiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ floodlightActivitiesGet
 floodlightActivitiesGet pFProFileId_ pFId_ =
   FloodlightActivitiesGet'
     {_fProFileId = _Coerce # pFProFileId_, _fId = _Coerce # pFId_}
+
 
 -- | User profile ID associated with this request.
 fProFileId :: Lens' FloodlightActivitiesGet Int64

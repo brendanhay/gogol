@@ -85,6 +85,7 @@ data AccountsClientsUsersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsClientsUsersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +125,7 @@ accountsClientsUsersUpdate pAcuuPayload_ pAcuuUserId_ pAcuuAccountId_ pAcuuClien
     , _acuuClientAccountId = _Coerce # pAcuuClientAccountId_
     , _acuuCallback = Nothing
     }
+
 
 -- | V1 error format.
 acuuXgafv :: Lens' AccountsClientsUsersUpdate (Maybe Xgafv)

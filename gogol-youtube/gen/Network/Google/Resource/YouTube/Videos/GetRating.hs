@@ -64,6 +64,7 @@ data VideosGetRating =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideosGetRating' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ videosGetRating
     -> VideosGetRating
 videosGetRating pVgrId_ =
   VideosGetRating' {_vgrOnBehalfOfContentOwner = Nothing, _vgrId = pVgrId_}
+
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the

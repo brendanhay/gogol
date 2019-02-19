@@ -81,6 +81,7 @@ data ChangesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ changesList pClPageToken_ =
     , _clIncludeRemoved = True
     , _clSupportsTeamDrives = False
     }
+
 
 -- | Whether Team Drive files or changes should be included in results.
 clIncludeTeamDriveItems :: Lens' ChangesList Bool

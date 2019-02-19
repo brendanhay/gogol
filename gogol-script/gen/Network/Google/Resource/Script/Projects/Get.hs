@@ -71,6 +71,7 @@ data ProjectsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsGet pPgScriptId_ =
     , _pgScriptId = pPgScriptId_
     , _pgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgXgafv :: Lens' ProjectsGet (Maybe Xgafv)

@@ -62,6 +62,7 @@ data AchievementConfigurationsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementConfigurationsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ achievementConfigurationsInsert
 achievementConfigurationsInsert pAciPayload_ pAciApplicationId_ =
   AchievementConfigurationsInsert'
     {_aciPayload = pAciPayload_, _aciApplicationId = pAciApplicationId_}
+
 
 -- | Multipart request metadata.
 aciPayload :: Lens' AchievementConfigurationsInsert AchievementConfiguration

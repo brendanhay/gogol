@@ -81,6 +81,7 @@ data AlertsFeedbackCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlertsFeedbackCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ alertsFeedbackCreate pAfcAlertId_ pAfcPayload_ =
     , _afcCustomerId = Nothing
     , _afcCallback = Nothing
     }
+
 
 -- | V1 error format.
 afcXgafv :: Lens' AlertsFeedbackCreate (Maybe Xgafv)

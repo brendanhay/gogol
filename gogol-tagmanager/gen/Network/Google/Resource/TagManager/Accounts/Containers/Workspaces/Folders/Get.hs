@@ -56,6 +56,7 @@ newtype AccountsContainersWorkspacesFoldersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ accountsContainersWorkspacesFoldersGet
     -> AccountsContainersWorkspacesFoldersGet
 accountsContainersWorkspacesFoldersGet pAcwfgPath_ =
   AccountsContainersWorkspacesFoldersGet' {_acwfgPath = pAcwfgPath_}
+
 
 -- | GTM Folder\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/folders\/{folder_id}

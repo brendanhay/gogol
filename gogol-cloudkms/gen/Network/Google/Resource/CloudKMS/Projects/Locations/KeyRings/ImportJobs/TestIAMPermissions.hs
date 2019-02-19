@@ -85,6 +85,7 @@ data ProjectsLocationsKeyRingsImportJobsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsKeyRingsImportJobsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsLocationsKeyRingsImportJobsTestIAMPermissions pPlkrijtipPayload_ pPlkrij
     , _plkrijtipResource = pPlkrijtipResource_
     , _plkrijtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrijtipXgafv :: Lens' ProjectsLocationsKeyRingsImportJobsTestIAMPermissions (Maybe Xgafv)

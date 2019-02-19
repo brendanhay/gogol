@@ -83,6 +83,7 @@ data CoursesCourseWorkGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesCourseWorkGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ coursesCourseWorkGet pCcwgCourseId_ pCcwgId_ =
     , _ccwgId = pCcwgId_
     , _ccwgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccwgXgafv :: Lens' CoursesCourseWorkGet (Maybe Xgafv)

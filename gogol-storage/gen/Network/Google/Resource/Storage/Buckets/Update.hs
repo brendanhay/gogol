@@ -84,6 +84,7 @@ data BucketsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ bucketsUpdate pBuBucket_ pBuPayload_ =
     , _buIfMetagenerationNotMatch = Nothing
     , _buProjection = Nothing
     }
+
 
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration matches the given value.

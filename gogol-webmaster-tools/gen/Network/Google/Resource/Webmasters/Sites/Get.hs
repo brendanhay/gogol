@@ -57,6 +57,7 @@ newtype SitesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ sitesGet
     :: Text -- ^ 'sitSiteURL'
     -> SitesGet
 sitesGet pSitSiteURL_ = SitesGet' {_sitSiteURL = pSitSiteURL_}
+
 
 -- | The URI of the property as defined in Search Console. Examples:
 -- http:\/\/www.example.com\/ or android-app:\/\/com.example\/ Note: for

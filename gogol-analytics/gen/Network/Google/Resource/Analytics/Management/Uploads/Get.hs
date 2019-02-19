@@ -70,6 +70,7 @@ data ManagementUploadsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementUploadsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ managementUploadsGet pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ p
     , _mugAccountId = pMugAccountId_
     , _mugUploadId = pMugUploadId_
     }
+
 
 -- | Web property Id for the upload to retrieve.
 mugWebPropertyId :: Lens' ManagementUploadsGet Text

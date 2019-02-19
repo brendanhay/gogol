@@ -74,6 +74,7 @@ data ProjectsRolesUndelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRolesUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsRolesUndelete pPruPayload_ pPruName_ =
     , _pruName = pPruName_
     , _pruCallback = Nothing
     }
+
 
 -- | V1 error format.
 pruXgafv :: Lens' ProjectsRolesUndelete (Maybe Xgafv)

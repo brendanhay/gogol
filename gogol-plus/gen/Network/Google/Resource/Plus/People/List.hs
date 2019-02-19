@@ -70,6 +70,7 @@ data PeopleList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeopleList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ peopleList pPlCollection_ pPlUserId_ =
     , _plPageToken = Nothing
     , _plMaxResults = 100
     }
+
 
 -- | The order to return people in.
 plOrderBy :: Lens' PeopleList (Maybe PeopleListOrderBy)

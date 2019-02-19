@@ -63,6 +63,7 @@ data ResourcesBuildingsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesBuildingsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ resourcesBuildingsGet
 resourcesBuildingsGet pRbgBuildingId_ pRbgCustomer_ =
   ResourcesBuildingsGet'
     {_rbgBuildingId = pRbgBuildingId_, _rbgCustomer = pRbgCustomer_}
+
 
 -- | The unique ID of the building to retrieve.
 rbgBuildingId :: Lens' ResourcesBuildingsGet Text

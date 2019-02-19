@@ -77,6 +77,7 @@ data ProjectsLocationsNodesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsNodesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsNodesCreate pPlncParent_ pPlncPayload_ =
     , _plncNodeId = Nothing
     , _plncCallback = Nothing
     }
+
 
 -- | The parent resource name.
 plncParent :: Lens' ProjectsLocationsNodesCreate Text

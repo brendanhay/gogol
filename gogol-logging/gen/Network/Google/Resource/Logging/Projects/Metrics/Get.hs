@@ -70,6 +70,7 @@ data ProjectsMetricsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsMetricsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsMetricsGet pPmgMetricName_ =
     , _pmgUploadType = Nothing
     , _pmgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmgXgafv :: Lens' ProjectsMetricsGet (Maybe Xgafv)

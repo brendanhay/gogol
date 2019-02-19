@@ -87,6 +87,7 @@ data CreativeFieldValuesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldValuesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ creativeFieldValuesList pCfvlCreativeFieldId_ pCfvlProFileId_ =
     , _cfvlSortField = CFVLSFID
     , _cfvlMaxResults = 1000
     }
+
 
 -- | Creative field ID for this creative field value.
 cfvlCreativeFieldId :: Lens' CreativeFieldValuesList Int64

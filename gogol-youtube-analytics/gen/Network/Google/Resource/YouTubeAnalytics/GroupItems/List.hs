@@ -77,6 +77,7 @@ data GroupItemsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupItemsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ groupItemsList =
     , _gilGroupId = Nothing
     , _gilCallback = Nothing
     }
+
 
 -- | V1 error format.
 gilXgafv :: Lens' GroupItemsList (Maybe Xgafv)

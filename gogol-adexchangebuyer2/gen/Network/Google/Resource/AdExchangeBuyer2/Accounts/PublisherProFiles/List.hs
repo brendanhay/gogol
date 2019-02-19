@@ -79,6 +79,7 @@ data AccountsPublisherProFilesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsPublisherProFilesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ accountsPublisherProFilesList pAppflAccountId_ =
     , _appflPageSize = Nothing
     , _appflCallback = Nothing
     }
+
 
 -- | V1 error format.
 appflXgafv :: Lens' AccountsPublisherProFilesList (Maybe Xgafv)

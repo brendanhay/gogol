@@ -61,6 +61,7 @@ data UsersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ usersDelete
     -> UsersDelete
 usersDelete pUdEnterpriseId_ pUdUserId_ =
   UsersDelete' {_udEnterpriseId = pUdEnterpriseId_, _udUserId = pUdUserId_}
+
 
 -- | The ID of the enterprise.
 udEnterpriseId :: Lens' UsersDelete Text

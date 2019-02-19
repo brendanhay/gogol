@@ -84,6 +84,7 @@ data CommentsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ commentsList pClBlogId_ pClPostId_ =
     , _clPageToken = Nothing
     , _clMaxResults = Nothing
     }
+
 
 clStatus :: Lens' CommentsList [CommentsListStatus]
 clStatus

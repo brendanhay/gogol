@@ -60,6 +60,7 @@ newtype RelyingPartyCreateAuthURI =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartyCreateAuthURI' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ relyingPartyCreateAuthURI
     -> RelyingPartyCreateAuthURI
 relyingPartyCreateAuthURI pRpcauPayload_ =
   RelyingPartyCreateAuthURI' {_rpcauPayload = pRpcauPayload_}
+
 
 -- | Multipart request metadata.
 rpcauPayload :: Lens' RelyingPartyCreateAuthURI IdentitytoolkitRelyingPartyCreateAuthURIRequest

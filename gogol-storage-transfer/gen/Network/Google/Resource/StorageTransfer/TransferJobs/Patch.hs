@@ -78,6 +78,7 @@ data TransferJobsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferJobsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ transferJobsPatch pTjpJobName_ pTjpPayload_ =
     , _tjpPayload = pTjpPayload_
     , _tjpCallback = Nothing
     }
+
 
 -- | V1 error format.
 tjpXgafv :: Lens' TransferJobsPatch (Maybe Xgafv)

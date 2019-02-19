@@ -67,6 +67,7 @@ data RoutersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoutersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ routersGet pRggProject_ pRggRouter_ pRggRegion_ =
     , _rggRouter = pRggRouter_
     , _rggRegion = pRggRegion_
     }
+
 
 -- | Project ID for this request.
 rggProject :: Lens' RoutersGet Text

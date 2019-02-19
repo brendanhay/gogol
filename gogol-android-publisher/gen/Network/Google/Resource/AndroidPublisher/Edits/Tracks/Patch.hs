@@ -74,6 +74,7 @@ data EditsTracksPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsTracksPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ editsTracksPatch pEtptTrack_ pEtptPackageName_ pEtptPayload_ pEtptEditId_ =
     , _etptPayload = pEtptPayload_
     , _etptEditId = pEtptEditId_
     }
+
 
 -- | The track to read or modify.
 etptTrack :: Lens' EditsTracksPatch Text

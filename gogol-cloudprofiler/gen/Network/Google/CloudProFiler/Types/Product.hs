@@ -39,6 +39,7 @@ newtype DeploymentLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -49,6 +50,7 @@ deploymentLabels
     -> DeploymentLabels
 deploymentLabels pDlAddtional_ =
   DeploymentLabels' {_dlAddtional = _Coerce # pDlAddtional_}
+
 
 dlAddtional :: Lens' DeploymentLabels (HashMap Text Text)
 dlAddtional
@@ -77,6 +79,7 @@ data ProFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +106,7 @@ proFile =
     , _pfDuration = Nothing
     , _pfDeployment = Nothing
     }
+
 
 -- | Input only. Profile bytes, as a gzip compressed serialized proto, the
 -- format is
@@ -181,6 +185,7 @@ data CreateProFileRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateProFileRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -192,6 +197,7 @@ createProFileRequest
     :: CreateProFileRequest
 createProFileRequest =
   CreateProFileRequest' {_cpfrProFileType = Nothing, _cpfrDeployment = Nothing}
+
 
 -- | One or more profile types that the agent is capable of providing.
 cpfrProFileType :: Lens' CreateProFileRequest [Text]
@@ -233,6 +239,7 @@ newtype ProFileLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFileLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -243,6 +250,7 @@ proFileLabels
     -> ProFileLabels
 proFileLabels pPflAddtional_ =
   ProFileLabels' {_pflAddtional = _Coerce # pPflAddtional_}
+
 
 pflAddtional :: Lens' ProFileLabels (HashMap Text Text)
 pflAddtional
@@ -268,6 +276,7 @@ data Deployment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -281,6 +290,7 @@ deployment
     :: Deployment
 deployment =
   Deployment' {_dLabels = Nothing, _dProjectId = Nothing, _dTarget = Nothing}
+
 
 -- | Labels identify the deployment within the user universe and same target.
 -- Validation regex for label names:

@@ -61,6 +61,7 @@ newtype LiaSettingsCustombatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ liaSettingsCustombatch
     -> LiaSettingsCustombatch
 liaSettingsCustombatch pLscPayload_ =
   LiaSettingsCustombatch' {_lscPayload = pLscPayload_}
+
 
 -- | Multipart request metadata.
 lscPayload :: Lens' LiaSettingsCustombatch LiaSettingsCustomBatchRequest

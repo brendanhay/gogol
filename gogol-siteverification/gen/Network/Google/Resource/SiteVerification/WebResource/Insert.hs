@@ -61,6 +61,7 @@ data WebResourceInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebResourceInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ webResourceInsert pWriPayload_ pWriVerificationMethod_ =
     { _wriPayload = pWriPayload_
     , _wriVerificationMethod = pWriVerificationMethod_
     }
+
 
 -- | Multipart request metadata.
 wriPayload :: Lens' WebResourceInsert SiteVerificationWebResourceResource

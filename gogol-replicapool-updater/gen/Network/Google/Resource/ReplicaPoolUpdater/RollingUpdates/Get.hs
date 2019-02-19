@@ -65,6 +65,7 @@ data RollingUpdatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollingUpdatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ rollingUpdatesGet pRugRollingUpdate_ pRugProject_ pRugZone_ =
     , _rugProject = pRugProject_
     , _rugZone = pRugZone_
     }
+
 
 -- | The name of the update.
 rugRollingUpdate :: Lens' RollingUpdatesGet Text

@@ -74,6 +74,7 @@ data GroupsMembershipsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsMembershipsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ groupsMembershipsCreate pGmcParent_ pGmcPayload_ =
     , _gmcPayload = pGmcPayload_
     , _gmcCallback = Nothing
     }
+
 
 -- | [Resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the

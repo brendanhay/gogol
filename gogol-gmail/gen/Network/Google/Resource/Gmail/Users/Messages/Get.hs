@@ -67,6 +67,7 @@ data UsersMessagesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersMessagesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ usersMessagesGet pUmgId_ =
     , _umgId = pUmgId_
     , _umgMetadataHeaders = Nothing
     }
+
 
 -- | The format to return the message in.
 umgFormat :: Lens' UsersMessagesGet UsersMessagesGetFormat

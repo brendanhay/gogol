@@ -60,6 +60,7 @@ data AccounttaxGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccounttaxGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ accounttaxGet pAggMerchantId_ pAggAccountId_ =
     { _aggMerchantId = _Coerce # pAggMerchantId_
     , _aggAccountId = _Coerce # pAggAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

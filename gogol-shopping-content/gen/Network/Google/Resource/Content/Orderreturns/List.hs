@@ -73,6 +73,7 @@ data OrderreturnsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderreturnsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ orderreturnsList pOoMerchantId_ =
     , _ooPageToken = Nothing
     , _ooMaxResults = Nothing
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

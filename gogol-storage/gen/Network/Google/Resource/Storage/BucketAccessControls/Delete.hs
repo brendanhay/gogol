@@ -66,6 +66,7 @@ data BucketAccessControlsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketAccessControlsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ bucketAccessControlsDelete pBacdBucket_ pBacdEntity_ =
     , _bacdUserProject = Nothing
     , _bacdEntity = pBacdEntity_
     }
+
 
 -- | Name of a bucket.
 bacdBucket :: Lens' BucketAccessControlsDelete Text

@@ -80,6 +80,7 @@ data ProjectsLocationsDataSourcesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSourcesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsLocationsDataSourcesList pPldslParent_ =
     , _pldslPageSize = Nothing
     , _pldslCallback = Nothing
     }
+
 
 -- | The BigQuery project id for which data sources should be returned. Must
 -- be in the form: \`projects\/{project_id}\`

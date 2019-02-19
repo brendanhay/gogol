@@ -74,6 +74,7 @@ data ProjectsOccurrencesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsOccurrencesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ projectsOccurrencesDelete pPodName_ =
     , _podName = pPodName_
     , _podCallback = Nothing
     }
+
 
 -- | V1 error format.
 podXgafv :: Lens' ProjectsOccurrencesDelete (Maybe Xgafv)

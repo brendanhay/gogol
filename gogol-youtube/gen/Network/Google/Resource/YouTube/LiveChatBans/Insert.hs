@@ -62,6 +62,7 @@ data LiveChatBansInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatBansInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ liveChatBansInsert
     -> LiveChatBansInsert
 liveChatBansInsert pLcbiPart_ pLcbiPayload_ =
   LiveChatBansInsert' {_lcbiPart = pLcbiPart_, _lcbiPayload = pLcbiPayload_}
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

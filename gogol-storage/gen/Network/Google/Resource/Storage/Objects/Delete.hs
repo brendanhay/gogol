@@ -84,6 +84,7 @@ data ObjectsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ objectsDelete pOdBucket_ pOdObject_ =
     , _odObject = pOdObject_
     , _odGeneration = Nothing
     }
+
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.

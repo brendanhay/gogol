@@ -72,6 +72,7 @@ data InstancesDetachDisk =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesDetachDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ instancesDetachDisk pIdddProject_ pIdddZone_ pIdddDeviceName_ pIdddInstance_ =
     , _idddDeviceName = pIdddDeviceName_
     , _idddInstance = pIdddInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

@@ -61,6 +61,7 @@ data GroupsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ groupsPatch
     -> GroupsPatch
 groupsPatch pGpGroupKey_ pGpPayload_ =
   GroupsPatch' {_gpGroupKey = pGpGroupKey_, _gpPayload = pGpPayload_}
+
 
 -- | Email or immutable ID of the group. If ID, it should match with id of
 -- group object

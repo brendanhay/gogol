@@ -58,6 +58,7 @@ newtype DictionaryListOfflineMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DictionaryListOfflineMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ dictionaryListOfflineMetadata
     -> DictionaryListOfflineMetadata
 dictionaryListOfflineMetadata pDlomCpksver_ =
   DictionaryListOfflineMetadata' {_dlomCpksver = pDlomCpksver_}
+
 
 -- | The device\/version ID from which to request the data.
 dlomCpksver :: Lens' DictionaryListOfflineMetadata Text

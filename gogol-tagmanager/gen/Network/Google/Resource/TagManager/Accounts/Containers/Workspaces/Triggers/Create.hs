@@ -61,6 +61,7 @@ data AccountsContainersWorkspacesTriggersCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesTriggersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ accountsContainersWorkspacesTriggersCreate
 accountsContainersWorkspacesTriggersCreate pAcwtcParent_ pAcwtcPayload_ =
   AccountsContainersWorkspacesTriggersCreate'
     {_acwtcParent = pAcwtcParent_, _acwtcPayload = pAcwtcPayload_}
+
 
 -- | GTM Workspaces\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}

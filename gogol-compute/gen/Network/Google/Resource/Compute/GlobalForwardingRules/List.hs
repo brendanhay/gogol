@@ -74,6 +74,7 @@ data GlobalForwardingRulesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GlobalForwardingRulesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ globalForwardingRulesList pGfrlProject_ =
     , _gfrlPageToken = Nothing
     , _gfrlMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

@@ -72,6 +72,7 @@ data EntitlementsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntitlementsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ entitlementsUpdate pEuEntitlementId_ pEuEnterpriseId_ pEuPayload_ pEuUserId_ =
     , _euInstall = Nothing
     , _euUserId = pEuUserId_
     }
+
 
 -- | The ID of the entitlement (a product ID), e.g.
 -- \"app:com.google.android.gm\".

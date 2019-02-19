@@ -70,6 +70,7 @@ data ProjectsScanConfigsScanRunsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsScanConfigsScanRunsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsScanConfigsScanRunsGet pPscsrgName_ =
     , _pscsrgName = pPscsrgName_
     , _pscsrgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscsrgXgafv :: Lens' ProjectsScanConfigsScanRunsGet (Maybe Xgafv)

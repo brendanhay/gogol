@@ -76,6 +76,7 @@ data EventsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ eventsInsert pEveCalendarId_ pEvePayload_ =
     , _eveSupportsAttachments = Nothing
     , _eveSendUpdates = Nothing
     }
+
 
 -- | Version number of conference data supported by the API client. Version 0
 -- assumes no conference data support and ignores conference data in the

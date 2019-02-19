@@ -81,6 +81,7 @@ data SpreadsheetsValuesBatchUpdateByDataFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsValuesBatchUpdateByDataFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ spreadsheetsValuesBatchUpdateByDataFilter pSvbubdfSpreadsheetId_ pSvbubdfPayload
     , _svbubdfPayload = pSvbubdfPayload_
     , _svbubdfCallback = Nothing
     }
+
 
 -- | V1 error format.
 svbubdfXgafv :: Lens' SpreadsheetsValuesBatchUpdateByDataFilter (Maybe Xgafv)

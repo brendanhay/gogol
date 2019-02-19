@@ -74,6 +74,7 @@ data UsersThreadsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersThreadsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ usersThreadsList =
     , _utlPageToken = Nothing
     , _utlMaxResults = 100
     }
+
 
 -- | Only return threads matching the specified query. Supports the same
 -- query format as the Gmail search box. For example,

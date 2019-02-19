@@ -65,6 +65,7 @@ data SnapshotsGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ snapshotsGetIAMPolicy
 snapshotsGetIAMPolicy pSgiampProject_ pSgiampResource_ =
   SnapshotsGetIAMPolicy'
     {_sgiampProject = pSgiampProject_, _sgiampResource = pSgiampResource_}
+
 
 -- | Project ID for this request.
 sgiampProject :: Lens' SnapshotsGetIAMPolicy Text

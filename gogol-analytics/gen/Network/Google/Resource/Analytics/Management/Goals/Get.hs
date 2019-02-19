@@ -70,6 +70,7 @@ data ManagementGoalsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementGoalsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ managementGoalsGet pMggWebPropertyId_ pMggGoalId_ pMggProFileId_ pMggAccountId_ 
     , _mggProFileId = pMggProFileId_
     , _mggAccountId = pMggAccountId_
     }
+
 
 -- | Web property ID to retrieve the goal for.
 mggWebPropertyId :: Lens' ManagementGoalsGet Text

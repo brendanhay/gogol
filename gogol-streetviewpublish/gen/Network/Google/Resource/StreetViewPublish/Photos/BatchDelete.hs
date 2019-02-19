@@ -84,6 +84,7 @@ data PhotosBatchDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PhotosBatchDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ photosBatchDelete pPbdPayload_ =
     , _pbdPayload = pPbdPayload_
     , _pbdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pbdXgafv :: Lens' PhotosBatchDelete (Maybe Xgafv)

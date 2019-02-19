@@ -67,6 +67,7 @@ data AdvertiserGroupsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserGroupsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ advertiserGroupsPatch pAgpProFileId_ pAgpPayload_ pAgpId_ =
     , _agpPayload = pAgpPayload_
     , _agpId = _Coerce # pAgpId_
     }
+
 
 -- | User profile ID associated with this request.
 agpProFileId :: Lens' AdvertiserGroupsPatch Int64

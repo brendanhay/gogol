@@ -78,6 +78,7 @@ data ProjectsLocationsOperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsOperationsList pPlolParent_ =
     , _plolProjectId = Nothing
     , _plolCallback = Nothing
     }
+
 
 -- | The parent (project and location) where the operations will be listed.
 -- Specified in the format \'projects\/*\/locations\/*\'. Location \"-\"

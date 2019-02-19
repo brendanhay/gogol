@@ -85,6 +85,7 @@ data SpreadsheetsValuesBatchClearByDataFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsValuesBatchClearByDataFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ spreadsheetsValuesBatchClearByDataFilter pSvbcbdfSpreadsheetId_ pSvbcbdfPayload_
     , _svbcbdfPayload = pSvbcbdfPayload_
     , _svbcbdfCallback = Nothing
     }
+
 
 -- | V1 error format.
 svbcbdfXgafv :: Lens' SpreadsheetsValuesBatchClearByDataFilter (Maybe Xgafv)

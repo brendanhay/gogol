@@ -74,6 +74,7 @@ data OrganizationsRolesUndelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsRolesUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ organizationsRolesUndelete pOruPayload_ pOruName_ =
     , _oruName = pOruName_
     , _oruCallback = Nothing
     }
+
 
 -- | V1 error format.
 oruXgafv :: Lens' OrganizationsRolesUndelete (Maybe Xgafv)

@@ -30,6 +30,7 @@ data Image =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40,6 +41,7 @@ data Image =
 image
     :: Image
 image = Image' {_iData = Nothing, _iMimeType = Nothing}
+
 
 -- | Image data in format determined by the mime type. Currently, the format
 -- will always be \"image\/png\", but this might change in the future.
@@ -75,6 +77,7 @@ newtype BlockedResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BlockedResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +86,7 @@ newtype BlockedResource =
 blockedResource
     :: BlockedResource
 blockedResource = BlockedResource' {_brURL = Nothing}
+
 
 -- | URL of the blocked resource.
 brURL :: Lens' BlockedResource (Maybe Text)
@@ -106,6 +110,7 @@ newtype ResourceIssue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceIssue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +119,7 @@ newtype ResourceIssue =
 resourceIssue
     :: ResourceIssue
 resourceIssue = ResourceIssue' {_riBlockedResource = Nothing}
+
 
 -- | Describes a blocked resource issue.
 riBlockedResource :: Lens' ResourceIssue (Maybe BlockedResource)
@@ -142,6 +148,7 @@ data RunMobileFriendlyTestRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RunMobileFriendlyTestRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -154,6 +161,7 @@ runMobileFriendlyTestRequest
 runMobileFriendlyTestRequest =
   RunMobileFriendlyTestRequest'
     {_rmftrURL = Nothing, _rmftrRequestScreenshot = Nothing}
+
 
 -- | URL for inspection.
 rmftrURL :: Lens' RunMobileFriendlyTestRequest (Maybe Text)
@@ -190,6 +198,7 @@ data TestStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -200,6 +209,7 @@ data TestStatus =
 testStatus
     :: TestStatus
 testStatus = TestStatus' {_tsStatus = Nothing, _tsDetails = Nothing}
+
 
 -- | Status of the test.
 tsStatus :: Lens' TestStatus (Maybe TestStatusStatus)
@@ -238,6 +248,7 @@ data RunMobileFriendlyTestResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RunMobileFriendlyTestResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -261,6 +272,7 @@ runMobileFriendlyTestResponse =
     , _rmftrTestStatus = Nothing
     , _rmftrMobileFriendlyIssues = Nothing
     }
+
 
 -- | Screenshot of the requested URL.
 rmftrScreenshot :: Lens' RunMobileFriendlyTestResponse (Maybe Image)
@@ -328,6 +340,7 @@ newtype MobileFriendlyIssue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileFriendlyIssue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -336,6 +349,7 @@ newtype MobileFriendlyIssue =
 mobileFriendlyIssue
     :: MobileFriendlyIssue
 mobileFriendlyIssue = MobileFriendlyIssue' {_mfiRule = Nothing}
+
 
 -- | Rule violated.
 mfiRule :: Lens' MobileFriendlyIssue (Maybe MobileFriendlyIssueRule)

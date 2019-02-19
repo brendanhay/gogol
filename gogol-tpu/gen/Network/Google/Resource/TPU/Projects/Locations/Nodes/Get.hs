@@ -70,6 +70,7 @@ data ProjectsLocationsNodesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsNodesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsLocationsNodesGet pPlngName_ =
     , _plngName = pPlngName_
     , _plngCallback = Nothing
     }
+
 
 -- | V1 error format.
 plngXgafv :: Lens' ProjectsLocationsNodesGet (Maybe Xgafv)

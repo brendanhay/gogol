@@ -64,6 +64,7 @@ data ReportsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ reportsUpdate pRuReportId_ pRuProFileId_ pRuPayload_ =
     , _ruProFileId = _Coerce # pRuProFileId_
     , _ruPayload = pRuPayload_
     }
+
 
 -- | The ID of the report.
 ruReportId :: Lens' ReportsUpdate Int64

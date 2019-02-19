@@ -85,6 +85,7 @@ data ProjectsSinksUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ projectsSinksUpdate pPsuPayload_ pPsuSinkName_ =
     , _psuSinkName = pPsuSinkName_
     , _psuCallback = Nothing
     }
+
 
 -- | V1 error format.
 psuXgafv :: Lens' ProjectsSinksUpdate (Maybe Xgafv)

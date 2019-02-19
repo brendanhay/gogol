@@ -79,6 +79,7 @@ data AppsAuthorizedCertificatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsAuthorizedCertificatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ appsAuthorizedCertificatesGet pAacgAuthorizedCertificatesId_ pAacgAppsId_ =
     , _aacgView = Nothing
     , _aacgCallback = Nothing
     }
+
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
 aacgAuthorizedCertificatesId :: Lens' AppsAuthorizedCertificatesGet Text

@@ -62,6 +62,7 @@ data TokensDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TokensDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ tokensDelete
     -> TokensDelete
 tokensDelete pTdClientId_ pTdUserKey_ =
   TokensDelete' {_tdClientId = pTdClientId_, _tdUserKey = pTdUserKey_}
+
 
 -- | The Client ID of the application the token is issued to.
 tdClientId :: Lens' TokensDelete Text

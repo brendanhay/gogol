@@ -64,6 +64,7 @@ data UserRolesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ userRolesPatch pUrpProFileId_ pUrpPayload_ pUrpId_ =
     , _urpPayload = pUrpPayload_
     , _urpId = _Coerce # pUrpId_
     }
+
 
 -- | User profile ID associated with this request.
 urpProFileId :: Lens' UserRolesPatch Int64

@@ -69,6 +69,7 @@ data ActivitiesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ activitiesList pAlCollection_ pAlUserId_ =
     , _alPageToken = Nothing
     , _alMaxResults = 20
     }
+
 
 -- | The collection of activities to list.
 alCollection :: Lens' ActivitiesList ActivitiesListCollection

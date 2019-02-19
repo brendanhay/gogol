@@ -79,6 +79,7 @@ data ProjectsDeidentifyTemplatesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDeidentifyTemplatesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ projectsDeidentifyTemplatesPatch pPdtpPayload_ pPdtpName_ =
     , _pdtpName = pPdtpName_
     , _pdtpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdtpXgafv :: Lens' ProjectsDeidentifyTemplatesPatch (Maybe Xgafv)

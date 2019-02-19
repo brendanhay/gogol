@@ -70,6 +70,7 @@ data FoldersExclusionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersExclusionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ foldersExclusionsGet pFegName_ =
     , _fegName = pFegName_
     , _fegCallback = Nothing
     }
+
 
 -- | V1 error format.
 fegXgafv :: Lens' FoldersExclusionsGet (Maybe Xgafv)

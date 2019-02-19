@@ -88,6 +88,7 @@ data ManagedShortLinksCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedShortLinksCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ managedShortLinksCreate pMslcPayload_ =
     , _mslcPayload = pMslcPayload_
     , _mslcCallback = Nothing
     }
+
 
 -- | V1 error format.
 mslcXgafv :: Lens' ManagedShortLinksCreate (Maybe Xgafv)

@@ -78,6 +78,7 @@ data PartnersDevicesUnclaim =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersDevicesUnclaim' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ partnersDevicesUnclaim pPduPartnerId_ pPduPayload_ =
     , _pduPayload = pPduPayload_
     , _pduCallback = Nothing
     }
+
 
 -- | V1 error format.
 pduXgafv :: Lens' PartnersDevicesUnclaim (Maybe Xgafv)

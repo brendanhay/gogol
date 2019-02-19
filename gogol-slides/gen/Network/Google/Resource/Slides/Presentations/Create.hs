@@ -80,6 +80,7 @@ data PresentationsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PresentationsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ presentationsCreate pPcPayload_ =
     , _pcPayload = pPcPayload_
     , _pcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pcXgafv :: Lens' PresentationsCreate (Maybe Xgafv)

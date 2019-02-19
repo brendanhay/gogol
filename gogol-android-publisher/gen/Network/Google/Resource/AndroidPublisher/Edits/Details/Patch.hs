@@ -66,6 +66,7 @@ data EditsDetailsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsDetailsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ editsDetailsPatch pEdpPackageName_ pEdpPayload_ pEdpEditId_ =
     , _edpPayload = pEdpPayload_
     , _edpEditId = pEdpEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

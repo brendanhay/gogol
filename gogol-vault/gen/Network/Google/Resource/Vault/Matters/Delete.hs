@@ -71,6 +71,7 @@ data MattersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ mattersDelete pMdMatterId_ =
     , _mdMatterId = pMdMatterId_
     , _mdCallback = Nothing
     }
+
 
 -- | V1 error format.
 mdXgafv :: Lens' MattersDelete (Maybe Xgafv)

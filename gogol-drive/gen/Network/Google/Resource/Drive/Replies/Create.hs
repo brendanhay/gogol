@@ -65,6 +65,7 @@ data RepliesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepliesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ repliesCreate pRcPayload_ pRcFileId_ pRcCommentId_ =
     , _rcFileId = pRcFileId_
     , _rcCommentId = pRcCommentId_
     }
+
 
 -- | Multipart request metadata.
 rcPayload :: Lens' RepliesCreate Reply

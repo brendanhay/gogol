@@ -58,6 +58,7 @@ newtype AccountsUserPermissionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsUserPermissionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ accountsUserPermissionsDelete
     -> AccountsUserPermissionsDelete
 accountsUserPermissionsDelete pAupdPath_ =
   AccountsUserPermissionsDelete' {_aupdPath = pAupdPath_}
+
 
 -- | GTM UserPermission\'s API relative path. Example:
 -- accounts\/{account_id}\/user_permissions\/{user_permission_id}

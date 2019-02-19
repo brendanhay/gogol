@@ -60,6 +60,7 @@ data CommentsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ commentsUpdate
     -> CommentsUpdate
 commentsUpdate pCuPart_ pCuPayload_ =
   CommentsUpdate' {_cuPart = pCuPart_, _cuPayload = pCuPayload_}
+
 
 -- | The part parameter identifies the properties that the API response will
 -- include. You must at least include the snippet part in the parameter

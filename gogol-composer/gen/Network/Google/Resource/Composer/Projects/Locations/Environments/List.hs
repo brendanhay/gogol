@@ -78,6 +78,7 @@ data ProjectsLocationsEnvironmentsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsEnvironmentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsEnvironmentsList pPlelParent_ =
     , _plelPageSize = Nothing
     , _plelCallback = Nothing
     }
+
 
 -- | List environments in the given project and location, in the form:
 -- \"projects\/{projectId}\/locations\/{locationId}\"

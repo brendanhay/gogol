@@ -60,6 +60,7 @@ data TeamdrivesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeamdrivesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ teamdrivesGet
 teamdrivesGet pTgTeamDriveId_ =
   TeamdrivesGet'
     {_tgTeamDriveId = pTgTeamDriveId_, _tgUseDomainAdminAccess = False}
+
 
 -- | The ID of the Team Drive
 tgTeamDriveId :: Lens' TeamdrivesGet Text

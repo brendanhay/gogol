@@ -72,6 +72,7 @@ data LayersVolumeAnnotationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LayersVolumeAnnotationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ layersVolumeAnnotationsGet pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
     , _lvagSource = Nothing
     , _lvagLayerId = pLvagLayerId_
     }
+
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.

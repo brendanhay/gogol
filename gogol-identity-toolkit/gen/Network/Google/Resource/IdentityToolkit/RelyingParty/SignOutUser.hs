@@ -62,6 +62,7 @@ newtype RelyingPartySignOutUser =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartySignOutUser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ relyingPartySignOutUser
     -> RelyingPartySignOutUser
 relyingPartySignOutUser pRpsouPayload_ =
   RelyingPartySignOutUser' {_rpsouPayload = pRpsouPayload_}
+
 
 -- | Multipart request metadata.
 rpsouPayload :: Lens' RelyingPartySignOutUser IdentitytoolkitRelyingPartySignOutUserRequest

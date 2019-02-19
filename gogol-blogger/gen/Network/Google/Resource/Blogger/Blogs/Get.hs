@@ -63,6 +63,7 @@ data BlogsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BlogsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ blogsGet
     -> BlogsGet
 blogsGet pBgBlogId_ =
   BlogsGet' {_bgBlogId = pBgBlogId_, _bgMaxPosts = Nothing, _bgView = Nothing}
+
 
 -- | The ID of the blog to get.
 bgBlogId :: Lens' BlogsGet Text

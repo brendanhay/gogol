@@ -65,6 +65,7 @@ data OrderDocumentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderDocumentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ orderDocumentsGet pOdgProFileId_ pOdgId_ pOdgProjectId_ =
     , _odgId = _Coerce # pOdgId_
     , _odgProjectId = _Coerce # pOdgProjectId_
     }
+
 
 -- | User profile ID associated with this request.
 odgProFileId :: Lens' OrderDocumentsGet Int64

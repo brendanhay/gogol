@@ -64,6 +64,7 @@ data AccountsSavedadstylesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsSavedadstylesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ accountsSavedadstylesList pAslAccountId_ =
     , _aslPageToken = Nothing
     , _aslMaxResults = Nothing
     }
+
 
 -- | Account for which to list saved ad styles.
 aslAccountId :: Lens' AccountsSavedadstylesList Text

@@ -91,6 +91,7 @@ data InstanceGroupManagersListManagedInstances =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersListManagedInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ instanceGroupManagersListManagedInstances pIgmlmiProject_ pIgmlmiInstanceGroupMa
     , _igmlmiPageToken = Nothing
     , _igmlmiMaxResults = 500
     }
+
 
 -- | Project ID for this request.
 igmlmiProject :: Lens' InstanceGroupManagersListManagedInstances Text

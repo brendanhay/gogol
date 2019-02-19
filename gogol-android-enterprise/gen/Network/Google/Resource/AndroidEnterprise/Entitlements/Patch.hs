@@ -74,6 +74,7 @@ data EntitlementsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntitlementsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ entitlementsPatch pEpEntitlementId_ pEpEnterpriseId_ pEpPayload_ pEpUserId_ =
     , _epInstall = Nothing
     , _epUserId = pEpUserId_
     }
+
 
 -- | The ID of the entitlement (a product ID), e.g.
 -- \"app:com.google.android.gm\".

@@ -76,6 +76,7 @@ data AppsFirewallIngressRulesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsFirewallIngressRulesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ appsFirewallIngressRulesGet pAfirgIngressRulesId_ pAfirgAppsId_ =
     , _afirgAppsId = pAfirgAppsId_
     , _afirgCallback = Nothing
     }
+
 
 -- | V1 error format.
 afirgXgafv :: Lens' AppsFirewallIngressRulesGet (Maybe Xgafv)

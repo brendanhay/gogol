@@ -64,6 +64,7 @@ data ShippingSettingsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ shippingSettingsUpdate pSsuMerchantId_ pSsuPayload_ pSsuAccountId_ =
     , _ssuPayload = pSsuPayload_
     , _ssuAccountId = _Coerce # pSsuAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

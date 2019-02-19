@@ -29,6 +29,7 @@ newtype JobExecutionInfoStages =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobExecutionInfoStages' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39,6 +40,7 @@ jobExecutionInfoStages
     -> JobExecutionInfoStages
 jobExecutionInfoStages pJeisAddtional_ =
   JobExecutionInfoStages' {_jeisAddtional = _Coerce # pJeisAddtional_}
+
 
 jeisAddtional :: Lens' JobExecutionInfoStages (HashMap Text JobExecutionStageInfo)
 jeisAddtional
@@ -69,6 +71,7 @@ data ComputationTopology =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ComputationTopology' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +98,7 @@ computationTopology =
     , _ctComputationId = Nothing
     , _ctSystemStageName = Nothing
     }
+
 
 -- | The state family values.
 ctStateFamilies :: Lens' ComputationTopology [StateFamilyConfig]
@@ -171,6 +175,7 @@ data SourceSplitResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceSplitResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -185,6 +190,7 @@ sourceSplitResponse
 sourceSplitResponse =
   SourceSplitResponse'
     {_ssrBundles = Nothing, _ssrShards = Nothing, _ssrOutcome = Nothing}
+
 
 -- | If outcome is SPLITTING_HAPPENED, then this is a list of bundles into
 -- which the source was split. Otherwise this field is ignored. This list
@@ -241,6 +247,7 @@ data ParameterMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ParameterMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -264,6 +271,7 @@ parameterMetadata =
     , _pmRegexes = Nothing
     , _pmLabel = Nothing
     }
+
 
 -- | Required. The help text to display for the parameter.
 pmHelpText :: Lens' ParameterMetadata (Maybe Text)
@@ -319,6 +327,7 @@ newtype ReportWorkItemStatusRequestUnifiedWorkerRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportWorkItemStatusRequestUnifiedWorkerRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -330,6 +339,7 @@ reportWorkItemStatusRequestUnifiedWorkerRequest
 reportWorkItemStatusRequestUnifiedWorkerRequest pRwisruwrAddtional_ =
   ReportWorkItemStatusRequestUnifiedWorkerRequest'
     {_rwisruwrAddtional = _Coerce # pRwisruwrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 rwisruwrAddtional :: Lens' ReportWorkItemStatusRequestUnifiedWorkerRequest (HashMap Text JSONValue)
@@ -366,6 +376,7 @@ data CreateJobFromTemplateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateJobFromTemplateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -389,6 +400,7 @@ createJobFromTemplateRequest =
     , _cjftrGcsPath = Nothing
     , _cjftrParameters = Nothing
     }
+
 
 -- | The location to which to direct the request.
 cjftrLocation :: Lens' CreateJobFromTemplateRequest (Maybe Text)
@@ -484,6 +496,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -496,6 +509,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -543,6 +557,7 @@ data NameAndKind =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NameAndKind' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -553,6 +568,7 @@ data NameAndKind =
 nameAndKind
     :: NameAndKind
 nameAndKind = NameAndKind' {_nakKind = Nothing, _nakName = Nothing}
+
 
 -- | Counter aggregation kind.
 nakKind :: Lens' NameAndKind (Maybe NameAndKindKind)
@@ -583,6 +599,7 @@ newtype IntegerList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IntegerList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -591,6 +608,7 @@ newtype IntegerList =
 integerList
     :: IntegerList
 integerList = IntegerList' {_ilElements = Nothing}
+
 
 -- | Elements of the list.
 ilElements :: Lens' IntegerList [SplitInt64]
@@ -633,6 +651,7 @@ data WorkItem =
     , _wiSeqMapTask               :: !(Maybe SeqMapTask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WorkItem' with the minimum fields required to make a request.
 --
@@ -687,6 +706,7 @@ workItem =
     , _wiStreamingConfigTask = Nothing
     , _wiSeqMapTask = Nothing
     }
+
 
 -- | Identifies the workflow job this WorkItem belongs to.
 wiJobId :: Lens' WorkItem (Maybe Text)
@@ -835,6 +855,7 @@ data WorkerHealthReport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerHealthReport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -855,6 +876,7 @@ workerHealthReport =
     , _whrPods = Nothing
     , _whrVMStartupTime = Nothing
     }
+
 
 -- | Whether the VM is healthy.
 whrVMIsHealthy :: Lens' WorkerHealthReport (Maybe Bool)
@@ -918,6 +940,7 @@ data Snapshot =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Snapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -941,6 +964,7 @@ snapshot =
     , _sId = Nothing
     , _sProjectId = Nothing
     }
+
 
 -- | The time this snapshot was created.
 sCreationTime :: Lens' Snapshot (Maybe UTCTime)
@@ -1000,6 +1024,7 @@ data SourceSplitOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceSplitOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1012,6 +1037,7 @@ sourceSplitOptions
 sourceSplitOptions =
   SourceSplitOptions'
     {_ssoDesiredShardSizeBytes = Nothing, _ssoDesiredBundleSizeBytes = Nothing}
+
 
 -- | DEPRECATED in favor of desired_bundle_size_bytes.
 ssoDesiredShardSizeBytes :: Lens' SourceSplitOptions (Maybe Int64)
@@ -1054,6 +1080,7 @@ newtype WorkerPoolMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerPoolMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1064,6 +1091,7 @@ workerPoolMetadata
     -> WorkerPoolMetadata
 workerPoolMetadata pWpmAddtional_ =
   WorkerPoolMetadata' {_wpmAddtional = _Coerce # pWpmAddtional_}
+
 
 wpmAddtional :: Lens' WorkerPoolMetadata (HashMap Text Text)
 wpmAddtional
@@ -1088,6 +1116,7 @@ data AutoscalingSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalingSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1099,6 +1128,7 @@ autoscalingSettings
     :: AutoscalingSettings
 autoscalingSettings =
   AutoscalingSettings' {_asMaxNumWorkers = Nothing, _asAlgorithm = Nothing}
+
 
 -- | The maximum number of workers to cap scaling at.
 asMaxNumWorkers :: Lens' AutoscalingSettings (Maybe Int32)
@@ -1136,6 +1166,7 @@ newtype JobExecutionStageInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobExecutionStageInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1144,6 +1175,7 @@ newtype JobExecutionStageInfo =
 jobExecutionStageInfo
     :: JobExecutionStageInfo
 jobExecutionStageInfo = JobExecutionStageInfo' {_jesiStepName = Nothing}
+
 
 -- | The steps associated with the execution stage. Note that stages may have
 -- several steps, and that a given step might be run by more than one
@@ -1180,6 +1212,7 @@ data InstructionOutput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstructionOutput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1206,6 +1239,7 @@ instructionOutput =
     , _ioOriginalName = Nothing
     , _ioOnlyCountKeyBytes = Nothing
     }
+
 
 -- | For system-generated byte and mean byte metrics, certain instructions
 -- should only report the value size.
@@ -1274,6 +1308,7 @@ data IntegerGauge =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IntegerGauge' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1284,6 +1319,7 @@ data IntegerGauge =
 integerGauge
     :: IntegerGauge
 integerGauge = IntegerGauge' {_igValue = Nothing, _igTimestamp = Nothing}
+
 
 -- | The value of the variable represented by this gauge.
 igValue :: Lens' IntegerGauge (Maybe SplitInt64)
@@ -1320,6 +1356,7 @@ data LaunchTemplateParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LaunchTemplateParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1334,6 +1371,7 @@ launchTemplateParameters
 launchTemplateParameters =
   LaunchTemplateParameters'
     {_ltpEnvironment = Nothing, _ltpJobName = Nothing, _ltpParameters = Nothing}
+
 
 -- | The runtime environment for the job.
 ltpEnvironment :: Lens' LaunchTemplateParameters (Maybe RuntimeEnvironment)
@@ -1381,6 +1419,7 @@ data ReportWorkItemStatusRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportWorkItemStatusRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1404,6 +1443,7 @@ reportWorkItemStatusRequest =
     , _rwisrWorkItemStatuses = Nothing
     , _rwisrWorkerId = Nothing
     }
+
 
 -- | The current timestamp at the worker.
 rwisrCurrentWorkerTime :: Lens' ReportWorkItemStatusRequest (Maybe UTCTime)
@@ -1475,6 +1515,7 @@ newtype EnvironmentVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnvironmentVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1485,6 +1526,7 @@ environmentVersion
     -> EnvironmentVersion
 environmentVersion pEvAddtional_ =
   EnvironmentVersion' {_evAddtional = _Coerce # pEvAddtional_}
+
 
 -- | Properties of the object.
 evAddtional :: Lens' EnvironmentVersion (HashMap Text JSONValue)
@@ -1510,6 +1552,7 @@ data StreamingApplianceSnapshotConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StreamingApplianceSnapshotConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1522,6 +1565,7 @@ streamingApplianceSnapshotConfig
 streamingApplianceSnapshotConfig =
   StreamingApplianceSnapshotConfig'
     {_sascImportStateEndpoint = Nothing, _sascSnapshotId = Nothing}
+
 
 -- | Indicates which endpoint is used to import appliance state.
 sascImportStateEndpoint :: Lens' StreamingApplianceSnapshotConfig (Maybe Text)
@@ -1563,6 +1607,7 @@ data Sink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Sink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1573,6 +1618,7 @@ data Sink =
 sink
     :: Sink
 sink = Sink' {_sCodec = Nothing, _sSpec = Nothing}
+
 
 -- | The codec to use to encode data written to the sink.
 sCodec :: Lens' Sink (Maybe SinkCodec)
@@ -1602,6 +1648,7 @@ newtype StringList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StringList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1610,6 +1657,7 @@ newtype StringList =
 stringList
     :: StringList
 stringList = StringList' {_slElements = Nothing}
+
 
 -- | Elements of the list.
 slElements :: Lens' StringList [Text]
@@ -1639,6 +1687,7 @@ newtype WorkerHealthReportResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerHealthReportResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1648,6 +1697,7 @@ workerHealthReportResponse
     :: WorkerHealthReportResponse
 workerHealthReportResponse =
   WorkerHealthReportResponse' {_whrrReportInterval = Nothing}
+
 
 -- | A positive value indicates the worker should change its reporting
 -- interval to the specified value. The default value of zero means no
@@ -1690,6 +1740,7 @@ data DisplayData =
     , _ddLabel          :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DisplayData' with the minimum fields required to make a request.
 --
@@ -1735,6 +1786,7 @@ displayData =
     , _ddStrValue = Nothing
     , _ddLabel = Nothing
     }
+
 
 -- | Contains value if the data is of duration type.
 ddDurationValue :: Lens' DisplayData (Maybe Scientific)
@@ -1850,11 +1902,13 @@ data SendDebugCaptureResponse =
   SendDebugCaptureResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SendDebugCaptureResponse' with the minimum fields required to make a request.
 --
 sendDebugCaptureResponse
     :: SendDebugCaptureResponse
 sendDebugCaptureResponse = SendDebugCaptureResponse'
+
 
 instance FromJSON SendDebugCaptureResponse where
         parseJSON
@@ -1877,6 +1931,7 @@ data StructuredMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StructuredMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1891,6 +1946,7 @@ structuredMessage
 structuredMessage =
   StructuredMessage'
     {_smMessageText = Nothing, _smMessageKey = Nothing, _smParameters = Nothing}
+
 
 -- | Human-readable version of message.
 smMessageText :: Lens' StructuredMessage (Maybe Text)
@@ -1941,6 +1997,7 @@ newtype JobLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1950,6 +2007,7 @@ jobLabels
     :: HashMap Text Text -- ^ 'jlAddtional'
     -> JobLabels
 jobLabels pJlAddtional_ = JobLabels' {_jlAddtional = _Coerce # pJlAddtional_}
+
 
 jlAddtional :: Lens' JobLabels (HashMap Text Text)
 jlAddtional
@@ -1976,6 +2034,7 @@ data MetricStructuredName =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricStructuredName' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1990,6 +2049,7 @@ metricStructuredName
 metricStructuredName =
   MetricStructuredName'
     {_msnOrigin = Nothing, _msnContext = Nothing, _msnName = Nothing}
+
 
 -- | Origin (namespace) of metric name. May be blank for user-define metrics;
 -- will be \"dataflow\" for metrics defined by the Dataflow service or SDK.
@@ -2038,6 +2098,7 @@ data BigQueryIODetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BigQueryIODetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2058,6 +2119,7 @@ bigQueryIODetails =
     , _bqiodProjectId = Nothing
     , _bqiodTable = Nothing
     }
+
 
 -- | Dataset accessed in the connection.
 bqiodDataSet :: Lens' BigQueryIODetails (Maybe Text)
@@ -2107,6 +2169,7 @@ newtype FileIODetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileIODetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2115,6 +2178,7 @@ newtype FileIODetails =
 fileIODetails
     :: FileIODetails
 fileIODetails = FileIODetails' {_fiodFilePattern = Nothing}
+
 
 -- | File Pattern used to access files by the connector.
 fiodFilePattern :: Lens' FileIODetails (Maybe Text)
@@ -2151,6 +2215,7 @@ data CounterStructuredName =
     , _csnWorkerId                   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CounterStructuredName' with the minimum fields required to make a request.
 --
@@ -2190,6 +2255,7 @@ counterStructuredName =
     , _csnInputIndex = Nothing
     , _csnWorkerId = Nothing
     }
+
 
 -- | One of the standard Origins defined above.
 csnOrigin :: Lens' CounterStructuredName (Maybe CounterStructuredNameOrigin)
@@ -2301,6 +2367,7 @@ data JobMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2330,6 +2397,7 @@ jobMetadata =
     , _jmBigQueryDetails = Nothing
     , _jmDatastoreDetails = Nothing
     }
+
 
 -- | Identification of a Spanner source used in the Dataflow job.
 jmSpannerDetails :: Lens' JobMetadata [SpannerIODetails]
@@ -2419,6 +2487,7 @@ data GetTemplateResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetTemplateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2430,6 +2499,7 @@ getTemplateResponse
     :: GetTemplateResponse
 getTemplateResponse =
   GetTemplateResponse' {_gtrStatus = Nothing, _gtrMetadata = Nothing}
+
 
 -- | The status of the get template request. Any problems with the request
 -- will be indicated in the error_details.
@@ -2468,6 +2538,7 @@ data WriteInstruction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WriteInstruction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2478,6 +2549,7 @@ data WriteInstruction =
 writeInstruction
     :: WriteInstruction
 writeInstruction = WriteInstruction' {_wiSink = Nothing, _wiInput = Nothing}
+
 
 -- | The sink to write to.
 wiSink :: Lens' WriteInstruction (Maybe Sink)
@@ -2509,6 +2581,7 @@ newtype EnvironmentUserAgent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnvironmentUserAgent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2519,6 +2592,7 @@ environmentUserAgent
     -> EnvironmentUserAgent
 environmentUserAgent pEuaAddtional_ =
   EnvironmentUserAgent' {_euaAddtional = _Coerce # pEuaAddtional_}
+
 
 -- | Properties of the object.
 euaAddtional :: Lens' EnvironmentUserAgent (HashMap Text JSONValue)
@@ -2546,6 +2620,7 @@ data Disk =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Disk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2558,6 +2633,7 @@ data Disk =
 disk
     :: Disk
 disk = Disk' {_dSizeGb = Nothing, _dDiskType = Nothing, _dMountPoint = Nothing}
+
 
 -- | Size of disk in GB. If zero or unspecified, the service will attempt to
 -- choose a reasonable default.
@@ -2623,6 +2699,7 @@ data MetricUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2664,6 +2741,7 @@ metricUpdate =
     , _muName = Nothing
     , _muScalar = Nothing
     }
+
 
 -- | Worker-computed aggregate value for the \"Mean\" aggregation kind. This
 -- holds the sum of the aggregated values and is used in combination with
@@ -2781,6 +2859,7 @@ newtype SourceGetMetadataResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceGetMetadataResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2789,6 +2868,7 @@ newtype SourceGetMetadataResponse =
 sourceGetMetadataResponse
     :: SourceGetMetadataResponse
 sourceGetMetadataResponse = SourceGetMetadataResponse' {_sgmrMetadata = Nothing}
+
 
 -- | The computed metadata.
 sgmrMetadata :: Lens' SourceGetMetadataResponse (Maybe SourceMetadata)
@@ -2817,6 +2897,7 @@ data TemplateMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TemplateMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2831,6 +2912,7 @@ templateMetadata
 templateMetadata =
   TemplateMetadata'
     {_tmName = Nothing, _tmParameters = Nothing, _tmDescription = Nothing}
+
 
 -- | Required. The name of the template.
 tmName :: Lens' TemplateMetadata (Maybe Text)
@@ -2883,6 +2965,7 @@ data Environment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Environment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2921,6 +3004,7 @@ environment =
     , _eUserAgent = Nothing
     , _eSdkPipelineOptions = Nothing
     }
+
 
 -- | The dataset for the current project where various workflow related
 -- tables are stored. The supported resource type is: Google BigQuery:
@@ -3040,6 +3124,7 @@ data ConcatPosition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConcatPosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3050,6 +3135,7 @@ data ConcatPosition =
 concatPosition
     :: ConcatPosition
 concatPosition = ConcatPosition' {_cpIndex = Nothing, _cpPosition = Nothing}
+
 
 -- | Index of the inner source.
 cpIndex :: Lens' ConcatPosition (Maybe Int32)
@@ -3089,6 +3175,7 @@ newtype MetricStructuredNameContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricStructuredNameContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3099,6 +3186,7 @@ metricStructuredNameContext
     -> MetricStructuredNameContext
 metricStructuredNameContext pMsncAddtional_ =
   MetricStructuredNameContext' {_msncAddtional = _Coerce # pMsncAddtional_}
+
 
 msncAddtional :: Lens' MetricStructuredNameContext (HashMap Text Text)
 msncAddtional
@@ -3137,6 +3225,7 @@ data CounterUpdate =
     , _cuInteger                   :: !(Maybe SplitInt64)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CounterUpdate' with the minimum fields required to make a request.
 --
@@ -3191,6 +3280,7 @@ counterUpdate =
     , _cuFloatingPointList = Nothing
     , _cuInteger = Nothing
     }
+
 
 -- | Counter name and aggregation type.
 cuNameAndKind :: Lens' CounterUpdate (Maybe NameAndKind)
@@ -3333,6 +3423,7 @@ newtype StreamingStageLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StreamingStageLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3341,6 +3432,7 @@ newtype StreamingStageLocation =
 streamingStageLocation
     :: StreamingStageLocation
 streamingStageLocation = StreamingStageLocation' {_sslStreamId = Nothing}
+
 
 -- | Identifies the particular stream within the streaming Dataflow job.
 sslStreamId :: Lens' StreamingStageLocation (Maybe Text)
@@ -3367,6 +3459,7 @@ newtype LeaseWorkItemRequestUnifiedWorkerRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaseWorkItemRequestUnifiedWorkerRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3378,6 +3471,7 @@ leaseWorkItemRequestUnifiedWorkerRequest
 leaseWorkItemRequestUnifiedWorkerRequest pLwiruwrAddtional_ =
   LeaseWorkItemRequestUnifiedWorkerRequest'
     {_lwiruwrAddtional = _Coerce # pLwiruwrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lwiruwrAddtional :: Lens' LeaseWorkItemRequestUnifiedWorkerRequest (HashMap Text JSONValue)
@@ -3414,6 +3508,7 @@ data DerivedSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DerivedSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3425,6 +3520,7 @@ derivedSource
     :: DerivedSource
 derivedSource =
   DerivedSource' {_dsDerivationMode = Nothing, _dsSource = Nothing}
+
 
 -- | What source to base the produced source on (if any).
 dsDerivationMode :: Lens' DerivedSource (Maybe DerivedSourceDerivationMode)
@@ -3464,6 +3560,7 @@ data JobMetrics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobMetrics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3474,6 +3571,7 @@ data JobMetrics =
 jobMetrics
     :: JobMetrics
 jobMetrics = JobMetrics' {_jmMetrics = Nothing, _jmMetricTime = Nothing}
+
 
 -- | All metrics for this job.
 jmMetrics :: Lens' JobMetrics [MetricUpdate]
@@ -3515,6 +3613,7 @@ data SendDebugCaptureRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SendDebugCaptureRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3535,6 +3634,7 @@ sendDebugCaptureRequest =
     , _sdcrComponentId = Nothing
     , _sdcrWorkerId = Nothing
     }
+
 
 -- | The location which contains the job specified by job_id.
 sdcrLocation :: Lens' SendDebugCaptureRequest (Maybe Text)
@@ -3596,6 +3696,7 @@ data WorkItemStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkItemStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3646,6 +3747,7 @@ workItemStatus =
     , _wisMetricUpdates = Nothing
     , _wisWorkItemId = Nothing
     }
+
 
 -- | The worker\'s progress through this WorkItem.
 wisReportedProgress :: Lens' WorkItemStatus (Maybe ApproximateReportedProgress)
@@ -3828,6 +3930,7 @@ newtype WorkerMessageLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerMessageLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3838,6 +3941,7 @@ workerMessageLabels
     -> WorkerMessageLabels
 workerMessageLabels pWmlAddtional_ =
   WorkerMessageLabels' {_wmlAddtional = _Coerce # pWmlAddtional_}
+
 
 wmlAddtional :: Lens' WorkerMessageLabels (HashMap Text Text)
 wmlAddtional
@@ -3862,6 +3966,7 @@ newtype FlattenInstruction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FlattenInstruction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3870,6 +3975,7 @@ newtype FlattenInstruction =
 flattenInstruction
     :: FlattenInstruction
 flattenInstruction = FlattenInstruction' {_fiInputs = Nothing}
+
 
 -- | Describes the inputs to the flatten instruction.
 fiInputs :: Lens' FlattenInstruction [InstructionInput]
@@ -3903,6 +4009,7 @@ data WorkerMessageCode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerMessageCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3914,6 +4021,7 @@ workerMessageCode
     :: WorkerMessageCode
 workerMessageCode =
   WorkerMessageCode' {_wmcParameters = Nothing, _wmcCode = Nothing}
+
 
 -- | Parameters contains specific information about the code. This is a
 -- struct to allow parameters of different types. Examples: 1. For a
@@ -3971,6 +4079,7 @@ data TransformSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransformSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3997,6 +4106,7 @@ transformSummary =
     , _tsName = Nothing
     , _tsId = Nothing
     }
+
 
 -- | Transform-specific display data.
 tsDisplayData :: Lens' TransformSummary [DisplayData]
@@ -4067,6 +4177,7 @@ newtype JobTransformNameMApping =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobTransformNameMApping' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4077,6 +4188,7 @@ jobTransformNameMApping
     -> JobTransformNameMApping
 jobTransformNameMApping pJtnmaAddtional_ =
   JobTransformNameMApping' {_jtnmaAddtional = _Coerce # pJtnmaAddtional_}
+
 
 jtnmaAddtional :: Lens' JobTransformNameMApping (HashMap Text Text)
 jtnmaAddtional
@@ -4102,6 +4214,7 @@ newtype SourceSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4111,6 +4224,7 @@ sourceSpec
     :: HashMap Text JSONValue -- ^ 'ssAddtional'
     -> SourceSpec
 sourceSpec pSsAddtional_ = SourceSpec' {_ssAddtional = _Coerce # pSsAddtional_}
+
 
 -- | Properties of the object.
 ssAddtional :: Lens' SourceSpec (HashMap Text JSONValue)
@@ -4138,6 +4252,7 @@ data SourceMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4155,6 +4270,7 @@ sourceMetadata =
     , _smProducesSortedKeys = Nothing
     , _smInfinite = Nothing
     }
+
 
 -- | An estimate of the total size (in bytes) of the data that would be read
 -- from this source. This estimate is in terms of external storage size,
@@ -4204,6 +4320,7 @@ newtype EnvironmentInternalExperiments =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnvironmentInternalExperiments' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4214,6 +4331,7 @@ environmentInternalExperiments
     -> EnvironmentInternalExperiments
 environmentInternalExperiments pEieAddtional_ =
   EnvironmentInternalExperiments' {_eieAddtional = _Coerce # pEieAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 eieAddtional :: Lens' EnvironmentInternalExperiments (HashMap Text JSONValue)
@@ -4258,6 +4376,7 @@ data TaskRunnerSettings =
     , _trsLanguageHint             :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TaskRunnerSettings' with the minimum fields required to make a request.
 --
@@ -4324,6 +4443,7 @@ taskRunnerSettings =
     , _trsParallelWorkerSettings = Nothing
     , _trsLanguageHint = Nothing
     }
+
 
 -- | Whether to continue taskrunner if an exception is hit.
 trsContinueOnException :: Lens' TaskRunnerSettings (Maybe Bool)
@@ -4516,6 +4636,7 @@ data StreamingComputationConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StreamingComputationConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4539,6 +4660,7 @@ streamingComputationConfig =
     , _sccTransformUserNameToStateFamily = Nothing
     , _sccStageName = Nothing
     }
+
 
 -- | Instructions that comprise the computation.
 sccInstructions :: Lens' StreamingComputationConfig [ParallelInstruction]
@@ -4606,6 +4728,7 @@ newtype EnvironmentSdkPipelineOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnvironmentSdkPipelineOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4616,6 +4739,7 @@ environmentSdkPipelineOptions
     -> EnvironmentSdkPipelineOptions
 environmentSdkPipelineOptions pEspoAddtional_ =
   EnvironmentSdkPipelineOptions' {_espoAddtional = _Coerce # pEspoAddtional_}
+
 
 -- | Properties of the object.
 espoAddtional :: Lens' EnvironmentSdkPipelineOptions (HashMap Text JSONValue)
@@ -4644,6 +4768,7 @@ data FloatingPointMean =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloatingPointMean' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4654,6 +4779,7 @@ data FloatingPointMean =
 floatingPointMean
     :: FloatingPointMean
 floatingPointMean = FloatingPointMean' {_fpmCount = Nothing, _fpmSum = Nothing}
+
 
 -- | The number of values being aggregated.
 fpmCount :: Lens' FloatingPointMean (Maybe SplitInt64)
@@ -4689,6 +4815,7 @@ data CPUTime =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CPUTime' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4702,6 +4829,7 @@ cpuTime
     :: CPUTime
 cpuTime =
   CPUTime' {_ctTotalMs = Nothing, _ctRate = Nothing, _ctTimestamp = Nothing}
+
 
 -- | Total active CPU time across all cores (ie., non-idle) in milliseconds
 -- since start-up.
@@ -4754,6 +4882,7 @@ data LeaseWorkItemRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaseWorkItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4783,6 +4912,7 @@ leaseWorkItemRequest =
     , _lwirRequestedLeaseDuration = Nothing
     , _lwirWorkerId = Nothing
     }
+
 
 -- | Filter for WorkItem type.
 lwirWorkItemTypes :: Lens' LeaseWorkItemRequest [Text]
@@ -4872,6 +5002,7 @@ data SourceOperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceOperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4883,6 +5014,7 @@ sourceOperationResponse
     :: SourceOperationResponse
 sourceOperationResponse =
   SourceOperationResponse' {_sorSplit = Nothing, _sorGetMetadata = Nothing}
+
 
 -- | A response to a request to split a source.
 sorSplit :: Lens' SourceOperationResponse (Maybe SourceSplitResponse)
@@ -4917,6 +5049,7 @@ newtype TopologyConfigUserStageToComputationNameMap =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TopologyConfigUserStageToComputationNameMap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4928,6 +5061,7 @@ topologyConfigUserStageToComputationNameMap
 topologyConfigUserStageToComputationNameMap pTcustcnmAddtional_ =
   TopologyConfigUserStageToComputationNameMap'
     {_tcustcnmAddtional = _Coerce # pTcustcnmAddtional_}
+
 
 tcustcnmAddtional :: Lens' TopologyConfigUserStageToComputationNameMap (HashMap Text Text)
 tcustcnmAddtional
@@ -4960,6 +5094,7 @@ data ShellTask =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShellTask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4970,6 +5105,7 @@ data ShellTask =
 shellTask
     :: ShellTask
 shellTask = ShellTask' {_stCommand = Nothing, _stExitCode = Nothing}
+
 
 -- | The shell command to run.
 stCommand :: Lens' ShellTask (Maybe Text)
@@ -5006,6 +5142,7 @@ data DatastoreIODetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatastoreIODetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5017,6 +5154,7 @@ datastoreIODetails
     :: DatastoreIODetails
 datastoreIODetails =
   DatastoreIODetails' {_diodNamespace = Nothing, _diodProjectId = Nothing}
+
 
 -- | Namespace used in the connection.
 diodNamespace :: Lens' DatastoreIODetails (Maybe Text)
@@ -5052,6 +5190,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5062,6 +5201,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -5088,6 +5228,7 @@ data ReportedParallelism =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportedParallelism' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5099,6 +5240,7 @@ reportedParallelism
     :: ReportedParallelism
 reportedParallelism =
   ReportedParallelism' {_rpValue = Nothing, _rpIsInfinite = Nothing}
+
 
 -- | Specifies the level of parallelism in case it is finite.
 rpValue :: Lens' ReportedParallelism (Maybe Double)
@@ -5140,6 +5282,7 @@ newtype StepProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StepProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5150,6 +5293,7 @@ stepProperties
     -> StepProperties
 stepProperties pSpAddtional_ =
   StepProperties' {_spAddtional = _Coerce # pSpAddtional_}
+
 
 -- | Properties of the object.
 spAddtional :: Lens' StepProperties (HashMap Text JSONValue)
@@ -5179,6 +5323,7 @@ data TopologyConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TopologyConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5202,6 +5347,7 @@ topologyConfig =
     , _tcUserStageToComputationNameMap = Nothing
     , _tcComputations = Nothing
     }
+
 
 -- | The disks assigned to a streaming Dataflow job.
 tcDataDiskAssignments :: Lens' TopologyConfig [DataDiskAssignment]
@@ -5275,6 +5421,7 @@ data ApproximateSplitRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApproximateSplitRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5292,6 +5439,7 @@ approximateSplitRequest =
     , _asrFractionOfRemainder = Nothing
     , _asrPosition = Nothing
     }
+
 
 -- | A fraction at which to split the work item, from 0.0 (beginning of the
 -- input) to 1.0 (end of the input).
@@ -5343,6 +5491,7 @@ data SplitInt64 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SplitInt64' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5353,6 +5502,7 @@ data SplitInt64 =
 splitInt64
     :: SplitInt64
 splitInt64 = SplitInt64' {_siHighBits = Nothing, _siLowBits = Nothing}
+
 
 -- | The high order bits, including the sign: n >> 32.
 siHighBits :: Lens' SplitInt64 (Maybe Int32)
@@ -5394,6 +5544,7 @@ data WorkerSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5420,6 +5571,7 @@ workerSettings =
     , _wsReportingEnabled = Nothing
     , _wsWorkerId = Nothing
     }
+
 
 -- | The Cloud Dataflow service path relative to the root URL, for example,
 -- \"dataflow\/v1b3\/projects\".
@@ -5496,6 +5648,7 @@ newtype GetDebugConfigResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetDebugConfigResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5504,6 +5657,7 @@ newtype GetDebugConfigResponse =
 getDebugConfigResponse
     :: GetDebugConfigResponse
 getDebugConfigResponse = GetDebugConfigResponse' {_gdcrConfig = Nothing}
+
 
 -- | The encoded debug configuration for the requested component.
 gdcrConfig :: Lens' GetDebugConfigResponse (Maybe Text)
@@ -5530,6 +5684,7 @@ data SdkVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SdkVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5547,6 +5702,7 @@ sdkVersion =
     , _svVersionDisplayName = Nothing
     , _svVersion = Nothing
     }
+
 
 -- | The support status for this SDK version.
 svSdkSupportStatus :: Lens' SdkVersion (Maybe SdkVersionSdkSupportStatus)
@@ -5592,6 +5748,7 @@ newtype WorkItemServiceStateHarnessData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkItemServiceStateHarnessData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5603,6 +5760,7 @@ workItemServiceStateHarnessData
 workItemServiceStateHarnessData pWisshdAddtional_ =
   WorkItemServiceStateHarnessData'
     {_wisshdAddtional = _Coerce # pWisshdAddtional_}
+
 
 -- | Properties of the object.
 wisshdAddtional :: Lens' WorkItemServiceStateHarnessData (HashMap Text JSONValue)
@@ -5632,6 +5790,7 @@ data DataDiskAssignment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataDiskAssignment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5643,6 +5802,7 @@ dataDiskAssignment
     :: DataDiskAssignment
 dataDiskAssignment =
   DataDiskAssignment' {_ddaVMInstance = Nothing, _ddaDataDisks = Nothing}
+
 
 -- | VM instance name the data disks mounted to, for example
 -- \"myproject-1014-104817-4c2-harness-0\".
@@ -5687,6 +5847,7 @@ newtype ResourceUtilizationReport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceUtilizationReport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5695,6 +5856,7 @@ newtype ResourceUtilizationReport =
 resourceUtilizationReport
     :: ResourceUtilizationReport
 resourceUtilizationReport = ResourceUtilizationReport' {_rurCPUTime = Nothing}
+
 
 -- | CPU utilization samples.
 rurCPUTime :: Lens' ResourceUtilizationReport [CPUTime]
@@ -5723,6 +5885,7 @@ newtype FailedLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FailedLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5731,6 +5894,7 @@ newtype FailedLocation =
 failedLocation
     :: FailedLocation
 failedLocation = FailedLocation' {_flName = Nothing}
+
 
 -- | The name of the failed location.
 flName :: Lens' FailedLocation (Maybe Text)
@@ -5757,6 +5921,7 @@ data WorkerMessageResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerMessageResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5774,6 +5939,7 @@ workerMessageResponse =
     , _wmrWorkerMetricsResponse = Nothing
     , _wmrWorkerShutdownNoticeResponse = Nothing
     }
+
 
 -- | The service\'s response to a worker\'s health report.
 wmrWorkerHealthReportResponse :: Lens' WorkerMessageResponse (Maybe WorkerHealthReportResponse)
@@ -5822,6 +5988,7 @@ newtype CreateJobFromTemplateRequestParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateJobFromTemplateRequestParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5833,6 +6000,7 @@ createJobFromTemplateRequestParameters
 createJobFromTemplateRequestParameters pCjftrpAddtional_ =
   CreateJobFromTemplateRequestParameters'
     {_cjftrpAddtional = _Coerce # pCjftrpAddtional_}
+
 
 cjftrpAddtional :: Lens' CreateJobFromTemplateRequestParameters (HashMap Text Text)
 cjftrpAddtional
@@ -5865,6 +6033,7 @@ data BigTableIODetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BigTableIODetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5882,6 +6051,7 @@ bigTableIODetails =
     , _btiodProjectId = Nothing
     , _btiodTableId = Nothing
     }
+
 
 -- | InstanceId accessed in the connection.
 btiodInstanceId :: Lens' BigTableIODetails (Maybe Text)
@@ -5933,6 +6103,7 @@ data WorkItemServiceState =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkItemServiceState' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5965,6 +6136,7 @@ workItemServiceState =
     , _wissSplitRequest = Nothing
     , _wissMetricShortId = Nothing
     }
+
 
 -- | The index value to use for the next report sent by the worker. Note: If
 -- the report call fails for whatever reason, the worker should reuse this
@@ -6066,6 +6238,7 @@ newtype LaunchTemplateResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LaunchTemplateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6074,6 +6247,7 @@ newtype LaunchTemplateResponse =
 launchTemplateResponse
     :: LaunchTemplateResponse
 launchTemplateResponse = LaunchTemplateResponse' {_ltrJob = Nothing}
+
 
 -- | The job that was launched, if the request was not a dry run and the job
 -- was successfully launched.
@@ -6102,6 +6276,7 @@ data StreamingSetupTask =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StreamingSetupTask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6125,6 +6300,7 @@ streamingSetupTask =
     , _sstDrain = Nothing
     , _sstSnapshotConfig = Nothing
     }
+
 
 -- | The global topology of the streaming Dataflow job.
 sstStreamingComputationTopology :: Lens' StreamingSetupTask (Maybe TopologyConfig)
@@ -6189,6 +6365,7 @@ newtype PartialGroupByKeyInstructionInputElementCodec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartialGroupByKeyInstructionInputElementCodec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6200,6 +6377,7 @@ partialGroupByKeyInstructionInputElementCodec
 partialGroupByKeyInstructionInputElementCodec pPgbkiiecAddtional_ =
   PartialGroupByKeyInstructionInputElementCodec'
     {_pgbkiiecAddtional = _Coerce # pPgbkiiecAddtional_}
+
 
 -- | Properties of the object.
 pgbkiiecAddtional :: Lens' PartialGroupByKeyInstructionInputElementCodec (HashMap Text JSONValue)
@@ -6238,6 +6416,7 @@ data MapTask =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MapTask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6258,6 +6437,7 @@ mapTask =
     , _mtSystemName = Nothing
     , _mtStageName = Nothing
     }
+
 
 -- | The instructions in the MapTask.
 mtInstructions :: Lens' MapTask [ParallelInstruction]
@@ -6313,6 +6493,7 @@ newtype MountedDataDisk =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MountedDataDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6321,6 +6502,7 @@ newtype MountedDataDisk =
 mountedDataDisk
     :: MountedDataDisk
 mountedDataDisk = MountedDataDisk' {_mddDataDisk = Nothing}
+
 
 -- | The name of the data disk. This name is local to the Google Cloud
 -- Platform project and uniquely identifies the disk within that project,
@@ -6348,6 +6530,7 @@ newtype SinkCodec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SinkCodec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6357,6 +6540,7 @@ sinkCodec
     :: HashMap Text JSONValue -- ^ 'scAddtional'
     -> SinkCodec
 sinkCodec pScAddtional_ = SinkCodec' {_scAddtional = _Coerce # pScAddtional_}
+
 
 -- | Properties of the object.
 scAddtional :: Lens' SinkCodec (HashMap Text JSONValue)
@@ -6382,6 +6566,7 @@ data IntegerMean =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IntegerMean' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6392,6 +6577,7 @@ data IntegerMean =
 integerMean
     :: IntegerMean
 integerMean = IntegerMean' {_imCount = Nothing, _imSum = Nothing}
+
 
 -- | The number of values being aggregated.
 imCount :: Lens' IntegerMean (Maybe SplitInt64)
@@ -6421,6 +6607,7 @@ newtype WorkerHealthReportPodsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerHealthReportPodsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6431,6 +6618,7 @@ workerHealthReportPodsItem
     -> WorkerHealthReportPodsItem
 workerHealthReportPodsItem pWhrpiAddtional_ =
   WorkerHealthReportPodsItem' {_whrpiAddtional = _Coerce # pWhrpiAddtional_}
+
 
 -- | Properties of the object.
 whrpiAddtional :: Lens' WorkerHealthReportPodsItem (HashMap Text JSONValue)
@@ -6457,6 +6645,7 @@ newtype ParDoInstructionUserFn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ParDoInstructionUserFn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6467,6 +6656,7 @@ parDoInstructionUserFn
     -> ParDoInstructionUserFn
 parDoInstructionUserFn pPdiufAddtional_ =
   ParDoInstructionUserFn' {_pdiufAddtional = _Coerce # pPdiufAddtional_}
+
 
 -- | Properties of the object.
 pdiufAddtional :: Lens' ParDoInstructionUserFn (HashMap Text JSONValue)
@@ -6493,6 +6683,7 @@ newtype InstructionOutputCodec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstructionOutputCodec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6503,6 +6694,7 @@ instructionOutputCodec
     -> InstructionOutputCodec
 instructionOutputCodec pIocAddtional_ =
   InstructionOutputCodec' {_iocAddtional = _Coerce # pIocAddtional_}
+
 
 -- | Properties of the object.
 iocAddtional :: Lens' InstructionOutputCodec (HashMap Text JSONValue)
@@ -6532,6 +6724,7 @@ data StreamLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StreamLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6552,6 +6745,7 @@ streamLocation =
     , _slCustomSourceLocation = Nothing
     , _slPubsubLocation = Nothing
     }
+
 
 -- | The stream is part of another computation within the current streaming
 -- Dataflow job.
@@ -6609,6 +6803,7 @@ newtype WorkerLifecycleEventMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerLifecycleEventMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6619,6 +6814,7 @@ workerLifecycleEventMetadata
     -> WorkerLifecycleEventMetadata
 workerLifecycleEventMetadata pWlemAddtional_ =
   WorkerLifecycleEventMetadata' {_wlemAddtional = _Coerce # pWlemAddtional_}
+
 
 wlemAddtional :: Lens' WorkerLifecycleEventMetadata (HashMap Text Text)
 wlemAddtional
@@ -6645,6 +6841,7 @@ newtype WorkerPoolPoolArgs =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerPoolPoolArgs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6655,6 +6852,7 @@ workerPoolPoolArgs
     -> WorkerPoolPoolArgs
 workerPoolPoolArgs pWppaAddtional_ =
   WorkerPoolPoolArgs' {_wppaAddtional = _Coerce # pWppaAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 wppaAddtional :: Lens' WorkerPoolPoolArgs (HashMap Text JSONValue)
@@ -6689,6 +6887,7 @@ data RuntimeEnvironment =
     , _reTempLocation            :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RuntimeEnvironment' with the minimum fields required to make a request.
 --
@@ -6731,6 +6930,7 @@ runtimeEnvironment =
     , _reMaxWorkers = Nothing
     , _reTempLocation = Nothing
     }
+
 
 -- | The initial number of Google Compute Engine instnaces for the job.
 reNumWorkers :: Lens' RuntimeEnvironment (Maybe Int32)
@@ -6853,6 +7053,7 @@ data CounterMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CounterMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6873,6 +7074,7 @@ counterMetadata =
     , _cmStandardUnits = Nothing
     , _cmOtherUnits = Nothing
     }
+
 
 -- | Counter aggregation kind.
 cmKind :: Lens' CounterMetadata (Maybe CounterMetadataKind)
@@ -6922,6 +7124,7 @@ newtype SendWorkerMessagesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SendWorkerMessagesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6931,6 +7134,7 @@ sendWorkerMessagesResponse
     :: SendWorkerMessagesResponse
 sendWorkerMessagesResponse =
   SendWorkerMessagesResponse' {_swmrWorkerMessageResponses = Nothing}
+
 
 -- | The servers response to the worker messages.
 swmrWorkerMessageResponses :: Lens' SendWorkerMessagesResponse [WorkerMessageResponse]
@@ -6964,6 +7168,7 @@ data StreamingSideInputLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StreamingSideInputLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6975,6 +7180,7 @@ streamingSideInputLocation
     :: StreamingSideInputLocation
 streamingSideInputLocation =
   StreamingSideInputLocation' {_ssilTag = Nothing, _ssilStateFamily = Nothing}
+
 
 -- | Identifies the particular side input within the streaming Dataflow job.
 ssilTag :: Lens' StreamingSideInputLocation (Maybe Text)
@@ -7011,6 +7217,7 @@ data GetDebugConfigRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetDebugConfigRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7028,6 +7235,7 @@ getDebugConfigRequest =
     , _gdcrComponentId = Nothing
     , _gdcrWorkerId = Nothing
     }
+
 
 -- | The location which contains the job specified by job_id.
 gdcrLocation :: Lens' GetDebugConfigRequest (Maybe Text)
@@ -7072,6 +7280,7 @@ data CounterStructuredNameAndMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CounterStructuredNameAndMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7084,6 +7293,7 @@ counterStructuredNameAndMetadata
 counterStructuredNameAndMetadata =
   CounterStructuredNameAndMetadata'
     {_csnamName = Nothing, _csnamMetadata = Nothing}
+
 
 -- | Structured name of the counter.
 csnamName :: Lens' CounterStructuredNameAndMetadata (Maybe CounterStructuredName)
@@ -7123,6 +7333,7 @@ newtype WorkerShutdownNotice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerShutdownNotice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7131,6 +7342,7 @@ newtype WorkerShutdownNotice =
 workerShutdownNotice
     :: WorkerShutdownNotice
 workerShutdownNotice = WorkerShutdownNotice' {_wsnReason = Nothing}
+
 
 -- | The reason for the worker shutdown. Current possible values are:
 -- \"UNKNOWN\": shutdown reason is unknown. \"PREEMPTION\": shutdown reason
@@ -7160,6 +7372,7 @@ data StreamingComputationTask =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StreamingComputationTask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7177,6 +7390,7 @@ streamingComputationTask =
     , _sctDataDisks = Nothing
     , _sctComputationRanges = Nothing
     }
+
 
 -- | A type of streaming computation task.
 sctTaskType :: Lens' StreamingComputationTask (Maybe StreamingComputationTaskTaskType)
@@ -7227,6 +7441,7 @@ data PipelineDescription =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PipelineDescription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7244,6 +7459,7 @@ pipelineDescription =
     , _pdDisplayData = Nothing
     , _pdOriginalPipelineTransform = Nothing
     }
+
 
 -- | Description of each stage of execution of the pipeline.
 pdExecutionPipelineStage :: Lens' PipelineDescription [ExecutionStageSummary]
@@ -7301,6 +7517,7 @@ data JobMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7321,6 +7538,7 @@ jobMessage =
     , _jmMessageImportance = Nothing
     , _jmId = Nothing
     }
+
 
 -- | The timestamp of the message.
 jmTime :: Lens' JobMessage (Maybe UTCTime)
@@ -7378,6 +7596,7 @@ data WorkerLifecycleEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerLifecycleEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7395,6 +7614,7 @@ workerLifecycleEvent =
     , _wleContainerStartTime = Nothing
     , _wleMetadata = Nothing
     }
+
 
 -- | The event being reported.
 wleEvent :: Lens' WorkerLifecycleEvent (Maybe WorkerLifecycleEventEvent)
@@ -7439,6 +7659,7 @@ newtype ReportWorkItemStatusResponseUnifiedWorkerResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportWorkItemStatusResponseUnifiedWorkerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7450,6 +7671,7 @@ reportWorkItemStatusResponseUnifiedWorkerResponse
 reportWorkItemStatusResponseUnifiedWorkerResponse pRAddtional_ =
   ReportWorkItemStatusResponseUnifiedWorkerResponse'
     {_rAddtional = _Coerce # pRAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 rAddtional :: Lens' ReportWorkItemStatusResponseUnifiedWorkerResponse (HashMap Text JSONValue)
@@ -7481,6 +7703,7 @@ newtype RuntimeEnvironmentAdditionalUserLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RuntimeEnvironmentAdditionalUserLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7492,6 +7715,7 @@ runtimeEnvironmentAdditionalUserLabels
 runtimeEnvironmentAdditionalUserLabels pReaulAddtional_ =
   RuntimeEnvironmentAdditionalUserLabels'
     {_reaulAddtional = _Coerce # pReaulAddtional_}
+
 
 reaulAddtional :: Lens' RuntimeEnvironmentAdditionalUserLabels (HashMap Text Text)
 reaulAddtional
@@ -7523,6 +7747,7 @@ data SeqMapTaskOutputInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SeqMapTaskOutputInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7534,6 +7759,7 @@ seqMapTaskOutputInfo
     :: SeqMapTaskOutputInfo
 seqMapTaskOutputInfo =
   SeqMapTaskOutputInfo' {_smtoiSink = Nothing, _smtoiTag = Nothing}
+
 
 -- | The sink to write the output value to.
 smtoiSink :: Lens' SeqMapTaskOutputInfo (Maybe Sink)
@@ -7568,6 +7794,7 @@ data PubSubIODetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PubSubIODetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7579,6 +7806,7 @@ pubSubIODetails
     :: PubSubIODetails
 pubSubIODetails =
   PubSubIODetails' {_psiodTopic = Nothing, _psiodSubscription = Nothing}
+
 
 -- | Topic accessed in the connection.
 psiodTopic :: Lens' PubSubIODetails (Maybe Text)
@@ -7614,6 +7842,7 @@ newtype SourceGetMetadataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceGetMetadataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7622,6 +7851,7 @@ newtype SourceGetMetadataRequest =
 sourceGetMetadataRequest
     :: SourceGetMetadataRequest
 sourceGetMetadataRequest = SourceGetMetadataRequest' {_sgmrSource = Nothing}
+
 
 -- | Specification of the source whose metadata should be computed.
 sgmrSource :: Lens' SourceGetMetadataRequest (Maybe Source)
@@ -7645,11 +7875,13 @@ data WorkerShutdownNoticeResponse =
   WorkerShutdownNoticeResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerShutdownNoticeResponse' with the minimum fields required to make a request.
 --
 workerShutdownNoticeResponse
     :: WorkerShutdownNoticeResponse
 workerShutdownNoticeResponse = WorkerShutdownNoticeResponse'
+
 
 instance FromJSON WorkerShutdownNoticeResponse where
         parseJSON
@@ -7668,6 +7900,7 @@ newtype SeqMapTaskUserFn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SeqMapTaskUserFn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7678,6 +7911,7 @@ seqMapTaskUserFn
     -> SeqMapTaskUserFn
 seqMapTaskUserFn pSmtufAddtional_ =
   SeqMapTaskUserFn' {_smtufAddtional = _Coerce # pSmtufAddtional_}
+
 
 -- | Properties of the object.
 smtufAddtional :: Lens' SeqMapTaskUserFn (HashMap Text JSONValue)
@@ -7703,6 +7937,7 @@ newtype PartialGroupByKeyInstructionValueCombiningFn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartialGroupByKeyInstructionValueCombiningFn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7714,6 +7949,7 @@ partialGroupByKeyInstructionValueCombiningFn
 partialGroupByKeyInstructionValueCombiningFn pPgbkivcfAddtional_ =
   PartialGroupByKeyInstructionValueCombiningFn'
     {_pgbkivcfAddtional = _Coerce # pPgbkivcfAddtional_}
+
 
 -- | Properties of the object.
 pgbkivcfAddtional :: Lens' PartialGroupByKeyInstructionValueCombiningFn (HashMap Text JSONValue)
@@ -7768,6 +8004,7 @@ data Job =
     , _jCreateTime            :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
@@ -7849,6 +8086,7 @@ job =
     , _jReplaceJobId = Nothing
     , _jCreateTime = Nothing
     }
+
 
 -- | The GCS location where the steps are stored.
 jStepsLocation :: Lens' Job (Maybe Text)
@@ -8105,6 +8343,7 @@ newtype ReadInstruction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReadInstruction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8113,6 +8352,7 @@ newtype ReadInstruction =
 readInstruction
     :: ReadInstruction
 readInstruction = ReadInstruction' {_riSource = Nothing}
+
 
 -- | The source to read from.
 riSource :: Lens' ReadInstruction (Maybe Source)
@@ -8139,6 +8379,7 @@ data ApproximateReportedProgress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApproximateReportedProgress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8159,6 +8400,7 @@ approximateReportedProgress =
     , _arpRemainingParallelism = Nothing
     , _arpPosition = Nothing
     }
+
 
 -- | Completion as fraction of the input consumed, from 0.0 (beginning,
 -- nothing consumed), to 1.0 (end of the input, entire input consumed).
@@ -8238,6 +8480,7 @@ newtype SinkSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SinkSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8247,6 +8490,7 @@ sinkSpec
     :: HashMap Text JSONValue -- ^ 'sAddtional'
     -> SinkSpec
 sinkSpec pSAddtional_ = SinkSpec' {_sAddtional = _Coerce # pSAddtional_}
+
 
 -- | Properties of the object.
 sAddtional :: Lens' SinkSpec (HashMap Text JSONValue)
@@ -8294,6 +8538,7 @@ data WorkerPool =
     , _wpDataDisks                   :: !(Maybe [Disk])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WorkerPool' with the minimum fields required to make a request.
 --
@@ -8366,6 +8611,7 @@ workerPool =
     , _wpWorkerHarnessContainerImage = Nothing
     , _wpDataDisks = Nothing
     }
+
 
 -- | Settings for autoscaling of this WorkerPool.
 wpAutoscalingSettings :: Lens' WorkerPool (Maybe AutoscalingSettings)
@@ -8593,6 +8839,7 @@ data Step =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Step' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8605,6 +8852,7 @@ data Step =
 step
     :: Step
 step = Step' {_sKind = Nothing, _sName = Nothing, _sProperties = Nothing}
+
 
 -- | The kind of step in the Cloud Dataflow job.
 sKind :: Lens' Step (Maybe Text)
@@ -8649,6 +8897,7 @@ data ComponentSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ComponentSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8666,6 +8915,7 @@ componentSource =
     , _csName = Nothing
     , _csOriginalTransformOrCollection = Nothing
     }
+
 
 -- | Human-readable name for this transform; may be user or system generated.
 csUserName :: Lens' ComponentSource (Maybe Text)
@@ -8716,6 +8966,7 @@ data Package =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Package' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8726,6 +8977,7 @@ data Package =
 package
     :: Package
 package = Package' {_pLocation = Nothing, _pName = Nothing}
+
 
 -- | The resource to read the package from. The supported resource type is:
 -- Google Cloud Storage: storage.googleapis.com\/{bucket}
@@ -8768,6 +9020,7 @@ data ExecutionStageSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExecutionStageSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8797,6 +9050,7 @@ executionStageSummary =
     , _essId = Nothing
     , _essComponentTransform = Nothing
     }
+
 
 -- | Output sources for this stage.
 essOutputSource :: Lens' ExecutionStageSummary [StageSource]
@@ -8888,6 +9142,7 @@ newtype WorkerMessageCodeParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerMessageCodeParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8898,6 +9153,7 @@ workerMessageCodeParameters
     -> WorkerMessageCodeParameters
 workerMessageCodeParameters pWmcpAddtional_ =
   WorkerMessageCodeParameters' {_wmcpAddtional = _Coerce # pWmcpAddtional_}
+
 
 -- | Properties of the object.
 wmcpAddtional :: Lens' WorkerMessageCodeParameters (HashMap Text JSONValue)
@@ -8927,6 +9183,7 @@ data DynamicSourceSplit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DynamicSourceSplit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8938,6 +9195,7 @@ dynamicSourceSplit
     :: DynamicSourceSplit
 dynamicSourceSplit =
   DynamicSourceSplit' {_dssResidual = Nothing, _dssPrimary = Nothing}
+
 
 -- | Residual part (returned to the pool of work). Specified relative to the
 -- previously-current source.
@@ -8975,6 +9233,7 @@ data SnapshotJobRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotJobRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8986,6 +9245,7 @@ snapshotJobRequest
     :: SnapshotJobRequest
 snapshotJobRequest =
   SnapshotJobRequest' {_sjrTtl = Nothing, _sjrLocation = Nothing}
+
 
 -- | TTL for the snapshot.
 sjrTtl :: Lens' SnapshotJobRequest (Maybe Scientific)
@@ -9022,6 +9282,7 @@ data ReportWorkItemStatusResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportWorkItemStatusResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9036,6 +9297,7 @@ reportWorkItemStatusResponse =
     { _rwisrWorkItemServiceStates = Nothing
     , _rwisrUnifiedWorkerResponse = Nothing
     }
+
 
 -- | A set of messages indicating the service-side state for each WorkItem
 -- whose status was reported, in the same order as the WorkItemStatus
@@ -9083,6 +9345,7 @@ data SourceFork =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceFork' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9103,6 +9366,7 @@ sourceFork =
     , _sfPrimary = Nothing
     , _sfResidualSource = Nothing
     }
+
 
 -- | DEPRECATED
 sfResidual :: Lens' SourceFork (Maybe SourceSplitShard)
@@ -9151,11 +9415,13 @@ data ResourceUtilizationReportResponse =
   ResourceUtilizationReportResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceUtilizationReportResponse' with the minimum fields required to make a request.
 --
 resourceUtilizationReportResponse
     :: ResourceUtilizationReportResponse
 resourceUtilizationReportResponse = ResourceUtilizationReportResponse'
+
 
 instance FromJSON ResourceUtilizationReportResponse
          where
@@ -9178,6 +9444,7 @@ data StreamingComputationRanges =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StreamingComputationRanges' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9190,6 +9457,7 @@ streamingComputationRanges
 streamingComputationRanges =
   StreamingComputationRanges'
     {_scrRangeAssignments = Nothing, _scrComputationId = Nothing}
+
 
 -- | Data disk assignments for ranges from this computation.
 scrRangeAssignments :: Lens' StreamingComputationRanges [KeyRangeDataDiskAssignment]
@@ -9232,6 +9500,7 @@ data ListJobsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListJobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9249,6 +9518,7 @@ listJobsResponse =
     , _ljrFailedLocation = Nothing
     , _ljrJobs = Nothing
     }
+
 
 -- | Set if there may be more results than fit in this response.
 ljrNextPageToken :: Lens' ListJobsResponse (Maybe Text)
@@ -9296,6 +9566,7 @@ newtype LaunchTemplateParametersParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LaunchTemplateParametersParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9307,6 +9578,7 @@ launchTemplateParametersParameters
 launchTemplateParametersParameters pLtppAddtional_ =
   LaunchTemplateParametersParameters'
     {_ltppAddtional = _Coerce # pLtppAddtional_}
+
 
 ltppAddtional :: Lens' LaunchTemplateParametersParameters (HashMap Text Text)
 ltppAddtional
@@ -9339,6 +9611,7 @@ data Source =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9362,6 +9635,7 @@ source =
     , _souSpec = Nothing
     , _souMetadata = Nothing
     }
+
 
 -- | Setting this value to true hints to the framework that the source
 -- doesn\'t need splitting, and using SourceSplitRequest on it would yield
@@ -9444,6 +9718,7 @@ data ApproximateProgress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApproximateProgress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9461,6 +9736,7 @@ approximateProgress =
     , _apPercentComplete = Nothing
     , _apPosition = Nothing
     }
+
 
 -- | Obsolete.
 apRemainingTime :: Lens' ApproximateProgress (Maybe Scientific)
@@ -9512,6 +9788,7 @@ data WorkerMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9541,6 +9818,7 @@ workerMessage =
     , _wmWorkerShutdownNotice = Nothing
     , _wmLabels = Nothing
     }
+
 
 -- | The health of a worker.
 wmWorkerHealthReport :: Lens' WorkerMessage (Maybe WorkerHealthReport)
@@ -9629,6 +9907,7 @@ data KeyRangeLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KeyRangeLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9652,6 +9931,7 @@ keyRangeLocation =
     , _krlDeliveryEndpoint = Nothing
     , _krlEnd = Nothing
     }
+
 
 -- | The name of the data disk where data for this range is stored. This name
 -- is local to the Google Cloud Platform project and uniquely identifies
@@ -9720,6 +10000,7 @@ data Histogram =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Histogram' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9730,6 +10011,7 @@ data Histogram =
 histogram
     :: Histogram
 histogram = Histogram' {_hBucketCounts = Nothing, _hFirstBucketOffSet = Nothing}
+
 
 -- | Counts of values in each bucket. For efficiency, prefix and trailing
 -- buckets with count = 0 are elided. Buckets can store the full range of
@@ -9775,6 +10057,7 @@ newtype MultiOutputInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MultiOutputInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9783,6 +10066,7 @@ newtype MultiOutputInfo =
 multiOutputInfo
     :: MultiOutputInfo
 multiOutputInfo = MultiOutputInfo' {_moiTag = Nothing}
+
 
 -- | The id of the tag the user code will emit to this output by; this should
 -- correspond to the tag of some SideInputInfo.
@@ -9813,6 +10097,7 @@ data PartialGroupByKeyInstruction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartialGroupByKeyInstruction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9839,6 +10124,7 @@ partialGroupByKeyInstruction =
     , _pgbkiInputElementCodec = Nothing
     , _pgbkiOriginalCombineValuesInputStoreName = Nothing
     }
+
 
 -- | The value combining function to invoke.
 pgbkiValueCombiningFn :: Lens' PartialGroupByKeyInstruction (Maybe PartialGroupByKeyInstructionValueCombiningFn)
@@ -9914,6 +10200,7 @@ newtype LeaseWorkItemResponseUnifiedWorkerResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaseWorkItemResponseUnifiedWorkerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9925,6 +10212,7 @@ leaseWorkItemResponseUnifiedWorkerResponse
 leaseWorkItemResponseUnifiedWorkerResponse pLAddtional_ =
   LeaseWorkItemResponseUnifiedWorkerResponse'
     {_lAddtional = _Coerce # pLAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lAddtional :: Lens' LeaseWorkItemResponseUnifiedWorkerResponse (HashMap Text JSONValue)
@@ -9962,6 +10250,7 @@ data ParDoInstruction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ParDoInstruction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9985,6 +10274,7 @@ parDoInstruction =
     , _pdiInput = Nothing
     , _pdiUserFn = Nothing
     }
+
 
 -- | The number of outputs.
 pdiNumOutputs :: Lens' ParDoInstruction (Maybe Int32)
@@ -10048,6 +10338,7 @@ newtype CustomSourceLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomSourceLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10056,6 +10347,7 @@ newtype CustomSourceLocation =
 customSourceLocation
     :: CustomSourceLocation
 customSourceLocation = CustomSourceLocation' {_cslStateful = Nothing}
+
 
 -- | Whether this source is stateful.
 cslStateful :: Lens' CustomSourceLocation (Maybe Bool)
@@ -10086,6 +10378,7 @@ data DistributionUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DistributionUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10112,6 +10405,7 @@ distributionUpdate =
     , _duSumOfSquares = Nothing
     , _duSum = Nothing
     }
+
 
 -- | The maximum value present in the distribution.
 duMax :: Lens' DistributionUpdate (Maybe SplitInt64)
@@ -10170,6 +10464,7 @@ newtype SourceBaseSpecsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceBaseSpecsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10180,6 +10475,7 @@ sourceBaseSpecsItem
     -> SourceBaseSpecsItem
 sourceBaseSpecsItem pSbsiAddtional_ =
   SourceBaseSpecsItem' {_sbsiAddtional = _Coerce # pSbsiAddtional_}
+
 
 -- | Properties of the object.
 sbsiAddtional :: Lens' SourceBaseSpecsItem (HashMap Text JSONValue)
@@ -10212,6 +10508,7 @@ data ParallelInstruction =
     , _piOriginalName      :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ParallelInstruction' with the minimum fields required to make a request.
 --
@@ -10248,6 +10545,7 @@ parallelInstruction =
     , _piFlatten = Nothing
     , _piOriginalName = Nothing
     }
+
 
 -- | Additional information for Read instructions.
 piRead :: Lens' ParallelInstruction (Maybe ReadInstruction)
@@ -10330,6 +10628,7 @@ newtype SideInputInfoKind =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SideInputInfoKind' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10340,6 +10639,7 @@ sideInputInfoKind
     -> SideInputInfoKind
 sideInputInfoKind pSiikAddtional_ =
   SideInputInfoKind' {_siikAddtional = _Coerce # pSiikAddtional_}
+
 
 -- | Properties of the object.
 siikAddtional :: Lens' SideInputInfoKind (HashMap Text JSONValue)
@@ -10369,6 +10669,7 @@ data StreamingConfigTask =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StreamingConfigTask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10389,6 +10690,7 @@ streamingConfigTask =
     , _sctWindmillServiceEndpoint = Nothing
     , _sctWindmillServicePort = Nothing
     }
+
 
 -- | Map from user step names to state families.
 sctUserStepToStateFamilyNameMap :: Lens' StreamingConfigTask (Maybe StreamingConfigTaskUserStepToStateFamilyNameMap)
@@ -10455,6 +10757,7 @@ data MetricShortId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricShortId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10466,6 +10769,7 @@ metricShortId
     :: MetricShortId
 metricShortId =
   MetricShortId' {_msiShortId = Nothing, _msiMetricIndex = Nothing}
+
 
 -- | The service-generated short identifier for the metric.
 msiShortId :: Lens' MetricShortId (Maybe Int64)
@@ -10505,6 +10809,7 @@ data SendWorkerMessagesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SendWorkerMessagesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10517,6 +10822,7 @@ sendWorkerMessagesRequest
 sendWorkerMessagesRequest =
   SendWorkerMessagesRequest'
     {_swmrLocation = Nothing, _swmrWorkerMessages = Nothing}
+
 
 -- | The location which contains the job
 swmrLocation :: Lens' SendWorkerMessagesRequest (Maybe Text)
@@ -10556,6 +10862,7 @@ data SourceSplitShard =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceSplitShard' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10567,6 +10874,7 @@ sourceSplitShard
     :: SourceSplitShard
 sourceSplitShard =
   SourceSplitShard' {_sssDerivationMode = Nothing, _sssSource = Nothing}
+
 
 -- | DEPRECATED
 sssDerivationMode :: Lens' SourceSplitShard (Maybe SourceSplitShardDerivationMode)
@@ -10604,6 +10912,7 @@ data SideInputInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SideInputInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10617,6 +10926,7 @@ sideInputInfo
     :: SideInputInfo
 sideInputInfo =
   SideInputInfo' {_siiTag = Nothing, _siiKind = Nothing, _siiSources = Nothing}
+
 
 -- | The id of the tag the user code will access this side input by; this
 -- should correspond to the tag of some MultiOutputInfo.
@@ -10663,6 +10973,7 @@ data ComponentTransform =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ComponentTransform' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10677,6 +10988,7 @@ componentTransform
 componentTransform =
   ComponentTransform'
     {_ctOriginalTransform = Nothing, _ctUserName = Nothing, _ctName = Nothing}
+
 
 -- | User name for the original user transform with which this transform is
 -- most closely associated.
@@ -10720,6 +11032,7 @@ newtype StreamingComputationConfigTransformUserNameToStateFamily =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StreamingComputationConfigTransformUserNameToStateFamily' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10731,6 +11044,7 @@ streamingComputationConfigTransformUserNameToStateFamily
 streamingComputationConfigTransformUserNameToStateFamily pScctuntsfAddtional_ =
   StreamingComputationConfigTransformUserNameToStateFamily'
     {_scctuntsfAddtional = _Coerce # pScctuntsfAddtional_}
+
 
 scctuntsfAddtional :: Lens' StreamingComputationConfigTransformUserNameToStateFamily (HashMap Text Text)
 scctuntsfAddtional
@@ -10763,6 +11077,7 @@ newtype JobExecutionInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobExecutionInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10771,6 +11086,7 @@ newtype JobExecutionInfo =
 jobExecutionInfo
     :: JobExecutionInfo
 jobExecutionInfo = JobExecutionInfo' {_jeiStages = Nothing}
+
 
 -- | A mapping from each stage to the information about that stage.
 jeiStages :: Lens' JobExecutionInfo (Maybe JobExecutionInfoStages)
@@ -10795,6 +11111,7 @@ newtype SourceCodec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceCodec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10805,6 +11122,7 @@ sourceCodec
     -> SourceCodec
 sourceCodec pSouAddtional_ =
   SourceCodec' {_souAddtional = _Coerce # pSouAddtional_}
+
 
 -- | Properties of the object.
 souAddtional :: Lens' SourceCodec (HashMap Text JSONValue)
@@ -10830,6 +11148,7 @@ data StateFamilyConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StateFamilyConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10841,6 +11160,7 @@ stateFamilyConfig
     :: StateFamilyConfig
 stateFamilyConfig =
   StateFamilyConfig' {_sfcIsRead = Nothing, _sfcStateFamily = Nothing}
+
 
 -- | If true, this family corresponds to a read operation.
 sfcIsRead :: Lens' StateFamilyConfig (Maybe Bool)
@@ -10880,6 +11200,7 @@ data KeyRangeDataDiskAssignment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KeyRangeDataDiskAssignment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10894,6 +11215,7 @@ keyRangeDataDiskAssignment
 keyRangeDataDiskAssignment =
   KeyRangeDataDiskAssignment'
     {_krddaDataDisk = Nothing, _krddaStart = Nothing, _krddaEnd = Nothing}
+
 
 -- | The name of the data disk where data for this range is stored. This name
 -- is local to the Google Cloud Platform project and uniquely identifies
@@ -10944,6 +11266,7 @@ data AutoscalingEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalingEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10970,6 +11293,7 @@ autoscalingEvent =
     , _aeWorkerPool = Nothing
     , _aeDescription = Nothing
     }
+
 
 -- | The current number of workers the job has.
 aeCurrentNumWorkers :: Lens' AutoscalingEvent (Maybe Int64)
@@ -11053,6 +11377,7 @@ data SourceSplitRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceSplitRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11064,6 +11389,7 @@ sourceSplitRequest
     :: SourceSplitRequest
 sourceSplitRequest =
   SourceSplitRequest' {_ssrSource = Nothing, _ssrOptions = Nothing}
+
 
 -- | Specification of the source to be split.
 ssrSource :: Lens' SourceSplitRequest (Maybe Source)
@@ -11100,6 +11426,7 @@ data ListJobMessagesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListJobMessagesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11117,6 +11444,7 @@ listJobMessagesResponse =
     , _ljmrNextPageToken = Nothing
     , _ljmrAutoscalingEvents = Nothing
     }
+
 
 -- | Messages in ascending timestamp order.
 ljmrJobMessages :: Lens' ListJobMessagesResponse [JobMessage]
@@ -11173,6 +11501,7 @@ data PubsubLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PubsubLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11202,6 +11531,7 @@ pubsubLocation =
     , _plWithAttributes = Nothing
     , _plSubscription = Nothing
     }
+
 
 -- | If set, specifies the pubsub subscription that will be used for tracking
 -- custom time timestamps for watermark estimation.
@@ -11281,6 +11611,7 @@ newtype FloatingPointList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloatingPointList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11289,6 +11620,7 @@ newtype FloatingPointList =
 floatingPointList
     :: FloatingPointList
 floatingPointList = FloatingPointList' {_fplElements = Nothing}
+
 
 -- | Elements of the list.
 fplElements :: Lens' FloatingPointList [Double]
@@ -11319,6 +11651,7 @@ data InstructionInput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstructionInput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11331,6 +11664,7 @@ instructionInput
 instructionInput =
   InstructionInput'
     {_iiProducerInstructionIndex = Nothing, _iiOutputNum = Nothing}
+
 
 -- | The index (origin zero) of the parallel instruction that produces the
 -- output to be consumed by this input. This index is relative to the list
@@ -11377,6 +11711,7 @@ data SeqMapTask =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SeqMapTask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11403,6 +11738,7 @@ seqMapTask =
     , _smtStageName = Nothing
     , _smtUserFn = Nothing
     }
+
 
 -- | Information about each of the inputs.
 smtInputs :: Lens' SeqMapTask [SideInputInfo]
@@ -11471,6 +11807,7 @@ newtype StreamingConfigTaskUserStepToStateFamilyNameMap =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StreamingConfigTaskUserStepToStateFamilyNameMap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11482,6 +11819,7 @@ streamingConfigTaskUserStepToStateFamilyNameMap
 streamingConfigTaskUserStepToStateFamilyNameMap pSctustsfnmAddtional_ =
   StreamingConfigTaskUserStepToStateFamilyNameMap'
     {_sctustsfnmAddtional = _Coerce # pSctustsfnmAddtional_}
+
 
 sctustsfnmAddtional :: Lens' StreamingConfigTaskUserStepToStateFamilyNameMap (HashMap Text Text)
 sctustsfnmAddtional
@@ -11515,6 +11853,7 @@ data ExecutionStageState =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExecutionStageState' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11532,6 +11871,7 @@ executionStageState =
     , _essCurrentStateTime = Nothing
     , _essExecutionStageState = Nothing
     }
+
 
 -- | The name of the execution stage.
 essExecutionStageName :: Lens' ExecutionStageState (Maybe Text)
@@ -11583,6 +11923,7 @@ data StageSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StageSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11603,6 +11944,7 @@ stageSource =
     , _ssName = Nothing
     , _ssOriginalTransformOrCollection = Nothing
     }
+
 
 -- | Size of the source, if measurable.
 ssSizeBytes :: Lens' StageSource (Maybe Int64)
@@ -11660,6 +12002,7 @@ data SourceOperationRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceOperationRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11686,6 +12029,7 @@ sourceOperationRequest =
     , _souStageName = Nothing
     , _souOriginalName = Nothing
     }
+
 
 -- | Information about a request to split a source.
 souSplit :: Lens' SourceOperationRequest (Maybe SourceSplitRequest)
@@ -11754,6 +12098,7 @@ data SpannerIODetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpannerIODetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11771,6 +12116,7 @@ spannerIODetails =
     , _siodDatabaseId = Nothing
     , _siodProjectId = Nothing
     }
+
 
 -- | InstanceId accessed in the connection.
 siodInstanceId :: Lens' SpannerIODetails (Maybe Text)
@@ -11816,6 +12162,7 @@ data LeaseWorkItemResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaseWorkItemResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11828,6 +12175,7 @@ leaseWorkItemResponse
 leaseWorkItemResponse =
   LeaseWorkItemResponse'
     {_lwirWorkItems = Nothing, _lwirUnifiedWorkerResponse = Nothing}
+
 
 -- | A list of the leased WorkItems.
 lwirWorkItems :: Lens' LeaseWorkItemResponse [WorkItem]
@@ -11875,6 +12223,7 @@ data Position =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Position' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11901,6 +12250,7 @@ position =
     , _pKey = Nothing
     , _pEnd = Nothing
     }
+
 
 -- | Position is a byte offset.
 pByteOffSet :: Lens' Position (Maybe Int64)
@@ -11967,6 +12317,7 @@ data Parameter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Parameter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11977,6 +12328,7 @@ data Parameter =
 parameter
     :: Parameter
 parameter = Parameter' {_parValue = Nothing, _parKey = Nothing}
+
 
 -- | Value for this parameter.
 parValue :: Lens' Parameter (Maybe JSONValue)

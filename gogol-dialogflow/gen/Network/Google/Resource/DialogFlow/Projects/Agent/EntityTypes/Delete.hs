@@ -71,6 +71,7 @@ data ProjectsAgentEntityTypesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentEntityTypesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsAgentEntityTypesDelete pPaetdName_ =
     , _paetdName = pPaetdName_
     , _paetdCallback = Nothing
     }
+
 
 -- | V1 error format.
 paetdXgafv :: Lens' ProjectsAgentEntityTypesDelete (Maybe Xgafv)

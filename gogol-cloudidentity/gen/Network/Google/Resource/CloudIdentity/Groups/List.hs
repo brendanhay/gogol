@@ -81,6 +81,7 @@ data GroupsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ groupsList =
     , _gllPageSize = Nothing
     , _gllCallback = Nothing
     }
+
 
 -- | \`Required\`. May be made Optional in the future. Customer ID to list
 -- all groups from.

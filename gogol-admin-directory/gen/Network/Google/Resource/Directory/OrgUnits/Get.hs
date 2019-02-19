@@ -62,6 +62,7 @@ data OrgUnitsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrgUnitsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ orgUnitsGet pOugOrgUnitPath_ pOugCustomerId_ =
     { _ougOrgUnitPath = _Coerce # pOugOrgUnitPath_
     , _ougCustomerId = pOugCustomerId_
     }
+
 
 -- | Full path of the organizational unit or its ID
 ougOrgUnitPath :: Lens' OrgUnitsGet [Text]

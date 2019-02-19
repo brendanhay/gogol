@@ -70,6 +70,7 @@ data DatabasesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatabasesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ databasesUpdate pDuProject_ pDuDatabase_ pDuPayload_ pDuInstance_ =
     , _duPayload = pDuPayload_
     , _duInstance = pDuInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 duProject :: Lens' DatabasesUpdate Text

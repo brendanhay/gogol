@@ -56,6 +56,7 @@ newtype DatafeedsCustombatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -65,6 +66,7 @@ datafeedsCustombatch
     :: DatafeedsCustomBatchRequest -- ^ 'dPayload'
     -> DatafeedsCustombatch
 datafeedsCustombatch pDPayload_ = DatafeedsCustombatch' {_dPayload = pDPayload_}
+
 
 -- | Multipart request metadata.
 dPayload :: Lens' DatafeedsCustombatch DatafeedsCustomBatchRequest

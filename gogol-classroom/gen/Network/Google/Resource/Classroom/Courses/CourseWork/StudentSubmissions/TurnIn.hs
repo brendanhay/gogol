@@ -106,6 +106,7 @@ data CoursesCourseWorkStudentSubmissionsTurnIn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsTurnIn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -145,6 +146,7 @@ coursesCourseWorkStudentSubmissionsTurnIn pCcwsstiCourseId_ pCcwsstiPayload_ pCc
     , _ccwsstiCallback = Nothing
     , _ccwsstiCourseWorkId = pCcwsstiCourseWorkId_
     }
+
 
 -- | V1 error format.
 ccwsstiXgafv :: Lens' CoursesCourseWorkStudentSubmissionsTurnIn (Maybe Xgafv)

@@ -65,6 +65,7 @@ data OrgUnitsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrgUnitsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ orgUnitsList
 orgUnitsList pOulCustomerId_ =
   OrgUnitsList'
     {_oulOrgUnitPath = "", _oulCustomerId = pOulCustomerId_, _oulType = Nothing}
+
 
 -- | the URL-encoded organizational unit\'s path or its ID
 oulOrgUnitPath :: Lens' OrgUnitsList Text

@@ -77,6 +77,7 @@ data ProjectsLocationsWorkflowTemplatesSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsLocationsWorkflowTemplatesSetIAMPolicy pPlwtsipPayload_ pPlwtsipResource
     , _plwtsipResource = pPlwtsipResource_
     , _plwtsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plwtsipXgafv :: Lens' ProjectsLocationsWorkflowTemplatesSetIAMPolicy (Maybe Xgafv)

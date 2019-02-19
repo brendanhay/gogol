@@ -65,6 +65,7 @@ data ManagementFiltersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementFiltersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ managementFiltersUpdate pMfuFilterId_ pMfuPayload_ pMfuAccountId_ =
     , _mfuPayload = pMfuPayload_
     , _mfuAccountId = pMfuAccountId_
     }
+
 
 -- | ID of the filter to be updated.
 mfuFilterId :: Lens' ManagementFiltersUpdate Text

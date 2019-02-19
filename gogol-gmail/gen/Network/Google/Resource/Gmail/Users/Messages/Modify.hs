@@ -66,6 +66,7 @@ data UsersMessagesModify =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersMessagesModify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ usersMessagesModify
 usersMessagesModify pUmmPayload_ pUmmId_ =
   UsersMessagesModify'
     {_ummPayload = pUmmPayload_, _ummUserId = "me", _ummId = pUmmId_}
+
 
 -- | Multipart request metadata.
 ummPayload :: Lens' UsersMessagesModify ModifyMessageRequest

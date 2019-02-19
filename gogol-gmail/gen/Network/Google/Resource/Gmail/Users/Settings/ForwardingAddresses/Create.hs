@@ -73,6 +73,7 @@ data UsersSettingsForwardingAddressesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsForwardingAddressesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ usersSettingsForwardingAddressesCreate
 usersSettingsForwardingAddressesCreate pUsfacPayload_ =
   UsersSettingsForwardingAddressesCreate'
     {_usfacPayload = pUsfacPayload_, _usfacUserId = "me"}
+
 
 -- | Multipart request metadata.
 usfacPayload :: Lens' UsersSettingsForwardingAddressesCreate ForwardingAddress

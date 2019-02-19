@@ -100,6 +100,7 @@ data ObjectsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -137,6 +138,7 @@ objectsGet pOgBucket_ pOgObject_ =
     , _ogProjection = Nothing
     , _ogGeneration = Nothing
     }
+
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.

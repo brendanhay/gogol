@@ -88,6 +88,7 @@ data ActivitiesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ activitiesList =
     , _alPageToken = Nothing
     , _alPageSize = 50
     }
+
 
 -- | Identifies the Drive item to return activities for.
 alDriveFileId :: Lens' ActivitiesList (Maybe Text)

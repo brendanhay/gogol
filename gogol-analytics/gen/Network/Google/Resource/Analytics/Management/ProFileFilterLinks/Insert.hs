@@ -71,6 +71,7 @@ data ManagementProFileFilterLinksInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementProFileFilterLinksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ managementProFileFilterLinksInsert pMpffliWebPropertyId_ pMpffliProFileId_ pMpff
     , _mpffliPayload = pMpffliPayload_
     , _mpffliAccountId = pMpffliAccountId_
     }
+
 
 -- | Web property Id to create profile filter link for.
 mpffliWebPropertyId :: Lens' ManagementProFileFilterLinksInsert Text

@@ -64,6 +64,7 @@ data MobileApppanelsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileApppanelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ mobileApppanelsList
 mobileApppanelsList =
   MobileApppanelsList'
     {_malToken = Nothing, _malStartIndex = Nothing, _malMaxResults = Nothing}
+
 
 malToken :: Lens' MobileApppanelsList (Maybe Text)
 malToken = lens _malToken (\ s a -> s{_malToken = a})

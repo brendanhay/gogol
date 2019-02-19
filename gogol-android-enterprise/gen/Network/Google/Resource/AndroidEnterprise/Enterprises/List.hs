@@ -66,6 +66,7 @@ newtype EnterprisesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ enterprisesList
     :: Text -- ^ 'elDomain'
     -> EnterprisesList
 enterprisesList pElDomain_ = EnterprisesList' {_elDomain = pElDomain_}
+
 
 -- | The exact primary domain name of the enterprise to look up.
 elDomain :: Lens' EnterprisesList Text

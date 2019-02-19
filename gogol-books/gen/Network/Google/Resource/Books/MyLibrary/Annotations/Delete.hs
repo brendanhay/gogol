@@ -61,6 +61,7 @@ data MyLibraryAnnotationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryAnnotationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ myLibraryAnnotationsDelete
 myLibraryAnnotationsDelete pMladAnnotationId_ =
   MyLibraryAnnotationsDelete'
     {_mladAnnotationId = pMladAnnotationId_, _mladSource = Nothing}
+
 
 -- | The ID for the annotation to delete.
 mladAnnotationId :: Lens' MyLibraryAnnotationsDelete Text

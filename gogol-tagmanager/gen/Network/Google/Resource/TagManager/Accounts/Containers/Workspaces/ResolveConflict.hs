@@ -65,6 +65,7 @@ data AccountsContainersWorkspacesResolveConflict =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesResolveConflict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ accountsContainersWorkspacesResolveConflict pAcwrcPath_ pAcwrcPayload_ =
     , _acwrcFingerprint = Nothing
     , _acwrcPayload = pAcwrcPayload_
     }
+
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}

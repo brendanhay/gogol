@@ -72,6 +72,7 @@ data SettingsDatasourcesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsDatasourcesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ settingsDatasourcesCreate pSdcPayload_ =
     , _sdcPayload = pSdcPayload_
     , _sdcCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdcXgafv :: Lens' SettingsDatasourcesCreate (Maybe Xgafv)

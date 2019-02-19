@@ -74,6 +74,7 @@ data AccessPoliciesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessPoliciesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ accessPoliciesDelete pApdName_ =
     , _apdName = pApdName_
     , _apdCallback = Nothing
     }
+
 
 -- | V1 error format.
 apdXgafv :: Lens' AccessPoliciesDelete (Maybe Xgafv)

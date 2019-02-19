@@ -72,6 +72,7 @@ data ProjectsGetAgent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGetAgent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsGetAgent pPgaParent_ =
     , _pgaUploadType = Nothing
     , _pgaCallback = Nothing
     }
+
 
 -- | Required. The project that the agent to fetch is associated with.
 -- Format: \`projects\/\`.

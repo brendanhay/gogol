@@ -73,6 +73,7 @@ data VolumesAssociatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumesAssociatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ volumesAssociatedList pValVolumeId_ =
     , _valSource = Nothing
     , _valAssociation = Nothing
     }
+
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating recommendations.

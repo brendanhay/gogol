@@ -31,6 +31,7 @@ data NotificationConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42,6 +43,7 @@ notificationConfig
     :: NotificationConfig
 notificationConfig =
   NotificationConfig' {_ncDeliveryTime = Nothing, _ncLevel = Nothing}
+
 
 -- | The time at which the notification should be delivered.
 ncDeliveryTime :: Lens' NotificationConfig (Maybe UTCTime)
@@ -79,6 +81,7 @@ newtype Command =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Command' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +90,7 @@ newtype Command =
 command
     :: Command
 command = Command' {_cType = Nothing}
+
 
 -- | The type of operation this command corresponds to. Allowed values are: -
 -- TAKE_A_NOTE - Shares a timeline item with the transcription of user
@@ -116,6 +120,7 @@ data LocationsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +133,7 @@ locationsListResponse
 locationsListResponse =
   LocationsListResponse'
     {_llrKind = "mirror#locationsList", _llrItems = Nothing}
+
 
 -- | The type of resource. This is always mirror#locationsList.
 llrKind :: Lens' LocationsListResponse Text
@@ -171,6 +177,7 @@ data Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -203,6 +210,7 @@ location =
     , _lLongitude = Nothing
     , _lTimestamp = Nothing
     }
+
 
 -- | The type of resource. This is always mirror#location.
 lKind :: Lens' Location Text
@@ -287,6 +295,7 @@ data Notification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -313,6 +322,7 @@ notification =
     , _nVerifyToken = Nothing
     , _nUserToken = Nothing
     }
+
 
 -- | The type of operation that generated the notification.
 nOperation :: Lens' Notification (Maybe Text)
@@ -389,6 +399,7 @@ data Contact =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Contact' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -433,6 +444,7 @@ contact =
     , _conType = Nothing
     , _conSpeakableName = Nothing
     }
+
 
 -- | A list of voice menu commands that a contact can handle. Glass shows up
 -- to three contacts for each voice menu command. If there are more than
@@ -569,6 +581,7 @@ data AuthToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -579,6 +592,7 @@ data AuthToken =
 authToken
     :: AuthToken
 authToken = AuthToken' {_atAuthToken = Nothing, _atType = Nothing}
+
 
 atAuthToken :: Lens' AuthToken (Maybe Text)
 atAuthToken
@@ -612,6 +626,7 @@ data AttachmentsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AttachmentsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -624,6 +639,7 @@ attachmentsListResponse
 attachmentsListResponse =
   AttachmentsListResponse'
     {_alrKind = "mirror#attachmentsList", _alrItems = Nothing}
+
 
 -- | The type of resource. This is always mirror#attachmentsList.
 alrKind :: Lens' AttachmentsListResponse Text
@@ -665,6 +681,7 @@ data MenuItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MenuItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -691,6 +708,7 @@ menuItem =
     , _miContextualCommand = Nothing
     , _miId = Nothing
     }
+
 
 -- | For CUSTOM items, a list of values controlling the appearance of the
 -- menu item in each of its states. A value for the DEFAULT state must be
@@ -798,6 +816,7 @@ data Setting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Setting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -811,6 +830,7 @@ setting
     :: Setting
 setting =
   Setting' {_sKind = "mirror#setting", _sValue = Nothing, _sId = Nothing}
+
 
 -- | The type of resource. This is always mirror#setting.
 sKind :: Lens' Setting Text
@@ -857,6 +877,7 @@ data Attachment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Attachment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -877,6 +898,7 @@ attachment =
     , _aIsProcessingContent = Nothing
     , _aContentType = Nothing
     }
+
 
 -- | The URL for the content.
 aContentURL :: Lens' Attachment (Maybe Text)
@@ -930,6 +952,7 @@ data Account =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -950,6 +973,7 @@ account =
     , _aPassword = Nothing
     , _aFeatures = Nothing
     }
+
 
 aAuthTokens :: Lens' Account [AuthToken]
 aAuthTokens
@@ -1001,6 +1025,7 @@ data UserData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1011,6 +1036,7 @@ data UserData =
 userData
     :: UserData
 userData = UserData' {_udValue = Nothing, _udKey = Nothing}
+
 
 udValue :: Lens' UserData (Maybe Text)
 udValue = lens _udValue (\ s a -> s{_udValue = a})
@@ -1040,6 +1066,7 @@ data UserAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1050,6 +1077,7 @@ data UserAction =
 userAction
     :: UserAction
 userAction = UserAction' {_uaPayload = Nothing, _uaType = Nothing}
+
 
 -- | An optional payload for the action. For actions of type CUSTOM, this is
 -- the ID of the custom menu item that was selected.
@@ -1093,6 +1121,7 @@ data TimelineListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimelineListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1110,6 +1139,7 @@ timelineListResponse =
     , _tlrKind = "mirror#timeline"
     , _tlrItems = Nothing
     }
+
 
 -- | The next page token. Provide this as the pageToken parameter in the
 -- request to retrieve the next page of results.
@@ -1157,6 +1187,7 @@ data ContactsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1168,6 +1199,7 @@ contactsListResponse
     :: ContactsListResponse
 contactsListResponse =
   ContactsListResponse' {_clrKind = "mirror#contacts", _clrItems = Nothing}
+
 
 -- | The type of resource. This is always mirror#contacts.
 clrKind :: Lens' ContactsListResponse Text
@@ -1206,6 +1238,7 @@ data MenuValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MenuValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1220,6 +1253,7 @@ menuValue
 menuValue =
   MenuValue'
     {_mvState = Nothing, _mvDisplayName = Nothing, _mvIconURL = Nothing}
+
 
 -- | The state that this value applies to. Allowed values are: - DEFAULT -
 -- Default value shown when displayed in the menuItems list. - PENDING -
@@ -1275,6 +1309,7 @@ data Subscription =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1310,6 +1345,7 @@ subscription =
     , _subId = Nothing
     , _subUpdated = Nothing
     }
+
 
 -- | The URL where notifications should be delivered (must start with
 -- https:\/\/).
@@ -1436,6 +1472,7 @@ data TimelineItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimelineItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1522,6 +1559,7 @@ timelineItem =
     , _tiTitle = Nothing
     , _tiInReplyTo = Nothing
     }
+
 
 -- | The user or group that created this item.
 tiCreator :: Lens' TimelineItem (Maybe Contact)
@@ -1794,6 +1832,7 @@ data SubscriptionsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1806,6 +1845,7 @@ subscriptionsListResponse
 subscriptionsListResponse =
   SubscriptionsListResponse'
     {_slrKind = "mirror#subscriptionsList", _slrItems = Nothing}
+
 
 -- | The type of resource. This is always mirror#subscriptionsList.
 slrKind :: Lens' SubscriptionsListResponse Text

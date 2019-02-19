@@ -67,6 +67,7 @@ data FloodlightConfigurationsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightConfigurationsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ floodlightConfigurationsPatch pFcpProFileId_ pFcpPayload_ pFcpId_ =
     , _fcpPayload = pFcpPayload_
     , _fcpId = _Coerce # pFcpId_
     }
+
 
 -- | User profile ID associated with this request.
 fcpProFileId :: Lens' FloodlightConfigurationsPatch Int64

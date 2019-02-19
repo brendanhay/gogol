@@ -104,6 +104,7 @@ data BeaconsAttachmentsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconsAttachmentsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -138,6 +139,7 @@ beaconsAttachmentsCreate pBacBeaconName_ pBacPayload_ =
     , _bacProjectId = Nothing
     , _bacCallback = Nothing
     }
+
 
 -- | V1 error format.
 bacXgafv :: Lens' BeaconsAttachmentsCreate (Maybe Xgafv)

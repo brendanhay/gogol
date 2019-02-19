@@ -74,6 +74,7 @@ data BillingAccountsLogsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsLogsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ billingAccountsLogsDelete pBaldLogName_ =
     , _baldLogName = pBaldLogName_
     , _baldCallback = Nothing
     }
+
 
 -- | V1 error format.
 baldXgafv :: Lens' BillingAccountsLogsDelete (Maybe Xgafv)

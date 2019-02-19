@@ -59,6 +59,7 @@ newtype SettingsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ settingsGet
     :: Text -- ^ 'sgSetting'
     -> SettingsGet
 settingsGet pSgSetting_ = SettingsGet' {_sgSetting = pSgSetting_}
+
 
 -- | The id of the user setting.
 sgSetting :: Lens' SettingsGet Text

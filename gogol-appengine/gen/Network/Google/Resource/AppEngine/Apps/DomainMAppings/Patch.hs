@@ -88,6 +88,7 @@ data AppsDomainMAppingsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsDomainMAppingsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ appsDomainMAppingsPatch pAdmapPayload_ pAdmapAppsId_ pAdmapDomainMAppingsId_ =
     , _admapDomainMAppingsId = pAdmapDomainMAppingsId_
     , _admapCallback = Nothing
     }
+
 
 -- | V1 error format.
 admapXgafv :: Lens' AppsDomainMAppingsPatch (Maybe Xgafv)

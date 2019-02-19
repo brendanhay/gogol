@@ -102,6 +102,7 @@ data ReportsQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -158,6 +159,7 @@ reportsQuery =
     , _rqMaxResults = Nothing
     , _rqCallback = Nothing
     }
+
 
 -- | V1 error format.
 rqXgafv :: Lens' ReportsQuery (Maybe Xgafv)

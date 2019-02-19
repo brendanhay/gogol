@@ -55,11 +55,13 @@ data SubscriptionsList =
   SubscriptionsList'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.
 --
 subscriptionsList
     :: SubscriptionsList
 subscriptionsList = SubscriptionsList'
+
 
 instance GoogleRequest SubscriptionsList where
         type Rs SubscriptionsList = SubscriptionsListResponse

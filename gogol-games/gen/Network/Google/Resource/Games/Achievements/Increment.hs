@@ -67,6 +67,7 @@ data AchievementsIncrement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementsIncrement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ achievementsIncrement pAiAchievementId_ pAiStepsToIncrement_ =
     , _aiAchievementId = pAiAchievementId_
     , _aiStepsToIncrement = _Coerce # pAiStepsToIncrement_
     }
+
 
 -- | A randomly generated numeric ID for each request specified by the
 -- caller. This number is used at the server to ensure that the request is

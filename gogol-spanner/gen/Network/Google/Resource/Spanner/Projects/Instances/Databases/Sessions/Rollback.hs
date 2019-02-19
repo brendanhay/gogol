@@ -84,6 +84,7 @@ data ProjectsInstancesDatabasesSessionsRollback =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsRollback' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsInstancesDatabasesSessionsRollback pProPayload_ pProSession_ =
     , _proSession = pProSession_
     , _proCallback = Nothing
     }
+
 
 -- | V1 error format.
 proXgafv :: Lens' ProjectsInstancesDatabasesSessionsRollback (Maybe Xgafv)

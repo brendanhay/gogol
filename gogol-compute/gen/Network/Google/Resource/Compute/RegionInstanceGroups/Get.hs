@@ -65,6 +65,7 @@ data RegionInstanceGroupsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ regionInstanceGroupsGet pRiggProject_ pRiggRegion_ pRiggInstanceGroup_ =
     , _riggRegion = pRiggRegion_
     , _riggInstanceGroup = pRiggInstanceGroup_
     }
+
 
 -- | Project ID for this request.
 riggProject :: Lens' RegionInstanceGroupsGet Text

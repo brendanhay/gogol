@@ -65,6 +65,7 @@ data TableUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ tableUpdate pTabPayload_ pTabTableId_ =
     , _tabReplaceViewDefinition = Nothing
     , _tabTableId = pTabTableId_
     }
+
 
 -- | Multipart request metadata.
 tabPayload :: Lens' TableUpdate Table

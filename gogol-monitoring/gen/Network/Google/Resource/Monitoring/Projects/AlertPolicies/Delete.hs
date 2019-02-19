@@ -70,6 +70,7 @@ data ProjectsAlertPoliciesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAlertPoliciesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsAlertPoliciesDelete pPapdName_ =
     , _papdName = pPapdName_
     , _papdCallback = Nothing
     }
+
 
 -- | V1 error format.
 papdXgafv :: Lens' ProjectsAlertPoliciesDelete (Maybe Xgafv)

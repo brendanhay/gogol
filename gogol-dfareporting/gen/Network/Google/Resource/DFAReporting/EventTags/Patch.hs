@@ -64,6 +64,7 @@ data EventTagsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventTagsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ eventTagsPatch pEtpProFileId_ pEtpPayload_ pEtpId_ =
     , _etpPayload = pEtpPayload_
     , _etpId = _Coerce # pEtpId_
     }
+
 
 -- | User profile ID associated with this request.
 etpProFileId :: Lens' EventTagsPatch Int64

@@ -70,6 +70,7 @@ data RegionCommitmentsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionCommitmentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ regionCommitmentsInsert pRciProject_ pRciPayload_ pRciRegion_ =
     , _rciPayload = pRciPayload_
     , _rciRegion = pRciRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

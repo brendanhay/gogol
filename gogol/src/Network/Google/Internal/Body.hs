@@ -14,7 +14,7 @@ import           Control.Monad.IO.Class (MonadIO (..))
 import           Data.Conduit.Binary    (sourceFile)
 import           Data.Maybe             (fromMaybe)
 import qualified Data.Text              as Text
-import           Network.Google.Types   (Body (..))
+import           Network.Google.Types   (GBody (..))
 import           Network.HTTP.Conduit   (requestBodySource)
 import           Network.HTTP.Media     (MediaType, parseAccept, (//))
 import qualified Network.Mime           as MIME
@@ -35,13 +35,13 @@ getMIMEType =
     . Text.takeWhileEnd (/= '/')
     . Text.pack
 
--- | Construct a 'Body' from a 'FilePath'.
+-- | Construct a 'GBody' from a 'FilePath'.
 --
 -- This uses 'getMIMEType' to calculate the MIME type from the file extension,
 -- you can use 'bodyContentType' to set a MIME type explicitly.
-sourceBody :: MonadIO m => FilePath -> m Body
+sourceBody :: MonadIO m => FilePath -> m GBody
 sourceBody f = do
     n <- getFileSize f
-    pure $ Body
+    pure $ GBody
         (getMIMEType f)
         (requestBodySource (fromIntegral n) (sourceFile f))

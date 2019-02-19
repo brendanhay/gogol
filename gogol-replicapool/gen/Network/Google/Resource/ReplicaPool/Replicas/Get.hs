@@ -69,6 +69,7 @@ data ReplicasGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplicasGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ replicasGet pRgPoolName_ pRgZone_ pRgReplicaName_ pRgProjectName_ =
     , _rgReplicaName = pRgReplicaName_
     , _rgProjectName = pRgProjectName_
     }
+
 
 -- | The replica pool name for this request.
 rgPoolName :: Lens' ReplicasGet Text

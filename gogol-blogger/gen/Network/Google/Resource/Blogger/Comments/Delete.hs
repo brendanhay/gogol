@@ -65,6 +65,7 @@ data CommentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ commentsDelete pCdBlogId_ pCdPostId_ pCdCommentId_ =
     , _cdPostId = pCdPostId_
     , _cdCommentId = pCdCommentId_
     }
+
 
 -- | The ID of the Blog.
 cdBlogId :: Lens' CommentsDelete Text

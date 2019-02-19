@@ -83,6 +83,7 @@ data AccountsProposalsCancelNegotiation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProposalsCancelNegotiation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ accountsProposalsCancelNegotiation pApcnPayload_ pApcnProposalId_ pApcnAccountId
     , _apcnAccountId = pApcnAccountId_
     , _apcnCallback = Nothing
     }
+
 
 -- | V1 error format.
 apcnXgafv :: Lens' AccountsProposalsCancelNegotiation (Maybe Xgafv)

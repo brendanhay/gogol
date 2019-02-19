@@ -72,6 +72,7 @@ data PurchasesSubscriptionsDefer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PurchasesSubscriptionsDefer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ purchasesSubscriptionsDefer pPsdPackageName_ pPsdToken_ pPsdPayload_ pPsdSubscri
     , _psdPayload = pPsdPayload_
     , _psdSubscriptionId = pPsdSubscriptionId_
     }
+
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').

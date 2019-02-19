@@ -78,6 +78,7 @@ data ProjectsLocationsRegistriesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsRegistriesList pPlrlParent_ =
     , _plrlPageSize = Nothing
     , _plrlCallback = Nothing
     }
+
 
 -- | The project and cloud region path. For example,
 -- \`projects\/example-project\/locations\/us-central1\`.

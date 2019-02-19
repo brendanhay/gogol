@@ -61,6 +61,7 @@ data CommentThreadsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentThreadsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ commentThreadsUpdate
     -> CommentThreadsUpdate
 commentThreadsUpdate pCtuPart_ pCtuPayload_ =
   CommentThreadsUpdate' {_ctuPart = pCtuPart_, _ctuPayload = pCtuPayload_}
+
 
 -- | The part parameter specifies a comma-separated list of commentThread
 -- resource properties that the API response will include. You must at

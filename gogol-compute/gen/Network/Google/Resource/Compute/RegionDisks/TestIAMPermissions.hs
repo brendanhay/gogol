@@ -70,6 +70,7 @@ data RegionDisksTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionDisksTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ regionDisksTestIAMPermissions pRdtipProject_ pRdtipPayload_ pRdtipResource_ pRdt
     , _rdtipResource = pRdtipResource_
     , _rdtipRegion = pRdtipRegion_
     }
+
 
 -- | Project ID for this request.
 rdtipProject :: Lens' RegionDisksTestIAMPermissions Text

@@ -62,6 +62,7 @@ data CustomChannelsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomChannelsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ customChannelsDelete pCcdCustomChannelId_ pCcdAdClientId_ =
     { _ccdCustomChannelId = pCcdCustomChannelId_
     , _ccdAdClientId = pCcdAdClientId_
     }
+
 
 -- | Custom channel to delete.
 ccdCustomChannelId :: Lens' CustomChannelsDelete Text

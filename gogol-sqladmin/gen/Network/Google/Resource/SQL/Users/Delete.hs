@@ -68,6 +68,7 @@ data UsersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ usersDelete pUdProject_ pUdName_ pUdHost_ pUdInstance_ =
     , _udHost = pUdHost_
     , _udInstance = pUdInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 udProject :: Lens' UsersDelete Text

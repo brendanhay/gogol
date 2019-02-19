@@ -75,6 +75,7 @@ data MattersSavedQueriesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersSavedQueriesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ mattersSavedQueriesGet pMsqgSavedQueryId_ pMsqgMatterId_ =
     , _msqgMatterId = pMsqgMatterId_
     , _msqgCallback = Nothing
     }
+
 
 -- | V1 error format.
 msqgXgafv :: Lens' MattersSavedQueriesGet (Maybe Xgafv)

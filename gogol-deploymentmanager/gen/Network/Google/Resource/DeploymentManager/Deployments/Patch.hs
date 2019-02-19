@@ -80,6 +80,7 @@ data DeploymentsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ deploymentsPatch pDpProject_ pDpPayload_ pDpDeployment_ =
     , _dpPreview = False
     , _dpDeployment = pDpDeployment_
     }
+
 
 -- | Sets the policy to use for creating new resources.
 dpCreatePolicy :: Lens' DeploymentsPatch DeploymentsPatchCreatePolicy

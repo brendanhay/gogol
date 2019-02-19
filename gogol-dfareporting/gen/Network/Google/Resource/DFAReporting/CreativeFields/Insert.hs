@@ -62,6 +62,7 @@ data CreativeFieldsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ creativeFieldsInsert
 creativeFieldsInsert pCfiProFileId_ pCfiPayload_ =
   CreativeFieldsInsert'
     {_cfiProFileId = _Coerce # pCfiProFileId_, _cfiPayload = pCfiPayload_}
+
 
 -- | User profile ID associated with this request.
 cfiProFileId :: Lens' CreativeFieldsInsert Int64

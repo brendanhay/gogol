@@ -79,6 +79,7 @@ data ProjectsScanConfigsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsScanConfigsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsScanConfigsPatch pPscpPayload_ pPscpName_ =
     , _pscpName = pPscpName_
     , _pscpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscpXgafv :: Lens' ProjectsScanConfigsPatch (Maybe Xgafv)

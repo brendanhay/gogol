@@ -61,6 +61,7 @@ data WatermarksUnSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WatermarksUnSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ watermarksUnSet
 watermarksUnSet pWusChannelId_ =
   WatermarksUnSet'
     {_wusChannelId = pWusChannelId_, _wusOnBehalfOfContentOwner = Nothing}
+
 
 -- | The channelId parameter specifies the YouTube channel ID for which the
 -- watermark is being unset.

@@ -96,6 +96,7 @@ data CoursesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -134,6 +135,7 @@ coursesList =
     , _clCourseStates = Nothing
     , _clCallback = Nothing
     }
+
 
 -- | Restricts returned courses to those having a student with the specified
 -- identifier. The identifier can be one of the following: * the numeric

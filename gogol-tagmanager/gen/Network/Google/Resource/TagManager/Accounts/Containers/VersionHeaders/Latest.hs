@@ -58,6 +58,7 @@ newtype AccountsContainersVersionHeadersLatest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersVersionHeadersLatest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ accountsContainersVersionHeadersLatest
     -> AccountsContainersVersionHeadersLatest
 accountsContainersVersionHeadersLatest pAcvhlParent_ =
   AccountsContainersVersionHeadersLatest' {_acvhlParent = pAcvhlParent_}
+
 
 -- | GTM Container\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}

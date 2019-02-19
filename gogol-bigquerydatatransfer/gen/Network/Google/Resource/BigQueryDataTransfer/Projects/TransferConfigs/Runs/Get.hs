@@ -70,6 +70,7 @@ data ProjectsTransferConfigsRunsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTransferConfigsRunsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsTransferConfigsRunsGet pPtcrgName_ =
     , _ptcrgName = pPtcrgName_
     , _ptcrgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptcrgXgafv :: Lens' ProjectsTransferConfigsRunsGet (Maybe Xgafv)

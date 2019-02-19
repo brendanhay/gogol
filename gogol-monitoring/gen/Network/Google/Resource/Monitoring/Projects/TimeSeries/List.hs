@@ -109,6 +109,7 @@ data ProjectsTimeSeriesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTimeSeriesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -169,6 +170,7 @@ projectsTimeSeriesList pPtslName_ =
     , _ptslPageSize = Nothing
     , _ptslCallback = Nothing
     }
+
 
 -- | Optional. The beginning of the time interval. The default value for the
 -- start time is the end time. The start time must not be later than the

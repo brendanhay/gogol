@@ -62,6 +62,7 @@ newtype EnterprisesSendTestPushNotification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesSendTestPushNotification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ enterprisesSendTestPushNotification
 enterprisesSendTestPushNotification pEstpnEnterpriseId_ =
   EnterprisesSendTestPushNotification'
     {_estpnEnterpriseId = pEstpnEnterpriseId_}
+
 
 -- | The ID of the enterprise.
 estpnEnterpriseId :: Lens' EnterprisesSendTestPushNotification Text

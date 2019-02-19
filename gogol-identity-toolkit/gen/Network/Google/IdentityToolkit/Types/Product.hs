@@ -29,6 +29,7 @@ data UploadAccountResponseErrorItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UploadAccountResponseErrorItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41,6 +42,7 @@ uploadAccountResponseErrorItem
 uploadAccountResponseErrorItem =
   UploadAccountResponseErrorItem'
     {_uareiMessage = Nothing, _uareiIndex = Nothing}
+
 
 -- | Detailed error message for the account info.
 uareiMessage :: Lens' UploadAccountResponseErrorItem (Maybe Text)
@@ -83,6 +85,7 @@ data UserInfoProviderUserInfoItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserInfoProviderUserInfoItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +118,7 @@ userInfoProviderUserInfoItem =
     , _uipuiiScreenName = Nothing
     , _uipuiiRawId = Nothing
     }
+
 
 -- | The IdP ID. For white listed IdPs it\'s a short domain name, e.g.,
 -- google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it\'s
@@ -203,6 +207,7 @@ data VerifyCustomTokenResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VerifyCustomTokenResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -226,6 +231,7 @@ verifyCustomTokenResponse =
     , _vctrExpiresIn = Nothing
     , _vctrIdToken = Nothing
     }
+
 
 -- | True if it\'s a new user sign-in, false if it\'s a returning user.
 vctrIsNewUser :: Lens' VerifyCustomTokenResponse (Maybe Bool)
@@ -296,6 +302,7 @@ data IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -334,6 +341,7 @@ identitytoolkitRelyingPartyVerifyPhoneNumberResponse =
     , _irpvpnrLocalId = Nothing
     , _irpvpnrIdToken = Nothing
     }
+
 
 irpvpnrIsNewUser :: Lens' IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse (Maybe Bool)
 irpvpnrIsNewUser
@@ -442,6 +450,7 @@ data IdpConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdpConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -468,6 +477,7 @@ idpConfig =
     , _icExperimentPercent = Nothing
     , _icProvider = Nothing
     }
+
 
 -- | OAuth2 client ID.
 icClientId :: Lens' IdpConfig (Maybe Text)
@@ -554,6 +564,7 @@ data UserInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -619,6 +630,7 @@ userInfo =
     , _uiRawPassword = Nothing
     , _uiScreenName = Nothing
     }
+
 
 -- | The email of the user.
 uiEmail :: Lens' UserInfo (Maybe Text)
@@ -789,6 +801,7 @@ newtype IdentitytoolkitRelyingPartySetProjectConfigResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartySetProjectConfigResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -799,6 +812,7 @@ identitytoolkitRelyingPartySetProjectConfigResponse
 identitytoolkitRelyingPartySetProjectConfigResponse =
   IdentitytoolkitRelyingPartySetProjectConfigResponse'
     {_irpspcrProjectId = Nothing}
+
 
 -- | Project ID of the relying party.
 irpspcrProjectId :: Lens' IdentitytoolkitRelyingPartySetProjectConfigResponse (Maybe Text)
@@ -836,6 +850,7 @@ data IdentitytoolkitRelyingPartyVerifyCustomTokenRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyVerifyCustomTokenRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -856,6 +871,7 @@ identitytoolkitRelyingPartyVerifyCustomTokenRequest =
     , _irpvctrToken = Nothing
     , _irpvctrReturnSecureToken = Nothing
     }
+
 
 -- | Instance id token of the app.
 irpvctrInstanceId :: Lens' IdentitytoolkitRelyingPartyVerifyCustomTokenRequest (Maybe Text)
@@ -921,6 +937,7 @@ data SetAccountInfoResponseProviderUserInfoItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetAccountInfoResponseProviderUserInfoItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -941,6 +958,7 @@ setAccountInfoResponseProviderUserInfoItem =
     , _sairpuiiFederatedId = Nothing
     , _sairpuiiDisplayName = Nothing
     }
+
 
 -- | The IdP ID. For whitelisted IdPs it\'s a short domain name, e.g.,
 -- google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it\'s
@@ -1004,6 +1022,7 @@ newtype IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1015,6 +1034,7 @@ identitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
 identitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter pIrpcaurcpAddtional_ =
   IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter'
     {_irpcaurcpAddtional = _Coerce # pIrpcaurcpAddtional_}
+
 
 -- | The customized query parameter.
 irpcaurcpAddtional :: Lens' IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter (HashMap Text Text)
@@ -1057,6 +1077,7 @@ data IdentitytoolkitRelyingPartyVerifyPasswordRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyVerifyPasswordRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1098,6 +1119,7 @@ identitytoolkitRelyingPartyVerifyPasswordRequest =
     , _irpvprIdToken = Nothing
     , _irpvprPendingIdToken = Nothing
     }
+
 
 -- | The email of the user.
 irpvprEmail :: Lens' IdentitytoolkitRelyingPartyVerifyPasswordRequest (Maybe Text)
@@ -1223,6 +1245,7 @@ data IdentitytoolkitRelyingPartySendVerificationCodeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartySendVerificationCodeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1243,6 +1266,7 @@ identitytoolkitRelyingPartySendVerificationCodeRequest =
     , _irpsvcrIosSecret = Nothing
     , _irpsvcrIosReceipt = Nothing
     }
+
 
 -- | The phone number to send the verification code to in E.164 format.
 irpsvcrPhoneNumber :: Lens' IdentitytoolkitRelyingPartySendVerificationCodeRequest (Maybe Text)
@@ -1309,6 +1333,7 @@ data SignupNewUserResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignupNewUserResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1338,6 +1363,7 @@ signupNewUserResponse =
     , _snurLocalId = Nothing
     , _snurIdToken = Nothing
     }
+
 
 -- | The email of the user.
 snurEmail :: Lens' SignupNewUserResponse (Maybe Text)
@@ -1423,6 +1449,7 @@ data IdentitytoolkitRelyingPartySetProjectConfigRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartySetProjectConfigRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1464,6 +1491,7 @@ identitytoolkitRelyingPartySetProjectConfigRequest =
     , _irpspcrResetPasswordTemplate = Nothing
     , _irpspcrUseEmailSending = Nothing
     }
+
 
 -- | Authorized domains for widget redirect.
 irpspcrAuthorizedDomains :: Lens' IdentitytoolkitRelyingPartySetProjectConfigRequest [Text]
@@ -1616,6 +1644,7 @@ data IdentitytoolkitRelyingPartySetAccountInfoRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartySetAccountInfoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1693,6 +1722,7 @@ identitytoolkitRelyingPartySetAccountInfoRequest =
     , _irpsairIdToken = Nothing
     , _irpsairProvider = Nothing
     }
+
 
 -- | Mark the user to upgrade to federated login.
 irpsairUpgradeToFederatedLogin :: Lens' IdentitytoolkitRelyingPartySetAccountInfoRequest (Maybe Bool)
@@ -1928,6 +1958,7 @@ data IdentitytoolkitRelyingPartyVerifyAssertionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyVerifyAssertionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1975,6 +2006,7 @@ identitytoolkitRelyingPartyVerifyAssertionRequest =
     , _irpvarIdToken = Nothing
     , _irpvarPendingIdToken = Nothing
     }
+
 
 -- | Whether return 200 and IDP credential rather than throw exception when
 -- federated id is already linked.
@@ -2129,6 +2161,7 @@ data EmailLinkSigninResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EmailLinkSigninResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2158,6 +2191,7 @@ emailLinkSigninResponse =
     , _elsrLocalId = Nothing
     , _elsrIdToken = Nothing
     }
+
 
 -- | The user\'s email.
 elsrEmail :: Lens' EmailLinkSigninResponse (Maybe Text)
@@ -2231,6 +2265,7 @@ newtype DeleteAccountResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteAccountResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2240,6 +2275,7 @@ deleteAccountResponse
     :: DeleteAccountResponse
 deleteAccountResponse =
   DeleteAccountResponse' {_darKind = "identitytoolkit#DeleteAccountResponse"}
+
 
 -- | The fixed string \"identitytoolkit#DeleteAccountResponse\".
 darKind :: Lens' DeleteAccountResponse Text
@@ -2266,6 +2302,7 @@ newtype IdentitytoolkitRelyingPartySignOutUserResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartySignOutUserResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2275,6 +2312,7 @@ identitytoolkitRelyingPartySignOutUserResponse
     :: IdentitytoolkitRelyingPartySignOutUserResponse
 identitytoolkitRelyingPartySignOutUserResponse =
   IdentitytoolkitRelyingPartySignOutUserResponse' {_irpsourLocalId = Nothing}
+
 
 -- | The local ID of the user.
 irpsourLocalId :: Lens' IdentitytoolkitRelyingPartySignOutUserResponse (Maybe Text)
@@ -2311,6 +2349,7 @@ data DownloadAccountResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DownloadAccountResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2328,6 +2367,7 @@ downloadAccountResponse =
     , _dUsers = Nothing
     , _dKind = "identitytoolkit#DownloadAccountResponse"
     }
+
 
 -- | The next page token. To be used in a subsequent request to return the
 -- next page of results.
@@ -2384,6 +2424,7 @@ data IdentitytoolkitRelyingPartyGetProjectConfigResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyGetProjectConfigResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2428,6 +2469,7 @@ identitytoolkitRelyingPartyGetProjectConfigResponse =
     , _irpgpcrUseEmailSending = Nothing
     , _irpgpcrDynamicLinksDomain = Nothing
     }
+
 
 -- | Authorized domains.
 irpgpcrAuthorizedDomains :: Lens' IdentitytoolkitRelyingPartyGetProjectConfigResponse [Text]
@@ -2566,6 +2608,7 @@ data ResetPasswordResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResetPasswordResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2586,6 +2629,7 @@ resetPasswordResponse =
     , _rprRequestType = Nothing
     , _rprNewEmail = Nothing
     }
+
 
 -- | The user\'s email. If the out-of-band code is for email recovery, the
 -- user\'s original email.
@@ -2637,6 +2681,7 @@ data UploadAccountResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UploadAccountResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2649,6 +2694,7 @@ uploadAccountResponse
 uploadAccountResponse =
   UploadAccountResponse'
     {_uarKind = "identitytoolkit#UploadAccountResponse", _uarError = Nothing}
+
 
 -- | The fixed string \"identitytoolkit#UploadAccountResponse\".
 uarKind :: Lens' UploadAccountResponse Text
@@ -2694,6 +2740,7 @@ data CreateAuthURIResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateAuthURIResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2729,6 +2776,7 @@ createAuthURIResponse =
     , _caurSessionId = Nothing
     , _caurForExistingProvider = Nothing
     }
+
 
 -- | The provider ID of the auth URI.
 caurProviderId :: Lens' CreateAuthURIResponse (Maybe Text)
@@ -2826,6 +2874,7 @@ newtype IdentitytoolkitRelyingPartyGetPublicKeysResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyGetPublicKeysResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2837,6 +2886,7 @@ identitytoolkitRelyingPartyGetPublicKeysResponse
 identitytoolkitRelyingPartyGetPublicKeysResponse pIrpgpkrAddtional_ =
   IdentitytoolkitRelyingPartyGetPublicKeysResponse'
     {_irpgpkrAddtional = _Coerce # pIrpgpkrAddtional_}
+
 
 irpgpkrAddtional :: Lens' IdentitytoolkitRelyingPartyGetPublicKeysResponse (HashMap Text Text)
 irpgpkrAddtional
@@ -2882,6 +2932,7 @@ data RelyingParty =
     , _rpAndroidPackageName    :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RelyingParty' with the minimum fields required to make a request.
 --
@@ -2936,6 +2987,7 @@ relyingParty =
     , _rpIdToken = Nothing
     , _rpAndroidPackageName = Nothing
     }
+
 
 -- | the iOS bundle id of iOS app to handle the action code
 rpIOSBundleId :: Lens' RelyingParty (Maybe Text)
@@ -3075,6 +3127,7 @@ data IdentitytoolkitRelyingPartyGetAccountInfoRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyGetAccountInfoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3098,6 +3151,7 @@ identitytoolkitRelyingPartyGetAccountInfoRequest =
     , _irpgairLocalId = Nothing
     , _irpgairIdToken = Nothing
     }
+
 
 -- | The list of emails of the users to inquiry.
 irpgairEmail :: Lens' IdentitytoolkitRelyingPartyGetAccountInfoRequest [Text]
@@ -3178,6 +3232,7 @@ data EmailTemplate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EmailTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3204,6 +3259,7 @@ emailTemplate =
     , _etFrom = Nothing
     , _etReplyTo = Nothing
     }
+
 
 -- | Subject of the email.
 etSubject :: Lens' EmailTemplate (Maybe Text)
@@ -3276,6 +3332,7 @@ data IdentitytoolkitRelyingPartyUploadAccountRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyUploadAccountRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3326,6 +3383,7 @@ identitytoolkitRelyingPartyUploadAccountRequest =
     , _irpuarRounds = Nothing
     , _irpuarTargetProjectId = Nothing
     }
+
 
 irpuarBlockSize :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe Int32)
 irpuarBlockSize
@@ -3476,6 +3534,7 @@ data IdentitytoolkitRelyingPartyResetPasswordRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyResetPasswordRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3496,6 +3555,7 @@ identitytoolkitRelyingPartyResetPasswordRequest =
     , _irprprOOBCode = Nothing
     , _irprprOldPassword = Nothing
     }
+
 
 -- | The email address of the user.
 irprprEmail :: Lens' IdentitytoolkitRelyingPartyResetPasswordRequest (Maybe Text)
@@ -3568,6 +3628,7 @@ data IdentitytoolkitRelyingPartyCreateAuthURIRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyCreateAuthURIRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3624,6 +3685,7 @@ identitytoolkitRelyingPartyCreateAuthURIRequest =
     , _irpcaurSessionId = Nothing
     , _irpcaurOpenidRealm = Nothing
     }
+
 
 -- | The IdP ID. For white listed IdPs it\'s a short domain name e.g.
 -- google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it\'s
@@ -3794,6 +3856,7 @@ newtype IdentitytoolkitRelyingPartySendVerificationCodeResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartySendVerificationCodeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3804,6 +3867,7 @@ identitytoolkitRelyingPartySendVerificationCodeResponse
 identitytoolkitRelyingPartySendVerificationCodeResponse =
   IdentitytoolkitRelyingPartySendVerificationCodeResponse'
     {_irpsvcrSessionInfo = Nothing}
+
 
 -- | Encrypted session information
 irpsvcrSessionInfo :: Lens' IdentitytoolkitRelyingPartySendVerificationCodeResponse (Maybe Text)
@@ -3840,6 +3904,7 @@ data GetAccountInfoResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetAccountInfoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3852,6 +3917,7 @@ getAccountInfoResponse
 getAccountInfoResponse =
   GetAccountInfoResponse'
     {_gairUsers = Nothing, _gairKind = "identitytoolkit#GetAccountInfoResponse"}
+
 
 -- | The info of the users.
 gairUsers :: Lens' GetAccountInfoResponse [UserInfo]
@@ -3895,6 +3961,7 @@ data IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3924,6 +3991,7 @@ identitytoolkitRelyingPartyVerifyPhoneNumberRequest =
     , _iCode = Nothing
     , _iIdToken = Nothing
     }
+
 
 iTemporaryProof :: Lens' IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest (Maybe Text)
 iTemporaryProof
@@ -3998,6 +4066,7 @@ data IdentitytoolkitRelyingPartyEmailLinkSigninRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyEmailLinkSigninRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4015,6 +4084,7 @@ identitytoolkitRelyingPartyEmailLinkSigninRequest =
     , _irpelsrOOBCode = Nothing
     , _irpelsrIdToken = Nothing
     }
+
 
 -- | The email address of the user.
 irpelsrEmail :: Lens' IdentitytoolkitRelyingPartyEmailLinkSigninRequest (Maybe Text)
@@ -4067,6 +4137,7 @@ data IdentitytoolkitRelyingPartyDeleteAccountRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyDeleteAccountRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4084,6 +4155,7 @@ identitytoolkitRelyingPartyDeleteAccountRequest =
     , _irpdarLocalId = Nothing
     , _irpdarIdToken = Nothing
     }
+
 
 -- | GCP project number of the requesting delegated app. Currently only
 -- intended for Firebase V1 migration.
@@ -4141,6 +4213,7 @@ data GetOOBConfirmationCodeResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetOOBConfirmationCodeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4158,6 +4231,7 @@ getOOBConfirmationCodeResponse =
     , _goobccrKind = "identitytoolkit#GetOobConfirmationCodeResponse"
     , _goobccrOOBCode = Nothing
     }
+
 
 -- | The email address that the email is sent to.
 goobccrEmail :: Lens' GetOOBConfirmationCodeResponse (Maybe Text)
@@ -4206,6 +4280,7 @@ data IdentitytoolkitRelyingPartyDownloadAccountRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartyDownloadAccountRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4226,6 +4301,7 @@ identitytoolkitRelyingPartyDownloadAccountRequest =
     , _iMaxResults = Nothing
     , _iTargetProjectId = Nothing
     }
+
 
 -- | The token for the next page. This should be taken from the previous
 -- response.
@@ -4302,6 +4378,7 @@ data VerifyPasswordResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VerifyPasswordResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4346,6 +4423,7 @@ verifyPasswordResponse =
     , _vprIdToken = Nothing
     , _vprOAuthAuthorizationCode = Nothing
     }
+
 
 -- | The email returned by the IdP. NOTE: The federated login user may not
 -- own the email.
@@ -4473,6 +4551,7 @@ data SetAccountInfoResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetAccountInfoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4517,6 +4596,7 @@ setAccountInfoResponse =
     , _sairNewEmail = Nothing
     , _sairIdToken = Nothing
     }
+
 
 -- | The email of the user.
 sairEmail :: Lens' SetAccountInfoResponse (Maybe Text)
@@ -4646,6 +4726,7 @@ data IdentitytoolkitRelyingPartySignupNewUserRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartySignupNewUserRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4696,6 +4777,7 @@ identitytoolkitRelyingPartySignupNewUserRequest =
     , _irpsnurLocalId = Nothing
     , _irpsnurIdToken = Nothing
     }
+
 
 -- | The email of the user.
 irpsnurEmail :: Lens' IdentitytoolkitRelyingPartySignupNewUserRequest (Maybe Text)
@@ -4875,6 +4957,7 @@ data VerifyAssertionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VerifyAssertionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5000,6 +5083,7 @@ verifyAssertionResponse =
     , _varIdToken = Nothing
     , _varOAuthAuthorizationCode = Nothing
     }
+
 
 -- | The IdP ID. For white listed IdPs it\'s a short domain name e.g.
 -- google.com, aol.com, live.net and yahoo.com. If the \"providerId\" param
@@ -5337,6 +5421,7 @@ data IdentitytoolkitRelyingPartySignOutUserRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IdentitytoolkitRelyingPartySignOutUserRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5349,6 +5434,7 @@ identitytoolkitRelyingPartySignOutUserRequest
 identitytoolkitRelyingPartySignOutUserRequest =
   IdentitytoolkitRelyingPartySignOutUserRequest'
     {_iInstanceId = Nothing, _iLocalId = Nothing}
+
 
 -- | Instance id token of the app.
 iInstanceId :: Lens' IdentitytoolkitRelyingPartySignOutUserRequest (Maybe Text)
@@ -5390,6 +5476,7 @@ data GetRecaptchaParamResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetRecaptchaParamResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5407,6 +5494,7 @@ getRecaptchaParamResponse =
     , _grprKind = "identitytoolkit#GetRecaptchaParamResponse"
     , _grprRecaptchaStoken = Nothing
     }
+
 
 -- | Site key registered at recaptcha.
 grprRecaptchaSiteKey :: Lens' GetRecaptchaParamResponse (Maybe Text)

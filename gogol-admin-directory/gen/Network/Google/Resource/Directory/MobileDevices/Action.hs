@@ -67,6 +67,7 @@ data MobileDevicesAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileDevicesAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ mobileDevicesAction pMdaResourceId_ pMdaPayload_ pMdaCustomerId_ =
     , _mdaPayload = pMdaPayload_
     , _mdaCustomerId = pMdaCustomerId_
     }
+
 
 -- | Immutable ID of Mobile Device
 mdaResourceId :: Lens' MobileDevicesAction Text

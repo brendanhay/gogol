@@ -68,6 +68,7 @@ data PurchasesSubscriptionsRefund =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PurchasesSubscriptionsRefund' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ purchasesSubscriptionsRefund pPsrPackageName_ pPsrToken_ pPsrSubscriptionId_ =
     , _psrToken = pPsrToken_
     , _psrSubscriptionId = pPsrSubscriptionId_
     }
+
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').

@@ -61,6 +61,7 @@ newtype ConversionUpdateAvailability =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConversionUpdateAvailability' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ conversionUpdateAvailability
     -> ConversionUpdateAvailability
 conversionUpdateAvailability pCuaPayload_ =
   ConversionUpdateAvailability' {_cuaPayload = pCuaPayload_}
+
 
 -- | Multipart request metadata.
 cuaPayload :: Lens' ConversionUpdateAvailability UpdateAvailabilityRequest

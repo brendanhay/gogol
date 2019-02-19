@@ -75,6 +75,7 @@ data ProjectsLocationsRegistriesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLocationsRegistriesCreate pPlrcParent_ pPlrcPayload_ =
     , _plrcPayload = pPlrcPayload_
     , _plrcCallback = Nothing
     }
+
 
 -- | The project and cloud region where this device registry must be created.
 -- For example, \`projects\/example-project\/locations\/us-central1\`.

@@ -78,6 +78,7 @@ data ProjectsLocationsKeyRingsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsKeyRingsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsKeyRingsList pPlkrlParent_ =
     , _plkrlPageSize = Nothing
     , _plkrlCallback = Nothing
     }
+
 
 -- | Required. The resource name of the location associated with the
 -- KeyRings, in the format \`projects\/*\/locations\/*\`.

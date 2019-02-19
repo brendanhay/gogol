@@ -57,6 +57,7 @@ newtype AlertsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlertsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -65,6 +66,7 @@ newtype AlertsList =
 alertsList
     :: AlertsList
 alertsList = AlertsList' {_alLocale = Nothing}
+
 
 -- | The locale to use for translating alert messages. The account locale
 -- will be used if this is not supplied. The AdSense default (English) will

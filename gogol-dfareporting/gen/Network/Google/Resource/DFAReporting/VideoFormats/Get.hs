@@ -61,6 +61,7 @@ data VideoFormatsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoFormatsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ videoFormatsGet
 videoFormatsGet pVfgProFileId_ pVfgId_ =
   VideoFormatsGet'
     {_vfgProFileId = _Coerce # pVfgProFileId_, _vfgId = _Coerce # pVfgId_}
+
 
 -- | User profile ID associated with this request.
 vfgProFileId :: Lens' VideoFormatsGet Int64

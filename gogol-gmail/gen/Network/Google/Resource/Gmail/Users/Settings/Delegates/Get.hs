@@ -68,6 +68,7 @@ data UsersSettingsDelegatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsDelegatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ usersSettingsDelegatesGet
 usersSettingsDelegatesGet pUsdgDelegateEmail_ =
   UsersSettingsDelegatesGet'
     {_usdgUserId = "me", _usdgDelegateEmail = pUsdgDelegateEmail_}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

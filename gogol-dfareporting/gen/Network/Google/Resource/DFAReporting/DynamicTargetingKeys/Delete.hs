@@ -68,6 +68,7 @@ data DynamicTargetingKeysDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DynamicTargetingKeysDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ dynamicTargetingKeysDelete pDtkdObjectType_ pDtkdObjectId_ pDtkdProFileId_ pDtkd
     , _dtkdProFileId = _Coerce # pDtkdProFileId_
     , _dtkdName = pDtkdName_
     }
+
 
 -- | Type of the object of this dynamic targeting key. This is a required
 -- field.

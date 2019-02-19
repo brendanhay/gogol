@@ -93,6 +93,7 @@ data SpreadsheetsValuesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsValuesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -140,6 +141,7 @@ spreadsheetsValuesUpdate pSvuSpreadsheetId_ pSvuPayload_ pSvuRange_ =
     , _svuCallback = Nothing
     , _svuResponseValueRenderOption = Nothing
     }
+
 
 -- | V1 error format.
 svuXgafv :: Lens' SpreadsheetsValuesUpdate (Maybe Xgafv)

@@ -90,6 +90,7 @@ data PhotosBatchGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PhotosBatchGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ photosBatchGet =
     , _pbgView = Nothing
     , _pbgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pbgXgafv :: Lens' PhotosBatchGet (Maybe Xgafv)

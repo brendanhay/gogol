@@ -88,6 +88,7 @@ data StatsGetIndex =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatsGetIndex' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -129,6 +130,7 @@ statsGetIndex =
     , _sgiToDateMonth = Nothing
     , _sgiCallback = Nothing
     }
+
 
 -- | Month of date. Must be from 1 to 12.
 sgiFromDateMonth :: Lens' StatsGetIndex (Maybe Int32)

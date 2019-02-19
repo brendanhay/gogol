@@ -29,6 +29,7 @@ newtype GoogleAppsScriptTypeFunctionSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleAppsScriptTypeFunctionSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38,6 +39,7 @@ googleAppsScriptTypeFunctionSet
     :: GoogleAppsScriptTypeFunctionSet
 googleAppsScriptTypeFunctionSet =
   GoogleAppsScriptTypeFunctionSet' {_gastfsValues = Nothing}
+
 
 -- | A list of functions composing the set.
 gastfsValues :: Lens' GoogleAppsScriptTypeFunctionSet [GoogleAppsScriptTypeFunction]
@@ -68,6 +70,7 @@ newtype GoogleAppsScriptTypeExecutionAPIConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleAppsScriptTypeExecutionAPIConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +80,7 @@ googleAppsScriptTypeExecutionAPIConfig
     :: GoogleAppsScriptTypeExecutionAPIConfig
 googleAppsScriptTypeExecutionAPIConfig =
   GoogleAppsScriptTypeExecutionAPIConfig' {_gasteacAccess = Nothing}
+
 
 -- | Who has permission to run the API executable.
 gasteacAccess :: Lens' GoogleAppsScriptTypeExecutionAPIConfig (Maybe GoogleAppsScriptTypeExecutionAPIConfigAccess)
@@ -113,6 +117,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -125,6 +130,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | An array that contains a single ExecutionError object that provides
 -- information about the nature of the error.
@@ -178,6 +184,7 @@ data Metrics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Metrics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -195,6 +202,7 @@ metrics =
     , _mFailedExecutions = Nothing
     , _mTotalExecutions = Nothing
     }
+
 
 -- | Number of active users.
 mActiveUsers :: Lens' Metrics [MetricsValue]
@@ -255,6 +263,7 @@ data GoogleAppsScriptTypeProcess =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleAppsScriptTypeProcess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -287,6 +296,7 @@ googleAppsScriptTypeProcess =
     , _gastpExecutingUser = Nothing
     , _gastpDuration = Nothing
     }
+
 
 -- | The executions status.
 gastpProcessStatus :: Lens' GoogleAppsScriptTypeProcess (Maybe GoogleAppsScriptTypeProcessProcessStatus)
@@ -379,6 +389,7 @@ data Project =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -408,6 +419,7 @@ project =
     , _pParentId = Nothing
     , _pCreateTime = Nothing
     }
+
 
 -- | User who originally created the script.
 pCreator :: Lens' Project (Maybe GoogleAppsScriptTypeUser)
@@ -503,6 +515,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -516,6 +529,7 @@ operation
     :: Operation
 operation =
   Operation' {_oDone = Nothing, _oError = Nothing, _oResponse = Nothing}
+
 
 -- | This field indicates whether the script execution has completed. A
 -- completed execution has a populated \`response\` field containing the
@@ -562,6 +576,7 @@ data ListUserProcessesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListUserProcessesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -574,6 +589,7 @@ listUserProcessesResponse
 listUserProcessesResponse =
   ListUserProcessesResponse'
     {_luprNextPageToken = Nothing, _luprProcesses = Nothing}
+
 
 -- | Token for the next page of results. If empty, there are no more pages
 -- remaining.
@@ -616,11 +632,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -639,6 +657,7 @@ data GoogleAppsScriptTypeUser =
     , _gastuName     :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAppsScriptTypeUser' with the minimum fields required to make a request.
 --
@@ -660,6 +679,7 @@ googleAppsScriptTypeUser =
     , _gastuDomain = Nothing
     , _gastuName = Nothing
     }
+
 
 -- | The user\'s identifying email address.
 gastuEmail :: Lens' GoogleAppsScriptTypeUser (Maybe Text)
@@ -712,6 +732,7 @@ data EntryPoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntryPoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -732,6 +753,7 @@ entryPoint =
     , _epEntryPointType = Nothing
     , _epWebApp = Nothing
     }
+
 
 -- | An entry point specification for Apps Script API execution calls.
 epExecutionAPI :: Lens' EntryPoint (Maybe GoogleAppsScriptTypeExecutionAPIEntryPoint)
@@ -781,6 +803,7 @@ data ListVersionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListVersionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -792,6 +815,7 @@ listVersionsResponse
     :: ListVersionsResponse
 listVersionsResponse =
   ListVersionsResponse' {_lvrNextPageToken = Nothing, _lvrVersions = Nothing}
+
 
 -- | The token use to fetch the next page of records. if not exist in the
 -- response, that means no more versions to list.
@@ -836,6 +860,7 @@ data ExecutionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExecutionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -856,6 +881,7 @@ executionRequest =
     , _erDevMode = Nothing
     , _erParameters = Nothing
     }
+
 
 -- | The name of the function to execute in the given script. The name does
 -- not include parentheses or parameters. It can reference a function in an
@@ -928,6 +954,7 @@ data ListScriptProcessesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListScriptProcessesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -940,6 +967,7 @@ listScriptProcessesResponse
 listScriptProcessesResponse =
   ListScriptProcessesResponse'
     {_lsprNextPageToken = Nothing, _lsprProcesses = Nothing}
+
 
 -- | Token for the next page of results. If empty, there are no more pages
 -- remaining.
@@ -979,6 +1007,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -989,6 +1018,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1014,6 +1044,7 @@ data ScriptStackTraceElement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScriptStackTraceElement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1025,6 +1056,7 @@ scriptStackTraceElement
     :: ScriptStackTraceElement
 scriptStackTraceElement =
   ScriptStackTraceElement' {_ssteFunction = Nothing, _ssteLineNumber = Nothing}
+
 
 -- | The name of the function that failed.
 ssteFunction :: Lens' ScriptStackTraceElement (Maybe Text)
@@ -1062,6 +1094,7 @@ data Content =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Content' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1072,6 +1105,7 @@ data Content =
 content
     :: Content
 content = Content' {_cScriptId = Nothing, _cFiles = Nothing}
+
 
 -- | The script project\'s Drive ID.
 cScriptId :: Lens' Content (Maybe Text)
@@ -1111,6 +1145,7 @@ data MetricsValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricsValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1125,6 +1160,7 @@ metricsValue
 metricsValue =
   MetricsValue'
     {_mvStartTime = Nothing, _mvValue = Nothing, _mvEndTime = Nothing}
+
 
 -- | Required field indicating the start time of the interval.
 mvStartTime :: Lens' MetricsValue (Maybe UTCTime)
@@ -1174,6 +1210,7 @@ data GoogleAppsScriptTypeAddOnEntryPoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleAppsScriptTypeAddOnEntryPoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1200,6 +1237,7 @@ googleAppsScriptTypeAddOnEntryPoint =
     , _gastaoepTitle = Nothing
     , _gastaoepDescription = Nothing
     }
+
 
 -- | The add-on\'s required post install tip URL.
 gastaoepPostInstallTipURL :: Lens' GoogleAppsScriptTypeAddOnEntryPoint (Maybe Text)
@@ -1272,6 +1310,7 @@ data GoogleAppsScriptTypeWebAppConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleAppsScriptTypeWebAppConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1284,6 +1323,7 @@ googleAppsScriptTypeWebAppConfig
 googleAppsScriptTypeWebAppConfig =
   GoogleAppsScriptTypeWebAppConfig'
     {_gastwacAccess = Nothing, _gastwacExecuteAs = Nothing}
+
 
 -- | Who has permission to run the web app.
 gastwacAccess :: Lens' GoogleAppsScriptTypeWebAppConfig (Maybe GoogleAppsScriptTypeWebAppConfigAccess)
@@ -1328,6 +1368,7 @@ data Version =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Version' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1348,6 +1389,7 @@ version =
     , _vDescription = Nothing
     , _vCreateTime = Nothing
     }
+
 
 -- | The incremental ID that is created by Apps Script when a version is
 -- created. This is system assigned number and is immutable once created.
@@ -1407,6 +1449,7 @@ data ExecutionError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExecutionError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1424,6 +1467,7 @@ executionError =
     , _eeErrorType = Nothing
     , _eeErrorMessage = Nothing
     }
+
 
 -- | An array of objects that provide a stack trace through the script to
 -- show where the execution failed, with the deepest call first.
@@ -1475,6 +1519,7 @@ data GoogleAppsScriptTypeWebAppEntryPoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleAppsScriptTypeWebAppEntryPoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1487,6 +1532,7 @@ googleAppsScriptTypeWebAppEntryPoint
 googleAppsScriptTypeWebAppEntryPoint =
   GoogleAppsScriptTypeWebAppEntryPoint'
     {_gastwaepEntryPointConfig = Nothing, _gastwaepURL = Nothing}
+
 
 -- | The entry point\'s configuration.
 gastwaepEntryPointConfig :: Lens' GoogleAppsScriptTypeWebAppEntryPoint (Maybe GoogleAppsScriptTypeWebAppConfig)
@@ -1527,6 +1573,7 @@ data CreateProjectRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateProjectRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1538,6 +1585,7 @@ createProjectRequest
     :: CreateProjectRequest
 createProjectRequest =
   CreateProjectRequest' {_cprTitle = Nothing, _cprParentId = Nothing}
+
 
 -- | The title for the project.
 cprTitle :: Lens' CreateProjectRequest (Maybe Text)
@@ -1577,6 +1625,7 @@ data DeploymentConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1597,6 +1646,7 @@ deploymentConfig =
     , _dcManifestFileName = Nothing
     , _dcDescription = Nothing
     }
+
 
 -- | The version number on which this deployment is based.
 dcVersionNumber :: Lens' DeploymentConfig (Maybe Int32)
@@ -1651,6 +1701,7 @@ data ListDeploymentsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDeploymentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1663,6 +1714,7 @@ listDeploymentsResponse
 listDeploymentsResponse =
   ListDeploymentsResponse'
     {_ldrNextPageToken = Nothing, _ldrDeployments = Nothing}
+
 
 -- | The token that can be used in the next call to get the next page of
 -- results.
@@ -1703,6 +1755,7 @@ newtype GoogleAppsScriptTypeFunction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleAppsScriptTypeFunction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1712,6 +1765,7 @@ googleAppsScriptTypeFunction
     :: GoogleAppsScriptTypeFunction
 googleAppsScriptTypeFunction =
   GoogleAppsScriptTypeFunction' {_gastfName = Nothing}
+
 
 -- | The function name in the script project.
 gastfName :: Lens' GoogleAppsScriptTypeFunction (Maybe Text)
@@ -1746,6 +1800,7 @@ data File =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1775,6 +1830,7 @@ file =
     , _fType = Nothing
     , _fCreateTime = Nothing
     }
+
 
 -- | The defined set of functions in the script file, if any.
 fFunctionSet :: Lens' File (Maybe GoogleAppsScriptTypeFunctionSet)
@@ -1847,6 +1903,7 @@ newtype GoogleAppsScriptTypeExecutionAPIEntryPoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleAppsScriptTypeExecutionAPIEntryPoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1857,6 +1914,7 @@ googleAppsScriptTypeExecutionAPIEntryPoint
 googleAppsScriptTypeExecutionAPIEntryPoint =
   GoogleAppsScriptTypeExecutionAPIEntryPoint'
     {_gasteaepEntryPointConfig = Nothing}
+
 
 -- | The entry point\'s configuration.
 gasteaepEntryPointConfig :: Lens' GoogleAppsScriptTypeExecutionAPIEntryPoint (Maybe GoogleAppsScriptTypeExecutionAPIConfig)
@@ -1894,6 +1952,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1904,6 +1963,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1931,6 +1991,7 @@ newtype ExecutionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExecutionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1939,6 +2000,7 @@ newtype ExecutionResponse =
 executionResponse
     :: ExecutionResponse
 executionResponse = ExecutionResponse' {_erResult = Nothing}
+
 
 -- | The return value of the script function. The type matches the object
 -- type returned in Apps Script. Functions called using the Apps Script API
@@ -1969,6 +2031,7 @@ data Deployment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1989,6 +2052,7 @@ deployment =
     , _dEntryPoints = Nothing
     , _dDeploymentConfig = Nothing
     }
+
 
 -- | The deployment ID for this deployment.
 dDeploymentId :: Lens' Deployment (Maybe Text)
@@ -2042,6 +2106,7 @@ newtype UpdateDeploymentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateDeploymentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2051,6 +2116,7 @@ updateDeploymentRequest
     :: UpdateDeploymentRequest
 updateDeploymentRequest =
   UpdateDeploymentRequest' {_udrDeploymentConfig = Nothing}
+
 
 -- | The deployment configuration.
 udrDeploymentConfig :: Lens' UpdateDeploymentRequest (Maybe DeploymentConfig)

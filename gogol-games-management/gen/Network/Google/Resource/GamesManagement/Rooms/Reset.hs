@@ -57,11 +57,13 @@ data RoomsReset =
   RoomsReset'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomsReset' with the minimum fields required to make a request.
 --
 roomsReset
     :: RoomsReset
 roomsReset = RoomsReset'
+
 
 instance GoogleRequest RoomsReset where
         type Rs RoomsReset = ()

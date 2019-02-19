@@ -74,6 +74,7 @@ data SubscriptionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ subscriptionsList =
     , _slPageToken = Nothing
     , _slMaxResults = Nothing
     }
+
 
 -- | When retrieving all of your subscriptions and filtering for specific
 -- customers, you can enter a prefix for a customer name. Using an example

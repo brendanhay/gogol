@@ -76,6 +76,7 @@ data GroupsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ groupsPatch pGpPayload_ pGpName_ =
     , _gpName = pGpName_
     , _gpCallback = Nothing
     }
+
 
 -- | V1 error format.
 gpXgafv :: Lens' GroupsPatch (Maybe Xgafv)

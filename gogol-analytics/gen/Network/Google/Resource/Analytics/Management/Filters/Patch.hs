@@ -65,6 +65,7 @@ data ManagementFiltersPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementFiltersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ managementFiltersPatch pMfpFilterId_ pMfpPayload_ pMfpAccountId_ =
     , _mfpPayload = pMfpPayload_
     , _mfpAccountId = pMfpAccountId_
     }
+
 
 -- | ID of the filter to be updated.
 mfpFilterId :: Lens' ManagementFiltersPatch Text

@@ -57,6 +57,7 @@ newtype QueriesGetQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueriesGetQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ queriesGetQuery
     -> QueriesGetQuery
 queriesGetQuery pQgqQueryId_ =
   QueriesGetQuery' {_qgqQueryId = _Coerce # pQgqQueryId_}
+
 
 -- | Query ID to retrieve.
 qgqQueryId :: Lens' QueriesGetQuery Int64

@@ -61,6 +61,7 @@ data AdvertiserLandingPagesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserLandingPagesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ advertiserLandingPagesGet
 advertiserLandingPagesGet pAlpgProFileId_ pAlpgId_ =
   AdvertiserLandingPagesGet'
     {_alpgProFileId = _Coerce # pAlpgProFileId_, _alpgId = _Coerce # pAlpgId_}
+
 
 -- | User profile ID associated with this request.
 alpgProFileId :: Lens' AdvertiserLandingPagesGet Int64

@@ -96,6 +96,7 @@ data ProjectsRegionsOperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -132,6 +133,7 @@ projectsRegionsOperationsList pProlName_ =
     , _prolPageSize = Nothing
     , _prolCallback = Nothing
     }
+
 
 -- | V1 error format.
 prolXgafv :: Lens' ProjectsRegionsOperationsList (Maybe Xgafv)

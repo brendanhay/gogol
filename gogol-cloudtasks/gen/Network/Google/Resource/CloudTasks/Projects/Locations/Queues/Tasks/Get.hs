@@ -73,6 +73,7 @@ data ProjectsLocationsQueuesTasksGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsQueuesTasksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ projectsLocationsQueuesTasksGet pPlqtgName_ =
     , _plqtgName = pPlqtgName_
     , _plqtgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plqtgXgafv :: Lens' ProjectsLocationsQueuesTasksGet (Maybe Xgafv)

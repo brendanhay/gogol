@@ -67,6 +67,7 @@ data DatabasesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatabasesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ databasesInsert pDiProject_ pDiPayload_ pDiInstance_ =
     , _diPayload = pDiPayload_
     , _diInstance = pDiInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 diProject :: Lens' DatabasesInsert Text

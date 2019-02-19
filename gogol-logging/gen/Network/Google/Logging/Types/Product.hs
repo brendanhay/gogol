@@ -39,6 +39,7 @@ data MonitoredResourceDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResourceDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -62,6 +63,7 @@ monitoredResourceDescriptor =
     , _mrdType = Nothing
     , _mrdDescription = Nothing
     }
+
 
 -- | Optional. The resource name of the monitored resource descriptor:
 -- \"projects\/{project_id}\/monitoredResourceDescriptors\/{type}\" where
@@ -133,6 +135,7 @@ data ListLogEntriesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLogEntriesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -144,6 +147,7 @@ listLogEntriesResponse
     :: ListLogEntriesResponse
 listLogEntriesResponse =
   ListLogEntriesResponse' {_llerNextPageToken = Nothing, _llerEntries = Nothing}
+
 
 -- | If there might be more results than those appearing in this response,
 -- then nextPageToken is included. To get the next set of results, call
@@ -202,6 +206,7 @@ data MetricDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -237,6 +242,7 @@ metricDescriptor =
     , _mdDescription = Nothing
     , _mdUnit = Nothing
     }
+
 
 -- | Whether the metric records instantaneous values, changes to a value,
 -- etc. Some combinations of metric_kind and value_type might not be
@@ -360,6 +366,7 @@ newtype MonitoredResourceLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResourceLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -370,6 +377,7 @@ monitoredResourceLabels
     -> MonitoredResourceLabels
 monitoredResourceLabels pMrlAddtional_ =
   MonitoredResourceLabels' {_mrlAddtional = _Coerce # pMrlAddtional_}
+
 
 mrlAddtional :: Lens' MonitoredResourceLabels (HashMap Text Text)
 mrlAddtional
@@ -400,6 +408,7 @@ data MonitoredResourceMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResourceMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -412,6 +421,7 @@ monitoredResourceMetadata
 monitoredResourceMetadata =
   MonitoredResourceMetadata'
     {_mrmUserLabels = Nothing, _mrmSystemLabels = Nothing}
+
 
 -- | Output only. A map of user-defined metadata labels.
 mrmUserLabels :: Lens' MonitoredResourceMetadata (Maybe MonitoredResourceMetadataUserLabels)
@@ -454,6 +464,7 @@ data ListLogMetricsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLogMetricsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -465,6 +476,7 @@ listLogMetricsResponse
     :: ListLogMetricsResponse
 listLogMetricsResponse =
   ListLogMetricsResponse' {_llmrMetrics = Nothing, _llmrNextPageToken = Nothing}
+
 
 -- | A list of logs-based metrics.
 llmrMetrics :: Lens' ListLogMetricsResponse [LogMetric]
@@ -510,6 +522,7 @@ data WriteLogEntriesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WriteLogEntriesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -536,6 +549,7 @@ writeLogEntriesRequest =
     , _wlerLogName = Nothing
     , _wlerDryRun = Nothing
     }
+
 
 -- | Required. The log entries to send to Logging. The order of log entries
 -- in this list does not matter. Values supplied in this method\'s
@@ -653,6 +667,7 @@ newtype LogMetricLabelExtractors =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogMetricLabelExtractors' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -663,6 +678,7 @@ logMetricLabelExtractors
     -> LogMetricLabelExtractors
 logMetricLabelExtractors pLmleAddtional_ =
   LogMetricLabelExtractors' {_lmleAddtional = _Coerce # pLmleAddtional_}
+
 
 lmleAddtional :: Lens' LogMetricLabelExtractors (HashMap Text Text)
 lmleAddtional
@@ -690,11 +706,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -712,6 +730,7 @@ newtype LogEntryLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogEntryLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -722,6 +741,7 @@ logEntryLabels
     -> LogEntryLabels
 logEntryLabels pLelAddtional_ =
   LogEntryLabels' {_lelAddtional = _Coerce # pLelAddtional_}
+
 
 lelAddtional :: Lens' LogEntryLabels (HashMap Text Text)
 lelAddtional
@@ -746,6 +766,7 @@ data ListSinksResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSinksResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -757,6 +778,7 @@ listSinksResponse
     :: ListSinksResponse
 listSinksResponse =
   ListSinksResponse' {_lsrSinks = Nothing, _lsrNextPageToken = Nothing}
+
 
 -- | A list of sinks.
 lsrSinks :: Lens' ListSinksResponse [LogSink]
@@ -829,6 +851,7 @@ data RequestLog =
     , _rlAppEngineRelease  :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RequestLog' with the minimum fields required to make a request.
 --
@@ -937,6 +960,7 @@ requestLog =
     , _rlSourceReference = Nothing
     , _rlAppEngineRelease = Nothing
     }
+
 
 -- | Stackdriver Trace identifier for this request.
 rlTraceId :: Lens' RequestLog (Maybe Text)
@@ -1224,6 +1248,7 @@ newtype LogEntryProtoPayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogEntryProtoPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1234,6 +1259,7 @@ logEntryProtoPayload
     -> LogEntryProtoPayload
 logEntryProtoPayload pLeppAddtional_ =
   LogEntryProtoPayload' {_leppAddtional = _Coerce # pLeppAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 leppAddtional :: Lens' LogEntryProtoPayload (HashMap Text JSONValue)
@@ -1263,6 +1289,7 @@ data LogEntrySourceLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogEntrySourceLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1277,6 +1304,7 @@ logEntrySourceLocation
 logEntrySourceLocation =
   LogEntrySourceLocation'
     {_leslFunction = Nothing, _leslLine = Nothing, _leslFile = Nothing}
+
 
 -- | Optional. Human-readable name of the function or method being invoked,
 -- with optional context such as the class or package name. This
@@ -1335,6 +1363,7 @@ data LogExclusion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogExclusion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1361,6 +1390,7 @@ logExclusion =
     , _leDescription = Nothing
     , _leCreateTime = Nothing
     }
+
 
 -- | Optional. If set to True, then this exclusion is disabled and it does
 -- not exclude any log entries. You can update an exclusion to change the
@@ -1431,11 +1461,13 @@ data WriteLogEntriesResponse =
   WriteLogEntriesResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WriteLogEntriesResponse' with the minimum fields required to make a request.
 --
 writeLogEntriesResponse
     :: WriteLogEntriesResponse
 writeLogEntriesResponse = WriteLogEntriesResponse'
+
 
 instance FromJSON WriteLogEntriesResponse where
         parseJSON
@@ -1464,6 +1496,7 @@ data LogSink =
     , _lsCreateTime          :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogSink' with the minimum fields required to make a request.
 --
@@ -1497,6 +1530,7 @@ logSink =
     , _lsFilter = Nothing
     , _lsCreateTime = Nothing
     }
+
 
 -- | Required. The export destination:
 -- \"storage.googleapis.com\/[GCS_BUCKET]\"
@@ -1611,6 +1645,7 @@ newtype MonitoredResourceMetadataUserLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResourceMetadataUserLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1622,6 +1657,7 @@ monitoredResourceMetadataUserLabels
 monitoredResourceMetadataUserLabels pMrmulAddtional_ =
   MonitoredResourceMetadataUserLabels'
     {_mrmulAddtional = _Coerce # pMrmulAddtional_}
+
 
 mrmulAddtional :: Lens' MonitoredResourceMetadataUserLabels (HashMap Text Text)
 mrmulAddtional
@@ -1651,6 +1687,7 @@ data ListExclusionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListExclusionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1663,6 +1700,7 @@ listExclusionsResponse
 listExclusionsResponse =
   ListExclusionsResponse'
     {_lerNextPageToken = Nothing, _lerExclusions = Nothing}
+
 
 -- | If there might be more results than appear in this response, then
 -- nextPageToken is included. To get the next set of results, call the same
@@ -1705,6 +1743,7 @@ data ListLogsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLogsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1716,6 +1755,7 @@ listLogsResponse
     :: ListLogsResponse
 listLogsResponse =
   ListLogsResponse' {_llrNextPageToken = Nothing, _llrLogNames = Nothing}
+
 
 -- | If there might be more results than those appearing in this response,
 -- then nextPageToken is included. To get the next set of results, call
@@ -1758,6 +1798,7 @@ data ListMonitoredResourceDescriptorsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListMonitoredResourceDescriptorsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1770,6 +1811,7 @@ listMonitoredResourceDescriptorsResponse
 listMonitoredResourceDescriptorsResponse =
   ListMonitoredResourceDescriptorsResponse'
     {_lmrdrNextPageToken = Nothing, _lmrdrResourceDescriptors = Nothing}
+
 
 -- | If there might be more results than those appearing in this response,
 -- then nextPageToken is included. To get the next set of results, call
@@ -1822,6 +1864,7 @@ newtype Explicit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Explicit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1830,6 +1873,7 @@ newtype Explicit =
 explicit
     :: Explicit
 explicit = Explicit' {_eBounds = Nothing}
+
 
 -- | The values must be monotonically increasing.
 eBounds :: Lens' Explicit [Double]
@@ -1870,6 +1914,7 @@ data HTTPRequest =
     , _httprReferer                        :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPRequest' with the minimum fields required to make a request.
 --
@@ -1924,6 +1969,7 @@ hTTPRequest =
     , _httprCacheHit = Nothing
     , _httprReferer = Nothing
     }
+
 
 -- | The response code indicating the status of response. Examples: 200, 404.
 httprStatus :: Lens' HTTPRequest (Maybe Int32)
@@ -2090,6 +2136,7 @@ data Exponential =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Exponential' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2104,6 +2151,7 @@ exponential
 exponential =
   Exponential'
     {_eGrowthFactor = Nothing, _eScale = Nothing, _eNumFiniteBuckets = Nothing}
+
 
 -- | Must be greater than 1.
 eGrowthFactor :: Lens' Exponential (Maybe Double)
@@ -2153,6 +2201,7 @@ newtype WriteLogEntriesRequestLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WriteLogEntriesRequestLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2163,6 +2212,7 @@ writeLogEntriesRequestLabels
     -> WriteLogEntriesRequestLabels
 writeLogEntriesRequestLabels pWlerlAddtional_ =
   WriteLogEntriesRequestLabels' {_wlerlAddtional = _Coerce # pWlerlAddtional_}
+
 
 wlerlAddtional :: Lens' WriteLogEntriesRequestLabels (HashMap Text Text)
 wlerlAddtional
@@ -2200,6 +2250,7 @@ data MonitoredResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2210,6 +2261,7 @@ data MonitoredResource =
 monitoredResource
     :: MonitoredResource
 monitoredResource = MonitoredResource' {_mrLabels = Nothing, _mrType = Nothing}
+
 
 -- | Required. Values for all of the labels listed in the associated
 -- monitored resource descriptor. For example, Compute Engine VM instances
@@ -2249,6 +2301,7 @@ data LogLine =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogLine' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2269,6 +2322,7 @@ logLine =
     , _llLogMessage = Nothing
     , _llSourceLocation = Nothing
     }
+
 
 -- | Approximate time when this log entry was made.
 llTime :: Lens' LogLine (Maybe UTCTime)
@@ -2321,6 +2375,7 @@ data MetricDescriptorMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricDescriptorMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2338,6 +2393,7 @@ metricDescriptorMetadata =
     , _mdmIngestDelay = Nothing
     , _mdmLaunchStage = Nothing
     }
+
 
 -- | The sampling period of metric data points. For metrics which are written
 -- periodically, consecutive data points are stored at this time interval,
@@ -2394,6 +2450,7 @@ newtype MonitoredResourceMetadataSystemLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitoredResourceMetadataSystemLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2405,6 +2462,7 @@ monitoredResourceMetadataSystemLabels
 monitoredResourceMetadataSystemLabels pMrmslAddtional_ =
   MonitoredResourceMetadataSystemLabels'
     {_mrmslAddtional = _Coerce # pMrmslAddtional_}
+
 
 -- | Properties of the object.
 mrmslAddtional :: Lens' MonitoredResourceMetadataSystemLabels (HashMap Text JSONValue)
@@ -2437,6 +2495,7 @@ data LabelDescriptor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LabelDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2451,6 +2510,7 @@ labelDescriptor
 labelDescriptor =
   LabelDescriptor'
     {_ldKey = Nothing, _ldValueType = Nothing, _ldDescription = Nothing}
+
 
 -- | The label key.
 ldKey :: Lens' LabelDescriptor (Maybe Text)
@@ -2499,6 +2559,7 @@ data Linear =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Linear' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2512,6 +2573,7 @@ linear
     :: Linear
 linear =
   Linear' {_lOffSet = Nothing, _lWidth = Nothing, _lNumFiniteBuckets = Nothing}
+
 
 -- | Lower bound of the first bucket.
 lOffSet :: Lens' Linear (Maybe Double)
@@ -2562,6 +2624,7 @@ data ListLogEntriesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLogEntriesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2588,6 +2651,7 @@ listLogEntriesRequest =
     , _llerPageSize = Nothing
     , _llerResourceNames = Nothing
     }
+
 
 -- | Optional. How the results should be sorted. Presently, the only
 -- permitted values are \"timestamp asc\" (default) and \"timestamp desc\".
@@ -2685,6 +2749,7 @@ data LogEntryOperation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogEntryOperation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2705,6 +2770,7 @@ logEntryOperation =
     , _leoLast = Nothing
     , _leoId = Nothing
     }
+
 
 -- | Optional. Set this to True if this is the first log entry in the
 -- operation.
@@ -2769,6 +2835,7 @@ data LogMetric =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogMetric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2807,6 +2874,7 @@ logMetric =
     , _lmDescription = Nothing
     , _lmCreateTime = Nothing
     }
+
 
 -- | Optional. The metric descriptor associated with the logs-based metric.
 -- If unspecified, it uses a default metric descriptor with a DELTA metric
@@ -2974,6 +3042,7 @@ data LogEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3033,6 +3102,7 @@ logEntry =
     , _leTrace = Nothing
     , _leSpanId = Nothing
     }
+
 
 -- | Optional. Information about an operation associated with the log entry,
 -- if applicable.
@@ -3234,6 +3304,7 @@ data SourceLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3248,6 +3319,7 @@ sourceLocation
 sourceLocation =
   SourceLocation'
     {_slLine = Nothing, _slFunctionName = Nothing, _slFile = Nothing}
+
 
 -- | Line within the source file.
 slLine :: Lens' SourceLocation (Maybe Int64)
@@ -3311,6 +3383,7 @@ data BucketOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3328,6 +3401,7 @@ bucketOptions =
     , _boLinearBuckets = Nothing
     , _boExplicitBuckets = Nothing
     }
+
 
 -- | The exponential buckets.
 boExponentialBuckets :: Lens' BucketOptions (Maybe Exponential)
@@ -3375,6 +3449,7 @@ data SourceReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3386,6 +3461,7 @@ sourceReference
     :: SourceReference
 sourceReference =
   SourceReference' {_srRepository = Nothing, _srRevisionId = Nothing}
+
 
 -- | Optional. A URI string identifying the repository. Example:
 -- \"https:\/\/github.com\/GoogleCloudPlatform\/kubernetes.git\"
@@ -3423,6 +3499,7 @@ newtype LogEntryJSONPayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogEntryJSONPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3433,6 +3510,7 @@ logEntryJSONPayload
     -> LogEntryJSONPayload
 logEntryJSONPayload pLejpAddtional_ =
   LogEntryJSONPayload' {_lejpAddtional = _Coerce # pLejpAddtional_}
+
 
 -- | Properties of the object.
 lejpAddtional :: Lens' LogEntryJSONPayload (HashMap Text JSONValue)

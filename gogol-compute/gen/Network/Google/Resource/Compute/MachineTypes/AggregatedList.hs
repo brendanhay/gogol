@@ -72,6 +72,7 @@ data MachineTypesAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypesAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ machineTypesAggregatedList pMtalProject_ =
     , _mtalPageToken = Nothing
     , _mtalMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

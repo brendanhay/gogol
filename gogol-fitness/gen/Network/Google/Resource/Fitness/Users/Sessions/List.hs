@@ -71,6 +71,7 @@ data UsersSessionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSessionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ usersSessionsList pUslUserId_ =
     , _uslPageToken = Nothing
     , _uslIncludeDeleted = Nothing
     }
+
 
 -- | An RFC3339 timestamp. Only sessions ending between the start and end
 -- times will be included in the response.

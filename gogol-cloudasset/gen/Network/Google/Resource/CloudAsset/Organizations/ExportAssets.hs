@@ -80,6 +80,7 @@ data OrganizationsExportAssets =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsExportAssets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ organizationsExportAssets pOeaParent_ pOeaPayload_ =
     , _oeaPayload = pOeaPayload_
     , _oeaCallback = Nothing
     }
+
 
 -- | Required. The relative name of the root asset. This can only be an
 -- organization number (such as \"organizations\/123\"), a project ID (such

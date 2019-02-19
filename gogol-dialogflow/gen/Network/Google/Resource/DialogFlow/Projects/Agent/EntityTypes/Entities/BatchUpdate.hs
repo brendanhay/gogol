@@ -81,6 +81,7 @@ data ProjectsAgentEntityTypesEntitiesBatchUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentEntityTypesEntitiesBatchUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsAgentEntityTypesEntitiesBatchUpdate pPaetebuParent_ pPaetebuPayload_ =
     , _paetebuPayload = pPaetebuPayload_
     , _paetebuCallback = Nothing
     }
+
 
 -- | Required. The name of the entity type to update or create entities in.
 -- Format: \`projects\/\/agent\/entityTypes\/\`.

@@ -63,6 +63,7 @@ data RoomsDecline =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomsDecline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ roomsDecline
     -> RoomsDecline
 roomsDecline pRooRoomId_ =
   RoomsDecline' {_rooRoomId = pRooRoomId_, _rooLanguage = Nothing}
+
 
 -- | The ID of the room.
 rooRoomId :: Lens' RoomsDecline Text

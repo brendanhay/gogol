@@ -71,6 +71,7 @@ data DevicesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DevicesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ devicesPatch pDpEnterpriseId_ pDpPayload_ pDpUserId_ pDpDeviceId_ =
     , _dpUserId = pDpUserId_
     , _dpDeviceId = pDpDeviceId_
     }
+
 
 -- | Mask that identifies which fields to update. If not set, all modifiable
 -- fields will be modified. When set in a query parameter, this field

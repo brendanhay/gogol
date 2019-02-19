@@ -61,6 +61,7 @@ data UsersLabelsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersLabelsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ usersLabelsCreate
     -> UsersLabelsCreate
 usersLabelsCreate pUlcPayload_ =
   UsersLabelsCreate' {_ulcPayload = pUlcPayload_, _ulcUserId = "me"}
+
 
 -- | Multipart request metadata.
 ulcPayload :: Lens' UsersLabelsCreate Label

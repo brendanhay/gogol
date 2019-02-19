@@ -61,6 +61,7 @@ data URLChannelsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLChannelsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ urlChannelsDelete
 urlChannelsDelete pUcdURLChannelId_ pUcdAdClientId_ =
   URLChannelsDelete'
     {_ucdURLChannelId = pUcdURLChannelId_, _ucdAdClientId = pUcdAdClientId_}
+
 
 -- | URL channel to delete.
 ucdURLChannelId :: Lens' URLChannelsDelete Text

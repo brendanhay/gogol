@@ -70,6 +70,7 @@ data BillingAccountsExclusionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsExclusionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ billingAccountsExclusionsGet pBaegName_ =
     , _baegName = pBaegName_
     , _baegCallback = Nothing
     }
+
 
 -- | V1 error format.
 baegXgafv :: Lens' BillingAccountsExclusionsGet (Maybe Xgafv)

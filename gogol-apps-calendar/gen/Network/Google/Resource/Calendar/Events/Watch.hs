@@ -121,6 +121,7 @@ data EventsWatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -188,6 +189,7 @@ eventsWatch pEwCalendarId_ pEwPayload_ =
     , _ewAlwaysIncludeEmail = Nothing
     , _ewTimeMax = Nothing
     }
+
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
 -- results from the previous list request. It makes the result of this list

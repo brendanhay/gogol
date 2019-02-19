@@ -62,6 +62,7 @@ newtype QuestsResetForAllPlayers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuestsResetForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ questsResetForAllPlayers
     -> QuestsResetForAllPlayers
 questsResetForAllPlayers pQrfapQuestId_ =
   QuestsResetForAllPlayers' {_qrfapQuestId = pQrfapQuestId_}
+
 
 -- | The ID of the quest.
 qrfapQuestId :: Lens' QuestsResetForAllPlayers Text

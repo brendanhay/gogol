@@ -65,6 +65,7 @@ data PoolsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PoolsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ poolsGet pPgPoolName_ pPgZone_ pPgProjectName_ =
     , _pgZone = pPgZone_
     , _pgProjectName = pPgProjectName_
     }
+
 
 -- | The name of the replica pool for this request.
 pgPoolName :: Lens' PoolsGet Text

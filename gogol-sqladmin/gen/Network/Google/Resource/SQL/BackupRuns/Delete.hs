@@ -65,6 +65,7 @@ data BackupRunsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackupRunsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ backupRunsDelete pBrdProject_ pBrdId_ pBrdInstance_ =
     , _brdId = _Coerce # pBrdId_
     , _brdInstance = pBrdInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 brdProject :: Lens' BackupRunsDelete Text

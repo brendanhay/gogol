@@ -76,6 +76,7 @@ data TargetHTTPSProxiesSetSSLPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPSProxiesSetSSLPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ targetHTTPSProxiesSetSSLPolicy pThpsspProject_ pThpsspPayload_ pThpsspTargetHTTP
     , _thpsspPayload = pThpsspPayload_
     , _thpsspTargetHTTPSProxy = pThpsspTargetHTTPSProxy_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

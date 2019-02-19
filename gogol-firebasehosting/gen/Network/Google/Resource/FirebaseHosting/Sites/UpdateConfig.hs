@@ -77,6 +77,7 @@ data SitesUpdateConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesUpdateConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ sitesUpdateConfig pSucPayload_ pSucName_ =
     , _sucName = pSucName_
     , _sucCallback = Nothing
     }
+
 
 -- | V1 error format.
 sucXgafv :: Lens' SitesUpdateConfig (Maybe Xgafv)

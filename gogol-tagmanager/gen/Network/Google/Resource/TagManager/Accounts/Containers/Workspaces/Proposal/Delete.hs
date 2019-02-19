@@ -57,6 +57,7 @@ newtype AccountsContainersWorkspacesProposalDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesProposalDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ accountsContainersWorkspacesProposalDelete
     -> AccountsContainersWorkspacesProposalDelete
 accountsContainersWorkspacesProposalDelete pAcwpdPath_ =
   AccountsContainersWorkspacesProposalDelete' {_acwpdPath = pAcwpdPath_}
+
 
 -- | GTM workspace proposal\'s relative path: Example:
 -- accounts\/{aid}\/containers\/{cid}\/workspace\/{wid}\/workspace_proposal

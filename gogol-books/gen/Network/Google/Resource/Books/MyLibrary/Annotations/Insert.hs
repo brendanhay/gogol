@@ -70,6 +70,7 @@ data MyLibraryAnnotationsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryAnnotationsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ myLibraryAnnotationsInsert pMlaiPayload_ =
     , _mlaiAnnotationId = Nothing
     , _mlaiSource = Nothing
     }
+
 
 -- | ISO-3166-1 code to override the IP-based location.
 mlaiCountry :: Lens' MyLibraryAnnotationsInsert (Maybe Text)

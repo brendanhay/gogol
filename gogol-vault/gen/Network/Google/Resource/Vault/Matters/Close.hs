@@ -75,6 +75,7 @@ data MattersClose =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersClose' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ mattersClose pMcPayload_ pMcMatterId_ =
     , _mcMatterId = pMcMatterId_
     , _mcCallback = Nothing
     }
+
 
 -- | V1 error format.
 mcXgafv :: Lens' MattersClose (Maybe Xgafv)

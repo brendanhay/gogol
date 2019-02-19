@@ -58,6 +58,7 @@ newtype MobileApppanelsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileApppanelsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ mobileApppanelsGet
     -> MobileApppanelsGet
 mobileApppanelsGet pMagPanelId_ =
   MobileApppanelsGet' {_magPanelId = pMagPanelId_}
+
 
 -- | External URL ID for the panel.
 magPanelId :: Lens' MobileApppanelsGet Text

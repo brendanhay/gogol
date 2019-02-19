@@ -60,6 +60,7 @@ data AccountsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ data AccountsList =
 accountsList
     :: AccountsList
 accountsList = AccountsList' {_alPageToken = Nothing, _alMaxResults = Nothing}
+
 
 -- | A continuation token, used to page through accounts. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the

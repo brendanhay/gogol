@@ -67,6 +67,7 @@ data AccountsLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ accountsLink pAlMerchantId_ pAlPayload_ pAlAccountId_ =
     , _alPayload = pAlPayload_
     , _alAccountId = _Coerce # pAlAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

@@ -75,6 +75,7 @@ data ProjectsRolesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRolesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsRolesCreate pPrcParent_ pPrcPayload_ =
     , _prcPayload = pPrcPayload_
     , _prcCallback = Nothing
     }
+
 
 -- | The resource name of the parent resource in one of the following
 -- formats: \`organizations\/{ORGANIZATION_ID}\` \`projects\/{PROJECT_ID}\`

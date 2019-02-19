@@ -78,6 +78,7 @@ data ProjectsLocationsDataSetsHl7V2StoresCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsHl7V2StoresCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsLocationsDataSetsHl7V2StoresCreate pPldshvscParent_ pPldshvscPayload_ =
     , _pldshvscHl7V2StoreId = Nothing
     , _pldshvscCallback = Nothing
     }
+
 
 -- | The name of the dataset this HL7v2 store belongs to.
 pldshvscParent :: Lens' ProjectsLocationsDataSetsHl7V2StoresCreate Text

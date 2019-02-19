@@ -64,6 +64,7 @@ data TurnBasedMatchesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ turnBasedMatchesGet pTbmgMatchId_ =
     , _tbmgLanguage = Nothing
     , _tbmgMatchId = pTbmgMatchId_
     }
+
 
 -- | Get match data along with metadata.
 tbmgIncludeMatchData :: Lens' TurnBasedMatchesGet (Maybe Bool)

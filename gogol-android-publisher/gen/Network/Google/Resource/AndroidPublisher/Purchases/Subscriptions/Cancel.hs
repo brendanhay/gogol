@@ -68,6 +68,7 @@ data PurchasesSubscriptionsCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PurchasesSubscriptionsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ purchasesSubscriptionsCancel pPscPackageName_ pPscToken_ pPscSubscriptionId_ =
     , _pscToken = pPscToken_
     , _pscSubscriptionId = pPscSubscriptionId_
     }
+
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').

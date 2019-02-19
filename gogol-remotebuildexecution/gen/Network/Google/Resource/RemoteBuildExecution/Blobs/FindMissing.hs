@@ -84,6 +84,7 @@ data BlobsFindMissing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BlobsFindMissing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ blobsFindMissing pBfmPayload_ pBfmInstanceName_ =
     , _bfmInstanceName = pBfmInstanceName_
     , _bfmCallback = Nothing
     }
+
 
 -- | V1 error format.
 bfmXgafv :: Lens' BlobsFindMissing (Maybe Xgafv)

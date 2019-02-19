@@ -72,6 +72,7 @@ data ContactGroupsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactGroupsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ contactGroupsCreate pCgcPayload_ =
     , _cgcPayload = pCgcPayload_
     , _cgcCallback = Nothing
     }
+
 
 -- | V1 error format.
 cgcXgafv :: Lens' ContactGroupsCreate (Maybe Xgafv)

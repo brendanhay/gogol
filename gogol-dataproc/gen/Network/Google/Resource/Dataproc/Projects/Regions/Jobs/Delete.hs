@@ -81,6 +81,7 @@ data ProjectsRegionsJobsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsJobsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsRegionsJobsDelete pPrjdJobId_ pPrjdRegion_ pPrjdProjectId_ =
     , _prjdProjectId = pPrjdProjectId_
     , _prjdCallback = Nothing
     }
+
 
 -- | V1 error format.
 prjdXgafv :: Lens' ProjectsRegionsJobsDelete (Maybe Xgafv)

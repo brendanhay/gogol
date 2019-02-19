@@ -35,6 +35,7 @@ data LiveChatMessageAuthorDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatMessageAuthorDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ liveChatMessageAuthorDetails =
     , _lcmadIsChatSponsor = Nothing
     , _lcmadChannelURL = Nothing
     }
+
 
 -- | Whether the author\'s identity has been verified by YouTube.
 lcmadIsVerified :: Lens' LiveChatMessageAuthorDetails (Maybe Bool)
@@ -155,6 +157,7 @@ data SubscriptionSubscriberSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionSubscriberSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -175,6 +178,7 @@ subscriptionSubscriberSnippet =
     , _sssTitle = Nothing
     , _sssDescription = Nothing
     }
+
 
 -- | The channel ID of the subscriber.
 sssChannelId :: Lens' SubscriptionSubscriberSnippet (Maybe Text)
@@ -226,6 +230,7 @@ data IngestionInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IngestionInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -243,6 +248,7 @@ ingestionInfo =
     , _iiIngestionAddress = Nothing
     , _iiStreamName = Nothing
     }
+
 
 -- | The backup ingestion URL that you should use to stream video to YouTube.
 -- You have the option of simultaneously streaming the content that you are
@@ -297,6 +303,7 @@ data ChannelAuditDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelAuditDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -314,6 +321,7 @@ channelAuditDetails =
     , _cadCopyrightStrikesGoodStanding = Nothing
     , _cadCommUnityGuidelinesGoodStanding = Nothing
     }
+
 
 -- | Whether or not the channel has any unresolved claims.
 cadContentIdClaimsGoodStanding :: Lens' ChannelAuditDetails (Maybe Bool)
@@ -364,6 +372,7 @@ data Thumbnail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Thumbnail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -376,6 +385,7 @@ data Thumbnail =
 thumbnail
     :: Thumbnail
 thumbnail = Thumbnail' {_tHeight = Nothing, _tURL = Nothing, _tWidth = Nothing}
+
 
 -- | (Optional) Height of the thumbnail image.
 tHeight :: Lens' Thumbnail (Maybe Word32)
@@ -416,6 +426,7 @@ newtype LiveChatTextMessageDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatTextMessageDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -425,6 +436,7 @@ liveChatTextMessageDetails
     :: LiveChatTextMessageDetails
 liveChatTextMessageDetails =
   LiveChatTextMessageDetails' {_lctmdMessageText = Nothing}
+
 
 -- | The user\'s message.
 lctmdMessageText :: Lens' LiveChatTextMessageDetails (Maybe Text)
@@ -456,6 +468,7 @@ data ActivityContentDetailsRecommendation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityContentDetailsRecommendation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -473,6 +486,7 @@ activityContentDetailsRecommendation =
     , _acdrSeedResourceId = Nothing
     , _acdrReason = Nothing
     }
+
 
 -- | The resourceId object contains information that identifies the
 -- recommended resource.
@@ -520,6 +534,7 @@ newtype LiveChatMessageRetractedDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatMessageRetractedDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -529,6 +544,7 @@ liveChatMessageRetractedDetails
     :: LiveChatMessageRetractedDetails
 liveChatMessageRetractedDetails =
   LiveChatMessageRetractedDetails' {_lcmrdRetractedMessageId = Nothing}
+
 
 lcmrdRetractedMessageId :: Lens' LiveChatMessageRetractedDetails (Maybe Text)
 lcmrdRetractedMessageId
@@ -566,6 +582,7 @@ data PlayListListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -601,6 +618,7 @@ playListListResponse =
     , _pllrEventId = Nothing
     , _pllrPrevPageToken = Nothing
     }
+
 
 -- | Etag of this resource.
 pllrEtag :: Lens' PlayListListResponse (Maybe Text)
@@ -696,6 +714,7 @@ data ChannelSectionSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSectionSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -725,6 +744,7 @@ channelSectionSnippet =
     , _cssPosition = Nothing
     , _cssDefaultLanguage = Nothing
     }
+
 
 -- | The style of the channel section.
 cssStyle :: Lens' ChannelSectionSnippet (Maybe ChannelSectionSnippetStyle)
@@ -796,6 +816,7 @@ data ChannelStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -813,6 +834,7 @@ channelStatus =
     , _csLongUploadsStatus = Nothing
     , _csPrivacyStatus = Nothing
     }
+
 
 -- | If true, then the user is linked to either a YouTube username or G+
 -- account. Otherwise, the user doesn\'t have a public YouTube identity.
@@ -856,6 +878,7 @@ newtype LiveChatPollClosedDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatPollClosedDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -864,6 +887,7 @@ newtype LiveChatPollClosedDetails =
 liveChatPollClosedDetails
     :: LiveChatPollClosedDetails
 liveChatPollClosedDetails = LiveChatPollClosedDetails' {_lcpcdPollId = Nothing}
+
 
 -- | The id of the poll that was closed.
 lcpcdPollId :: Lens' LiveChatPollClosedDetails (Maybe Text)
@@ -892,6 +916,7 @@ data PromotedItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PromotedItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -912,6 +937,7 @@ promotedItem =
     , _piId = Nothing
     , _piTiming = Nothing
     }
+
 
 -- | A custom message to display for this promotion. This field is currently
 -- ignored unless the promoted item is a website.
@@ -968,6 +994,7 @@ data LiveStreamSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveStreamSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -991,6 +1018,7 @@ liveStreamSnippet =
     , _lssTitle = Nothing
     , _lssDescription = Nothing
     }
+
 
 -- | The date and time that the stream was created. The value is specified in
 -- ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
@@ -1058,6 +1086,7 @@ data SearchResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1078,6 +1107,7 @@ searchResult =
     , _srKind = "youtube#searchResult"
     , _srId = Nothing
     }
+
 
 -- | Etag of this resource.
 srEtag :: Lens' SearchResult (Maybe Text)
@@ -1125,11 +1155,13 @@ data TokenPagination =
   TokenPagination'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
 --
 tokenPagination
     :: TokenPagination
 tokenPagination = TokenPagination'
+
 
 instance FromJSON TokenPagination where
         parseJSON
@@ -1152,6 +1184,7 @@ data ResourceId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1172,6 +1205,7 @@ resourceId =
     , _riVideoId = Nothing
     , _riPlayListId = Nothing
     }
+
 
 -- | The type of the API resource.
 riKind :: Lens' ResourceId (Maybe Text)
@@ -1233,6 +1267,7 @@ data SearchListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1271,6 +1306,7 @@ searchListResponse =
     , _slrEventId = Nothing
     , _slrPrevPageToken = Nothing
     }
+
 
 -- | Etag of this resource.
 slrEtag :: Lens' SearchListResponse (Maybe Text)
@@ -1364,6 +1400,7 @@ newtype PlayListStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1372,6 +1409,7 @@ newtype PlayListStatus =
 playListStatus
     :: PlayListStatus
 playListStatus = PlayListStatus' {_plsPrivacyStatus = Nothing}
+
 
 -- | The playlist\'s privacy status.
 plsPrivacyStatus :: Lens' PlayListStatus (Maybe PlayListStatusPrivacyStatus)
@@ -1406,6 +1444,7 @@ data LiveChatMessageListResponse =
     , _lcmlrEventId               :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiveChatMessageListResponse' with the minimum fields required to make a request.
 --
@@ -1445,6 +1484,7 @@ liveChatMessageListResponse =
     , _lcmlrPollingIntervalMillis = Nothing
     , _lcmlrEventId = Nothing
     }
+
 
 -- | The date and time when the underlying stream went offline. The value is
 -- specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
@@ -1556,6 +1596,7 @@ data ChannelListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1591,6 +1632,7 @@ channelListResponse =
     , _clrEventId = Nothing
     , _clrPrevPageToken = Nothing
     }
+
 
 -- | Etag of this resource.
 clrEtag :: Lens' ChannelListResponse (Maybe Text)
@@ -1680,6 +1722,7 @@ data ChannelProFileDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelProFileDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1700,6 +1743,7 @@ channelProFileDetails =
     , _cpfdDisplayName = Nothing
     , _cpfdChannelURL = Nothing
     }
+
 
 -- | The YouTube channel ID.
 cpfdChannelId :: Lens' ChannelProFileDetails (Maybe Text)
@@ -1758,6 +1802,7 @@ data SuperChatEventListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SuperChatEventListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1790,6 +1835,7 @@ superChatEventListResponse =
     , _scelrVisitorId = Nothing
     , _scelrEventId = Nothing
     }
+
 
 -- | Etag of this resource.
 scelrEtag :: Lens' SuperChatEventListResponse (Maybe Text)
@@ -1877,6 +1923,7 @@ data VideoAbuseReportReasonListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoAbuseReportReasonListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1900,6 +1947,7 @@ videoAbuseReportReasonListResponse =
     , _varrlrVisitorId = Nothing
     , _varrlrEventId = Nothing
     }
+
 
 -- | Etag of this resource.
 varrlrEtag :: Lens' VideoAbuseReportReasonListResponse (Maybe Text)
@@ -1965,6 +2013,7 @@ data LiveChatUserBannedMessageDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatUserBannedMessageDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1982,6 +2031,7 @@ liveChatUserBannedMessageDetails =
     , _lcubmdBannedUserDetails = Nothing
     , _lcubmdBanDurationSeconds = Nothing
     }
+
 
 -- | The type of ban.
 lcubmdBanType :: Lens' LiveChatUserBannedMessageDetails (Maybe LiveChatUserBannedMessageDetailsBanType)
@@ -2047,6 +2097,7 @@ data LiveBroadcastContentDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveBroadcastContentDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2103,6 +2154,7 @@ liveBroadcastContentDetails =
     , _lbcdBoundStreamLastUpdateTimeMs = Nothing
     , _lbcdEnableDvr = Nothing
     }
+
 
 -- | This setting indicates whether YouTube should enable content encryption
 -- for the broadcast.
@@ -2289,6 +2341,7 @@ data ChannelSection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2318,6 +2371,7 @@ channelSection =
     , _csId = Nothing
     , _csLocalizations = Nothing
     }
+
 
 -- | Etag of this resource.
 csEtag :: Lens' ChannelSection (Maybe Text)
@@ -2394,6 +2448,7 @@ data ChannelContentDetailsRelatedPlayLists =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelContentDetailsRelatedPlayLists' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2417,6 +2472,7 @@ channelContentDetailsRelatedPlayLists =
     , _ccdrplUploads = Nothing
     , _ccdrplLikes = Nothing
     }
+
 
 -- | The ID of the playlist that contains the channel\"s favorite videos. Use
 -- the playlistItems.insert and playlistItems.delete to add or remove items
@@ -2495,6 +2551,7 @@ data LiveStream =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveStream' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2524,6 +2581,7 @@ liveStream =
     , _lsId = Nothing
     , _lsCdn = Nothing
     }
+
 
 -- | The status object contains information about live stream\'s status.
 lsStatus :: Lens' LiveStream (Maybe LiveStreamStatus)
@@ -2593,6 +2651,7 @@ newtype ActivityContentDetailsFavorite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityContentDetailsFavorite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2602,6 +2661,7 @@ activityContentDetailsFavorite
     :: ActivityContentDetailsFavorite
 activityContentDetailsFavorite =
   ActivityContentDetailsFavorite' {_acdfResourceId = Nothing}
+
 
 -- | The resourceId object contains information that identifies the resource
 -- that was marked as a favorite.
@@ -2641,6 +2701,7 @@ data VideoContentDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoContentDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2679,6 +2740,7 @@ videoContentDetails =
     , _vcdContentRating = Nothing
     , _vcdLicensedContent = Nothing
     }
+
 
 -- | The countryRestriction object contains information about the countries
 -- where a video is (or is not) viewable.
@@ -2815,6 +2877,7 @@ data ImageSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2889,6 +2952,7 @@ imageSettings =
     , _isBannerTabletLowImageURL = Nothing
     , _isBannerTabletHdImageURL = Nothing
     }
+
 
 -- | Banner image. Mobile size low resolution (320x88).
 isBannerMobileLowImageURL :: Lens' ImageSettings (Maybe Text)
@@ -3113,6 +3177,7 @@ data VideoTopicDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoTopicDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3130,6 +3195,7 @@ videoTopicDetails =
     , _vtdRelevantTopicIds = Nothing
     , _vtdTopicCategories = Nothing
     }
+
 
 -- | A list of Freebase topic IDs that are centrally associated with the
 -- video. These are topics that are centrally featured in the video, and it
@@ -3187,6 +3253,7 @@ newtype ActivityContentDetailsComment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityContentDetailsComment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3196,6 +3263,7 @@ activityContentDetailsComment
     :: ActivityContentDetailsComment
 activityContentDetailsComment =
   ActivityContentDetailsComment' {_acdcResourceId = Nothing}
+
 
 -- | The resourceId object contains information that identifies the resource
 -- associated with the comment.
@@ -3227,6 +3295,7 @@ data LiveBroadcastStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveBroadcastStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3247,6 +3316,7 @@ liveBroadcastStatus =
     , _lbsLifeCycleStatus = Nothing
     , _lbsPrivacyStatus = Nothing
     }
+
 
 -- | Priority of the live broadcast event (internal state).
 lbsLiveBroadcastPriority :: Lens' LiveBroadcastStatus (Maybe LiveBroadcastStatusLiveBroadcastPriority)
@@ -3306,6 +3376,7 @@ newtype ActivityContentDetailsUpload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityContentDetailsUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3315,6 +3386,7 @@ activityContentDetailsUpload
     :: ActivityContentDetailsUpload
 activityContentDetailsUpload =
   ActivityContentDetailsUpload' {_acduVideoId = Nothing}
+
 
 -- | The ID that YouTube uses to uniquely identify the uploaded video.
 acduVideoId :: Lens' ActivityContentDetailsUpload (Maybe Text)
@@ -3343,6 +3415,7 @@ data ActivityContentDetailsPlayListItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityContentDetailsPlayListItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3360,6 +3433,7 @@ activityContentDetailsPlayListItem =
     , _acdpliPlayListId = Nothing
     , _acdpliPlayListItemId = Nothing
     }
+
 
 -- | The resourceId object contains information about the resource that was
 -- added to the playlist.
@@ -3408,6 +3482,7 @@ data SuperStickerMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SuperStickerMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3425,6 +3500,7 @@ superStickerMetadata =
     , _ssmStickerId = Nothing
     , _ssmAltTextLanguage = Nothing
     }
+
 
 -- | Internationalized alt text that describes the sticker image and any
 -- animation associated with it.
@@ -3474,6 +3550,7 @@ data ActivityContentDetailsSocial =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityContentDetailsSocial' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3497,6 +3574,7 @@ activityContentDetailsSocial =
     , _acdsReferenceURL = Nothing
     , _acdsType = Nothing
     }
+
 
 -- | The resourceId object encapsulates information that identifies the
 -- resource associated with a social network post.
@@ -3557,6 +3635,7 @@ data LiveChatBan =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatBan' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3577,6 +3656,7 @@ liveChatBan =
     , _lcbKind = "youtube#liveChatBan"
     , _lcbId = Nothing
     }
+
 
 -- | Etag of this resource.
 lcbEtag :: Lens' LiveChatBan (Maybe Text)
@@ -3622,6 +3702,7 @@ newtype ActivityContentDetailsSubscription =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityContentDetailsSubscription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3631,6 +3712,7 @@ activityContentDetailsSubscription
     :: ActivityContentDetailsSubscription
 activityContentDetailsSubscription =
   ActivityContentDetailsSubscription' {_aResourceId = Nothing}
+
 
 -- | The resourceId object contains information that identifies the resource
 -- that the user subscribed to.
@@ -3661,6 +3743,7 @@ newtype ActivityContentDetailsLike =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityContentDetailsLike' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3670,6 +3753,7 @@ activityContentDetailsLike
     :: ActivityContentDetailsLike
 activityContentDetailsLike =
   ActivityContentDetailsLike' {_acdlResourceId = Nothing}
+
 
 -- | The resourceId object contains information that identifies the rated
 -- resource.
@@ -3697,6 +3781,7 @@ newtype PlayListContentDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListContentDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3705,6 +3790,7 @@ newtype PlayListContentDetails =
 playListContentDetails
     :: PlayListContentDetails
 playListContentDetails = PlayListContentDetails' {_plcdItemCount = Nothing}
+
 
 -- | The number of videos in the playlist.
 plcdItemCount :: Lens' PlayListContentDetails (Maybe Word32)
@@ -3736,6 +3822,7 @@ data LiveChatSuperChatDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatSuperChatDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3759,6 +3846,7 @@ liveChatSuperChatDetails =
     , _lcscdCurrency = Nothing
     , _lcscdTier = Nothing
     }
+
 
 -- | The comment added by the user to this Super Chat event.
 lcscdUserComment :: Lens' LiveChatSuperChatDetails (Maybe Text)
@@ -3825,6 +3913,7 @@ data PageInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3835,6 +3924,7 @@ data PageInfo =
 pageInfo
     :: PageInfo
 pageInfo = PageInfo' {_piResultsPerPage = Nothing, _piTotalResults = Nothing}
+
 
 -- | The number of results included in the API response.
 piResultsPerPage :: Lens' PageInfo (Maybe Int32)
@@ -3880,6 +3970,7 @@ data VideoStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3912,6 +4003,7 @@ videoStatus =
     , _vsEmbeddable = Nothing
     , _vsLicense = Nothing
     }
+
 
 -- | This value explains why a video failed to upload. This property is only
 -- present if the uploadStatus property indicates that the upload failed.
@@ -4013,6 +4105,7 @@ data VideoFileDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoFileDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4048,6 +4141,7 @@ videoFileDetails =
     , _vfdAudioStreams = Nothing
     , _vfdFileName = Nothing
     }
+
 
 -- | The uploaded video file\'s combined (video and audio) bitrate in bits
 -- per second.
@@ -4156,6 +4250,7 @@ data ThumbnailSetResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThumbnailSetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4179,6 +4274,7 @@ thumbnailSetResponse =
     , _tsrVisitorId = Nothing
     , _tsrEventId = Nothing
     }
+
 
 -- | Etag of this resource.
 tsrEtag :: Lens' ThumbnailSetResponse (Maybe Text)
@@ -4242,6 +4338,7 @@ data LiveBroadcastListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveBroadcastListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4277,6 +4374,7 @@ liveBroadcastListResponse =
     , _lblrEventId = Nothing
     , _lblrPrevPageToken = Nothing
     }
+
 
 -- | Etag of this resource.
 lblrEtag :: Lens' LiveBroadcastListResponse (Maybe Text)
@@ -4367,6 +4465,7 @@ newtype ChannelContentDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelContentDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4375,6 +4474,7 @@ newtype ChannelContentDetails =
 channelContentDetails
     :: ChannelContentDetails
 channelContentDetails = ChannelContentDetails' {_ccdRelatedPlayLists = Nothing}
+
 
 ccdRelatedPlayLists :: Lens' ChannelContentDetails (Maybe ChannelContentDetailsRelatedPlayLists)
 ccdRelatedPlayLists
@@ -4403,6 +4503,7 @@ newtype ActivityContentDetailsChannelItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityContentDetailsChannelItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4412,6 +4513,7 @@ activityContentDetailsChannelItem
     :: ActivityContentDetailsChannelItem
 activityContentDetailsChannelItem =
   ActivityContentDetailsChannelItem' {_acdciResourceId = Nothing}
+
 
 -- | The resourceId object contains information that identifies the resource
 -- that was added to the channel.
@@ -4450,6 +4552,7 @@ data VideoListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4485,6 +4588,7 @@ videoListResponse =
     , _vlrEventId = Nothing
     , _vlrPrevPageToken = Nothing
     }
+
 
 -- | Etag of this resource.
 vlrEtag :: Lens' VideoListResponse (Maybe Text)
@@ -4572,6 +4676,7 @@ newtype VideoMonetizationDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoMonetizationDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4580,6 +4685,7 @@ newtype VideoMonetizationDetails =
 videoMonetizationDetails
     :: VideoMonetizationDetails
 videoMonetizationDetails = VideoMonetizationDetails' {_vmdAccess = Nothing}
+
 
 -- | The value of access indicates whether the video can be monetized or not.
 vmdAccess :: Lens' VideoMonetizationDetails (Maybe AccessPolicy)
@@ -4606,6 +4712,7 @@ data VideoSuggestionsTagSuggestion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoSuggestionsTagSuggestion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4618,6 +4725,7 @@ videoSuggestionsTagSuggestion
 videoSuggestionsTagSuggestion =
   VideoSuggestionsTagSuggestion'
     {_vstsTag = Nothing, _vstsCategoryRestricts = Nothing}
+
 
 -- | The keyword tag suggested for the video.
 vstsTag :: Lens' VideoSuggestionsTagSuggestion (Maybe Text)
@@ -4666,6 +4774,7 @@ data LiveChatModeratorListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatModeratorListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4701,6 +4810,7 @@ liveChatModeratorListResponse =
     , _lEventId = Nothing
     , _lPrevPageToken = Nothing
     }
+
 
 -- | Etag of this resource.
 lEtag :: Lens' LiveChatModeratorListResponse (Maybe Text)
@@ -4795,6 +4905,7 @@ data ActivitySnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivitySnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4827,6 +4938,7 @@ activitySnippet =
     , _asType = Nothing
     , _asDescription = Nothing
     }
+
 
 -- | The date and time that the video was uploaded. The value is specified in
 -- ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
@@ -4915,6 +5027,7 @@ data ChannelTopicDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelTopicDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4926,6 +5039,7 @@ channelTopicDetails
     :: ChannelTopicDetails
 channelTopicDetails =
   ChannelTopicDetails' {_ctdTopicIds = Nothing, _ctdTopicCategories = Nothing}
+
 
 -- | A list of Freebase topic IDs associated with the channel. You can
 -- retrieve information about each topic using the Freebase Topic API.
@@ -4968,6 +5082,7 @@ data LiveChatPollEditedDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatPollEditedDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4982,6 +5097,7 @@ liveChatPollEditedDetails
 liveChatPollEditedDetails =
   LiveChatPollEditedDetails'
     {_lcpedPrompt = Nothing, _lcpedItems = Nothing, _lcpedId = Nothing}
+
 
 lcpedPrompt :: Lens' LiveChatPollEditedDetails (Maybe Text)
 lcpedPrompt
@@ -5028,6 +5144,7 @@ data VideoCategoryListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoCategoryListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5063,6 +5180,7 @@ videoCategoryListResponse =
     , _vclrEventId = Nothing
     , _vclrPrevPageToken = Nothing
     }
+
 
 -- | Etag of this resource.
 vclrEtag :: Lens' VideoCategoryListResponse (Maybe Text)
@@ -5163,6 +5281,7 @@ data VideoProcessingDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoProcessingDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5195,6 +5314,7 @@ videoProcessingDetails =
     , _vpdEditorSuggestionsAvailability = Nothing
     , _vpdFileDetailsAvailability = Nothing
     }
+
 
 -- | The reason that YouTube failed to process the video. This property will
 -- only have a value if the processingStatus property\'s value is failed.
@@ -5308,6 +5428,7 @@ data CommentThreadSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentThreadSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5334,6 +5455,7 @@ commentThreadSnippet =
     , _ctsTotalReplyCount = Nothing
     , _ctsTopLevelComment = Nothing
     }
+
 
 -- | Whether the thread (and therefore all its comments) is visible to all
 -- YouTube users.
@@ -5407,6 +5529,7 @@ data ChannelSectionListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSectionListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5430,6 +5553,7 @@ channelSectionListResponse =
     , _cslrVisitorId = Nothing
     , _cslrEventId = Nothing
     }
+
 
 -- | Etag of this resource.
 cslrEtag :: Lens' ChannelSectionListResponse (Maybe Text)
@@ -5493,6 +5617,7 @@ data SuperChatEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SuperChatEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5513,6 +5638,7 @@ superChatEvent =
     , _sceKind = "youtube#superChatEvent"
     , _sceId = Nothing
     }
+
 
 -- | Etag of this resource.
 sceEtag :: Lens' SuperChatEvent (Maybe Text)
@@ -5563,6 +5689,7 @@ data VideoAbuseReportReason =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoAbuseReportReason' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5583,6 +5710,7 @@ videoAbuseReportReason =
     , _varrKind = "youtube#videoAbuseReportReason"
     , _varrId = Nothing
     }
+
 
 -- | Etag of this resource.
 varrEtag :: Lens' VideoAbuseReportReason (Maybe Text)
@@ -5631,6 +5759,7 @@ data LiveStreamConfigurationIssue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveStreamConfigurationIssue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5651,6 +5780,7 @@ liveStreamConfigurationIssue =
     , _lsciType = Nothing
     , _lsciDescription = Nothing
     }
+
 
 -- | How severe this issue is to the stream.
 lsciSeverity :: Lens' LiveStreamConfigurationIssue (Maybe LiveStreamConfigurationIssueSeverity)
@@ -5704,6 +5834,7 @@ data LiveChatMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5727,6 +5858,7 @@ liveChatMessage =
     , _lcmAuthorDetails = Nothing
     , _lcmId = Nothing
     }
+
 
 -- | Etag of this resource.
 lcmEtag :: Lens' LiveChatMessage (Maybe Text)
@@ -5795,6 +5927,7 @@ data Channel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5845,6 +5978,7 @@ channel =
     , _chaStatistics = Nothing
     , _chaLocalizations = Nothing
     }
+
 
 -- | The status object encapsulates information about the privacy status of
 -- the channel.
@@ -5982,6 +6116,7 @@ data ChannelSectionTargeting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSectionTargeting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5996,6 +6131,7 @@ channelSectionTargeting
 channelSectionTargeting =
   ChannelSectionTargeting'
     {_cstRegions = Nothing, _cstCountries = Nothing, _cstLanguages = Nothing}
+
 
 -- | The region the channel section is targeting.
 cstRegions :: Lens' ChannelSectionTargeting [Text]
@@ -6051,6 +6187,7 @@ data LiveStreamListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveStreamListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6086,6 +6223,7 @@ liveStreamListResponse =
     , _lslrEventId = Nothing
     , _lslrPrevPageToken = Nothing
     }
+
 
 -- | Etag of this resource.
 lslrEtag :: Lens' LiveStreamListResponse (Maybe Text)
@@ -6175,6 +6313,7 @@ newtype ChannelLocalizations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelLocalizations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6185,6 +6324,7 @@ channelLocalizations
     -> ChannelLocalizations
 channelLocalizations pClAddtional_ =
   ChannelLocalizations' {_clAddtional = _Coerce # pClAddtional_}
+
 
 -- | The language tag, using string since map_key require simple types.
 clAddtional :: Lens' ChannelLocalizations (HashMap Text ChannelLocalization)
@@ -6218,6 +6358,7 @@ data PlayListSnippet =
     , _plsDefaultLanguage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayListSnippet' with the minimum fields required to make a request.
 --
@@ -6254,6 +6395,7 @@ playListSnippet =
     , _plsTags = Nothing
     , _plsDefaultLanguage = Nothing
     }
+
 
 -- | The date and time that the playlist was created. The value is specified
 -- in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
@@ -6350,6 +6492,7 @@ data VideoGetRatingResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoGetRatingResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6373,6 +6516,7 @@ videoGetRatingResponse =
     , _vgrrVisitorId = Nothing
     , _vgrrEventId = Nothing
     }
+
 
 -- | Etag of this resource.
 vgrrEtag :: Lens' VideoGetRatingResponse (Maybe Text)
@@ -6441,6 +6585,7 @@ data SuperChatEventSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SuperChatEventSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6485,6 +6630,7 @@ superChatEventSnippet =
     , _scesIsSuperChatForGood = Nothing
     , _scesIsSuperStickerEvent = Nothing
     }
+
 
 -- | A rendered string that displays the purchase amount and currency (e.g.,
 -- \"$1.00\"). The string is rendered for the given language.
@@ -6614,6 +6760,7 @@ data VideoAbuseReportReasonSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoAbuseReportReasonSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6626,6 +6773,7 @@ videoAbuseReportReasonSnippet
 videoAbuseReportReasonSnippet =
   VideoAbuseReportReasonSnippet'
     {_varrsSecondaryReasons = Nothing, _varrsLabel = Nothing}
+
 
 -- | The secondary reasons associated with this reason, if any are available.
 -- (There might be 0 or more.)
@@ -6669,6 +6817,7 @@ data Caption =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Caption' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6689,6 +6838,7 @@ caption =
     , _capKind = "youtube#caption"
     , _capId = Nothing
     }
+
 
 -- | Etag of this resource.
 capEtag :: Lens' Caption (Maybe Text)
@@ -6735,6 +6885,7 @@ data VideoContentDetailsRegionRestriction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoContentDetailsRegionRestriction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6747,6 +6898,7 @@ videoContentDetailsRegionRestriction
 videoContentDetailsRegionRestriction =
   VideoContentDetailsRegionRestriction'
     {_vcdrrAllowed = Nothing, _vcdrrBlocked = Nothing}
+
 
 -- | A list of region codes that identify countries where the video is
 -- viewable. If this property is present and a country is not listed in its
@@ -6799,6 +6951,7 @@ data InvideoTiming =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InvideoTiming' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6813,6 +6966,7 @@ invideoTiming
 invideoTiming =
   InvideoTiming'
     {_itDurationMs = Nothing, _itOffSetMs = Nothing, _itType = Nothing}
+
 
 -- | Defines the duration in milliseconds for which the promotion should be
 -- displayed. If missing, the client should use the default.
@@ -6862,6 +7016,7 @@ newtype PlayListLocalizations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListLocalizations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6872,6 +7027,7 @@ playListLocalizations
     -> PlayListLocalizations
 playListLocalizations pPllAddtional_ =
   PlayListLocalizations' {_pllAddtional = _Coerce # pPllAddtional_}
+
 
 -- | The language tag, using string since map_key require simple types.
 pllAddtional :: Lens' PlayListLocalizations (HashMap Text PlayListLocalization)
@@ -6899,6 +7055,7 @@ data VideoProcessingDetailsProcessingProgress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoProcessingDetailsProcessingProgress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6916,6 +7073,7 @@ videoProcessingDetailsProcessingProgress =
     , _vpdppPartsTotal = Nothing
     , _vpdppPartsProcessed = Nothing
     }
+
 
 -- | An estimate of the amount of time, in millseconds, that YouTube needs to
 -- finish processing the video.
@@ -6985,6 +7143,7 @@ data ChannelSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7017,6 +7176,7 @@ channelSnippet =
     , _csDescription = Nothing
     , _csDefaultLanguage = Nothing
     }
+
 
 -- | The date and time that the channel was created. The value is specified
 -- in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
@@ -7111,6 +7271,7 @@ data ThumbnailDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThumbnailDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7134,6 +7295,7 @@ thumbnailDetails =
     , _tdStandard = Nothing
     , _tdHigh = Nothing
     }
+
 
 -- | The medium quality image for this resource.
 tdMedium :: Lens' ThumbnailDetails (Maybe Thumbnail)
@@ -7188,6 +7350,7 @@ data MonitorStreamInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MonitorStreamInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7205,6 +7368,7 @@ monitorStreamInfo =
     , _msiEmbedHTML = Nothing
     , _msiEnableMonitorStream = Nothing
     }
+
 
 -- | If you have set the enableMonitorStream property to true, then this
 -- property determines the length of the live broadcast delay.
@@ -7275,6 +7439,7 @@ data LiveChatMessageSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatMessageSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7334,6 +7499,7 @@ liveChatMessageSnippet =
     , _lcmsHasDisplayContent = Nothing
     , _lcmsDisplayMessage = Nothing
     }
+
 
 lcmsMessageDeletedDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatMessageDeletedDetails)
 lcmsMessageDeletedDetails
@@ -7505,6 +7671,7 @@ data I18nRegion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'I18nRegion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7525,6 +7692,7 @@ i18nRegion =
     , _irKind = "youtube#i18nRegion"
     , _irId = Nothing
     }
+
 
 -- | Etag of this resource.
 irEtag :: Lens' I18nRegion (Maybe Text)
@@ -7576,6 +7744,7 @@ data ChannelStatistics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelStatistics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7599,6 +7768,7 @@ channelStatistics =
     , _csHiddenSubscriberCount = Nothing
     , _csViewCount = Nothing
     }
+
 
 -- | The number of comments for the channel.
 csCommentCount :: Lens' ChannelStatistics (Maybe Word64)
@@ -7664,6 +7834,7 @@ data LiveChatFanFundingEventDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatFanFundingEventDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7684,6 +7855,7 @@ liveChatFanFundingEventDetails =
     , _lcffedAmountDisplayString = Nothing
     , _lcffedCurrency = Nothing
     }
+
 
 -- | The comment added by the user to this fan funding event.
 lcffedUserComment :: Lens' LiveChatFanFundingEventDetails (Maybe Text)
@@ -7751,6 +7923,7 @@ data ActivityContentDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityContentDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7792,6 +7965,7 @@ activityContentDetails =
     , _acdLike = Nothing
     , _acdRecommendation = Nothing
     }
+
 
 -- | The promotedItem object contains details about a resource which is being
 -- promoted. This property is only present if the snippet.type is
@@ -7914,6 +8088,7 @@ data VideoCategory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoCategory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7934,6 +8109,7 @@ videoCategory =
     , _vcKind = "youtube#videoCategory"
     , _vcId = Nothing
     }
+
 
 -- | Etag of this resource.
 vcEtag :: Lens' VideoCategory (Maybe Text)
@@ -7980,6 +8156,7 @@ newtype VideoLocalizations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoLocalizations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7990,6 +8167,7 @@ videoLocalizations
     -> VideoLocalizations
 videoLocalizations pVlAddtional_ =
   VideoLocalizations' {_vlAddtional = _Coerce # pVlAddtional_}
+
 
 -- | The language tag, using string since map_key require simple types.
 vlAddtional :: Lens' VideoLocalizations (HashMap Text VideoLocalization)
@@ -8015,6 +8193,7 @@ data ChannelSectionContentDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSectionContentDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8027,6 +8206,7 @@ channelSectionContentDetails
 channelSectionContentDetails =
   ChannelSectionContentDetails'
     {_cscdChannels = Nothing, _cscdPlayLists = Nothing}
+
 
 -- | The channel ids for type multiple_channels.
 cscdChannels :: Lens' ChannelSectionContentDetails [Text]
@@ -8084,6 +8264,7 @@ data Video =
     , _vMonetizationDetails  :: !(Maybe VideoMonetizationDetails)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Video' with the minimum fields required to make a request.
 --
@@ -8147,6 +8328,7 @@ video =
     , _vProcessingDetails = Nothing
     , _vMonetizationDetails = Nothing
     }
+
 
 -- | The status object contains information about the video\'s uploading,
 -- processing, and privacy statuses.
@@ -8328,6 +8510,7 @@ data LiveBroadcast =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveBroadcast' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8357,6 +8540,7 @@ liveBroadcast =
     , _lbId = Nothing
     , _lbStatistics = Nothing
     }
+
 
 -- | The status object contains information about the event\'s status.
 lbStatus :: Lens' LiveBroadcast (Maybe LiveBroadcastStatus)
@@ -8432,6 +8616,7 @@ data Nonprofit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Nonprofit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8442,6 +8627,7 @@ data Nonprofit =
 nonprofit
     :: Nonprofit
 nonprofit = Nonprofit' {_nNonprofitId = Nothing, _nNonprofitLegalName = Nothing}
+
 
 -- | Id of the nonprofit.
 nNonprofitId :: Lens' Nonprofit (Maybe NonprofitId)
@@ -8483,6 +8669,7 @@ data LiveChatModerator =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatModerator' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8503,6 +8690,7 @@ liveChatModerator =
     , _livKind = "youtube#liveChatModerator"
     , _livId = Nothing
     }
+
 
 -- | Etag of this resource.
 livEtag :: Lens' LiveChatModerator (Maybe Text)
@@ -8549,6 +8737,7 @@ data LiveStreamContentDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveStreamContentDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8561,6 +8750,7 @@ liveStreamContentDetails
 liveStreamContentDetails =
   LiveStreamContentDetails'
     {_lscdClosedCaptionsIngestionURL = Nothing, _lscdIsReusable = Nothing}
+
 
 -- | The ingestion URL where the closed captions of this stream are sent.
 lscdClosedCaptionsIngestionURL :: Lens' LiveStreamContentDetails (Maybe Text)
@@ -8610,6 +8800,7 @@ data LiveChatModeratorSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatModeratorSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8622,6 +8813,7 @@ liveChatModeratorSnippet
 liveChatModeratorSnippet =
   LiveChatModeratorSnippet'
     {_lLiveChatId = Nothing, _lModeratorDetails = Nothing}
+
 
 -- | The ID of the live chat this moderator can act on.
 lLiveChatId :: Lens' LiveChatModeratorSnippet (Maybe Text)
@@ -8658,6 +8850,7 @@ data PropertyValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PropertyValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8668,6 +8861,7 @@ data PropertyValue =
 propertyValue
     :: PropertyValue
 propertyValue = PropertyValue' {_pvProperty = Nothing, _pvValue = Nothing}
+
 
 -- | A property.
 pvProperty :: Lens' PropertyValue (Maybe Text)
@@ -8713,6 +8907,7 @@ data VideoSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8757,6 +8952,7 @@ videoSnippet =
     , _vsTags = Nothing
     , _vsDefaultLanguage = Nothing
     }
+
 
 -- | The default_audio_language property specifies the language spoken in the
 -- video\'s default audio track.
@@ -8889,6 +9085,7 @@ data LiveBroadcastSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveBroadcastSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8930,6 +9127,7 @@ liveBroadcastSnippet =
     , _lbsIsDefaultBroadcast = Nothing
     , _lbsDescription = Nothing
     }
+
 
 -- | The date and time that the broadcast actually ended. This information is
 -- only available once the broadcast\'s state is complete. The value is
@@ -9057,6 +9255,7 @@ data AccessPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9067,6 +9266,7 @@ data AccessPolicy =
 accessPolicy
     :: AccessPolicy
 accessPolicy = AccessPolicy' {_apException = Nothing, _apAllowed = Nothing}
+
 
 -- | A list of region codes that identify countries where the default policy
 -- do not apply.
@@ -9109,6 +9309,7 @@ data Sponsor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Sponsor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9122,6 +9323,7 @@ sponsor
     :: Sponsor
 sponsor =
   Sponsor' {_sEtag = Nothing, _sSnippet = Nothing, _sKind = "youtube#sponsor"}
+
 
 -- | Etag of this resource.
 sEtag :: Lens' Sponsor (Maybe Text)
@@ -9160,6 +9362,7 @@ newtype LiveChatMessageDeletedDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatMessageDeletedDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9169,6 +9372,7 @@ liveChatMessageDeletedDetails
     :: LiveChatMessageDeletedDetails
 liveChatMessageDeletedDetails =
   LiveChatMessageDeletedDetails' {_lcmddDeletedMessageId = Nothing}
+
 
 lcmddDeletedMessageId :: Lens' LiveChatMessageDeletedDetails (Maybe Text)
 lcmddDeletedMessageId
@@ -9203,6 +9407,7 @@ data CommentThreadListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentThreadListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9235,6 +9440,7 @@ commentThreadListResponse =
     , _ctlrVisitorId = Nothing
     , _ctlrEventId = Nothing
     }
+
 
 -- | Etag of this resource.
 ctlrEtag :: Lens' CommentThreadListResponse (Maybe Text)
@@ -9318,6 +9524,7 @@ data WatchSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WatchSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9335,6 +9542,7 @@ watchSettings =
     , _wsBackgRoundColor = Nothing
     , _wsTextColor = Nothing
     }
+
 
 -- | An ID that uniquely identifies a playlist that displays next to the
 -- video player.
@@ -9384,6 +9592,7 @@ data CdnSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CdnSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9407,6 +9616,7 @@ cdnSettings =
     , _csResolution = Nothing
     , _csIngestionType = Nothing
     }
+
 
 -- | The ingestionInfo object contains information that YouTube provides that
 -- you need to transmit your RTMP or HTTP stream to YouTube.
@@ -9463,6 +9673,7 @@ newtype NonprofitId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NonprofitId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9471,6 +9682,7 @@ newtype NonprofitId =
 nonprofitId
     :: NonprofitId
 nonprofitId = NonprofitId' {_niValue = Nothing}
+
 
 niValue :: Lens' NonprofitId (Maybe Text)
 niValue = lens _niValue (\ s a -> s{_niValue = a})
@@ -9496,6 +9708,7 @@ data LiveBroadcastStatistics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveBroadcastStatistics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9508,6 +9721,7 @@ liveBroadcastStatistics
 liveBroadcastStatistics =
   LiveBroadcastStatistics'
     {_lbsTotalChatCount = Nothing, _lbsConcurrentViewers = Nothing}
+
 
 -- | The total number of live chat messages currently on the broadcast. The
 -- property and its value will be present if the broadcast is public, has
@@ -9560,6 +9774,7 @@ data VideoCategorySnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoCategorySnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9577,6 +9792,7 @@ videoCategorySnippet =
     , _vcsChannelId = "UCBR8-60-B28hp2BmDPdntcQ"
     , _vcsTitle = Nothing
     }
+
 
 vcsAssignable :: Lens' VideoCategorySnippet (Maybe Bool)
 vcsAssignable
@@ -9622,6 +9838,7 @@ data I18nLanguage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'I18nLanguage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9642,6 +9859,7 @@ i18nLanguage =
     , _ilKind = "youtube#i18nLanguage"
     , _ilId = Nothing
     }
+
 
 -- | Etag of this resource.
 ilEtag :: Lens' I18nLanguage (Maybe Text)
@@ -9693,6 +9911,7 @@ data VideoStatistics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoStatistics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9716,6 +9935,7 @@ videoStatistics =
     , _vsDislikeCount = Nothing
     , _vsViewCount = Nothing
     }
+
 
 -- | The number of users who have indicated that they liked the video by
 -- giving it a positive rating.
@@ -9789,6 +10009,7 @@ data ActivityListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9824,6 +10045,7 @@ activityListResponse =
     , _alrEventId = Nothing
     , _alrPrevPageToken = Nothing
     }
+
 
 -- | Etag of this resource.
 alrEtag :: Lens' ActivityListResponse (Maybe Text)
@@ -9911,6 +10133,7 @@ newtype ActivityContentDetailsBulletin =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityContentDetailsBulletin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9920,6 +10143,7 @@ activityContentDetailsBulletin
     :: ActivityContentDetailsBulletin
 activityContentDetailsBulletin =
   ActivityContentDetailsBulletin' {_acdbResourceId = Nothing}
+
 
 -- | The resourceId object contains information that identifies the resource
 -- associated with a bulletin post.
@@ -9953,6 +10177,7 @@ data VideoAbuseReport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoAbuseReport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9976,6 +10201,7 @@ videoAbuseReport =
     , _varLanguage = Nothing
     , _varComments = Nothing
     }
+
 
 -- | The ID of this abuse report secondary reason.
 varSecondaryReasonId :: Lens' VideoAbuseReport (Maybe Text)
@@ -10036,6 +10262,7 @@ data VideoFileDetailsAudioStream =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoFileDetailsAudioStream' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10056,6 +10283,7 @@ videoFileDetailsAudioStream =
     , _vfdasCodec = Nothing
     , _vfdasChannelCount = Nothing
     }
+
 
 -- | The audio stream\'s bitrate, in bits per second.
 vfdasBitrateBps :: Lens' VideoFileDetailsAudioStream (Maybe Word64)
@@ -10112,6 +10340,7 @@ data I18nRegionListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'I18nRegionListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10135,6 +10364,7 @@ i18nRegionListResponse =
     , _irlrVisitorId = Nothing
     , _irlrEventId = Nothing
     }
+
 
 -- | Etag of this resource.
 irlrEtag :: Lens' I18nRegionListResponse (Maybe Text)
@@ -10196,6 +10426,7 @@ data GuideCategorySnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GuideCategorySnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10208,6 +10439,7 @@ guideCategorySnippet
 guideCategorySnippet =
   GuideCategorySnippet'
     {_gcsChannelId = "UCBR8-60-B28hp2BmDPdntcQ", _gcsTitle = Nothing}
+
 
 gcsChannelId :: Lens' GuideCategorySnippet Text
 gcsChannelId
@@ -10244,6 +10476,7 @@ data CaptionListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CaptionListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10267,6 +10500,7 @@ captionListResponse =
     , _cVisitorId = Nothing
     , _cEventId = Nothing
     }
+
 
 -- | Etag of this resource.
 cEtag :: Lens' CaptionListResponse (Maybe Text)
@@ -10321,6 +10555,7 @@ newtype PlayListItemStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListItemStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10329,6 +10564,7 @@ newtype PlayListItemStatus =
 playListItemStatus
     :: PlayListItemStatus
 playListItemStatus = PlayListItemStatus' {_plisPrivacyStatus = Nothing}
+
 
 -- | This resource\'s privacy status.
 plisPrivacyStatus :: Lens' PlayListItemStatus (Maybe PlayListItemStatusPrivacyStatus)
@@ -10359,6 +10595,7 @@ data InvideoPosition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InvideoPosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10370,6 +10607,7 @@ invideoPosition
     :: InvideoPosition
 invideoPosition =
   InvideoPosition' {_ipCornerPosition = Nothing, _ipType = Nothing}
+
 
 -- | Describes in which corner of the video the visual widget will appear.
 ipCornerPosition :: Lens' InvideoPosition (Maybe InvideoPositionCornerPosition)
@@ -10407,6 +10645,7 @@ data LiveChatSuperStickerDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatSuperStickerDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10430,6 +10669,7 @@ liveChatSuperStickerDetails =
     , _lcssdCurrency = Nothing
     , _lcssdTier = Nothing
     }
+
 
 -- | Information about the Super Sticker.
 lcssdSuperStickerMetadata :: Lens' LiveChatSuperStickerDetails (Maybe SuperStickerMetadata)
@@ -10497,6 +10737,7 @@ data LiveStreamHealthStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveStreamHealthStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10514,6 +10755,7 @@ liveStreamHealthStatus =
     , _lshsConfigurationIssues = Nothing
     , _lshsLastUpdateTimeSeconds = Nothing
     }
+
 
 -- | The status code of this stream
 lshsStatus :: Lens' LiveStreamHealthStatus (Maybe LiveStreamHealthStatusStatus)
@@ -10563,6 +10805,7 @@ newtype ChannelSectionLocalizations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSectionLocalizations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10573,6 +10816,7 @@ channelSectionLocalizations
     -> ChannelSectionLocalizations
 channelSectionLocalizations pCslAddtional_ =
   ChannelSectionLocalizations' {_cslAddtional = _Coerce # pCslAddtional_}
+
 
 -- | The language tag, using string since map_key require simple types.
 cslAddtional :: Lens' ChannelSectionLocalizations (HashMap Text ChannelSectionLocalization)
@@ -10604,6 +10848,7 @@ data SubscriptionListResponse =
     , _subPrevPageToken   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionListResponse' with the minimum fields required to make a request.
 --
@@ -10640,6 +10885,7 @@ subscriptionListResponse =
     , _subEventId = Nothing
     , _subPrevPageToken = Nothing
     }
+
 
 -- | Etag of this resource.
 subEtag :: Lens' SubscriptionListResponse (Maybe Text)
@@ -10729,6 +10975,7 @@ data VideoLocalization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoLocalization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10740,6 +10987,7 @@ videoLocalization
     :: VideoLocalization
 videoLocalization =
   VideoLocalization' {_vlTitle = Nothing, _vlDescription = Nothing}
+
 
 -- | Localized version of the video\'s title.
 vlTitle :: Lens' VideoLocalization (Maybe Text)
@@ -10780,6 +11028,7 @@ data CommentListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10812,6 +11061,7 @@ commentListResponse =
     , _comVisitorId = Nothing
     , _comEventId = Nothing
     }
+
 
 -- | Etag of this resource.
 comEtag :: Lens' CommentListResponse (Maybe Text)
@@ -10892,6 +11142,7 @@ data VideoPlayer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoPlayer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10906,6 +11157,7 @@ videoPlayer
 videoPlayer =
   VideoPlayer'
     {_vpEmbedHeight = Nothing, _vpEmbedWidth = Nothing, _vpEmbedHTML = Nothing}
+
 
 vpEmbedHeight :: Lens' VideoPlayer (Maybe Int64)
 vpEmbedHeight
@@ -10954,6 +11206,7 @@ data PromotedItemId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PromotedItemId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10974,6 +11227,7 @@ promotedItemId =
     , _piiWebsiteURL = Nothing
     , _piiType = Nothing
     }
+
 
 -- | If type is recentUpload, this field identifies the channel from which to
 -- take the recent upload. If missing, the channel is assumed to be the
@@ -11030,6 +11284,7 @@ data LocalizedString =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocalizedString' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11040,6 +11295,7 @@ data LocalizedString =
 localizedString
     :: LocalizedString
 localizedString = LocalizedString' {_lsValue = Nothing, _lsLanguage = Nothing}
+
 
 lsValue :: Lens' LocalizedString (Maybe Text)
 lsValue = lens _lsValue (\ s a -> s{_lsValue = a})
@@ -11078,6 +11334,7 @@ data PlayListItemListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListItemListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11113,6 +11370,7 @@ playListItemListResponse =
     , _plilrEventId = Nothing
     , _plilrPrevPageToken = Nothing
     }
+
 
 -- | Etag of this resource.
 plilrEtag :: Lens' PlayListItemListResponse (Maybe Text)
@@ -11212,6 +11470,7 @@ data GuideCategory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GuideCategory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11232,6 +11491,7 @@ guideCategory =
     , _gcKind = "youtube#guideCategory"
     , _gcId = Nothing
     }
+
 
 -- | Etag of this resource.
 gcEtag :: Lens' GuideCategory (Maybe Text)
@@ -11285,6 +11545,7 @@ data SearchResultSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchResultSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11314,6 +11575,7 @@ searchResultSnippet =
     , _srsLiveBroadcastContent = Nothing
     , _srsDescription = Nothing
     }
+
 
 -- | The creation date and time of the resource that the search result
 -- identifies. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ)
@@ -11397,6 +11659,7 @@ data LiveChatPollItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatPollItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11408,6 +11671,7 @@ liveChatPollItem
     :: LiveChatPollItem
 liveChatPollItem =
   LiveChatPollItem' {_lcpiItemId = Nothing, _lcpiDescription = Nothing}
+
 
 lcpiItemId :: Lens' LiveChatPollItem (Maybe Text)
 lcpiItemId
@@ -11448,6 +11712,7 @@ data SponsorListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SponsorListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11480,6 +11745,7 @@ sponsorListResponse =
     , _spoVisitorId = Nothing
     , _spoEventId = Nothing
     }
+
 
 -- | Etag of this resource.
 spoEtag :: Lens' SponsorListResponse (Maybe Text)
@@ -11568,6 +11834,7 @@ data Activity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Activity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11591,6 +11858,7 @@ activity =
     , _aContentDetails = Nothing
     , _aId = Nothing
     }
+
 
 -- | Etag of this resource.
 aEtag :: Lens' Activity (Maybe Text)
@@ -11652,6 +11920,7 @@ data InvideoPromotion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InvideoPromotion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11672,6 +11941,7 @@ invideoPromotion =
     , _ipDefaultTiming = Nothing
     , _ipPosition = Nothing
     }
+
 
 -- | Indicates whether the channel\'s promotional campaign uses \"smart
 -- timing.\" This feature attempts to show promotions at a point in the
@@ -11733,6 +12003,7 @@ data InvideoBranding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InvideoBranding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11756,6 +12027,7 @@ invideoBranding =
     , _ibImageBytes = Nothing
     , _ibPosition = Nothing
     }
+
 
 ibImageURL :: Lens' InvideoBranding (Maybe Text)
 ibImageURL
@@ -11810,6 +12082,7 @@ data ChannelBannerResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelBannerResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11827,6 +12100,7 @@ channelBannerResource =
     , _cbrKind = "youtube#channelBannerResource"
     , _cbrURL = Nothing
     }
+
 
 -- | Etag of this resource.
 cbrEtag :: Lens' ChannelBannerResource (Maybe Text)
@@ -11869,6 +12143,7 @@ data I18nLanguageListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'I18nLanguageListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11892,6 +12167,7 @@ i18nLanguageListResponse =
     , _illrVisitorId = Nothing
     , _illrEventId = Nothing
     }
+
 
 -- | Etag of this resource.
 illrEtag :: Lens' I18nLanguageListResponse (Maybe Text)
@@ -11950,6 +12226,7 @@ newtype PlayListPlayer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListPlayer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11958,6 +12235,7 @@ newtype PlayListPlayer =
 playListPlayer
     :: PlayListPlayer
 playListPlayer = PlayListPlayer' {_plpEmbedHTML = Nothing}
+
 
 -- | An
 -- tag that embeds a player that will play the playlist.
@@ -11987,6 +12265,7 @@ data ChannelBrandingSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelBrandingSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12007,6 +12286,7 @@ channelBrandingSettings =
     , _cbsChannel = Nothing
     , _cbsWatch = Nothing
     }
+
 
 -- | Branding properties for branding images.
 cbsImage :: Lens' ChannelBrandingSettings (Maybe ImageSettings)
@@ -12061,6 +12341,7 @@ data CommentThread =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentThread' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12084,6 +12365,7 @@ commentThread =
     , _ctReplies = Nothing
     , _ctId = Nothing
     }
+
 
 -- | Etag of this resource.
 ctEtag :: Lens' CommentThread (Maybe Text)
@@ -12139,6 +12421,7 @@ data PlayListLocalization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListLocalization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12150,6 +12433,7 @@ playListLocalization
     :: PlayListLocalization
 playListLocalization =
   PlayListLocalization' {_pllTitle = Nothing, _pllDescription = Nothing}
+
 
 -- | The localized strings for playlist\'s title.
 pllTitle :: Lens' PlayListLocalization (Maybe Text)
@@ -12186,6 +12470,7 @@ data LiveChatBanSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatBanSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12206,6 +12491,7 @@ liveChatBanSnippet =
     , _lcbsBanDurationSeconds = Nothing
     , _lcbsType = Nothing
     }
+
 
 -- | The chat this ban is pertinent to.
 lcbsLiveChatId :: Lens' LiveChatBanSnippet (Maybe Text)
@@ -12259,6 +12545,7 @@ data SubscriptionContentDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionContentDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12276,6 +12563,7 @@ subscriptionContentDetails =
     , _scdTotalItemCount = Nothing
     , _scdNewItemCount = Nothing
     }
+
 
 -- | The type of activity this subscription is for (only uploads,
 -- everything).
@@ -12325,6 +12613,7 @@ newtype ChannelConversionPings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelConversionPings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12333,6 +12622,7 @@ newtype ChannelConversionPings =
 channelConversionPings
     :: ChannelConversionPings
 channelConversionPings = ChannelConversionPings' {_ccpPings = Nothing}
+
 
 -- | Pings that the app shall fire (authenticated by biscotti cookie). Each
 -- ping has a context, in which the app must fire the ping, and a url
@@ -12364,6 +12654,7 @@ data LocalizedProperty =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocalizedProperty' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12378,6 +12669,7 @@ localizedProperty
 localizedProperty =
   LocalizedProperty'
     {_lpDefault = Nothing, _lpLocalized = Nothing, _lpDefaultLanguage = Nothing}
+
 
 lpDefault :: Lens' LocalizedProperty (Maybe Text)
 lpDefault
@@ -12421,6 +12713,7 @@ data ChannelLocalization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelLocalization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12432,6 +12725,7 @@ channelLocalization
     :: ChannelLocalization
 channelLocalization =
   ChannelLocalization' {_clTitle = Nothing, _clDescription = Nothing}
+
 
 -- | The localized strings for channel\'s title.
 clTitle :: Lens' ChannelLocalization (Maybe Text)
@@ -12469,6 +12763,7 @@ data PlayListItemContentDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListItemContentDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12492,6 +12787,7 @@ playListItemContentDetails =
     , _plicdVideoId = Nothing
     , _plicdEndAt = Nothing
     }
+
 
 -- | The time, measured in seconds from the start of the video, when the
 -- video should start playing. (The playlist owner can specify the times
@@ -12560,6 +12856,7 @@ data VideoAgeGating =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoAgeGating' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12577,6 +12874,7 @@ videoAgeGating =
     , _vagRestricted = Nothing
     , _vagVideoGameRating = Nothing
     }
+
 
 -- | Indicates whether or not the video has alcoholic beverage content. Only
 -- users of legal purchasing age in a particular country, as identified by
@@ -12625,6 +12923,7 @@ newtype LanguageTag =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LanguageTag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12633,6 +12932,7 @@ newtype LanguageTag =
 languageTag
     :: LanguageTag
 languageTag = LanguageTag' {_ltValue = Nothing}
+
 
 ltValue :: Lens' LanguageTag (Maybe Text)
 ltValue = lens _ltValue (\ s a -> s{_ltValue = a})
@@ -12656,6 +12956,7 @@ data LiveChatPollOpenedDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatPollOpenedDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12670,6 +12971,7 @@ liveChatPollOpenedDetails
 liveChatPollOpenedDetails =
   LiveChatPollOpenedDetails'
     {_lcpodPrompt = Nothing, _lcpodItems = Nothing, _lcpodId = Nothing}
+
 
 lcpodPrompt :: Lens' LiveChatPollOpenedDetails (Maybe Text)
 lcpodPrompt
@@ -12716,6 +13018,7 @@ data VideoFileDetailsVideoStream =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoFileDetailsVideoStream' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12748,6 +13051,7 @@ videoFileDetailsVideoStream =
     , _vfdvsAspectRatio = Nothing
     , _vfdvsWidthPixels = Nothing
     }
+
 
 -- | The encoded video content\'s height in pixels.
 vfdvsHeightPixels :: Lens' VideoFileDetailsVideoStream (Maybe Word32)
@@ -12842,6 +13146,7 @@ data ChannelConversionPing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelConversionPing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12853,6 +13158,7 @@ channelConversionPing
     :: ChannelConversionPing
 channelConversionPing =
   ChannelConversionPing' {_ccpContext = Nothing, _ccpConversionURL = Nothing}
+
 
 -- | Defines the context of the ping.
 ccpContext :: Lens' ChannelConversionPing (Maybe ChannelConversionPingContext)
@@ -12915,6 +13221,7 @@ data PlayListItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12941,6 +13248,7 @@ playListItem =
     , _pliContentDetails = Nothing
     , _pliId = Nothing
     }
+
 
 -- | The status object contains information about the playlist item\'s
 -- privacy status.
@@ -13013,6 +13321,7 @@ data GuideCategoryListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GuideCategoryListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13048,6 +13357,7 @@ guideCategoryListResponse =
     , _gclrEventId = Nothing
     , _gclrPrevPageToken = Nothing
     }
+
 
 -- | Etag of this resource.
 gclrEtag :: Lens' GuideCategoryListResponse (Maybe Text)
@@ -13152,6 +13462,7 @@ data CaptionSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CaptionSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13199,6 +13510,7 @@ captionSnippet =
     , _csIsEasyReader = Nothing
     , _csAudioTrackType = Nothing
     }
+
 
 -- | The reason that YouTube failed to process the caption track. This
 -- property is only present if the state property\'s value is failed.
@@ -13332,6 +13644,7 @@ data Comment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13352,6 +13665,7 @@ comment =
     , _ccKind = "youtube#comment"
     , _ccId = Nothing
     }
+
 
 -- | Etag of this resource.
 ccEtag :: Lens' Comment (Maybe Text)
@@ -13399,6 +13713,7 @@ data I18nRegionSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'I18nRegionSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13409,6 +13724,7 @@ data I18nRegionSnippet =
 i18nRegionSnippet
     :: I18nRegionSnippet
 i18nRegionSnippet = I18nRegionSnippet' {_irsName = Nothing, _irsGl = Nothing}
+
 
 -- | The human-readable name of the region.
 irsName :: Lens' I18nRegionSnippet (Maybe Text)
@@ -13449,6 +13765,7 @@ data Subscription =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13475,6 +13792,7 @@ subscription =
     , _ssContentDetails = Nothing
     , _ssId = Nothing
     }
+
 
 -- | Etag of this resource.
 ssEtag :: Lens' Subscription (Maybe Text)
@@ -13542,6 +13860,7 @@ data VideoRecordingDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoRecordingDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13559,6 +13878,7 @@ videoRecordingDetails =
     , _vrdLocationDescription = Nothing
     , _vrdRecordingDate = Nothing
     }
+
 
 -- | The geolocation information associated with the video.
 vrdLocation :: Lens' VideoRecordingDetails (Maybe GeoPoint)
@@ -13605,6 +13925,7 @@ data VideoRating =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoRating' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13615,6 +13936,7 @@ data VideoRating =
 videoRating
     :: VideoRating
 videoRating = VideoRating' {_vRating = Nothing, _vVideoId = Nothing}
+
 
 vRating :: Lens' VideoRating (Maybe VideoRatingRating)
 vRating = lens _vRating (\ s a -> s{_vRating = a})
@@ -13658,6 +13980,7 @@ data CommentSnippet =
     , _cParentId              :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentSnippet' with the minimum fields required to make a request.
 --
@@ -13712,6 +14035,7 @@ commentSnippet =
     , _cCanRate = Nothing
     , _cParentId = Nothing
     }
+
 
 -- | The rating the viewer has given to this comment. For the time being this
 -- will never return RATE_TYPE_DISLIKE and instead return RATE_TYPE_NONE.
@@ -13859,6 +14183,7 @@ data LiveStreamStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveStreamStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13870,6 +14195,7 @@ liveStreamStatus
     :: LiveStreamStatus
 liveStreamStatus =
   LiveStreamStatus' {_lssStreamStatus = Nothing, _lssHealthStatus = Nothing}
+
 
 lssStreamStatus :: Lens' LiveStreamStatus (Maybe LiveStreamStatusStreamStatus)
 lssStreamStatus
@@ -13910,6 +14236,7 @@ data VideoSuggestions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoSuggestions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13933,6 +14260,7 @@ videoSuggestions =
     , _vsProcessingWarnings = Nothing
     , _vsTagSuggestions = Nothing
     }
+
 
 -- | A list of errors that will prevent YouTube from successfully processing
 -- the uploaded video video. These errors indicate that, regardless of the
@@ -14025,6 +14353,7 @@ data PlayListItemSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListItemSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14060,6 +14389,7 @@ playListItemSnippet =
     , _plisDescription = Nothing
     , _plisPosition = Nothing
     }
+
 
 -- | The id object contains information that can be used to uniquely identify
 -- the resource that is included in the playlist as the playlist item.
@@ -14160,6 +14490,7 @@ newtype VideoProjectDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoProjectDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14168,6 +14499,7 @@ newtype VideoProjectDetails =
 videoProjectDetails
     :: VideoProjectDetails
 videoProjectDetails = VideoProjectDetails' {_vpdTags = Nothing}
+
 
 -- | A list of project tags associated with the video during the upload.
 vpdTags :: Lens' VideoProjectDetails [Text]
@@ -14263,6 +14595,7 @@ data ContentRating =
     , _crKmrbRating             :: !(Maybe ContentRatingKmrbRating)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContentRating' with the minimum fields required to make a request.
 --
@@ -14482,6 +14815,7 @@ contentRating =
     , _crOflcRating = Nothing
     , _crKmrbRating = Nothing
     }
+
 
 -- | Reasons that explain why the video received its FPB (South Africa)
 -- rating.
@@ -15094,6 +15428,7 @@ data PlayList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15126,6 +15461,7 @@ playList =
     , _plLocalizations = Nothing
     , _plPlayer = Nothing
     }
+
 
 -- | The status object contains status information for the playlist.
 plStatus :: Lens' PlayList (Maybe PlayListStatus)
@@ -15215,6 +15551,7 @@ data ChannelSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15265,6 +15602,7 @@ channelSettings =
     , _cDescription = Nothing
     , _cDefaultLanguage = Nothing
     }
+
 
 -- | Whether related channels should be proposed.
 cShowRelatedChannels :: Lens' ChannelSettings (Maybe Bool)
@@ -15405,6 +15743,7 @@ data SubscriptionSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15434,6 +15773,7 @@ subscriptionSnippet =
     , _ssTitle = Nothing
     , _ssDescription = Nothing
     }
+
 
 -- | The id object contains information about the channel that the user
 -- subscribed to.
@@ -15515,6 +15855,7 @@ data VideoLiveStreamingDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoLiveStreamingDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15541,6 +15882,7 @@ videoLiveStreamingDetails =
     , _vlsdActualStartTime = Nothing
     , _vlsdActiveLiveChatId = Nothing
     }
+
 
 -- | The time that the broadcast actually ended. The value is specified in
 -- ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. This value will not be
@@ -15644,6 +15986,7 @@ data ActivityContentDetailsPromotedItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityContentDetailsPromotedItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15682,6 +16025,7 @@ activityContentDetailsPromotedItem =
     , _acdpiImpressionURL = Nothing
     , _acdpiCustomCtaButtonText = Nothing
     }
+
 
 -- | The URL the client should direct the user to, if the user chooses to
 -- visit the advertiser\'s website.
@@ -15797,6 +16141,7 @@ data SponsorSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SponsorSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15817,6 +16162,7 @@ sponsorSnippet =
     , _sSponsorDetails = Nothing
     , _sSponsorSince = Nothing
     }
+
 
 -- | The cumulative time a user has been a sponsor in months.
 sCumulativeDurationMonths :: Lens' SponsorSnippet (Maybe Int32)
@@ -15875,6 +16221,7 @@ data GeoPoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeoPoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15889,6 +16236,7 @@ geoPoint
 geoPoint =
   GeoPoint'
     {_gpLatitude = Nothing, _gpAltitude = Nothing, _gpLongitude = Nothing}
+
 
 -- | Latitude in degrees.
 gpLatitude :: Lens' GeoPoint (Maybe Double)
@@ -15933,6 +16281,7 @@ newtype CommentThreadReplies =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentThreadReplies' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15941,6 +16290,7 @@ newtype CommentThreadReplies =
 commentThreadReplies
     :: CommentThreadReplies
 commentThreadReplies = CommentThreadReplies' {_ctrComments = Nothing}
+
 
 -- | A limited number of replies. Unless the number of replies returned
 -- equals total_reply_count in the snippet the returned replies are only a
@@ -15972,6 +16322,7 @@ newtype ChannelSectionLocalization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelSectionLocalization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15980,6 +16331,7 @@ newtype ChannelSectionLocalization =
 channelSectionLocalization
     :: ChannelSectionLocalization
 channelSectionLocalization = ChannelSectionLocalization' {_cslTitle = Nothing}
+
 
 -- | The localized strings for channel section\'s title.
 cslTitle :: Lens' ChannelSectionLocalization (Maybe Text)
@@ -16004,6 +16356,7 @@ data VideoAbuseReportSecondaryReason =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoAbuseReportSecondaryReason' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16015,6 +16368,7 @@ videoAbuseReportSecondaryReason
     :: VideoAbuseReportSecondaryReason
 videoAbuseReportSecondaryReason =
   VideoAbuseReportSecondaryReason' {_varsrId = Nothing, _varsrLabel = Nothing}
+
 
 -- | The ID of this abuse report secondary reason.
 varsrId :: Lens' VideoAbuseReportSecondaryReason (Maybe Text)
@@ -16051,6 +16405,7 @@ data ChannelContentOwnerDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelContentOwnerDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16063,6 +16418,7 @@ channelContentOwnerDetails
 channelContentOwnerDetails =
   ChannelContentOwnerDetails'
     {_ccodTimeLinked = Nothing, _ccodContentOwner = Nothing}
+
 
 -- | The date and time of when the channel was linked to the content owner.
 -- The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
@@ -16103,6 +16459,7 @@ data I18nLanguageSnippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'I18nLanguageSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16114,6 +16471,7 @@ i18nLanguageSnippet
     :: I18nLanguageSnippet
 i18nLanguageSnippet =
   I18nLanguageSnippet' {_ilsHl = Nothing, _ilsName = Nothing}
+
 
 -- | A short BCP-47 code that uniquely identifies a language.
 ilsHl :: Lens' I18nLanguageSnippet (Maybe Text)
@@ -16145,6 +16503,7 @@ data LiveChatPollVotedDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveChatPollVotedDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16156,6 +16515,7 @@ liveChatPollVotedDetails
     :: LiveChatPollVotedDetails
 liveChatPollVotedDetails =
   LiveChatPollVotedDetails' {_lcpvdPollId = Nothing, _lcpvdItemId = Nothing}
+
 
 -- | The poll the user voted on.
 lcpvdPollId :: Lens' LiveChatPollVotedDetails (Maybe Text)

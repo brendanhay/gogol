@@ -72,6 +72,7 @@ data ProjectsDatabasesCollectionGroupsIndexesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesCollectionGroupsIndexesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsDatabasesCollectionGroupsIndexesGet pPdcgigName_ =
     , _pdcgigName = pPdcgigName_
     , _pdcgigCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdcgigXgafv :: Lens' ProjectsDatabasesCollectionGroupsIndexesGet (Maybe Xgafv)

@@ -72,6 +72,7 @@ data PostUserInfosGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostUserInfosGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ postUserInfosGet pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
     , _puigUserId = pPuigUserId_
     , _puigPostId = pPuigPostId_
     }
+
 
 -- | The ID of the blog.
 puigBlogId :: Lens' PostUserInfosGet Text

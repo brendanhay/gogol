@@ -86,6 +86,7 @@ data AccountsCreativesDealAssociationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCreativesDealAssociationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ accountsCreativesDealAssociationsList pAcdalCreativeId_ pAcdalAccountId_ =
     , _acdalPageSize = Nothing
     , _acdalCallback = Nothing
     }
+
 
 -- | V1 error format.
 acdalXgafv :: Lens' AccountsCreativesDealAssociationsList (Maybe Xgafv)

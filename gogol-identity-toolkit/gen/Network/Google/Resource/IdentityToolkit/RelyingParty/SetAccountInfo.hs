@@ -60,6 +60,7 @@ newtype RelyingPartySetAccountInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartySetAccountInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ relyingPartySetAccountInfo
     -> RelyingPartySetAccountInfo
 relyingPartySetAccountInfo pRpsaiPayload_ =
   RelyingPartySetAccountInfo' {_rpsaiPayload = pRpsaiPayload_}
+
 
 -- | Multipart request metadata.
 rpsaiPayload :: Lens' RelyingPartySetAccountInfo IdentitytoolkitRelyingPartySetAccountInfoRequest

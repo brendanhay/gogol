@@ -75,6 +75,7 @@ data ObjectAccessControlsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectAccessControlsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ objectAccessControlsPatch pOacpBucket_ pOacpPayload_ pOacpObject_ pOacpEntity_ =
     , _oacpEntity = pOacpEntity_
     , _oacpGeneration = Nothing
     }
+
 
 -- | Name of a bucket.
 oacpBucket :: Lens' ObjectAccessControlsPatch Text

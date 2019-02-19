@@ -72,6 +72,7 @@ data ProjectsDataSourcesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDataSourcesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsDataSourcesGet pPdsgName_ =
     , _pdsgName = pPdsgName_
     , _pdsgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdsgXgafv :: Lens' ProjectsDataSourcesGet (Maybe Xgafv)

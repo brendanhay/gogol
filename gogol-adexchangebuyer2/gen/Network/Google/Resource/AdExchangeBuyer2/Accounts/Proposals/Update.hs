@@ -98,6 +98,7 @@ data AccountsProposalsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProposalsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -133,6 +134,7 @@ accountsProposalsUpdate pApuPayload_ pApuProposalId_ pApuAccountId_ =
     , _apuAccountId = pApuAccountId_
     , _apuCallback = Nothing
     }
+
 
 -- | V1 error format.
 apuXgafv :: Lens' AccountsProposalsUpdate (Maybe Xgafv)

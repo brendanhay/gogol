@@ -187,6 +187,7 @@ data CSESiterestrictList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CSESiterestrictList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -289,6 +290,7 @@ cSESiterestrictList pCseslQ_ =
     , _cseslHq = Nothing
     , _cseslHighRange = Nothing
     }
+
 
 -- | Returns images of a specific dominant color: red, orange, yellow, green,
 -- teal, blue, purple, pink, white, gray, black and brown.

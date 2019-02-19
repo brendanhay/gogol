@@ -64,6 +64,7 @@ data WebAppsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebAppsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ webAppsPatch pWapWebAppId_ pWapEnterpriseId_ pWapPayload_ =
     , _wapEnterpriseId = pWapEnterpriseId_
     , _wapPayload = pWapPayload_
     }
+
 
 -- | The ID of the web app.
 wapWebAppId :: Lens' WebAppsPatch Text

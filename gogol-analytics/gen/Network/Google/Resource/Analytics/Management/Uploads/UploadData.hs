@@ -82,6 +82,7 @@ data ManagementUploadsUploadData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementUploadsUploadData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ managementUploadsUploadData pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudAc
     , _muudCustomDataSourceId = pMuudCustomDataSourceId_
     , _muudAccountId = pMuudAccountId_
     }
+
 
 -- | Web property UA-string associated with the upload.
 muudWebPropertyId :: Lens' ManagementUploadsUploadData Text

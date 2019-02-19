@@ -66,6 +66,7 @@ data InstancesClone =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesClone' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ instancesClone pIcProject_ pIcPayload_ pIcInstance_ =
     , _icPayload = pIcPayload_
     , _icInstance = pIcInstance_
     }
+
 
 -- | Project ID of the source as well as the clone Cloud SQL instance.
 icProject :: Lens' InstancesClone Text

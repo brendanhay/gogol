@@ -74,6 +74,7 @@ data ThreatListUpdatesFetch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThreatListUpdatesFetch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ threatListUpdatesFetch pTlufPayload_ =
     , _tlufPayload = pTlufPayload_
     , _tlufCallback = Nothing
     }
+
 
 -- | V1 error format.
 tlufXgafv :: Lens' ThreatListUpdatesFetch (Maybe Xgafv)

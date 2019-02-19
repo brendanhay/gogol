@@ -61,6 +61,7 @@ data ReportsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ reportsGet pRgReportId_ pRgProFileId_ =
     { _rgReportId = _Coerce # pRgReportId_
     , _rgProFileId = _Coerce # pRgProFileId_
     }
+
 
 -- | The ID of the report.
 rgReportId :: Lens' ReportsGet Int64

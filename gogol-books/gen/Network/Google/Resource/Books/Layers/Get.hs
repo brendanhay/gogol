@@ -67,6 +67,7 @@ data LayersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LayersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ layersGet pLgVolumeId_ pLgSummaryId_ =
     , _lgSource = Nothing
     , _lgSummaryId = pLgSummaryId_
     }
+
 
 -- | The content version for the requested volume.
 lgContentVersion :: Lens' LayersGet (Maybe Text)

@@ -64,6 +64,7 @@ data TasksUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TasksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ tasksUpdate
 tasksUpdate pTuPayload_ pTuTaskList_ pTuTask_ =
   TasksUpdate'
     {_tuPayload = pTuPayload_, _tuTaskList = pTuTaskList_, _tuTask = pTuTask_}
+
 
 -- | Multipart request metadata.
 tuPayload :: Lens' TasksUpdate Task

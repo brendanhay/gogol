@@ -94,6 +94,7 @@ data ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ projectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate pPhespsssbcEx
     , _phespsssbcProjectId = pPhespsssbcProjectId_
     , _phespsssbcSampleSeriesId = pPhespsssbcSampleSeriesId_
     }
+
 
 -- | A tool results execution ID.
 phespsssbcExecutionId :: Lens' ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate Text

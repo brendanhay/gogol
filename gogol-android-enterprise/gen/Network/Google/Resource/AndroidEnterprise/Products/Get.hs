@@ -64,6 +64,7 @@ data ProductsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ productsGet pProEnterpriseId_ pProProductId_ =
     , _proLanguage = Nothing
     , _proProductId = pProProductId_
     }
+
 
 -- | The ID of the enterprise.
 proEnterpriseId :: Lens' ProductsGet Text

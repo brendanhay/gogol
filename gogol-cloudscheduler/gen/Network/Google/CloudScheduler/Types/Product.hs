@@ -65,6 +65,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -121,11 +123,13 @@ data PauseJobRequest =
   PauseJobRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PauseJobRequest' with the minimum fields required to make a request.
 --
 pauseJobRequest
     :: PauseJobRequest
 pauseJobRequest = PauseJobRequest'
+
 
 instance FromJSON PauseJobRequest where
         parseJSON
@@ -145,6 +149,7 @@ data ListLocationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -156,6 +161,7 @@ listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
   ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -192,11 +198,13 @@ data ResumeJobRequest =
   ResumeJobRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResumeJobRequest' with the minimum fields required to make a request.
 --
 resumeJobRequest
     :: ResumeJobRequest
 resumeJobRequest = ResumeJobRequest'
+
 
 instance FromJSON ResumeJobRequest where
         parseJSON
@@ -233,6 +241,7 @@ newtype AppEngineHTTPTargetHeaders =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppEngineHTTPTargetHeaders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -244,6 +253,7 @@ appEngineHTTPTargetHeaders
 appEngineHTTPTargetHeaders pAehttpthAddtional_ =
   AppEngineHTTPTargetHeaders'
     {_aehttpthAddtional = _Coerce # pAehttpthAddtional_}
+
 
 aehttpthAddtional :: Lens' AppEngineHTTPTargetHeaders (HashMap Text Text)
 aehttpthAddtional
@@ -276,6 +286,7 @@ data RetryConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RetryConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -299,6 +310,7 @@ retryConfig =
     , _rcRetryCount = Nothing
     , _rcMaxBackoffDuration = Nothing
     }
+
 
 -- | The time between retries will double \`max_doublings\` times. A job\'s
 -- retry interval starts at min_backoff_duration, then doubles
@@ -390,6 +402,7 @@ data Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -413,6 +426,7 @@ location =
     , _lLabels = Nothing
     , _lLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
@@ -472,11 +486,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -494,6 +510,7 @@ newtype PubsubTargetAttributes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PubsubTargetAttributes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -504,6 +521,7 @@ pubsubTargetAttributes
     -> PubsubTargetAttributes
 pubsubTargetAttributes pPtaAddtional_ =
   PubsubTargetAttributes' {_ptaAddtional = _Coerce # pPtaAddtional_}
+
 
 ptaAddtional :: Lens' PubsubTargetAttributes (HashMap Text Text)
 ptaAddtional
@@ -538,6 +556,7 @@ newtype HTTPTargetHeaders =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPTargetHeaders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -548,6 +567,7 @@ hTTPTargetHeaders
     -> HTTPTargetHeaders
 hTTPTargetHeaders pHttpthAddtional_ =
   HTTPTargetHeaders' {_httpthAddtional = _Coerce # pHttpthAddtional_}
+
 
 httpthAddtional :: Lens' HTTPTargetHeaders (HashMap Text Text)
 httpthAddtional
@@ -582,6 +602,7 @@ data PubsubMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PubsubMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -602,6 +623,7 @@ pubsubMessage =
     , _pmAttributes = Nothing
     , _pmMessageId = Nothing
     }
+
 
 -- | The message data field. If this field is empty, the message must contain
 -- at least one attribute.
@@ -659,6 +681,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -669,6 +692,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -704,6 +728,7 @@ data AppEngineHTTPTarget =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppEngineHTTPTarget' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -727,6 +752,7 @@ appEngineHTTPTarget =
     , _aehttptHeaders = Nothing
     , _aehttptAppEngineRouting = Nothing
     }
+
 
 -- | The HTTP method to use for the request. PATCH and OPTIONS are not
 -- permitted.
@@ -821,6 +847,7 @@ data HTTPTarget =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPTarget' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -841,6 +868,7 @@ hTTPTarget =
     , _httptURI = Nothing
     , _httptHeaders = Nothing
     }
+
 
 -- | Which HTTP method to use for the request.
 httptHTTPMethod :: Lens' HTTPTarget (Maybe HTTPTargetHTTPMethod)
@@ -904,11 +932,13 @@ data RunJobRequest =
   RunJobRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RunJobRequest' with the minimum fields required to make a request.
 --
 runJobRequest
     :: RunJobRequest
 runJobRequest = RunJobRequest'
+
 
 instance FromJSON RunJobRequest where
         parseJSON
@@ -938,6 +968,7 @@ data Job =
     , _jDescription         :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
@@ -986,6 +1017,7 @@ job =
     , _jTimeZone = Nothing
     , _jDescription = Nothing
     }
+
 
 -- | Output only. The response from the target for the last attempted
 -- execution.
@@ -1133,6 +1165,7 @@ newtype PubsubMessageAttributes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PubsubMessageAttributes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1143,6 +1176,7 @@ pubsubMessageAttributes
     -> PubsubMessageAttributes
 pubsubMessageAttributes pPmaAddtional_ =
   PubsubMessageAttributes' {_pmaAddtional = _Coerce # pPmaAddtional_}
+
 
 pmaAddtional :: Lens' PubsubMessageAttributes (HashMap Text Text)
 pmaAddtional
@@ -1170,6 +1204,7 @@ data PubsubTarget =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PubsubTarget' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1184,6 +1219,7 @@ pubsubTarget
 pubsubTarget =
   PubsubTarget'
     {_ptData = Nothing, _ptTopicName = Nothing, _ptAttributes = Nothing}
+
 
 -- | The message payload for PubsubMessage. Pubsub message must contain
 -- either non-empty data, or at least one attribute.
@@ -1234,6 +1270,7 @@ data ListJobsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListJobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1245,6 +1282,7 @@ listJobsResponse
     :: ListJobsResponse
 listJobsResponse =
   ListJobsResponse' {_ljrNextPageToken = Nothing, _ljrJobs = Nothing}
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- page_token field in the subsequent call to ListJobs to retrieve the next
@@ -1287,6 +1325,7 @@ newtype LocationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1297,6 +1336,7 @@ locationLabels
     -> LocationLabels
 locationLabels pLlAddtional_ =
   LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -1321,6 +1361,7 @@ newtype LocationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1331,6 +1372,7 @@ locationMetadata
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
   LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -1366,6 +1408,7 @@ data AppEngineRouting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppEngineRouting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1386,6 +1429,7 @@ appEngineRouting =
     , _aerHost = Nothing
     , _aerInstance = Nothing
     }
+
 
 -- | App service. By default, the job is sent to the service which is the
 -- default service when the job is attempted.

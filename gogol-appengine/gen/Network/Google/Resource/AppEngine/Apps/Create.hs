@@ -83,6 +83,7 @@ data AppsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ appsCreate pAcPayload_ =
     , _acPayload = pAcPayload_
     , _acCallback = Nothing
     }
+
 
 -- | V1 error format.
 acXgafv :: Lens' AppsCreate (Maybe Xgafv)

@@ -73,6 +73,7 @@ data ProjectsScanConfigsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsScanConfigsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ projectsScanConfigsUpdate pPscuPayload_ pPscuName_ =
     , _pscuName = pPscuName_
     , _pscuCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscuXgafv :: Lens' ProjectsScanConfigsUpdate (Maybe Xgafv)

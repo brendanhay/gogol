@@ -65,6 +65,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -124,6 +126,7 @@ data ListLocationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -135,6 +138,7 @@ listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
   ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -185,6 +189,7 @@ data TransferRun =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferRun' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -232,6 +237,7 @@ transferRun =
     , _trEndTime = Nothing
     , _trDestinationDataSetId = Nothing
     }
+
 
 -- | For batch transfer runs, specifies the date and time that data should be
 -- ingested.
@@ -363,11 +369,13 @@ data CheckValidCredsRequest =
   CheckValidCredsRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckValidCredsRequest' with the minimum fields required to make a request.
 --
 checkValidCredsRequest
     :: CheckValidCredsRequest
 checkValidCredsRequest = CheckValidCredsRequest'
+
 
 instance FromJSON CheckValidCredsRequest where
         parseJSON
@@ -386,6 +394,7 @@ newtype TransferConfigParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferConfigParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -396,6 +405,7 @@ transferConfigParams
     -> TransferConfigParams
 transferConfigParams pTcpAddtional_ =
   TransferConfigParams' {_tcpAddtional = _Coerce # pTcpAddtional_}
+
 
 -- | Properties of the object.
 tcpAddtional :: Lens' TransferConfigParams (HashMap Text JSONValue)
@@ -422,6 +432,7 @@ data ScheduleTransferRunsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScheduleTransferRunsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -434,6 +445,7 @@ scheduleTransferRunsRequest
 scheduleTransferRunsRequest =
   ScheduleTransferRunsRequest'
     {_strrStartTime = Nothing, _strrEndTime = Nothing}
+
 
 -- | Start time of the range of transfer runs. For example,
 -- \`\"2017-05-25T00:00:00+00:00\"\`.
@@ -477,6 +489,7 @@ data Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -500,6 +513,7 @@ location =
     , _lLabels = Nothing
     , _lLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
@@ -559,11 +573,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -582,6 +598,7 @@ data ScheduleOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScheduleOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -599,6 +616,7 @@ scheduleOptions =
     , _soDisableAutoScheduling = Nothing
     , _soEndTime = Nothing
     }
+
 
 -- | Specifies time to start scheduling transfer runs. The first run will be
 -- scheduled at or after the start time according to a recurrence pattern
@@ -656,6 +674,7 @@ data ListTransferLogsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTransferLogsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -668,6 +687,7 @@ listTransferLogsResponse
 listTransferLogsResponse =
   ListTransferLogsResponse'
     {_ltlrNextPageToken = Nothing, _ltlrTransferMessages = Nothing}
+
 
 -- | Output only. The next-pagination token. For multiple-page list results,
 -- this token can be used as the \`GetTransferRunLogRequest.page_token\` to
@@ -709,6 +729,7 @@ newtype CheckValidCredsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckValidCredsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -718,6 +739,7 @@ checkValidCredsResponse
     :: CheckValidCredsResponse
 checkValidCredsResponse =
   CheckValidCredsResponse' {_cvcrHasValidCreds = Nothing}
+
 
 -- | If set to \`true\`, the credentials exist and are valid.
 cvcrHasValidCreds :: Lens' CheckValidCredsResponse (Maybe Bool)
@@ -745,6 +767,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -755,6 +778,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -779,6 +803,7 @@ newtype TransferRunParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferRunParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -789,6 +814,7 @@ transferRunParams
     -> TransferRunParams
 transferRunParams pTrpAddtional_ =
   TransferRunParams' {_trpAddtional = _Coerce # pTrpAddtional_}
+
 
 -- | Properties of the object.
 trpAddtional :: Lens' TransferRunParams (HashMap Text JSONValue)
@@ -830,6 +856,7 @@ data DataSourceParameter =
     , _dspFields                :: !(Maybe [DataSourceParameter])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataSourceParameter' with the minimum fields required to make a request.
 --
@@ -884,6 +911,7 @@ dataSourceParameter =
     , _dspValidationHelpURL = Nothing
     , _dspFields = Nothing
     }
+
 
 -- | For integer and double values specifies maxminum allowed value.
 dspMaxValue :: Lens' DataSourceParameter (Maybe Double)
@@ -1022,6 +1050,7 @@ newtype ScheduleTransferRunsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScheduleTransferRunsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1031,6 +1060,7 @@ scheduleTransferRunsResponse
     :: ScheduleTransferRunsResponse
 scheduleTransferRunsResponse =
   ScheduleTransferRunsResponse' {_strrRuns = Nothing}
+
 
 -- | The transfer runs that were scheduled.
 strrRuns :: Lens' ScheduleTransferRunsResponse [TransferRun]
@@ -1060,6 +1090,7 @@ data ListDataSourcesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDataSourcesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1072,6 +1103,7 @@ listDataSourcesResponse
 listDataSourcesResponse =
   ListDataSourcesResponse'
     {_ldsrNextPageToken = Nothing, _ldsrDataSources = Nothing}
+
 
 -- | Output only. The next-pagination token. For multiple-page list results,
 -- this token can be used as the \`ListDataSourcesRequest.page_token\` to
@@ -1130,6 +1162,7 @@ data DataSource =
     , _dsDescription                  :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataSource' with the minimum fields required to make a request.
 --
@@ -1193,6 +1226,7 @@ dataSource =
     , _dsDefaultSchedule = Nothing
     , _dsDescription = Nothing
     }
+
 
 -- | Data source client id which should be used to receive refresh token.
 dsClientId :: Lens' DataSource (Maybe Text)
@@ -1376,6 +1410,7 @@ data ListTransferRunsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTransferRunsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1388,6 +1423,7 @@ listTransferRunsResponse
 listTransferRunsResponse =
   ListTransferRunsResponse'
     {_ltrrNextPageToken = Nothing, _ltrrTransferRuns = Nothing}
+
 
 -- | Output only. The next-pagination token. For multiple-page list results,
 -- this token can be used as the \`ListTransferRunsRequest.page_token\` to
@@ -1431,6 +1467,7 @@ data TransferMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1445,6 +1482,7 @@ transferMessage
 transferMessage =
   TransferMessage'
     {_tmSeverity = Nothing, _tmMessageTime = Nothing, _tmMessageText = Nothing}
+
 
 -- | Message severity.
 tmSeverity :: Lens' TransferMessage (Maybe TransferMessageSeverity)
@@ -1490,6 +1528,7 @@ newtype LocationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1500,6 +1539,7 @@ locationLabels
     -> LocationLabels
 locationLabels pLlAddtional_ =
   LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -1524,6 +1564,7 @@ newtype LocationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1534,6 +1575,7 @@ locationMetadata
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
   LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -1559,6 +1601,7 @@ data ListTransferConfigsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTransferConfigsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1571,6 +1614,7 @@ listTransferConfigsResponse
 listTransferConfigsResponse =
   ListTransferConfigsResponse'
     {_ltcrNextPageToken = Nothing, _ltcrTransferConfigs = Nothing}
+
 
 -- | Output only. The next-pagination token. For multiple-page list results,
 -- this token can be used as the \`ListTransferConfigsRequest.page_token\`
@@ -1630,6 +1674,7 @@ data TransferConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1680,6 +1725,7 @@ transferConfig =
     , _tcDestinationDataSetId = Nothing
     , _tcDataRefreshWindowDays = Nothing
     }
+
 
 -- | Output only. State of the most recently updated transfer run.
 tcState :: Lens' TransferConfig (Maybe TransferConfigState)

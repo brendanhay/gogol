@@ -73,6 +73,7 @@ data ResourcesCalendarsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesCalendarsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ resourcesCalendarsPatch pRcpPayload_ pRcpCustomer_ pRcpCalendarResourceId_ =
     , _rcpCustomer = pRcpCustomer_
     , _rcpCalendarResourceId = pRcpCalendarResourceId_
     }
+
 
 -- | Multipart request metadata.
 rcpPayload :: Lens' ResourcesCalendarsPatch CalendarResource

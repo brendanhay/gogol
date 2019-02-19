@@ -75,6 +75,7 @@ data BillingAccountsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ billingAccountsGet pBagName_ =
     , _bagName = pBagName_
     , _bagCallback = Nothing
     }
+
 
 -- | V1 error format.
 bagXgafv :: Lens' BillingAccountsGet (Maybe Xgafv)

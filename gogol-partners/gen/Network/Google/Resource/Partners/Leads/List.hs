@@ -113,6 +113,7 @@ data LeadsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeadsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -166,6 +167,7 @@ leadsList =
     , _llRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _llCallback = Nothing
     }
+
 
 -- | V1 error format.
 llXgafv :: Lens' LeadsList (Maybe Xgafv)

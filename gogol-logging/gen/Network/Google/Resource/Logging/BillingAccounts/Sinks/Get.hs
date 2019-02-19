@@ -70,6 +70,7 @@ data BillingAccountsSinksGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsSinksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ billingAccountsSinksGet pBasgSinkName_ =
     , _basgSinkName = pBasgSinkName_
     , _basgCallback = Nothing
     }
+
 
 -- | V1 error format.
 basgXgafv :: Lens' BillingAccountsSinksGet (Maybe Xgafv)

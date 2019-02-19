@@ -61,6 +61,7 @@ data AccountsContainersWorkspacesTriggersRevert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesTriggersRevert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ accountsContainersWorkspacesTriggersRevert
 accountsContainersWorkspacesTriggersRevert pAcwtrPath_ =
   AccountsContainersWorkspacesTriggersRevert'
     {_acwtrPath = pAcwtrPath_, _acwtrFingerprint = Nothing}
+
 
 -- | GTM Trigger\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/triggers\/{trigger_id}

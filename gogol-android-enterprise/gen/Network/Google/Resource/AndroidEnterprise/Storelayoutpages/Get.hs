@@ -62,6 +62,7 @@ data StorelayoutpagesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StorelayoutpagesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ storelayoutpagesGet
 storelayoutpagesGet pSgEnterpriseId_ pSgPageId_ =
   StorelayoutpagesGet'
     {_sgEnterpriseId = pSgEnterpriseId_, _sgPageId = pSgPageId_}
+
 
 -- | The ID of the enterprise.
 sgEnterpriseId :: Lens' StorelayoutpagesGet Text

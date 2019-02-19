@@ -81,6 +81,7 @@ data AccountsProductsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProductsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ accountsProductsList pAplParent_ =
     , _aplPageSize = Nothing
     , _aplCallback = Nothing
     }
+
 
 -- | Parent ID in the format \`accounts\/{account_id}\`. \`account_id\` - The
 -- ID of the Manufacturer Center account.

@@ -75,6 +75,7 @@ data OrganizationsDeidentifyTemplatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsDeidentifyTemplatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ organizationsDeidentifyTemplatesGet pOdtgName_ =
     , _odtgName = pOdtgName_
     , _odtgCallback = Nothing
     }
+
 
 -- | V1 error format.
 odtgXgafv :: Lens' OrganizationsDeidentifyTemplatesGet (Maybe Xgafv)

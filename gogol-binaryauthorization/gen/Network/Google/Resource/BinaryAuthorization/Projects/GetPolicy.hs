@@ -72,6 +72,7 @@ data ProjectsGetPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGetPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsGetPolicy pPgpName_ =
     , _pgpName = pPgpName_
     , _pgpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgpXgafv :: Lens' ProjectsGetPolicy (Maybe Xgafv)

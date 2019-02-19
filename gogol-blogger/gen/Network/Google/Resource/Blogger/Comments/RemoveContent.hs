@@ -66,6 +66,7 @@ data CommentsRemoveContent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsRemoveContent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ commentsRemoveContent pCrcBlogId_ pCrcPostId_ pCrcCommentId_ =
     , _crcPostId = pCrcPostId_
     , _crcCommentId = pCrcCommentId_
     }
+
 
 -- | The ID of the Blog.
 crcBlogId :: Lens' CommentsRemoveContent Text

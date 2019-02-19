@@ -65,6 +65,7 @@ data ManagementFiltersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementFiltersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ managementFiltersList pMflAccountId_ =
     , _mflStartIndex = Nothing
     , _mflMaxResults = Nothing
     }
+
 
 -- | Account ID to retrieve filters for.
 mflAccountId :: Lens' ManagementFiltersList Text

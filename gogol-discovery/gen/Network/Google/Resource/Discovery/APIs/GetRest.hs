@@ -62,6 +62,7 @@ data APIsGetRest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'APIsGetRest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ apisGetRest
     -> APIsGetRest
 apisGetRest pAgrVersion_ pAgrAPI_ =
   APIsGetRest' {_agrVersion = pAgrVersion_, _agrAPI = pAgrAPI_}
+
 
 -- | The version of the API.
 agrVersion :: Lens' APIsGetRest Text

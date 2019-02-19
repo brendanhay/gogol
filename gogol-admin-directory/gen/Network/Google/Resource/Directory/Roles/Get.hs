@@ -62,6 +62,7 @@ data RolesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RolesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ rolesGet
     -> RolesGet
 rolesGet pRgRoleId_ pRgCustomer_ =
   RolesGet' {_rgRoleId = pRgRoleId_, _rgCustomer = pRgCustomer_}
+
 
 -- | Immutable ID of the role.
 rgRoleId :: Lens' RolesGet Text

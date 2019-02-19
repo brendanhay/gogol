@@ -92,6 +92,7 @@ data ProjectsSnapshotsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSnapshotsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -125,6 +126,7 @@ projectsSnapshotsList pPslsProject_ =
     , _pslsPageSize = Nothing
     , _pslsCallback = Nothing
     }
+
 
 -- | V1 error format.
 pslsXgafv :: Lens' ProjectsSnapshotsList (Maybe Xgafv)

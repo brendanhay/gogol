@@ -61,6 +61,7 @@ data URLList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ data URLList =
 urlList
     :: URLList
 urlList = URLList' {_ulStartToken = Nothing, _ulProjection = Nothing}
+
 
 -- | Token for requesting successive pages of results.
 ulStartToken :: Lens' URLList (Maybe Text)

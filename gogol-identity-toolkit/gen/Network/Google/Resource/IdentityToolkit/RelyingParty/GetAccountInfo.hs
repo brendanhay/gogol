@@ -60,6 +60,7 @@ newtype RelyingPartyGetAccountInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartyGetAccountInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ relyingPartyGetAccountInfo
     -> RelyingPartyGetAccountInfo
 relyingPartyGetAccountInfo pRpgaiPayload_ =
   RelyingPartyGetAccountInfo' {_rpgaiPayload = pRpgaiPayload_}
+
 
 -- | Multipart request metadata.
 rpgaiPayload :: Lens' RelyingPartyGetAccountInfo IdentitytoolkitRelyingPartyGetAccountInfoRequest

@@ -68,6 +68,7 @@ data RollingUpdatesResume =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollingUpdatesResume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ rollingUpdatesResume pRRollingUpdate_ pRProject_ pRZone_ =
     , _rProject = pRProject_
     , _rZone = pRZone_
     }
+
 
 -- | The name of the update.
 rRollingUpdate :: Lens' RollingUpdatesResume Text

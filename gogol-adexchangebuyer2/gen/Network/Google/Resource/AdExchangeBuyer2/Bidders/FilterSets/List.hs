@@ -78,6 +78,7 @@ data BiddersFilterSetsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BiddersFilterSetsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ biddersFilterSetsList pBfslOwnerName_ =
     , _bfslPageSize = Nothing
     , _bfslCallback = Nothing
     }
+
 
 -- | V1 error format.
 bfslXgafv :: Lens' BiddersFilterSetsList (Maybe Xgafv)

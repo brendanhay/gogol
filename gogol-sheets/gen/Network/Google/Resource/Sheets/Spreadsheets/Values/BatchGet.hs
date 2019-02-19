@@ -87,6 +87,7 @@ data SpreadsheetsValuesBatchGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsValuesBatchGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ spreadsheetsValuesBatchGet pSvbgSpreadsheetId_ =
     , _svbgMajorDimension = Nothing
     , _svbgCallback = Nothing
     }
+
 
 -- | V1 error format.
 svbgXgafv :: Lens' SpreadsheetsValuesBatchGet (Maybe Xgafv)

@@ -70,6 +70,7 @@ data TablesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TablesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ tablesList pTlDataSetId_ pTlProjectId_ =
     , _tlProjectId = pTlProjectId_
     , _tlMaxResults = Nothing
     }
+
 
 -- | Dataset ID of the tables to list
 tlDataSetId :: Lens' TablesList Text

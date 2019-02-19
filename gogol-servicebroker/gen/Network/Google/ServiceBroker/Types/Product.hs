@@ -47,6 +47,7 @@ data GoogleIAMV1__Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleIAMV1__Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -61,6 +62,7 @@ googleIAMV1__Policy
 googleIAMV1__Policy =
   GoogleIAMV1__Policy'
     {_givpEtag = Nothing, _givpVersion = Nothing, _givpBindings = Nothing}
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -115,6 +117,7 @@ newtype GoogleIAMV1__TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleIAMV1__TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +127,7 @@ googleIAMV1__TestIAMPermissionsResponse
     :: GoogleIAMV1__TestIAMPermissionsResponse
 googleIAMV1__TestIAMPermissionsResponse =
   GoogleIAMV1__TestIAMPermissionsResponse' {_givtiprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -165,6 +169,7 @@ data GoogleType__Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleType__Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -185,6 +190,7 @@ googleType__Expr =
     , _gteTitle = Nothing
     , _gteDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -242,6 +248,7 @@ data GoogleIAMV1__Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleIAMV1__Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -256,6 +263,7 @@ googleIAMV1__Binding
 googleIAMV1__Binding =
   GoogleIAMV1__Binding'
     {_givbMembers = Nothing, _givbRole = Nothing, _givbCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -316,6 +324,7 @@ newtype GoogleIAMV1__SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleIAMV1__SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -325,6 +334,7 @@ googleIAMV1__SetIAMPolicyRequest
     :: GoogleIAMV1__SetIAMPolicyRequest
 googleIAMV1__SetIAMPolicyRequest =
   GoogleIAMV1__SetIAMPolicyRequest' {_givsiprPolicy = Nothing}
+
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -358,6 +368,7 @@ newtype GoogleIAMV1__TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleIAMV1__TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -367,6 +378,7 @@ googleIAMV1__TestIAMPermissionsRequest
     :: GoogleIAMV1__TestIAMPermissionsRequest
 googleIAMV1__TestIAMPermissionsRequest =
   GoogleIAMV1__TestIAMPermissionsRequest' {_giamvtiamprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more

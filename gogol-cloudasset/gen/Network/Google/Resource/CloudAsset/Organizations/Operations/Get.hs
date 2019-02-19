@@ -74,6 +74,7 @@ data OrganizationsOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ organizationsOperationsGet pOogName_ =
     , _oogName = pOogName_
     , _oogCallback = Nothing
     }
+
 
 -- | V1 error format.
 oogXgafv :: Lens' OrganizationsOperationsGet (Maybe Xgafv)

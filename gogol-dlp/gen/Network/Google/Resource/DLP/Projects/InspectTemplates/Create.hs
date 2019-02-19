@@ -80,6 +80,7 @@ data ProjectsInspectTemplatesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInspectTemplatesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsInspectTemplatesCreate pPitcParent_ pPitcPayload_ =
     , _pitcPayload = pPitcPayload_
     , _pitcCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id or
 -- organizations\/my-org-id.

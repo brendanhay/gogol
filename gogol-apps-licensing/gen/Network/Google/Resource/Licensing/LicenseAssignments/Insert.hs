@@ -67,6 +67,7 @@ data LicenseAssignmentsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicenseAssignmentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ licenseAssignmentsInsert pLaiSKUId_ pLaiPayload_ pLaiProductId_ =
     , _laiPayload = pLaiPayload_
     , _laiProductId = pLaiProductId_
     }
+
 
 -- | Name for sku
 laiSKUId :: Lens' LicenseAssignmentsInsert Text

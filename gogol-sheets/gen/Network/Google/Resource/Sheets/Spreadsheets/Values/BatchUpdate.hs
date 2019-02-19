@@ -80,6 +80,7 @@ data SpreadsheetsValuesBatchUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsValuesBatchUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ spreadsheetsValuesBatchUpdate pSvbuSpreadsheetId_ pSvbuPayload_ =
     , _svbuPayload = pSvbuPayload_
     , _svbuCallback = Nothing
     }
+
 
 -- | V1 error format.
 svbuXgafv :: Lens' SpreadsheetsValuesBatchUpdate (Maybe Xgafv)

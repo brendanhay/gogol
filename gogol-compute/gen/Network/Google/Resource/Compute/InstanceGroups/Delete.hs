@@ -72,6 +72,7 @@ data InstanceGroupsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ instanceGroupsDelete pIgdProject_ pIgdZone_ pIgdInstanceGroup_ =
     , _igdZone = pIgdZone_
     , _igdInstanceGroup = pIgdInstanceGroup_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

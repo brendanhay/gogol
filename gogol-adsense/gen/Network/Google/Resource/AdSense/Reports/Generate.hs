@@ -113,6 +113,7 @@ data ReportsGenerate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsGenerate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -159,6 +160,7 @@ reportsGenerate pRgEndDate_ pRgStartDate_ =
     , _rgUseTimezoneReporting = Nothing
     , _rgMaxResults = Nothing
     }
+
 
 -- | Dimensions to base the report on.
 rgDimension :: Lens' ReportsGenerate [Text]

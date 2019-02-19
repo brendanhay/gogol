@@ -78,6 +78,7 @@ data SharedAlbumsJoin =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SharedAlbumsJoin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ sharedAlbumsJoin pSajPayload_ =
     , _sajBearerToken = Nothing
     , _sajCallback = Nothing
     }
+
 
 -- | V1 error format.
 sajXgafv :: Lens' SharedAlbumsJoin (Maybe Xgafv)

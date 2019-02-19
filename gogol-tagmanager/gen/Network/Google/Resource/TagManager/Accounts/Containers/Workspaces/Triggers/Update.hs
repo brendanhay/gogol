@@ -63,6 +63,7 @@ data AccountsContainersWorkspacesTriggersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesTriggersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ accountsContainersWorkspacesTriggersUpdate pAcwtuPath_ pAcwtuPayload_ =
     , _acwtuFingerprint = Nothing
     , _acwtuPayload = pAcwtuPayload_
     }
+
 
 -- | GTM Trigger\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/triggers\/{trigger_id}

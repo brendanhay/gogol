@@ -77,6 +77,7 @@ data ServicesUndelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ servicesUndelete pSuServiceName_ =
     , _suServiceName = pSuServiceName_
     , _suCallback = Nothing
     }
+
 
 -- | V1 error format.
 suXgafv :: Lens' ServicesUndelete (Maybe Xgafv)

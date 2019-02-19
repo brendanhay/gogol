@@ -71,6 +71,7 @@ data HTTPSHealthChecksUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPSHealthChecksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ httpsHealthChecksUpdate pHhcuProject_ pHhcuPayload_ pHhcuHTTPSHealthCheck_ =
     , _hhcuPayload = pHhcuPayload_
     , _hhcuHTTPSHealthCheck = pHhcuHTTPSHealthCheck_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

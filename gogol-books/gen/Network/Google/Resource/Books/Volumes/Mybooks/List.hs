@@ -80,6 +80,7 @@ data VolumesMybooksList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumesMybooksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ volumesMybooksList =
     , _vmlStartIndex = Nothing
     , _vmlMaxResults = Nothing
     }
+
 
 -- | The processing state of the user uploaded volumes to be returned.
 -- Applicable only if the UPLOADED is specified in the acquireMethod.

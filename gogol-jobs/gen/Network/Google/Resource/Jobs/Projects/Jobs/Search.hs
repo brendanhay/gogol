@@ -79,6 +79,7 @@ data ProjectsJobsSearch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobsSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ projectsJobsSearch pPjsParent_ pPjsPayload_ =
     , _pjsPayload = pPjsPayload_
     , _pjsCallback = Nothing
     }
+
 
 -- | Required. The resource name of the project to search within. The format
 -- is \"projects\/{project_id}\", for example,

@@ -32,6 +32,7 @@ data ImageConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -52,6 +53,7 @@ imageConfiguration =
     , _icURL = Nothing
     , _icImageType = Nothing
     }
+
 
 -- | The resource ID of resource which the image belongs to.
 icResourceId :: Lens' ImageConfiguration (Maybe Text)
@@ -102,6 +104,7 @@ data LeaderboardConfigurationListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardConfigurationListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +122,7 @@ leaderboardConfigurationListResponse =
     , _lclrKind = "gamesConfiguration#leaderboardConfigurationListResponse"
     , _lclrItems = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 lclrNextPageToken :: Lens' LeaderboardConfigurationListResponse (Maybe Text)
@@ -173,6 +177,7 @@ data GamesNumberAffixConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GamesNumberAffixConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -199,6 +204,7 @@ gamesNumberAffixConfiguration =
     , _gnacZero = Nothing
     , _gnacMany = Nothing
     }
+
 
 -- | When the language requires special treatment of \"small\" numbers (as
 -- with 2, 3, and 4 in Czech; or numbers ending 2, 3, or 4 but not 12, 13,
@@ -263,6 +269,7 @@ data AchievementConfigurationListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementConfigurationListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -280,6 +287,7 @@ achievementConfigurationListResponse =
     , _aclrKind = "gamesConfiguration#achievementConfigurationListResponse"
     , _aclrItems = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 aclrNextPageToken :: Lens' AchievementConfigurationListResponse (Maybe Text)
@@ -336,6 +344,7 @@ data LeaderboardConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -368,6 +377,7 @@ leaderboardConfiguration =
     , _lcId = Nothing
     , _lcScoreOrder = Nothing
     }
+
 
 -- | Maximum score that can be posted to this leaderboard.
 lcScoreMax :: Lens' LeaderboardConfiguration (Maybe Int64)
@@ -453,6 +463,7 @@ data AchievementConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -485,6 +496,7 @@ achievementConfiguration =
     , _acDraft = Nothing
     , _acId = Nothing
     }
+
 
 -- | The type of the achievement. Possible values are: - \"STANDARD\" -
 -- Achievement is either locked or unlocked. - \"INCREMENTAL\" -
@@ -569,6 +581,7 @@ data LocalizedString =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocalizedString' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -586,6 +599,7 @@ localizedString =
     , _lsLocale = Nothing
     , _lsValue = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesConfiguration#localizedString.
@@ -630,6 +644,7 @@ data GamesNumberFormatConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GamesNumberFormatConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -650,6 +665,7 @@ gamesNumberFormatConfiguration =
     , _gnfcNumberFormatType = Nothing
     , _gnfcNumDecimalPlaces = Nothing
     }
+
 
 -- | An optional suffix for the NUMERIC format type. These strings follow the
 -- same plural rules as all Android string resources.
@@ -714,6 +730,7 @@ data LeaderboardConfigurationDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardConfigurationDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -737,6 +754,7 @@ leaderboardConfigurationDetail =
     , _lcdName = Nothing
     , _lcdIconURL = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesConfiguration#leaderboardConfigurationDetail.
@@ -801,6 +819,7 @@ data AchievementConfigurationDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementConfigurationDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -827,6 +846,7 @@ achievementConfigurationDetail =
     , _acdIconURL = Nothing
     , _acdDescription = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesConfiguration#achievementConfigurationDetail.
@@ -896,6 +916,7 @@ data LocalizedStringBundle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocalizedStringBundle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -910,6 +931,7 @@ localizedStringBundle =
     { _lsbKind = "gamesConfiguration#localizedStringBundle"
     , _lsbTranslations = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesConfiguration#localizedStringBundle.

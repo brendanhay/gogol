@@ -69,6 +69,7 @@ data AccountsContainersWorkspacesFoldersMoveEntitiesToFolder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersMoveEntitiesToFolder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ accountsContainersWorkspacesFoldersMoveEntitiesToFolder pAcwfmetfPath_ pAcwfmetf
     , _acwfmetfPayload = pAcwfmetfPayload_
     , _acwfmetfTagId = Nothing
     }
+
 
 -- | GTM Folder\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/folders\/{folder_id}

@@ -62,6 +62,7 @@ data PlacementGroupsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementGroupsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ placementGroupsUpdate
 placementGroupsUpdate pPguProFileId_ pPguPayload_ =
   PlacementGroupsUpdate'
     {_pguProFileId = _Coerce # pPguProFileId_, _pguPayload = pPguPayload_}
+
 
 -- | User profile ID associated with this request.
 pguProFileId :: Lens' PlacementGroupsUpdate Int64

@@ -86,6 +86,7 @@ data FoldersUndelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ foldersUndelete pFuPayload_ pFuName_ =
     , _fuName = pFuName_
     , _fuCallback = Nothing
     }
+
 
 -- | V1 error format.
 fuXgafv :: Lens' FoldersUndelete (Maybe Xgafv)

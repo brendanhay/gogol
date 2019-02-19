@@ -76,6 +76,7 @@ data ProjectsDatabasesOperationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesOperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ projectsDatabasesOperationsDelete pPdodName_ =
     , _pdodName = pPdodName_
     , _pdodCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdodXgafv :: Lens' ProjectsDatabasesOperationsDelete (Maybe Xgafv)

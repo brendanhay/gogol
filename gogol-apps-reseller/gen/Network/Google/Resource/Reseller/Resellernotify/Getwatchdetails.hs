@@ -55,11 +55,13 @@ data ResellernotifyGetwatchdetails =
   ResellernotifyGetwatchdetails'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResellernotifyGetwatchdetails' with the minimum fields required to make a request.
 --
 resellernotifyGetwatchdetails
     :: ResellernotifyGetwatchdetails
 resellernotifyGetwatchdetails = ResellernotifyGetwatchdetails'
+
 
 instance GoogleRequest ResellernotifyGetwatchdetails
          where

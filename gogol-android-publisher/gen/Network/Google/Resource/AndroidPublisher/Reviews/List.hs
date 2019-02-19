@@ -71,6 +71,7 @@ data ReviewsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReviewsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ reviewsList pRlPackageName_ =
     , _rlStartIndex = Nothing
     , _rlMaxResults = Nothing
     }
+
 
 -- | Unique identifier for the Android app for which we want reviews; for
 -- example, \"com.spiffygame\".

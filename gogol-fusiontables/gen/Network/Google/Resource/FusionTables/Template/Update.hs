@@ -64,6 +64,7 @@ data TemplateUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TemplateUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ templateUpdate pTuTemplateId_ pTuPayload_ pTuTableId_ =
     , _tuPayload = pTuPayload_
     , _tuTableId = pTuTableId_
     }
+
 
 -- | Identifier for the template that is being updated
 tuTemplateId :: Lens' TemplateUpdate Int32

@@ -89,6 +89,7 @@ data ProjectsJobTriggersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobTriggersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +129,7 @@ projectsJobTriggersList pPjtlParent_ =
     , _pjtlPageSize = Nothing
     , _pjtlCallback = Nothing
     }
+
 
 -- | The parent resource name, for example \`projects\/my-project-id\`.
 pjtlParent :: Lens' ProjectsJobTriggersList Text

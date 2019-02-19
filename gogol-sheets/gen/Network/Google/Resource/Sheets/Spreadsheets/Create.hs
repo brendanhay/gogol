@@ -72,6 +72,7 @@ data SpreadsheetsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ spreadsheetsCreate pScPayload_ =
     , _scPayload = pScPayload_
     , _scCallback = Nothing
     }
+
 
 -- | V1 error format.
 scXgafv :: Lens' SpreadsheetsCreate (Maybe Xgafv)

@@ -62,6 +62,7 @@ data StorelayoutpagesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StorelayoutpagesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ storelayoutpagesInsert
 storelayoutpagesInsert pSiEnterpriseId_ pSiPayload_ =
   StorelayoutpagesInsert'
     {_siEnterpriseId = pSiEnterpriseId_, _siPayload = pSiPayload_}
+
 
 -- | The ID of the enterprise.
 siEnterpriseId :: Lens' StorelayoutpagesInsert Text

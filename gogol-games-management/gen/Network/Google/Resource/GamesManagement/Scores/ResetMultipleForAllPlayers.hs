@@ -63,6 +63,7 @@ newtype ScoresResetMultipleForAllPlayers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScoresResetMultipleForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ scoresResetMultipleForAllPlayers
     -> ScoresResetMultipleForAllPlayers
 scoresResetMultipleForAllPlayers pSrmfapPayload_ =
   ScoresResetMultipleForAllPlayers' {_srmfapPayload = pSrmfapPayload_}
+
 
 -- | Multipart request metadata.
 srmfapPayload :: Lens' ScoresResetMultipleForAllPlayers ScoresResetMultipleForAllRequest

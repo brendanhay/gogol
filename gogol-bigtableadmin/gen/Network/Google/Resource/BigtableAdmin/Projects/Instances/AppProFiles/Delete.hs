@@ -73,6 +73,7 @@ data ProjectsInstancesAppProFilesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesAppProFilesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ projectsInstancesAppProFilesDelete pPiapfdName_ =
     , _piapfdName = pPiapfdName_
     , _piapfdCallback = Nothing
     }
+
 
 -- | V1 error format.
 piapfdXgafv :: Lens' ProjectsInstancesAppProFilesDelete (Maybe Xgafv)

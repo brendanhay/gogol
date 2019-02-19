@@ -71,6 +71,7 @@ data ManagementWebPropertyAdWordsLinksUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ managementWebPropertyAdWordsLinksUpdate pMwpawluWebPropertyId_ pMwpawluPayload_ 
     , _mwpawluAccountId = pMwpawluAccountId_
     , _mwpawluWebPropertyAdWordsLinkId = pMwpawluWebPropertyAdWordsLinkId_
     }
+
 
 -- | Web property ID to retrieve the Google Ads link for.
 mwpawluWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksUpdate Text

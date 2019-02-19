@@ -58,6 +58,7 @@ newtype UsersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ usersDelete
     :: Text -- ^ 'udUserKey'
     -> UsersDelete
 usersDelete pUdUserKey_ = UsersDelete' {_udUserKey = pUdUserKey_}
+
 
 -- | Email or immutable ID of the user
 udUserKey :: Lens' UsersDelete Text

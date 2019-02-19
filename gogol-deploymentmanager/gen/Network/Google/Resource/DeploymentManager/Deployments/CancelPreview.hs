@@ -69,6 +69,7 @@ data DeploymentsCancelPreview =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeploymentsCancelPreview' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ deploymentsCancelPreview pDcpProject_ pDcpPayload_ pDcpDeployment_ =
     , _dcpPayload = pDcpPayload_
     , _dcpDeployment = pDcpDeployment_
     }
+
 
 -- | The project ID for this request.
 dcpProject :: Lens' DeploymentsCancelPreview Text

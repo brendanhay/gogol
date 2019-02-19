@@ -63,6 +63,7 @@ data AccountsContainersWorkspacesFoldersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ accountsContainersWorkspacesFoldersUpdate pAcwfuPath_ pAcwfuPayload_ =
     , _acwfuFingerprint = Nothing
     , _acwfuPayload = pAcwfuPayload_
     }
+
 
 -- | GTM Folder\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/folders\/{folder_id}

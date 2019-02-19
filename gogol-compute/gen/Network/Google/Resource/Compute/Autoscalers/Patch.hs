@@ -75,6 +75,7 @@ data AutoscalersPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ autoscalersPatch pApProject_ pApZone_ pApPayload_ =
     , _apPayload = pApPayload_
     , _apAutoscaler = Nothing
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

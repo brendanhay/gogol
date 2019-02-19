@@ -61,6 +61,7 @@ data MobileCarriersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileCarriersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ mobileCarriersGet
 mobileCarriersGet pMcgProFileId_ pMcgId_ =
   MobileCarriersGet'
     {_mcgProFileId = _Coerce # pMcgProFileId_, _mcgId = _Coerce # pMcgId_}
+
 
 -- | User profile ID associated with this request.
 mcgProFileId :: Lens' MobileCarriersGet Int64

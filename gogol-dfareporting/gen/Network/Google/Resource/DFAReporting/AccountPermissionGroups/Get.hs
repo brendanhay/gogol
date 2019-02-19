@@ -62,6 +62,7 @@ data AccountPermissionGroupsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountPermissionGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ accountPermissionGroupsGet
 accountPermissionGroupsGet pApggProFileId_ pApggId_ =
   AccountPermissionGroupsGet'
     {_apggProFileId = _Coerce # pApggProFileId_, _apggId = _Coerce # pApggId_}
+
 
 -- | User profile ID associated with this request.
 apggProFileId :: Lens' AccountPermissionGroupsGet Int64

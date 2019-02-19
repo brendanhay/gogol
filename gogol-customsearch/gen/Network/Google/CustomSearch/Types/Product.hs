@@ -30,6 +30,7 @@ data PromotionImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PromotionImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43,6 +44,7 @@ promotionImage
     :: PromotionImage
 promotionImage =
   PromotionImage' {_piHeight = Nothing, _piWidth = Nothing, _piSource = Nothing}
+
 
 piHeight :: Lens' PromotionImage (Maybe Int32)
 piHeight
@@ -82,6 +84,7 @@ data Context =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Context' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +95,7 @@ data Context =
 context
     :: Context
 context = Context' {_cFacets = Nothing, _cTitle = Nothing}
+
 
 cFacets :: Lens' Context [[ContextFacetsItemItem]]
 cFacets
@@ -123,6 +127,7 @@ newtype SearchQueries =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchQueries' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -133,6 +138,7 @@ searchQueries
     -> SearchQueries
 searchQueries pSqAddtional_ =
   SearchQueries' {_sqAddtional = _Coerce # pSqAddtional_}
+
 
 sqAddtional :: Lens' SearchQueries (HashMap Text [Query])
 sqAddtional
@@ -155,6 +161,7 @@ newtype ResultPagemapAdditionalItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultPagemapAdditionalItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -165,6 +172,7 @@ resultPagemapAdditionalItem
     -> ResultPagemapAdditionalItem
 resultPagemapAdditionalItem pRpaiAddtional_ =
   ResultPagemapAdditionalItem' {_rpaiAddtional = _Coerce # pRpaiAddtional_}
+
 
 rpaiAddtional :: Lens' ResultPagemapAdditionalItem (HashMap Text JSONValue)
 rpaiAddtional
@@ -190,6 +198,7 @@ data SearchURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -205,6 +214,7 @@ searchURL =
     , _suTemplate =
         "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
     }
+
 
 suType :: Lens' SearchURL Text
 suType = lens _suType (\ s a -> s{_suType = a})
@@ -238,6 +248,7 @@ data SearchSpelling =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchSpelling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -249,6 +260,7 @@ searchSpelling
     :: SearchSpelling
 searchSpelling =
   SearchSpelling' {_ssCorrectedQuery = Nothing, _ssHTMLCorrectedQuery = Nothing}
+
 
 ssCorrectedQuery :: Lens' SearchSpelling (Maybe Text)
 ssCorrectedQuery
@@ -289,6 +301,7 @@ data ResultImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -318,6 +331,7 @@ resultImage =
     , _riWidth = Nothing
     , _riThumbnailWidth = Nothing
     }
+
 
 riThumbnailLink :: Lens' ResultImage (Maybe Text)
 riThumbnailLink
@@ -388,6 +402,7 @@ newtype ResultPagemap =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultPagemap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -398,6 +413,7 @@ resultPagemap
     -> ResultPagemap
 resultPagemap pRpAddtional_ =
   ResultPagemap' {_rpAddtional = _Coerce # pRpAddtional_}
+
 
 rpAddtional :: Lens' ResultPagemap (HashMap Text [ResultPagemapAdditionalItem])
 rpAddtional
@@ -433,6 +449,7 @@ data Result =
     , _rTitle            :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Result' with the minimum fields required to make a request.
 --
@@ -487,6 +504,7 @@ result =
     , _rLabels = Nothing
     , _rTitle = Nothing
     }
+
 
 rMime :: Lens' Result (Maybe Text)
 rMime = lens _rMime (\ s a -> s{_rMime = a})
@@ -591,6 +609,7 @@ data ResultLabelsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultLabelsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -605,6 +624,7 @@ resultLabelsItem
 resultLabelsItem =
   ResultLabelsItem'
     {_rliName = Nothing, _rliDisplayName = Nothing, _rliLabelWithOp = Nothing}
+
 
 rliName :: Lens' ResultLabelsItem (Maybe Text)
 rliName = lens _rliName (\ s a -> s{_rliName = a})
@@ -646,6 +666,7 @@ data SearchSearchInformation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchSearchInformation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -666,6 +687,7 @@ searchSearchInformation =
     , _ssiTotalResults = Nothing
     , _ssiFormattedTotalResults = Nothing
     }
+
 
 ssiSearchTime :: Lens' SearchSearchInformation (Maybe Double)
 ssiSearchTime
@@ -752,6 +774,7 @@ data Query =
     , _qHighRange              :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Query' with the minimum fields required to make a request.
 --
@@ -869,6 +892,7 @@ query =
     , _qHq = Nothing
     , _qHighRange = Nothing
     }
+
 
 qImgDominantColor :: Lens' Query (Maybe Text)
 qImgDominantColor
@@ -1105,6 +1129,7 @@ data PromotionBodyLinesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PromotionBodyLinesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1125,6 +1150,7 @@ promotionBodyLinesItem =
     , _pbliHTMLTitle = Nothing
     , _pbliTitle = Nothing
     }
+
 
 pbliLink :: Lens' PromotionBodyLinesItem (Maybe Text)
 pbliLink = lens _pbliLink (\ s a -> s{_pbliLink = a})
@@ -1171,6 +1197,7 @@ data Promotion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Promotion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1197,6 +1224,7 @@ promotion =
     , _pHTMLTitle = Nothing
     , _pTitle = Nothing
     }
+
 
 pImage :: Lens' Promotion (Maybe PromotionImage)
 pImage = lens _pImage (\ s a -> s{_pImage = a})
@@ -1258,6 +1286,7 @@ data Search =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Search' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1290,6 +1319,7 @@ search =
     , _sPromotions = Nothing
     , _sSpelling = Nothing
     }
+
 
 sQueries :: Lens' Search (Maybe SearchQueries)
 sQueries = lens _sQueries (\ s a -> s{_sQueries = a})
@@ -1358,6 +1388,7 @@ data ContextFacetsItemItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContextFacetsItemItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1372,6 +1403,7 @@ contextFacetsItemItem
 contextFacetsItemItem =
   ContextFacetsItemItem'
     {_cfiiAnchor = Nothing, _cfiiLabelWithOp = Nothing, _cfiiLabel = Nothing}
+
 
 cfiiAnchor :: Lens' ContextFacetsItemItem (Maybe Text)
 cfiiAnchor

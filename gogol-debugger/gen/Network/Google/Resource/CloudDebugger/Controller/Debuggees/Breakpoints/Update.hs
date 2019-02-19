@@ -92,6 +92,7 @@ data ControllerDebuggeesBreakpointsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ControllerDebuggeesBreakpointsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +128,7 @@ controllerDebuggeesBreakpointsUpdate pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
     , _cdbuDebuggeeId = pCdbuDebuggeeId_
     , _cdbuCallback = Nothing
     }
+
 
 -- | V1 error format.
 cdbuXgafv :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Xgafv)

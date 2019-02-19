@@ -61,6 +61,7 @@ data DirectorySitesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DirectorySitesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ directorySitesGet
 directorySitesGet pDsgProFileId_ pDsgId_ =
   DirectorySitesGet'
     {_dsgProFileId = _Coerce # pDsgProFileId_, _dsgId = _Coerce # pDsgId_}
+
 
 -- | User profile ID associated with this request.
 dsgProFileId :: Lens' DirectorySitesGet Int64

@@ -61,6 +61,7 @@ newtype TiersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TiersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ tiersList
     :: Text -- ^ 'tlProject'
     -> TiersList
 tiersList pTlProject_ = TiersList' {_tlProject = pTlProject_}
+
 
 -- | Project ID of the project for which to list tiers.
 tlProject :: Lens' TiersList Text

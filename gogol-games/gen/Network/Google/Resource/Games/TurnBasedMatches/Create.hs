@@ -62,6 +62,7 @@ data TurnBasedMatchesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ turnBasedMatchesCreate
 turnBasedMatchesCreate pTbmcPayload_ =
   TurnBasedMatchesCreate'
     {_tbmcPayload = pTbmcPayload_, _tbmcLanguage = Nothing}
+
 
 -- | Multipart request metadata.
 tbmcPayload :: Lens' TurnBasedMatchesCreate TurnBasedMatchCreateRequest

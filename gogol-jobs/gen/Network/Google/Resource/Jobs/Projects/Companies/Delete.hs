@@ -72,6 +72,7 @@ data ProjectsCompaniesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsCompaniesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsCompaniesDelete pPcdName_ =
     , _pcdName = pPcdName_
     , _pcdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pcdXgafv :: Lens' ProjectsCompaniesDelete (Maybe Xgafv)

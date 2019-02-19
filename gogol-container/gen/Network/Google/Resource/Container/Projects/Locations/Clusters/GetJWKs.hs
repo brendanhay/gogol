@@ -76,6 +76,7 @@ data ProjectsLocationsClustersGetJWKs =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersGetJWKs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ projectsLocationsClustersGetJWKs pPlcgjParent_ =
     , _plcgjUploadType = Nothing
     , _plcgjCallback = Nothing
     }
+
 
 -- | The cluster (project, location, cluster id) to get keys for. Specified
 -- in the format \'projects\/*\/locations\/*\/clusters\/*\'.

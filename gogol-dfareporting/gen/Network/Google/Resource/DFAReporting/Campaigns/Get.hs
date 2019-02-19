@@ -61,6 +61,7 @@ data CampaignsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CampaignsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ campaignsGet
 campaignsGet pCggProFileId_ pCggId_ =
   CampaignsGet'
     {_cggProFileId = _Coerce # pCggProFileId_, _cggId = _Coerce # pCggId_}
+
 
 -- | User profile ID associated with this request.
 cggProFileId :: Lens' CampaignsGet Int64

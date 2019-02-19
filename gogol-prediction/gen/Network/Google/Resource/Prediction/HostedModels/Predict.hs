@@ -65,6 +65,7 @@ data HostedModelsPredict =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HostedModelsPredict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ hostedModelsPredict pHmpProject_ pHmpPayload_ pHmpHostedModelName_ =
     , _hmpPayload = pHmpPayload_
     , _hmpHostedModelName = pHmpHostedModelName_
     }
+
 
 -- | The project associated with the model.
 hmpProject :: Lens' HostedModelsPredict Text

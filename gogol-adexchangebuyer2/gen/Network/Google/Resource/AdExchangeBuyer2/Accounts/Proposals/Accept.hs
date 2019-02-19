@@ -87,6 +87,7 @@ data AccountsProposalsAccept =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProposalsAccept' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ accountsProposalsAccept pApaPayload_ pApaProposalId_ pApaAccountId_ =
     , _apaAccountId = pApaAccountId_
     , _apaCallback = Nothing
     }
+
 
 -- | V1 error format.
 apaXgafv :: Lens' AccountsProposalsAccept (Maybe Xgafv)

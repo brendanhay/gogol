@@ -74,6 +74,7 @@ data ProjectsLocationsDataSetsFhirStoresResourcesHistoryList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsFhirStoresResourcesHistoryList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ projectsLocationsDataSetsFhirStoresResourcesHistoryList pPldsfsrhlName_ =
     , _pldsfsrhlName = pPldsfsrhlName_
     , _pldsfsrhlCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldsfsrhlXgafv :: Lens' ProjectsLocationsDataSetsFhirStoresResourcesHistoryList (Maybe Xgafv)

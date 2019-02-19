@@ -61,6 +61,7 @@ data TemplateGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TemplateGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ templateGet
 templateGet pTemeTemplateId_ pTemeTableId_ =
   TemplateGet'
     {_temeTemplateId = _Coerce # pTemeTemplateId_, _temeTableId = pTemeTableId_}
+
 
 -- | Identifier for the template that is being requested
 temeTemplateId :: Lens' TemplateGet Int32

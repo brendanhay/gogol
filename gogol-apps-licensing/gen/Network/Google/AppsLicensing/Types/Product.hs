@@ -29,6 +29,7 @@ newtype LicenseAssignmentInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicenseAssignmentInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37,6 +38,7 @@ newtype LicenseAssignmentInsert =
 licenseAssignmentInsert
     :: LicenseAssignmentInsert
 licenseAssignmentInsert = LicenseAssignmentInsert' {_laiUserId = Nothing}
+
 
 -- | Email id of the user
 laiUserId :: Lens' LicenseAssignmentInsert (Maybe Text)
@@ -65,6 +67,7 @@ data LicenseAssignmentList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicenseAssignmentList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +88,7 @@ licenseAssignmentList =
     , _lalKind = "licensing#licenseAssignmentList"
     , _lalItems = Nothing
     }
+
 
 -- | ETag of the resource.
 lalEtag :: Lens' LicenseAssignmentList (Maybe Text)
@@ -142,6 +146,7 @@ data LicenseAssignment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicenseAssignment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -174,6 +179,7 @@ licenseAssignment =
     , _laSelfLink = Nothing
     , _laProductId = Nothing
     }
+
 
 -- | Display Name of the product.
 laProductName :: Lens' LicenseAssignment (Maybe Text)

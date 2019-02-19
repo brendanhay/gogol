@@ -62,6 +62,7 @@ data DomainsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ domainsGet
     -> DomainsGet
 domainsGet pDgCustomer_ pDgDomainName_ =
   DomainsGet' {_dgCustomer = pDgCustomer_, _dgDomainName = pDgDomainName_}
+
 
 -- | Immutable ID of the G Suite account.
 dgCustomer :: Lens' DomainsGet Text

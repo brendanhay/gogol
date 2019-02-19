@@ -73,6 +73,7 @@ data ProjectsScanConfigsScanRunsFindingTypeStatsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsScanConfigsScanRunsFindingTypeStatsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ projectsScanConfigsScanRunsFindingTypeStatsList pPscsrftslParent_ =
     , _pscsrftslUploadType = Nothing
     , _pscsrftslCallback = Nothing
     }
+
 
 -- | Required. The parent resource name, which should be a scan run resource
 -- name in the format

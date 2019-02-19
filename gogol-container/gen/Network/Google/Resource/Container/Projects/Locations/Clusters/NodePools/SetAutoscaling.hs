@@ -75,6 +75,7 @@ data ProjectsLocationsClustersNodePoolsSetAutoscaling =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsSetAutoscaling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLocationsClustersNodePoolsSetAutoscaling pPlcnpsaPayload_ pPlcnpsaName_ 
     , _plcnpsaName = pPlcnpsaName_
     , _plcnpsaCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcnpsaXgafv :: Lens' ProjectsLocationsClustersNodePoolsSetAutoscaling (Maybe Xgafv)

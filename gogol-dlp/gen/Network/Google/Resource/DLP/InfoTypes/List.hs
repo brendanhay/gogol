@@ -79,6 +79,7 @@ data InfoTypesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InfoTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ infoTypesList =
     , _itlFilter = Nothing
     , _itlCallback = Nothing
     }
+
 
 -- | V1 error format.
 itlXgafv :: Lens' InfoTypesList (Maybe Xgafv)

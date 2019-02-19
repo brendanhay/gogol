@@ -68,6 +68,7 @@ data BucketAccessControlsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketAccessControlsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ bucketAccessControlsUpdate pBacuBucket_ pBacuPayload_ pBacuEntity_ =
     , _bacuUserProject = Nothing
     , _bacuEntity = pBacuEntity_
     }
+
 
 -- | Name of a bucket.
 bacuBucket :: Lens' BucketAccessControlsUpdate Text

@@ -73,6 +73,7 @@ data DynamicTargetingKeysList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DynamicTargetingKeysList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ dynamicTargetingKeysList pDtklProFileId_ =
     , _dtklProFileId = _Coerce # pDtklProFileId_
     , _dtklNames = Nothing
     }
+
 
 -- | Select only dynamic targeting keys with this object type.
 dtklObjectType :: Lens' DynamicTargetingKeysList (Maybe DynamicTargetingKeysListObjectType)

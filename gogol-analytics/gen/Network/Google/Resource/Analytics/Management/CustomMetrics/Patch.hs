@@ -73,6 +73,7 @@ data ManagementCustomMetricsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementCustomMetricsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ managementCustomMetricsPatch pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpPaylo
     , _mcmpPayload = pMcmpPayload_
     , _mcmpAccountId = pMcmpAccountId_
     }
+
 
 -- | Custom metric ID for the custom metric to update.
 mcmpCustomMetricId :: Lens' ManagementCustomMetricsPatch Text

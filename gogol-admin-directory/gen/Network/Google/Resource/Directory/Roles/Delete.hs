@@ -62,6 +62,7 @@ data RolesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RolesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ rolesDelete
     -> RolesDelete
 rolesDelete pRdRoleId_ pRdCustomer_ =
   RolesDelete' {_rdRoleId = pRdRoleId_, _rdCustomer = pRdCustomer_}
+
 
 -- | Immutable ID of the role.
 rdRoleId :: Lens' RolesDelete Text

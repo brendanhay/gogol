@@ -62,6 +62,7 @@ data AdvertiserGroupsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserGroupsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ advertiserGroupsUpdate
 advertiserGroupsUpdate pAguProFileId_ pAguPayload_ =
   AdvertiserGroupsUpdate'
     {_aguProFileId = _Coerce # pAguProFileId_, _aguPayload = pAguPayload_}
+
 
 -- | User profile ID associated with this request.
 aguProFileId :: Lens' AdvertiserGroupsUpdate Int64

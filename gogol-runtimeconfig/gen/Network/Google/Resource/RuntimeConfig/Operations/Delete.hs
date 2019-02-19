@@ -76,6 +76,7 @@ data OperationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ operationsDelete pOdName_ =
     , _odName = pOdName_
     , _odCallback = Nothing
     }
+
 
 -- | V1 error format.
 odXgafv :: Lens' OperationsDelete (Maybe Xgafv)

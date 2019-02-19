@@ -58,6 +58,7 @@ newtype CloudLoadingDeleteBook =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudLoadingDeleteBook' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ cloudLoadingDeleteBook
     -> CloudLoadingDeleteBook
 cloudLoadingDeleteBook pCldbVolumeId_ =
   CloudLoadingDeleteBook' {_cldbVolumeId = pCldbVolumeId_}
+
 
 -- | The id of the book to be removed.
 cldbVolumeId :: Lens' CloudLoadingDeleteBook Text

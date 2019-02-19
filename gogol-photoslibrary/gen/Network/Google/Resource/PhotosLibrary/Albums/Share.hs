@@ -85,6 +85,7 @@ data AlbumsShare =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlbumsShare' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ albumsShare pAsAlbumId_ pAsPayload_ =
     , _asBearerToken = Nothing
     , _asCallback = Nothing
     }
+
 
 -- | V1 error format.
 asXgafv :: Lens' AlbumsShare (Maybe Xgafv)

@@ -63,6 +63,7 @@ data SavedColumnsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SavedColumnsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ savedColumnsList pSclAgencyId_ pSclAdvertiserId_ =
     { _sclAgencyId = _Coerce # pSclAgencyId_
     , _sclAdvertiserId = _Coerce # pSclAdvertiserId_
     }
+
 
 -- | DS ID of the agency.
 sclAgencyId :: Lens' SavedColumnsList Int64

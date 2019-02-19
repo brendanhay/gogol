@@ -52,11 +52,13 @@ data ColorsGet =
   ColorsGet'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColorsGet' with the minimum fields required to make a request.
 --
 colorsGet
     :: ColorsGet
 colorsGet = ColorsGet'
+
 
 instance GoogleRequest ColorsGet where
         type Rs ColorsGet = Colors

@@ -89,6 +89,7 @@ data ChangeLogsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangeLogsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -131,6 +132,7 @@ changeLogsList pCllProFileId_ =
     , _cllObjectIds = Nothing
     , _cllMaxResults = 1000
     }
+
 
 -- | Select only change logs with these user profile IDs.
 cllUserProFileIds :: Lens' ChangeLogsList [Int64]

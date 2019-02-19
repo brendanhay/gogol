@@ -35,6 +35,7 @@ data UserLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -64,6 +65,7 @@ userLocation =
     , _ulCustomType = Nothing
     , _ulFloorSection = Nothing
     }
+
 
 -- | Textual location. This is most useful for display purposes to concisely
 -- describe the location. For example, \"Mountain View, CA\", \"Near
@@ -143,6 +145,7 @@ data VerificationCode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VerificationCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -163,6 +166,7 @@ verificationCode =
     , _vcKind = "admin#directory#verificationCode"
     , _vcUserId = Nothing
     }
+
 
 -- | A current verification code for the user. Invalidated or used
 -- verification codes are not returned as part of the result.
@@ -212,6 +216,7 @@ data Feature =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Feature' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -229,6 +234,7 @@ feature =
     , _fKind = "admin#directory#resources#features#Feature"
     , _fName = Nothing
     }
+
 
 -- | ETag of the resource.
 fEtags :: Lens' Feature (Maybe Text)
@@ -276,6 +282,7 @@ data OrgUnit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrgUnit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -311,6 +318,7 @@ orgUnit =
     , _ouDescription = Nothing
     , _ouOrgUnitId = Nothing
     }
+
 
 -- | ETag of the resource.
 ouEtag :: Lens' OrgUnit (Maybe Text)
@@ -397,6 +405,7 @@ newtype UserMakeAdmin =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserMakeAdmin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -405,6 +414,7 @@ newtype UserMakeAdmin =
 userMakeAdmin
     :: UserMakeAdmin
 userMakeAdmin = UserMakeAdmin' {_umaStatus = Nothing}
+
 
 -- | Boolean indicating new admin status of the user
 umaStatus :: Lens' UserMakeAdmin (Maybe Bool)
@@ -430,6 +440,7 @@ data UserAbout =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserAbout' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -440,6 +451,7 @@ data UserAbout =
 userAbout
     :: UserAbout
 userAbout = UserAbout' {_uaValue = Nothing, _uaContentType = Nothing}
+
 
 -- | Actual value of notes.
 uaValue :: Lens' UserAbout (Maybe Text)
@@ -478,6 +490,7 @@ data Privileges =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Privileges' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -492,6 +505,7 @@ privileges
 privileges =
   Privileges'
     {_pEtag = Nothing, _pKind = "admin#directory#privileges", _pItems = Nothing}
+
 
 -- | ETag of the resource.
 pEtag :: Lens' Privileges (Maybe Text)
@@ -535,6 +549,7 @@ data Groups =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Groups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -555,6 +570,7 @@ groups =
     , _gNextPageToken = Nothing
     , _gKind = "admin#directory#groups"
     }
+
 
 -- | List of group objects.
 gGroups :: Lens' Groups [Group]
@@ -606,6 +622,7 @@ data RoleAssignments =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoleAssignments' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -626,6 +643,7 @@ roleAssignments =
     , _raKind = "admin#directory#roleAssignments"
     , _raItems = Nothing
     }
+
 
 -- | ETag of the resource.
 raEtag :: Lens' RoleAssignments (Maybe Text)
@@ -679,6 +697,7 @@ data Privilege =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Privilege' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -708,6 +727,7 @@ privilege =
     , _priPrivilegeName = Nothing
     , _priChildPrivileges = Nothing
     }
+
 
 -- | ETag of the resource.
 priEtag :: Lens' Privilege (Maybe Text)
@@ -786,6 +806,7 @@ data Roles =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Roles' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -806,6 +827,7 @@ roles =
     , _rKind = "admin#directory#roles"
     , _rItems = Nothing
     }
+
 
 -- | ETag of the resource.
 rEtag :: Lens' Roles (Maybe Text)
@@ -851,6 +873,7 @@ newtype ChromeOSDeviceDiskVolumeReportsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSDeviceDiskVolumeReportsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -860,6 +883,7 @@ chromeOSDeviceDiskVolumeReportsItem
     :: ChromeOSDeviceDiskVolumeReportsItem
 chromeOSDeviceDiskVolumeReportsItem =
   ChromeOSDeviceDiskVolumeReportsItem' {_coddvriVolumeInfo = Nothing}
+
 
 -- | Disk volumes
 coddvriVolumeInfo :: Lens' ChromeOSDeviceDiskVolumeReportsItem [ChromeOSDeviceDiskVolumeReportsItemVolumeInfoItem]
@@ -904,6 +928,7 @@ data UserAddress =
     , _uaSourceIsStructured :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserAddress' with the minimum fields required to make a request.
 --
@@ -952,6 +977,7 @@ userAddress =
     , _uaCustomType = Nothing
     , _uaSourceIsStructured = Nothing
     }
+
 
 -- | Street.
 uaStreetAddress :: Lens' UserAddress (Maybe Text)
@@ -1078,6 +1104,7 @@ data CustomerPostalAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerPostalAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1113,6 +1140,7 @@ customerPostalAddress =
     , _cpaRegion = Nothing
     , _cpaAddressLine3 = Nothing
     }
+
 
 -- | The company or company division name.
 cpaOrganizationName :: Lens' CustomerPostalAddress (Maybe Text)
@@ -1215,6 +1243,7 @@ data RoleAssignment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoleAssignment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1244,6 +1273,7 @@ roleAssignment =
     , _rolRoleAssignmentId = Nothing
     , _rolOrgUnitId = Nothing
     }
+
 
 -- | ETag of the resource.
 rolEtag :: Lens' RoleAssignment (Maybe Text)
@@ -1327,6 +1357,7 @@ data Group =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1365,6 +1396,7 @@ group' =
     , _groId = Nothing
     , _groDescription = Nothing
     }
+
 
 -- | Email of Group
 groEmail :: Lens' Group (Maybe Text)
@@ -1489,6 +1521,7 @@ data ChromeOSDevice =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSDevice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1590,6 +1623,7 @@ chromeOSDevice =
     , _codOSVersion = Nothing
     , _codSystemRamTotal = Nothing
     }
+
 
 -- | status of the device (Read-only)
 codStatus :: Lens' ChromeOSDevice (Maybe Text)
@@ -1868,6 +1902,7 @@ data Users =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Users' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1891,6 +1926,7 @@ users =
     , _uKind = "admin#directory#users"
     , _uTriggerEvent = Nothing
     }
+
 
 -- | ETag of the resource.
 uEtag :: Lens' Users (Maybe Text)
@@ -1952,6 +1988,7 @@ data Asp =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Asp' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1981,6 +2018,7 @@ asp =
     , _aLastTimeUsed = Nothing
     , _aUserKey = Nothing
     }
+
 
 -- | The time when the ASP was created. Expressed in Unix time format.
 aCreationTime :: Lens' Asp (Maybe Int64)
@@ -2052,6 +2090,7 @@ data Schemas =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Schemas' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2066,6 +2105,7 @@ schemas
 schemas =
   Schemas'
     {_sEtag = Nothing, _sSchemas = Nothing, _sKind = "admin#directory#schemas"}
+
 
 -- | ETag of the resource.
 sEtag :: Lens' Schemas (Maybe Text)
@@ -2109,6 +2149,7 @@ data ChromeOSDeviceDeviceFilesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSDeviceDeviceFilesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2129,6 +2170,7 @@ chromeOSDeviceDeviceFilesItem =
     , _coddfiType = Nothing
     , _coddfiCreateTime = Nothing
     }
+
 
 -- | File name
 coddfiName :: Lens' ChromeOSDeviceDeviceFilesItem (Maybe Text)
@@ -2183,6 +2225,7 @@ data Buildings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Buildings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2203,6 +2246,7 @@ buildings =
     , _bBuildings = Nothing
     , _bKind = "admin#directory#resources#buildings#buildingsList"
     }
+
 
 -- | ETag of the resource.
 bEtag :: Lens' Buildings (Maybe Text)
@@ -2262,6 +2306,7 @@ data Notification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2294,6 +2339,7 @@ notification =
     , _nNotificationId = Nothing
     , _nSendTime = Nothing
     }
+
 
 -- | Subject of the notification (Read-only)
 nSubject :: Lens' Notification (Maybe Text)
@@ -2371,6 +2417,7 @@ data UserIm =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserIm' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2397,6 +2444,7 @@ userIm =
     , _uiType = Nothing
     , _uiCustomType = Nothing
     }
+
 
 -- | Instant messenger id.
 uiIm :: Lens' UserIm (Maybe Text)
@@ -2471,6 +2519,7 @@ data BuildingAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildingAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2500,6 +2549,7 @@ buildingAddress =
     , _baAdministrativeArea = Nothing
     , _baAddressLines = Nothing
     }
+
 
 -- | Optional. BCP-47 language code of the contents of this address (if
 -- known). This is often the UI language of the input form or is expected
@@ -2617,6 +2667,7 @@ data Tokens =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Tokens' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2631,6 +2682,7 @@ tokens
 tokens =
   Tokens'
     {_tEtag = Nothing, _tKind = "admin#directory#tokenList", _tItems = Nothing}
+
 
 -- | ETag of the resource.
 tEtag :: Lens' Tokens (Maybe Text)
@@ -2671,6 +2723,7 @@ newtype UserCustomSchemas =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserCustomSchemas' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2681,6 +2734,7 @@ userCustomSchemas
     -> UserCustomSchemas
 userCustomSchemas pUcsAddtional_ =
   UserCustomSchemas' {_ucsAddtional = _Coerce # pUcsAddtional_}
+
 
 ucsAddtional :: Lens' UserCustomSchemas (HashMap Text UserCustomProperties)
 ucsAddtional
@@ -2706,6 +2760,7 @@ data UserKeyword =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserKeyword' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2719,6 +2774,7 @@ userKeyword
     :: UserKeyword
 userKeyword =
   UserKeyword' {_ukValue = Nothing, _ukType = Nothing, _ukCustomType = Nothing}
+
 
 -- | Keyword.
 ukValue :: Lens' UserKeyword (Maybe Text)
@@ -2763,6 +2819,7 @@ data DomainAliases =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainAliases' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2780,6 +2837,7 @@ domainAliases =
     , _daKind = "admin#directory#domainAliases"
     , _daDomainAliases = Nothing
     }
+
 
 -- | ETag of the resource.
 daEtag :: Lens' DomainAliases (Maybe Text)
@@ -2824,6 +2882,7 @@ data Aliases =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Aliases' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2841,6 +2900,7 @@ aliases =
     , _aliKind = "admin#directory#aliases"
     , _aliAliases = Nothing
     }
+
 
 -- | ETag of the resource.
 aliEtag :: Lens' Aliases (Maybe Text)
@@ -2896,6 +2956,7 @@ data CalendarResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CalendarResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2949,6 +3010,7 @@ calendarResource =
     , _crFloorSection = Nothing
     , _crUserVisibleDescription = Nothing
     }
+
 
 -- | ETag of the resource.
 crEtags :: Lens' CalendarResource (Maybe Text)
@@ -3091,6 +3153,7 @@ newtype UserUndelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3099,6 +3162,7 @@ newtype UserUndelete =
 userUndelete
     :: UserUndelete
 userUndelete = UserUndelete' {_uuOrgUnitPath = Nothing}
+
 
 -- | OrgUnit of User
 uuOrgUnitPath :: Lens' UserUndelete (Maybe Text)
@@ -3128,6 +3192,7 @@ data Members =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Members' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3148,6 +3213,7 @@ members =
     , _mKind = "admin#directory#members"
     , _mMembers = Nothing
     }
+
 
 -- | ETag of the resource.
 mEtag :: Lens' Members (Maybe Text)
@@ -3206,6 +3272,7 @@ data Channel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3244,6 +3311,7 @@ channel =
     , _cId = Nothing
     , _cType = Nothing
     }
+
 
 -- | A version-specific identifier for the watched resource.
 cResourceURI :: Lens' Channel (Maybe Text)
@@ -3335,6 +3403,7 @@ data MobileDevices =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileDevices' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3355,6 +3424,7 @@ mobileDevices =
     , _mdKind = "admin#directory#mobiledevices"
     , _mdMobileDevices = Nothing
     }
+
 
 -- | ETag of the resource.
 mdEtag :: Lens' MobileDevices (Maybe Text)
@@ -3412,6 +3482,7 @@ data Token =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Token' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3444,6 +3515,7 @@ token =
     , _tokAnonymous = Nothing
     , _tokUserKey = Nothing
     }
+
 
 -- | The Client ID of the application the token is issued to.
 tokClientId :: Lens' Token (Maybe Text)
@@ -3525,6 +3597,7 @@ data UserName =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserName' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3539,6 +3612,7 @@ userName
 userName =
   UserName'
     {_unGivenName = Nothing, _unFullName = Nothing, _unFamilyName = Nothing}
+
 
 -- | First Name
 unGivenName :: Lens' UserName (Maybe Text)
@@ -3587,6 +3661,7 @@ data Building =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Building' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3619,6 +3694,7 @@ building =
     , _buiFloorNames = Nothing
     , _buiDescription = Nothing
     }
+
 
 -- | ETag of the resource.
 buiEtags :: Lens' Building (Maybe Text)
@@ -3710,6 +3786,7 @@ data ChromeOSDeviceRecentUsersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSDeviceRecentUsersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3721,6 +3798,7 @@ chromeOSDeviceRecentUsersItem
     :: ChromeOSDeviceRecentUsersItem
 chromeOSDeviceRecentUsersItem =
   ChromeOSDeviceRecentUsersItem' {_codruiEmail = Nothing, _codruiType = Nothing}
+
 
 -- | Email address of the user. Present only if the user type is managed
 codruiEmail :: Lens' ChromeOSDeviceRecentUsersItem (Maybe Text)
@@ -3760,6 +3838,7 @@ data DomainAlias =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainAlias' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3786,6 +3865,7 @@ domainAlias =
     , _dDomainAliasName = Nothing
     , _dParentDomainName = Nothing
     }
+
 
 -- | The creation time of the domain alias. (Read-only).
 dCreationTime :: Lens' DomainAlias (Maybe Int64)
@@ -3851,6 +3931,7 @@ data UserGender =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserGender' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3865,6 +3946,7 @@ userGender
 userGender =
   UserGender'
     {_ugAddressMeAs = Nothing, _ugCustomGender = Nothing, _ugType = Nothing}
+
 
 -- | AddressMeAs. A human-readable string containing the proper way to refer
 -- to the profile owner by humans, for example \"he\/him\/his\" or
@@ -3913,6 +3995,7 @@ data Alias =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Alias' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3936,6 +4019,7 @@ alias =
     , _aaId = Nothing
     , _aaPrimaryEmail = Nothing
     }
+
 
 -- | ETag of the resource.
 aaEtag :: Lens' Alias (Maybe Text)
@@ -3992,6 +4076,7 @@ data Schema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Schema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4018,6 +4103,7 @@ schema =
     , _schDisplayName = Nothing
     , _schFields = Nothing
     }
+
 
 -- | ETag of the resource.
 schEtag :: Lens' Schema (Maybe Text)
@@ -4083,6 +4169,7 @@ newtype ChromeOSMoveDevicesToOu =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSMoveDevicesToOu' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4091,6 +4178,7 @@ newtype ChromeOSMoveDevicesToOu =
 chromeOSMoveDevicesToOu
     :: ChromeOSMoveDevicesToOu
 chromeOSMoveDevicesToOu = ChromeOSMoveDevicesToOu' {_comdtoDeviceIds = Nothing}
+
 
 -- | ChromeOs Devices to be moved to OU
 comdtoDeviceIds :: Lens' ChromeOSMoveDevicesToOu [Text]
@@ -4165,6 +4253,7 @@ data User =
     , _useSuspensionReason           :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -4312,6 +4401,7 @@ user =
     , _useCustomSchemas = Nothing
     , _useSuspensionReason = Nothing
     }
+
 
 -- | User\'s G Suite account creation time. (Read-only)
 useCreationTime :: Lens' User (Maybe UTCTime)
@@ -4669,6 +4759,7 @@ data ChromeOSDeviceAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSDeviceAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4681,6 +4772,7 @@ chromeOSDeviceAction
 chromeOSDeviceAction =
   ChromeOSDeviceAction'
     {_codaAction = Nothing, _codaDeprovisionReason = Nothing}
+
 
 -- | Action to be taken on the ChromeOs Device
 codaAction :: Lens' ChromeOSDeviceAction (Maybe Text)
@@ -4715,6 +4807,7 @@ newtype FeatureRename =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FeatureRename' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4723,6 +4816,7 @@ newtype FeatureRename =
 featureRename
     :: FeatureRename
 featureRename = FeatureRename' {_frNewName = Nothing}
+
 
 -- | New name of the feature.
 frNewName :: Lens' FeatureRename (Maybe Text)
@@ -4753,6 +4847,7 @@ data Role =
     , _rrRolePrivileges   :: !(Maybe [RoleRolePrivilegesItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Role' with the minimum fields required to make a request.
 --
@@ -4786,6 +4881,7 @@ role' =
     , _rrIsSuperAdminRole = Nothing
     , _rrRolePrivileges = Nothing
     }
+
 
 -- | ETag of the resource.
 rrEtag :: Lens' Role (Maybe Text)
@@ -4875,6 +4971,7 @@ data Customer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Customer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4910,6 +5007,7 @@ customer =
     , _cusCustomerCreationTime = Nothing
     , _cusPostalAddress = Nothing
     }
+
 
 -- | ETag of the resource.
 cusEtag :: Lens' Customer (Maybe Text)
@@ -5002,6 +5100,7 @@ data MobileDeviceApplicationsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileDeviceApplicationsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5025,6 +5124,7 @@ mobileDeviceApplicationsItem =
     , _mdaiDisplayName = Nothing
     , _mdaiPermission = Nothing
     }
+
 
 -- | Version code of application
 mdaiVersionCode :: Lens' MobileDeviceApplicationsItem (Maybe Int32)
@@ -5089,6 +5189,7 @@ data ChromeOSDeviceDiskVolumeReportsItemVolumeInfoItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSDeviceDiskVolumeReportsItemVolumeInfoItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5106,6 +5207,7 @@ chromeOSDeviceDiskVolumeReportsItemVolumeInfoItem =
     , _coddvriviiStorageTotal = Nothing
     , _coddvriviiVolumeId = Nothing
     }
+
 
 -- | Free disk space [in bytes]
 coddvriviiStorageFree :: Lens' ChromeOSDeviceDiskVolumeReportsItemVolumeInfoItem (Maybe Int64)
@@ -5162,6 +5264,7 @@ data OrgUnits =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrgUnits' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5179,6 +5282,7 @@ orgUnits =
     , _oKind = "admin#directory#orgUnits"
     , _oOrganizationUnits = Nothing
     }
+
 
 -- | ETag of the resource.
 oEtag :: Lens' OrgUnits (Maybe Text)
@@ -5223,6 +5327,7 @@ data UserSSHPublicKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserSSHPublicKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5240,6 +5345,7 @@ userSSHPublicKey =
     , _uspkKey = Nothing
     , _uspkExpirationTimeUsec = Nothing
     }
+
 
 -- | A SHA-256 fingerprint of the SSH public key. (Read-only)
 uspkFingerprint :: Lens' UserSSHPublicKey (Maybe Text)
@@ -5287,6 +5393,7 @@ data VerificationCodes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VerificationCodes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5304,6 +5411,7 @@ verificationCodes =
     , _vKind = "admin#directory#verificationCodesList"
     , _vItems = Nothing
     }
+
 
 -- | ETag of the resource.
 vEtag :: Lens' VerificationCodes (Maybe Text)
@@ -5347,6 +5455,7 @@ data BuildingCoordinates =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildingCoordinates' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5358,6 +5467,7 @@ buildingCoordinates
     :: BuildingCoordinates
 buildingCoordinates =
   BuildingCoordinates' {_bcLatitude = Nothing, _bcLongitude = Nothing}
+
 
 -- | Latitude in decimal degrees.
 bcLatitude :: Lens' BuildingCoordinates (Maybe Double)
@@ -5396,6 +5506,7 @@ data UserRelation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRelation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5409,6 +5520,7 @@ userRelation
     :: UserRelation
 userRelation =
   UserRelation' {_urValue = Nothing, _urType = Nothing, _urCustomType = Nothing}
+
 
 -- | The name of the relation.
 urValue :: Lens' UserRelation (Maybe Text)
@@ -5452,6 +5564,7 @@ data TrustedApps =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrustedApps' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5472,6 +5585,7 @@ trustedApps =
     , _taKind = "admin#directory#trustedapplist"
     , _taTrustedApps = Nothing
     }
+
 
 -- | ETag of the resource.
 taEtag :: Lens' TrustedApps (Maybe Text)
@@ -5524,6 +5638,7 @@ data Features =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Features' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5544,6 +5659,7 @@ features =
     , _feaKind = "admin#directory#resources#features#featuresList"
     , _feaFeatures = Nothing
     }
+
 
 -- | ETag of the resource.
 feaEtag :: Lens' Features (Maybe Text)
@@ -5595,6 +5711,7 @@ newtype ChannelParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5605,6 +5722,7 @@ channelParams
     -> ChannelParams
 channelParams pCpAddtional_ =
   ChannelParams' {_cpAddtional = _Coerce # pCpAddtional_}
+
 
 -- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
@@ -5634,6 +5752,7 @@ data ChromeOSDeviceTpmVersionInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSDeviceTpmVersionInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5660,6 +5779,7 @@ chromeOSDeviceTpmVersionInfo =
     , _codtviFamily = Nothing
     , _codtviFirmwareVersion = Nothing
     }
+
 
 -- | Vendor-specific information such as Vendor ID.
 codtviVendorSpecific :: Lens' ChromeOSDeviceTpmVersionInfo (Maybe Text)
@@ -5738,6 +5858,7 @@ data UserOrganization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserOrganization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5782,6 +5903,7 @@ userOrganization =
     , _uoCustomType = Nothing
     , _uoDescription = Nothing
     }
+
 
 -- | Department within the organization.
 uoDePartment :: Lens' UserOrganization (Maybe Text)
@@ -5891,6 +6013,7 @@ data UserWebsite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserWebsite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5911,6 +6034,7 @@ userWebsite =
     , _uwType = Nothing
     , _uwCustomType = Nothing
     }
+
 
 -- | Website.
 uwValue :: Lens' UserWebsite (Maybe Text)
@@ -5961,6 +6085,7 @@ data ChromeOSDeviceActiveTimeRangesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSDeviceActiveTimeRangesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5973,6 +6098,7 @@ chromeOSDeviceActiveTimeRangesItem
 chromeOSDeviceActiveTimeRangesItem =
   ChromeOSDeviceActiveTimeRangesItem'
     {_codatriDate = Nothing, _codatriActiveTime = Nothing}
+
 
 -- | Date of usage
 codatriDate :: Lens' ChromeOSDeviceActiveTimeRangesItem (Maybe Day)
@@ -6015,6 +6141,7 @@ data UserEmail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserEmail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6035,6 +6162,7 @@ userEmail =
     , _ueType = Nothing
     , _ueCustomType = Nothing
     }
+
 
 -- | Email id of the user.
 ueAddress :: Lens' UserEmail (Maybe Text)
@@ -6090,6 +6218,7 @@ data UserPhone =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserPhone' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6110,6 +6239,7 @@ userPhone =
     , _upType = Nothing
     , _upCustomType = Nothing
     }
+
 
 -- | Phone number.
 upValue :: Lens' UserPhone (Maybe Text)
@@ -6167,6 +6297,7 @@ data UserPhoto =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserPhoto' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6199,6 +6330,7 @@ userPhoto =
     , _upId = Nothing
     , _upPrimaryEmail = Nothing
     }
+
 
 -- | Base64 encoded photo data
 upPhotoData :: Lens' UserPhoto (Maybe ByteString)
@@ -6273,6 +6405,7 @@ data ChromeOSDeviceSystemRamFreeReportsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSDeviceSystemRamFreeReportsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6285,6 +6418,7 @@ chromeOSDeviceSystemRamFreeReportsItem
 chromeOSDeviceSystemRamFreeReportsItem =
   ChromeOSDeviceSystemRamFreeReportsItem'
     {_codsrfriReportTime = Nothing, _codsrfriSystemRamFreeInfo = Nothing}
+
 
 -- | Date and time the report was received.
 codsrfriReportTime :: Lens' ChromeOSDeviceSystemRamFreeReportsItem (Maybe UTCTime)
@@ -6339,6 +6473,7 @@ data UserPosixAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserPosixAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6377,6 +6512,7 @@ userPosixAccount =
     , _upaSystemId = Nothing
     , _upaHomeDirectory = Nothing
     }
+
 
 -- | The GECOS (user information) for this account.
 upaGecos :: Lens' UserPosixAccount (Maybe Text)
@@ -6469,6 +6605,7 @@ newtype FeatureInstance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FeatureInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6477,6 +6614,7 @@ newtype FeatureInstance =
 featureInstance
     :: FeatureInstance
 featureInstance = FeatureInstance' {_fiFeature = Nothing}
+
 
 -- | The feature that this is an instance of. A calendar resource may have
 -- multiple instances of a feature.
@@ -6540,6 +6678,7 @@ data MobileDevice =
     , _mobDefaultLanguage                :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MobileDevice' with the minimum fields required to make a request.
 --
@@ -6669,6 +6808,7 @@ mobileDevice =
     , _mobApplications = Nothing
     , _mobDefaultLanguage = Nothing
     }
+
 
 -- | List of owner user\'s email addresses (Read-only)
 mobEmail :: Lens' MobileDevice [Text]
@@ -7001,6 +7141,7 @@ data ChromeOSDeviceCPUStatusReportsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSDeviceCPUStatusReportsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7018,6 +7159,7 @@ chromeOSDeviceCPUStatusReportsItem =
     , _codcsriCPUTemperatureInfo = Nothing
     , _codcsriReportTime = Nothing
     }
+
 
 codcsriCPUUtilizationPercentageInfo :: Lens' ChromeOSDeviceCPUStatusReportsItem [Int32]
 codcsriCPUUtilizationPercentageInfo
@@ -7079,6 +7221,7 @@ data Member =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Member' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7111,6 +7254,7 @@ member =
     , _memId = Nothing
     , _memType = Nothing
     }
+
 
 -- | Email of member (Read-only)
 memEmail :: Lens' Member (Maybe Text)
@@ -7189,6 +7333,7 @@ data AppAccessCollections =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppAccessCollections' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7221,6 +7366,7 @@ appAccessCollections =
     , _aacBlockedAPIAccessBuckets = Nothing
     , _aacErrorMessage = Nothing
     }
+
 
 -- | ETag of the resource.
 aacEtag :: Lens' AppAccessCollections (Maybe Text)
@@ -7314,6 +7460,7 @@ newtype UserCustomProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserCustomProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7324,6 +7471,7 @@ userCustomProperties
     -> UserCustomProperties
 userCustomProperties pUcpAddtional_ =
   UserCustomProperties' {_ucpAddtional = _Coerce # pUcpAddtional_}
+
 
 ucpAddtional :: Lens' UserCustomProperties (HashMap Text JSONValue)
 ucpAddtional
@@ -7349,6 +7497,7 @@ data UserLanguage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserLanguage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7360,6 +7509,7 @@ userLanguage
     :: UserLanguage
 userLanguage =
   UserLanguage' {_ulLanguageCode = Nothing, _ulCustomLanguage = Nothing}
+
 
 -- | Language Code. Should be used for storing Google III LanguageCode string
 -- representation for language. Illegal values cause SchemaException.
@@ -7405,6 +7555,7 @@ data Domains =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Domains' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7434,6 +7585,7 @@ domains =
     , _domDomainName = Nothing
     , _domIsPrimary = Nothing
     }
+
 
 -- | Creation time of the domain. (Read-only).
 domCreationTime :: Lens' Domains (Maybe Int64)
@@ -7510,6 +7662,7 @@ data CalendarResources =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CalendarResources' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7530,6 +7683,7 @@ calendarResources =
     , _crsKind = "admin#directory#resources#calendars#calendarResourcesList"
     , _crsItems = Nothing
     }
+
 
 -- | ETag of the resource.
 crsEtag :: Lens' CalendarResources (Maybe Text)
@@ -7586,6 +7740,7 @@ data Notifications =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Notifications' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7609,6 +7764,7 @@ notifications =
     , _notItems = Nothing
     , _notUnreadNotificationsCount = Nothing
     }
+
 
 -- | ETag of the resource.
 notEtag :: Lens' Notifications (Maybe Text)
@@ -7671,6 +7827,7 @@ data SchemaFieldSpecNumericIndexingSpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SchemaFieldSpecNumericIndexingSpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7683,6 +7840,7 @@ schemaFieldSpecNumericIndexingSpec
 schemaFieldSpecNumericIndexingSpec =
   SchemaFieldSpecNumericIndexingSpec'
     {_sfsnisMaxValue = Nothing, _sfsnisMinValue = Nothing}
+
 
 -- | Maximum value of this field. This is meant to be indicative rather than
 -- enforced. Values outside this range will still be indexed, but search
@@ -7728,6 +7886,7 @@ newtype MobileDeviceAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileDeviceAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7736,6 +7895,7 @@ newtype MobileDeviceAction =
 mobileDeviceAction
     :: MobileDeviceAction
 mobileDeviceAction = MobileDeviceAction' {_mdaAction = Nothing}
+
 
 -- | Action to be taken on the Mobile Device
 mdaAction :: Lens' MobileDeviceAction (Maybe Text)
@@ -7768,6 +7928,7 @@ data SchemaFieldSpec =
     , _sfsMultiValued         :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SchemaFieldSpec' with the minimum fields required to make a request.
 --
@@ -7807,6 +7968,7 @@ schemaFieldSpec =
     , _sfsDisplayName = Nothing
     , _sfsMultiValued = Nothing
     }
+
 
 -- | ETag of the resource.
 sfsEtag :: Lens' SchemaFieldSpec (Maybe Text)
@@ -7907,6 +8069,7 @@ data ChromeOSDevices =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSDevices' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7927,6 +8090,7 @@ chromeOSDevices =
     , _cosdKind = "admin#directory#chromeosdevices"
     , _cosdChromeosDevices = Nothing
     }
+
 
 -- | ETag of the resource.
 cosdEtag :: Lens' ChromeOSDevices (Maybe Text)
@@ -7977,6 +8141,7 @@ newtype MembersHasMember =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MembersHasMember' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7985,6 +8150,7 @@ newtype MembersHasMember =
 membersHasMember
     :: MembersHasMember
 membersHasMember = MembersHasMember' {_mhmIsMember = Nothing}
+
 
 -- | Identifies whether the given user is a member of the group. Membership
 -- can be direct or nested.
@@ -8015,6 +8181,7 @@ data TrustedAppId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrustedAppId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8038,6 +8205,7 @@ trustedAppId =
     , _taiCertificateHashSHA1 = Nothing
     , _taiAndroidPackageName = Nothing
     }
+
 
 -- | SHA256 signature of the app certificate.
 taiCertificateHashSHA256 :: Lens' TrustedAppId (Maybe Text)
@@ -8097,6 +8265,7 @@ data UserExternalId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserExternalId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8111,6 +8280,7 @@ userExternalId
 userExternalId =
   UserExternalId'
     {_ueiValue = Nothing, _ueiType = Nothing, _ueiCustomType = Nothing}
+
 
 -- | The value of the id.
 ueiValue :: Lens' UserExternalId (Maybe Text)
@@ -8152,6 +8322,7 @@ data Asps =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Asps' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8169,6 +8340,7 @@ asps =
     , _aspKind = "admin#directory#aspList"
     , _aspItems = Nothing
     }
+
 
 -- | ETag of the resource.
 aspEtag :: Lens' Asps (Maybe Text)
@@ -8210,6 +8382,7 @@ data ChromeOSDeviceCPUStatusReportsItemCPUTemperatureInfoItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChromeOSDeviceCPUStatusReportsItemCPUTemperatureInfoItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8222,6 +8395,7 @@ chromeOSDeviceCPUStatusReportsItemCPUTemperatureInfoItem
 chromeOSDeviceCPUStatusReportsItemCPUTemperatureInfoItem =
   ChromeOSDeviceCPUStatusReportsItemCPUTemperatureInfoItem'
     {_codcsrictiiTemperature = Nothing, _codcsrictiiLabel = Nothing}
+
 
 -- | Temperature in Celsius degrees.
 codcsrictiiTemperature :: Lens' ChromeOSDeviceCPUStatusReportsItemCPUTemperatureInfoItem (Maybe Int32)
@@ -8265,6 +8439,7 @@ data RoleRolePrivilegesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoleRolePrivilegesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8277,6 +8452,7 @@ roleRolePrivilegesItem
 roleRolePrivilegesItem =
   RoleRolePrivilegesItem'
     {_rrpiServiceId = Nothing, _rrpiPrivilegeName = Nothing}
+
 
 -- | The obfuscated ID of the service this privilege is for.
 rrpiServiceId :: Lens' RoleRolePrivilegesItem (Maybe Text)
@@ -8315,6 +8491,7 @@ data Domains2 =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Domains2' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8332,6 +8509,7 @@ domains2 =
     , _ddKind = "admin#directory#domains"
     , _ddDomains = Nothing
     }
+
 
 -- | ETag of the resource.
 ddEtag :: Lens' Domains2 (Maybe Text)

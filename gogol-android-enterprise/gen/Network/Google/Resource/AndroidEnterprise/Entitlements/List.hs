@@ -63,6 +63,7 @@ data EntitlementsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntitlementsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ entitlementsList
     -> EntitlementsList
 entitlementsList pElEnterpriseId_ pElUserId_ =
   EntitlementsList' {_elEnterpriseId = pElEnterpriseId_, _elUserId = pElUserId_}
+
 
 -- | The ID of the enterprise.
 elEnterpriseId :: Lens' EntitlementsList Text

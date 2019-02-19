@@ -77,6 +77,7 @@ data ProjectsExclusionsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsExclusionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsExclusionsPatch pPepPayload_ pPepName_ =
     , _pepName = pPepName_
     , _pepCallback = Nothing
     }
+
 
 -- | V1 error format.
 pepXgafv :: Lens' ProjectsExclusionsPatch (Maybe Xgafv)

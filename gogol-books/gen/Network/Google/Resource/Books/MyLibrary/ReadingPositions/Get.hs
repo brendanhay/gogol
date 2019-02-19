@@ -65,6 +65,7 @@ data MyLibraryReadingPositionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryReadingPositionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ myLibraryReadingPositionsGet pMlrpgVolumeId_ =
     , _mlrpgVolumeId = pMlrpgVolumeId_
     , _mlrpgSource = Nothing
     }
+
 
 -- | Volume content version for which this reading position is requested.
 mlrpgContentVersion :: Lens' MyLibraryReadingPositionsGet (Maybe Text)

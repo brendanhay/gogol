@@ -32,6 +32,7 @@ data ItemContent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ItemContent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -52,6 +53,7 @@ itemContent =
     , _icContentDataRef = Nothing
     , _icInlineContent = Nothing
     }
+
 
 -- | Hashing info calculated and provided by the API client for content. Can
 -- be used with the items.push method to calculate modified state. The
@@ -105,6 +107,7 @@ newtype Photo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Photo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +116,7 @@ newtype Photo =
 photo
     :: Photo
 photo = Photo' {_pURL = Nothing}
+
 
 -- | The URL of the photo.
 pURL :: Lens' Photo (Maybe Text)
@@ -137,6 +141,7 @@ data SearchItemsByViewURLRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchItemsByViewURLRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -154,6 +159,7 @@ searchItemsByViewURLRequest =
     , _sibvurPageToken = Nothing
     , _sibvurViewURL = Nothing
     }
+
 
 -- | Common debug options.
 sibvurDebugOptions :: Lens' SearchItemsByViewURLRequest (Maybe DebugOptions)
@@ -206,6 +212,7 @@ data SearchApplication =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchApplication' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -238,6 +245,7 @@ searchApplication =
     , _saDisplayName = Nothing
     , _saDefaultSortOptions = Nothing
     }
+
 
 -- | Retrictions applied to the configurations. The maximum number of
 -- elements is 10.
@@ -338,6 +346,7 @@ newtype BooleanOperatorOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BooleanOperatorOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -346,6 +355,7 @@ newtype BooleanOperatorOptions =
 booleanOperatorOptions
     :: BooleanOperatorOptions
 booleanOperatorOptions = BooleanOperatorOptions' {_booOperatorName = Nothing}
+
 
 -- | Indicates the operator name required in the query in order to isolate
 -- the boolean property. For example, if operatorName is *closed* and the
@@ -418,6 +428,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -430,6 +441,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -486,6 +498,7 @@ data EnumPropertyOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnumPropertyOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -503,6 +516,7 @@ enumPropertyOptions =
     , _epoOrderedRanking = Nothing
     , _epoOperatorOptions = Nothing
     }
+
 
 -- | The list of possible values for the enumeration property. All
 -- EnumValuePairs must provide a string value. If you specify an integer
@@ -563,6 +577,7 @@ data UnreserveItemsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnreserveItemsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -580,6 +595,7 @@ unreserveItemsRequest =
     , _uirDebugOptions = Nothing
     , _uirConnectorName = Nothing
     }
+
 
 -- | Name of a queue to unreserve items from.
 uirQueue :: Lens' UnreserveItemsRequest (Maybe Text)
@@ -627,6 +643,7 @@ data DateOperatorOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DateOperatorOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -644,6 +661,7 @@ dateOperatorOptions =
     , _dooLessThanOperatorName = Nothing
     , _dooGreaterThanOperatorName = Nothing
     }
+
 
 -- | Indicates the actual string required in the query in order to isolate
 -- the date property. For example, suppose an issue tracking schema object
@@ -711,6 +729,7 @@ newtype GetDataSourceIndexStatsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetDataSourceIndexStatsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -720,6 +739,7 @@ getDataSourceIndexStatsResponse
     :: GetDataSourceIndexStatsResponse
 getDataSourceIndexStatsResponse =
   GetDataSourceIndexStatsResponse' {_gdsisrStats = Nothing}
+
 
 -- | Summary of indexed item counts, one for each day in the requested range.
 gdsisrStats :: Lens' GetDataSourceIndexStatsResponse [DataSourceIndexStats]
@@ -750,6 +770,7 @@ data ObjectDisplayOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectDisplayOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -762,6 +783,7 @@ objectDisplayOptions
 objectDisplayOptions =
   ObjectDisplayOptions'
     {_odoMetalines = Nothing, _odoObjectDisplayLabel = Nothing}
+
 
 -- | Defines the properties that will be displayed in the metalines of the
 -- search results. The property values will be displayed in the order given
@@ -810,6 +832,7 @@ newtype QueryItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -818,6 +841,7 @@ newtype QueryItem =
 queryItem
     :: QueryItem
 queryItem = QueryItem' {_qiIsSynthetic = Nothing}
+
 
 -- | True if the text was generated by means other than a previous user
 -- search.
@@ -845,6 +869,7 @@ data ListUnmAppedIdentitiesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListUnmAppedIdentitiesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -857,6 +882,7 @@ listUnmAppedIdentitiesResponse
 listUnmAppedIdentitiesResponse =
   ListUnmAppedIdentitiesResponse'
     {_luairNextPageToken = Nothing, _luairUnmAppedIdentities = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -899,6 +925,7 @@ data DeleteQueueItemsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeleteQueueItemsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -916,6 +943,7 @@ deleteQueueItemsRequest =
     , _dqirDebugOptions = Nothing
     , _dqirConnectorName = Nothing
     }
+
 
 -- | Name of a queue to delete items from.
 dqirQueue :: Lens' DeleteQueueItemsRequest (Maybe Text)
@@ -965,6 +993,7 @@ data SearchResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -991,6 +1020,7 @@ searchResult =
     , _srMetadata = Nothing
     , _srTitle = Nothing
     }
+
 
 -- | Debugging information about this search result.
 srDebugInfo :: Lens' SearchResult (Maybe ResultDebugInfo)
@@ -1054,6 +1084,7 @@ newtype SpellResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpellResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1062,6 +1093,7 @@ newtype SpellResult =
 spellResult
     :: SpellResult
 spellResult = SpellResult' {_srSuggestedQuery = Nothing}
+
 
 -- | The suggested spelling of the query.
 srSuggestedQuery :: Lens' SpellResult (Maybe Text)
@@ -1089,6 +1121,7 @@ newtype PeopleSuggestion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeopleSuggestion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1097,6 +1130,7 @@ newtype PeopleSuggestion =
 peopleSuggestion
     :: PeopleSuggestion
 peopleSuggestion = PeopleSuggestion' {_psPerson = Nothing}
+
 
 -- | Suggested person. All fields of the person object might not be
 -- populated.
@@ -1124,6 +1158,7 @@ data QuerySource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuerySource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1144,6 +1179,7 @@ querySource =
     , _qsSource = Nothing
     , _qsOperators = Nothing
     }
+
 
 -- | A short name or alias for the source. This value can be used with the
 -- \'source\' operator.
@@ -1195,6 +1231,7 @@ newtype SuggestResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SuggestResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1203,6 +1240,7 @@ newtype SuggestResponse =
 suggestResponse
     :: SuggestResponse
 suggestResponse = SuggestResponse' {_srSuggestResults = Nothing}
+
 
 -- | List of suggestion results.
 srSuggestResults :: Lens' SuggestResponse [SuggestResult]
@@ -1236,6 +1274,7 @@ data RepositoryError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepositoryError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1250,6 +1289,7 @@ repositoryError
 repositoryError =
   RepositoryError'
     {_reHTTPStatusCode = Nothing, _reType = Nothing, _reErrorMessage = Nothing}
+
 
 -- | Error codes. Matches the definition of HTTP status codes.
 reHTTPStatusCode :: Lens' RepositoryError (Maybe Int32)
@@ -1295,6 +1335,7 @@ data HTMLPropertyOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTMLPropertyOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1307,6 +1348,7 @@ htmlPropertyOptions
 htmlPropertyOptions =
   HTMLPropertyOptions'
     {_hpoRetrievalImportance = Nothing, _hpoOperatorOptions = Nothing}
+
 
 -- | Indicates the search quality importance of the tokens within the field
 -- when used for retrieval. Can only be set to DEFAULT or NONE.
@@ -1359,6 +1401,7 @@ data PropertyDefinition =
     , _pdDatePropertyOptions      :: !(Maybe DatePropertyOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PropertyDefinition' with the minimum fields required to make a request.
 --
@@ -1413,6 +1456,7 @@ propertyDefinition =
     , _pdBooleanPropertyOptions = Nothing
     , _pdDatePropertyOptions = Nothing
     }
+
 
 pdEnumPropertyOptions :: Lens' PropertyDefinition (Maybe EnumPropertyOptions)
 pdEnumPropertyOptions
@@ -1577,6 +1621,7 @@ data SortOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SortOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1587,6 +1632,7 @@ data SortOptions =
 sortOptions
     :: SortOptions
 sortOptions = SortOptions' {_soSortOrder = Nothing, _soOperatorName = Nothing}
+
 
 -- | Ascending is the default sort order
 soSortOrder :: Lens' SortOptions (Maybe SortOptionsSortOrder)
@@ -1623,6 +1669,7 @@ newtype ObjectPropertyOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectPropertyOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1632,6 +1679,7 @@ objectPropertyOptions
     :: ObjectPropertyOptions
 objectPropertyOptions =
   ObjectPropertyOptions' {_opoSubobjectProperties = Nothing}
+
 
 -- | The properties of the sub-object. These properties represent a nested
 -- object. For example, if this property represents a postal address, the
@@ -1677,6 +1725,7 @@ data SearchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1718,6 +1767,7 @@ searchResponse =
     , _sStructuredResults = Nothing
     , _sErrorInfo = Nothing
     }
+
 
 -- | Suggested spelling for the query.
 sSpellResults :: Lens' SearchResponse [SpellResult]
@@ -1839,6 +1889,7 @@ data SuggestResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SuggestResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1859,6 +1910,7 @@ suggestResult =
     , _sSuggestedQuery = Nothing
     , _sSource = Nothing
     }
+
 
 sPeopleSuggestion :: Lens' SuggestResult (Maybe PeopleSuggestion)
 sPeopleSuggestion
@@ -1909,6 +1961,7 @@ newtype TextValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1917,6 +1970,7 @@ newtype TextValues =
 textValues
     :: TextValues
 textValues = TextValues' {_tvValues = Nothing}
+
 
 -- | The maximum allowable length for text values is 2048 characters.
 tvValues :: Lens' TextValues [Text]
@@ -1943,6 +1997,7 @@ newtype DriveLocationRestrict =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DriveLocationRestrict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1951,6 +2006,7 @@ newtype DriveLocationRestrict =
 driveLocationRestrict
     :: DriveLocationRestrict
 driveLocationRestrict = DriveLocationRestrict' {_dlrType = Nothing}
+
 
 dlrType :: Lens' DriveLocationRestrict (Maybe DriveLocationRestrictType)
 dlrType = lens _dlrType (\ s a -> s{_dlrType = a})
@@ -1974,6 +2030,7 @@ data ListQuerySourcesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListQuerySourcesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1986,6 +2043,7 @@ listQuerySourcesResponse
 listQuerySourcesResponse =
   ListQuerySourcesResponse'
     {_lqsrNextPageToken = Nothing, _lqsrSources = Nothing}
+
 
 lqsrNextPageToken :: Lens' ListQuerySourcesResponse (Maybe Text)
 lqsrNextPageToken
@@ -2024,6 +2082,7 @@ newtype DoubleOperatorOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DoubleOperatorOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2032,6 +2091,7 @@ newtype DoubleOperatorOptions =
 doubleOperatorOptions
     :: DoubleOperatorOptions
 doubleOperatorOptions = DoubleOperatorOptions' {_dOperatorName = Nothing}
+
 
 -- | Indicates the operator name required in the query in order to use the
 -- double property in sorting or as a facet. The operator name can only
@@ -2066,6 +2126,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2089,6 +2150,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -2158,6 +2220,7 @@ data Person =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Person' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2181,6 +2244,7 @@ person =
     , _pName = Nothing
     , _pObfuscatedId = Nothing
     }
+
 
 -- | The person\'s email addresses
 pEmailAddresses :: Lens' Person [EmailAddress]
@@ -2245,6 +2309,7 @@ data CompositeFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompositeFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2256,6 +2321,7 @@ compositeFilter
     :: CompositeFilter
 compositeFilter =
   CompositeFilter' {_cfSubFilters = Nothing, _cfLogicOperator = Nothing}
+
 
 -- | Sub filters.
 cfSubFilters :: Lens' CompositeFilter [Filter]
@@ -2294,6 +2360,7 @@ newtype ResultDisplayLine =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultDisplayLine' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2302,6 +2369,7 @@ newtype ResultDisplayLine =
 resultDisplayLine
     :: ResultDisplayLine
 resultDisplayLine = ResultDisplayLine' {_rdlFields = Nothing}
+
 
 rdlFields :: Lens' ResultDisplayLine [ResultDisplayField]
 rdlFields
@@ -2328,6 +2396,7 @@ newtype DoubleValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DoubleValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2336,6 +2405,7 @@ newtype DoubleValues =
 doubleValues
     :: DoubleValues
 doubleValues = DoubleValues' {_dvValues = Nothing}
+
 
 dvValues :: Lens' DoubleValues [Double]
 dvValues
@@ -2364,6 +2434,7 @@ data Snippet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Snippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2374,6 +2445,7 @@ data Snippet =
 snippet
     :: Snippet
 snippet = Snippet' {_sMatchRanges = Nothing, _sSnippet = Nothing}
+
 
 -- | The matched ranges in the snippet.
 sMatchRanges :: Lens' Snippet [MatchRange]
@@ -2414,6 +2486,7 @@ data TextOperatorOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextOperatorOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2426,6 +2499,7 @@ textOperatorOptions
 textOperatorOptions =
   TextOperatorOptions'
     {_tooOperatorName = Nothing, _tooExactMatchWithOperator = Nothing}
+
 
 -- | Indicates the operator name required in the query in order to isolate
 -- the text property. For example, if operatorName is *subject* and the
@@ -2479,6 +2553,7 @@ newtype QueryInterpretationOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryInterpretationOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2488,6 +2563,7 @@ queryInterpretationOptions
     :: QueryInterpretationOptions
 queryInterpretationOptions =
   QueryInterpretationOptions' {_qioDisableNlInterpretation = Nothing}
+
 
 -- | Flag to disable natural language (NL) interpretation of queries. Default
 -- is false, Set to true to disable natural language interpretation. NL
@@ -2519,6 +2595,7 @@ newtype ResetSearchApplicationRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResetSearchApplicationRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2528,6 +2605,7 @@ resetSearchApplicationRequest
     :: ResetSearchApplicationRequest
 resetSearchApplicationRequest =
   ResetSearchApplicationRequest' {_rsarDebugOptions = Nothing}
+
 
 -- | Common debug options.
 rsarDebugOptions :: Lens' ResetSearchApplicationRequest (Maybe DebugOptions)
@@ -2567,6 +2645,7 @@ data ItemMetadata =
     , _imCreateTime            :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ItemMetadata' with the minimum fields required to make a request.
 --
@@ -2612,6 +2691,7 @@ itemMetadata =
     , _imSearchQualityMetadata = Nothing
     , _imCreateTime = Nothing
     }
+
 
 -- | Link to the source repository serving the data. Search results apply
 -- this link to the title. The maximum length is 2048 characters.
@@ -2748,6 +2828,7 @@ data FilterOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2758,6 +2839,7 @@ data FilterOptions =
 filterOptions
     :: FilterOptions
 filterOptions = FilterOptions' {_foObjectType = Nothing, _foFilter = Nothing}
+
 
 -- | If object_type is set, only objects of that type are returned. This
 -- should correspond to the name of the object that was registered within
@@ -2794,6 +2876,7 @@ newtype StructuredResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StructuredResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2802,6 +2885,7 @@ newtype StructuredResult =
 structuredResult
     :: StructuredResult
 structuredResult = StructuredResult' {_srPerson = Nothing}
+
 
 srPerson :: Lens' StructuredResult (Maybe Person)
 srPerson = lens _srPerson (\ s a -> s{_srPerson = a})
@@ -2825,6 +2909,7 @@ data ProcessingError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProcessingError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2839,6 +2924,7 @@ processingError
 processingError =
   ProcessingError'
     {_peFieldViolations = Nothing, _peCode = Nothing, _peErrorMessage = Nothing}
+
 
 -- | In case the item fields are invalid, this field contains the details
 -- about the validation errors.
@@ -2885,6 +2971,7 @@ data ListItemNamesForUnmAppedIdentityResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListItemNamesForUnmAppedIdentityResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2897,6 +2984,7 @@ listItemNamesForUnmAppedIdentityResponse
 listItemNamesForUnmAppedIdentityResponse =
   ListItemNamesForUnmAppedIdentityResponse'
     {_linfuairNextPageToken = Nothing, _linfuairItemNames = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -2946,6 +3034,7 @@ data ItemACL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ItemACL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2969,6 +3058,7 @@ itemACL =
     , _iaInheritACLFrom = Nothing
     , _iaDeniedReaders = Nothing
     }
+
 
 -- | Optional. List of owners for the item. This field has no bearing on
 -- document access permissions. It does, however, offer a slight ranking
@@ -3060,6 +3150,7 @@ data Value =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3086,6 +3177,7 @@ value =
     , _vDateValue = Nothing
     , _vBooleanValue = Nothing
     }
+
 
 vIntegerValue :: Lens' Value (Maybe Int64)
 vIntegerValue
@@ -3148,6 +3240,7 @@ data FieldViolation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FieldViolation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3158,6 +3251,7 @@ data FieldViolation =
 fieldViolation
     :: FieldViolation
 fieldViolation = FieldViolation' {_fvField = Nothing, _fvDescription = Nothing}
+
 
 -- | Path of field with violation.
 fvField :: Lens' FieldViolation (Maybe Text)
@@ -3193,6 +3287,7 @@ newtype Metaline =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Metaline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3201,6 +3296,7 @@ newtype Metaline =
 metaline
     :: Metaline
 metaline = Metaline' {_mProperties = Nothing}
+
 
 -- | The list of displayed properties for the metaline.
 mProperties :: Lens' Metaline [DisplayedProperty]
@@ -3234,6 +3330,7 @@ data FacetBucket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FacetBucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3247,6 +3344,7 @@ facetBucket
     :: FacetBucket
 facetBucket =
   FacetBucket' {_fbValue = Nothing, _fbCount = Nothing, _fbPercentage = Nothing}
+
 
 fbValue :: Lens' FacetBucket (Maybe Value)
 fbValue = lens _fbValue (\ s a -> s{_fbValue = a})
@@ -3288,6 +3386,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3298,6 +3397,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -3326,6 +3426,7 @@ data TimestampOperatorOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimestampOperatorOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3343,6 +3444,7 @@ timestampOperatorOptions =
     , _tLessThanOperatorName = Nothing
     , _tGreaterThanOperatorName = Nothing
     }
+
 
 -- | Indicates the operator name required in the query in order to isolate
 -- the timestamp property. For example, if operatorName is *closedon* and
@@ -3414,6 +3516,7 @@ data IntegerOperatorOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IntegerOperatorOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3431,6 +3534,7 @@ integerOperatorOptions =
     , _iooLessThanOperatorName = Nothing
     , _iooGreaterThanOperatorName = Nothing
     }
+
 
 -- | Indicates the operator name required in the query in order to isolate
 -- the integer property. For example, if operatorName is *priority* and the
@@ -3496,11 +3600,13 @@ data QuerySuggestion =
   QuerySuggestion'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuerySuggestion' with the minimum fields required to make a request.
 --
 querySuggestion
     :: QuerySuggestion
 querySuggestion = QuerySuggestion'
+
 
 instance FromJSON QuerySuggestion where
         parseJSON
@@ -3519,6 +3625,7 @@ data ListSearchApplicationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSearchApplicationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3531,6 +3638,7 @@ listSearchApplicationsResponse
 listSearchApplicationsResponse =
   ListSearchApplicationsResponse'
     {_lsarNextPageToken = Nothing, _lsarSearchApplications = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -3572,6 +3680,7 @@ newtype ResultDebugInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultDebugInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3580,6 +3689,7 @@ newtype ResultDebugInfo =
 resultDebugInfo
     :: ResultDebugInfo
 resultDebugInfo = ResultDebugInfo' {_rdiFormattedDebugInfo = Nothing}
+
 
 -- | General debug info formatted for display.
 rdiFormattedDebugInfo :: Lens' ResultDebugInfo (Maybe Text)
@@ -3609,6 +3719,7 @@ data ItemCountByStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ItemCountByStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3620,6 +3731,7 @@ itemCountByStatus
     :: ItemCountByStatus
 itemCountByStatus =
   ItemCountByStatus' {_icbsCount = Nothing, _icbsStatusCode = Nothing}
+
 
 -- | Number of items matching the status code.
 icbsCount :: Lens' ItemCountByStatus (Maybe Int64)
@@ -3656,6 +3768,7 @@ newtype TimestampPropertyOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimestampPropertyOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3665,6 +3778,7 @@ timestampPropertyOptions
     :: TimestampPropertyOptions
 timestampPropertyOptions =
   TimestampPropertyOptions' {_tpoOperatorOptions = Nothing}
+
 
 -- | If set, describes how the timestamp should be used as a search operator.
 tpoOperatorOptions :: Lens' TimestampPropertyOptions (Maybe TimestampOperatorOptions)
@@ -3694,6 +3808,7 @@ newtype ResultCounts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultCounts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3702,6 +3817,7 @@ newtype ResultCounts =
 resultCounts
     :: ResultCounts
 resultCounts = ResultCounts' {_rcSourceResultCounts = Nothing}
+
 
 -- | Result count information for each source with results.
 rcSourceResultCounts :: Lens' ResultCounts [SourceResultCount]
@@ -3741,6 +3857,7 @@ data FreshnessOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FreshnessOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3753,6 +3870,7 @@ freshnessOptions
 freshnessOptions =
   FreshnessOptions'
     {_foFreshnessDuration = Nothing, _foFreshnessProperty = Nothing}
+
 
 -- | The duration (in seconds) after which an object should be considered
 -- stale.
@@ -3796,6 +3914,7 @@ newtype DebugOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DebugOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3804,6 +3923,7 @@ newtype DebugOptions =
 debugOptions
     :: DebugOptions
 debugOptions = DebugOptions' {_doEnableDebugging = Nothing}
+
 
 -- | If set, the request will enable debugging features of Cloud Search. Only
 -- turn on this field, if asked by Google to help with debugging.
@@ -3835,6 +3955,7 @@ data IntegerPropertyOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IntegerPropertyOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3855,6 +3976,7 @@ integerPropertyOptions =
     , _ipoMinimumValue = Nothing
     , _ipoOperatorOptions = Nothing
     }
+
 
 -- | The maximum value of the property. The minimum and maximum values for
 -- the property are used to rank results according to the ordered ranking.
@@ -3917,6 +4039,7 @@ data DataSourceRestriction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSourceRestriction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3928,6 +4051,7 @@ dataSourceRestriction
     :: DataSourceRestriction
 dataSourceRestriction =
   DataSourceRestriction' {_dsrFilterOptions = Nothing, _dsrSource = Nothing}
+
 
 -- | Filter options restricting the results. If multiple filters are present,
 -- they are grouped by object type before joining. Filters with the same
@@ -3970,6 +4094,7 @@ data Schema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Schema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3980,6 +4105,7 @@ data Schema =
 schema
     :: Schema
 schema = Schema' {_sObjectDefinitions = Nothing, _sOperationIds = Nothing}
+
 
 -- | The list of top-level objects for the data source. The maximum number of
 -- elements is 10.
@@ -4025,6 +4151,7 @@ newtype DriveTimeSpanRestrict =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DriveTimeSpanRestrict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4033,6 +4160,7 @@ newtype DriveTimeSpanRestrict =
 driveTimeSpanRestrict
     :: DriveTimeSpanRestrict
 driveTimeSpanRestrict = DriveTimeSpanRestrict' {_dtsrType = Nothing}
+
 
 dtsrType :: Lens' DriveTimeSpanRestrict (Maybe DriveTimeSpanRestrictType)
 dtsrType = lens _dtsrType (\ s a -> s{_dtsrType = a})
@@ -4057,6 +4185,7 @@ data ResultDisplayField =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultDisplayField' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4071,6 +4200,7 @@ resultDisplayField
 resultDisplayField =
   ResultDisplayField'
     {_rdfProperty = Nothing, _rdfOperatorName = Nothing, _rdfLabel = Nothing}
+
 
 -- | The name value pair for the property.
 rdfProperty :: Lens' ResultDisplayField (Maybe NamedProperty)
@@ -4113,6 +4243,7 @@ data UpdateSchemaRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateSchemaRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4130,6 +4261,7 @@ updateSchemaRequest =
     , _usrSchema = Nothing
     , _usrDebugOptions = Nothing
     }
+
 
 -- | If true, the request will be validated without side effects.
 usrValidateOnly :: Lens' UpdateSchemaRequest (Maybe Bool)
@@ -4179,6 +4311,7 @@ data Date =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4191,6 +4324,7 @@ data Date =
 date
     :: Date
 date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month.
 dDay :: Lens' Date (Maybe Int32)
@@ -4237,6 +4371,7 @@ newtype DisplayedProperty =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DisplayedProperty' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4245,6 +4380,7 @@ newtype DisplayedProperty =
 displayedProperty
     :: DisplayedProperty
 displayedProperty = DisplayedProperty' {_dpPropertyName = Nothing}
+
 
 -- | The name of the top-level property as defined in a property definition
 -- for the object. If the name is not a defined property in the schema, an
@@ -4277,6 +4413,7 @@ data FacetResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FacetResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4297,6 +4434,7 @@ facetResult =
     , _frObjectType = Nothing
     , _frOperatorName = Nothing
     }
+
 
 -- | Source name for which facet results are returned. Will not be empty.
 frSourceName :: Lens' FacetResult (Maybe Text)
@@ -4349,6 +4487,7 @@ newtype DriveMimeTypeRestrict =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DriveMimeTypeRestrict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4357,6 +4496,7 @@ newtype DriveMimeTypeRestrict =
 driveMimeTypeRestrict
     :: DriveMimeTypeRestrict
 driveMimeTypeRestrict = DriveMimeTypeRestrict' {_dmtrType = Nothing}
+
 
 dmtrType :: Lens' DriveMimeTypeRestrict (Maybe DriveMimeTypeRestrictType)
 dmtrType = lens _dmtrType (\ s a -> s{_dmtrType = a})
@@ -4379,6 +4519,7 @@ newtype StructuredDataObject =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StructuredDataObject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4387,6 +4528,7 @@ newtype StructuredDataObject =
 structuredDataObject
     :: StructuredDataObject
 structuredDataObject = StructuredDataObject' {_sdoProperties = Nothing}
+
 
 -- | The properties for the object. The maximum number of elements is 1000.
 sdoProperties :: Lens' StructuredDataObject [NamedProperty]
@@ -4417,6 +4559,7 @@ newtype Media =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Media' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4425,6 +4568,7 @@ newtype Media =
 media
     :: Media
 media = Media' {_mResourceName = Nothing}
+
 
 -- | Name of the media resource.
 mResourceName :: Lens' Media (Maybe Text)
@@ -4452,6 +4596,7 @@ data ItemStructuredData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ItemStructuredData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4463,6 +4608,7 @@ itemStructuredData
     :: ItemStructuredData
 itemStructuredData =
   ItemStructuredData' {_isdHash = Nothing, _isdObject = Nothing}
+
 
 -- | Hashing value provided by the API caller. This can be used with the
 -- items.push method to calculate modified state. The maximum length is
@@ -4499,6 +4645,7 @@ newtype DriveFollowUpRestrict =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DriveFollowUpRestrict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4507,6 +4654,7 @@ newtype DriveFollowUpRestrict =
 driveFollowUpRestrict
     :: DriveFollowUpRestrict
 driveFollowUpRestrict = DriveFollowUpRestrict' {_dfurType = Nothing}
+
 
 dfurType :: Lens' DriveFollowUpRestrict (Maybe DriveFollowUpRestrictType)
 dfurType = lens _dfurType (\ s a -> s{_dfurType = a})
@@ -4529,6 +4677,7 @@ newtype DateValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DateValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4537,6 +4686,7 @@ newtype DateValues =
 dateValues
     :: DateValues
 dateValues = DateValues' {_dValues = Nothing}
+
 
 dValues :: Lens' DateValues [Date]
 dValues
@@ -4571,6 +4721,7 @@ data NamedProperty =
     , _npIntegerValues   :: !(Maybe IntegerValues)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NamedProperty' with the minimum fields required to make a request.
 --
@@ -4610,6 +4761,7 @@ namedProperty =
     , _npTimestampValues = Nothing
     , _npIntegerValues = Nothing
     }
+
 
 npDoubleValues :: Lens' NamedProperty (Maybe DoubleValues)
 npDoubleValues
@@ -4698,6 +4850,7 @@ data MatchRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MatchRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4708,6 +4861,7 @@ data MatchRange =
 matchRange
     :: MatchRange
 matchRange = MatchRange' {_mrStart = Nothing, _mrEnd = Nothing}
+
 
 -- | Starting position of the match in the snippet.
 mrStart :: Lens' MatchRange (Maybe Int32)
@@ -4742,6 +4896,7 @@ newtype ResponseDebugInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResponseDebugInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4750,6 +4905,7 @@ newtype ResponseDebugInfo =
 responseDebugInfo
     :: ResponseDebugInfo
 responseDebugInfo = ResponseDebugInfo' {_rFormattedDebugInfo = Nothing}
+
 
 -- | General debug info formatted for display.
 rFormattedDebugInfo :: Lens' ResponseDebugInfo (Maybe Text)
@@ -4778,6 +4934,7 @@ data ListDataSourceResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDataSourceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4789,6 +4946,7 @@ listDataSourceResponse
     :: ListDataSourceResponse
 listDataSourceResponse =
   ListDataSourceResponse' {_ldsrNextPageToken = Nothing, _ldsrSources = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -4834,6 +4992,7 @@ data SearchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4866,6 +5025,7 @@ searchRequest =
     , _srPageSize = Nothing
     , _srRequestOptions = Nothing
     }
+
 
 -- | The options for sorting the search results
 srSortOptions :: Lens' SearchRequest (Maybe SortOptions)
@@ -4957,6 +5117,7 @@ newtype Name =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Name' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4965,6 +5126,7 @@ newtype Name =
 name
     :: Name
 name = Name' {_nDisplayName = Nothing}
+
 
 -- | The read-only display name formatted according to the locale specified
 -- by the viewer\'s account or the 'Accept-Language' HTTP header.
@@ -4994,6 +5156,7 @@ data SourceResultCount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceResultCount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5014,6 +5177,7 @@ sourceResultCount =
     , _srcResultCountEstimate = Nothing
     , _srcSource = Nothing
     }
+
 
 -- | Whether there are more search results for this source.
 srcHasMoreResults :: Lens' SourceResultCount (Maybe Bool)
@@ -5072,6 +5236,7 @@ data SourceConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5089,6 +5254,7 @@ sourceConfig =
     , _scScoringConfig = Nothing
     , _scSource = Nothing
     }
+
 
 -- | The crowding configuration for the source.
 scCrowdingConfig :: Lens' SourceConfig (Maybe SourceCrowdingConfig)
@@ -5131,6 +5297,7 @@ data ListItemsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListItemsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5142,6 +5309,7 @@ listItemsResponse
     :: ListItemsResponse
 listItemsResponse =
   ListItemsResponse' {_lirNextPageToken = Nothing, _lirItems = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -5182,6 +5350,7 @@ data ScoringConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScoringConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5194,6 +5363,7 @@ scoringConfig
 scoringConfig =
   ScoringConfig'
     {_scDisablePersonalization = Nothing, _scDisableFreshness = Nothing}
+
 
 -- | Whether to personalize the results. By default, personal signals will be
 -- used to boost results.
@@ -5235,6 +5405,7 @@ data StartUploadItemRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StartUploadItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5247,6 +5418,7 @@ startUploadItemRequest
 startUploadItemRequest =
   StartUploadItemRequest'
     {_suirDebugOptions = Nothing, _suirConnectorName = Nothing}
+
 
 -- | Common debug options.
 suirDebugOptions :: Lens' StartUploadItemRequest (Maybe DebugOptions)
@@ -5286,6 +5458,7 @@ newtype UploadItemRef =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UploadItemRef' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5294,6 +5467,7 @@ newtype UploadItemRef =
 uploadItemRef
     :: UploadItemRef
 uploadItemRef = UploadItemRef' {_uirName = Nothing}
+
 
 -- | Name of the content reference. The maximum length is 2048 characters.
 uirName :: Lens' UploadItemRef (Maybe Text)
@@ -5318,6 +5492,7 @@ data PushItemRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PushItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5335,6 +5510,7 @@ pushItemRequest =
     , _pirConnectorName = Nothing
     , _pirItem = Nothing
     }
+
 
 -- | Common debug options.
 pirDebugOptions :: Lens' PushItemRequest (Maybe DebugOptions)
@@ -5378,6 +5554,7 @@ newtype DoublePropertyOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DoublePropertyOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5386,6 +5563,7 @@ newtype DoublePropertyOptions =
 doublePropertyOptions
     :: DoublePropertyOptions
 doublePropertyOptions = DoublePropertyOptions' {_dpoOperatorOptions = Nothing}
+
 
 -- | If set, describes how the double should be used as a search operator.
 dpoOperatorOptions :: Lens' DoublePropertyOptions (Maybe DoubleOperatorOptions)
@@ -5424,6 +5602,7 @@ data QueryOperator =
     , _qoGreaterThanOperatorName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryOperator' with the minimum fields required to make a request.
 --
@@ -5466,6 +5645,7 @@ queryOperator =
     , _qoEnumValues = Nothing
     , _qoGreaterThanOperatorName = Nothing
     }
+
 
 -- | Can get suggestions for this field.
 qoIsSuggestable :: Lens' QueryOperator (Maybe Bool)
@@ -5578,6 +5758,7 @@ newtype PollItemsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PollItemsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5586,6 +5767,7 @@ newtype PollItemsResponse =
 pollItemsResponse
     :: PollItemsResponse
 pollItemsResponse = PollItemsResponse' {_pirItems = Nothing}
+
 
 -- | Set of items from the queue available for connector to process.
 -- These items have the following subset of fields populated:
@@ -5622,6 +5804,7 @@ newtype SourceScoringConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceScoringConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5630,6 +5813,7 @@ newtype SourceScoringConfig =
 sourceScoringConfig
     :: SourceScoringConfig
 sourceScoringConfig = SourceScoringConfig' {_sscSourceImportance = Nothing}
+
 
 -- | Importance of the source.
 sscSourceImportance :: Lens' SourceScoringConfig (Maybe SourceScoringConfigSourceImportance)
@@ -5658,6 +5842,7 @@ newtype EmailAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EmailAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5666,6 +5851,7 @@ newtype EmailAddress =
 emailAddress
     :: EmailAddress
 emailAddress = EmailAddress' {_eaEmailAddress = Nothing}
+
 
 -- | The email address.
 eaEmailAddress :: Lens' EmailAddress (Maybe Text)
@@ -5691,6 +5877,7 @@ newtype RetrievalImportance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RetrievalImportance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5699,6 +5886,7 @@ newtype RetrievalImportance =
 retrievalImportance
     :: RetrievalImportance
 retrievalImportance = RetrievalImportance' {_riImportance = Nothing}
+
 
 -- | Indicates the ranking importance given to property when it is matched
 -- during retrieval. Once set, the token importance of a property cannot be
@@ -5728,6 +5916,7 @@ data DataSourceIndexStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSourceIndexStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5739,6 +5928,7 @@ dataSourceIndexStats
     :: DataSourceIndexStats
 dataSourceIndexStats =
   DataSourceIndexStats' {_dsisItemCountByStatus = Nothing, _dsisDate = Nothing}
+
 
 -- | Number of items aggregrated by status code.
 dsisItemCountByStatus :: Lens' DataSourceIndexStats [ItemCountByStatus]
@@ -5786,6 +5976,7 @@ data SourceCrowdingConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceCrowdingConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5806,6 +5997,7 @@ sourceCrowdingConfig =
     , _sccNumResults = Nothing
     , _sccSource = Nothing
     }
+
 
 -- | Use a field to control results crowding. For example, if you want to
 -- control overly similar results from Gmail topics, use \`thread_id\`. For
@@ -5866,6 +6058,7 @@ data Interaction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Interaction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5880,6 +6073,7 @@ interaction
 interaction =
   Interaction'
     {_iInteractionTime = Nothing, _iPrincipal = Nothing, _iType = Nothing}
+
 
 -- | The time when the user acted on the item. If multiple actions of the
 -- same type exist for a single user, only the most recent action is
@@ -5925,6 +6119,7 @@ data Principal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Principal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5942,6 +6137,7 @@ principal =
     , _pGroupResourceName = Nothing
     , _pGsuitePrincipal = Nothing
     }
+
 
 -- | This principal is a user identified using an external identity. The name
 -- field must specify the user resource name with this format:
@@ -5993,6 +6189,7 @@ data IndexItemRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IndexItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6013,6 +6210,7 @@ indexItemRequest =
     , _iirConnectorName = Nothing
     , _iirItem = Nothing
     }
+
 
 -- | Required. The RequestMode for this request.
 iirMode :: Lens' IndexItemRequest (Maybe IndexItemRequestMode)
@@ -6063,6 +6261,7 @@ data TextPropertyOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextPropertyOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6075,6 +6274,7 @@ textPropertyOptions
 textPropertyOptions =
   TextPropertyOptions'
     {_tRetrievalImportance = Nothing, _tOperatorOptions = Nothing}
+
 
 -- | Indicates the search quality importance of the tokens within the field
 -- when used for retrieval.
@@ -6127,6 +6327,7 @@ data EnumValuePair =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnumValuePair' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6138,6 +6339,7 @@ enumValuePair
     :: EnumValuePair
 enumValuePair =
   EnumValuePair' {_evpIntegerValue = Nothing, _evpStringValue = Nothing}
+
 
 -- | The integer value of the EnumValuePair which must be non-negative.
 -- Optional.
@@ -6184,6 +6386,7 @@ data Metadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6216,6 +6419,7 @@ metadata =
     , _mCreateTime = Nothing
     , _mFields = Nothing
     }
+
 
 -- | Object type of the search result.
 mObjectType :: Lens' Metadata (Maybe Text)
@@ -6294,6 +6498,7 @@ data UpdateDataSourceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateDataSourceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6305,6 +6510,7 @@ updateDataSourceRequest
     :: UpdateDataSourceRequest
 updateDataSourceRequest =
   UpdateDataSourceRequest' {_udsrDebugOptions = Nothing, _udsrSource = Nothing}
+
 
 -- | Common debug options.
 udsrDebugOptions :: Lens' UpdateDataSourceRequest (Maybe DebugOptions)
@@ -6348,6 +6554,7 @@ data DataSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6380,6 +6587,7 @@ dataSource =
     , _dsName = Nothing
     , _dsDisplayName = Nothing
     }
+
 
 -- | A short name or alias for the source. This value will be used to match
 -- the \'source\' operator. For example, if the short name is *\<value>*
@@ -6487,6 +6695,7 @@ newtype HTMLValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTMLValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6495,6 +6704,7 @@ newtype HTMLValues =
 htmlValues
     :: HTMLValues
 htmlValues = HTMLValues' {_hvValues = Nothing}
+
 
 -- | The maximum allowable length for html values is 2048 characters.
 hvValues :: Lens' HTMLValues [Text]
@@ -6523,6 +6733,7 @@ newtype HTMLOperatorOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTMLOperatorOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6531,6 +6742,7 @@ newtype HTMLOperatorOptions =
 htmlOperatorOptions
     :: HTMLOperatorOptions
 htmlOperatorOptions = HTMLOperatorOptions' {_hooOperatorName = Nothing}
+
 
 -- | Indicates the operator name required in the query in order to isolate
 -- the html property. For example, if operatorName is *subject* and the
@@ -6577,6 +6789,7 @@ data Item =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Item' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6615,6 +6828,7 @@ item =
     , _iMetadata = Nothing
     , _iACL = Nothing
     }
+
 
 -- | Status of the item. Output only field.
 iStatus :: Lens' Item (Maybe ItemStatus)
@@ -6711,6 +6925,7 @@ data Source =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6721,6 +6936,7 @@ data Source =
 source
     :: Source
 source = Source' {_sName = Nothing, _sPredefinedSource = Nothing}
+
 
 -- | Source name for content indexed by the Indexing API.
 sName :: Lens' Source (Maybe Text)
@@ -6755,6 +6971,7 @@ newtype PropertyDisplayOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PropertyDisplayOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6763,6 +6980,7 @@ newtype PropertyDisplayOptions =
 propertyDisplayOptions
     :: PropertyDisplayOptions
 propertyDisplayOptions = PropertyDisplayOptions' {_pdoDisplayLabel = Nothing}
+
 
 -- | The user friendly label for the property that will be used if the
 -- property is specified to be displayed in ObjectDisplayOptions. If given,
@@ -6799,6 +7017,7 @@ newtype ObjectValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6807,6 +7026,7 @@ newtype ObjectValues =
 objectValues
     :: ObjectValues
 objectValues = ObjectValues' {_ovValues = Nothing}
+
 
 ovValues :: Lens' ObjectValues [StructuredDataObject]
 ovValues
@@ -6834,6 +7054,7 @@ data ObjectOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6845,6 +7066,7 @@ objectOptions
     :: ObjectOptions
 objectOptions =
   ObjectOptions' {_ooFreshnessOptions = Nothing, _ooDisplayOptions = Nothing}
+
 
 -- | The freshness options for an object.
 ooFreshnessOptions :: Lens' ObjectOptions (Maybe FreshnessOptions)
@@ -6887,6 +7109,7 @@ data FacetOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FacetOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6901,6 +7124,7 @@ facetOptions
 facetOptions =
   FacetOptions'
     {_fSourceName = Nothing, _fObjectType = Nothing, _fOperatorName = Nothing}
+
 
 -- | Source name to facet on. Format: datasources\/{source_id} If empty, all
 -- data sources will be used.
@@ -6949,6 +7173,7 @@ data SuggestRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SuggestRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6966,6 +7191,7 @@ suggestRequest =
     , _sQuery = Nothing
     , _sRequestOptions = Nothing
     }
+
 
 -- | The sources to use for suggestions. If not specified, all data sources
 -- from the current search application are used.
@@ -7021,6 +7247,7 @@ data Filter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7031,6 +7258,7 @@ data Filter =
 filter'
     :: Filter
 filter' = Filter' {_fCompositeFilter = Nothing, _fValueFilter = Nothing}
+
 
 fCompositeFilter :: Lens' Filter (Maybe CompositeFilter)
 fCompositeFilter
@@ -7066,6 +7294,7 @@ data ObjectDefinition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7080,6 +7309,7 @@ objectDefinition
 objectDefinition =
   ObjectDefinition'
     {_odName = Nothing, _odOptions = Nothing, _odPropertyDefinitions = Nothing}
+
 
 -- | Name for the object, which then defines its type. Item indexing requests
 -- should set the objectType field equal to this value. For example, if
@@ -7134,6 +7364,7 @@ data PollItemsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PollItemsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7157,6 +7388,7 @@ pollItemsRequest =
     , _pStatusCodes = Nothing
     , _pLimit = Nothing
     }
+
 
 -- | Queue name to fetch items from. If unspecified, PollItems will fetch
 -- from \'default\' queue. The maximum length is 100 characters.
@@ -7219,6 +7451,7 @@ data QueryInterpretation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryInterpretation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7231,6 +7464,7 @@ queryInterpretation
 queryInterpretation =
   QueryInterpretation'
     {_qiInterpretedQuery = Nothing, _qiInterpretationType = Nothing}
+
 
 -- | The interpretation of the query used in search. For example, query
 -- \"email from john\" will be interpreted as \"from:john source:mail\"
@@ -7268,6 +7502,7 @@ data UnmAppedIdentity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnmAppedIdentity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7280,6 +7515,7 @@ unmAppedIdentity
 unmAppedIdentity =
   UnmAppedIdentity'
     {_uaiResolutionStatusCode = Nothing, _uaiExternalIdentity = Nothing}
+
 
 -- | The resolution status for the external identity.
 uaiResolutionStatusCode :: Lens' UnmAppedIdentity (Maybe UnmAppedIdentityResolutionStatusCode)
@@ -7321,6 +7557,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7331,6 +7568,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -7356,6 +7594,7 @@ data CustomerIndexStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerIndexStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7367,6 +7606,7 @@ customerIndexStats
     :: CustomerIndexStats
 customerIndexStats =
   CustomerIndexStats' {_cisItemCountByStatus = Nothing, _cisDate = Nothing}
+
 
 -- | Number of items aggregrated by status code.
 cisItemCountByStatus :: Lens' CustomerIndexStats [ItemCountByStatus]
@@ -7410,6 +7650,7 @@ data PushItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PushItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7439,6 +7680,7 @@ pushItem =
     , _piMetadataHash = Nothing
     , _piType = Nothing
     }
+
 
 -- | Populate this field to store Connector or repository error details. This
 -- information is displayed in the Admin Console. This field may only be
@@ -7526,6 +7768,7 @@ data ErrorMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ErrorMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7536,6 +7779,7 @@ data ErrorMessage =
 errorMessage
     :: ErrorMessage
 errorMessage = ErrorMessage' {_emSource = Nothing, _emErrorMessage = Nothing}
+
 
 emSource :: Lens' ErrorMessage (Maybe Source)
 emSource = lens _emSource (\ s a -> s{_emSource = a})
@@ -7568,6 +7812,7 @@ newtype BooleanPropertyOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BooleanPropertyOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7576,6 +7821,7 @@ newtype BooleanPropertyOptions =
 booleanPropertyOptions
     :: BooleanPropertyOptions
 booleanPropertyOptions = BooleanPropertyOptions' {_bpoOperatorOptions = Nothing}
+
 
 -- | If set, describes how the boolean should be used as a search operator.
 bpoOperatorOptions :: Lens' BooleanPropertyOptions (Maybe BooleanOperatorOptions)
@@ -7605,6 +7851,7 @@ data ValueFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ValueFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7615,6 +7862,7 @@ data ValueFilter =
 valueFilter
     :: ValueFilter
 valueFilter = ValueFilter' {_vfValue = Nothing, _vfOperatorName = Nothing}
+
 
 -- | The value to be compared with.
 vfValue :: Lens' ValueFilter (Maybe Value)
@@ -7665,6 +7913,7 @@ newtype EnumOperatorOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnumOperatorOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7673,6 +7922,7 @@ newtype EnumOperatorOptions =
 enumOperatorOptions
     :: EnumOperatorOptions
 enumOperatorOptions = EnumOperatorOptions' {_eooOperatorName = Nothing}
+
 
 -- | Indicates the operator name required in the query in order to isolate
 -- the enum property. For example, if operatorName is *priority* and the
@@ -7709,6 +7959,7 @@ newtype DatePropertyOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatePropertyOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7717,6 +7968,7 @@ newtype DatePropertyOptions =
 datePropertyOptions
     :: DatePropertyOptions
 datePropertyOptions = DatePropertyOptions' {_dOperatorOptions = Nothing}
+
 
 -- | If set, describes how the date should be used as a search operator.
 dOperatorOptions :: Lens' DatePropertyOptions (Maybe DateOperatorOptions)
@@ -7745,6 +7997,7 @@ newtype EnumValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnumValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7753,6 +8006,7 @@ newtype EnumValues =
 enumValues
     :: EnumValues
 enumValues = EnumValues' {_evValues = Nothing}
+
 
 -- | The maximum allowable length for string values is 32 characters.
 evValues :: Lens' EnumValues [Text]
@@ -7780,6 +8034,7 @@ data GSuitePrincipal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GSuitePrincipal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7797,6 +8052,7 @@ gSuitePrincipal =
     , _gspGsuiteUserEmail = Nothing
     , _gspGsuiteDomain = Nothing
     }
+
 
 -- | This principal references a G Suite group account
 gspGsuiteGroupEmail :: Lens' GSuitePrincipal (Maybe Text)
@@ -7843,6 +8099,7 @@ newtype SearchQualityMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchQualityMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7851,6 +8108,7 @@ newtype SearchQualityMetadata =
 searchQualityMetadata
     :: SearchQualityMetadata
 searchQualityMetadata = SearchQualityMetadata' {_sqmQuality = Nothing}
+
 
 -- | An indication of the quality of the item, used to influence search
 -- quality. Value should be between 0.0 (lowest quality) and 1.0 (highest
@@ -7878,6 +8136,7 @@ newtype TimestampValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimestampValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7886,6 +8145,7 @@ newtype TimestampValues =
 timestampValues
     :: TimestampValues
 timestampValues = TimestampValues' {_tValues = Nothing}
+
 
 tValues :: Lens' TimestampValues [UTCTime]
 tValues
@@ -7911,6 +8171,7 @@ newtype ErrorInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ErrorInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7919,6 +8180,7 @@ newtype ErrorInfo =
 errorInfo
     :: ErrorInfo
 errorInfo = ErrorInfo' {_eiErrorMessages = Nothing}
+
 
 eiErrorMessages :: Lens' ErrorInfo [ErrorMessage]
 eiErrorMessages
@@ -7948,6 +8210,7 @@ data ResultDisplayMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultDisplayMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7960,6 +8223,7 @@ resultDisplayMetadata
 resultDisplayMetadata =
   ResultDisplayMetadata'
     {_rdmMetalines = Nothing, _rdmObjectTypeLabel = Nothing}
+
 
 -- | The metalines content to be displayed with the result.
 rdmMetalines :: Lens' ResultDisplayMetadata [ResultDisplayLine]
@@ -8005,6 +8269,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8015,6 +8280,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -8039,6 +8305,7 @@ newtype IntegerValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IntegerValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8047,6 +8314,7 @@ newtype IntegerValues =
 integerValues
     :: IntegerValues
 integerValues = IntegerValues' {_ivValues = Nothing}
+
 
 ivValues :: Lens' IntegerValues [Int64]
 ivValues
@@ -8073,6 +8341,7 @@ data SearchItemsByViewURLResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchItemsByViewURLResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8085,6 +8354,7 @@ searchItemsByViewURLResponse
 searchItemsByViewURLResponse =
   SearchItemsByViewURLResponse'
     {_sibvurNextPageToken = Nothing, _sibvurItems = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -8122,6 +8392,7 @@ newtype GetCustomerIndexStatsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetCustomerIndexStatsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8131,6 +8402,7 @@ getCustomerIndexStatsResponse
     :: GetCustomerIndexStatsResponse
 getCustomerIndexStatsResponse =
   GetCustomerIndexStatsResponse' {_gcisrStats = Nothing}
+
 
 -- | Summary of indexed item counts, one for each day in the requested range.
 gcisrStats :: Lens' GetCustomerIndexStatsResponse [CustomerIndexStats]
@@ -8163,6 +8435,7 @@ data RestrictItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestrictItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8186,6 +8459,7 @@ restrictItem =
     , _riDriveFollowUpRestrict = Nothing
     , _riSearchOperator = Nothing
     }
+
 
 riDriveLocationRestrict :: Lens' RestrictItem (Maybe DriveLocationRestrict)
 riDriveLocationRestrict
@@ -8246,6 +8520,7 @@ newtype CheckAccessResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckAccessResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8254,6 +8529,7 @@ newtype CheckAccessResponse =
 checkAccessResponse
     :: CheckAccessResponse
 checkAccessResponse = CheckAccessResponse' {_carHasAccess = Nothing}
+
 
 -- | Returns true if principal has access. Returns false otherwise.
 carHasAccess :: Lens' CheckAccessResponse (Maybe Bool)
@@ -8282,6 +8558,7 @@ data RequestOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RequestOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8302,6 +8579,7 @@ requestOptions =
     , _roTimeZone = Nothing
     , _roSearchApplicationId = Nothing
     }
+
 
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
@@ -8363,6 +8641,7 @@ data ItemStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ItemStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8380,6 +8659,7 @@ itemStatus =
     , _isCode = Nothing
     , _isRepositoryErrors = Nothing
     }
+
 
 -- | Error details in case the item is in ERROR state.
 isProcessingErrors :: Lens' ItemStatus [ProcessingError]

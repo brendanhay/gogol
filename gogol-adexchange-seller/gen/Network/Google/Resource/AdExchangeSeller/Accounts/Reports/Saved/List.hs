@@ -65,6 +65,7 @@ data AccountsReportsSavedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsReportsSavedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ accountsReportsSavedList pArslAccountId_ =
     , _arslPageToken = Nothing
     , _arslMaxResults = Nothing
     }
+
 
 -- | Account owning the saved reports.
 arslAccountId :: Lens' AccountsReportsSavedList Text

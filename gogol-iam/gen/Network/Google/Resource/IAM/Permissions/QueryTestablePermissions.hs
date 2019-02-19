@@ -74,6 +74,7 @@ data PermissionsQueryTestablePermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PermissionsQueryTestablePermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ permissionsQueryTestablePermissions pPqtpPayload_ =
     , _pqtpPayload = pPqtpPayload_
     , _pqtpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pqtpXgafv :: Lens' PermissionsQueryTestablePermissions (Maybe Xgafv)

@@ -61,6 +61,7 @@ newtype WebResourceGetToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebResourceGetToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ webResourceGetToken
     -> WebResourceGetToken
 webResourceGetToken pWrgtPayload_ =
   WebResourceGetToken' {_wrgtPayload = pWrgtPayload_}
+
 
 -- | Multipart request metadata.
 wrgtPayload :: Lens' WebResourceGetToken SiteVerificationWebResourceGettokenRequest

@@ -72,6 +72,7 @@ data URLNotificationsPublish =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLNotificationsPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ urlNotificationsPublish pUnpPayload_ =
     , _unpPayload = pUnpPayload_
     , _unpCallback = Nothing
     }
+
 
 -- | V1 error format.
 unpXgafv :: Lens' URLNotificationsPublish (Maybe Xgafv)

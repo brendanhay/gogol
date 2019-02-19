@@ -32,6 +32,7 @@ data ColumnList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColumnList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -52,6 +53,7 @@ columnList =
     , _clKind = "fusiontables#columnList"
     , _clItems = Nothing
     }
+
 
 -- | Total number of columns for the table.
 clTotalItems :: Lens' ColumnList (Maybe Int32)
@@ -105,6 +107,7 @@ data TableList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +125,7 @@ tableList =
     , _tlKind = "fusiontables#tableList"
     , _tlItems = Nothing
     }
+
 
 -- | Token used to access the next page of this result. No token is displayed
 -- if there are no more pages left.
@@ -169,6 +173,7 @@ data StyleFunction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StyleFunction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -189,6 +194,7 @@ styleFunction =
     , _sfGradient = Nothing
     , _sfColumnName = Nothing
     }
+
 
 -- | Bucket function that assigns a style based on the range a column value
 -- falls into.
@@ -248,6 +254,7 @@ data ColumnBaseColumn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColumnBaseColumn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -259,6 +266,7 @@ columnBaseColumn
     :: ColumnBaseColumn
 columnBaseColumn =
   ColumnBaseColumn' {_cbcTableIndex = Nothing, _cbcColumnId = Nothing}
+
 
 -- | Offset to the entry in the list of base tables in the table definition.
 cbcTableIndex :: Lens' ColumnBaseColumn (Maybe Int32)
@@ -299,6 +307,7 @@ data SQLresponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SQLresponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -316,6 +325,7 @@ sQLresponse =
     , _sqlRows = Nothing
     , _sqlColumns = Nothing
     }
+
 
 -- | The kind of item this is. For responses to SQL queries, this is always
 -- fusiontables#sqlresponse.
@@ -362,6 +372,7 @@ data StyleFunctionGradientColorsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StyleFunctionGradientColorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -374,6 +385,7 @@ styleFunctionGradientColorsItem
 styleFunctionGradientColorsItem =
   StyleFunctionGradientColorsItem'
     {_sfgciColor = Nothing, _sfgciOpacity = Nothing}
+
 
 -- | Color in #RRGGBB format.
 sfgciColor :: Lens' StyleFunctionGradientColorsItem (Maybe Text)
@@ -413,6 +425,7 @@ data StyleSettingList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StyleSettingList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -433,6 +446,7 @@ styleSettingList =
     , _sslKind = "fusiontables#styleSettingList"
     , _sslItems = Nothing
     }
+
 
 -- | Total number of styles for the table.
 sslTotalItems :: Lens' StyleSettingList (Maybe Int32)
@@ -493,6 +507,7 @@ data Bucket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Bucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -519,6 +534,7 @@ bucket =
     , _bOpacity = Nothing
     , _bMin = Nothing
     }
+
 
 -- | Maximum value in the selected column for a row to be styled according to
 -- the bucket color, opacity, icon, or weight.
@@ -583,6 +599,7 @@ data Line =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Line' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -593,6 +610,7 @@ data Line =
 line
     :: Line
 line = Line' {_lCoordinates = Nothing, _lType = "LineString"}
+
 
 -- | The coordinates that define the line.
 lCoordinates :: Lens' Line [[Double]]
@@ -636,6 +654,7 @@ data StyleSetting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StyleSetting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -665,6 +684,7 @@ styleSetting =
     , _ssStyleId = Nothing
     , _ssTableId = Nothing
     }
+
 
 -- | Style definition for lines in the table.
 ssPolylineOptions :: Lens' StyleSetting (Maybe LineStyle)
@@ -740,6 +760,7 @@ data Point =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Point' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -750,6 +771,7 @@ data Point =
 point
     :: Point
 point = Point' {_pCoordinates = Nothing, _pType = "Point"}
+
 
 -- | The coordinates that define the point.
 pCoordinates :: Lens' Point [Double]
@@ -787,6 +809,7 @@ data Polygon =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Polygon' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -797,6 +820,7 @@ data Polygon =
 polygon
     :: Polygon
 polygon = Polygon' {_polCoordinates = Nothing, _polType = "Polygon"}
+
 
 -- | The coordinates that define the polygon.
 polCoordinates :: Lens' Polygon [[[Double]]]
@@ -837,6 +861,7 @@ data TaskList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TaskList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -857,6 +882,7 @@ taskList =
     , _tKind = "fusiontables#taskList"
     , _tItems = Nothing
     }
+
 
 -- | Total number of tasks for the table.
 tTotalItems :: Lens' TaskList (Maybe Int32)
@@ -909,6 +935,7 @@ data Geometry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Geometry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -926,6 +953,7 @@ geometry =
     , _gGeometry = Nothing
     , _gType = "GeometryCollection"
     }
+
 
 -- | The list of geometries in this geometry collection.
 gGeometries :: Lens' Geometry [JSONValue]
@@ -971,6 +999,7 @@ data TemplateList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TemplateList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -991,6 +1020,7 @@ templateList =
     , _temKind = "fusiontables#templateList"
     , _temItems = Nothing
     }
+
 
 -- | Total number of templates for the table.
 temTotalItems :: Lens' TemplateList (Maybe Int32)
@@ -1046,6 +1076,7 @@ data Import =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Import' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1056,6 +1087,7 @@ data Import =
 import'
     :: Import
 import' = Import' {_iKind = "fusiontables#import", _iNumRowsReceived = Nothing}
+
 
 -- | The kind of item this is. For an import, this is always
 -- fusiontables#import.
@@ -1098,6 +1130,7 @@ data Task =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Task' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1121,6 +1154,7 @@ task =
     , _tasType = Nothing
     , _tasStarted = Nothing
     }
+
 
 -- | Task percentage completion.
 tasProgress :: Lens' Task (Maybe Text)
@@ -1180,6 +1214,7 @@ data Template =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Template' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1206,6 +1241,7 @@ template =
     , _ttName = Nothing
     , _ttTableId = Nothing
     }
+
 
 -- | List of columns from which the template is to be automatically
 -- constructed. Only one of body or automaticColumns can be specified.
@@ -1277,6 +1313,7 @@ data PointStyle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PointStyle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1287,6 +1324,7 @@ data PointStyle =
 pointStyle
     :: PointStyle
 pointStyle = PointStyle' {_psIconName = Nothing, _psIconStyler = Nothing}
+
 
 -- | Name of the icon. Use values defined in
 -- http:\/\/www.google.com\/fusiontables\/DataSource?dsrcid=308519
@@ -1329,6 +1367,7 @@ data PolygonStyle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PolygonStyle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1361,6 +1400,7 @@ polygonStyle =
     , _psStrokeWeightStyler = Nothing
     , _psStrokeColor = Nothing
     }
+
 
 -- | Column-value, gradient, or bucket styler that is used to determine the
 -- interior color and opacity of the polygon.
@@ -1454,6 +1494,7 @@ data StyleFunctionGradient =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StyleFunctionGradient' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1468,6 +1509,7 @@ styleFunctionGradient
 styleFunctionGradient =
   StyleFunctionGradient'
     {_sfgMax = Nothing, _sfgMin = Nothing, _sfgColors = Nothing}
+
 
 -- | Higher-end of the interpolation range: rows with this value will be
 -- assigned to colors[n-1].
@@ -1525,6 +1567,7 @@ data Column =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Column' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1569,6 +1612,7 @@ column =
     , _cValidateData = Nothing
     , _cDescription = Nothing
     }
+
 
 -- | JSON schema for interpreting JSON in this column.
 cColumnJSONSchema :: Lens' Column (Maybe Text)
@@ -1720,6 +1764,7 @@ data Table =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1767,6 +1812,7 @@ table =
     , _tabaAttribution = Nothing
     , _tabaAttributionLink = Nothing
     }
+
 
 -- | Variable for whether table is exportable.
 tabaIsExportable :: Lens' Table (Maybe Bool)
@@ -1896,6 +1942,7 @@ data LineStyle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LineStyle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1919,6 +1966,7 @@ lineStyle =
     , _lsStrokeWeightStyler = Nothing
     , _lsStrokeColor = Nothing
     }
+
 
 -- | Column-value, gradient or buckets styler that is used to determine the
 -- line color and opacity.

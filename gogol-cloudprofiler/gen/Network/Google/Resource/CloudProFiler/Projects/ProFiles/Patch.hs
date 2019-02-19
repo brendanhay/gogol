@@ -82,6 +82,7 @@ data ProjectsProFilesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsProFilesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsProFilesPatch pPpfpPayload_ pPpfpName_ =
     , _ppfpName = pPpfpName_
     , _ppfpCallback = Nothing
     }
+
 
 -- | V1 error format.
 ppfpXgafv :: Lens' ProjectsProFilesPatch (Maybe Xgafv)

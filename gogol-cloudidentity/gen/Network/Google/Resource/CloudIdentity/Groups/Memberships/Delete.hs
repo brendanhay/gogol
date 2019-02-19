@@ -70,6 +70,7 @@ data GroupsMembershipsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsMembershipsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ groupsMembershipsDelete pGmdName_ =
     , _gmdName = pGmdName_
     , _gmdCallback = Nothing
     }
+
 
 -- | V1 error format.
 gmdXgafv :: Lens' GroupsMembershipsDelete (Maybe Xgafv)

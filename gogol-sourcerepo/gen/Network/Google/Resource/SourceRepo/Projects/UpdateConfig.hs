@@ -75,6 +75,7 @@ data ProjectsUpdateConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsUpdateConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsUpdateConfig pPucPayload_ pPucName_ =
     , _pucName = pPucName_
     , _pucCallback = Nothing
     }
+
 
 -- | V1 error format.
 pucXgafv :: Lens' ProjectsUpdateConfig (Maybe Xgafv)

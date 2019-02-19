@@ -61,6 +61,7 @@ data AdsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ adsInsert
     -> AdsInsert
 adsInsert pAiProFileId_ pAiPayload_ =
   AdsInsert' {_aiProFileId = _Coerce # pAiProFileId_, _aiPayload = pAiPayload_}
+
 
 -- | User profile ID associated with this request.
 aiProFileId :: Lens' AdsInsert Int64

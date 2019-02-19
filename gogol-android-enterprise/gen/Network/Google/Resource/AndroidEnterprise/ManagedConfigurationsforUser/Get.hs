@@ -68,6 +68,7 @@ data ManagedConfigurationsforUserGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfigurationsforUserGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ managedConfigurationsforUserGet pMcugEnterpriseId_ pMcugUserId_ pMcugManagedConf
     , _mcugUserId = pMcugUserId_
     , _mcugManagedConfigurationForUserId = pMcugManagedConfigurationForUserId_
     }
+
 
 -- | The ID of the enterprise.
 mcugEnterpriseId :: Lens' ManagedConfigurationsforUserGet Text

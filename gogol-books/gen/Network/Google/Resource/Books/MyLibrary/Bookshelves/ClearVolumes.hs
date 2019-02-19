@@ -62,6 +62,7 @@ data MyLibraryBookshelvesClearVolumes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryBookshelvesClearVolumes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ myLibraryBookshelvesClearVolumes
 myLibraryBookshelvesClearVolumes pMlbcvShelf_ =
   MyLibraryBookshelvesClearVolumes'
     {_mlbcvShelf = pMlbcvShelf_, _mlbcvSource = Nothing}
+
 
 -- | ID of bookshelf from which to remove a volume.
 mlbcvShelf :: Lens' MyLibraryBookshelvesClearVolumes Text

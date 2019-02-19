@@ -64,6 +64,7 @@ data ReviewsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReviewsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ reviewsGet pRgReviewId_ pRgPackageName_ =
     , _rgPackageName = pRgPackageName_
     , _rgTranslationLanguage = Nothing
     }
+
 
 rgReviewId :: Lens' ReviewsGet Text
 rgReviewId

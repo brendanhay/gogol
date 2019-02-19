@@ -82,6 +82,7 @@ data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList pPlkrckckvlParent_ =
     , _plkrckckvlPageSize = Nothing
     , _plkrckckvlCallback = Nothing
     }
+
 
 -- | Required. The resource name of the CryptoKey to list, in the format
 -- \`projects\/*\/locations\/*\/keyRings\/*\/cryptoKeys\/*\`.

@@ -77,6 +77,7 @@ data UsersDataSourcesDataSetsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDataSourcesDataSetsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ usersDataSourcesDataSetsPatch pUdsdspDataSourceId_ pUdsdspPayload_ pUdsdspUserId
     , _udsdspDataSetId = pUdsdspDataSetId_
     , _udsdspCurrentTimeMillis = Nothing
     }
+
 
 -- | The data stream ID of the data source that created the dataset.
 udsdspDataSourceId :: Lens' UsersDataSourcesDataSetsPatch Text

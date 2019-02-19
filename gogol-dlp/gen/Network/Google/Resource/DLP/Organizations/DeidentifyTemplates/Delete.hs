@@ -75,6 +75,7 @@ data OrganizationsDeidentifyTemplatesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsDeidentifyTemplatesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ organizationsDeidentifyTemplatesDelete pOdtdName_ =
     , _odtdName = pOdtdName_
     , _odtdCallback = Nothing
     }
+
 
 -- | V1 error format.
 odtdXgafv :: Lens' OrganizationsDeidentifyTemplatesDelete (Maybe Xgafv)

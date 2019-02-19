@@ -61,6 +61,7 @@ data WebAppsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebAppsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ webAppsInsert
 webAppsInsert pWaiEnterpriseId_ pWaiPayload_ =
   WebAppsInsert'
     {_waiEnterpriseId = pWaiEnterpriseId_, _waiPayload = pWaiPayload_}
+
 
 -- | The ID of the enterprise.
 waiEnterpriseId :: Lens' WebAppsInsert Text

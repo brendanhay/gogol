@@ -62,6 +62,7 @@ data DomainsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ domainsDelete
     -> DomainsDelete
 domainsDelete pDdCustomer_ pDdDomainName_ =
   DomainsDelete' {_ddCustomer = pDdCustomer_, _ddDomainName = pDdDomainName_}
+
 
 -- | Immutable ID of the G Suite account.
 ddCustomer :: Lens' DomainsDelete Text

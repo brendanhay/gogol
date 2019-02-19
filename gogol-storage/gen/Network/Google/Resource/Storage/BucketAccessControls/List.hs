@@ -62,6 +62,7 @@ data BucketAccessControlsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketAccessControlsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ bucketAccessControlsList
 bucketAccessControlsList pBaclBucket_ =
   BucketAccessControlsList'
     {_baclBucket = pBaclBucket_, _baclUserProject = Nothing}
+
 
 -- | Name of a bucket.
 baclBucket :: Lens' BucketAccessControlsList Text

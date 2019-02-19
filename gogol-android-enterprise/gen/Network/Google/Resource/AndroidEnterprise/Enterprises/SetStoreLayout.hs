@@ -74,6 +74,7 @@ data EnterprisesSetStoreLayout =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesSetStoreLayout' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ enterprisesSetStoreLayout
 enterprisesSetStoreLayout pEsslEnterpriseId_ pEsslPayload_ =
   EnterprisesSetStoreLayout'
     {_esslEnterpriseId = pEsslEnterpriseId_, _esslPayload = pEsslPayload_}
+
 
 -- | The ID of the enterprise.
 esslEnterpriseId :: Lens' EnterprisesSetStoreLayout Text

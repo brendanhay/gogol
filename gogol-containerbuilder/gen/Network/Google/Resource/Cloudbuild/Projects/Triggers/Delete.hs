@@ -77,6 +77,7 @@ data ProjectsTriggersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTriggersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsTriggersDelete pPtdTriggerId_ pPtdProjectId_ =
     , _ptdProjectId = pPtdProjectId_
     , _ptdCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptdXgafv :: Lens' ProjectsTriggersDelete (Maybe Xgafv)

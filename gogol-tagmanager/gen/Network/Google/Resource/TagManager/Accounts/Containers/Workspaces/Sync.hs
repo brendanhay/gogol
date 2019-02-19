@@ -61,6 +61,7 @@ newtype AccountsContainersWorkspacesSync =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesSync' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ accountsContainersWorkspacesSync
     -> AccountsContainersWorkspacesSync
 accountsContainersWorkspacesSync pAcwsPath_ =
   AccountsContainersWorkspacesSync' {_acwsPath = pAcwsPath_}
+
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}

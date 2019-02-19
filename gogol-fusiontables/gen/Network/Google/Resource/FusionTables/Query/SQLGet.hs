@@ -72,6 +72,7 @@ data QuerySQLGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuerySQLGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ querySQLGet
 querySQLGet pQsqlgSQL_ =
   QuerySQLGet'
     {_qsqlgTyped = Nothing, _qsqlgHdrs = Nothing, _qsqlgSQL = pQsqlgSQL_}
+
 
 -- | Whether typed values are returned in the (JSON) response: numbers for
 -- numeric values and parsed geometries for KML values. Default is true.

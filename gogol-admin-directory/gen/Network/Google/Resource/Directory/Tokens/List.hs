@@ -61,6 +61,7 @@ newtype TokensList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TokensList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ tokensList
     :: Text -- ^ 'tlUserKey'
     -> TokensList
 tokensList pTlUserKey_ = TokensList' {_tlUserKey = pTlUserKey_}
+
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.

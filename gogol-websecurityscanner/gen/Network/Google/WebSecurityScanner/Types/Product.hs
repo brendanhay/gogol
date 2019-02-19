@@ -31,6 +31,7 @@ data FindingTypeStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FindingTypeStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42,6 +43,7 @@ findingTypeStats
     :: FindingTypeStats
 findingTypeStats =
   FindingTypeStats' {_ftsFindingCount = Nothing, _ftsFindingType = Nothing}
+
 
 -- | Output only. The count of findings belonging to this finding type.
 ftsFindingCount :: Lens' FindingTypeStats (Maybe Int32)
@@ -80,6 +82,7 @@ data ListFindingsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListFindingsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +94,7 @@ listFindingsResponse
     :: ListFindingsResponse
 listFindingsResponse =
   ListFindingsResponse' {_lfrNextPageToken = Nothing, _lfrFindings = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -128,11 +132,13 @@ data StopScanRunRequest =
   StopScanRunRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StopScanRunRequest' with the minimum fields required to make a request.
 --
 stopScanRunRequest
     :: StopScanRunRequest
 stopScanRunRequest = StopScanRunRequest'
+
 
 instance FromJSON StopScanRunRequest where
         parseJSON
@@ -152,6 +158,7 @@ data Schedule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Schedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -163,6 +170,7 @@ schedule
     :: Schedule
 schedule =
   Schedule' {_sScheduleTime = Nothing, _sIntervalDurationDays = Nothing}
+
 
 -- | A timestamp indicates when the next run will be scheduled. The value is
 -- refreshed by the server after each run. If unspecified, it will default
@@ -221,6 +229,7 @@ data Finding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Finding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -274,6 +283,7 @@ finding =
     , _fFrameURL = Nothing
     , _fDescription = Nothing
     }
+
 
 -- | Output only. The URL where the browser lands when the vulnerability is
 -- detected.
@@ -417,11 +427,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -438,6 +450,7 @@ newtype ListFindingTypeStatsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListFindingTypeStatsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -447,6 +460,7 @@ listFindingTypeStatsResponse
     :: ListFindingTypeStatsResponse
 listFindingTypeStatsResponse =
   ListFindingTypeStatsResponse' {_lftsrFindingTypeStats = Nothing}
+
 
 -- | The list of FindingTypeStats returned.
 lftsrFindingTypeStats :: Lens' ListFindingTypeStatsResponse [FindingTypeStats]
@@ -479,6 +493,7 @@ data GoogleAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -489,6 +504,7 @@ data GoogleAccount =
 googleAccount
     :: GoogleAccount
 googleAccount = GoogleAccount' {_gaUsername = Nothing, _gaPassword = Nothing}
+
 
 -- | Required. The user name of the Google account.
 gaUsername :: Lens' GoogleAccount (Maybe Text)
@@ -526,6 +542,7 @@ data Xss =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Xss' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -536,6 +553,7 @@ data Xss =
 xss
     :: Xss
 xss = Xss' {_xStackTraces = Nothing, _xErrorMessage = Nothing}
+
 
 -- | Stack traces leading to the point where the XSS occurred.
 xStackTraces :: Lens' Xss [Text]
@@ -575,6 +593,7 @@ data Authentication =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Authentication' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -586,6 +605,7 @@ authentication
     :: Authentication
 authentication =
   Authentication' {_aGoogleAccount = Nothing, _aCustomAccount = Nothing}
+
 
 -- | Authentication using a Google account.
 aGoogleAccount :: Lens' Authentication (Maybe GoogleAccount)
@@ -623,6 +643,7 @@ data ListCrawledURLsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListCrawledURLsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -635,6 +656,7 @@ listCrawledURLsResponse
 listCrawledURLsResponse =
   ListCrawledURLsResponse'
     {_lcurNextPageToken = Nothing, _lcurCrawledURLs = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -675,6 +697,7 @@ newtype VulnerableParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VulnerableParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -683,6 +706,7 @@ newtype VulnerableParameters =
 vulnerableParameters
     :: VulnerableParameters
 vulnerableParameters = VulnerableParameters' {_vpParameterNames = Nothing}
+
 
 -- | The vulnerable parameter names.
 vpParameterNames :: Lens' VulnerableParameters [Text]
@@ -719,6 +743,7 @@ data CrawledURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CrawledURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -732,6 +757,7 @@ crawledURL
     :: CrawledURL
 crawledURL =
   CrawledURL' {_cuHTTPMethod = Nothing, _cuBody = Nothing, _cuURL = Nothing}
+
 
 -- | Output only. The http method of the request that was used to visit the
 -- URL, in uppercase.
@@ -773,6 +799,7 @@ data OutdatedLibrary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OutdatedLibrary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -787,6 +814,7 @@ outdatedLibrary
 outdatedLibrary =
   OutdatedLibrary'
     {_olLearnMoreURLs = Nothing, _olVersion = Nothing, _olLibraryName = Nothing}
+
 
 -- | URLs to learn more information about the vulnerabilities in the library.
 olLearnMoreURLs :: Lens' OutdatedLibrary [Text]
@@ -834,6 +862,7 @@ data ListScanRunsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListScanRunsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -845,6 +874,7 @@ listScanRunsResponse
     :: ListScanRunsResponse
 listScanRunsResponse =
   ListScanRunsResponse' {_lsrrNextPageToken = Nothing, _lsrrScanRuns = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -885,6 +915,7 @@ data Header =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Header' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -895,6 +926,7 @@ data Header =
 header
     :: Header
 header = Header' {_hValue = Nothing, _hName = Nothing}
+
 
 -- | Header value.
 hValue :: Lens' Header (Maybe Text)
@@ -926,6 +958,7 @@ data ListScanConfigsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListScanConfigsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -938,6 +971,7 @@ listScanConfigsResponse
 listScanConfigsResponse =
   ListScanConfigsResponse'
     {_lscrNextPageToken = Nothing, _lscrScanConfigs = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -976,11 +1010,13 @@ data StartScanRunRequest =
   StartScanRunRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StartScanRunRequest' with the minimum fields required to make a request.
 --
 startScanRunRequest
     :: StartScanRunRequest
 startScanRunRequest = StartScanRunRequest'
+
 
 instance FromJSON StartScanRunRequest where
         parseJSON
@@ -1001,6 +1037,7 @@ data CustomAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1015,6 +1052,7 @@ customAccount
 customAccount =
   CustomAccount'
     {_caLoginURL = Nothing, _caUsername = Nothing, _caPassword = Nothing}
+
 
 -- | Required. The login form URL of the website.
 caLoginURL :: Lens' CustomAccount (Maybe Text)
@@ -1068,6 +1106,7 @@ data ScanConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScanConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1106,6 +1145,7 @@ scanConfig =
     , _scUserAgent = Nothing
     , _scBlackListPatterns = Nothing
     }
+
 
 -- | Latest ScanRun if available.
 scLatestRun :: Lens' ScanConfig (Maybe ScanRun)
@@ -1215,6 +1255,7 @@ data VulnerableHeaders =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VulnerableHeaders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1226,6 +1267,7 @@ vulnerableHeaders
     :: VulnerableHeaders
 vulnerableHeaders =
   VulnerableHeaders' {_vhMissingHeaders = Nothing, _vhHeaders = Nothing}
+
 
 -- | List of missing headers.
 vhMissingHeaders :: Lens' VulnerableHeaders [Header]
@@ -1268,6 +1310,7 @@ data ViolatingResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ViolatingResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1279,6 +1322,7 @@ violatingResource
     :: ViolatingResource
 violatingResource =
   ViolatingResource' {_vrContentType = Nothing, _vrResourceURL = Nothing}
+
 
 -- | The MIME type of this resource.
 vrContentType :: Lens' ViolatingResource (Maybe Text)
@@ -1324,6 +1368,7 @@ data ScanRun =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScanRun' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1359,6 +1404,7 @@ scanRun =
     , _srEndTime = Nothing
     , _srExecutionState = Nothing
     }
+
 
 -- | Output only. The time at which the ScanRun started.
 srStartTime :: Lens' ScanRun (Maybe UTCTime)

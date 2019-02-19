@@ -64,6 +64,7 @@ data ProjectsServiceAccountGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServiceAccountGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ projectsServiceAccountGet
 projectsServiceAccountGet pPsagProjectId_ =
   ProjectsServiceAccountGet'
     {_psagUserProject = Nothing, _psagProjectId = pPsagProjectId_}
+
 
 -- | The project to be billed for this request.
 psagUserProject :: Lens' ProjectsServiceAccountGet (Maybe Text)

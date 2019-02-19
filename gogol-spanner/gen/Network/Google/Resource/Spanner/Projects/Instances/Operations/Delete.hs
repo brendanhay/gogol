@@ -76,6 +76,7 @@ data ProjectsInstancesOperationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesOperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ projectsInstancesOperationsDelete pPiodName_ =
     , _piodName = pPiodName_
     , _piodCallback = Nothing
     }
+
 
 -- | V1 error format.
 piodXgafv :: Lens' ProjectsInstancesOperationsDelete (Maybe Xgafv)

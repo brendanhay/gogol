@@ -69,6 +69,7 @@ data SnapshotsSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotsSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ snapshotsSetIAMPolicy pSsipProject_ pSsipPayload_ pSsipResource_ =
     , _ssipPayload = pSsipPayload_
     , _ssipResource = pSsipResource_
     }
+
 
 -- | Project ID for this request.
 ssipProject :: Lens' SnapshotsSetIAMPolicy Text

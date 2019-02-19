@@ -57,6 +57,7 @@ newtype SurveysGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveysGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ surveysGet
     :: Text -- ^ 'sgSurveyURLId'
     -> SurveysGet
 surveysGet pSgSurveyURLId_ = SurveysGet' {_sgSurveyURLId = pSgSurveyURLId_}
+
 
 -- | External URL ID for the survey.
 sgSurveyURLId :: Lens' SurveysGet Text

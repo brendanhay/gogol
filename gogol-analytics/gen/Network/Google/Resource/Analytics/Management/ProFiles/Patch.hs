@@ -71,6 +71,7 @@ data ManagementProFilesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementProFilesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ managementProFilesPatch pMpfpWebPropertyId_ pMpfpProFileId_ pMpfpPayload_ pMpfpA
     , _mpfpPayload = pMpfpPayload_
     , _mpfpAccountId = pMpfpAccountId_
     }
+
 
 -- | Web property ID to which the view (profile) belongs
 mpfpWebPropertyId :: Lens' ManagementProFilesPatch Text

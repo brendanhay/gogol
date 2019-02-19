@@ -81,6 +81,7 @@ data ProjectsLocationsTransferConfigsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsTransferConfigsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsLocationsTransferConfigsList pPltclParent_ =
     , _pltclPageSize = Nothing
     , _pltclCallback = Nothing
     }
+
 
 -- | The BigQuery project id for which data sources should be returned:
 -- \`projects\/{project_id}\`.

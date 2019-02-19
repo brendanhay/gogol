@@ -60,6 +60,7 @@ data TokenInfo' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TokenInfo'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ tokenInfo'
 tokenInfo' =
   TokenInfo''
     {_tAccessToken = Nothing, _tTokenHandle = Nothing, _tIdToken = Nothing}
+
 
 tAccessToken :: Lens' TokenInfo' (Maybe Text)
 tAccessToken

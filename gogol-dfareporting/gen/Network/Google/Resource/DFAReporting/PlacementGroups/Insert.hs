@@ -62,6 +62,7 @@ data PlacementGroupsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementGroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ placementGroupsInsert
 placementGroupsInsert pPgiProFileId_ pPgiPayload_ =
   PlacementGroupsInsert'
     {_pgiProFileId = _Coerce # pPgiProFileId_, _pgiPayload = pPgiPayload_}
+
 
 -- | User profile ID associated with this request.
 pgiProFileId :: Lens' PlacementGroupsInsert Int64

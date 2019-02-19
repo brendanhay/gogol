@@ -63,6 +63,7 @@ data CustomersPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ customersPatch
     -> CustomersPatch
 customersPatch pCpPayload_ pCpCustomerId_ =
   CustomersPatch' {_cpPayload = pCpPayload_, _cpCustomerId = pCpCustomerId_}
+
 
 -- | Multipart request metadata.
 cpPayload :: Lens' CustomersPatch Customer

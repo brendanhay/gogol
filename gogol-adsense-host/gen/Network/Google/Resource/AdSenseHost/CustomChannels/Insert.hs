@@ -62,6 +62,7 @@ data CustomChannelsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomChannelsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ customChannelsInsert
 customChannelsInsert pCciPayload_ pCciAdClientId_ =
   CustomChannelsInsert'
     {_cciPayload = pCciPayload_, _cciAdClientId = pCciAdClientId_}
+
 
 -- | Multipart request metadata.
 cciPayload :: Lens' CustomChannelsInsert CustomChannel

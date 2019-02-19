@@ -78,6 +78,7 @@ data ProjectsTriggersRun =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTriggersRun' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsTriggersRun pPtrTriggerId_ pPtrPayload_ pPtrProjectId_ =
     , _ptrProjectId = pPtrProjectId_
     , _ptrCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptrXgafv :: Lens' ProjectsTriggersRun (Maybe Xgafv)

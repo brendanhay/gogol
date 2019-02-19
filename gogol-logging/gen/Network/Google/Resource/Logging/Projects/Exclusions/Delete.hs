@@ -70,6 +70,7 @@ data ProjectsExclusionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsExclusionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsExclusionsDelete pPedName_ =
     , _pedName = pPedName_
     , _pedCallback = Nothing
     }
+
 
 -- | V1 error format.
 pedXgafv :: Lens' ProjectsExclusionsDelete (Maybe Xgafv)

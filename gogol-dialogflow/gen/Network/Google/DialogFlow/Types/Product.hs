@@ -65,6 +65,7 @@ data GoogleRpcStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleRpcStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ googleRpcStatus
 googleRpcStatus =
   GoogleRpcStatus'
     {_grsDetails = Nothing, _grsCode = Nothing, _grsMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -127,6 +129,7 @@ data GoogleCloudDialogflowV2IntentFollowupIntentInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentFollowupIntentInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -141,6 +144,7 @@ googleCloudDialogflowV2IntentFollowupIntentInfo =
     { _gcdvifiiFollowupIntentName = Nothing
     , _gcdvifiiParentFollowupIntentName = Nothing
     }
+
 
 -- | The unique identifier of the followup intent. Format:
 -- \`projects\/\/agent\/intents\/\`.
@@ -191,6 +195,7 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -201,6 +206,7 @@ googleCloudDialogflowV2beta1IntentMessageSimpleResponses
 googleCloudDialogflowV2beta1IntentMessageSimpleResponses =
   GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses'
     {_gcdvimsrSimpleResponses = Nothing}
+
 
 -- | Required. The list of simple responses.
 gcdvimsrSimpleResponses :: Lens' GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses [GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse]
@@ -242,6 +248,7 @@ data GoogleCloudDialogflowV2InputAudioConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2InputAudioConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -262,6 +269,7 @@ googleCloudDialogflowV2InputAudioConfig =
     , _gcdviacSampleRateHertz = Nothing
     , _gcdviacAudioEncoding = Nothing
     }
+
 
 -- | Required. The language of the supplied audio. Dialogflow does not do
 -- translations. See [Language
@@ -333,6 +341,7 @@ newtype GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -343,6 +352,7 @@ googleCloudDialogflowV2beta1BatchUpdateIntentsResponse
 googleCloudDialogflowV2beta1BatchUpdateIntentsResponse =
   GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse'
     {_gcdvbuirIntents = Nothing}
+
 
 -- | The collection of updated or created intents.
 gcdvbuirIntents :: Lens' GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse [GoogleCloudDialogflowV2beta1Intent]
@@ -381,6 +391,7 @@ newtype GoogleCloudDialogflowV2beta1IntentMessagePayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessagePayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -392,6 +403,7 @@ googleCloudDialogflowV2beta1IntentMessagePayload
 googleCloudDialogflowV2beta1IntentMessagePayload pGcdvimpAddtional_ =
   GoogleCloudDialogflowV2beta1IntentMessagePayload'
     {_gcdvimpAddtional = _Coerce # pGcdvimpAddtional_}
+
 
 -- | Properties of the object.
 gcdvimpAddtional :: Lens' GoogleCloudDialogflowV2beta1IntentMessagePayload (HashMap Text JSONValue)
@@ -427,6 +439,7 @@ data GoogleCloudDialogflowV2WebhookRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2WebhookRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -447,6 +460,7 @@ googleCloudDialogflowV2WebhookRequest =
     , _gcdvwrQueryResult = Nothing
     , _gcdvwrSession = Nothing
     }
+
 
 -- | Optional. The contents of the original request that was passed to
 -- \`[Streaming]DetectIntent\` call.
@@ -513,6 +527,7 @@ data GoogleCloudDialogflowV2IntentMessageCarouselSelectItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageCarouselSelectItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -533,6 +548,7 @@ googleCloudDialogflowV2IntentMessageCarouselSelectItem =
     , _gcdvimcsiDescription = Nothing
     , _gcdvimcsiInfo = Nothing
     }
+
 
 -- | Optional. The image to display.
 gcdvimcsiImage :: Lens' GoogleCloudDialogflowV2IntentMessageCarouselSelectItem (Maybe GoogleCloudDialogflowV2IntentMessageImage)
@@ -598,6 +614,7 @@ data GoogleCloudDialogflowV2EventInput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2EventInput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -615,6 +632,7 @@ googleCloudDialogflowV2EventInput =
     , _gcdveiName = Nothing
     , _gcdveiParameters = Nothing
     }
+
 
 -- | Required. The language of this query. See [Language
 -- Support](https:\/\/dialogflow.com\/docs\/languages) for a list of the
@@ -665,6 +683,7 @@ data GoogleCloudDialogflowV2IntentMessageSimpleResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageSimpleResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -682,6 +701,7 @@ googleCloudDialogflowV2IntentMessageSimpleResponse =
     , _gcdvimsrSsml = Nothing
     , _gcdvimsrTextToSpeech = Nothing
     }
+
 
 -- | Optional. The text to display.
 gcdvimsrDisplayText :: Lens' GoogleCloudDialogflowV2IntentMessageSimpleResponse (Maybe Text)
@@ -738,6 +758,7 @@ newtype GoogleLongrunningOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -749,6 +770,7 @@ googleLongrunningOperationMetadata
 googleLongrunningOperationMetadata pGlomAddtional_ =
   GoogleLongrunningOperationMetadata'
     {_glomAddtional = _Coerce # pGlomAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glomAddtional :: Lens' GoogleLongrunningOperationMetadata (HashMap Text JSONValue)
@@ -781,6 +803,7 @@ data GoogleCloudDialogflowV2IntentTrainingPhrase =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentTrainingPhrase' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -801,6 +824,7 @@ googleCloudDialogflowV2IntentTrainingPhrase =
     , _gcdvitpTimesAddedCount = Nothing
     , _gcdvitpType = Nothing
     }
+
 
 -- | Required. The collection of training phrase parts (can be annotated).
 -- Fields: \`entity_type\`, \`alias\` and \`user_defined\` should be
@@ -866,6 +890,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -886,6 +911,7 @@ googleCloudDialogflowV2beta1IntentMessageCarouselSelectItem =
     , _gDescription = Nothing
     , _gInfo = Nothing
     }
+
 
 -- | Optional. The image to display.
 gImage :: Lens' GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem (Maybe GoogleCloudDialogflowV2beta1IntentMessageImage)
@@ -941,6 +967,7 @@ data GoogleCloudDialogflowV2IntentMessageBasicCard =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageBasicCard' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -964,6 +991,7 @@ googleCloudDialogflowV2IntentMessageBasicCard =
     , _gcdvimbcTitle = Nothing
     , _gcdvimbcFormattedText = Nothing
     }
+
 
 -- | Optional. The image for the card.
 gcdvimbcImage :: Lens' GoogleCloudDialogflowV2IntentMessageBasicCard (Maybe GoogleCloudDialogflowV2IntentMessageImage)
@@ -1034,6 +1062,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1048,6 +1077,7 @@ googleCloudDialogflowV2beta1IntentMessageSimpleResponse
 googleCloudDialogflowV2beta1IntentMessageSimpleResponse =
   GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse'
     {_gDisplayText = Nothing, _gSsml = Nothing, _gTextToSpeech = Nothing}
+
 
 -- | Optional. The text to display.
 gDisplayText :: Lens' GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse (Maybe Text)
@@ -1118,6 +1148,7 @@ data GoogleCloudDialogflowV2Intent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2Intent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1180,6 +1211,7 @@ googleCloudDialogflowV2Intent =
     , _gcdviMlDisabled = Nothing
     , _gcdviResetContexts = Nothing
     }
+
 
 -- | Optional. The list of platforms for which the first response will be
 -- taken from among the messages assigned to the DEFAULT_PLATFORM.
@@ -1391,6 +1423,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1403,6 +1436,7 @@ googleCloudDialogflowV2beta1IntentMessageBasicCardButton
 googleCloudDialogflowV2beta1IntentMessageBasicCardButton =
   GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton'
     {_gcdvimbcbOpenURIAction = Nothing, _gcdvimbcbTitle = Nothing}
+
 
 -- | Required. Action to take when a user taps on the button.
 gcdvimbcbOpenURIAction :: Lens' GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton (Maybe GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction)
@@ -1446,6 +1480,7 @@ data GoogleCloudDialogflowV2BatchCreateEntitiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchCreateEntitiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1458,6 +1493,7 @@ googleCloudDialogflowV2BatchCreateEntitiesRequest
 googleCloudDialogflowV2BatchCreateEntitiesRequest =
   GoogleCloudDialogflowV2BatchCreateEntitiesRequest'
     {_gcdvbcerLanguageCode = Nothing, _gcdvbcerEntities = Nothing}
+
 
 -- | Optional. The language of entity synonyms defined in \`entities\`. If
 -- not specified, the agent\'s default language is used. [More than a dozen
@@ -1508,6 +1544,7 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageSuggestions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageSuggestions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1518,6 +1555,7 @@ googleCloudDialogflowV2beta1IntentMessageSuggestions
 googleCloudDialogflowV2beta1IntentMessageSuggestions =
   GoogleCloudDialogflowV2beta1IntentMessageSuggestions'
     {_gcdvimsSuggestions = Nothing}
+
 
 -- | Required. The list of suggested replies.
 gcdvimsSuggestions :: Lens' GoogleCloudDialogflowV2beta1IntentMessageSuggestions [GoogleCloudDialogflowV2beta1IntentMessageSuggestion]
@@ -1555,6 +1593,7 @@ newtype GoogleCloudDialogflowV2BatchDeleteIntentsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchDeleteIntentsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1564,6 +1603,7 @@ googleCloudDialogflowV2BatchDeleteIntentsRequest
     :: GoogleCloudDialogflowV2BatchDeleteIntentsRequest
 googleCloudDialogflowV2BatchDeleteIntentsRequest =
   GoogleCloudDialogflowV2BatchDeleteIntentsRequest' {_gcdvbdirIntents = Nothing}
+
 
 -- | Required. The collection of intents to delete. Only intent \`name\` must
 -- be filled in.
@@ -1613,6 +1653,7 @@ data GoogleCloudDialogflowV2QueryResult =
     , _gcdvqrDiagnosticInfo              :: !(Maybe GoogleCloudDialogflowV2QueryResultDiagnosticInfo)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryResult' with the minimum fields required to make a request.
 --
@@ -1664,6 +1705,7 @@ googleCloudDialogflowV2QueryResult =
     , _gcdvqrWebhookSource = Nothing
     , _gcdvqrDiagnosticInfo = Nothing
     }
+
 
 -- | The language that was triggered during intent detection. See [Language
 -- Support](https:\/\/dialogflow.com\/docs\/reference\/language) for a list
@@ -1840,6 +1882,7 @@ data GoogleCloudDialogflowV2BatchUpdateIntentsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchUpdateIntentsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1863,6 +1906,7 @@ googleCloudDialogflowV2BatchUpdateIntentsRequest =
     , _gcdvbuirIntentBatchURI = Nothing
     , _gcdvbuirIntentBatchInline = Nothing
     }
+
 
 -- | Optional. The language of training phrases, parameters and rich messages
 -- defined in \`intents\`. If not specified, the agent\'s default language
@@ -1942,6 +1986,7 @@ data GoogleTypeLatLng =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleTypeLatLng' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1953,6 +1998,7 @@ googleTypeLatLng
     :: GoogleTypeLatLng
 googleTypeLatLng =
   GoogleTypeLatLng' {_gtllLatitude = Nothing, _gtllLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 gtllLatitude :: Lens' GoogleTypeLatLng (Maybe Double)
@@ -1996,6 +2042,7 @@ data GoogleCloudDialogflowV2beta1WebhookResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1WebhookResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2025,6 +2072,7 @@ googleCloudDialogflowV2beta1WebhookResponse =
     , _gcdvwrOutputContexts = Nothing
     , _gcdvwrFollowupEventInput = Nothing
     }
+
 
 -- | Optional. The collection of rich messages to present to the user. This
 -- value is passed directly to \`QueryResult.fulfillment_messages\`.
@@ -2142,6 +2190,7 @@ newtype GoogleCloudDialogflowV2beta1EventInputParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1EventInputParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2153,6 +2202,7 @@ googleCloudDialogflowV2beta1EventInputParameters
 googleCloudDialogflowV2beta1EventInputParameters pGcdveipAddtional_ =
   GoogleCloudDialogflowV2beta1EventInputParameters'
     {_gcdveipAddtional = _Coerce # pGcdveipAddtional_}
+
 
 -- | Properties of the object.
 gcdveipAddtional :: Lens' GoogleCloudDialogflowV2beta1EventInputParameters (HashMap Text JSONValue)
@@ -2200,6 +2250,7 @@ newtype GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2211,6 +2262,7 @@ googleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload
 googleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload pGcdvodirpAddtional_ =
   GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload'
     {_gcdvodirpAddtional = _Coerce # pGcdvodirpAddtional_}
+
 
 -- | Properties of the object.
 gcdvodirpAddtional :: Lens' GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload (HashMap Text JSONValue)
@@ -2244,6 +2296,7 @@ data GoogleCloudDialogflowV2IntentMessageQuickReplies =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageQuickReplies' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2256,6 +2309,7 @@ googleCloudDialogflowV2IntentMessageQuickReplies
 googleCloudDialogflowV2IntentMessageQuickReplies =
   GoogleCloudDialogflowV2IntentMessageQuickReplies'
     {_gcdvimqrTitle = Nothing, _gcdvimqrQuickReplies = Nothing}
+
 
 -- | Optional. The title of the collection of quick replies.
 gcdvimqrTitle :: Lens' GoogleCloudDialogflowV2IntentMessageQuickReplies (Maybe Text)
@@ -2301,6 +2355,7 @@ newtype GoogleCloudDialogflowV2beta1KnowledgeAnswers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1KnowledgeAnswers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2310,6 +2365,7 @@ googleCloudDialogflowV2beta1KnowledgeAnswers
     :: GoogleCloudDialogflowV2beta1KnowledgeAnswers
 googleCloudDialogflowV2beta1KnowledgeAnswers =
   GoogleCloudDialogflowV2beta1KnowledgeAnswers' {_gcdvkaAnswers = Nothing}
+
 
 -- | A list of answers from Knowledge Connector.
 gcdvkaAnswers :: Lens' GoogleCloudDialogflowV2beta1KnowledgeAnswers [GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer]
@@ -2347,6 +2403,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageCardButton =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageCardButton' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2359,6 +2416,7 @@ googleCloudDialogflowV2beta1IntentMessageCardButton
 googleCloudDialogflowV2beta1IntentMessageCardButton =
   GoogleCloudDialogflowV2beta1IntentMessageCardButton'
     {_gcdvimcbText = Nothing, _gcdvimcbPostback = Nothing}
+
 
 -- | Optional. The text to show on the button.
 gcdvimcbText :: Lens' GoogleCloudDialogflowV2beta1IntentMessageCardButton (Maybe Text)
@@ -2402,6 +2460,7 @@ newtype GoogleCloudDialogflowV2beta1ContextParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1ContextParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2413,6 +2472,7 @@ googleCloudDialogflowV2beta1ContextParameters
 googleCloudDialogflowV2beta1ContextParameters pGcdvcpAddtional_ =
   GoogleCloudDialogflowV2beta1ContextParameters'
     {_gcdvcpAddtional = _Coerce # pGcdvcpAddtional_}
+
 
 -- | Properties of the object.
 gcdvcpAddtional :: Lens' GoogleCloudDialogflowV2beta1ContextParameters (HashMap Text JSONValue)
@@ -2446,6 +2506,7 @@ newtype GoogleCloudDialogflowV2QueryParametersPayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryParametersPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2457,6 +2518,7 @@ googleCloudDialogflowV2QueryParametersPayload
 googleCloudDialogflowV2QueryParametersPayload pGcdvqppAddtional_ =
   GoogleCloudDialogflowV2QueryParametersPayload'
     {_gcdvqppAddtional = _Coerce # pGcdvqppAddtional_}
+
 
 -- | Properties of the object.
 gcdvqppAddtional :: Lens' GoogleCloudDialogflowV2QueryParametersPayload (HashMap Text JSONValue)
@@ -2490,6 +2552,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageListSelect =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageListSelect' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2502,6 +2565,7 @@ googleCloudDialogflowV2beta1IntentMessageListSelect
 googleCloudDialogflowV2beta1IntentMessageListSelect =
   GoogleCloudDialogflowV2beta1IntentMessageListSelect'
     {_gcdvimlsItems = Nothing, _gcdvimlsTitle = Nothing}
+
 
 -- | Required. List items.
 gcdvimlsItems :: Lens' GoogleCloudDialogflowV2beta1IntentMessageListSelect [GoogleCloudDialogflowV2beta1IntentMessageListSelectItem]
@@ -2546,6 +2610,7 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2556,6 +2621,7 @@ googleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio
 googleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio =
   GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio'
     {_gcdvimtpaAudioURI = Nothing}
+
 
 -- | Required. URI to a Google Cloud Storage object containing the audio to
 -- play, e.g., \"gs:\/\/bucket\/object\". The object must contain a single
@@ -2602,6 +2668,7 @@ data GoogleCloudDialogflowV2IntentTrainingPhrasePart =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentTrainingPhrasePart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2622,6 +2689,7 @@ googleCloudDialogflowV2IntentTrainingPhrasePart =
     , _gcdvitppEntityType = Nothing
     , _gcdvitppAlias = Nothing
     }
+
 
 -- | Required. The text corresponding to the example, if there are no
 -- annotations. For annotated examples, it is the text for one of the
@@ -2687,11 +2755,13 @@ data GoogleProtobufEmpty =
   GoogleProtobufEmpty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleProtobufEmpty' with the minimum fields required to make a request.
 --
 googleProtobufEmpty
     :: GoogleProtobufEmpty
 googleProtobufEmpty = GoogleProtobufEmpty'
+
 
 instance FromJSON GoogleProtobufEmpty where
         parseJSON
@@ -2731,6 +2801,7 @@ newtype GoogleCloudDialogflowV2beta1WebhookResponsePayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1WebhookResponsePayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2742,6 +2813,7 @@ googleCloudDialogflowV2beta1WebhookResponsePayload
 googleCloudDialogflowV2beta1WebhookResponsePayload pGcdvwrpAddtional_ =
   GoogleCloudDialogflowV2beta1WebhookResponsePayload'
     {_gcdvwrpAddtional = _Coerce # pGcdvwrpAddtional_}
+
 
 -- | Properties of the object.
 gcdvwrpAddtional :: Lens' GoogleCloudDialogflowV2beta1WebhookResponsePayload (HashMap Text JSONValue)
@@ -2775,6 +2847,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageQuickReplies =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageQuickReplies' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2787,6 +2860,7 @@ googleCloudDialogflowV2beta1IntentMessageQuickReplies
 googleCloudDialogflowV2beta1IntentMessageQuickReplies =
   GoogleCloudDialogflowV2beta1IntentMessageQuickReplies'
     {_gcdvimqrsTitle = Nothing, _gcdvimqrsQuickReplies = Nothing}
+
 
 -- | Optional. The title of the collection of quick replies.
 gcdvimqrsTitle :: Lens' GoogleCloudDialogflowV2beta1IntentMessageQuickReplies (Maybe Text)
@@ -2835,6 +2909,7 @@ data GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2847,6 +2922,7 @@ googleCloudDialogflowV2IntentMessageLinkOutSuggestion
 googleCloudDialogflowV2IntentMessageLinkOutSuggestion =
   GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion'
     {_gcdvimlosURI = Nothing, _gcdvimlosDestinationName = Nothing}
+
 
 -- | Required. The URI of the app or site to open when the user taps the
 -- suggestion chip.
@@ -2891,6 +2967,7 @@ data GoogleCloudDialogflowV2ImportAgentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2ImportAgentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2903,6 +2980,7 @@ googleCloudDialogflowV2ImportAgentRequest
 googleCloudDialogflowV2ImportAgentRequest =
   GoogleCloudDialogflowV2ImportAgentRequest'
     {_gcdviarAgentURI = Nothing, _gcdviarAgentContent = Nothing}
+
 
 -- | The URI to a Google Cloud Storage file containing the agent to import.
 -- Note: The URI must start with \"gs:\/\/\".
@@ -2958,6 +3036,7 @@ newtype GoogleRpcStatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleRpcStatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2968,6 +3047,7 @@ googleRpcStatusDetailsItem
     -> GoogleRpcStatusDetailsItem
 googleRpcStatusDetailsItem pGrsdiAddtional_ =
   GoogleRpcStatusDetailsItem' {_grsdiAddtional = _Coerce # pGrsdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 grsdiAddtional :: Lens' GoogleRpcStatusDetailsItem (HashMap Text JSONValue)
@@ -2994,6 +3074,7 @@ newtype GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3004,6 +3085,7 @@ googleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse
 googleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse =
   GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse'
     {_gcdvbuetrEntityTypes = Nothing}
+
 
 -- | The collection of updated or created entity types.
 gcdvbuetrEntityTypes :: Lens' GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse [GoogleCloudDialogflowV2beta1EntityType]
@@ -3043,6 +3125,7 @@ newtype GoogleCloudDialogflowV2ContextParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2ContextParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3054,6 +3137,7 @@ googleCloudDialogflowV2ContextParameters
 googleCloudDialogflowV2ContextParameters pGAddtional_ =
   GoogleCloudDialogflowV2ContextParameters'
     {_gAddtional = _Coerce # pGAddtional_}
+
 
 -- | Properties of the object.
 gAddtional :: Lens' GoogleCloudDialogflowV2ContextParameters (HashMap Text JSONValue)
@@ -3086,6 +3170,7 @@ data GoogleCloudDialogflowV2IntentMessageCardButton =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageCardButton' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3098,6 +3183,7 @@ googleCloudDialogflowV2IntentMessageCardButton
 googleCloudDialogflowV2IntentMessageCardButton =
   GoogleCloudDialogflowV2IntentMessageCardButton'
     {_gText = Nothing, _gPostback = Nothing}
+
 
 -- | Optional. The text to show on the button.
 gText :: Lens' GoogleCloudDialogflowV2IntentMessageCardButton (Maybe Text)
@@ -3138,6 +3224,7 @@ data GoogleCloudDialogflowV2IntentMessageListSelect =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageListSelect' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3150,6 +3237,7 @@ googleCloudDialogflowV2IntentMessageListSelect
 googleCloudDialogflowV2IntentMessageListSelect =
   GoogleCloudDialogflowV2IntentMessageListSelect'
     {_gooItems = Nothing, _gooTitle = Nothing}
+
 
 -- | Required. List items.
 gooItems :: Lens' GoogleCloudDialogflowV2IntentMessageListSelect [GoogleCloudDialogflowV2IntentMessageListSelectItem]
@@ -3194,6 +3282,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageCard =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageCard' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3214,6 +3303,7 @@ googleCloudDialogflowV2beta1IntentMessageCard =
     , _gcdvimcSubtitle = Nothing
     , _gcdvimcTitle = Nothing
     }
+
 
 -- | Optional. The collection of card buttons.
 gcdvimcButtons :: Lens' GoogleCloudDialogflowV2beta1IntentMessageCard [GoogleCloudDialogflowV2beta1IntentMessageCardButton]
@@ -3274,6 +3364,7 @@ data GoogleCloudDialogflowV2RestoreAgentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2RestoreAgentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3286,6 +3377,7 @@ googleCloudDialogflowV2RestoreAgentRequest
 googleCloudDialogflowV2RestoreAgentRequest =
   GoogleCloudDialogflowV2RestoreAgentRequest'
     {_gcdvrarAgentURI = Nothing, _gcdvrarAgentContent = Nothing}
+
 
 -- | The URI to a Google Cloud Storage file containing the agent to restore.
 -- Note: The URI must start with \"gs:\/\/\".
@@ -3343,6 +3435,7 @@ newtype GoogleCloudDialogflowV2IntentMessageSuggestions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageSuggestions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3352,6 +3445,7 @@ googleCloudDialogflowV2IntentMessageSuggestions
     :: GoogleCloudDialogflowV2IntentMessageSuggestions
 googleCloudDialogflowV2IntentMessageSuggestions =
   GoogleCloudDialogflowV2IntentMessageSuggestions' {_gSuggestions = Nothing}
+
 
 -- | Required. The list of suggested replies.
 gSuggestions :: Lens' GoogleCloudDialogflowV2IntentMessageSuggestions [GoogleCloudDialogflowV2IntentMessageSuggestion]
@@ -3387,6 +3481,7 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3397,6 +3492,7 @@ googleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction
 googleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction =
   GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction'
     {_gcdvimbcbouaURI = Nothing}
+
 
 -- | Required. The HTTP or HTTPS scheme URI.
 gcdvimbcbouaURI :: Lens' GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction (Maybe Text)
@@ -3436,6 +3532,7 @@ data GoogleCloudDialogflowV2QueryParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3462,6 +3559,7 @@ googleCloudDialogflowV2QueryParameters =
     , _gcdvqpSessionEntityTypes = Nothing
     , _gcdvqpResetContexts = Nothing
     }
+
 
 -- | Optional. The collection of contexts to be activated before this query
 -- is executed.
@@ -3548,6 +3646,7 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageSuggestion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageSuggestion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3557,6 +3656,7 @@ googleCloudDialogflowV2beta1IntentMessageSuggestion
     :: GoogleCloudDialogflowV2beta1IntentMessageSuggestion
 googleCloudDialogflowV2beta1IntentMessageSuggestion =
   GoogleCloudDialogflowV2beta1IntentMessageSuggestion' {_gcdvimsTitle = Nothing}
+
 
 -- | Required. The text shown the in the suggestion chip.
 gcdvimsTitle :: Lens' GoogleCloudDialogflowV2beta1IntentMessageSuggestion (Maybe Text)
@@ -3592,6 +3692,7 @@ data GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3609,6 +3710,7 @@ googleCloudDialogflowV2beta1OriginalDetectIntentRequest =
     , _gcdvodirVersion = Nothing
     , _gcdvodirSource = Nothing
     }
+
 
 -- | Optional. This field is set to the value of the
 -- \`QueryParameters.payload\` field passed in the request. Some
@@ -3677,6 +3779,7 @@ newtype GoogleCloudDialogflowV2EventInputParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2EventInputParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3688,6 +3791,7 @@ googleCloudDialogflowV2EventInputParameters
 googleCloudDialogflowV2EventInputParameters pGcdveipsAddtional_ =
   GoogleCloudDialogflowV2EventInputParameters'
     {_gcdveipsAddtional = _Coerce # pGcdveipsAddtional_}
+
 
 -- | Properties of the object.
 gcdveipsAddtional :: Lens' GoogleCloudDialogflowV2EventInputParameters (HashMap Text JSONValue)
@@ -3722,6 +3826,7 @@ data GoogleCloudDialogflowV2DetectIntentResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2DetectIntentResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3739,6 +3844,7 @@ googleCloudDialogflowV2DetectIntentResponse =
     , _gcdvdirWebhookStatus = Nothing
     , _gcdvdirQueryResult = Nothing
     }
+
 
 -- | The unique identifier of the response. It can be used to locate a
 -- response in the training example set or for reporting issues.
@@ -3794,6 +3900,7 @@ data GoogleCloudDialogflowV2IntentMessageListSelectItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageListSelectItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3814,6 +3921,7 @@ googleCloudDialogflowV2IntentMessageListSelectItem =
     , _gcdvimlsiDescription = Nothing
     , _gcdvimlsiInfo = Nothing
     }
+
 
 -- | Optional. The image to display.
 gcdvimlsiImage :: Lens' GoogleCloudDialogflowV2IntentMessageListSelectItem (Maybe GoogleCloudDialogflowV2IntentMessageImage)
@@ -3874,6 +3982,7 @@ newtype GoogleCloudDialogflowV2beta1SentimentAnalysisResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1SentimentAnalysisResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3884,6 +3993,7 @@ googleCloudDialogflowV2beta1SentimentAnalysisResult
 googleCloudDialogflowV2beta1SentimentAnalysisResult =
   GoogleCloudDialogflowV2beta1SentimentAnalysisResult'
     {_gcdvsarQueryTextSentiment = Nothing}
+
 
 -- | The sentiment analysis result for \`query_text\`.
 gcdvsarQueryTextSentiment :: Lens' GoogleCloudDialogflowV2beta1SentimentAnalysisResult (Maybe GoogleCloudDialogflowV2beta1Sentiment)
@@ -3920,6 +4030,7 @@ newtype GoogleCloudDialogflowV2EntityTypeBatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2EntityTypeBatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3929,6 +4040,7 @@ googleCloudDialogflowV2EntityTypeBatch
     :: GoogleCloudDialogflowV2EntityTypeBatch
 googleCloudDialogflowV2EntityTypeBatch =
   GoogleCloudDialogflowV2EntityTypeBatch' {_gcdvetbEntityTypes = Nothing}
+
 
 -- | A collection of entity types.
 gcdvetbEntityTypes :: Lens' GoogleCloudDialogflowV2EntityTypeBatch [GoogleCloudDialogflowV2EntityType]
@@ -3966,6 +4078,7 @@ newtype GoogleCloudDialogflowV2QueryResultDiagnosticInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryResultDiagnosticInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3977,6 +4090,7 @@ googleCloudDialogflowV2QueryResultDiagnosticInfo
 googleCloudDialogflowV2QueryResultDiagnosticInfo pGcdvqrdiAddtional_ =
   GoogleCloudDialogflowV2QueryResultDiagnosticInfo'
     {_gcdvqrdiAddtional = _Coerce # pGcdvqrdiAddtional_}
+
 
 -- | Properties of the object.
 gcdvqrdiAddtional :: Lens' GoogleCloudDialogflowV2QueryResultDiagnosticInfo (HashMap Text JSONValue)
@@ -4009,6 +4123,7 @@ newtype GoogleCloudDialogflowV2IntentMessageText =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageText' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4018,6 +4133,7 @@ googleCloudDialogflowV2IntentMessageText
     :: GoogleCloudDialogflowV2IntentMessageText
 googleCloudDialogflowV2IntentMessageText =
   GoogleCloudDialogflowV2IntentMessageText' {_gcdvimtText = Nothing}
+
 
 -- | Optional. The collection of the agent\'s responses.
 gcdvimtText :: Lens' GoogleCloudDialogflowV2IntentMessageText [Text]
@@ -4053,6 +4169,7 @@ data GoogleCloudDialogflowV2DetectIntentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2DetectIntentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4070,6 +4187,7 @@ googleCloudDialogflowV2DetectIntentRequest =
     , _gcdvdirInputAudio = Nothing
     , _gcdvdirQueryParams = Nothing
     }
+
 
 -- | Required. The input specification. It can be set to: 1. an audio config
 -- which instructs the speech recognizer how to process the speech audio,
@@ -4126,6 +4244,7 @@ newtype GoogleCloudDialogflowV2beta1QueryResultParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1QueryResultParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4137,6 +4256,7 @@ googleCloudDialogflowV2beta1QueryResultParameters
 googleCloudDialogflowV2beta1QueryResultParameters pGcdvqrpAddtional_ =
   GoogleCloudDialogflowV2beta1QueryResultParameters'
     {_gcdvqrpAddtional = _Coerce # pGcdvqrpAddtional_}
+
 
 -- | Properties of the object.
 gcdvqrpAddtional :: Lens' GoogleCloudDialogflowV2beta1QueryResultParameters (HashMap Text JSONValue)
@@ -4173,6 +4293,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageBasicCard =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageBasicCard' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4196,6 +4317,7 @@ googleCloudDialogflowV2beta1IntentMessageBasicCard =
     , _gcdvimbccTitle = Nothing
     , _gcdvimbccFormattedText = Nothing
     }
+
 
 -- | Optional. The image for the card.
 gcdvimbccImage :: Lens' GoogleCloudDialogflowV2beta1IntentMessageBasicCard (Maybe GoogleCloudDialogflowV2beta1IntentMessageImage)
@@ -4268,6 +4390,7 @@ data GoogleCloudDialogflowV2beta1IntentTrainingPhrase =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentTrainingPhrase' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4288,6 +4411,7 @@ googleCloudDialogflowV2beta1IntentTrainingPhrase =
     , _gTimesAddedCount = Nothing
     , _gType = Nothing
     }
+
 
 -- | Required. The collection of training phrase parts (can be annotated).
 -- Fields: \`entity_type\`, \`alias\` and \`user_defined\` should be
@@ -4350,6 +4474,7 @@ data GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4373,6 +4498,7 @@ googleCloudDialogflowV2beta1KnowledgeAnswersAnswer =
     , _gcdvkaaFaqQuestion = Nothing
     , _gcdvkaaMatchConfidenceLevel = Nothing
     }
+
 
 -- | The system\'s confidence score that this Knowledge answer is a good
 -- match for this conversational query. The range is from 0.0 (completely
@@ -4462,6 +4588,7 @@ data GoogleCloudDialogflowV2beta1EventInput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1EventInput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4476,6 +4603,7 @@ googleCloudDialogflowV2beta1EventInput
 googleCloudDialogflowV2beta1EventInput =
   GoogleCloudDialogflowV2beta1EventInput'
     {_gooLanguageCode = Nothing, _gooName = Nothing, _gooParameters = Nothing}
+
 
 -- | Required. The language of this query. See [Language
 -- Support](https:\/\/dialogflow.com\/docs\/languages) for a list of the
@@ -4527,6 +4655,7 @@ data GoogleCloudDialogflowV2BatchUpdateEntitiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchUpdateEntitiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4544,6 +4673,7 @@ googleCloudDialogflowV2BatchUpdateEntitiesRequest =
     , _gcdvbuerUpdateMask = Nothing
     , _gcdvbuerEntities = Nothing
     }
+
 
 -- | Optional. The language of entity synonyms defined in \`entities\`. If
 -- not specified, the agent\'s default language is used. [More than a dozen
@@ -4603,6 +4733,7 @@ newtype GoogleCloudDialogflowV2IntentMessagePayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessagePayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4614,6 +4745,7 @@ googleCloudDialogflowV2IntentMessagePayload
 googleCloudDialogflowV2IntentMessagePayload pGooAddtional_ =
   GoogleCloudDialogflowV2IntentMessagePayload'
     {_gooAddtional = _Coerce # pGooAddtional_}
+
 
 -- | Properties of the object.
 gooAddtional :: Lens' GoogleCloudDialogflowV2IntentMessagePayload (HashMap Text JSONValue)
@@ -4645,6 +4777,7 @@ newtype GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4655,6 +4788,7 @@ googleCloudDialogflowV2beta1KnowledgeOperationMetadata
 googleCloudDialogflowV2beta1KnowledgeOperationMetadata =
   GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata'
     {_gcdvkomState = Nothing}
+
 
 -- | Required. The current state of this operation.
 gcdvkomState :: Lens' GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata (Maybe GoogleCloudDialogflowV2beta1KnowledgeOperationMetadataState)
@@ -4691,6 +4825,7 @@ data GoogleCloudDialogflowV2beta1WebhookRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1WebhookRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4714,6 +4849,7 @@ googleCloudDialogflowV2beta1WebhookRequest =
     , _gQueryResult = Nothing
     , _gSession = Nothing
     }
+
 
 -- | Optional. The contents of the original request that was passed to
 -- \`[Streaming]DetectIntent\` call.
@@ -4787,6 +4923,7 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageText =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageText' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4796,6 +4933,7 @@ googleCloudDialogflowV2beta1IntentMessageText
     :: GoogleCloudDialogflowV2beta1IntentMessageText
 googleCloudDialogflowV2beta1IntentMessageText =
   GoogleCloudDialogflowV2beta1IntentMessageText' {_gooText = Nothing}
+
 
 -- | Optional. The collection of the agent\'s responses.
 gooText :: Lens' GoogleCloudDialogflowV2beta1IntentMessageText [Text]
@@ -4832,6 +4970,7 @@ newtype GoogleCloudDialogflowV2IntentMessageSimpleResponses =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageSimpleResponses' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4842,6 +4981,7 @@ googleCloudDialogflowV2IntentMessageSimpleResponses
 googleCloudDialogflowV2IntentMessageSimpleResponses =
   GoogleCloudDialogflowV2IntentMessageSimpleResponses'
     {_gSimpleResponses = Nothing}
+
 
 -- | Required. The list of simple responses.
 gSimpleResponses :: Lens' GoogleCloudDialogflowV2IntentMessageSimpleResponses [GoogleCloudDialogflowV2IntentMessageSimpleResponse]
@@ -4880,6 +5020,7 @@ data GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4892,6 +5033,7 @@ googleCloudDialogflowV2beta1IntentFollowupIntentInfo
 googleCloudDialogflowV2beta1IntentFollowupIntentInfo =
   GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo'
     {_gFollowupIntentName = Nothing, _gParentFollowupIntentName = Nothing}
+
 
 -- | The unique identifier of the followup intent. Format:
 -- \`projects\/\/agent\/intents\/\`.
@@ -4939,6 +5081,7 @@ newtype GoogleCloudDialogflowV2QueryResultParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryResultParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4950,6 +5093,7 @@ googleCloudDialogflowV2QueryResultParameters
 googleCloudDialogflowV2QueryResultParameters pGcdvqrpsAddtional_ =
   GoogleCloudDialogflowV2QueryResultParameters'
     {_gcdvqrpsAddtional = _Coerce # pGcdvqrpsAddtional_}
+
 
 -- | Properties of the object.
 gcdvqrpsAddtional :: Lens' GoogleCloudDialogflowV2QueryResultParameters (HashMap Text JSONValue)
@@ -4984,6 +5128,7 @@ newtype GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4995,6 +5140,7 @@ googleCloudDialogflowV2beta1QueryResultDiagnosticInfo
 googleCloudDialogflowV2beta1QueryResultDiagnosticInfo pGcdvqrdicAddtional_ =
   GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo'
     {_gcdvqrdicAddtional = _Coerce # pGcdvqrdicAddtional_}
+
 
 -- | Properties of the object.
 gcdvqrdicAddtional :: Lens' GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo (HashMap Text JSONValue)
@@ -5028,6 +5174,7 @@ data GoogleCloudDialogflowV2BatchDeleteEntitiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchDeleteEntitiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5040,6 +5187,7 @@ googleCloudDialogflowV2BatchDeleteEntitiesRequest
 googleCloudDialogflowV2BatchDeleteEntitiesRequest =
   GoogleCloudDialogflowV2BatchDeleteEntitiesRequest'
     {_gcdvbderLanguageCode = Nothing, _gcdvbderEntityValues = Nothing}
+
 
 -- | Optional. The language of entity synonyms defined in \`entities\`. If
 -- not specified, the agent\'s default language is used. [More than a dozen
@@ -5092,6 +5240,7 @@ newtype GoogleCloudDialogflowV2BatchUpdateIntentsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchUpdateIntentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5101,6 +5250,7 @@ googleCloudDialogflowV2BatchUpdateIntentsResponse
     :: GoogleCloudDialogflowV2BatchUpdateIntentsResponse
 googleCloudDialogflowV2BatchUpdateIntentsResponse =
   GoogleCloudDialogflowV2BatchUpdateIntentsResponse' {_gIntents = Nothing}
+
 
 -- | The collection of updated or created intents.
 gIntents :: Lens' GoogleCloudDialogflowV2BatchUpdateIntentsResponse [GoogleCloudDialogflowV2Intent]
@@ -5136,6 +5286,7 @@ data GoogleCloudDialogflowV2ListEntityTypesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2ListEntityTypesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5148,6 +5299,7 @@ googleCloudDialogflowV2ListEntityTypesResponse
 googleCloudDialogflowV2ListEntityTypesResponse =
   GoogleCloudDialogflowV2ListEntityTypesResponse'
     {_gcdvletrNextPageToken = Nothing, _gcdvletrEntityTypes = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -5204,6 +5356,7 @@ data GoogleCloudDialogflowV2Agent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2Agent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5242,6 +5395,7 @@ googleCloudDialogflowV2Agent =
     , _gcdvaTimeZone = Nothing
     , _gcdvaDescription = Nothing
     }
+
 
 -- | Required. The project of this agent. Format: \`projects\/\`.
 gcdvaParent :: Lens' GoogleCloudDialogflowV2Agent (Maybe Text)
@@ -5377,6 +5531,7 @@ data GoogleCloudDialogflowV2beta1IntentMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5430,6 +5585,7 @@ googleCloudDialogflowV2beta1IntentMessage =
     , _gcdvimBasicCard = Nothing
     , _gcdvimQuickReplies = Nothing
     }
+
 
 -- | Displays a card.
 gcdvimCard :: Lens' GoogleCloudDialogflowV2beta1IntentMessage (Maybe GoogleCloudDialogflowV2beta1IntentMessageCard)
@@ -5580,6 +5736,7 @@ data GoogleCloudDialogflowV2IntentMessageSelectItemInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageSelectItemInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5592,6 +5749,7 @@ googleCloudDialogflowV2IntentMessageSelectItemInfo
 googleCloudDialogflowV2IntentMessageSelectItemInfo =
   GoogleCloudDialogflowV2IntentMessageSelectItemInfo'
     {_gcdvimsiiKey = Nothing, _gcdvimsiiSynonyms = Nothing}
+
 
 -- | Required. A unique key that will be sent back to the agent if this
 -- response is given.
@@ -5639,6 +5797,7 @@ data GoogleCloudDialogflowV2beta1Sentiment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1Sentiment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5651,6 +5810,7 @@ googleCloudDialogflowV2beta1Sentiment
 googleCloudDialogflowV2beta1Sentiment =
   GoogleCloudDialogflowV2beta1Sentiment'
     {_gcdvsScore = Nothing, _gcdvsMagnitude = Nothing}
+
 
 -- | Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
 -- sentiment).
@@ -5694,6 +5854,7 @@ newtype GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5704,6 +5865,7 @@ googleCloudDialogflowV2BatchDeleteEntityTypesRequest
 googleCloudDialogflowV2BatchDeleteEntityTypesRequest =
   GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest'
     {_gcdvbdetrEntityTypeNames = Nothing}
+
 
 -- | Required. The names entity types to delete. All names must point to the
 -- same agent as \`parent\`.
@@ -5748,6 +5910,7 @@ data GoogleCloudDialogflowV2QueryInput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryInput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5765,6 +5928,7 @@ googleCloudDialogflowV2QueryInput =
     , _gcdvqiEvent = Nothing
     , _gcdvqiText = Nothing
     }
+
 
 -- | Instructs the speech recognizer how to process the speech audio.
 gcdvqiAudioConfig :: Lens' GoogleCloudDialogflowV2QueryInput (Maybe GoogleCloudDialogflowV2InputAudioConfig)
@@ -5809,6 +5973,7 @@ newtype GoogleCloudDialogflowV2ExportAgentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2ExportAgentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5818,6 +5983,7 @@ googleCloudDialogflowV2ExportAgentRequest
     :: GoogleCloudDialogflowV2ExportAgentRequest
 googleCloudDialogflowV2ExportAgentRequest =
   GoogleCloudDialogflowV2ExportAgentRequest' {_gcdvearAgentURI = Nothing}
+
 
 -- | Optional. The [Google Cloud
 -- Storage](https:\/\/cloud.google.com\/storage\/docs\/) URI to export the
@@ -5854,6 +6020,7 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5864,6 +6031,7 @@ googleCloudDialogflowV2beta1IntentMessageCarouselSelect
 googleCloudDialogflowV2beta1IntentMessageCarouselSelect =
   GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect'
     {_gcdvimcsItems = Nothing}
+
 
 -- | Required. Carousel items.
 gcdvimcsItems :: Lens' GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect [GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem]
@@ -5902,6 +6070,7 @@ data GoogleCloudDialogflowV2beta1Context =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1Context' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5919,6 +6088,7 @@ googleCloudDialogflowV2beta1Context =
     , _gcdvcName = Nothing
     , _gcdvcParameters = Nothing
     }
+
 
 -- | Optional. The number of conversational query requests after which the
 -- context expires. If set to \`0\` (the default) the context expires
@@ -5980,6 +6150,7 @@ data GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6000,6 +6171,7 @@ googleCloudDialogflowV2BatchUpdateEntityTypesRequest =
     , _gcdvbuetrEntityTypeBatchInline = Nothing
     , _gcdvbuetrEntityTypeBatchURI = Nothing
     }
+
 
 -- | Optional. The language of entity synonyms defined in \`entity_types\`.
 -- If not specified, the agent\'s default language is used. [More than a
@@ -6075,6 +6247,7 @@ newtype GoogleLongrunningOperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningOperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6086,6 +6259,7 @@ googleLongrunningOperationResponse
 googleLongrunningOperationResponse pGlorAddtional_ =
   GoogleLongrunningOperationResponse'
     {_glorAddtional = _Coerce # pGlorAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glorAddtional :: Lens' GoogleLongrunningOperationResponse (HashMap Text JSONValue)
@@ -6119,6 +6293,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6131,6 +6306,7 @@ googleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech
 googleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech =
   GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech'
     {_gcdvimtssText = Nothing, _gcdvimtssSsml = Nothing}
+
 
 -- | The raw text to be synthesized.
 gcdvimtssText :: Lens' GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech (Maybe Text)
@@ -6177,6 +6353,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageListSelectItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageListSelectItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6197,6 +6374,7 @@ googleCloudDialogflowV2beta1IntentMessageListSelectItem =
     , _gcdvimlsicDescription = Nothing
     , _gcdvimlsicInfo = Nothing
     }
+
 
 -- | Optional. The image to display.
 gcdvimlsicImage :: Lens' GoogleCloudDialogflowV2beta1IntentMessageListSelectItem (Maybe GoogleCloudDialogflowV2beta1IntentMessageImage)
@@ -6257,6 +6435,7 @@ newtype GoogleCloudDialogflowV2IntentMessageSuggestion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageSuggestion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6266,6 +6445,7 @@ googleCloudDialogflowV2IntentMessageSuggestion
     :: GoogleCloudDialogflowV2IntentMessageSuggestion
 googleCloudDialogflowV2IntentMessageSuggestion =
   GoogleCloudDialogflowV2IntentMessageSuggestion' {_gcdvimscTitle = Nothing}
+
 
 -- | Required. The text shown the in the suggestion chip.
 gcdvimscTitle :: Lens' GoogleCloudDialogflowV2IntentMessageSuggestion (Maybe Text)
@@ -6301,6 +6481,7 @@ data GoogleCloudDialogflowV2beta1EntityTypeEntity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1EntityTypeEntity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6313,6 +6494,7 @@ googleCloudDialogflowV2beta1EntityTypeEntity
 googleCloudDialogflowV2beta1EntityTypeEntity =
   GoogleCloudDialogflowV2beta1EntityTypeEntity'
     {_gcdveteValue = Nothing, _gcdveteSynonyms = Nothing}
+
 
 -- | Required. The primary value associated with this entity entry. For
 -- example, if the entity type is *vegetable*, the value could be
@@ -6369,6 +6551,7 @@ data GoogleCloudDialogflowV2EntityType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2EntityType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6392,6 +6575,7 @@ googleCloudDialogflowV2EntityType =
     , _gcdvetAutoExpansionMode = Nothing
     , _gcdvetDisplayName = Nothing
     }
+
 
 -- | Optional. The collection of entity entries associated with the entity
 -- type.
@@ -6460,6 +6644,7 @@ data GoogleCloudDialogflowV2TextInput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2TextInput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6472,6 +6657,7 @@ googleCloudDialogflowV2TextInput
 googleCloudDialogflowV2TextInput =
   GoogleCloudDialogflowV2TextInput'
     {_gcdvtiLanguageCode = Nothing, _gcdvtiText = Nothing}
+
 
 -- | Required. The language of this conversational query. See [Language
 -- Support](https:\/\/dialogflow.com\/docs\/languages) for a list of the
@@ -6513,6 +6699,7 @@ newtype GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6523,6 +6710,7 @@ googleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction
 googleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction =
   GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction'
     {_gcdvimbcbouriaURI = Nothing}
+
 
 -- | Required. The HTTP or HTTPS scheme URI.
 gcdvimbcbouriaURI :: Lens' GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction (Maybe Text)
@@ -6560,6 +6748,7 @@ data GoogleCloudDialogflowV2IntentMessageCard =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageCard' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6580,6 +6769,7 @@ googleCloudDialogflowV2IntentMessageCard =
     , _gcdvimccSubtitle = Nothing
     , _gcdvimccTitle = Nothing
     }
+
 
 -- | Optional. The collection of card buttons.
 gcdvimccButtons :: Lens' GoogleCloudDialogflowV2IntentMessageCard [GoogleCloudDialogflowV2IntentMessageCardButton]
@@ -6642,6 +6832,7 @@ data GoogleCloudDialogflowV2OriginalDetectIntentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2OriginalDetectIntentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6656,6 +6847,7 @@ googleCloudDialogflowV2OriginalDetectIntentRequest
 googleCloudDialogflowV2OriginalDetectIntentRequest =
   GoogleCloudDialogflowV2OriginalDetectIntentRequest'
     {_gPayload = Nothing, _gVersion = Nothing, _gSource = Nothing}
+
 
 -- | Optional. This field is set to the value of the
 -- \`QueryParameters.payload\` field passed in the request. Some
@@ -6719,6 +6911,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6731,6 +6924,7 @@ googleCloudDialogflowV2beta1IntentMessageImage
 googleCloudDialogflowV2beta1IntentMessageImage =
   GoogleCloudDialogflowV2beta1IntentMessageImage'
     {_gcdvimiAccessibilityText = Nothing, _gcdvimiImageURI = Nothing}
+
 
 -- | A text description of the image to be used for accessibility, e.g.,
 -- screen readers. Required if image_uri is set for CarouselSelect.
@@ -6776,6 +6970,7 @@ data GoogleCloudDialogflowV2ExportAgentResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2ExportAgentResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6788,6 +6983,7 @@ googleCloudDialogflowV2ExportAgentResponse
 googleCloudDialogflowV2ExportAgentResponse =
   GoogleCloudDialogflowV2ExportAgentResponse'
     {_gAgentURI = Nothing, _gAgentContent = Nothing}
+
 
 -- | The URI to a file containing the exported agent. This field is populated
 -- only if \`agent_uri\` is specified in \`ExportAgentRequest\`.
@@ -6865,6 +7061,7 @@ newtype GoogleCloudDialogflowV2WebhookResponsePayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2WebhookResponsePayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6876,6 +7073,7 @@ googleCloudDialogflowV2WebhookResponsePayload
 googleCloudDialogflowV2WebhookResponsePayload pGcdvwrpcAddtional_ =
   GoogleCloudDialogflowV2WebhookResponsePayload'
     {_gcdvwrpcAddtional = _Coerce # pGcdvwrpcAddtional_}
+
 
 -- | Properties of the object.
 gcdvwrpcAddtional :: Lens' GoogleCloudDialogflowV2WebhookResponsePayload (HashMap Text JSONValue)
@@ -6910,6 +7108,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6922,6 +7121,7 @@ googleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion
 googleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion =
   GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion'
     {_gURI = Nothing, _gDestinationName = Nothing}
+
 
 -- | Required. The URI of the app or site to open when the user taps the
 -- suggestion chip.
@@ -6964,6 +7164,7 @@ data GoogleCloudDialogflowV2ListIntentsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2ListIntentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6976,6 +7177,7 @@ googleCloudDialogflowV2ListIntentsResponse
 googleCloudDialogflowV2ListIntentsResponse =
   GoogleCloudDialogflowV2ListIntentsResponse'
     {_gcdvlirIntents = Nothing, _gcdvlirNextPageToken = Nothing}
+
 
 -- | The list of agent intents. There will be a maximum number of items
 -- returned based on the page_size field in the request.
@@ -7023,6 +7225,7 @@ newtype GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7033,6 +7236,7 @@ googleCloudDialogflowV2BatchUpdateEntityTypesResponse
 googleCloudDialogflowV2BatchUpdateEntityTypesResponse =
   GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse'
     {_gEntityTypes = Nothing}
+
 
 -- | The collection of updated or created entity types.
 gEntityTypes :: Lens' GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse [GoogleCloudDialogflowV2EntityType]
@@ -7069,6 +7273,7 @@ newtype GoogleCloudDialogflowV2QueryResultWebhookPayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryResultWebhookPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7080,6 +7285,7 @@ googleCloudDialogflowV2QueryResultWebhookPayload
 googleCloudDialogflowV2QueryResultWebhookPayload pGcdvqrwpAddtional_ =
   GoogleCloudDialogflowV2QueryResultWebhookPayload'
     {_gcdvqrwpAddtional = _Coerce # pGcdvqrwpAddtional_}
+
 
 -- | Properties of the object.
 gcdvqrwpAddtional :: Lens' GoogleCloudDialogflowV2QueryResultWebhookPayload (HashMap Text JSONValue)
@@ -7119,6 +7325,7 @@ data GoogleCloudDialogflowV2beta1IntentParameter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentParameter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7151,6 +7358,7 @@ googleCloudDialogflowV2beta1IntentParameter =
     , _gcdvipIsList = Nothing
     , _gcdvipEntityTypeDisplayName = Nothing
     }
+
 
 -- | Optional. The definition of the parameter value. It can be: - a constant
 -- string, - a parameter value defined as \`$parameter_name\`, - an
@@ -7258,6 +7466,7 @@ data GoogleCloudDialogflowV2IntentParameter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentParameter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7290,6 +7499,7 @@ googleCloudDialogflowV2IntentParameter =
     , _gcdvipcIsList = Nothing
     , _gcdvipcEntityTypeDisplayName = Nothing
     }
+
 
 -- | Optional. The definition of the parameter value. It can be: - a constant
 -- string, - a parameter value defined as \`$parameter_name\`, - an
@@ -7390,6 +7600,7 @@ newtype GoogleCloudDialogflowV2beta1QueryResultWebhookPayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1QueryResultWebhookPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7401,6 +7612,7 @@ googleCloudDialogflowV2beta1QueryResultWebhookPayload
 googleCloudDialogflowV2beta1QueryResultWebhookPayload pGcdvqrwpcAddtional_ =
   GoogleCloudDialogflowV2beta1QueryResultWebhookPayload'
     {_gcdvqrwpcAddtional = _Coerce # pGcdvqrwpcAddtional_}
+
 
 -- | Properties of the object.
 gcdvqrwpcAddtional :: Lens' GoogleCloudDialogflowV2beta1QueryResultWebhookPayload (HashMap Text JSONValue)
@@ -7436,6 +7648,7 @@ data GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7456,6 +7669,7 @@ googleCloudDialogflowV2beta1IntentTrainingPhrasePart =
     , _gcdvitppcEntityType = Nothing
     , _gcdvitppcAlias = Nothing
     }
+
 
 -- | Required. The text corresponding to the example, if there are no
 -- annotations. For annotated examples, it is the text for one of the
@@ -7522,6 +7736,7 @@ data GoogleCloudDialogflowV2ListContextsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2ListContextsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7534,6 +7749,7 @@ googleCloudDialogflowV2ListContextsResponse
 googleCloudDialogflowV2ListContextsResponse =
   GoogleCloudDialogflowV2ListContextsResponse'
     {_gcdvlcrContexts = Nothing, _gcdvlcrNextPageToken = Nothing}
+
 
 -- | The list of contexts. There will be a maximum number of items returned
 -- based on the page_size field in the request.
@@ -7581,6 +7797,7 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7591,6 +7808,7 @@ googleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall
 googleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall =
   GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall'
     {_gcdvimttcPhoneNumber = Nothing}
+
 
 -- | Required. The phone number to transfer the call to in [E.164
 -- format](https:\/\/en.wikipedia.org\/wiki\/E.164). We currently only
@@ -7629,6 +7847,7 @@ data GoogleCloudDialogflowV2beta1ExportAgentResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1ExportAgentResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7641,6 +7860,7 @@ googleCloudDialogflowV2beta1ExportAgentResponse
 googleCloudDialogflowV2beta1ExportAgentResponse =
   GoogleCloudDialogflowV2beta1ExportAgentResponse'
     {_gooAgentURI = Nothing, _gooAgentContent = Nothing}
+
 
 -- | The URI to a file containing the exported agent. This field is populated
 -- only if \`agent_uri\` is specified in \`ExportAgentRequest\`.
@@ -7712,6 +7932,7 @@ newtype GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7723,6 +7944,7 @@ googleCloudDialogflowV2OriginalDetectIntentRequestPayload
 googleCloudDialogflowV2OriginalDetectIntentRequestPayload pGcdvodirpcAddtional_ =
   GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload'
     {_gcdvodirpcAddtional = _Coerce # pGcdvodirpcAddtional_}
+
 
 -- | Properties of the object.
 gcdvodirpcAddtional :: Lens' GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload (HashMap Text JSONValue)
@@ -7760,6 +7982,7 @@ data GoogleCloudDialogflowV2SessionEntityType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2SessionEntityType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7777,6 +8000,7 @@ googleCloudDialogflowV2SessionEntityType =
     , _gcdvSetEntities = Nothing
     , _gcdvSetName = Nothing
     }
+
 
 -- | Required. Indicates whether the additional data should override or
 -- supplement the developer entity type definition.
@@ -7835,6 +8059,7 @@ data GoogleCloudDialogflowV2EntityTypeEntity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2EntityTypeEntity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7847,6 +8072,7 @@ googleCloudDialogflowV2EntityTypeEntity
 googleCloudDialogflowV2EntityTypeEntity =
   GoogleCloudDialogflowV2EntityTypeEntity'
     {_gValue = Nothing, _gSynonyms = Nothing}
+
 
 -- | Required. The primary value associated with this entity entry. For
 -- example, if the entity type is *vegetable*, the value could be
@@ -7910,6 +8136,7 @@ data GoogleCloudDialogflowV2beta1QueryResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1QueryResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7966,6 +8193,7 @@ googleCloudDialogflowV2beta1QueryResult =
     , _gWebhookSource = Nothing
     , _gDiagnosticInfo = Nothing
     }
+
 
 -- | The language that was triggered during intent detection. See [Language
 -- Support](https:\/\/dialogflow.com\/docs\/reference\/language) for a list
@@ -8156,6 +8384,7 @@ data GoogleCloudDialogflowV2IntentMessageImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8168,6 +8397,7 @@ googleCloudDialogflowV2IntentMessageImage
 googleCloudDialogflowV2IntentMessageImage =
   GoogleCloudDialogflowV2IntentMessageImage'
     {_gAccessibilityText = Nothing, _gImageURI = Nothing}
+
 
 -- | Optional. A text description of the image to be used for accessibility,
 -- e.g., screen readers.
@@ -8214,6 +8444,7 @@ data GoogleCloudDialogflowV2WebhookResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2WebhookResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8240,6 +8471,7 @@ googleCloudDialogflowV2WebhookResponse =
     , _gooOutputContexts = Nothing
     , _gooFollowupEventInput = Nothing
     }
+
 
 -- | Optional. The collection of rich messages to present to the user. This
 -- value is passed directly to \`QueryResult.fulfillment_messages\`.
@@ -8341,12 +8573,14 @@ data GoogleCloudDialogflowV2TrainAgentRequest =
   GoogleCloudDialogflowV2TrainAgentRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2TrainAgentRequest' with the minimum fields required to make a request.
 --
 googleCloudDialogflowV2TrainAgentRequest
     :: GoogleCloudDialogflowV2TrainAgentRequest
 googleCloudDialogflowV2TrainAgentRequest =
   GoogleCloudDialogflowV2TrainAgentRequest'
+
 
 instance FromJSON
            GoogleCloudDialogflowV2TrainAgentRequest
@@ -8371,6 +8605,7 @@ newtype GoogleCloudDialogflowV2IntentBatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentBatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8380,6 +8615,7 @@ googleCloudDialogflowV2IntentBatch
     :: GoogleCloudDialogflowV2IntentBatch
 googleCloudDialogflowV2IntentBatch =
   GoogleCloudDialogflowV2IntentBatch' {_gcdvibIntents = Nothing}
+
 
 -- | A collection of intents.
 gcdvibIntents :: Lens' GoogleCloudDialogflowV2IntentBatch [GoogleCloudDialogflowV2Intent]
@@ -8417,6 +8653,7 @@ data GoogleCloudDialogflowV2beta1EntityType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1EntityType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8440,6 +8677,7 @@ googleCloudDialogflowV2beta1EntityType =
     , _gcdvetcAutoExpansionMode = Nothing
     , _gcdvetcDisplayName = Nothing
     }
+
 
 -- | Optional. The collection of entity entries associated with the entity
 -- type.
@@ -8510,6 +8748,7 @@ data GoogleCloudDialogflowV2SearchAgentsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2SearchAgentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8522,6 +8761,7 @@ googleCloudDialogflowV2SearchAgentsResponse
 googleCloudDialogflowV2SearchAgentsResponse =
   GoogleCloudDialogflowV2SearchAgentsResponse'
     {_gcdvsarNextPageToken = Nothing, _gcdvsarAgents = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -8570,6 +8810,7 @@ data GoogleCloudDialogflowV2ListSessionEntityTypesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2ListSessionEntityTypesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8582,6 +8823,7 @@ googleCloudDialogflowV2ListSessionEntityTypesResponse
 googleCloudDialogflowV2ListSessionEntityTypesResponse =
   GoogleCloudDialogflowV2ListSessionEntityTypesResponse'
     {_gcdvlSetrNextPageToken = Nothing, _gcdvlSetrSessionEntityTypes = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -8636,6 +8878,7 @@ data GoogleLongrunningOperation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningOperation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8659,6 +8902,7 @@ googleLongrunningOperation =
     , _gloName = Nothing
     , _gloMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -8736,6 +8980,7 @@ data GoogleCloudDialogflowV2IntentMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8780,6 +9025,7 @@ googleCloudDialogflowV2IntentMessage =
     , _gcdvimcBasicCard = Nothing
     , _gcdvimcQuickReplies = Nothing
     }
+
 
 -- | The card response.
 gcdvimcCard :: Lens' GoogleCloudDialogflowV2IntentMessage (Maybe GoogleCloudDialogflowV2IntentMessageCard)
@@ -8899,6 +9145,7 @@ newtype GoogleCloudDialogflowV2IntentMessageCarouselSelect =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageCarouselSelect' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8908,6 +9155,7 @@ googleCloudDialogflowV2IntentMessageCarouselSelect
     :: GoogleCloudDialogflowV2IntentMessageCarouselSelect
 googleCloudDialogflowV2IntentMessageCarouselSelect =
   GoogleCloudDialogflowV2IntentMessageCarouselSelect' {_gItems = Nothing}
+
 
 -- | Required. Carousel items.
 gItems :: Lens' GoogleCloudDialogflowV2IntentMessageCarouselSelect [GoogleCloudDialogflowV2IntentMessageCarouselSelectItem]
@@ -8943,6 +9191,7 @@ data GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8955,6 +9204,7 @@ googleCloudDialogflowV2beta1IntentMessageSelectItemInfo
 googleCloudDialogflowV2beta1IntentMessageSelectItemInfo =
   GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo'
     {_gooKey = Nothing, _gooSynonyms = Nothing}
+
 
 -- | Required. A unique key that will be sent back to the agent if this
 -- response is given.
@@ -9018,6 +9268,7 @@ data GoogleCloudDialogflowV2beta1Intent =
     , _gcdvicResetContexts            :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1Intent' with the minimum fields required to make a request.
 --
@@ -9087,6 +9338,7 @@ googleCloudDialogflowV2beta1Intent =
     , _gcdvicMlDisabled = Nothing
     , _gcdvicResetContexts = Nothing
     }
+
 
 -- | Optional. The list of platforms for which the first response will be
 -- taken from among the messages assigned to the DEFAULT_PLATFORM.
@@ -9329,6 +9581,7 @@ data GoogleCloudDialogflowV2Context =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2Context' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9346,6 +9599,7 @@ googleCloudDialogflowV2Context =
     , _gcdvccName = Nothing
     , _gcdvccParameters = Nothing
     }
+
 
 -- | Optional. The number of conversational query requests after which the
 -- context expires. If set to \`0\` (the default) the context expires
@@ -9400,6 +9654,7 @@ data GoogleCloudDialogflowV2IntentMessageBasicCardButton =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageBasicCardButton' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9412,6 +9667,7 @@ googleCloudDialogflowV2IntentMessageBasicCardButton
 googleCloudDialogflowV2IntentMessageBasicCardButton =
   GoogleCloudDialogflowV2IntentMessageBasicCardButton'
     {_gcdvimbcbcOpenURIAction = Nothing, _gcdvimbcbcTitle = Nothing}
+
 
 -- | Required. Action to take when a user taps on the button.
 gcdvimbcbcOpenURIAction :: Lens' GoogleCloudDialogflowV2IntentMessageBasicCardButton (Maybe GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction)

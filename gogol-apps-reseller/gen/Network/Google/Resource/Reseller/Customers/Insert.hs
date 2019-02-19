@@ -61,6 +61,7 @@ data CustomersInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ customersInsert
     -> CustomersInsert
 customersInsert pCiPayload_ =
   CustomersInsert' {_ciPayload = pCiPayload_, _ciCustomerAuthToken = Nothing}
+
 
 -- | Multipart request metadata.
 ciPayload :: Lens' CustomersInsert Customer

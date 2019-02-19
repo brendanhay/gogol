@@ -57,6 +57,7 @@ newtype PushtokensUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PushtokensUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ pushtokensUpdate
     :: PushToken -- ^ 'puPayload'
     -> PushtokensUpdate
 pushtokensUpdate pPuPayload_ = PushtokensUpdate' {_puPayload = pPuPayload_}
+
 
 -- | Multipart request metadata.
 puPayload :: Lens' PushtokensUpdate PushToken

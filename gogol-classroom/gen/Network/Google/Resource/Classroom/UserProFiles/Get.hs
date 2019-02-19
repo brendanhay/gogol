@@ -77,6 +77,7 @@ data UserProFilesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserProFilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ userProFilesGet pUpfgUserId_ =
     , _upfgUserId = pUpfgUserId_
     , _upfgCallback = Nothing
     }
+
 
 -- | V1 error format.
 upfgXgafv :: Lens' UserProFilesGet (Maybe Xgafv)

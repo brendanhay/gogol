@@ -77,6 +77,7 @@ data BackendServicesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServicesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ backendServicesPatch pBspProject_ pBspPayload_ pBspBackendService_ =
     , _bspPayload = pBspPayload_
     , _bspBackendService = pBspBackendService_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

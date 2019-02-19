@@ -78,6 +78,7 @@ data ProjectsLocationsDataSetsFhirStoresCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsFhirStoresCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsLocationsDataSetsFhirStoresCreate pPldsfscParent_ pPldsfscPayload_ =
     , _pldsfscFhirStoreId = Nothing
     , _pldsfscCallback = Nothing
     }
+
 
 -- | The name of the dataset this FHIR store belongs to.
 pldsfscParent :: Lens' ProjectsLocationsDataSetsFhirStoresCreate Text

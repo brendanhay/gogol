@@ -63,6 +63,7 @@ data RegionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ regionsGet
     -> RegionsGet
 regionsGet pRgProject_ pRgRegion_ =
   RegionsGet' {_rgProject = pRgProject_, _rgRegion = pRgRegion_}
+
 
 -- | Project ID for this request.
 rgProject :: Lens' RegionsGet Text

@@ -56,6 +56,7 @@ newtype AccountsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -65,6 +66,7 @@ accountsGet
     :: Text -- ^ 'agPath'
     -> AccountsGet
 accountsGet pAgPath_ = AccountsGet' {_agPath = pAgPath_}
+
 
 -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}
 agPath :: Lens' AccountsGet Text

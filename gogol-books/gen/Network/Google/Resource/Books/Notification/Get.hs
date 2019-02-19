@@ -64,6 +64,7 @@ data NotificationGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ notificationGet pNgNotificationId_ =
     , _ngNotificationId = pNgNotificationId_
     , _ngSource = Nothing
     }
+
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating notification title and body.

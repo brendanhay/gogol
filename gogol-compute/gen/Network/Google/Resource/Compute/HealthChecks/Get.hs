@@ -64,6 +64,7 @@ data HealthChecksGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HealthChecksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ healthChecksGet
 healthChecksGet pHcgHealthCheck_ pHcgProject_ =
   HealthChecksGet'
     {_hcgHealthCheck = pHcgHealthCheck_, _hcgProject = pHcgProject_}
+
 
 -- | Name of the HealthCheck resource to return.
 hcgHealthCheck :: Lens' HealthChecksGet Text

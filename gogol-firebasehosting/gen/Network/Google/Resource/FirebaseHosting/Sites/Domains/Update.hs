@@ -75,6 +75,7 @@ data SitesDomainsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesDomainsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ sitesDomainsUpdate pSduPayload_ pSduName_ =
     , _sduName = pSduName_
     , _sduCallback = Nothing
     }
+
 
 -- | V1 error format.
 sduXgafv :: Lens' SitesDomainsUpdate (Maybe Xgafv)

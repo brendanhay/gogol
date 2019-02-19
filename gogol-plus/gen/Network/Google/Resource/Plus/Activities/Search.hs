@@ -69,6 +69,7 @@ data ActivitiesSearch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivitiesSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ activitiesSearch pAsQuery_ =
     , _asPageToken = Nothing
     , _asMaxResults = 10
     }
+
 
 -- | Specifies how to order search results.
 asOrderBy :: Lens' ActivitiesSearch ActivitiesSearchOrderBy

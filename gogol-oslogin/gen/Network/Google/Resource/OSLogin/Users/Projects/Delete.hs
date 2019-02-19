@@ -70,6 +70,7 @@ data UsersProjectsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersProjectsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ usersProjectsDelete pUpdName_ =
     , _updName = pUpdName_
     , _updCallback = Nothing
     }
+
 
 -- | V1 error format.
 updXgafv :: Lens' UsersProjectsDelete (Maybe Xgafv)

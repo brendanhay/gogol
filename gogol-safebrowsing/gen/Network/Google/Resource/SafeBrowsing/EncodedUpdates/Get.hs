@@ -78,6 +78,7 @@ data EncodedUpdatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EncodedUpdatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ encodedUpdatesGet pEugEncodedRequest_ =
     , _eugClientVersion = Nothing
     , _eugCallback = Nothing
     }
+
 
 -- | A client ID that uniquely identifies the client implementation of the
 -- Safe Browsing API.

@@ -83,6 +83,7 @@ data ProjectsLocationsDataSetsFhirStoresImport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsFhirStoresImport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ projectsLocationsDataSetsFhirStoresImport pPldsfsiPayload_ pPldsfsiName_ =
     , _pldsfsiName = pPldsfsiName_
     , _pldsfsiCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldsfsiXgafv :: Lens' ProjectsLocationsDataSetsFhirStoresImport (Maybe Xgafv)

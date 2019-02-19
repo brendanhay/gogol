@@ -59,6 +59,7 @@ newtype PubproFilesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PubproFilesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ pubproFilesList
     -> PubproFilesList
 pubproFilesList pPflAccountId_ =
   PubproFilesList' {_pflAccountId = _Coerce # pPflAccountId_}
+
 
 -- | The accountId of the publisher to get profiles for.
 pflAccountId :: Lens' PubproFilesList Int32

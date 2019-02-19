@@ -73,6 +73,7 @@ data ManagementGoalsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementGoalsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ managementGoalsUpdate pMguWebPropertyId_ pMguGoalId_ pMguProFileId_ pMguPayload_
     , _mguPayload = pMguPayload_
     , _mguAccountId = pMguAccountId_
     }
+
 
 -- | Web property ID to update the goal.
 mguWebPropertyId :: Lens' ManagementGoalsUpdate Text

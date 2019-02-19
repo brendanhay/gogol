@@ -80,6 +80,7 @@ data ProjectsAgentSessionsEntityTypesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentSessionsEntityTypesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ projectsAgentSessionsEntityTypesPatch pPaSetpPayload_ pPaSetpName_ =
     , _paSetpName = pPaSetpName_
     , _paSetpCallback = Nothing
     }
+
 
 -- | V1 error format.
 paSetpXgafv :: Lens' ProjectsAgentSessionsEntityTypesPatch (Maybe Xgafv)

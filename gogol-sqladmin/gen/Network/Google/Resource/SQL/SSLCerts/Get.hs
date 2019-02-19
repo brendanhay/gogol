@@ -69,6 +69,7 @@ data SSLCertsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ sslCertsGet pScgProject_ pScgSha1Fingerprint_ pScgInstance_ =
     , _scgSha1Fingerprint = pScgSha1Fingerprint_
     , _scgInstance = pScgInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 scgProject :: Lens' SSLCertsGet Text

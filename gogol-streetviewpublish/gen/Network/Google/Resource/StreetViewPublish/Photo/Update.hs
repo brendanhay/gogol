@@ -99,6 +99,7 @@ data PhotoUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PhotoUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -133,6 +134,7 @@ photoUpdate pPuPayload_ pPuId_ =
     , _puId = pPuId_
     , _puCallback = Nothing
     }
+
 
 -- | V1 error format.
 puXgafv :: Lens' PhotoUpdate (Maybe Xgafv)

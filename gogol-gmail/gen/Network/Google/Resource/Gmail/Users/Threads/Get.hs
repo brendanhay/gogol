@@ -67,6 +67,7 @@ data UsersThreadsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersThreadsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ usersThreadsGet pUtgId_ =
     , _utgId = pUtgId_
     , _utgMetadataHeaders = Nothing
     }
+
 
 -- | The format to return the messages in.
 utgFormat :: Lens' UsersThreadsGet UsersThreadsGetFormat

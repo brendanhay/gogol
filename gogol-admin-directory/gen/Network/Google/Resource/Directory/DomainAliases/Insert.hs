@@ -63,6 +63,7 @@ data DomainAliasesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainAliasesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ domainAliasesInsert
 domainAliasesInsert pDaiPayload_ pDaiCustomer_ =
   DomainAliasesInsert'
     {_daiPayload = pDaiPayload_, _daiCustomer = pDaiCustomer_}
+
 
 -- | Multipart request metadata.
 daiPayload :: Lens' DomainAliasesInsert DomainAlias

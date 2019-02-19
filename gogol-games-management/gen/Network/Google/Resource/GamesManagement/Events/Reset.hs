@@ -64,6 +64,7 @@ newtype EventsReset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsReset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ eventsReset
     :: Text -- ^ 'erEventId'
     -> EventsReset
 eventsReset pErEventId_ = EventsReset' {_erEventId = pErEventId_}
+
 
 -- | The ID of the event.
 erEventId :: Lens' EventsReset Text

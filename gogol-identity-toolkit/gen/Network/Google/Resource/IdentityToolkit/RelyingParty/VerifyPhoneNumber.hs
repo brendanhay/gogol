@@ -64,6 +64,7 @@ newtype RelyingPartyVerifyPhoneNumber =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartyVerifyPhoneNumber' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ relyingPartyVerifyPhoneNumber
     -> RelyingPartyVerifyPhoneNumber
 relyingPartyVerifyPhoneNumber pRpvpnPayload_ =
   RelyingPartyVerifyPhoneNumber' {_rpvpnPayload = pRpvpnPayload_}
+
 
 -- | Multipart request metadata.
 rpvpnPayload :: Lens' RelyingPartyVerifyPhoneNumber IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest

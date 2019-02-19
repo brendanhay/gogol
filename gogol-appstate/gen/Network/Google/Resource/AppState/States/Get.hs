@@ -59,6 +59,7 @@ newtype StatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ statesGet
     :: Int32 -- ^ 'sgStateKey'
     -> StatesGet
 statesGet pSgStateKey_ = StatesGet' {_sgStateKey = _Coerce # pSgStateKey_}
+
 
 -- | The key for the data to be retrieved.
 sgStateKey :: Lens' StatesGet Int32

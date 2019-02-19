@@ -77,6 +77,7 @@ data ProjectsCommit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsCommit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsCommit pPcPayload_ pPcProjectId_ =
     , _pcProjectId = pPcProjectId_
     , _pcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pcXgafv :: Lens' ProjectsCommit (Maybe Xgafv)

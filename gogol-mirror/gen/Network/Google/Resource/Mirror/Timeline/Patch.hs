@@ -61,6 +61,7 @@ data TimelinePatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimelinePatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ timelinePatch
     -> TimelinePatch
 timelinePatch pTpPayload_ pTpId_ =
   TimelinePatch' {_tpPayload = pTpPayload_, _tpId = pTpId_}
+
 
 -- | Multipart request metadata.
 tpPayload :: Lens' TimelinePatch TimelineItem

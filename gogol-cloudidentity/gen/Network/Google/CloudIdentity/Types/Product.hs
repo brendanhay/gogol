@@ -28,6 +28,7 @@ newtype LookupMembershipNameResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LookupMembershipNameResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37,6 +38,7 @@ lookupMembershipNameResponse
     :: LookupMembershipNameResponse
 lookupMembershipNameResponse =
   LookupMembershipNameResponse' {_lmnrName = Nothing}
+
 
 -- | [Resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the
@@ -102,6 +104,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +117,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -167,6 +171,7 @@ data Group =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -199,6 +204,7 @@ group' =
     , _gDescription = Nothing
     , _gCreateTime = Nothing
     }
+
 
 -- | The entity under which this Group resides in Cloud Identity resource
 -- hierarchy. Must be set when creating a Group, read-only afterwards.
@@ -290,6 +296,7 @@ data Membership =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Membership' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -313,6 +320,7 @@ membership =
     , _mPreferredMemberKey = Nothing
     , _mCreateTime = Nothing
     }
+
 
 -- | Roles for a member within the Group. Currently supported
 -- MembershipRoles: \`\"MEMBER\"\`.
@@ -385,6 +393,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -408,6 +417,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -474,6 +484,7 @@ data ListGroupsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListGroupsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -485,6 +496,7 @@ listGroupsResponse
     :: ListGroupsResponse
 listGroupsResponse =
   ListGroupsResponse' {_lgrGroups = Nothing, _lgrNextPageToken = Nothing}
+
 
 -- | Groups returned in response to list request. The results are not sorted.
 lgrGroups :: Lens' ListGroupsResponse [Group]
@@ -523,6 +535,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -533,6 +546,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -557,6 +571,7 @@ newtype MembershipRole =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MembershipRole' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -565,6 +580,7 @@ newtype MembershipRole =
 membershipRole
     :: MembershipRole
 membershipRole = MembershipRole' {_mrName = Nothing}
+
 
 -- | MembershipRole in string format. Currently supported MembershipRoles:
 -- \`\"MEMBER\"\`.
@@ -588,6 +604,7 @@ newtype LookupGroupNameResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LookupGroupNameResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -596,6 +613,7 @@ newtype LookupGroupNameResponse =
 lookupGroupNameResponse
     :: LookupGroupNameResponse
 lookupGroupNameResponse = LookupGroupNameResponse' {_lgnrName = Nothing}
+
 
 -- | [Resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the
@@ -622,6 +640,7 @@ data SearchGroupsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchGroupsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -633,6 +652,7 @@ searchGroupsResponse
     :: SearchGroupsResponse
 searchGroupsResponse =
   SearchGroupsResponse' {_sgrGroups = Nothing, _sgrNextPageToken = Nothing}
+
 
 -- | List of Groups satisfying the search query.
 sgrGroups :: Lens' SearchGroupsResponse [Group]
@@ -675,6 +695,7 @@ data EntityKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -685,6 +706,7 @@ data EntityKey =
 entityKey
     :: EntityKey
 entityKey = EntityKey' {_ekNamespace = Nothing, _ekId = Nothing}
+
 
 -- | Namespaces provide isolation for IDs, so an ID only needs to be unique
 -- within its namespace. Namespaces are currently only created as part of
@@ -724,6 +746,7 @@ newtype GroupLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -734,6 +757,7 @@ groupLabels
     -> GroupLabels
 groupLabels pGlAddtional_ =
   GroupLabels' {_glAddtional = _Coerce # pGlAddtional_}
+
 
 glAddtional :: Lens' GroupLabels (HashMap Text Text)
 glAddtional
@@ -757,6 +781,7 @@ data ListMembershipsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListMembershipsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -769,6 +794,7 @@ listMembershipsResponse
 listMembershipsResponse =
   ListMembershipsResponse'
     {_lmrNextPageToken = Nothing, _lmrMemberships = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results available for listing.
@@ -812,6 +838,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -822,6 +849,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -853,6 +881,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -863,6 +892,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)

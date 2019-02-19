@@ -62,6 +62,7 @@ data AdvertiserGroupsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserGroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ advertiserGroupsInsert
 advertiserGroupsInsert pAgiProFileId_ pAgiPayload_ =
   AdvertiserGroupsInsert'
     {_agiProFileId = _Coerce # pAgiProFileId_, _agiPayload = pAgiPayload_}
+
 
 -- | User profile ID associated with this request.
 agiProFileId :: Lens' AdvertiserGroupsInsert Int64

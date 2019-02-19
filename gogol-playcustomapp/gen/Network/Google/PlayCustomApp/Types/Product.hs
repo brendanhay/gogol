@@ -30,6 +30,7 @@ data CustomApp =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomApp' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40,6 +41,7 @@ data CustomApp =
 customApp
     :: CustomApp
 customApp = CustomApp' {_caLanguageCode = Nothing, _caTitle = Nothing}
+
 
 -- | Default listing language in BCP 47 format.
 caLanguageCode :: Lens' CustomApp (Maybe Text)

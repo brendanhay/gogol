@@ -61,6 +61,7 @@ data AccountsContainersWorkspacesUpdateProposal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesUpdateProposal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ accountsContainersWorkspacesUpdateProposal
 accountsContainersWorkspacesUpdateProposal pAcwupPath_ pAcwupPayload_ =
   AccountsContainersWorkspacesUpdateProposal'
     {_acwupPath = pAcwupPath_, _acwupPayload = pAcwupPayload_}
+
 
 -- | GTM workspace proposal\'s relative path: Example:
 -- accounts\/{aid}\/containers\/{cid}\/workspace\/{wid}\/workspace_proposal

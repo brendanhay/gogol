@@ -70,6 +70,7 @@ data ManagementExperimentsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementExperimentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ managementExperimentsInsert pMeiWebPropertyId_ pMeiProFileId_ pMeiPayload_ pMeiA
     , _meiPayload = pMeiPayload_
     , _meiAccountId = pMeiAccountId_
     }
+
 
 -- | Web property ID to create the experiment for.
 meiWebPropertyId :: Lens' ManagementExperimentsInsert Text

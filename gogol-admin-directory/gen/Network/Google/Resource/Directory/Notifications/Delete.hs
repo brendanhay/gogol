@@ -62,6 +62,7 @@ data NotificationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ notificationsDelete
 notificationsDelete pNdCustomer_ pNdNotificationId_ =
   NotificationsDelete'
     {_ndCustomer = pNdCustomer_, _ndNotificationId = pNdNotificationId_}
+
 
 -- | The unique ID for the customer\'s G Suite account. The customerId is
 -- also returned as part of the Users resource.

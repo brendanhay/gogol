@@ -89,6 +89,7 @@ data QuerySourcesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuerySourcesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +128,7 @@ querySourcesList =
     , _qslPageToken = Nothing
     , _qslCallback = Nothing
     }
+
 
 -- | V1 error format.
 qslXgafv :: Lens' QuerySourcesList (Maybe Xgafv)

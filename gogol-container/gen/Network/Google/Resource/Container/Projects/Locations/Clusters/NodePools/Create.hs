@@ -76,6 +76,7 @@ data ProjectsLocationsClustersNodePoolsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsLocationsClustersNodePoolsCreate pPlcnpcParent_ pPlcnpcPayload_ =
     , _plcnpcPayload = pPlcnpcPayload_
     , _plcnpcCallback = Nothing
     }
+
 
 -- | The parent (project, location, cluster id) where the node pool will be
 -- created. Specified in the format

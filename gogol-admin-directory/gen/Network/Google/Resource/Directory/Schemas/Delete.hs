@@ -62,6 +62,7 @@ data SchemasDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SchemasDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ schemasDelete
     -> SchemasDelete
 schemasDelete pSdCustomerId_ pSdSchemaKey_ =
   SchemasDelete' {_sdCustomerId = pSdCustomerId_, _sdSchemaKey = pSdSchemaKey_}
+
 
 -- | Immutable ID of the G Suite account
 sdCustomerId :: Lens' SchemasDelete Text

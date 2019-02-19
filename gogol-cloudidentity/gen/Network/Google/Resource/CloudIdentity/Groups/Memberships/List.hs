@@ -81,6 +81,7 @@ data GroupsMembershipsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsMembershipsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ groupsMembershipsList pGroParent_ =
     , _groPageSize = Nothing
     , _groCallback = Nothing
     }
+
 
 -- | [Resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the

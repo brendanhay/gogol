@@ -62,6 +62,7 @@ data ManagementFiltersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementFiltersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ managementFiltersDelete
 managementFiltersDelete pMfdFilterId_ pMfdAccountId_ =
   ManagementFiltersDelete'
     {_mfdFilterId = pMfdFilterId_, _mfdAccountId = pMfdAccountId_}
+
 
 -- | ID of the filter to be deleted.
 mfdFilterId :: Lens' ManagementFiltersDelete Text

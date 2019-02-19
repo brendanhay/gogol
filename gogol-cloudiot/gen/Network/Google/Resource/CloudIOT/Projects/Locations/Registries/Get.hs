@@ -71,6 +71,7 @@ data ProjectsLocationsRegistriesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsLocationsRegistriesGet pPlrgName_ =
     , _plrgName = pPlrgName_
     , _plrgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrgXgafv :: Lens' ProjectsLocationsRegistriesGet (Maybe Xgafv)

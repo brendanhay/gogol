@@ -78,6 +78,7 @@ data DebugDatasourcesItemsCheckAccess =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DebugDatasourcesItemsCheckAccess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ debugDatasourcesItemsCheckAccess pDdicaPayload_ pDdicaName_ =
     , _ddicaDebugOptionsEnableDebugging = Nothing
     , _ddicaCallback = Nothing
     }
+
 
 -- | V1 error format.
 ddicaXgafv :: Lens' DebugDatasourcesItemsCheckAccess (Maybe Xgafv)

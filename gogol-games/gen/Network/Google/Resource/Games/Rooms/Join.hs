@@ -66,6 +66,7 @@ data RoomsJoin =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomsJoin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ roomsJoin
 roomsJoin pRjPayload_ pRjRoomId_ =
   RoomsJoin'
     {_rjPayload = pRjPayload_, _rjRoomId = pRjRoomId_, _rjLanguage = Nothing}
+
 
 -- | Multipart request metadata.
 rjPayload :: Lens' RoomsJoin RoomJoinRequest

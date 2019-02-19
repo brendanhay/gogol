@@ -68,6 +68,7 @@ data PostsGetByPath =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostsGetByPath' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ postsGetByPath pPgbpPath_ pPgbpBlogId_ =
     , _pgbpMaxComments = Nothing
     , _pgbpView = Nothing
     }
+
 
 -- | Path of the Post to retrieve.
 pgbpPath :: Lens' PostsGetByPath Text

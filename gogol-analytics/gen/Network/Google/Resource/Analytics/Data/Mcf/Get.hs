@@ -85,6 +85,7 @@ data DataMcfGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataMcfGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +128,7 @@ dataMcfGet pDmgMetrics_ pDmgIds_ pDmgEndDate_ pDmgStartDate_ =
     , _dmgMaxResults = Nothing
     , _dmgStartDate = pDmgStartDate_
     }
+
 
 -- | A comma-separated list of Multi-Channel Funnels metrics. E.g.,
 -- \'mcf:totalConversions,mcf:totalConversionValue\'. At least one metric

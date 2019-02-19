@@ -69,6 +69,7 @@ data DefaultObjectAccessControlsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DefaultObjectAccessControlsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ defaultObjectAccessControlsList pDoaclBucket_ =
     , _doaclUserProject = Nothing
     , _doaclIfMetagenerationNotMatch = Nothing
     }
+
 
 -- | If present, only return default ACL listing if the bucket\'s current
 -- metageneration matches this value.

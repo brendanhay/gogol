@@ -63,6 +63,7 @@ data UsersDataSourcesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDataSourcesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ usersDataSourcesDelete
 usersDataSourcesDelete pUdsdDataSourceId_ pUdsdUserId_ =
   UsersDataSourcesDelete'
     {_udsdDataSourceId = pUdsdDataSourceId_, _udsdUserId = pUdsdUserId_}
+
 
 -- | The data stream ID of the data source to delete.
 udsdDataSourceId :: Lens' UsersDataSourcesDelete Text

@@ -61,6 +61,7 @@ data SizesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SizesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ sizesGet
     -> SizesGet
 sizesGet pSgProFileId_ pSgId_ =
   SizesGet' {_sgProFileId = _Coerce # pSgProFileId_, _sgId = _Coerce # pSgId_}
+
 
 -- | User profile ID associated with this request.
 sgProFileId :: Lens' SizesGet Int64

@@ -74,6 +74,7 @@ data LogsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ logsDelete pLdLogName_ =
     , _ldLogName = pLdLogName_
     , _ldCallback = Nothing
     }
+
 
 -- | V1 error format.
 ldXgafv :: Lens' LogsDelete (Maybe Xgafv)

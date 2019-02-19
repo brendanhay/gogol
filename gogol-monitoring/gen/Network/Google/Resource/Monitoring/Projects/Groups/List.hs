@@ -87,6 +87,7 @@ data ProjectsGroupsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -129,6 +130,7 @@ projectsGroupsList pPglName_ =
     , _pglAncestorsOfGroup = Nothing
     , _pglCallback = Nothing
     }
+
 
 -- | V1 error format.
 pglXgafv :: Lens' ProjectsGroupsList (Maybe Xgafv)

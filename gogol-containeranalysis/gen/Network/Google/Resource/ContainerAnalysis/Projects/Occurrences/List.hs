@@ -81,6 +81,7 @@ data ProjectsOccurrencesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsOccurrencesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsOccurrencesList pPolParent_ =
     , _polPageSize = Nothing
     , _polCallback = Nothing
     }
+
 
 -- | The name of the project to list occurrences for in the form of
 -- \`projects\/[PROJECT_ID]\`.

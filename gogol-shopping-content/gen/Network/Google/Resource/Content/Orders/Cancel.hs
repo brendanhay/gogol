@@ -65,6 +65,7 @@ data OrdersCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ ordersCancel pOc1MerchantId_ pOc1Payload_ pOc1OrderId_ =
     , _oc1Payload = pOc1Payload_
     , _oc1OrderId = pOc1OrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

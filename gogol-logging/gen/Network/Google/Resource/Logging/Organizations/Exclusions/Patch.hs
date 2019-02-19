@@ -77,6 +77,7 @@ data OrganizationsExclusionsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsExclusionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ organizationsExclusionsPatch pOepPayload_ pOepName_ =
     , _oepName = pOepName_
     , _oepCallback = Nothing
     }
+
 
 -- | V1 error format.
 oepXgafv :: Lens' OrganizationsExclusionsPatch (Maybe Xgafv)

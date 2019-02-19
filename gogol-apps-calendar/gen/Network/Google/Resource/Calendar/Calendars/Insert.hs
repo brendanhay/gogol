@@ -57,6 +57,7 @@ newtype CalendarsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CalendarsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ calendarsInsert
     :: Calendar -- ^ 'ciPayload'
     -> CalendarsInsert
 calendarsInsert pCiPayload_ = CalendarsInsert' {_ciPayload = pCiPayload_}
+
 
 -- | Multipart request metadata.
 ciPayload :: Lens' CalendarsInsert Calendar

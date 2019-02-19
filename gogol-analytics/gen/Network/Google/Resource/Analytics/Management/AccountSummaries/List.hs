@@ -64,6 +64,7 @@ data ManagementAccountSummariesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementAccountSummariesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ managementAccountSummariesList
 managementAccountSummariesList =
   ManagementAccountSummariesList'
     {_maslStartIndex = Nothing, _maslMaxResults = Nothing}
+
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.

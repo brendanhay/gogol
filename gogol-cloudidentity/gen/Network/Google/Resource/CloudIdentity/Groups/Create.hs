@@ -71,6 +71,7 @@ data GroupsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ groupsCreate pGcPayload_ =
     , _gcPayload = pGcPayload_
     , _gcCallback = Nothing
     }
+
 
 -- | V1 error format.
 gcXgafv :: Lens' GroupsCreate (Maybe Xgafv)

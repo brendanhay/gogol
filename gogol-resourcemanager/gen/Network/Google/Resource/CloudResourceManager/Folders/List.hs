@@ -91,6 +91,7 @@ data FoldersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ foldersList =
     , _flPageSize = Nothing
     , _flCallback = Nothing
     }
+
 
 -- | The resource name of the Organization or Folder whose Folders are being
 -- listed. Must be of the form \`folders\/{folder_id}\` or

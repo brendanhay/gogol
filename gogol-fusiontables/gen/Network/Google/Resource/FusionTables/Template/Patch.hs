@@ -64,6 +64,7 @@ data TemplatePatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TemplatePatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ templatePatch pTppTemplateId_ pTppPayload_ pTppTableId_ =
     , _tppPayload = pTppPayload_
     , _tppTableId = pTppTableId_
     }
+
 
 -- | Identifier for the template that is being updated
 tppTemplateId :: Lens' TemplatePatch Int32

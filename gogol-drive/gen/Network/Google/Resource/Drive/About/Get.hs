@@ -54,11 +54,13 @@ data AboutGet =
   AboutGet'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AboutGet' with the minimum fields required to make a request.
 --
 aboutGet
     :: AboutGet
 aboutGet = AboutGet'
+
 
 instance GoogleRequest AboutGet where
         type Rs AboutGet = About

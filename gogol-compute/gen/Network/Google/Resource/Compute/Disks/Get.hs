@@ -67,6 +67,7 @@ data DisksGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DisksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ disksGet
     -> DisksGet
 disksGet pDgProject_ pDgDisk_ pDgZone_ =
   DisksGet' {_dgProject = pDgProject_, _dgDisk = pDgDisk_, _dgZone = pDgZone_}
+
 
 -- | Project ID for this request.
 dgProject :: Lens' DisksGet Text

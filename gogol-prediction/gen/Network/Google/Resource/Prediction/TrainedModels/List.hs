@@ -65,6 +65,7 @@ data TrainedModelsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrainedModelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ trainedModelsList pTmlProject_ =
     , _tmlPageToken = Nothing
     , _tmlMaxResults = Nothing
     }
+
 
 -- | The project associated with the model.
 tmlProject :: Lens' TrainedModelsList Text

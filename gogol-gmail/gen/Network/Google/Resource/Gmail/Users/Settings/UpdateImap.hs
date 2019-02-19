@@ -63,6 +63,7 @@ data UsersSettingsUpdateImap =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsUpdateImap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ usersSettingsUpdateImap
     -> UsersSettingsUpdateImap
 usersSettingsUpdateImap pUsuiPayload_ =
   UsersSettingsUpdateImap' {_usuiPayload = pUsuiPayload_, _usuiUserId = "me"}
+
 
 -- | Multipart request metadata.
 usuiPayload :: Lens' UsersSettingsUpdateImap ImapSettings

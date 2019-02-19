@@ -64,6 +64,7 @@ data UsersLabelsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersLabelsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ usersLabelsPatch
 usersLabelsPatch pUlpPayload_ pUlpId_ =
   UsersLabelsPatch'
     {_ulpPayload = pUlpPayload_, _ulpUserId = "me", _ulpId = pUlpId_}
+
 
 -- | Multipart request metadata.
 ulpPayload :: Lens' UsersLabelsPatch Label

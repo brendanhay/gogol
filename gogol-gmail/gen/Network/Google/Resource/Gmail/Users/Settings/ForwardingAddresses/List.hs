@@ -60,6 +60,7 @@ newtype UsersSettingsForwardingAddressesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsForwardingAddressesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ usersSettingsForwardingAddressesList
     :: UsersSettingsForwardingAddressesList
 usersSettingsForwardingAddressesList =
   UsersSettingsForwardingAddressesList' {_usfalUserId = "me"}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

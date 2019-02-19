@@ -68,6 +68,7 @@ data AchievementsSetStepsAtLeast =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementsSetStepsAtLeast' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ achievementsSetStepsAtLeast pAssalAchievementId_ pAssalSteps_ =
     { _assalAchievementId = pAssalAchievementId_
     , _assalSteps = _Coerce # pAssalSteps_
     }
+
 
 -- | The ID of the achievement used by this method.
 assalAchievementId :: Lens' AchievementsSetStepsAtLeast Text

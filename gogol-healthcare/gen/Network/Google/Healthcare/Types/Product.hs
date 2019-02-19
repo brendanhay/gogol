@@ -65,6 +65,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -126,6 +128,7 @@ newtype OperationSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +139,7 @@ operationSchema
     -> OperationSchema
 operationSchema pOsAddtional_ =
   OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -161,6 +165,7 @@ data ExportResourcesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExportResourcesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -175,6 +180,7 @@ exportResourcesRequest =
     { _errBigQueryDestinationLocation = Nothing
     , _errGcsDestinationLocation = Nothing
     }
+
 
 -- | The BigQuery destination location. The output will be one BigQuery table
 -- per resource type. The server implements a data-driven FHIR-to-SQL
@@ -241,6 +247,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -251,6 +258,7 @@ data AuditConfig =
 auditConfig
     :: AuditConfig
 auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -290,6 +298,7 @@ newtype HTTPBodyExtensionsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPBodyExtensionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -300,6 +309,7 @@ hTTPBodyExtensionsItem
     -> HTTPBodyExtensionsItem
 hTTPBodyExtensionsItem pHttpbeiAddtional_ =
   HTTPBodyExtensionsItem' {_httpbeiAddtional = _Coerce # pHttpbeiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 httpbeiAddtional :: Lens' HTTPBodyExtensionsItem (HashMap Text JSONValue)
@@ -330,6 +340,7 @@ data Annotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Annotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -353,6 +364,7 @@ annotation =
     , _aAnnotationSource = Nothing
     , _aResourceAnnotation = Nothing
     }
+
 
 -- | Annotations for sentitive texts, e.g., range of such texts.
 aTextAnnotation :: Lens' Annotation (Maybe SensitiveTextAnnotation)
@@ -414,6 +426,7 @@ newtype NotificationConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -422,6 +435,7 @@ newtype NotificationConfig =
 notificationConfig
     :: NotificationConfig
 notificationConfig = NotificationConfig' {_ncPubsubTopic = Nothing}
+
 
 -- | The [Cloud Pub\/Sub](https:\/\/cloud.google.com\/pubsub\/docs\/) topic
 -- that notifications of changes are published on. Supplied by the client.
@@ -458,11 +472,13 @@ data FhirConfig =
   FhirConfig'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FhirConfig' with the minimum fields required to make a request.
 --
 fhirConfig
     :: FhirConfig
 fhirConfig = FhirConfig'
+
 
 instance FromJSON FhirConfig where
         parseJSON
@@ -485,6 +501,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -505,6 +522,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -559,6 +577,7 @@ data ListLocationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -570,6 +589,7 @@ listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
   ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -609,6 +629,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -621,6 +642,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -658,11 +680,13 @@ data GetIAMPolicyRequest =
   GetIAMPolicyRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -684,6 +708,7 @@ data FhirStore =
     , _fsName                        :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FhirStore' with the minimum fields required to make a request.
 --
@@ -708,6 +733,7 @@ fhirStore =
     , _fsDisableResourceVersioning = Nothing
     , _fsName = Nothing
     }
+
 
 -- | Whether this FHIR store has the [updateCreate
 -- capability](https:\/\/www.hl7.org\/fhir\/capabilitystatement-definitions.html#CapabilityStatement.rest.resource.updateCreate).
@@ -807,6 +833,7 @@ newtype SegmentFields =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SegmentFields' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -817,6 +844,7 @@ segmentFields
     -> SegmentFields
 segmentFields pSfAddtional_ =
   SegmentFields' {_sfAddtional = _Coerce # pSfAddtional_}
+
 
 sfAddtional :: Lens' SegmentFields (HashMap Text Text)
 sfAddtional
@@ -844,6 +872,7 @@ data DataSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -854,6 +883,7 @@ data DataSet =
 dataSet
     :: DataSet
 dataSet = DataSet' {_dsName = Nothing, _dsTimeZone = Nothing}
+
 
 -- | Output only. Resource name of the dataset, of the form
 -- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\`.
@@ -892,6 +922,7 @@ data BigQueryDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BigQueryDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -906,6 +937,7 @@ bigQueryDestination
 bigQueryDestination =
   BigQueryDestination'
     {_bqdDataSet = Nothing, _bqdOverwriteTable = Nothing, _bqdTable = Nothing}
+
 
 -- | Required. The BigQuery dataset to which the DICOM store should be
 -- exported. If this dataset does not exist, the export call returns an
@@ -955,6 +987,7 @@ data ListAnnotationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAnnotationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -967,6 +1000,7 @@ listAnnotationsResponse
 listAnnotationsResponse =
   ListAnnotationsResponse'
     {_larAnnotations = Nothing, _larNextPageToken = Nothing}
+
 
 -- | The returned Annotations names. Won\'t be more values than the value of
 -- page_size in the request.
@@ -1012,6 +1046,7 @@ data Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1035,6 +1070,7 @@ location =
     , _lLabels = Nothing
     , _lLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
@@ -1097,6 +1133,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1120,6 +1157,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -1186,6 +1224,7 @@ data Finding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Finding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1198,6 +1237,7 @@ data Finding =
 finding
     :: Finding
 finding = Finding' {_fStart = Nothing, _fInfoType = Nothing, _fEnd = Nothing}
+
 
 -- | Zero-based starting index of the found text, inclusively.
 fStart :: Lens' Finding (Maybe Int64)
@@ -1242,6 +1282,7 @@ newtype ImageConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1250,6 +1291,7 @@ newtype ImageConfig =
 imageConfig
     :: ImageConfig
 imageConfig = ImageConfig' {_icRedactAllText = Nothing}
+
 
 -- | If true, all text found in the image is redacted.
 icRedactAllText :: Lens' ImageConfig (Maybe Bool)
@@ -1279,11 +1321,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1301,6 +1345,7 @@ data ImportError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImportError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1311,6 +1356,7 @@ data ImportError =
 importError
     :: ImportError
 importError = ImportError' {_ieStatus = Nothing, _ieResource = Nothing}
+
 
 -- | Error status associated with resource.
 ieStatus :: Lens' ImportError (Maybe Status)
@@ -1347,6 +1393,7 @@ newtype ImportDicomDataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImportDicomDataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1355,6 +1402,7 @@ newtype ImportDicomDataRequest =
 importDicomDataRequest
     :: ImportDicomDataRequest
 importDicomDataRequest = ImportDicomDataRequest' {_iddrInputConfig = Nothing}
+
 
 -- | Specifies where the imported data resides.
 iddrInputConfig :: Lens' ImportDicomDataRequest (Maybe InputConfig)
@@ -1384,6 +1432,7 @@ data Hl7V2Store =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Hl7V2Store' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1401,6 +1450,7 @@ hl7V2Store =
     , _hvsName = Nothing
     , _hvsParserConfig = Nothing
     }
+
 
 -- | The notification destination all messages (both Ingest & Create) are
 -- published on. Only the message name is sent as part of the notification.
@@ -1450,6 +1500,7 @@ data AnnotationStore =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotationStore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1460,6 +1511,7 @@ data AnnotationStore =
 annotationStore
     :: AnnotationStore
 annotationStore = AnnotationStore' {_asName = Nothing, _asLabels = Nothing}
+
 
 -- | Output only. Resource name of the Annotation store, of the form
 -- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/annotationStores\/{annotation_store_id}\`.
@@ -1501,6 +1553,7 @@ data BoundingPoly =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BoundingPoly' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1511,6 +1564,7 @@ data BoundingPoly =
 boundingPoly
     :: BoundingPoly
 boundingPoly = BoundingPoly' {_bpLabel = Nothing, _bpVertices = Nothing}
+
 
 bpLabel :: Lens' BoundingPoly (Maybe Text)
 bpLabel = lens _bpLabel (\ s a -> s{_bpLabel = a})
@@ -1544,6 +1598,7 @@ newtype ImageAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1552,6 +1607,7 @@ newtype ImageAnnotation =
 imageAnnotation
     :: ImageAnnotation
 imageAnnotation = ImageAnnotation' {_iaBoundingPolys = Nothing}
+
 
 -- | The list of polygons outlining the sensitive regions in the image.
 iaBoundingPolys :: Lens' ImageAnnotation [BoundingPoly]
@@ -1584,6 +1640,7 @@ data Vertex =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Vertex' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1594,6 +1651,7 @@ data Vertex =
 vertex
     :: Vertex
 vertex = Vertex' {_vX = Nothing, _vY = Nothing}
+
 
 -- | X coordinate.
 vX :: Lens' Vertex (Maybe Double)
@@ -1623,6 +1681,7 @@ data GcsDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GcsDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1633,6 +1692,7 @@ data GcsDestination =
 gcsDestination
     :: GcsDestination
 gcsDestination = GcsDestination' {_gdURIPrefix = Nothing, _gdMimeType = Nothing}
+
 
 -- | URI for a Google Cloud Storage directory to which result files should be
 -- written (e.g., \`gs:\/\/bucket-id\/path\/to\/destination\/dir\`). If
@@ -1681,6 +1741,7 @@ data BigQueryLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BigQueryLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1698,6 +1759,7 @@ bigQueryLocation =
     , _bqlDataSetId = Nothing
     , _bqlProjectId = Nothing
     }
+
 
 -- | The configuration for the exported BigQuery schema.
 bqlSchemaConfig :: Lens' BigQueryLocation (Maybe SchemaConfig)
@@ -1739,6 +1801,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1749,6 +1812,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1775,6 +1839,7 @@ data SchemaConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SchemaConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1786,6 +1851,7 @@ schemaConfig
     :: SchemaConfig
 schemaConfig =
   SchemaConfig' {_scRecursiveStructureDepth = Nothing, _scSchemaType = Nothing}
+
 
 -- | The depth for all recursive structures in the output analytics schema.
 -- For example, concept in the CodeSystem resource is a recursive
@@ -1830,6 +1896,7 @@ data SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1841,6 +1908,7 @@ setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
   SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -1884,6 +1952,7 @@ data ProgressCounter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProgressCounter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1898,6 +1967,7 @@ progressCounter
 progressCounter =
   ProgressCounter'
     {_pcPending = Nothing, _pcSuccess = Nothing, _pcFailure = Nothing}
+
 
 -- | The number of units that are pending in the operation.
 pcPending :: Lens' ProgressCounter (Maybe Int64)
@@ -1942,6 +2012,7 @@ newtype InputConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InputConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1950,6 +2021,7 @@ newtype InputConfig =
 inputConfig
     :: InputConfig
 inputConfig = InputConfig' {_icGcsSource = Nothing}
+
 
 -- | Files on Google Cloud Storage. To enable the Cloud Healthcare API to
 -- read from resources in your project (e.g. Google Cloud Storage buckets),
@@ -1985,6 +2057,7 @@ newtype SensitiveTextAnnotationDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SensitiveTextAnnotationDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1995,6 +2068,7 @@ sensitiveTextAnnotationDetails
     -> SensitiveTextAnnotationDetails
 sensitiveTextAnnotationDetails pStadAddtional_ =
   SensitiveTextAnnotationDetails' {_stadAddtional = _Coerce # pStadAddtional_}
+
 
 stadAddtional :: Lens' SensitiveTextAnnotationDetails (HashMap Text Detail)
 stadAddtional
@@ -2027,6 +2101,7 @@ data DeidentifyConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeidentifyConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2040,6 +2115,7 @@ deidentifyConfig
     :: DeidentifyConfig
 deidentifyConfig =
   DeidentifyConfig' {_dcDicom = Nothing, _dcImage = Nothing, _dcFhir = Nothing}
+
 
 -- | Configures de-id of application\/DICOM content.
 dcDicom :: Lens' DeidentifyConfig (Maybe DicomConfig)
@@ -2079,6 +2155,7 @@ data ListAnnotationStoresResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAnnotationStoresResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2091,6 +2168,7 @@ listAnnotationStoresResponse
 listAnnotationStoresResponse =
   ListAnnotationStoresResponse'
     {_lasrNextPageToken = Nothing, _lasrAnnotationStores = Nothing}
+
 
 -- | Token to retrieve the next page of results or empty if there are no more
 -- results in the list.
@@ -2134,6 +2212,7 @@ data IngestMessageResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IngestMessageResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2145,6 +2224,7 @@ ingestMessageResponse
     :: IngestMessageResponse
 ingestMessageResponse =
   IngestMessageResponse' {_imrHl7Ack = Nothing, _imrMessage = Nothing}
+
 
 -- | HL7v2 ACK message.
 imrHl7Ack :: Lens' IngestMessageResponse (Maybe ByteString)
@@ -2180,6 +2260,7 @@ newtype GcsDataLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GcsDataLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2188,6 +2269,7 @@ newtype GcsDataLocation =
 gcsDataLocation
     :: GcsDataLocation
 gcsDataLocation = GcsDataLocation' {_gdlGcsURI = Nothing}
+
 
 -- | The gcs_uri must be in the format \"gs:\/\/bucket\/path\/to\/object\".
 -- The gcs_uri may include wildcards in the \"path\/to\/object\" part to to
@@ -2217,6 +2299,7 @@ newtype AnnotationSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotationSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2225,6 +2308,7 @@ newtype AnnotationSource =
 annotationSource
     :: AnnotationSource
 annotationSource = AnnotationSource' {_asCloudHealthcareSource = Nothing}
+
 
 -- | Cloud Healthcare API resource.
 asCloudHealthcareSource :: Lens' AnnotationSource (Maybe CloudHealthcareSource)
@@ -2255,6 +2339,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2264,6 +2349,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -2298,6 +2384,7 @@ data ListHl7V2StoresResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListHl7V2StoresResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2310,6 +2397,7 @@ listHl7V2StoresResponse
 listHl7V2StoresResponse =
   ListHl7V2StoresResponse'
     {_lhvsrNextPageToken = Nothing, _lhvsrHl7V2Stores = Nothing}
+
 
 -- | Token to retrieve the next page of results or empty if there are no more
 -- results in the list.
@@ -2357,6 +2445,7 @@ data ImportResourcesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImportResourcesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2374,6 +2463,7 @@ importResourcesRequest =
     , _irrGcsErrorLocation = Nothing
     , _irrContentStructure = Nothing
     }
+
 
 -- | Cloud Storage source data locations. Each Cloud Storage object should be
 -- a text file that contains newline delimited JSON structures conforming
@@ -2422,6 +2512,7 @@ newtype ResourceAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2430,6 +2521,7 @@ newtype ResourceAnnotation =
 resourceAnnotation
     :: ResourceAnnotation
 resourceAnnotation = ResourceAnnotation' {_raLabel = Nothing}
+
 
 raLabel :: Lens' ResourceAnnotation (Maybe Text)
 raLabel = lens _raLabel (\ s a -> s{_raLabel = a})
@@ -2459,6 +2551,7 @@ newtype AnnotationStoreLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnnotationStoreLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2469,6 +2562,7 @@ annotationStoreLabels
     -> AnnotationStoreLabels
 annotationStoreLabels pAslAddtional_ =
   AnnotationStoreLabels' {_aslAddtional = _Coerce # pAslAddtional_}
+
 
 aslAddtional :: Lens' AnnotationStoreLabels (HashMap Text Text)
 aslAddtional
@@ -2495,6 +2589,7 @@ data ParserConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ParserConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2506,6 +2601,7 @@ parserConfig
     :: ParserConfig
 parserConfig =
   ParserConfig' {_pcSegmentTerminator = Nothing, _pcAllowNullHeader = Nothing}
+
 
 -- | Byte(s) to be used as the segment terminator. If this is unset, \'\\r\'
 -- will be used as segment terminator.
@@ -2545,6 +2641,7 @@ newtype CloudHealthcareSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudHealthcareSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2553,6 +2650,7 @@ newtype CloudHealthcareSource =
 cloudHealthcareSource
     :: CloudHealthcareSource
 cloudHealthcareSource = CloudHealthcareSource' {_chsName = Nothing}
+
 
 -- | Full path of a Cloud Healthcare API resource.
 chsName :: Lens' CloudHealthcareSource (Maybe Text)
@@ -2577,6 +2675,7 @@ data OutputConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OutputConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2588,6 +2687,7 @@ outputConfig
     :: OutputConfig
 outputConfig =
   OutputConfig' {_ocBigQueryDestination = Nothing, _ocGcsDestination = Nothing}
+
 
 -- | BigQueryDestination requires two IAM roles:
 -- \`roles\/bigquery.dataEditor\` and \`roles\/bigquery.jobUser\`.
@@ -2648,6 +2748,7 @@ data HTTPBody =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPBody' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2665,6 +2766,7 @@ hTTPBody =
     , _httpbData = Nothing
     , _httpbContentType = Nothing
     }
+
 
 -- | Application specific response metadata. Must be set in the first
 -- response for streaming APIs.
@@ -2713,6 +2815,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2722,6 +2825,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -2755,6 +2859,7 @@ data ListDataSetsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDataSetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2766,6 +2871,7 @@ listDataSetsResponse
     :: ListDataSetsResponse
 listDataSetsResponse =
   ListDataSetsResponse' {_ldsrNextPageToken = Nothing, _ldsrDataSets = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -2810,6 +2916,7 @@ data GoogleCloudHealthcareV1alphaFhirRestImportResourcesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudHealthcareV1alphaFhirRestImportResourcesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2830,6 +2937,7 @@ googleCloudHealthcareV1alphaFhirRestImportResourcesResponse =
     , _gchvfrirrSuccessCount = Nothing
     , _gchvfrirrInputSize = Nothing
     }
+
 
 -- | The number of resources that had errors.
 gchvfrirrErrorCount :: Lens' GoogleCloudHealthcareV1alphaFhirRestImportResourcesResponse (Maybe Int64)
@@ -2913,6 +3021,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2933,6 +3042,7 @@ policy =
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -2997,6 +3107,7 @@ data ListFhirStoresResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListFhirStoresResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3009,6 +3120,7 @@ listFhirStoresResponse
 listFhirStoresResponse =
   ListFhirStoresResponse'
     {_lfsrNextPageToken = Nothing, _lfsrFhirStores = Nothing}
+
 
 -- | Token to retrieve the next page of results or empty if there are no more
 -- results in the list.
@@ -3051,6 +3163,7 @@ newtype LocationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3061,6 +3174,7 @@ locationLabels
     -> LocationLabels
 locationLabels pLlAddtional_ =
   LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -3084,6 +3198,7 @@ newtype IngestMessageRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IngestMessageRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3092,6 +3207,7 @@ newtype IngestMessageRequest =
 ingestMessageRequest
     :: IngestMessageRequest
 ingestMessageRequest = IngestMessageRequest' {_iMessage = Nothing}
+
 
 -- | HL7v2 message to ingest.
 iMessage :: Lens' IngestMessageRequest (Maybe Message)
@@ -3115,6 +3231,7 @@ newtype GoogleCloudHealthcareV1alphaGcsSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudHealthcareV1alphaGcsSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3124,6 +3241,7 @@ googleCloudHealthcareV1alphaGcsSource
     :: GoogleCloudHealthcareV1alphaGcsSource
 googleCloudHealthcareV1alphaGcsSource =
   GoogleCloudHealthcareV1alphaGcsSource' {_gchvgsContentURI = Nothing}
+
 
 -- | Points to a [Google Cloud
 -- Storage](https:\/\/cloud.google.com\/storage\/) URI containing file(s)
@@ -3170,6 +3288,7 @@ newtype LocationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3180,6 +3299,7 @@ locationMetadata
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
   LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -3208,6 +3328,7 @@ data OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3228,6 +3349,7 @@ operationMetadata =
     , _omAPIMethodName = Nothing
     , _omCreateTime = Nothing
     }
+
 
 omCounter :: Lens' OperationMetadata (Maybe ProgressCounter)
 omCounter
@@ -3288,6 +3410,7 @@ data Message =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Message' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3323,6 +3446,7 @@ message =
     , _mCreateTime = Nothing
     , _mParsedData = Nothing
     }
+
 
 -- | Raw message bytes.
 mData :: Lens' Message (Maybe ByteString)
@@ -3421,6 +3545,7 @@ data DicomStore =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DicomStore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3431,6 +3556,7 @@ data DicomStore =
 dicomStore
     :: DicomStore
 dicomStore = DicomStore' {_dNotificationConfig = Nothing, _dName = Nothing}
+
 
 -- | Notification destination for new DICOM instances. Supplied by the
 -- client.
@@ -3467,6 +3593,7 @@ newtype ImportDicomDataErrorDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImportDicomDataErrorDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3476,6 +3603,7 @@ importDicomDataErrorDetails
     :: ImportDicomDataErrorDetails
 importDicomDataErrorDetails =
   ImportDicomDataErrorDetails' {_iddedErrors = Nothing}
+
 
 -- | Contains errors encountered in imports of individual resources (e.g., a
 -- Google Cloud Storage object).
@@ -3510,6 +3638,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3521,6 +3650,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -3562,6 +3692,7 @@ data Segment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Segment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3575,6 +3706,7 @@ segment
     :: Segment
 segment =
   Segment' {_sSetId = Nothing, _sSegmentId = Nothing, _sFields = Nothing}
+
 
 -- | Set ID for segments that can be in a set. This can be empty if it is
 -- missing or it is not applicable.
@@ -3634,6 +3766,7 @@ newtype MessageLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MessageLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3644,6 +3777,7 @@ messageLabels
     -> MessageLabels
 messageLabels pMlAddtional_ =
   MessageLabels' {_mlAddtional = _Coerce # pMlAddtional_}
+
 
 mlAddtional :: Lens' MessageLabels (HashMap Text Text)
 mlAddtional
@@ -3667,6 +3801,7 @@ newtype SearchResourcesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchResourcesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3675,6 +3810,7 @@ newtype SearchResourcesRequest =
 searchResourcesRequest
     :: SearchResourcesRequest
 searchResourcesRequest = SearchResourcesRequest' {_srrResourceType = Nothing}
+
 
 -- | The type of the resource to search.
 srrResourceType :: Lens' SearchResourcesRequest (Maybe Text)
@@ -3704,6 +3840,7 @@ data DeidentifyDataSetRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeidentifyDataSetRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3716,6 +3853,7 @@ deidentifyDataSetRequest
 deidentifyDataSetRequest =
   DeidentifyDataSetRequest'
     {_ddsrConfig = Nothing, _ddsrDestinationDataSet = Nothing}
+
 
 -- | Deidentify configuration
 ddsrConfig :: Lens' DeidentifyDataSetRequest (Maybe DeidentifyConfig)
@@ -3756,6 +3894,7 @@ data PatientId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PatientId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3766,6 +3905,7 @@ data PatientId =
 patientId
     :: PatientId
 patientId = PatientId' {_piValue = Nothing, _piType = Nothing}
+
 
 -- | The patient\'s unique identifier.
 piValue :: Lens' PatientId (Maybe Text)
@@ -3796,6 +3936,7 @@ newtype DicomConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DicomConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3804,6 +3945,7 @@ newtype DicomConfig =
 dicomConfig
     :: DicomConfig
 dicomConfig = DicomConfig' {_dcWhiteListTags = Nothing}
+
 
 -- | Tags to be whitelisted, for example \"PatientID\", \"0010,0010\". Any
 -- tag that is whitelisted will copied as is. All other tags will be
@@ -3843,6 +3985,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3853,6 +3996,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -3877,6 +4021,7 @@ newtype CreateMessageRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateMessageRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3885,6 +4030,7 @@ newtype CreateMessageRequest =
 createMessageRequest
     :: CreateMessageRequest
 createMessageRequest = CreateMessageRequest' {_cmrMessage = Nothing}
+
 
 -- | HL7v2 message.
 cmrMessage :: Lens' CreateMessageRequest (Maybe Message)
@@ -3910,6 +4056,7 @@ newtype SensitiveTextAnnotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SensitiveTextAnnotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3918,6 +4065,7 @@ newtype SensitiveTextAnnotation =
 sensitiveTextAnnotation
     :: SensitiveTextAnnotation
 sensitiveTextAnnotation = SensitiveTextAnnotation' {_staDetails = Nothing}
+
 
 -- | Maps from a resource slice (e.g. FHIR resource field path) to a set of
 -- sensitive text findings. For example, Appointment.Narrative text1 -->
@@ -3946,6 +4094,7 @@ data ListMessagesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListMessagesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3957,6 +4106,7 @@ listMessagesResponse
     :: ListMessagesResponse
 listMessagesResponse =
   ListMessagesResponse' {_lmrNextPageToken = Nothing, _lmrMessages = Nothing}
+
 
 -- | Token to retrieve the next page of results or empty if there are no more
 -- results in the list.
@@ -3998,6 +4148,7 @@ data ListDicomStoresResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDicomStoresResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4009,6 +4160,7 @@ listDicomStoresResponse
     :: ListDicomStoresResponse
 listDicomStoresResponse =
   ListDicomStoresResponse' {_lNextPageToken = Nothing, _lDicomStores = Nothing}
+
 
 -- | Token to retrieve the next page of results or empty if there are no more
 -- results in the list.
@@ -4052,6 +4204,7 @@ data GoogleCloudHealthcareV1alphaFhirRestExportResourcesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleCloudHealthcareV1alphaFhirRestExportResourcesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4064,6 +4217,7 @@ googleCloudHealthcareV1alphaFhirRestExportResourcesResponse
 googleCloudHealthcareV1alphaFhirRestExportResourcesResponse =
   GoogleCloudHealthcareV1alphaFhirRestExportResourcesResponse'
     {_gchvfrerrName = Nothing, _gchvfrerrResourceCount = Nothing}
+
 
 -- | The FHIR store name of the resources that have been exported, in the
 -- format
@@ -4111,6 +4265,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4124,6 +4279,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -4184,6 +4340,7 @@ newtype Detail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Detail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4192,6 +4349,7 @@ newtype Detail =
 detail
     :: Detail
 detail = Detail' {_dFindings = Nothing}
+
 
 dFindings :: Lens' Detail [Finding]
 dFindings
@@ -4221,6 +4379,7 @@ newtype ExportDicomDataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExportDicomDataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4229,6 +4388,7 @@ newtype ExportDicomDataRequest =
 exportDicomDataRequest
     :: ExportDicomDataRequest
 exportDicomDataRequest = ExportDicomDataRequest' {_eddrOutputConfig = Nothing}
+
 
 -- | Specifies where the exported data should be placed.
 eddrOutputConfig :: Lens' ExportDicomDataRequest (Maybe OutputConfig)
@@ -4257,6 +4417,7 @@ newtype ParsedData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ParsedData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4265,6 +4426,7 @@ newtype ParsedData =
 parsedData
     :: ParsedData
 parsedData = ParsedData' {_pdSegments = Nothing}
+
 
 pdSegments :: Lens' ParsedData [Segment]
 pdSegments
@@ -4295,6 +4457,7 @@ data ErrorDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ErrorDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4305,6 +4468,7 @@ data ErrorDetail =
 errorDetail
     :: ErrorDetail
 errorDetail = ErrorDetail' {_edError = Nothing, _edResource = Nothing}
+
 
 -- | The status of the error.
 edError :: Lens' ErrorDetail (Maybe Status)

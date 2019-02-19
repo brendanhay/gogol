@@ -65,6 +65,7 @@ data RegionAutoscalersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionAutoscalersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ regionAutoscalersGet pRagProject_ pRagAutoscaler_ pRagRegion_ =
     , _ragAutoscaler = pRagAutoscaler_
     , _ragRegion = pRagRegion_
     }
+
 
 -- | Project ID for this request.
 ragProject :: Lens' RegionAutoscalersGet Text

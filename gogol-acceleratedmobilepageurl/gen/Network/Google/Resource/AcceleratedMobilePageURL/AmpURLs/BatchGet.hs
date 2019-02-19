@@ -74,6 +74,7 @@ data AmpURLsBatchGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AmpURLsBatchGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ ampURLsBatchGet pAubgPayload_ =
     , _aubgPayload = pAubgPayload_
     , _aubgCallback = Nothing
     }
+
 
 -- | V1 error format.
 aubgXgafv :: Lens' AmpURLsBatchGet (Maybe Xgafv)

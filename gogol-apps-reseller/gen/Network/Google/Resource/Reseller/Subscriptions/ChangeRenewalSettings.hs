@@ -69,6 +69,7 @@ data SubscriptionsChangeRenewalSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsChangeRenewalSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ subscriptionsChangeRenewalSettings pScrsPayload_ pScrsCustomerId_ pScrsSubscript
     , _scrsCustomerId = pScrsCustomerId_
     , _scrsSubscriptionId = pScrsSubscriptionId_
     }
+
 
 -- | Multipart request metadata.
 scrsPayload :: Lens' SubscriptionsChangeRenewalSettings RenewalSettings

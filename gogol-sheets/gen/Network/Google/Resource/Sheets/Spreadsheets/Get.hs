@@ -97,6 +97,7 @@ data SpreadsheetsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -130,6 +131,7 @@ spreadsheetsGet pSgSpreadsheetId_ =
     , _sgIncludeGridData = Nothing
     , _sgCallback = Nothing
     }
+
 
 -- | V1 error format.
 sgXgafv :: Lens' SpreadsheetsGet (Maybe Xgafv)

@@ -31,6 +31,7 @@ data AdClients =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdClients' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -51,6 +52,7 @@ adClients =
     , _acKind = "adsensehost#adClients"
     , _acItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 acEtag :: Lens' AdClients (Maybe Text)
@@ -106,6 +108,7 @@ data AssociationSession =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AssociationSession' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -141,6 +144,7 @@ associationSession =
     , _asWebsiteURL = Nothing
     , _asRedirectURL = Nothing
     }
+
 
 -- | Status of the completed association, available once the association
 -- callback token has been verified. One of ACCEPTED, REJECTED, or ERROR.
@@ -233,6 +237,7 @@ data Accounts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Accounts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -247,6 +252,7 @@ accounts
 accounts =
   Accounts'
     {_aEtag = Nothing, _aKind = "adsensehost#accounts", _aItems = Nothing}
+
 
 -- | ETag of this response for caching purposes.
 aEtag :: Lens' Accounts (Maybe Text)
@@ -289,6 +295,7 @@ data AdUnits =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdUnits' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -309,6 +316,7 @@ adUnits =
     , _auKind = "adsensehost#adUnits"
     , _auItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 auEtag :: Lens' AdUnits (Maybe Text)
@@ -359,6 +367,7 @@ data URLChannels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLChannels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -379,6 +388,7 @@ urlChannels =
     , _ucKind = "adsensehost#urlChannels"
     , _ucItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 ucEtag :: Lens' URLChannels (Maybe Text)
@@ -430,6 +440,7 @@ data CustomChannels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomChannels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -450,6 +461,7 @@ customChannels =
     , _ccKind = "adsensehost#customChannels"
     , _ccItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 ccEtag :: Lens' CustomChannels (Maybe Text)
@@ -505,6 +517,7 @@ data AdUnit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdUnit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -537,6 +550,7 @@ adUnit =
     , _auuCode = Nothing
     , _auuId = Nothing
     }
+
 
 -- | Status of this ad unit. Possible values are: NEW: Indicates that the ad
 -- unit was created within the last seven days and does not yet have any
@@ -624,6 +638,7 @@ data Report =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -653,6 +668,7 @@ report =
     , _rHeaders = Nothing
     , _rTotalMatchedRows = Nothing
     }
+
 
 -- | Kind this is, in this case adsensehost#report.
 rKind :: Lens' Report Text
@@ -741,6 +757,7 @@ data AdStyleFont =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdStyleFont' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -751,6 +768,7 @@ data AdStyleFont =
 adStyleFont
     :: AdStyleFont
 adStyleFont = AdStyleFont' {_asfSize = Nothing, _asfFamily = Nothing}
+
 
 -- | The size of the font. Possible values are: ACCOUNT_DEFAULT_SIZE,
 -- ADSENSE_DEFAULT_SIZE, SMALL, MEDIUM and LARGE.
@@ -787,6 +805,7 @@ data Account =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -807,6 +826,7 @@ account =
     , _accName = Nothing
     , _accId = Nothing
     }
+
 
 -- | Approval status of this account. One of: PENDING, APPROVED, DISABLED.
 accStatus :: Lens' Account (Maybe Text)
@@ -855,6 +875,7 @@ data AdUnitMobileContentAdsSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdUnitMobileContentAdsSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -875,6 +896,7 @@ adUnitMobileContentAdsSettings =
     , _aumcasMarkupLanguage = Nothing
     , _aumcasType = Nothing
     }
+
 
 -- | Size of this ad unit.
 aumcasSize :: Lens' AdUnitMobileContentAdsSettings (Maybe Text)
@@ -933,6 +955,7 @@ data AdStyleColors =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdStyleColors' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -956,6 +979,7 @@ adStyleColors =
     , _ascTitle = Nothing
     , _ascBackgRound = Nothing
     }
+
 
 -- | The color of the ad text.
 ascText :: Lens' AdStyleColors (Maybe Text)
@@ -1009,6 +1033,7 @@ data AdUnitContentAdsSettingsBackupOption =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdUnitContentAdsSettingsBackupOption' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1023,6 +1048,7 @@ adUnitContentAdsSettingsBackupOption
 adUnitContentAdsSettingsBackupOption =
   AdUnitContentAdsSettingsBackupOption'
     {_aucasboColor = Nothing, _aucasboURL = Nothing, _aucasboType = Nothing}
+
 
 -- | Color to use when type is set to COLOR. These are represented as six
 -- hexadecimal characters, similar to HTML color codes, but without the
@@ -1071,6 +1097,7 @@ data AdClient =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdClient' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1094,6 +1121,7 @@ adClient =
     , _adId = Nothing
     , _adProductCode = Nothing
     }
+
 
 -- | Kind of resource this is, in this case adsensehost#adClient.
 adKind :: Lens' AdClient Text
@@ -1152,6 +1180,7 @@ data ReportHeadersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportHeadersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1166,6 +1195,7 @@ reportHeadersItem
 reportHeadersItem =
   ReportHeadersItem'
     {_rhiName = Nothing, _rhiCurrency = Nothing, _rhiType = Nothing}
+
 
 -- | The name of the header.
 rhiName :: Lens' ReportHeadersItem (Maybe Text)
@@ -1209,6 +1239,7 @@ data AdStyle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdStyle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1229,6 +1260,7 @@ adStyle =
     , _assFont = Nothing
     , _assColors = Nothing
     }
+
 
 -- | The style of the corners in the ad (deprecated: never populated,
 -- ignored).
@@ -1280,6 +1312,7 @@ data CustomChannel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1300,6 +1333,7 @@ customChannel =
     , _cCode = Nothing
     , _cId = Nothing
     }
+
 
 -- | Kind of resource this is, in this case adsensehost#customChannel.
 cKind :: Lens' CustomChannel Text
@@ -1346,6 +1380,7 @@ data URLChannel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1363,6 +1398,7 @@ urlChannel =
     , _urlcId = Nothing
     , _urlcURLPattern = Nothing
     }
+
 
 -- | Kind of resource this is, in this case adsensehost#urlChannel.
 urlcKind :: Lens' URLChannel Text
@@ -1406,6 +1442,7 @@ data AdCode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1416,6 +1453,7 @@ data AdCode =
 adCode
     :: AdCode
 adCode = AdCode' {_aaKind = "adsensehost#adCode", _aaAdCode = Nothing}
+
 
 -- | Kind this is, in this case adsensehost#adCode.
 aaKind :: Lens' AdCode Text
@@ -1452,6 +1490,7 @@ data AdUnitContentAdsSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdUnitContentAdsSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1466,6 +1505,7 @@ adUnitContentAdsSettings
 adUnitContentAdsSettings =
   AdUnitContentAdsSettings'
     {_aucasBackupOption = Nothing, _aucasSize = Nothing, _aucasType = Nothing}
+
 
 -- | The backup option to be used in instances where no ad is available.
 aucasBackupOption :: Lens' AdUnitContentAdsSettings (Maybe AdUnitContentAdsSettingsBackupOption)

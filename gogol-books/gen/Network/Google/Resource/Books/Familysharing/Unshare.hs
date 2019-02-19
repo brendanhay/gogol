@@ -66,6 +66,7 @@ data FamilysharingUnshare =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FamilysharingUnshare' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ familysharingUnshare
 familysharingUnshare =
   FamilysharingUnshare'
     {_fuVolumeId = Nothing, _fuSource = Nothing, _fuDocId = Nothing}
+
 
 -- | The volume to unshare.
 fuVolumeId :: Lens' FamilysharingUnshare (Maybe Text)

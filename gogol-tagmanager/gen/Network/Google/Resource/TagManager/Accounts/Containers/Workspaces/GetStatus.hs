@@ -58,6 +58,7 @@ newtype AccountsContainersWorkspacesGetStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesGetStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ accountsContainersWorkspacesGetStatus
     -> AccountsContainersWorkspacesGetStatus
 accountsContainersWorkspacesGetStatus pAcwgsPath_ =
   AccountsContainersWorkspacesGetStatus' {_acwgsPath = pAcwgsPath_}
+
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}

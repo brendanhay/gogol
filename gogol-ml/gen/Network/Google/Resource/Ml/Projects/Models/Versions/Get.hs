@@ -79,6 +79,7 @@ data ProjectsModelsVersionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsModelsVersionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsModelsVersionsGet pPmvgName_ =
     , _pmvgName = pPmvgName_
     , _pmvgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmvgXgafv :: Lens' ProjectsModelsVersionsGet (Maybe Xgafv)

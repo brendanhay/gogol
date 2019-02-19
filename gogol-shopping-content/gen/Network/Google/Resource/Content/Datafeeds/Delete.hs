@@ -60,6 +60,7 @@ data DatafeedsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ datafeedsDelete pDdMerchantId_ pDdDatafeedId_ =
     { _ddMerchantId = _Coerce # pDdMerchantId_
     , _ddDatafeedId = _Coerce # pDdDatafeedId_
     }
+
 
 -- | The ID of the account that manages the datafeed. This account cannot be
 -- a multi-client account.

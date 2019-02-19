@@ -64,6 +64,7 @@ data AccountsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ accountsPatch pAppProFileId_ pAppPayload_ pAppId_ =
     , _appPayload = pAppPayload_
     , _appId = _Coerce # pAppId_
     }
+
 
 -- | User profile ID associated with this request.
 appProFileId :: Lens' AccountsPatch Int64

@@ -62,6 +62,7 @@ data CreativeGroupsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeGroupsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ creativeGroupsUpdate
 creativeGroupsUpdate pCguProFileId_ pCguPayload_ =
   CreativeGroupsUpdate'
     {_cguProFileId = _Coerce # pCguProFileId_, _cguPayload = pCguPayload_}
+
 
 -- | User profile ID associated with this request.
 cguProFileId :: Lens' CreativeGroupsUpdate Int64

@@ -79,6 +79,7 @@ data ProjectsNotificationChannelsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotificationChannelsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsNotificationChannelsGet pPncgName_ =
     , _pncgName = pPncgName_
     , _pncgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pncgXgafv :: Lens' ProjectsNotificationChannelsGet (Maybe Xgafv)

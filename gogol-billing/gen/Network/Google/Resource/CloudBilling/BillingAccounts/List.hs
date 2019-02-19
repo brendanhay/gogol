@@ -82,6 +82,7 @@ data BillingAccountsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ billingAccountsList =
     , _balPageSize = Nothing
     , _balCallback = Nothing
     }
+
 
 -- | V1 error format.
 balXgafv :: Lens' BillingAccountsList (Maybe Xgafv)

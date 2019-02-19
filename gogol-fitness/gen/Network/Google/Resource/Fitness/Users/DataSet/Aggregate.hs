@@ -68,6 +68,7 @@ data UsersDataSetAggregate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDataSetAggregate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ usersDataSetAggregate
 usersDataSetAggregate pUdsaPayload_ pUdsaUserId_ =
   UsersDataSetAggregate'
     {_udsaPayload = pUdsaPayload_, _udsaUserId = pUdsaUserId_}
+
 
 -- | Multipart request metadata.
 udsaPayload :: Lens' UsersDataSetAggregate AggregateRequest

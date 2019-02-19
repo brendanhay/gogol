@@ -80,6 +80,7 @@ data PartnersDevicesMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersDevicesMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ partnersDevicesMetadata pPdmPayload_ pPdmDeviceId_ pPdmMetadataOwnerId_ =
     , _pdmCallback = Nothing
     , _pdmMetadataOwnerId = _Coerce # pPdmMetadataOwnerId_
     }
+
 
 -- | V1 error format.
 pdmXgafv :: Lens' PartnersDevicesMetadata (Maybe Xgafv)

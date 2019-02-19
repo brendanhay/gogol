@@ -58,6 +58,7 @@ newtype UsersGetProFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersGetProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ newtype UsersGetProFile =
 usersGetProFile
     :: UsersGetProFile
 usersGetProFile = UsersGetProFile' {_ugpfUserId = "me"}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

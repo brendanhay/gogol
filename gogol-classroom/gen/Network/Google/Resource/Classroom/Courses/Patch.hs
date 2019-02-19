@@ -89,6 +89,7 @@ data CoursesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ coursesPatch pCpPayload_ pCpId_ =
     , _cpId = pCpId_
     , _cpCallback = Nothing
     }
+
 
 -- | V1 error format.
 cpXgafv :: Lens' CoursesPatch (Maybe Xgafv)

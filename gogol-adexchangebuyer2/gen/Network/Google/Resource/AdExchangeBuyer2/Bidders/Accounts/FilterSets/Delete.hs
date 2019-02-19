@@ -72,6 +72,7 @@ data BiddersAccountsFilterSetsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BiddersAccountsFilterSetsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ biddersAccountsFilterSetsDelete pBafsdName_ =
     , _bafsdName = pBafsdName_
     , _bafsdCallback = Nothing
     }
+
 
 -- | V1 error format.
 bafsdXgafv :: Lens' BiddersAccountsFilterSetsDelete (Maybe Xgafv)

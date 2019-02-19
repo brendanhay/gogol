@@ -85,6 +85,7 @@ data ProjectsSubscriptionsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSubscriptionsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsSubscriptionsTestIAMPermissions pPstiampPayload_ pPstiampResource_ =
     , _pstiampResource = pPstiampResource_
     , _pstiampCallback = Nothing
     }
+
 
 -- | V1 error format.
 pstiampXgafv :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Xgafv)

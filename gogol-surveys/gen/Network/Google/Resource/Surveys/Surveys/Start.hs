@@ -62,6 +62,7 @@ data SurveysStart =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveysStart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ surveysStart
     -> SurveysStart
 surveysStart pSsResourceId_ pSsPayload_ =
   SurveysStart' {_ssResourceId = pSsResourceId_, _ssPayload = pSsPayload_}
+
 
 ssResourceId :: Lens' SurveysStart Text
 ssResourceId

@@ -102,6 +102,7 @@ data MediaUpload' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MediaUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -133,6 +134,7 @@ mediaUpload pMuResourceName_ pMuPayload_ =
     , _muPayload = pMuPayload_
     , _muCallback = Nothing
     }
+
 
 -- | V1 error format.
 muXgafv :: Lens' MediaUpload' (Maybe Xgafv)

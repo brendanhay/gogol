@@ -94,6 +94,7 @@ data TranslationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TranslationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -143,6 +144,7 @@ translationsList pTlQ_ pTlTarget_ =
     , _tlTarget = pTlTarget_
     , _tlCallback = Nothing
     }
+
 
 -- | V1 error format.
 tlXgafv :: Lens' TranslationsList (Maybe Xgafv)

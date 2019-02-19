@@ -82,6 +82,7 @@ data UsersSettingsDelegatesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsDelegatesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ usersSettingsDelegatesCreate
 usersSettingsDelegatesCreate pUsdcPayload_ =
   UsersSettingsDelegatesCreate'
     {_usdcPayload = pUsdcPayload_, _usdcUserId = "me"}
+
 
 -- | Multipart request metadata.
 usdcPayload :: Lens' UsersSettingsDelegatesCreate Delegate

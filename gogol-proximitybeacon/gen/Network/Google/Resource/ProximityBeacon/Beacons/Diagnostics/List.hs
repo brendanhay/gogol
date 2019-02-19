@@ -96,6 +96,7 @@ data BeaconsDiagnosticsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconsDiagnosticsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -135,6 +136,7 @@ beaconsDiagnosticsList pBdlBeaconName_ =
     , _bdlAlertFilter = Nothing
     , _bdlCallback = Nothing
     }
+
 
 -- | V1 error format.
 bdlXgafv :: Lens' BeaconsDiagnosticsList (Maybe Xgafv)

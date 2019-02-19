@@ -30,6 +30,7 @@ data ListReportsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListReportsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44,6 +45,7 @@ listReportsResponse =
     { _lrrReports = Nothing
     , _lrrKind = "doubleclickbidmanager#listReportsResponse"
     }
+
 
 -- | Retrieved reports.
 lrrReports :: Lens' ListReportsResponse [Report]
@@ -92,6 +94,7 @@ data QueryMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -133,6 +136,7 @@ queryMetadata =
     , _qmTitle = Nothing
     , _qmSendNotification = Nothing
     }
+
 
 -- | The path to the location in Google Cloud Storage where the latest report
 -- is stored.
@@ -252,6 +256,7 @@ data RunQueryRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RunQueryRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -272,6 +277,7 @@ runQueryRequest =
     , _rqrReportDataStartTimeMs = Nothing
     , _rqrTimezoneCode = Nothing
     }
+
 
 -- | The ending time for the data that is shown in the report. Note,
 -- reportDataEndTimeMs is required if dataRange is CUSTOM_DATES and ignored
@@ -333,6 +339,7 @@ data FilterPair =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterPair' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -343,6 +350,7 @@ data FilterPair =
 filterPair
     :: FilterPair
 filterPair = FilterPair' {_fpValue = Nothing, _fpType = Nothing}
+
 
 -- | Filter value.
 fpValue :: Lens' FilterPair (Maybe Text)
@@ -375,6 +383,7 @@ data UploadLineItemsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UploadLineItemsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -389,6 +398,7 @@ uploadLineItemsRequest
 uploadLineItemsRequest =
   UploadLineItemsRequest'
     {_ulirLineItems = Nothing, _ulirFormat = Nothing, _ulirDryRun = Nothing}
+
 
 -- | Line items in CSV to upload. Refer to Entity Write File Format for more
 -- information on file format.
@@ -436,6 +446,7 @@ data DownloadLineItemsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DownloadLineItemsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -456,6 +467,7 @@ downloadLineItemsRequest =
     , _dlirFileSpec = Nothing
     , _dlirFilterIds = Nothing
     }
+
 
 -- | Filter type used to filter line items to fetch.
 dlirFilterType :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFilterType)
@@ -514,6 +526,7 @@ data DownloadRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DownloadRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -534,6 +547,7 @@ downloadRequest =
     , _drVersion = Nothing
     , _drFilterIds = Nothing
     }
+
 
 -- | File types that will be returned. Acceptable values are: - \"AD\" -
 -- \"AD_GROUP\" - \"CAMPAIGN\" - \"INSERTION_ORDER\" - \"LINE_ITEM\" -
@@ -592,6 +606,7 @@ data ListQueriesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListQueriesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -606,6 +621,7 @@ listQueriesResponse =
     { _lqrQueries = Nothing
     , _lqrKind = "doubleclickbidmanager#listQueriesResponse"
     }
+
 
 -- | Retrieved queries.
 lqrQueries :: Lens' ListQueriesResponse [Query]
@@ -644,6 +660,7 @@ newtype UploadLineItemsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UploadLineItemsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -652,6 +669,7 @@ newtype UploadLineItemsResponse =
 uploadLineItemsResponse
     :: UploadLineItemsResponse
 uploadLineItemsResponse = UploadLineItemsResponse' {_ulirUploadStatus = Nothing}
+
 
 -- | Status of upload.
 ulirUploadStatus :: Lens' UploadLineItemsResponse (Maybe UploadStatus)
@@ -683,6 +701,7 @@ data ReportMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -703,6 +722,7 @@ reportMetadata =
     , _rmGoogleCloudStoragePath = Nothing
     , _rmReportDataStartTimeMs = Nothing
     }
+
 
 -- | Report status.
 rmStatus :: Lens' ReportMetadata (Maybe ReportStatus)
@@ -761,6 +781,7 @@ data Report =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -773,6 +794,7 @@ data Report =
 report
     :: Report
 report = Report' {_rParams = Nothing, _rKey = Nothing, _rMetadata = Nothing}
+
 
 -- | Report parameters.
 rParams :: Lens' Report (Maybe Parameters)
@@ -816,6 +838,7 @@ data RowStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RowStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -842,6 +865,7 @@ rowStatus =
     , _rsErrors = Nothing
     , _rsEntityId = Nothing
     }
+
 
 -- | Entity name.
 rsEntityName :: Lens' RowStatus (Maybe Text)
@@ -909,6 +933,7 @@ data ReportKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -919,6 +944,7 @@ data ReportKey =
 reportKey
     :: ReportKey
 reportKey = ReportKey' {_rkQueryId = Nothing, _rkReportId = Nothing}
+
 
 -- | Query ID.
 rkQueryId :: Lens' ReportKey (Maybe Int64)
@@ -956,6 +982,7 @@ data UploadStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UploadStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -966,6 +993,7 @@ data UploadStatus =
 uploadStatus
     :: UploadStatus
 uploadStatus = UploadStatus' {_usRowStatus = Nothing, _usErrors = Nothing}
+
 
 -- | Per-row upload status.
 usRowStatus :: Lens' UploadStatus [RowStatus]
@@ -1008,6 +1036,7 @@ data QuerySchedule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuerySchedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1028,6 +1057,7 @@ querySchedule =
     , _qsNextRunMinuteOfDay = Nothing
     , _qsNextRunTimezoneCode = Nothing
     }
+
 
 -- | How often the query is run.
 qsFrequency :: Lens' QuerySchedule (Maybe QueryScheduleFrequency)
@@ -1084,6 +1114,7 @@ newtype DownloadLineItemsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DownloadLineItemsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1093,6 +1124,7 @@ downloadLineItemsResponse
     :: DownloadLineItemsResponse
 downloadLineItemsResponse =
   DownloadLineItemsResponse' {_dlirLineItems = Nothing}
+
 
 -- | Retrieved line items in CSV format. For more information about file
 -- formats, see Entity Write File Format.
@@ -1126,6 +1158,7 @@ data DownloadResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DownloadResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1152,6 +1185,7 @@ downloadResponse =
     , _drAdGroups = Nothing
     , _drAds = Nothing
     }
+
 
 drInventorySources :: Lens' DownloadResponse (Maybe Text)
 drInventorySources
@@ -1218,6 +1252,7 @@ data ReportStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1238,6 +1273,7 @@ reportStatus =
     , _rsFormat = Nothing
     , _rsFailure = Nothing
     }
+
 
 -- | The state of the report.
 rsState :: Lens' ReportStatus (Maybe ReportStatusState)
@@ -1293,6 +1329,7 @@ data Query =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Query' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1325,6 +1362,7 @@ query =
     , _qReportDataStartTimeMs = Nothing
     , _qTimezoneCode = Nothing
     }
+
 
 -- | Query ID.
 qQueryId :: Lens' Query (Maybe Int64)
@@ -1415,6 +1453,7 @@ data Parameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Parameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1438,6 +1477,7 @@ parameters =
     , _pGroupBys = Nothing
     , _pType = Nothing
     }
+
 
 -- | Metrics to include as columns in your report.
 pMetrics :: Lens' Parameters [ParametersMetricsItem]
@@ -1500,6 +1540,7 @@ newtype ReportFailure =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportFailure' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1508,6 +1549,7 @@ newtype ReportFailure =
 reportFailure
     :: ReportFailure
 reportFailure = ReportFailure' {_rfErrorCode = Nothing}
+
 
 -- | Error code that shows why the report was not created.
 rfErrorCode :: Lens' ReportFailure (Maybe ReportFailureErrorCode)

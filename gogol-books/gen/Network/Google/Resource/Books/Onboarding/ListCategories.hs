@@ -58,6 +58,7 @@ newtype OnboardingListCategories =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OnboardingListCategories' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ newtype OnboardingListCategories =
 onboardingListCategories
     :: OnboardingListCategories
 onboardingListCategories = OnboardingListCategories' {_olcLocale = Nothing}
+
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Default is en-US if
 -- unset.

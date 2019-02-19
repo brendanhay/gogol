@@ -74,6 +74,7 @@ data ProductsApprove =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsApprove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ productsApprove pPaEnterpriseId_ pPaPayload_ pPaProductId_ =
     , _paPayload = pPaPayload_
     , _paProductId = pPaProductId_
     }
+
 
 -- | The ID of the enterprise.
 paEnterpriseId :: Lens' ProductsApprove Text

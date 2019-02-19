@@ -94,6 +94,7 @@ data FilesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +129,7 @@ filesUpdate pFuPayload_ pFuFileId_ =
     , _fuAddParents = Nothing
     , _fuSupportsTeamDrives = False
     }
+
 
 -- | Multipart request metadata.
 fuPayload :: Lens' FilesUpdate File

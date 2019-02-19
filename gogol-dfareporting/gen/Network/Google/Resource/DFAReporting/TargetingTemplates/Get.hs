@@ -62,6 +62,7 @@ data TargetingTemplatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingTemplatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ targetingTemplatesGet
 targetingTemplatesGet pTtgProFileId_ pTtgId_ =
   TargetingTemplatesGet'
     {_ttgProFileId = _Coerce # pTtgProFileId_, _ttgId = _Coerce # pTtgId_}
+
 
 -- | User profile ID associated with this request.
 ttgProFileId :: Lens' TargetingTemplatesGet Int64

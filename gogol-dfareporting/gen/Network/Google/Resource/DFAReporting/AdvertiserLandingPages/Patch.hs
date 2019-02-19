@@ -65,6 +65,7 @@ data AdvertiserLandingPagesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserLandingPagesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ advertiserLandingPagesPatch pAlppProFileId_ pAlppPayload_ pAlppId_ =
     , _alppPayload = pAlppPayload_
     , _alppId = _Coerce # pAlppId_
     }
+
 
 -- | User profile ID associated with this request.
 alppProFileId :: Lens' AdvertiserLandingPagesPatch Int64

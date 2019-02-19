@@ -78,6 +78,7 @@ data BillingAccountsSinksList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsSinksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ billingAccountsSinksList pBaslParent_ =
     , _baslPageSize = Nothing
     , _baslCallback = Nothing
     }
+
 
 -- | Required. The parent resource whose sinks are to be listed:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

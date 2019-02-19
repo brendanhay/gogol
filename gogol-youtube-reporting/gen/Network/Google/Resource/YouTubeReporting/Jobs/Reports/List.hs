@@ -93,6 +93,7 @@ data JobsReportsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobsReportsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -138,6 +139,7 @@ jobsReportsList pJrlJobId_ =
     , _jrlPageSize = Nothing
     , _jrlCallback = Nothing
     }
+
 
 -- | If set, only reports created after the specified date\/time are
 -- returned.

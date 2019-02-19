@@ -80,6 +80,7 @@ data ProjectsLocationsDataSetsFhirStoresResourcesConditionalUpdateResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsFhirStoresResourcesConditionalUpdateResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsLocationsDataSetsFhirStoresResourcesConditionalUpdateResource pPldsfsrcu
     , _pldsfsrcurType = pPldsfsrcurType_
     , _pldsfsrcurCallback = Nothing
     }
+
 
 -- | The name of the FHIR store this resource belongs to.
 pldsfsrcurParent :: Lens' ProjectsLocationsDataSetsFhirStoresResourcesConditionalUpdateResource Text

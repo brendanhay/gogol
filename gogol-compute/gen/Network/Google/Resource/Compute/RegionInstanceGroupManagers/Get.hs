@@ -66,6 +66,7 @@ data RegionInstanceGroupManagersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ regionInstanceGroupManagersGet pRigmgProject_ pRigmgInstanceGroupManager_ pRigmg
     , _rigmgInstanceGroupManager = pRigmgInstanceGroupManager_
     , _rigmgRegion = pRigmgRegion_
     }
+
 
 -- | Project ID for this request.
 rigmgProject :: Lens' RegionInstanceGroupManagersGet Text

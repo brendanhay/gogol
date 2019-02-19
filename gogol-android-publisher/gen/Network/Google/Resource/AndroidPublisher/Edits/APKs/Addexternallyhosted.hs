@@ -73,6 +73,7 @@ data EditsAPKsAddexternallyhosted =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsAPKsAddexternallyhosted' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ editsAPKsAddexternallyhosted pEapkaPackageName_ pEapkaPayload_ pEapkaEditId_ =
     , _eapkaPayload = pEapkaPayload_
     , _eapkaEditId = pEapkaEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

@@ -88,6 +88,7 @@ data TasksList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TasksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -130,6 +131,7 @@ tasksList pTlTaskList_ =
     , _tlPageToken = Nothing
     , _tlMaxResults = Nothing
     }
+
 
 -- | Upper bound for a task\'s due date (as a RFC 3339 timestamp) to filter
 -- by. Optional. The default is not to filter by due date.

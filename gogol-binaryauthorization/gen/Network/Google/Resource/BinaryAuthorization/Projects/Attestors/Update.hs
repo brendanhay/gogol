@@ -73,6 +73,7 @@ data ProjectsAttestorsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAttestorsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ projectsAttestorsUpdate pPauPayload_ pPauName_ =
     , _pauName = pPauName_
     , _pauCallback = Nothing
     }
+
 
 -- | V1 error format.
 pauXgafv :: Lens' ProjectsAttestorsUpdate (Maybe Xgafv)

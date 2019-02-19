@@ -78,6 +78,7 @@ data ProjectsLocationsFunctionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsFunctionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsFunctionsList pPlflParent_ =
     , _plflPageSize = Nothing
     , _plflCallback = Nothing
     }
+
 
 -- | The project and location from which the function should be listed,
 -- specified in the format \`projects\/*\/locations\/*\` If you want to

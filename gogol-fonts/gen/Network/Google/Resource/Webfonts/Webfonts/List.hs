@@ -59,6 +59,7 @@ newtype WebfontsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebfontsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ newtype WebfontsList =
 webfontsList
     :: WebfontsList
 webfontsList = WebfontsList' {_wlSort = Nothing}
+
 
 -- | Enables sorting of the list
 wlSort :: Lens' WebfontsList (Maybe WebfontsListSort)

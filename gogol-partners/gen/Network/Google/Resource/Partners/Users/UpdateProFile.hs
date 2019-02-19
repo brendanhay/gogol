@@ -107,6 +107,7 @@ data UsersUpdateProFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersUpdateProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -155,6 +156,7 @@ usersUpdateProFile pUupfPayload_ =
     , _uupfRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _uupfCallback = Nothing
     }
+
 
 -- | V1 error format.
 uupfXgafv :: Lens' UsersUpdateProFile (Maybe Xgafv)

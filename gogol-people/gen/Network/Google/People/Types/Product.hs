@@ -33,6 +33,7 @@ data SipAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SipAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -53,6 +54,7 @@ sipAddress =
     , _saType = Nothing
     , _saFormattedType = Nothing
     }
+
 
 -- | The SIP address in the [RFC 3261
 -- 19.1](https:\/\/tools.ietf.org\/html\/rfc3261#section-19.1) SIP URI
@@ -107,6 +109,7 @@ data Photo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Photo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +122,7 @@ data Photo =
 photo
     :: Photo
 photo = Photo' {_pDefault = Nothing, _pURL = Nothing, _pMetadata = Nothing}
+
 
 -- | True if the photo is a default photo; false if the photo is a
 -- user-provided photo.
@@ -163,6 +167,7 @@ data Event =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Event' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -183,6 +188,7 @@ event =
     , _eType = Nothing
     , _eFormattedType = Nothing
     }
+
 
 -- | The date of the event.
 eDate :: Lens' Event (Maybe Date)
@@ -235,6 +241,7 @@ data ListConnectionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListConnectionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -258,6 +265,7 @@ listConnectionsResponse =
     , _lcrNextSyncToken = Nothing
     , _lcrTotalPeople = Nothing
     }
+
 
 -- | The total number of items in the list without pagination.
 lcrTotalItems :: Lens' ListConnectionsResponse (Maybe Int32)
@@ -359,6 +367,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -371,6 +380,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -419,6 +429,7 @@ data ContactGroupResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactGroupResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -436,6 +447,7 @@ contactGroupResponse =
     , _cgrContactGroup = Nothing
     , _cgrRequestedResourceName = Nothing
     }
+
 
 -- | The status of the response.
 cgrStatus :: Lens' ContactGroupResponse (Maybe Status)
@@ -487,6 +499,7 @@ data ContactGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -519,6 +532,7 @@ contactGroup =
     , _cgMetadata = Nothing
     , _cgMemberCount = Nothing
     }
+
 
 -- | The [HTTP entity tag](https:\/\/en.wikipedia.org\/wiki\/HTTP_ETag) of
 -- the resource. Used for web cache validation.
@@ -610,6 +624,7 @@ newtype ModifyContactGroupMembersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModifyContactGroupMembersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -619,6 +634,7 @@ modifyContactGroupMembersResponse
     :: ModifyContactGroupMembersResponse
 modifyContactGroupMembersResponse =
   ModifyContactGroupMembersResponse' {_mcgmrNotFoundResourceNames = Nothing}
+
 
 -- | The contact people resource names that were not found.
 mcgmrNotFoundResourceNames :: Lens' ModifyContactGroupMembersResponse [Text]
@@ -654,6 +670,7 @@ newtype UpdateContactGroupRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateContactGroupRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -663,6 +680,7 @@ updateContactGroupRequest
     :: UpdateContactGroupRequest
 updateContactGroupRequest =
   UpdateContactGroupRequest' {_ucgrContactGroup = Nothing}
+
 
 -- | The contact group to update.
 ucgrContactGroup :: Lens' UpdateContactGroupRequest (Maybe ContactGroup)
@@ -692,6 +710,7 @@ newtype DomainMembership =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainMembership' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -700,6 +719,7 @@ newtype DomainMembership =
 domainMembership
     :: DomainMembership
 domainMembership = DomainMembership' {_dmInViewerDomain = Nothing}
+
 
 -- | True if the person is in the viewer\'s Google Apps domain.
 dmInViewerDomain :: Lens' DomainMembership (Maybe Bool)
@@ -730,6 +750,7 @@ data RelationshipInterest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelationshipInterest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -744,6 +765,7 @@ relationshipInterest
 relationshipInterest =
   RelationshipInterest'
     {_riValue = Nothing, _riMetadata = Nothing, _riFormattedValue = Nothing}
+
 
 -- | The kind of relationship the person is looking for. The value can be
 -- custom or one of these predefined values: * \`friend\` * \`date\` *
@@ -790,6 +812,7 @@ data BraggingRights =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BraggingRights' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -800,6 +823,7 @@ data BraggingRights =
 braggingRights
     :: BraggingRights
 braggingRights = BraggingRights' {_brValue = Nothing, _brMetadata = Nothing}
+
 
 -- | The bragging rights; for example, \`climbed mount everest\`.
 brValue :: Lens' BraggingRights (Maybe Text)
@@ -835,6 +859,7 @@ data Membership =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Membership' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -852,6 +877,7 @@ membership =
     , _mContactGroupMembership = Nothing
     , _mMetadata = Nothing
     }
+
 
 -- | The domain membership.
 mDomainMembership :: Lens' Membership (Maybe DomainMembership)
@@ -931,6 +957,7 @@ data Person =
     , _perRelationshipInterests :: !(Maybe [RelationshipInterest])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Person' with the minimum fields required to make a request.
 --
@@ -1036,6 +1063,7 @@ person =
     , _perMemberships = Nothing
     , _perRelationshipInterests = Nothing
     }
+
 
 -- | The person\'s email addresses.
 perEmailAddresses :: Lens' Person [EmailAddress]
@@ -1357,11 +1385,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1380,6 +1410,7 @@ data ListContactGroupsResponse =
     , _lcgrNextSyncToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListContactGroupsResponse' with the minimum fields required to make a request.
 --
@@ -1401,6 +1432,7 @@ listContactGroupsResponse =
     , _lcgrNextPageToken = Nothing
     , _lcgrNextSyncToken = Nothing
     }
+
 
 -- | The list of contact groups. Members of the contact groups are not
 -- populated.
@@ -1458,6 +1490,7 @@ newtype ContactGroupMembership =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactGroupMembership' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1466,6 +1499,7 @@ newtype ContactGroupMembership =
 contactGroupMembership
     :: ContactGroupMembership
 contactGroupMembership = ContactGroupMembership' {_cgmContactGroupId = Nothing}
+
 
 -- | The contact group ID for the contact group membership. The contact group
 -- ID can be custom or one of these predefined values: * \`myContacts\` *
@@ -1498,6 +1532,7 @@ data UserDefined =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserDefined' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1511,6 +1546,7 @@ userDefined
     :: UserDefined
 userDefined =
   UserDefined' {_udValue = Nothing, _udKey = Nothing, _udMetadata = Nothing}
+
 
 -- | The end user specified value of the user defined data.
 udValue :: Lens' UserDefined (Maybe Text)
@@ -1550,6 +1586,7 @@ data Locale =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Locale' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1560,6 +1597,7 @@ data Locale =
 locale
     :: Locale
 locale = Locale' {_lValue = Nothing, _lMetadata = Nothing}
+
 
 -- | The well-formed [IETF BCP 47](https:\/\/tools.ietf.org\/html\/bcp47)
 -- language tag representing the locale.
@@ -1595,6 +1633,7 @@ data RelationshipStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelationshipStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1609,6 +1648,7 @@ relationshipStatus
 relationshipStatus =
   RelationshipStatus'
     {_rsValue = Nothing, _rsMetadata = Nothing, _rsFormattedValue = Nothing}
+
 
 -- | The relationship status. The value can be custom or one of these
 -- predefined values: * \`single\` * \`inARelationship\` * \`engaged\` *
@@ -1658,6 +1698,7 @@ data URL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1678,6 +1719,7 @@ url =
     , _uType = Nothing
     , _uFormattedType = Nothing
     }
+
 
 -- | The URL.
 uValue :: Lens' URL (Maybe Text)
@@ -1728,6 +1770,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1738,6 +1781,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1773,6 +1817,7 @@ data Address =
     , _aFormattedType   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Address' with the minimum fields required to make a request.
 --
@@ -1818,6 +1863,7 @@ address =
     , _aType = Nothing
     , _aFormattedType = Nothing
     }
+
 
 -- | The street address.
 aStreetAddress :: Lens' Address (Maybe Text)
@@ -1925,6 +1971,7 @@ data ProFileMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFileMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1936,6 +1983,7 @@ proFileMetadata
     :: ProFileMetadata
 proFileMetadata =
   ProFileMetadata' {_pfmObjectType = Nothing, _pfmUserTypes = Nothing}
+
 
 -- | The profile object type.
 pfmObjectType :: Lens' ProFileMetadata (Maybe ProFileMetadataObjectType)
@@ -1977,6 +2025,7 @@ data Relation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Relation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1997,6 +2046,7 @@ relation =
     , _rType = Nothing
     , _rFormattedType = Nothing
     }
+
 
 -- | The name of the other person this relation refers to.
 rPerson :: Lens' Relation (Maybe Text)
@@ -2049,6 +2099,7 @@ newtype GetPeopleResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetPeopleResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2057,6 +2108,7 @@ newtype GetPeopleResponse =
 getPeopleResponse
     :: GetPeopleResponse
 getPeopleResponse = GetPeopleResponse' {_gprResponses = Nothing}
+
 
 -- | The response for each requested resource name.
 gprResponses :: Lens' GetPeopleResponse [PersonResponse]
@@ -2090,6 +2142,7 @@ data Birthday =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Birthday' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2102,6 +2155,7 @@ data Birthday =
 birthday
     :: Birthday
 birthday = Birthday' {_bText = Nothing, _bDate = Nothing, _bMetadata = Nothing}
+
 
 -- | A free-form string representing the user\'s birthday.
 bText :: Lens' Birthday (Maybe Text)
@@ -2148,6 +2202,7 @@ data Date =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2160,6 +2215,7 @@ data Date =
 date
     :: Date
 date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -2207,6 +2263,7 @@ data Tagline =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Tagline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2217,6 +2274,7 @@ data Tagline =
 tagline
     :: Tagline
 tagline = Tagline' {_tValue = Nothing, _tMetadata = Nothing}
+
 
 -- | The tagline.
 tValue :: Lens' Tagline (Maybe Text)
@@ -2251,6 +2309,7 @@ data Residence =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Residence' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2265,6 +2324,7 @@ residence
 residence =
   Residence'
     {_resValue = Nothing, _resCurrent = Nothing, _resMetadata = Nothing}
+
 
 -- | The address of the residence.
 resValue :: Lens' Residence (Maybe Text)
@@ -2307,6 +2367,7 @@ data AgeRangeType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AgeRangeType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2317,6 +2378,7 @@ data AgeRangeType =
 ageRangeType
     :: AgeRangeType
 ageRangeType = AgeRangeType' {_artAgeRange = Nothing, _artMetadata = Nothing}
+
 
 -- | The age range.
 artAgeRange :: Lens' AgeRangeType (Maybe AgeRangeTypeAgeRange)
@@ -2353,6 +2415,7 @@ data Gender =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Gender' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2366,6 +2429,7 @@ gender
     :: Gender
 gender =
   Gender' {_gValue = Nothing, _gMetadata = Nothing, _gFormattedValue = Nothing}
+
 
 -- | The gender for the person. The gender can be custom or one of these
 -- predefined values: * \`male\` * \`female\` * \`other\` * \`unknown\`
@@ -2422,6 +2486,7 @@ data Name =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Name' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2472,6 +2537,7 @@ name =
     , _nHonorificSuffix = Nothing
     , _nPhoneticFullName = Nothing
     }
+
 
 -- | The given name.
 nGivenName :: Lens' Name (Maybe Text)
@@ -2608,6 +2674,7 @@ data FieldMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FieldMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2622,6 +2689,7 @@ fieldMetadata
 fieldMetadata =
   FieldMetadata'
     {_fmVerified = Nothing, _fmPrimary = Nothing, _fmSource = Nothing}
+
 
 -- | True if the field is verified; false if the field is unverified. A
 -- verified field is typically a name, email address, phone number, or
@@ -2669,6 +2737,7 @@ data PhoneNumber =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PhoneNumber' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2692,6 +2761,7 @@ phoneNumber =
     , _pnType = Nothing
     , _pnFormattedType = Nothing
     }
+
 
 -- | The read-only canonicalized [ITU-T
 -- E.164](https:\/\/law.resource.org\/pub\/us\/cfr\/ibr\/004\/itu-t.E.164.1.2008.pdf)
@@ -2754,6 +2824,7 @@ data Occupation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Occupation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2764,6 +2835,7 @@ data Occupation =
 occupation
     :: Occupation
 occupation = Occupation' {_oValue = Nothing, _oMetadata = Nothing}
+
 
 -- | The occupation; for example, \`carpenter\`.
 oValue :: Lens' Occupation (Maybe Text)
@@ -2801,6 +2873,7 @@ data EmailAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EmailAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2824,6 +2897,7 @@ emailAddress =
     , _eaType = Nothing
     , _eaFormattedType = Nothing
     }
+
 
 -- | The email address.
 eaValue :: Lens' EmailAddress (Maybe Text)
@@ -2881,6 +2955,7 @@ newtype CreateContactGroupRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateContactGroupRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2890,6 +2965,7 @@ createContactGroupRequest
     :: CreateContactGroupRequest
 createContactGroupRequest =
   CreateContactGroupRequest' {_ccgrContactGroup = Nothing}
+
 
 -- | The contact group to create.
 ccgrContactGroup :: Lens' CreateContactGroupRequest (Maybe ContactGroup)
@@ -2920,6 +2996,7 @@ data ContactGroupMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactGroupMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2931,6 +3008,7 @@ contactGroupMetadata
     :: ContactGroupMetadata
 contactGroupMetadata =
   ContactGroupMetadata' {_cgmUpdateTime = Nothing, _cgmDeleted = Nothing}
+
 
 -- | The time the group was last updated.
 cgmUpdateTime :: Lens' ContactGroupMetadata (Maybe UTCTime)
@@ -2972,6 +3050,7 @@ data ModifyContactGroupMembersRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModifyContactGroupMembersRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2984,6 +3063,7 @@ modifyContactGroupMembersRequest
 modifyContactGroupMembersRequest =
   ModifyContactGroupMembersRequest'
     {_mcgmrResourceNamesToAdd = Nothing, _mcgmrResourceNamesToRemove = Nothing}
+
 
 -- | The resource names of the contact people to add in the form of in the
 -- form \`people\/\`person_id.
@@ -3035,6 +3115,7 @@ data Source =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3058,6 +3139,7 @@ source =
     , _sId = Nothing
     , _sType = Nothing
     }
+
 
 -- | **Only populated in \`person.metadata.sources\`.** The [HTTP entity
 -- tag](https:\/\/en.wikipedia.org\/wiki\/HTTP_ETag) of the source. Used
@@ -3120,6 +3202,7 @@ data ImClient =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImClient' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3146,6 +3229,7 @@ imClient =
     , _icType = Nothing
     , _icFormattedType = Nothing
     }
+
 
 -- | The read-only protocol of the IM client formatted in the viewer\'s
 -- account locale or the \`Accept-Language\` HTTP header locale.
@@ -3214,6 +3298,7 @@ newtype BatchGetContactGroupsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchGetContactGroupsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3223,6 +3308,7 @@ batchGetContactGroupsResponse
     :: BatchGetContactGroupsResponse
 batchGetContactGroupsResponse =
   BatchGetContactGroupsResponse' {_bgcgrResponses = Nothing}
+
 
 -- | The list of responses for each requested contact group resource.
 bgcgrResponses :: Lens' BatchGetContactGroupsResponse [ContactGroupResponse]
@@ -3257,6 +3343,7 @@ data PersonMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3280,6 +3367,7 @@ personMetadata =
     , _pmLinkedPeopleResourceNames = Nothing
     , _pmDeleted = Nothing
     }
+
 
 -- | Any former resource names this person has had. Populated only for
 -- [\`connections.list\`](\/people\/api\/rest\/v1\/people.connections\/list)
@@ -3356,6 +3444,7 @@ data Nickname =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Nickname' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3369,6 +3458,7 @@ nickname
     :: Nickname
 nickname =
   Nickname' {_nicValue = Nothing, _nicMetadata = Nothing, _nicType = Nothing}
+
 
 -- | The nickname.
 nicValue :: Lens' Nickname (Maybe Text)
@@ -3422,6 +3512,7 @@ data Organization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Organization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3472,6 +3563,7 @@ organization =
     , _orgType = Nothing
     , _orgFormattedType = Nothing
     }
+
 
 -- | The person\'s department at the organization.
 orgDePartment :: Lens' Organization (Maybe Text)
@@ -3596,6 +3688,7 @@ data Interest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Interest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3606,6 +3699,7 @@ data Interest =
 interest
     :: Interest
 interest = Interest' {_iValue = Nothing, _iMetadata = Nothing}
+
 
 -- | The interest; for example, \`stargazing\`.
 iValue :: Lens' Interest (Maybe Text)
@@ -3641,6 +3735,7 @@ data PersonResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3661,6 +3756,7 @@ personResponse =
     , _prPerson = Nothing
     , _prHTTPStatusCode = Nothing
     }
+
 
 -- | The status of the response.
 prStatus :: Lens' PersonResponse (Maybe Status)
@@ -3716,6 +3812,7 @@ data Skill =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Skill' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3726,6 +3823,7 @@ data Skill =
 skill
     :: Skill
 skill = Skill' {_sValue = Nothing, _sMetadata = Nothing}
+
 
 -- | The skill; for example, \`underwater basket weaving\`.
 sValue :: Lens' Skill (Maybe Text)
@@ -3760,6 +3858,7 @@ data Biography =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Biography' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3774,6 +3873,7 @@ biography
 biography =
   Biography'
     {_bioValue = Nothing, _bioMetadata = Nothing, _bioContentType = Nothing}
+
 
 -- | The short biography.
 bioValue :: Lens' Biography (Maybe Text)
@@ -3818,6 +3918,7 @@ data CoverPhoto =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoverPhoto' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3831,6 +3932,7 @@ coverPhoto
     :: CoverPhoto
 coverPhoto =
   CoverPhoto' {_cpDefault = Nothing, _cpURL = Nothing, _cpMetadata = Nothing}
+
 
 -- | True if the cover photo is the default cover photo; false if the cover
 -- photo is a user-provided cover photo.

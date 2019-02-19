@@ -106,6 +106,7 @@ data AccountsReportsGenerate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsReportsGenerate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -147,6 +148,7 @@ accountsReportsGenerate pArgEndDate_ pArgStartDate_ pArgAccountId_ =
     , _argStartIndex = Nothing
     , _argMaxResults = Nothing
     }
+
 
 -- | Dimensions to base the report on.
 argDimension :: Lens' AccountsReportsGenerate [Text]

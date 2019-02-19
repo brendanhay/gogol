@@ -68,6 +68,7 @@ data DataSetsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSetsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ dataSetsUpdate pDsuPayload_ pDsuDataSetId_ pDsuProjectId_ =
     , _dsuDataSetId = pDsuDataSetId_
     , _dsuProjectId = pDsuProjectId_
     }
+
 
 -- | Multipart request metadata.
 dsuPayload :: Lens' DataSetsUpdate DataSet

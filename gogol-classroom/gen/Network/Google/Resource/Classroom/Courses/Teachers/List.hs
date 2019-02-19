@@ -85,6 +85,7 @@ data CoursesTeachersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesTeachersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ coursesTeachersList pCtlCourseId_ =
     , _ctlPageSize = Nothing
     , _ctlCallback = Nothing
     }
+
 
 -- | V1 error format.
 ctlXgafv :: Lens' CoursesTeachersList (Maybe Xgafv)

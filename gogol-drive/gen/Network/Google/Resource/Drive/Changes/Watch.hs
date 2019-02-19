@@ -85,6 +85,7 @@ data ChangesWatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangesWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -125,6 +126,7 @@ changesWatch pCwPayload_ pCwPageToken_ =
     , _cwIncludeRemoved = True
     , _cwSupportsTeamDrives = False
     }
+
 
 -- | Whether Team Drive files or changes should be included in results.
 cwIncludeTeamDriveItems :: Lens' ChangesWatch Bool

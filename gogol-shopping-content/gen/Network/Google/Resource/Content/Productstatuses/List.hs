@@ -67,6 +67,7 @@ data ProductstatusesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductstatusesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ productstatusesList pPlMerchantId_ =
     , _plPageToken = Nothing
     , _plMaxResults = Nothing
     }
+
 
 -- | The ID of the account that contains the products. This account cannot be
 -- a multi-client account.

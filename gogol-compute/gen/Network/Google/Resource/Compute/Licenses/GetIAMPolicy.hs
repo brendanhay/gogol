@@ -65,6 +65,7 @@ data LicensesGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicensesGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ licensesGetIAMPolicy
 licensesGetIAMPolicy pLgipProject_ pLgipResource_ =
   LicensesGetIAMPolicy'
     {_lgipProject = pLgipProject_, _lgipResource = pLgipResource_}
+
 
 -- | Project ID for this request.
 lgipProject :: Lens' LicensesGetIAMPolicy Text

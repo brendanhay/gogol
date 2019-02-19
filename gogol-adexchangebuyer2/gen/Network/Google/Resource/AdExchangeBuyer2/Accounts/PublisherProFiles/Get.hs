@@ -76,6 +76,7 @@ data AccountsPublisherProFilesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsPublisherProFilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ accountsPublisherProFilesGet pAppfgAccountId_ pAppfgPublisherProFileId_ =
     , _appfgPublisherProFileId = pAppfgPublisherProFileId_
     , _appfgCallback = Nothing
     }
+
 
 -- | V1 error format.
 appfgXgafv :: Lens' AccountsPublisherProFilesGet (Maybe Xgafv)

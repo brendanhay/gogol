@@ -76,6 +76,7 @@ data ProjectsNotesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ projectsNotesPatch pPnpPayload_ pPnpName_ =
     , _pnpName = pPnpName_
     , _pnpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pnpXgafv :: Lens' ProjectsNotesPatch (Maybe Xgafv)

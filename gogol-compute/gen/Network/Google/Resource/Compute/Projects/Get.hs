@@ -57,6 +57,7 @@ newtype ProjectsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ projectsGet
     :: Text -- ^ 'pgProject'
     -> ProjectsGet
 projectsGet pPgProject_ = ProjectsGet' {_pgProject = pPgProject_}
+
 
 -- | Project ID for this request.
 pgProject :: Lens' ProjectsGet Text

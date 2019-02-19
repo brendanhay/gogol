@@ -58,6 +58,7 @@ newtype ConversionUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConversionUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ conversionUpdate
     :: ConversionList -- ^ 'cuPayload'
     -> ConversionUpdate
 conversionUpdate pCuPayload_ = ConversionUpdate' {_cuPayload = pCuPayload_}
+
 
 -- | Multipart request metadata.
 cuPayload :: Lens' ConversionUpdate ConversionList

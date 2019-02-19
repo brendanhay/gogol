@@ -82,6 +82,7 @@ data ShortLinksCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShortLinksCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ shortLinksCreate pSlcPayload_ =
     , _slcPayload = pSlcPayload_
     , _slcCallback = Nothing
     }
+
 
 -- | V1 error format.
 slcXgafv :: Lens' ShortLinksCreate (Maybe Xgafv)

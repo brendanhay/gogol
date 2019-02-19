@@ -83,6 +83,7 @@ data ProjectsLocationsQueuesTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsQueuesTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ projectsLocationsQueuesTestIAMPermissions pPlqtipPayload_ pPlqtipResource_ =
     , _plqtipResource = pPlqtipResource_
     , _plqtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plqtipXgafv :: Lens' ProjectsLocationsQueuesTestIAMPermissions (Maybe Xgafv)

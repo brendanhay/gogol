@@ -69,6 +69,7 @@ data PoolsUpdatetemplate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PoolsUpdatetemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ poolsUpdatetemplate pPuPoolName_ pPuZone_ pPuPayload_ pPuProjectName_ =
     , _puPayload = pPuPayload_
     , _puProjectName = pPuProjectName_
     }
+
 
 -- | The name of the replica pool for this request.
 puPoolName :: Lens' PoolsUpdatetemplate Text

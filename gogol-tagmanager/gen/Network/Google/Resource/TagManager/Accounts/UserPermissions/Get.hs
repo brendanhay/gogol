@@ -57,6 +57,7 @@ newtype AccountsUserPermissionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsUserPermissionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ accountsUserPermissionsGet
     -> AccountsUserPermissionsGet
 accountsUserPermissionsGet pAupgPath_ =
   AccountsUserPermissionsGet' {_aupgPath = pAupgPath_}
+
 
 -- | GTM UserPermission\'s API relative path. Example:
 -- accounts\/{account_id}\/user_permissions\/{user_permission_id}

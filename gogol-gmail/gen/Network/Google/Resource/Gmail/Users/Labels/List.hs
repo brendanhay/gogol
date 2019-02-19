@@ -59,6 +59,7 @@ newtype UsersLabelsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersLabelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ newtype UsersLabelsList =
 usersLabelsList
     :: UsersLabelsList
 usersLabelsList = UsersLabelsList' {_ullUserId = "me"}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

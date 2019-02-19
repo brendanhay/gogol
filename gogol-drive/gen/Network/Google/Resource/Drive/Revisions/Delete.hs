@@ -63,6 +63,7 @@ data RevisionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RevisionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ revisionsDelete
     -> RevisionsDelete
 revisionsDelete pRFileId_ pRRevisionId_ =
   RevisionsDelete' {_rFileId = pRFileId_, _rRevisionId = pRRevisionId_}
+
 
 -- | The ID of the file.
 rFileId :: Lens' RevisionsDelete Text

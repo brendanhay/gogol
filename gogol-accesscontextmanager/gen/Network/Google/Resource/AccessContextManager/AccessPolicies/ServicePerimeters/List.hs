@@ -78,6 +78,7 @@ data AccessPoliciesServicePerimetersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessPoliciesServicePerimetersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ accessPoliciesServicePerimetersList pApsplParent_ =
     , _apsplPageSize = Nothing
     , _apsplCallback = Nothing
     }
+
 
 -- | Required. Resource name for the access policy to list Service Perimeters
 -- from. Format: \`accessPolicies\/{policy_id}\`

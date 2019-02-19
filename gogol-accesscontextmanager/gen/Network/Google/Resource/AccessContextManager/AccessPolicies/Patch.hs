@@ -83,6 +83,7 @@ data AccessPoliciesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessPoliciesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ accessPoliciesPatch pAppPayload_ pAppName_ =
     , _appName = pAppName_
     , _appCallback = Nothing
     }
+
 
 -- | V1 error format.
 appXgafv :: Lens' AccessPoliciesPatch (Maybe Xgafv)

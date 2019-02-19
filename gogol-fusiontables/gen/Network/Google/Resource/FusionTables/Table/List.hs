@@ -60,6 +60,7 @@ data TableList' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ data TableList' =
 tableList'
     :: TableList'
 tableList' = TableList'' {_tPageToken = Nothing, _tMaxResults = Nothing}
+
 
 -- | Continuation token specifying which result page to return.
 tPageToken :: Lens' TableList' (Maybe Text)

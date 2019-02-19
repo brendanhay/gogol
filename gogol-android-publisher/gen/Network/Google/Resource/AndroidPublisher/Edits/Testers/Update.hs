@@ -65,6 +65,7 @@ data EditsTestersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsTestersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ editsTestersUpdate pEtutTrack_ pEtutPackageName_ pEtutPayload_ pEtutEditId_ =
     , _etutPayload = pEtutPayload_
     , _etutEditId = pEtutEditId_
     }
+
 
 -- | The track to read or modify. Acceptable values are: \"alpha\", \"beta\",
 -- \"production\", \"rollout\" or \"internal\".

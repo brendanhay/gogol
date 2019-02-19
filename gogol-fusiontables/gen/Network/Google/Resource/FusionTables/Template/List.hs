@@ -64,6 +64,7 @@ data TemplateList' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TemplateList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ templateList' pTllTableId_ =
     , _tllTableId = pTllTableId_
     , _tllMaxResults = Nothing
     }
+
 
 -- | Continuation token specifying which results page to return. Optional.
 tllPageToken :: Lens' TemplateList' (Maybe Text)

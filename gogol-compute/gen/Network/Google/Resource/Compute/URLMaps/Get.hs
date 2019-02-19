@@ -64,6 +64,7 @@ data URLMapsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMapsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ urlMapsGet
     -> URLMapsGet
 urlMapsGet pUmgURLMap_ pUmgProject_ =
   URLMapsGet' {_umgURLMap = pUmgURLMap_, _umgProject = pUmgProject_}
+
 
 -- | Name of the UrlMap resource to return.
 umgURLMap :: Lens' URLMapsGet Text

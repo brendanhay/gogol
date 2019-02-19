@@ -61,6 +61,7 @@ data TimelineAttachmentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimelineAttachmentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ timelineAttachmentsDelete
 timelineAttachmentsDelete pTadItemId_ pTadAttachmentId_ =
   TimelineAttachmentsDelete'
     {_tadItemId = pTadItemId_, _tadAttachmentId = pTadAttachmentId_}
+
 
 -- | The ID of the timeline item the attachment belongs to.
 tadItemId :: Lens' TimelineAttachmentsDelete Text

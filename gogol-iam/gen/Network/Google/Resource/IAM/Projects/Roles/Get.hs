@@ -70,6 +70,7 @@ data ProjectsRolesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRolesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsRolesGet pPrgName_ =
     , _prgName = pPrgName_
     , _prgCallback = Nothing
     }
+
 
 -- | V1 error format.
 prgXgafv :: Lens' ProjectsRolesGet (Maybe Xgafv)

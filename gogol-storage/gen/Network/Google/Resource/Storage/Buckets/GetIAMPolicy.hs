@@ -61,6 +61,7 @@ data BucketsGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ bucketsGetIAMPolicy
     -> BucketsGetIAMPolicy
 bucketsGetIAMPolicy pBgipBucket_ =
   BucketsGetIAMPolicy' {_bgipBucket = pBgipBucket_, _bgipUserProject = Nothing}
+
 
 -- | Name of a bucket.
 bgipBucket :: Lens' BucketsGetIAMPolicy Text

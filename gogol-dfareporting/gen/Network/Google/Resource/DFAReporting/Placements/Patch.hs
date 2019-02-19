@@ -64,6 +64,7 @@ data PlacementsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ placementsPatch pPpProFileId_ pPpPayload_ pPpId_ =
     , _ppPayload = pPpPayload_
     , _ppId = _Coerce # pPpId_
     }
+
 
 -- | User profile ID associated with this request.
 ppProFileId :: Lens' PlacementsPatch Int64

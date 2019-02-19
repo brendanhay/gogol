@@ -75,6 +75,7 @@ data ProjectsOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ projectsOperationsGet pPogName_ =
     , _pogName = pPogName_
     , _pogCallback = Nothing
     }
+
 
 -- | V1 error format.
 pogXgafv :: Lens' ProjectsOperationsGet (Maybe Xgafv)

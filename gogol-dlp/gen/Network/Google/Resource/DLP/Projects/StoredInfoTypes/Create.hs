@@ -80,6 +80,7 @@ data ProjectsStoredInfoTypesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsStoredInfoTypesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsStoredInfoTypesCreate pPsitcParent_ pPsitcPayload_ =
     , _psitcPayload = pPsitcPayload_
     , _psitcCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id or
 -- organizations\/my-org-id.

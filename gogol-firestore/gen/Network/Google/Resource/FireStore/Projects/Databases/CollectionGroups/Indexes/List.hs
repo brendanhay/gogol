@@ -83,6 +83,7 @@ data ProjectsDatabasesCollectionGroupsIndexesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesCollectionGroupsIndexesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +120,7 @@ projectsDatabasesCollectionGroupsIndexesList pPdcgilParent_ =
     , _pdcgilPageSize = Nothing
     , _pdcgilCallback = Nothing
     }
+
 
 -- | A parent name of the form
 -- \`projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\`

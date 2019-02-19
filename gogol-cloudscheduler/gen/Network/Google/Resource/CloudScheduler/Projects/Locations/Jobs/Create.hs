@@ -74,6 +74,7 @@ data ProjectsLocationsJobsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsJobsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsLocationsJobsCreate pPljcParent_ pPljcPayload_ =
     , _pljcPayload = pPljcPayload_
     , _pljcCallback = Nothing
     }
+
 
 -- | Required. The location name. For example:
 -- \`projects\/PROJECT_ID\/locations\/LOCATION_ID\`.

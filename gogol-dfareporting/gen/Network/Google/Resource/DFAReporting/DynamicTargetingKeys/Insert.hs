@@ -70,6 +70,7 @@ data DynamicTargetingKeysInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DynamicTargetingKeysInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ dynamicTargetingKeysInsert
 dynamicTargetingKeysInsert pDtkiProFileId_ pDtkiPayload_ =
   DynamicTargetingKeysInsert'
     {_dtkiProFileId = _Coerce # pDtkiProFileId_, _dtkiPayload = pDtkiPayload_}
+
 
 -- | User profile ID associated with this request.
 dtkiProFileId :: Lens' DynamicTargetingKeysInsert Int64

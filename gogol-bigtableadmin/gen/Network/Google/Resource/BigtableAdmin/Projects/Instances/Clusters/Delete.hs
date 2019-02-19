@@ -70,6 +70,7 @@ data ProjectsInstancesClustersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesClustersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsInstancesClustersDelete pPicdName_ =
     , _picdName = pPicdName_
     , _picdCallback = Nothing
     }
+
 
 -- | V1 error format.
 picdXgafv :: Lens' ProjectsInstancesClustersDelete (Maybe Xgafv)

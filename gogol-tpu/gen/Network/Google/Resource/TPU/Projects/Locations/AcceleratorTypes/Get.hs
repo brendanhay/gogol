@@ -71,6 +71,7 @@ data ProjectsLocationsAcceleratorTypesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsAcceleratorTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsLocationsAcceleratorTypesGet pPlatgName_ =
     , _platgName = pPlatgName_
     , _platgCallback = Nothing
     }
+
 
 -- | V1 error format.
 platgXgafv :: Lens' ProjectsLocationsAcceleratorTypesGet (Maybe Xgafv)

@@ -101,6 +101,7 @@ data UserStatesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserStatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -145,6 +146,7 @@ userStatesList =
     , _uslRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _uslCallback = Nothing
     }
+
 
 -- | V1 error format.
 uslXgafv :: Lens' UserStatesList (Maybe Xgafv)

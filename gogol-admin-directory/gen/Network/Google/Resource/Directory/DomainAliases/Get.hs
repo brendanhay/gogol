@@ -62,6 +62,7 @@ data DomainAliasesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainAliasesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ domainAliasesGet
 domainAliasesGet pDagDomainAliasName_ pDagCustomer_ =
   DomainAliasesGet'
     {_dagDomainAliasName = pDagDomainAliasName_, _dagCustomer = pDagCustomer_}
+
 
 -- | Name of domain alias to be retrieved.
 dagDomainAliasName :: Lens' DomainAliasesGet Text

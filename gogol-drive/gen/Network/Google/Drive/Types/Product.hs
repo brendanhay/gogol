@@ -32,6 +32,7 @@ data FileList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -52,6 +53,7 @@ fileList =
     , _flKind = "drive#fileList"
     , _flFiles = Nothing
     }
+
 
 -- | The page token for the next page of files. This will be absent if the
 -- end of the files list has been reached. If the token is rejected for any
@@ -130,6 +132,7 @@ data TeamDriveCapabilities =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeamDriveCapabilities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -195,6 +198,7 @@ teamDriveCapabilities =
     , _tdcCanCopy = Nothing
     , _tdcCanShare = Nothing
     }
+
 
 -- | Whether the current user can rename files or folders in this Team Drive.
 tdcCanRename :: Lens' TeamDriveCapabilities (Maybe Bool)
@@ -390,6 +394,7 @@ data CommentQuotedFileContent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentQuotedFileContent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -401,6 +406,7 @@ commentQuotedFileContent
     :: CommentQuotedFileContent
 commentQuotedFileContent =
   CommentQuotedFileContent' {_cqfcValue = Nothing, _cqfcMimeType = Nothing}
+
 
 -- | The quoted content itself. This is interpreted as plain text if set
 -- through the API.
@@ -440,6 +446,7 @@ data AboutStorageQuota =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AboutStorageQuota' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -460,6 +467,7 @@ aboutStorageQuota =
     , _asqUsage = Nothing
     , _asqUsageInDrive = Nothing
     }
+
 
 -- | The usage by trashed files in Google Drive.
 asqUsageInDriveTrash :: Lens' AboutStorageQuota (Maybe Int64)
@@ -523,6 +531,7 @@ data Reply =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Reply' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -558,6 +567,7 @@ reply =
     , _rId = Nothing
     , _rDeleted = Nothing
     }
+
 
 -- | The content of the reply with HTML formatting.
 rHTMLContent :: Lens' Reply (Maybe Text)
@@ -640,6 +650,7 @@ newtype AboutImportFormats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AboutImportFormats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -650,6 +661,7 @@ aboutImportFormats
     -> AboutImportFormats
 aboutImportFormats pAifAddtional_ =
   AboutImportFormats' {_aifAddtional = _Coerce # pAifAddtional_}
+
 
 aifAddtional :: Lens' AboutImportFormats (HashMap Text [Text])
 aifAddtional
@@ -696,6 +708,7 @@ data FileCapabilities =
     , _fcCanShare                              :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FileCapabilities' with the minimum fields required to make a request.
 --
@@ -777,6 +790,7 @@ fileCapabilities =
     , _fcCanCopy = Nothing
     , _fcCanShare = Nothing
     }
+
 
 -- | Whether the current user can rename this file.
 fcCanRename :: Lens' FileCapabilities (Maybe Bool)
@@ -1019,6 +1033,7 @@ data ReplyList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplyList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1036,6 +1051,7 @@ replyList =
     , _rlKind = "drive#replyList"
     , _rlReplies = Nothing
     }
+
 
 -- | The page token for the next page of replies. This will be absent if the
 -- end of the replies list has been reached. If the token is rejected for
@@ -1087,6 +1103,7 @@ data FileContentHintsThumbnail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileContentHintsThumbnail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1098,6 +1115,7 @@ fileContentHintsThumbnail
     :: FileContentHintsThumbnail
 fileContentHintsThumbnail =
   FileContentHintsThumbnail' {_fchtImage = Nothing, _fchtMimeType = Nothing}
+
 
 -- | The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).
 fchtImage :: Lens' FileContentHintsThumbnail (Maybe ByteString)
@@ -1135,6 +1153,7 @@ data TeamDriveList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeamDriveList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1152,6 +1171,7 @@ teamDriveList =
     , _tdlTeamDrives = Nothing
     , _tdlKind = "drive#teamDriveList"
     }
+
 
 -- | The page token for the next page of Team Drives. This will be absent if
 -- the end of the Team Drives list has been reached. If the token is
@@ -1211,6 +1231,7 @@ data Channel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1249,6 +1270,7 @@ channel =
     , _cId = Nothing
     , _cType = Nothing
     }
+
 
 -- | A version-specific identifier for the watched resource.
 cResourceURI :: Lens' Channel (Maybe Text)
@@ -1337,6 +1359,7 @@ data AboutTeamDriveThemesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AboutTeamDriveThemesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1354,6 +1377,7 @@ aboutTeamDriveThemesItem =
     , _atdtiBackgRoundImageLink = Nothing
     , _atdtiId = Nothing
     }
+
 
 -- | The color of this Team Drive theme as an RGB hex string.
 atdtiColorRgb :: Lens' AboutTeamDriveThemesItem (Maybe Text)
@@ -1401,6 +1425,7 @@ data TeamDriveRestrictions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeamDriveRestrictions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1421,6 +1446,7 @@ teamDriveRestrictions =
     , _tdrCopyRequiresWriterPermission = Nothing
     , _tdrDomainUsersOnly = Nothing
     }
+
 
 -- | Whether access to items inside this Team Drive is restricted to members
 -- of this Team Drive.
@@ -1490,6 +1516,7 @@ data TeamDriveBackgRoundImageFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeamDriveBackgRoundImageFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1510,6 +1537,7 @@ teamDriveBackgRoundImageFile =
     , _tdbrifWidth = Nothing
     , _tdbrifId = Nothing
     }
+
 
 -- | The X coordinate of the upper left corner of the cropping area in the
 -- background image. This is a value in the closed range of 0 to 1. This
@@ -1577,6 +1605,7 @@ data FileVideoMediaMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileVideoMediaMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1591,6 +1620,7 @@ fileVideoMediaMetadata
 fileVideoMediaMetadata =
   FileVideoMediaMetadata'
     {_fvmmHeight = Nothing, _fvmmWidth = Nothing, _fvmmDurationMillis = Nothing}
+
 
 -- | The height of the video in pixels.
 fvmmHeight :: Lens' FileVideoMediaMetadata (Maybe Int32)
@@ -1638,6 +1668,7 @@ newtype FileAppProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileAppProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1648,6 +1679,7 @@ fileAppProperties
     -> FileAppProperties
 fileAppProperties pFapAddtional_ =
   FileAppProperties' {_fapAddtional = _Coerce # pFapAddtional_}
+
 
 fapAddtional :: Lens' FileAppProperties (HashMap Text Text)
 fapAddtional
@@ -1677,6 +1709,7 @@ data Change =
     , _chaFile        :: !(Maybe File)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Change' with the minimum fields required to make a request.
 --
@@ -1710,6 +1743,7 @@ change =
     , _chaFileId = Nothing
     , _chaFile = Nothing
     }
+
 
 -- | Whether the file or Team Drive has been removed from this list of
 -- changes, for example by deletion or loss of access.
@@ -1798,6 +1832,7 @@ data TeamDrive =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeamDrive' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1836,6 +1871,7 @@ teamDrive =
     , _tdId = Nothing
     , _tdCapabilities = Nothing
     }
+
 
 -- | The ID of the theme from which the background image and color will be
 -- set. The set of possible teamDriveThemes can be retrieved from a
@@ -1943,6 +1979,7 @@ newtype AboutExportFormats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AboutExportFormats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1953,6 +1990,7 @@ aboutExportFormats
     -> AboutExportFormats
 aboutExportFormats pAefAddtional_ =
   AboutExportFormats' {_aefAddtional = _Coerce # pAefAddtional_}
+
 
 aefAddtional :: Lens' AboutExportFormats (HashMap Text [Text])
 aefAddtional
@@ -1981,6 +2019,7 @@ data User =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2007,6 +2046,7 @@ user =
     , _uDisplayName = Nothing
     , _uPermissionId = Nothing
     }
+
 
 -- | A link to the user\'s profile photo, if available.
 uPhotoLink :: Lens' User (Maybe Text)
@@ -2074,6 +2114,7 @@ data ChangeList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangeList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2094,6 +2135,7 @@ changeList =
     , _clChanges = Nothing
     , _clKind = "drive#changeList"
     }
+
 
 -- | The starting page token for future changes. This will be present only if
 -- the end of the current changes list has been reached.
@@ -2152,6 +2194,7 @@ newtype RevisionExportLinks =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RevisionExportLinks' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2162,6 +2205,7 @@ revisionExportLinks
     -> RevisionExportLinks
 revisionExportLinks pRelAddtional_ =
   RevisionExportLinks' {_relAddtional = _Coerce # pRelAddtional_}
+
 
 -- | A mapping from export format to URL
 relAddtional :: Lens' RevisionExportLinks (HashMap Text Text)
@@ -2188,6 +2232,7 @@ data FileContentHints =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileContentHints' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2199,6 +2244,7 @@ fileContentHints
     :: FileContentHints
 fileContentHints =
   FileContentHints' {_fchThumbnail = Nothing, _fchIndexableText = Nothing}
+
 
 -- | A thumbnail for the file. This will only be used if Drive cannot
 -- generate a standard thumbnail.
@@ -2236,6 +2282,7 @@ newtype ChannelParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2246,6 +2293,7 @@ channelParams
     -> ChannelParams
 channelParams pCpAddtional_ =
   ChannelParams' {_cpAddtional = _Coerce # pCpAddtional_}
+
 
 -- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
@@ -2271,6 +2319,7 @@ newtype FileProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2281,6 +2330,7 @@ fileProperties
     -> FileProperties
 fileProperties pFpAddtional_ =
   FileProperties' {_fpAddtional = _Coerce # pFpAddtional_}
+
 
 fpAddtional :: Lens' FileProperties (HashMap Text Text)
 fpAddtional
@@ -2304,6 +2354,7 @@ newtype AboutMaxImportSizes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AboutMaxImportSizes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2314,6 +2365,7 @@ aboutMaxImportSizes
     -> AboutMaxImportSizes
 aboutMaxImportSizes pAmisAddtional_ =
   AboutMaxImportSizes' {_amisAddtional = _Coerce # pAmisAddtional_}
+
 
 amisAddtional :: Lens' AboutMaxImportSizes (HashMap Text Int64)
 amisAddtional
@@ -2347,6 +2399,7 @@ data About =
     , _aFolderColorPalette  :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'About' with the minimum fields required to make a request.
 --
@@ -2389,6 +2442,7 @@ about =
     , _aTeamDriveThemes = Nothing
     , _aFolderColorPalette = Nothing
     }
+
 
 -- | A map of source MIME type to possible targets for all supported exports.
 aExportFormats :: Lens' About (Maybe AboutExportFormats)
@@ -2502,6 +2556,7 @@ data FileImageMediaMetadataLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileImageMediaMetadataLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2519,6 +2574,7 @@ fileImageMediaMetadataLocation =
     , _fimmlAltitude = Nothing
     , _fimmlLongitude = Nothing
     }
+
 
 -- | The latitude stored in the image.
 fimmlLatitude :: Lens' FileImageMediaMetadataLocation (Maybe Double)
@@ -2567,6 +2623,7 @@ data StartPageToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StartPageToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2579,6 +2636,7 @@ startPageToken
 startPageToken =
   StartPageToken'
     {_sptKind = "drive#startPageToken", _sptStartPageToken = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"drive#startPageToken\".
@@ -2634,6 +2692,7 @@ data FileImageMediaMetadata =
     , _fimmColorSpace       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FileImageMediaMetadata' with the minimum fields required to make a request.
 --
@@ -2706,6 +2765,7 @@ fileImageMediaMetadata =
     , _fimmSensor = Nothing
     , _fimmColorSpace = Nothing
     }
+
 
 -- | The rotation in clockwise degrees from the image\'s original
 -- orientation.
@@ -2906,6 +2966,7 @@ data Comment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2950,6 +3011,7 @@ comment =
     , _comId = Nothing
     , _comDeleted = Nothing
     }
+
 
 -- | The content of the comment with HTML formatting.
 comHTMLContent :: Lens' Comment (Maybe Text)
@@ -3078,6 +3140,7 @@ data Revision =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Revision' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3125,6 +3188,7 @@ revision =
     , _revPublishedOutsideDomain = Nothing
     , _revId = Nothing
     }
+
 
 -- | The last time the revision was modified (RFC 3339 date-time).
 revModifiedTime :: Lens' Revision (Maybe UTCTime)
@@ -3268,6 +3332,7 @@ data Permission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3312,6 +3377,7 @@ permission =
     , _pType = Nothing
     , _pExpirationTime = Nothing
     }
+
 
 -- | A link to the user\'s profile photo, if available.
 pPhotoLink :: Lens' Permission (Maybe Text)
@@ -3481,6 +3547,7 @@ data File =
     , _fProperties                   :: !(Maybe FileProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
@@ -3652,6 +3719,7 @@ file =
     , _fContentHints = Nothing
     , _fProperties = Nothing
     }
+
 
 -- | Whether the user owns the file. Not populated for Team Drive files.
 fOwnedByMe :: Lens' File (Maybe Bool)
@@ -4151,6 +4219,7 @@ data PermissionTeamDrivePermissionDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PermissionTeamDrivePermissionDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4171,6 +4240,7 @@ permissionTeamDrivePermissionDetailsItem =
     , _ptdpdiRole = Nothing
     , _ptdpdiInheritedFrom = Nothing
     }
+
 
 -- | Whether this permission is inherited. This field is always populated.
 -- This is an output-only field.
@@ -4236,6 +4306,7 @@ data GeneratedIds =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeneratedIds' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4250,6 +4321,7 @@ generatedIds
 generatedIds =
   GeneratedIds'
     {_giSpace = Nothing, _giKind = "drive#generatedIds", _giIds = Nothing}
+
 
 -- | The type of file that can be created with these IDs.
 giSpace :: Lens' GeneratedIds (Maybe Text)
@@ -4291,6 +4363,7 @@ newtype FileExportLinks =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileExportLinks' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4301,6 +4374,7 @@ fileExportLinks
     -> FileExportLinks
 fileExportLinks pFelAddtional_ =
   FileExportLinks' {_felAddtional = _Coerce # pFelAddtional_}
+
 
 -- | A mapping from export format to URL
 felAddtional :: Lens' FileExportLinks (HashMap Text Text)
@@ -4327,6 +4401,7 @@ data CommentList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4344,6 +4419,7 @@ commentList =
     , _cllKind = "drive#commentList"
     , _cllComments = Nothing
     }
+
 
 -- | The page token for the next page of comments. This will be absent if the
 -- end of the comments list has been reached. If the token is rejected for
@@ -4395,6 +4471,7 @@ data RevisionList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RevisionList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4412,6 +4489,7 @@ revisionList =
     , _rllKind = "drive#revisionList"
     , _rllRevisions = Nothing
     }
+
 
 -- | The page token for the next page of revisions. This will be absent if
 -- the end of the revisions list has been reached. If the token is rejected
@@ -4463,6 +4541,7 @@ data PermissionList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PermissionList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4480,6 +4559,7 @@ permissionList =
     , _plKind = "drive#permissionList"
     , _plPermissions = Nothing
     }
+
 
 -- | The page token for the next page of permissions. This field will be
 -- absent if the end of the permissions list has been reached. If the token

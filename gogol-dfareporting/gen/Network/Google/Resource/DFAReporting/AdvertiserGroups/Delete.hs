@@ -61,6 +61,7 @@ data AdvertiserGroupsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserGroupsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ advertiserGroupsDelete
 advertiserGroupsDelete pAgdProFileId_ pAgdId_ =
   AdvertiserGroupsDelete'
     {_agdProFileId = _Coerce # pAgdProFileId_, _agdId = _Coerce # pAgdId_}
+
 
 -- | User profile ID associated with this request.
 agdProFileId :: Lens' AdvertiserGroupsDelete Int64

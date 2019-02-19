@@ -76,6 +76,7 @@ data ProjectsRolesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRolesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ projectsRolesPatch pPrpPayload_ pPrpName_ =
     , _prpName = pPrpName_
     , _prpCallback = Nothing
     }
+
 
 -- | V1 error format.
 prpXgafv :: Lens' ProjectsRolesPatch (Maybe Xgafv)

@@ -75,6 +75,7 @@ data ProjectsDeidentifyTemplatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDeidentifyTemplatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ projectsDeidentifyTemplatesGet pPdtgName_ =
     , _pdtgName = pPdtgName_
     , _pdtgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdtgXgafv :: Lens' ProjectsDeidentifyTemplatesGet (Maybe Xgafv)

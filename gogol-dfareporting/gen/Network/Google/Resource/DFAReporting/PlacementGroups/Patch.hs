@@ -67,6 +67,7 @@ data PlacementGroupsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementGroupsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ placementGroupsPatch pPgpProFileId_ pPgpPayload_ pPgpId_ =
     , _pgpPayload = pPgpPayload_
     , _pgpId = _Coerce # pPgpId_
     }
+
 
 -- | User profile ID associated with this request.
 pgpProFileId :: Lens' PlacementGroupsPatch Int64

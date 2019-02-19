@@ -66,6 +66,7 @@ data InstancesSimulateMaintenanceEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesSimulateMaintenanceEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ instancesSimulateMaintenanceEvent pIsmeProject_ pIsmeZone_ pIsmeInstance_ =
     , _ismeZone = pIsmeZone_
     , _ismeInstance = pIsmeInstance_
     }
+
 
 -- | Project ID for this request.
 ismeProject :: Lens' InstancesSimulateMaintenanceEvent Text

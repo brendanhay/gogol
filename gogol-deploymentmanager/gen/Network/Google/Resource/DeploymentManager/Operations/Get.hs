@@ -62,6 +62,7 @@ data OperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ operationsGet
     -> OperationsGet
 operationsGet pOgProject_ pOgOperation_ =
   OperationsGet' {_ogProject = pOgProject_, _ogOperation = pOgOperation_}
+
 
 -- | The project ID for this request.
 ogProject :: Lens' OperationsGet Text

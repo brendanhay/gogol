@@ -76,6 +76,7 @@ data TableImportTable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableImportTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ tableImportTable
 tableImportTable pTitName_ =
   TableImportTable'
     {_titName = pTitName_, _titDelimiter = Nothing, _titEncoding = Nothing}
+
 
 -- | The name to be assigned to the new table.
 titName :: Lens' TableImportTable Text

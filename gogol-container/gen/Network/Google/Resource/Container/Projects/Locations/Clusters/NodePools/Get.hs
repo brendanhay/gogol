@@ -82,6 +82,7 @@ data ProjectsLocationsClustersNodePoolsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ projectsLocationsClustersNodePoolsGet pPlcnpgName_ =
     , _plcnpgProjectId = Nothing
     , _plcnpgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcnpgXgafv :: Lens' ProjectsLocationsClustersNodePoolsGet (Maybe Xgafv)

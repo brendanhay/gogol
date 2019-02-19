@@ -60,6 +60,7 @@ data DatafeedsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ datafeedsInsert
 datafeedsInsert pDiMerchantId_ pDiPayload_ =
   DatafeedsInsert'
     {_diMerchantId = _Coerce # pDiMerchantId_, _diPayload = pDiPayload_}
+
 
 -- | The ID of the account that manages the datafeed. This account cannot be
 -- a multi-client account.

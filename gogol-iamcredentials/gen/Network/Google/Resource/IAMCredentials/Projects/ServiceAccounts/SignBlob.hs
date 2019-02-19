@@ -74,6 +74,7 @@ data ProjectsServiceAccountsSignBlob =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServiceAccountsSignBlob' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsServiceAccountsSignBlob pPsasbPayload_ pPsasbName_ =
     , _psasbName = pPsasbName_
     , _psasbCallback = Nothing
     }
+
 
 -- | V1 error format.
 psasbXgafv :: Lens' ProjectsServiceAccountsSignBlob (Maybe Xgafv)

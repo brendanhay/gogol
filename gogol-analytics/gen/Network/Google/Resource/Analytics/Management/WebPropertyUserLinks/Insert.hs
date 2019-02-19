@@ -67,6 +67,7 @@ data ManagementWebPropertyUserLinksInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementWebPropertyUserLinksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ managementWebPropertyUserLinksInsert pMwpuliWebPropertyId_ pMwpuliPayload_ pMwpu
     , _mwpuliPayload = pMwpuliPayload_
     , _mwpuliAccountId = pMwpuliAccountId_
     }
+
 
 -- | Web Property ID to create the user link for.
 mwpuliWebPropertyId :: Lens' ManagementWebPropertyUserLinksInsert Text

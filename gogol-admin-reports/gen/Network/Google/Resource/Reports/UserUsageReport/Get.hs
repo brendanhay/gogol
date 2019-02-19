@@ -84,6 +84,7 @@ data UserUsageReportGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserUsageReportGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ userUsageReportGet pUurgDate_ pUurgUserKey_ =
     , _uurgMaxResults = Nothing
     , _uurgOrgUnitId = ""
     }
+
 
 -- | Represents the set of filters including parameter operator value.
 uurgFilters :: Lens' UserUsageReportGet (Maybe Text)

@@ -63,6 +63,7 @@ data AccountsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ accountsPatch pApPayload_ pApId_ =
     , _apConfirmUnsafeAccountChange = Nothing
     , _apId = _Coerce # pApId_
     }
+
 
 -- | Multipart request metadata.
 apPayload :: Lens' AccountsPatch Account

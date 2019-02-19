@@ -66,6 +66,7 @@ data UsersMessagesAttachmentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersMessagesAttachmentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ usersMessagesAttachmentsGet
 usersMessagesAttachmentsGet pUmagId_ pUmagMessageId_ =
   UsersMessagesAttachmentsGet'
     {_umagUserId = "me", _umagId = pUmagId_, _umagMessageId = pUmagMessageId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

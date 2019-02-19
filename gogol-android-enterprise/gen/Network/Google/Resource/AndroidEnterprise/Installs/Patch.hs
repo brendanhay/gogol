@@ -76,6 +76,7 @@ data InstallsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstallsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ installsPatch pIpEnterpriseId_ pIpPayload_ pIpUserId_ pIpInstallId_ pIpDeviceId_
     , _ipInstallId = pIpInstallId_
     , _ipDeviceId = pIpDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 ipEnterpriseId :: Lens' InstallsPatch Text

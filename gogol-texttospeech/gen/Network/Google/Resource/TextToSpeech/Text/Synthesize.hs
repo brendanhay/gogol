@@ -74,6 +74,7 @@ data TextSynthesize =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextSynthesize' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ textSynthesize pTsPayload_ =
     , _tsPayload = pTsPayload_
     , _tsCallback = Nothing
     }
+
 
 -- | V1 error format.
 tsXgafv :: Lens' TextSynthesize (Maybe Xgafv)

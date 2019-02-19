@@ -64,6 +64,7 @@ data RevisionsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RevisionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ revisionsUpdate pRevPayload_ pRevFileId_ pRevRevisionId_ =
     , _revFileId = pRevFileId_
     , _revRevisionId = pRevRevisionId_
     }
+
 
 -- | Multipart request metadata.
 revPayload :: Lens' RevisionsUpdate Revision

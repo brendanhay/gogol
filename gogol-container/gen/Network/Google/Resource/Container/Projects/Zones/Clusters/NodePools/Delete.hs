@@ -87,6 +87,7 @@ data ProjectsZonesClustersNodePoolsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -129,6 +130,7 @@ projectsZonesClustersNodePoolsDelete pPzcnpdZone_ pPzcnpdNodePoolId_ pPzcnpdClus
     , _pzcnpdProjectId = pPzcnpdProjectId_
     , _pzcnpdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcnpdXgafv :: Lens' ProjectsZonesClustersNodePoolsDelete (Maybe Xgafv)

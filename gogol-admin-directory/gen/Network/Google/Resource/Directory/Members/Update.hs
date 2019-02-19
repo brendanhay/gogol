@@ -65,6 +65,7 @@ data MembersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MembersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ membersUpdate pMuMemberKey_ pMuGroupKey_ pMuPayload_ =
     , _muGroupKey = pMuGroupKey_
     , _muPayload = pMuPayload_
     }
+
 
 -- | Email or immutable ID of the user. If ID, it should match with id of
 -- member object

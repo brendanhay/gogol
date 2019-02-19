@@ -75,6 +75,7 @@ data ProjectsJobsBatchDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobsBatchDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsJobsBatchDelete pPjbdParent_ pPjbdPayload_ =
     , _pjbdPayload = pPjbdPayload_
     , _pjbdCallback = Nothing
     }
+
 
 -- | Required. The resource name of the project under which the job is
 -- created. The format is \"projects\/{project_id}\", for example,

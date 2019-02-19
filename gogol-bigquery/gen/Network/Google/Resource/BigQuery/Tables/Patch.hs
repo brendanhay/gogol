@@ -74,6 +74,7 @@ data TablesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TablesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ tablesPatch pTpPayload_ pTpDataSetId_ pTpProjectId_ pTpTableId_ =
     , _tpProjectId = pTpProjectId_
     , _tpTableId = pTpTableId_
     }
+
 
 -- | Multipart request metadata.
 tpPayload :: Lens' TablesPatch Table

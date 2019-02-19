@@ -83,6 +83,7 @@ data CoursesTeachersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesTeachersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ coursesTeachersGet pCtgCourseId_ pCtgUserId_ =
     , _ctgUserId = pCtgUserId_
     , _ctgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ctgXgafv :: Lens' CoursesTeachersGet (Maybe Xgafv)

@@ -30,6 +30,7 @@ data ListAlertsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAlertsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41,6 +42,7 @@ listAlertsResponse
     :: ListAlertsResponse
 listAlertsResponse =
   ListAlertsResponse' {_larNextPageToken = Nothing, _larAlerts = Nothing}
+
 
 -- | The token for the next page. If not empty, indicates that there may be
 -- more alerts that match the listing request; this value can be used in a
@@ -82,6 +84,7 @@ newtype CSVRow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CSVRow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +93,7 @@ newtype CSVRow =
 csvRow
     :: CSVRow
 csvRow = CSVRow' {_crEntries = Nothing}
+
 
 -- | The data entries in a CSV file row, as a string array rather than a
 -- single comma-separated string.
@@ -122,6 +126,7 @@ data AlertFeedback =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlertFeedback' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -148,6 +153,7 @@ alertFeedback =
     , _afType = Nothing
     , _afCreateTime = Nothing
     }
+
 
 -- | Output only. The unique identifier for the feedback.
 afFeedbackId :: Lens' AlertFeedback (Maybe Text)
@@ -211,6 +217,7 @@ data DeviceCompromised =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceCompromised' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -221,6 +228,7 @@ data DeviceCompromised =
 deviceCompromised
     :: DeviceCompromised
 deviceCompromised = DeviceCompromised' {_dcEmail = Nothing, _dcEvents = Nothing}
+
 
 -- | The email of the user this alert was created for.
 dcEmail :: Lens' DeviceCompromised (Maybe Text)
@@ -256,6 +264,7 @@ newtype StateSponsoredAttack =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StateSponsoredAttack' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -264,6 +273,7 @@ newtype StateSponsoredAttack =
 stateSponsoredAttack
     :: StateSponsoredAttack
 stateSponsoredAttack = StateSponsoredAttack' {_ssaEmail = Nothing}
+
 
 -- | The email of the user this incident was created for.
 ssaEmail :: Lens' StateSponsoredAttack (Maybe Text)
@@ -291,6 +301,7 @@ data BadWhiteList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BadWhiteList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -311,6 +322,7 @@ badWhiteList =
     , _bwlMessages = Nothing
     , _bwlMaliciousEntity = Nothing
     }
+
 
 -- | The source IP address of the malicious email, for example,
 -- \`127.0.0.1\`.
@@ -371,6 +383,7 @@ data SuspiciousActivitySecurityDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SuspiciousActivitySecurityDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -406,6 +419,7 @@ suspiciousActivitySecurityDetail =
     , _sasdDeviceType = Nothing
     , _sasdSerialNumber = Nothing
     }
+
 
 -- | The device property which was changed.
 sasdDeviceProperty :: Lens' SuspiciousActivitySecurityDetail (Maybe Text)
@@ -499,11 +513,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -520,6 +536,7 @@ newtype UndeleteAlertRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UndeleteAlertRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -528,6 +545,7 @@ newtype UndeleteAlertRequest =
 undeleteAlertRequest
     :: UndeleteAlertRequest
 undeleteAlertRequest = UndeleteAlertRequest' {_uarCustomerId = Nothing}
+
 
 -- | Optional. The unique identifier of the G Suite organization account of
 -- the customer the alert is associated with. Inferred from the caller
@@ -557,6 +575,7 @@ newtype Settings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Settings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -565,6 +584,7 @@ newtype Settings =
 settings
     :: Settings
 settings = Settings' {_sNotifications = Nothing}
+
 
 -- | The list of notifications.
 sNotifications :: Lens' Settings [Notification]
@@ -596,6 +616,7 @@ newtype Notification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -604,6 +625,7 @@ newtype Notification =
 notification
     :: Notification
 notification = Notification' {_nCloudPubsubTopic = Nothing}
+
 
 -- | A Google Cloud Pub\/sub topic destination.
 nCloudPubsubTopic :: Lens' Notification (Maybe CloudPubsubTopic)
@@ -632,6 +654,7 @@ data AccountWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -642,6 +665,7 @@ data AccountWarning =
 accountWarning
     :: AccountWarning
 accountWarning = AccountWarning' {_awEmail = Nothing, _awLoginDetails = Nothing}
+
 
 -- | Required. The email of the user that this event belongs to.
 awEmail :: Lens' AccountWarning (Maybe Text)
@@ -685,6 +709,7 @@ data MailPhishing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MailPhishing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -705,6 +730,7 @@ mailPhishing =
     , _mpMessages = Nothing
     , _mpMaliciousEntity = Nothing
     }
+
 
 -- | If \`true\`, the email originated from within the organization.
 mpIsInternal :: Lens' MailPhishing (Maybe Bool)
@@ -763,6 +789,7 @@ data GmailMessageInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GmailMessageInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -795,6 +822,7 @@ gmailMessageInfo =
     , _gmiMessageBodySnippet = Nothing
     , _gmiMessageId = Nothing
     }
+
 
 -- | The MD5 Hash of email\'s subject (only available for reported emails).
 gmiMD5HashSubject :: Lens' GmailMessageInfo (Maybe Text)
@@ -882,6 +910,7 @@ newtype AlertData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlertData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -891,6 +920,7 @@ alertData
     :: HashMap Text JSONValue -- ^ 'adAddtional'
     -> AlertData
 alertData pAdAddtional_ = AlertData' {_adAddtional = _Coerce # pAdAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 adAddtional :: Lens' AlertData (HashMap Text JSONValue)
@@ -921,6 +951,7 @@ data PhishingSpike =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PhishingSpike' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -941,6 +972,7 @@ phishingSpike =
     , _psMessages = Nothing
     , _psMaliciousEntity = Nothing
     }
+
 
 -- | If \`true\`, the email originated from within the organization.
 psIsInternal :: Lens' PhishingSpike (Maybe Bool)
@@ -994,6 +1026,7 @@ data CSV =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CSV' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1004,6 +1037,7 @@ data CSV =
 csv
     :: CSV
 csv = CSV' {_cDataRows = Nothing, _cHeaders = Nothing}
+
 
 -- | The list of data rows in a CSV file, as string arrays rather than as a
 -- single comma-separated string.
@@ -1053,6 +1087,7 @@ data Alert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Alert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1091,6 +1126,7 @@ alert =
     , _aType = Nothing
     , _aCreateTime = Nothing
     }
+
 
 -- | Required. The time the event that caused this alert was started or
 -- detected.
@@ -1192,6 +1228,7 @@ newtype Attachment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Attachment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1200,6 +1237,7 @@ newtype Attachment =
 attachment
     :: Attachment
 attachment = Attachment' {_aCSV = Nothing}
+
 
 -- | A CSV file attachment.
 aCSV :: Lens' Attachment (Maybe CSV)
@@ -1225,6 +1263,7 @@ data RequestInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RequestInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1242,6 +1281,7 @@ requestInfo =
     , _riAppDeveloperEmail = Nothing
     , _riAppName = Nothing
     }
+
 
 -- | Required. Number of requests sent for this application to set up default
 -- SQL instance.
@@ -1294,6 +1334,7 @@ data GoogleOperations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleOperations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1314,6 +1355,7 @@ googleOperations =
     , _goTitle = Nothing
     , _goDescription = Nothing
     }
+
 
 -- | Optional. Application-specific data for an incident, provided when the G
 -- Suite application which reported the incident cannot be completely
@@ -1371,6 +1413,7 @@ data SuspiciousActivity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SuspiciousActivity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1382,6 +1425,7 @@ suspiciousActivity
     :: SuspiciousActivity
 suspiciousActivity =
   SuspiciousActivity' {_saEmail = Nothing, _saEvents = Nothing}
+
 
 -- | The email of the user this alert was created for.
 saEmail :: Lens' SuspiciousActivity (Maybe Text)
@@ -1417,6 +1461,7 @@ newtype AppMakerSQLSetupNotification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppMakerSQLSetupNotification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1426,6 +1471,7 @@ appMakerSQLSetupNotification
     :: AppMakerSQLSetupNotification
 appMakerSQLSetupNotification =
   AppMakerSQLSetupNotification' {_amsqlsnRequestInfo = Nothing}
+
 
 -- | List of applications with requests for default SQL set up.
 amsqlsnRequestInfo :: Lens' AppMakerSQLSetupNotification [RequestInfo]
@@ -1459,6 +1505,7 @@ data DomainWideTakeoutInitiated =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainWideTakeoutInitiated' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1471,6 +1518,7 @@ domainWideTakeoutInitiated
 domainWideTakeoutInitiated =
   DomainWideTakeoutInitiated'
     {_dwtiEmail = Nothing, _dwtiTakeoutRequestId = Nothing}
+
 
 -- | The email of the admin who initiated the takeout.
 dwtiEmail :: Lens' DomainWideTakeoutInitiated (Maybe Text)
@@ -1506,6 +1554,7 @@ newtype DomainId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DomainId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1514,6 +1563,7 @@ newtype DomainId =
 domainId
     :: DomainId
 domainId = DomainId' {_diCustomerPrimaryDomain = Nothing}
+
 
 -- | The primary domain for the customer.
 diCustomerPrimaryDomain :: Lens' DomainId (Maybe Text)
@@ -1549,6 +1599,7 @@ data DeviceCompromisedSecurityDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceCompromisedSecurityDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1578,6 +1629,7 @@ deviceCompromisedSecurityDetail =
     , _dcsdDeviceType = Nothing
     , _dcsdSerialNumber = Nothing
     }
+
 
 -- | The device resource ID.
 dcsdResourceId :: Lens' DeviceCompromisedSecurityDetail (Maybe Text)
@@ -1661,6 +1713,7 @@ data CloudPubsubTopic =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudPubsubTopic' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1672,6 +1725,7 @@ cloudPubsubTopic
     :: CloudPubsubTopic
 cloudPubsubTopic =
   CloudPubsubTopic' {_cptTopicName = Nothing, _cptPayloadFormat = Nothing}
+
 
 -- | The \`name\` field of a Cloud Pubsub [Topic]
 -- (https:\/\/cloud.google.com\/pubsub\/docs\/reference\/rest\/v1\/projects.topics#Topic).
@@ -1709,6 +1763,7 @@ newtype ListAlertFeedbackResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAlertFeedbackResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1717,6 +1772,7 @@ newtype ListAlertFeedbackResponse =
 listAlertFeedbackResponse
     :: ListAlertFeedbackResponse
 listAlertFeedbackResponse = ListAlertFeedbackResponse' {_lafrFeedback = Nothing}
+
 
 -- | The list of alert feedback. Feedback entries for each alert are ordered
 -- by creation time descending.
@@ -1748,6 +1804,7 @@ data LoginDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LoginDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1758,6 +1815,7 @@ data LoginDetails =
 loginDetails
     :: LoginDetails
 loginDetails = LoginDetails' {_ldIPAddress = Nothing, _ldLoginTime = Nothing}
+
 
 -- | Optional. The human-readable IP address (for example, \`11.22.33.44\`)
 -- that is associated with the warning event.
@@ -1795,6 +1853,7 @@ newtype MaliciousEntity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MaliciousEntity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1803,6 +1862,7 @@ newtype MaliciousEntity =
 maliciousEntity
     :: MaliciousEntity
 maliciousEntity = MaliciousEntity' {_meFromHeader = Nothing}
+
 
 -- | The sender email address.
 meFromHeader :: Lens' MaliciousEntity (Maybe Text)

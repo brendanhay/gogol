@@ -84,6 +84,7 @@ data ServicesRolloutsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesRolloutsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ servicesRolloutsList pSrlServiceName_ =
     , _srlPageSize = Nothing
     , _srlCallback = Nothing
     }
+
 
 -- | V1 error format.
 srlXgafv :: Lens' ServicesRolloutsList (Maybe Xgafv)

@@ -62,6 +62,7 @@ data AchievementsUnlock =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementsUnlock' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ achievementsUnlock
 achievementsUnlock pAuAchievementId_ =
   AchievementsUnlock'
     {_auBuiltinGameId = Nothing, _auAchievementId = pAuAchievementId_}
+
 
 -- | Override used only by built-in games in Play Games application.
 auBuiltinGameId :: Lens' AchievementsUnlock (Maybe Text)

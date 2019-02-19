@@ -85,6 +85,7 @@ data ProjectsReleasesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsReleasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ projectsReleasesList pPrlrName_ =
     , _prlrPageSize = Nothing
     , _prlrCallback = Nothing
     }
+
 
 -- | V1 error format.
 prlrXgafv :: Lens' ProjectsReleasesList (Maybe Xgafv)

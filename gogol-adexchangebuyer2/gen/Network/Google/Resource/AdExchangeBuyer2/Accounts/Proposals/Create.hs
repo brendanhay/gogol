@@ -77,6 +77,7 @@ data AccountsProposalsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProposalsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ accountsProposalsCreate pApcPayload_ pApcAccountId_ =
     , _apcAccountId = pApcAccountId_
     , _apcCallback = Nothing
     }
+
 
 -- | V1 error format.
 apcXgafv :: Lens' AccountsProposalsCreate (Maybe Xgafv)

@@ -63,6 +63,7 @@ data EventsRecord =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsRecord' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ eventsRecord
     -> EventsRecord
 eventsRecord pErPayload_ =
   EventsRecord' {_erPayload = pErPayload_, _erLanguage = Nothing}
+
 
 -- | Multipart request metadata.
 erPayload :: Lens' EventsRecord EventRecordRequest

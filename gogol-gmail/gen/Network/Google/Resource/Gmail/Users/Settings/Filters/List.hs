@@ -60,6 +60,7 @@ newtype UsersSettingsFiltersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsFiltersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ newtype UsersSettingsFiltersList =
 usersSettingsFiltersList
     :: UsersSettingsFiltersList
 usersSettingsFiltersList = UsersSettingsFiltersList' {_usflUserId = "me"}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

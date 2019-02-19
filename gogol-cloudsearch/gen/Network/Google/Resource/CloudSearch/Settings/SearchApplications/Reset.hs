@@ -77,6 +77,7 @@ data SettingsSearchApplicationsReset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsSearchApplicationsReset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ settingsSearchApplicationsReset pSsarPayload_ pSsarName_ =
     , _ssarName = pSsarName_
     , _ssarCallback = Nothing
     }
+
 
 -- | V1 error format.
 ssarXgafv :: Lens' SettingsSearchApplicationsReset (Maybe Xgafv)

@@ -69,6 +69,7 @@ data UsersDataSourcesDataPointChangesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDataSourcesDataPointChangesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ usersDataSourcesDataPointChangesList pUdsdpclDataSourceId_ pUdsdpclUserId_ =
     , _udsdpclLimit = Nothing
     , _udsdpclPageToken = Nothing
     }
+
 
 -- | The data stream ID of the data source that created the dataset.
 udsdpclDataSourceId :: Lens' UsersDataSourcesDataPointChangesList Text

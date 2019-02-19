@@ -67,6 +67,7 @@ data UsersSessionsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSessionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ usersSessionsUpdate pUsuPayload_ pUsuUserId_ pUsuSessionId_ =
     , _usuCurrentTimeMillis = Nothing
     , _usuSessionId = pUsuSessionId_
     }
+
 
 -- | Multipart request metadata.
 usuPayload :: Lens' UsersSessionsUpdate Session

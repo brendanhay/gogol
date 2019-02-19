@@ -83,6 +83,7 @@ data ProjectsDatabasesDocumentsCreateDocument =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesDocumentsCreateDocument' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +125,7 @@ projectsDatabasesDocumentsCreateDocument pPddcdParent_ pPddcdCollectionId_ pPddc
     , _pddcdMaskFieldPaths = Nothing
     , _pddcdCallback = Nothing
     }
+
 
 -- | The parent resource. For example:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\` or

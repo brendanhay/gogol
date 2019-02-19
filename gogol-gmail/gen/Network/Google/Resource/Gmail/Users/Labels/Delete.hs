@@ -63,6 +63,7 @@ data UsersLabelsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersLabelsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ usersLabelsDelete
     -> UsersLabelsDelete
 usersLabelsDelete pUldId_ =
   UsersLabelsDelete' {_uldUserId = "me", _uldId = pUldId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

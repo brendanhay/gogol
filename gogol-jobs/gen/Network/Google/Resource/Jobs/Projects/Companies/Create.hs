@@ -75,6 +75,7 @@ data ProjectsCompaniesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsCompaniesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsCompaniesCreate pPccParent_ pPccPayload_ =
     , _pccPayload = pPccPayload_
     , _pccCallback = Nothing
     }
+
 
 -- | Required. Resource name of the project under which the company is
 -- created. The format is \"projects\/{project_id}\", for example,

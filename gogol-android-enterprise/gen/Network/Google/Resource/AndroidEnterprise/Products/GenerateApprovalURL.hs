@@ -80,6 +80,7 @@ data ProductsGenerateApprovalURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProductsGenerateApprovalURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ productsGenerateApprovalURL pPgauEnterpriseId_ pPgauProductId_ =
     , _pgauEnterpriseId = pPgauEnterpriseId_
     , _pgauProductId = pPgauProductId_
     }
+
 
 -- | The BCP 47 language code used for permission names and descriptions in
 -- the returned iframe, for instance \"en-US\".

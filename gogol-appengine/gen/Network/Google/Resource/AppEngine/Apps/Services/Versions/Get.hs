@@ -84,6 +84,7 @@ data AppsServicesVersionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsServicesVersionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ appsServicesVersionsGet pAsvgVersionsId_ pAsvgAppsId_ pAsvgServicesId_ =
     , _asvgServicesId = pAsvgServicesId_
     , _asvgCallback = Nothing
     }
+
 
 -- | V1 error format.
 asvgXgafv :: Lens' AppsServicesVersionsGet (Maybe Xgafv)

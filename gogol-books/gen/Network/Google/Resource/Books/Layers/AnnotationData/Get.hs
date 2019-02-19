@@ -87,6 +87,7 @@ data LayersAnnotationDataGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LayersAnnotationDataGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -129,6 +130,7 @@ layersAnnotationDataGet pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolumeI
     , _ladgH = Nothing
     , _ladgLayerId = pLadgLayerId_
     }
+
 
 -- | The requested pixel width for any images. If width is provided height
 -- must also be provided.

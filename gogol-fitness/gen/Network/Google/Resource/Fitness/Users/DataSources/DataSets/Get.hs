@@ -79,6 +79,7 @@ data UsersDataSourcesDataSetsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDataSourcesDataSetsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ usersDataSourcesDataSetsGet pUdsdsgDataSourceId_ pUdsdsgUserId_ pUdsdsgDataSetId
     , _udsdsgLimit = Nothing
     , _udsdsgPageToken = Nothing
     }
+
 
 -- | The data stream ID of the data source that created the dataset.
 udsdsgDataSourceId :: Lens' UsersDataSourcesDataSetsGet Text

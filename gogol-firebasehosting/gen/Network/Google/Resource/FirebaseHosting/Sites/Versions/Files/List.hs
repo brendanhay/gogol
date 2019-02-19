@@ -81,6 +81,7 @@ data SitesVersionsFilesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesVersionsFilesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ sitesVersionsFilesList pSvflParent_ =
     , _svflPageSize = Nothing
     , _svflCallback = Nothing
     }
+
 
 -- | Required. The parent to list files for, in the format:
 -- 'sites\/site-name\/versions\/versionID'

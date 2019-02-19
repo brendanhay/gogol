@@ -58,6 +58,7 @@ newtype ConversionInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConversionInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ conversionInsert
     :: ConversionList -- ^ 'ciPayload'
     -> ConversionInsert
 conversionInsert pCiPayload_ = ConversionInsert' {_ciPayload = pCiPayload_}
+
 
 -- | Multipart request metadata.
 ciPayload :: Lens' ConversionInsert ConversionList

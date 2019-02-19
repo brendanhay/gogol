@@ -81,6 +81,7 @@ data MediaInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MediaInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ mediaInsert pMiCollection_ pMiPayload_ pMiUserId_ =
     , _miPayload = pMiPayload_
     , _miUserId = pMiUserId_
     }
+
 
 miCollection :: Lens' MediaInsert MediaInsertCollection
 miCollection

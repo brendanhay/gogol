@@ -30,6 +30,7 @@ data CreateWorkspaceProposalRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateWorkspaceProposalRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42,6 +43,7 @@ createWorkspaceProposalRequest
 createWorkspaceProposalRequest =
   CreateWorkspaceProposalRequest'
     {_cwprInitialComment = Nothing, _cwprReviewers = Nothing}
+
 
 -- | If present, an initial comment to associate with the workspace proposal.
 cwprInitialComment :: Lens' CreateWorkspaceProposalRequest (Maybe WorkspaceProposalHistoryComment)
@@ -83,6 +85,7 @@ data ListVariablesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListVariablesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +97,7 @@ listVariablesResponse
     :: ListVariablesResponse
 listVariablesResponse =
   ListVariablesResponse' {_lvrNextPageToken = Nothing, _lvrVariable = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lvrNextPageToken :: Lens' ListVariablesResponse (Maybe Text)
@@ -133,6 +137,7 @@ data ListFoldersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListFoldersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -144,6 +149,7 @@ listFoldersResponse
     :: ListFoldersResponse
 listFoldersResponse =
   ListFoldersResponse' {_lfrNextPageToken = Nothing, _lfrFolder = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lfrNextPageToken :: Lens' ListFoldersResponse (Maybe Text)
@@ -183,6 +189,7 @@ data ListEnvironmentsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListEnvironmentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -195,6 +202,7 @@ listEnvironmentsResponse
 listEnvironmentsResponse =
   ListEnvironmentsResponse'
     {_lerNextPageToken = Nothing, _lerEnvironment = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lerNextPageToken :: Lens' ListEnvironmentsResponse (Maybe Text)
@@ -234,6 +242,7 @@ newtype RevertFolderResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RevertFolderResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -242,6 +251,7 @@ newtype RevertFolderResponse =
 revertFolderResponse
     :: RevertFolderResponse
 revertFolderResponse = RevertFolderResponse' {_rfrFolder = Nothing}
+
 
 -- | Folder as it appears in the latest container version since the last
 -- workspace synchronization operation. If no folder is present, that means
@@ -268,6 +278,7 @@ newtype RevertVariableResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RevertVariableResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -276,6 +287,7 @@ newtype RevertVariableResponse =
 revertVariableResponse
     :: RevertVariableResponse
 revertVariableResponse = RevertVariableResponse' {_rvrVariable = Nothing}
+
 
 -- | Variable as it appears in the latest container version since the last
 -- workspace synchronization operation. If no variable is present, that
@@ -305,6 +317,7 @@ data PublishContainerVersionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PublishContainerVersionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -317,6 +330,7 @@ publishContainerVersionResponse
 publishContainerVersionResponse =
   PublishContainerVersionResponse'
     {_pcvrCompilerError = Nothing, _pcvrContainerVersion = Nothing}
+
 
 -- | Compiler errors or not.
 pcvrCompilerError :: Lens' PublishContainerVersionResponse (Maybe Bool)
@@ -356,6 +370,7 @@ data ListWorkspacesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListWorkspacesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -367,6 +382,7 @@ listWorkspacesResponse
     :: ListWorkspacesResponse
 listWorkspacesResponse =
   ListWorkspacesResponse' {_lwrNextPageToken = Nothing, _lwrWorkspace = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lwrNextPageToken :: Lens' ListWorkspacesResponse (Maybe Text)
@@ -416,6 +432,7 @@ data ContainerVersionHeader =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContainerVersionHeader' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -460,6 +477,7 @@ containerVersionHeader =
     , _cvhNumRules = Nothing
     , _cvhNumVariables = Nothing
     }
+
 
 -- | Number of tags in the container version.
 cvhNumTags :: Lens' ContainerVersionHeader (Maybe Text)
@@ -568,6 +586,7 @@ data TeardownTag =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeardownTag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -579,6 +598,7 @@ teardownTag
     :: TeardownTag
 teardownTag =
   TeardownTag' {_ttStopTeardownOnFailure = Nothing, _ttTagName = Nothing}
+
 
 -- | If true, fire the teardown tag if and only if the main tag fires
 -- successfully. If false, fire the teardown tag regardless of main tag
@@ -619,6 +639,7 @@ data ListTriggersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTriggersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -630,6 +651,7 @@ listTriggersResponse
     :: ListTriggersResponse
 listTriggersResponse =
   ListTriggersResponse' {_ltrNextPageToken = Nothing, _ltrTrigger = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 ltrNextPageToken :: Lens' ListTriggersResponse (Maybe Text)
@@ -690,6 +712,7 @@ data Tag =
     , _tParameter         :: !(Maybe [Parameter])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Tag' with the minimum fields required to make a request.
 --
@@ -771,6 +794,7 @@ tag =
     , _tFiringRuleId = Nothing
     , _tParameter = Nothing
     }
+
 
 -- | Blocking trigger IDs. If any of the listed triggers evaluate to true,
 -- the tag will not fire.
@@ -987,6 +1011,7 @@ data ZoneTypeRestriction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZoneTypeRestriction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -998,6 +1023,7 @@ zoneTypeRestriction
     :: ZoneTypeRestriction
 zoneTypeRestriction =
   ZoneTypeRestriction' {_ztrEnable = Nothing, _ztrWhiteListedTypeId = Nothing}
+
 
 -- | True if type restrictions have been enabled for this Zone.
 ztrEnable :: Lens' ZoneTypeRestriction (Maybe Bool)
@@ -1039,6 +1065,7 @@ data CreateContainerVersionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateContainerVersionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1059,6 +1086,7 @@ createContainerVersionResponse =
     , _ccvrContainerVersion = Nothing
     , _ccvrSyncStatus = Nothing
     }
+
 
 -- | Compiler errors or not.
 ccvrCompilerError :: Lens' CreateContainerVersionResponse (Maybe Bool)
@@ -1117,6 +1145,7 @@ data CreateContainerVersionRequestVersionOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateContainerVersionRequestVersionOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1129,6 +1158,7 @@ createContainerVersionRequestVersionOptions
 createContainerVersionRequestVersionOptions =
   CreateContainerVersionRequestVersionOptions'
     {_ccvrvoName = Nothing, _ccvrvoNotes = Nothing}
+
 
 -- | The name of the container version to be created.
 ccvrvoName :: Lens' CreateContainerVersionRequestVersionOptions (Maybe Text)
@@ -1176,6 +1206,7 @@ data Workspace =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Workspace' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1208,6 +1239,7 @@ workspace =
     , _wWorkspaceId = Nothing
     , _wDescription = Nothing
     }
+
 
 -- | GTM Container ID.
 wContainerId :: Lens' Workspace (Maybe Text)
@@ -1300,6 +1332,7 @@ data Environment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Environment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1353,6 +1386,7 @@ environment =
     , _eType = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | GTM Container ID.
 eContainerId :: Lens' Environment (Maybe Text)
@@ -1483,6 +1517,7 @@ newtype AccountAccess =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountAccess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1491,6 +1526,7 @@ newtype AccountAccess =
 accountAccess
     :: AccountAccess
 accountAccess = AccountAccess' {_aaPermission = Nothing}
+
 
 -- | Whether the user has no access, user access, or admin access to an
 -- account.
@@ -1518,6 +1554,7 @@ data ListUserPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListUserPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1530,6 +1567,7 @@ listUserPermissionsResponse
 listUserPermissionsResponse =
   ListUserPermissionsResponse'
     {_luprNextPageToken = Nothing, _luprUserPermission = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 luprNextPageToken :: Lens' ListUserPermissionsResponse (Maybe Text)
@@ -1569,6 +1607,7 @@ newtype WorkspaceProposalHistoryComment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkspaceProposalHistoryComment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1578,6 +1617,7 @@ workspaceProposalHistoryComment
     :: WorkspaceProposalHistoryComment
 workspaceProposalHistoryComment =
   WorkspaceProposalHistoryComment' {_wphcContent = Nothing}
+
 
 -- | The contents of the reviewer or author comment.
 wphcContent :: Lens' WorkspaceProposalHistoryComment (Maybe Text)
@@ -1605,6 +1645,7 @@ newtype CreateBuiltInVariableResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateBuiltInVariableResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1614,6 +1655,7 @@ createBuiltInVariableResponse
     :: CreateBuiltInVariableResponse
 createBuiltInVariableResponse =
   CreateBuiltInVariableResponse' {_cbivrBuiltInVariable = Nothing}
+
 
 -- | List of created built-in variables.
 cbivrBuiltInVariable :: Lens' CreateBuiltInVariableResponse [BuiltInVariable]
@@ -1650,6 +1692,7 @@ data WorkspaceProposalHistory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkspaceProposalHistory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1673,6 +1716,7 @@ workspaceProposalHistory =
     , _wphComment = Nothing
     , _wphCreatedTimestamp = Nothing
     }
+
 
 -- | The party responsible for the change in history.
 wphCreatedBy :: Lens' WorkspaceProposalHistory (Maybe WorkspaceProposalUser)
@@ -1730,6 +1774,7 @@ data ZoneChildContainer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZoneChildContainer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1741,6 +1786,7 @@ zoneChildContainer
     :: ZoneChildContainer
 zoneChildContainer =
   ZoneChildContainer' {_zccPublicId = Nothing, _zccNickname = Nothing}
+
 
 -- | The child container\'s public id.
 zccPublicId :: Lens' ZoneChildContainer (Maybe Text)
@@ -1776,6 +1822,7 @@ data ListAccountsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAccountsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1787,6 +1834,7 @@ listAccountsResponse
     :: ListAccountsResponse
 listAccountsResponse =
   ListAccountsResponse' {_larNextPageToken = Nothing, _larAccount = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 larNextPageToken :: Lens' ListAccountsResponse (Maybe Text)
@@ -1826,6 +1874,7 @@ data MergeConflict =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MergeConflict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1838,6 +1887,7 @@ mergeConflict
 mergeConflict =
   MergeConflict'
     {_mcEntityInBaseVersion = Nothing, _mcEntityInWorkspace = Nothing}
+
 
 -- | The base version entity (since the latest sync operation) that has
 -- conflicting changes compared to the workspace. If this field is missing,
@@ -1888,6 +1938,7 @@ data Folder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Folder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1923,6 +1974,7 @@ folder =
     , _fWorkspaceId = Nothing
     , _fNotes = Nothing
     }
+
 
 -- | GTM Container ID.
 fContainerId :: Lens' Folder (Maybe Text)
@@ -2006,6 +2058,7 @@ data ZoneBoundary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZoneBoundary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2017,6 +2070,7 @@ zoneBoundary
     :: ZoneBoundary
 zoneBoundary =
   ZoneBoundary' {_zbCustomEvaluationTriggerId = Nothing, _zbCondition = Nothing}
+
 
 -- | Custom evaluation trigger IDs. A zone will evaluate its boundary
 -- conditions when any of the listed triggers are true.
@@ -2074,6 +2128,7 @@ data Variable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Variable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2130,6 +2185,7 @@ variable =
     , _vEnablingTriggerId = Nothing
     , _vParameter = Nothing
     }
+
 
 -- | The end timestamp in milliseconds to schedule a variable.
 vScheduleEndMs :: Lens' Variable (Maybe Int64)
@@ -2290,6 +2346,7 @@ data Zone =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Zone' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2334,6 +2391,7 @@ zone =
     , _zWorkspaceId = Nothing
     , _zNotes = Nothing
     }
+
 
 -- | GTM Container ID.
 zContainerId :: Lens' Zone (Maybe Text)
@@ -2442,6 +2500,7 @@ data SyncWorkspaceResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SyncWorkspaceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2453,6 +2512,7 @@ syncWorkspaceResponse
     :: SyncWorkspaceResponse
 syncWorkspaceResponse =
   SyncWorkspaceResponse' {_swrMergeConflict = Nothing, _swrSyncStatus = Nothing}
+
 
 -- | The merge conflict after sync. If this field is not empty, the sync is
 -- still treated as successful. But a version cannot be created until all
@@ -2494,6 +2554,7 @@ newtype RevertTriggerResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RevertTriggerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2502,6 +2563,7 @@ newtype RevertTriggerResponse =
 revertTriggerResponse
     :: RevertTriggerResponse
 revertTriggerResponse = RevertTriggerResponse' {_rtrTrigger = Nothing}
+
 
 -- | Trigger as it appears in the latest container version since the last
 -- workspace synchronization operation. If no trigger is present, that
@@ -2533,6 +2595,7 @@ data Account =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2559,6 +2622,7 @@ account =
     , _aName = Nothing
     , _aTagManagerURL = Nothing
     }
+
 
 -- | GTM Account\'s API relative path.
 aPath :: Lens' Account (Maybe Text)
@@ -2628,6 +2692,7 @@ data UpdateWorkspaceProposalRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateWorkspaceProposalRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2648,6 +2713,7 @@ updateWorkspaceProposalRequest =
     , _uwprFingerprint = Nothing
     , _uwprReviewers = Nothing
     }
+
 
 -- | If present, the status of the workspace proposal is updated.
 uwprStatus :: Lens' UpdateWorkspaceProposalRequest (Maybe UpdateWorkspaceProposalRequestStatus)
@@ -2705,6 +2771,7 @@ data GetWorkspaceStatusResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetWorkspaceStatusResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2717,6 +2784,7 @@ getWorkspaceStatusResponse
 getWorkspaceStatusResponse =
   GetWorkspaceStatusResponse'
     {_gwsrMergeConflict = Nothing, _gwsrWorkspaceChange = Nothing}
+
 
 -- | The merge conflict after sync.
 gwsrMergeConflict :: Lens' GetWorkspaceStatusResponse [MergeConflict]
@@ -2760,6 +2828,7 @@ data QuickPreviewResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuickPreviewResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2777,6 +2846,7 @@ quickPreviewResponse =
     , _qprContainerVersion = Nothing
     , _qprSyncStatus = Nothing
     }
+
 
 -- | Were there compiler errors or not.
 qprCompilerError :: Lens' QuickPreviewResponse (Maybe Bool)
@@ -2824,6 +2894,7 @@ data ListContainerVersionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListContainerVersionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2836,6 +2907,7 @@ listContainerVersionsResponse
 listContainerVersionsResponse =
   ListContainerVersionsResponse'
     {_lcvrNextPageToken = Nothing, _lcvrContainerVersionHeader = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lcvrNextPageToken :: Lens' ListContainerVersionsResponse (Maybe Text)
@@ -2886,6 +2958,7 @@ data Container =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Container' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2924,6 +2997,7 @@ container =
     , _cTagManagerURL = Nothing
     , _cNotes = Nothing
     }
+
 
 -- | Container Public ID.
 cPublicId :: Lens' Container (Maybe Text)
@@ -3028,6 +3102,7 @@ data BuiltInVariable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuiltInVariable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3054,6 +3129,7 @@ builtInVariable =
     , _bivWorkspaceId = Nothing
     , _bivType = Nothing
     }
+
 
 -- | GTM Container ID.
 bivContainerId :: Lens' BuiltInVariable (Maybe Text)
@@ -3120,6 +3196,7 @@ data UserPermission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserPermission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3143,6 +3220,7 @@ userPermission =
     , _upEmailAddress = Nothing
     , _upContainerAccess = Nothing
     }
+
 
 -- | GTM UserPermission\'s API relative path.
 upPath :: Lens' UserPermission (Maybe Text)
@@ -3217,6 +3295,7 @@ data ContainerVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContainerVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3273,6 +3352,7 @@ containerVersion =
     , _cvTrigger = Nothing
     , _cvDescription = Nothing
     }
+
 
 -- | The tags in the container that this version was taken from.
 cvTag :: Lens' ContainerVersion [Tag]
@@ -3424,6 +3504,7 @@ data SetupTag =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetupTag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3434,6 +3515,7 @@ data SetupTag =
 setupTag
     :: SetupTag
 setupTag = SetupTag' {_stTagName = Nothing, _stStopOnSetupFailure = Nothing}
+
 
 -- | The name of the setup tag.
 stTagName :: Lens' SetupTag (Maybe Text)
@@ -3472,6 +3554,7 @@ data ListContainersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListContainersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3483,6 +3566,7 @@ listContainersResponse
     :: ListContainersResponse
 listContainersResponse =
   ListContainersResponse' {_lcrNextPageToken = Nothing, _lcrContainer = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lcrNextPageToken :: Lens' ListContainersResponse (Maybe Text)
@@ -3551,6 +3635,7 @@ data Trigger =
     , _triParameter                      :: !(Maybe [Parameter])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Trigger' with the minimum fields required to make a request.
 --
@@ -3656,6 +3741,7 @@ trigger =
     , _triWaitForTags = Nothing
     , _triParameter = Nothing
     }
+
 
 -- | A visibility trigger minimum continuous visible time (in milliseconds).
 -- Only valid for AMP Visibility trigger.
@@ -3960,6 +4046,7 @@ data ListTagsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTagsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3971,6 +4058,7 @@ listTagsResponse
     :: ListTagsResponse
 listTagsResponse =
   ListTagsResponse' {_lNextPageToken = Nothing, _lTag = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lNextPageToken :: Lens' ListTagsResponse (Maybe Text)
@@ -4008,6 +4096,7 @@ data ListEnabledBuiltInVariablesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListEnabledBuiltInVariablesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4020,6 +4109,7 @@ listEnabledBuiltInVariablesResponse
 listEnabledBuiltInVariablesResponse =
   ListEnabledBuiltInVariablesResponse'
     {_lebivrNextPageToken = Nothing, _lebivrBuiltInVariable = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 lebivrNextPageToken :: Lens' ListEnabledBuiltInVariablesResponse (Maybe Text)
@@ -4062,6 +4152,7 @@ data WorkspaceProposalUser =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkspaceProposalUser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4073,6 +4164,7 @@ workspaceProposalUser
     :: WorkspaceProposalUser
 workspaceProposalUser =
   WorkspaceProposalUser' {_wpuGaiaId = Nothing, _wpuType = Nothing}
+
 
 -- | Gaia id associated with a user, absent for the Google Tag Manager
 -- system.
@@ -4112,6 +4204,7 @@ data FolderEntities =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FolderEntities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4132,6 +4225,7 @@ folderEntities =
     , _feVariable = Nothing
     , _feTrigger = Nothing
     }
+
 
 -- | Continuation token for fetching the next page of results.
 feNextPageToken :: Lens' FolderEntities (Maybe Text)
@@ -4187,6 +4281,7 @@ data SyncStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SyncStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4197,6 +4292,7 @@ data SyncStatus =
 syncStatus
     :: SyncStatus
 syncStatus = SyncStatus' {_ssSyncError = Nothing, _ssMergeConflict = Nothing}
+
 
 -- | An error occurred during the synchronization operation.
 ssSyncError :: Lens' SyncStatus (Maybe Bool)
@@ -4232,6 +4328,7 @@ newtype RevertTagResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RevertTagResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4240,6 +4337,7 @@ newtype RevertTagResponse =
 revertTagResponse
     :: RevertTagResponse
 revertTagResponse = RevertTagResponse' {_rtrTag = Nothing}
+
 
 -- | Tag as it appears in the latest container version since the last
 -- workspace synchronization operation. If no tag is present, that means
@@ -4266,6 +4364,7 @@ data Condition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4276,6 +4375,7 @@ data Condition =
 condition
     :: Condition
 condition = Condition' {_cType = Nothing, _cParameter = Nothing}
+
 
 -- | The type of operator for this condition.
 cType :: Lens' Condition (Maybe ConditionType)
@@ -4324,6 +4424,7 @@ data Entity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Entity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4347,6 +4448,7 @@ entity =
     , _eChangeStatus = Nothing
     , _eTrigger = Nothing
     }
+
 
 -- | The tag being represented by the entity.
 eTag :: Lens' Entity (Maybe Tag)
@@ -4400,6 +4502,7 @@ data ContainerAccess =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContainerAccess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4411,6 +4514,7 @@ containerAccess
     :: ContainerAccess
 containerAccess =
   ContainerAccess' {_caContainerId = Nothing, _caPermission = Nothing}
+
 
 -- | GTM Container ID.
 caContainerId :: Lens' ContainerAccess (Maybe Text)
@@ -4495,6 +4599,7 @@ data Timestamp =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Timestamp' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4505,6 +4610,7 @@ data Timestamp =
 timestamp
     :: Timestamp
 timestamp = Timestamp' {_tNanos = Nothing, _tSeconds = Nothing}
+
 
 -- | Non-negative fractions of a second at nanosecond resolution. Negative
 -- second values with fractions must still have non-negative nanos values
@@ -4543,6 +4649,7 @@ newtype RevertBuiltInVariableResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RevertBuiltInVariableResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4552,6 +4659,7 @@ revertBuiltInVariableResponse
     :: RevertBuiltInVariableResponse
 revertBuiltInVariableResponse =
   RevertBuiltInVariableResponse' {_rbivrEnabled = Nothing}
+
 
 -- | Whether the built-in variable is enabled after reversion.
 rbivrEnabled :: Lens' RevertBuiltInVariableResponse (Maybe Bool)
@@ -4579,6 +4687,7 @@ data WorkspaceProposalHistoryStatusChange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkspaceProposalHistoryStatusChange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4591,6 +4700,7 @@ workspaceProposalHistoryStatusChange
 workspaceProposalHistoryStatusChange =
   WorkspaceProposalHistoryStatusChange'
     {_wphscOldStatus = Nothing, _wphscNewStatus = Nothing}
+
 
 -- | The old proposal status before the status change.
 wphscOldStatus :: Lens' WorkspaceProposalHistoryStatusChange (Maybe WorkspaceProposalHistoryStatusChangeOldStatus)
@@ -4636,6 +4746,7 @@ data WorkspaceProposal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkspaceProposal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4662,6 +4773,7 @@ workspaceProposal =
     , _wpAuthors = Nothing
     , _wpReviewers = Nothing
     }
+
 
 -- | The status of the workspace proposal as it goes through review.
 wpStatus :: Lens' WorkspaceProposal (Maybe WorkspaceProposalStatus)
@@ -4734,6 +4846,7 @@ data Parameter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Parameter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4757,6 +4870,7 @@ parameter =
     , _pKey = Nothing
     , _pType = Nothing
     }
+
 
 -- | This list parameter\'s parameters (keys will be ignored).
 pList :: Lens' Parameter [Parameter]

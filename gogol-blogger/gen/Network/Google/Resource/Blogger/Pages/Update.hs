@@ -70,6 +70,7 @@ data PagesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PagesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ pagesUpdate pPuuBlogId_ pPuuPageId_ pPuuPayload_ =
     , _puuRevert = Nothing
     , _puuPublish = Nothing
     }
+
 
 -- | The ID of the Blog.
 puuBlogId :: Lens' PagesUpdate Text

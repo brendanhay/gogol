@@ -70,6 +70,7 @@ data ProjectsAttestorsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAttestorsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsAttestorsGet pPagName_ =
     , _pagName = pPagName_
     , _pagCallback = Nothing
     }
+
 
 -- | V1 error format.
 pagXgafv :: Lens' ProjectsAttestorsGet (Maybe Xgafv)

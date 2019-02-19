@@ -84,6 +84,7 @@ data ProjectsRegionsJobsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsJobsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsRegionsJobsTestIAMPermissions pPrjtipPayload_ pPrjtipResource_ =
     , _prjtipResource = pPrjtipResource_
     , _prjtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prjtipXgafv :: Lens' ProjectsRegionsJobsTestIAMPermissions (Maybe Xgafv)

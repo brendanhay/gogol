@@ -36,6 +36,7 @@ data DataSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -59,6 +60,7 @@ dataSet =
     , _dsMinStartTimeNs = Nothing
     , _dsMaxEndTimeNs = Nothing
     }
+
 
 -- | This token will be set when a dataset is received in response to a GET
 -- request and the dataset is too large to be included in a single
@@ -135,6 +137,7 @@ data Application =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -155,6 +158,7 @@ application =
     , _aVersion = Nothing
     , _aDetailsURL = Nothing
     }
+
 
 -- | Package name for this application. This is used as a unique identifier
 -- when created by Android applications, but cannot be specified by REST
@@ -206,6 +210,7 @@ newtype AggregateResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AggregateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -214,6 +219,7 @@ newtype AggregateResponse =
 aggregateResponse
     :: AggregateResponse
 aggregateResponse = AggregateResponse' {_arBucket = Nothing}
+
 
 -- | A list of buckets containing the aggregated data.
 arBucket :: Lens' AggregateResponse [AggregateBucket]
@@ -242,6 +248,7 @@ data AggregateBy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AggregateBy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -253,6 +260,7 @@ aggregateBy
     :: AggregateBy
 aggregateBy =
   AggregateBy' {_abDataTypeName = Nothing, _abDataSourceId = Nothing}
+
 
 -- | The data type to aggregate. All data sources providing this data type
 -- will contribute data to the aggregation. The response will contain a
@@ -295,6 +303,7 @@ data BucketByActivity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketByActivity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -307,6 +316,7 @@ bucketByActivity
 bucketByActivity =
   BucketByActivity'
     {_bbaMinDurationMillis = Nothing, _bbaActivityDataSourceId = Nothing}
+
 
 -- | Specifies that only activity segments of duration longer than
 -- minDurationMillis are considered and used as a container for aggregated
@@ -356,6 +366,7 @@ data AggregateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AggregateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -388,6 +399,7 @@ aggregateRequest =
     , _arStartTimeMillis = Nothing
     , _arBucketByActivitySegment = Nothing
     }
+
 
 -- | The end of a window of time. Data that intersects with this time window
 -- will be aggregated. The time is in milliseconds since epoch, inclusive.
@@ -514,6 +526,7 @@ data Device =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -537,6 +550,7 @@ device =
     , _dVersion = Nothing
     , _dType = Nothing
     }
+
 
 -- | Manufacturer of the product\/hardware.
 dManufacturer :: Lens' Device (Maybe Text)
@@ -596,6 +610,7 @@ data Value =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -616,6 +631,7 @@ value =
     , _vIntVal = Nothing
     , _vStringVal = Nothing
     }
+
 
 -- | Map value. The valid key space and units for the corresponding value of
 -- each entry should be documented as part of the data type definition.
@@ -670,6 +686,7 @@ newtype BucketBySession =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketBySession' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -678,6 +695,7 @@ newtype BucketBySession =
 bucketBySession
     :: BucketBySession
 bucketBySession = BucketBySession' {_bbsMinDurationMillis = Nothing}
+
 
 -- | Specifies that only sessions of duration longer than minDurationMillis
 -- are considered and used as a container for aggregated data.
@@ -723,6 +741,7 @@ data DataPoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataPoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -755,6 +774,7 @@ dataPoint =
     , _dpModifiedTimeMillis = Nothing
     , _dpStartTimeNanos = Nothing
     }
+
 
 -- | If the data point is contained in a dataset for a derived data source,
 -- this field will be populated with the data source stream ID that created
@@ -858,6 +878,7 @@ data ListSessionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSessionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -878,6 +899,7 @@ listSessionsResponse =
     , _lsrHasMoreData = Nothing
     , _lsrSession = Nothing
     }
+
 
 -- | The continuation token, which is used to page through large result sets.
 -- Provide this value in a subsequent request to return the next page of
@@ -943,6 +965,7 @@ data AggregateBucket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AggregateBucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -969,6 +992,7 @@ aggregateBucket =
     , _abStartTimeMillis = Nothing
     , _abSession = Nothing
     }
+
 
 -- | The end time for the aggregated data, in milliseconds since epoch,
 -- inclusive.
@@ -1043,6 +1067,7 @@ newtype MapValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MapValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1051,6 +1076,7 @@ newtype MapValue =
 mapValue
     :: MapValue
 mapValue = MapValue' {_mvFpVal = Nothing}
+
 
 -- | Floating point value.
 mvFpVal :: Lens' MapValue (Maybe Double)
@@ -1075,6 +1101,7 @@ newtype ListDataSourcesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDataSourcesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1083,6 +1110,7 @@ newtype ListDataSourcesResponse =
 listDataSourcesResponse
     :: ListDataSourcesResponse
 listDataSourcesResponse = ListDataSourcesResponse' {_ldsrDataSource = Nothing}
+
 
 -- | A previously created data source.
 ldsrDataSource :: Lens' ListDataSourcesResponse [DataSource]
@@ -1119,6 +1147,7 @@ data DataTypeField =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataTypeField' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1133,6 +1162,7 @@ dataTypeField
 dataTypeField =
   DataTypeField'
     {_dtfFormat = Nothing, _dtfName = Nothing, _dtfOptional = Nothing}
+
 
 -- | The different supported formats for each field in a data type.
 dtfFormat :: Lens' DataTypeField (Maybe DataTypeFieldFormat)
@@ -1193,6 +1223,7 @@ data DataSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1225,6 +1256,7 @@ dataSource =
     , _dsDataStreamName = Nothing
     , _dsDataStreamId = Nothing
     }
+
 
 -- | Information about an application which feeds sensor data into the
 -- platform.
@@ -1339,6 +1371,7 @@ data BucketByTimePeriod =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketByTimePeriod' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1353,6 +1386,7 @@ bucketByTimePeriod
 bucketByTimePeriod =
   BucketByTimePeriod'
     {_bbtpValue = Nothing, _bbtpType = Nothing, _bbtpTimeZoneId = Nothing}
+
 
 bbtpValue :: Lens' BucketByTimePeriod (Maybe Int32)
 bbtpValue
@@ -1393,6 +1427,7 @@ data ValueMapValEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ValueMapValEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1403,6 +1438,7 @@ data ValueMapValEntry =
 valueMapValEntry
     :: ValueMapValEntry
 valueMapValEntry = ValueMapValEntry' {_vmveValue = Nothing, _vmveKey = Nothing}
+
 
 vmveValue :: Lens' ValueMapValEntry (Maybe MapValue)
 vmveValue
@@ -1434,6 +1470,7 @@ data BucketByTime =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketByTime' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1445,6 +1482,7 @@ bucketByTime
     :: BucketByTime
 bucketByTime =
   BucketByTime' {_bbtPeriod = Nothing, _bbtDurationMillis = Nothing}
+
 
 bbtPeriod :: Lens' BucketByTime (Maybe BucketByTimePeriod)
 bbtPeriod
@@ -1483,6 +1521,7 @@ data DataType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1493,6 +1532,7 @@ data DataType =
 dataType
     :: DataType
 dataType = DataType' {_dtField = Nothing, _dtName = Nothing}
+
 
 -- | A field represents one dimension of a data type.
 dtField :: Lens' DataType [DataTypeField]
@@ -1529,6 +1569,7 @@ data ListDataPointChangesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDataPointChangesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1549,6 +1590,7 @@ listDataPointChangesResponse =
     , _ldpcrDataSourceId = Nothing
     , _ldpcrDeletedDataPoint = Nothing
     }
+
 
 -- | The continuation token, which is used to page through large result sets.
 -- Provide this value in a subsequent request to return the next page of
@@ -1618,6 +1660,7 @@ data Session =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Session' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1653,6 +1696,7 @@ session =
     , _sStartTimeMillis = Nothing
     , _sDescription = Nothing
     }
+
 
 -- | An end time, in milliseconds since epoch, inclusive.
 sEndTimeMillis :: Lens' Session (Maybe Int64)

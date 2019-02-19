@@ -83,6 +83,7 @@ data AlbumsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlbumsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ albumsList =
     , _alPageSize = Nothing
     , _alCallback = Nothing
     }
+
 
 -- | V1 error format.
 alXgafv :: Lens' AlbumsList (Maybe Xgafv)

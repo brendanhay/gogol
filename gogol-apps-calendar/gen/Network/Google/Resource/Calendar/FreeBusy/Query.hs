@@ -58,6 +58,7 @@ newtype FreeBusyQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FreeBusyQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ freeBusyQuery
     :: FreeBusyRequest -- ^ 'fbqPayload'
     -> FreeBusyQuery
 freeBusyQuery pFbqPayload_ = FreeBusyQuery' {_fbqPayload = pFbqPayload_}
+
 
 -- | Multipart request metadata.
 fbqPayload :: Lens' FreeBusyQuery FreeBusyRequest

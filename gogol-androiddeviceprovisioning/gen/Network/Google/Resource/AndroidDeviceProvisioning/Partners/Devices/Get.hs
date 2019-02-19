@@ -70,6 +70,7 @@ data PartnersDevicesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersDevicesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ partnersDevicesGet pPdgName_ =
     , _pdgName = pPdgName_
     , _pdgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdgXgafv :: Lens' PartnersDevicesGet (Maybe Xgafv)

@@ -67,6 +67,7 @@ data ContentCategoriesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContentCategoriesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ contentCategoriesPatch pCcpProFileId_ pCcpPayload_ pCcpId_ =
     , _ccpPayload = pCcpPayload_
     , _ccpId = _Coerce # pCcpId_
     }
+
 
 -- | User profile ID associated with this request.
 ccpProFileId :: Lens' ContentCategoriesPatch Int64

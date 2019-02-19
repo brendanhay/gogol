@@ -116,6 +116,7 @@ data ProjectsInstancesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -147,6 +148,7 @@ projectsInstancesPatch pPipPayload_ pPipName_ =
     , _pipName = pPipName_
     , _pipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pipXgafv :: Lens' ProjectsInstancesPatch (Maybe Xgafv)

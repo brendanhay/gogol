@@ -81,6 +81,7 @@ data CustomersDevicesApplyConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersDevicesApplyConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ customersDevicesApplyConfiguration pCdacParent_ pCdacPayload_ =
     , _cdacPayload = pCdacPayload_
     , _cdacCallback = Nothing
     }
+
 
 -- | Required. The customer managing the device. An API resource name in the
 -- format \`customers\/[CUSTOMER_ID]\`.

@@ -72,6 +72,7 @@ data RoutersPreview =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoutersPreview' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ routersPreview pRppProject_ pRppRouter_ pRppPayload_ pRppRegion_ =
     , _rppPayload = pRppPayload_
     , _rppRegion = pRppRegion_
     }
+
 
 -- | Project ID for this request.
 rppProject :: Lens' RoutersPreview Text

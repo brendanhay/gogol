@@ -67,6 +67,7 @@ data CreativeFieldsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ creativeFieldsPatch pCfpProFileId_ pCfpPayload_ pCfpId_ =
     , _cfpPayload = pCfpPayload_
     , _cfpId = _Coerce # pCfpId_
     }
+
 
 -- | User profile ID associated with this request.
 cfpProFileId :: Lens' CreativeFieldsPatch Int64

@@ -64,6 +64,7 @@ data CommentsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ commentsUpdate pCuPayload_ pCuFileId_ pCuCommentId_ =
     , _cuFileId = pCuFileId_
     , _cuCommentId = pCuCommentId_
     }
+
 
 -- | Multipart request metadata.
 cuPayload :: Lens' CommentsUpdate Comment

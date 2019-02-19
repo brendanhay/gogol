@@ -81,6 +81,7 @@ data MattersSavedQueriesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersSavedQueriesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ mattersSavedQueriesList pMsqlMatterId_ =
     , _msqlPageSize = Nothing
     , _msqlCallback = Nothing
     }
+
 
 -- | V1 error format.
 msqlXgafv :: Lens' MattersSavedQueriesList (Maybe Xgafv)

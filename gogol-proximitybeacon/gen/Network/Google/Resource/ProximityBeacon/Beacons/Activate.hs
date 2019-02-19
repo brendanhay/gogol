@@ -85,6 +85,7 @@ data BeaconsActivate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconsActivate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ beaconsActivate pBaBeaconName_ =
     , _baProjectId = Nothing
     , _baCallback = Nothing
     }
+
 
 -- | V1 error format.
 baXgafv :: Lens' BeaconsActivate (Maybe Xgafv)

@@ -66,6 +66,7 @@ data InstancesFailover =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesFailover' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ instancesFailover pIfProject_ pIfPayload_ pIfInstance_ =
     , _ifPayload = pIfPayload_
     , _ifInstance = pIfInstance_
     }
+
 
 -- | ID of the project that contains the read replica.
 ifProject :: Lens' InstancesFailover Text

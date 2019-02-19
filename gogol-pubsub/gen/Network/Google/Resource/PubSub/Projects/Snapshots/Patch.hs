@@ -90,6 +90,7 @@ data ProjectsSnapshotsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSnapshotsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ projectsSnapshotsPatch pPpPayload_ pPpName_ =
     , _ppName = pPpName_
     , _ppCallback = Nothing
     }
+
 
 -- | V1 error format.
 ppXgafv :: Lens' ProjectsSnapshotsPatch (Maybe Xgafv)

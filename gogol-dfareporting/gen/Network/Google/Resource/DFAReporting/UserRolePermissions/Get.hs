@@ -62,6 +62,7 @@ data UserRolePermissionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolePermissionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ userRolePermissionsGet
 userRolePermissionsGet pUProFileId_ pUId_ =
   UserRolePermissionsGet'
     {_uProFileId = _Coerce # pUProFileId_, _uId = _Coerce # pUId_}
+
 
 -- | User profile ID associated with this request.
 uProFileId :: Lens' UserRolePermissionsGet Int64

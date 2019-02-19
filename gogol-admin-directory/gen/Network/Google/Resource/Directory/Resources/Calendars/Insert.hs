@@ -64,6 +64,7 @@ data ResourcesCalendarsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesCalendarsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ resourcesCalendarsInsert
 resourcesCalendarsInsert pRciPayload_ pRciCustomer_ =
   ResourcesCalendarsInsert'
     {_rciPayload = pRciPayload_, _rciCustomer = pRciCustomer_}
+
 
 -- | Multipart request metadata.
 rciPayload :: Lens' ResourcesCalendarsInsert CalendarResource

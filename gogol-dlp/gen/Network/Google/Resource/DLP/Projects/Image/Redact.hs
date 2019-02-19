@@ -87,6 +87,7 @@ data ProjectsImageRedact =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsImageRedact' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ projectsImageRedact pPirParent_ pPirPayload_ =
     , _pirPayload = pPirPayload_
     , _pirCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id.
 pirParent :: Lens' ProjectsImageRedact Text

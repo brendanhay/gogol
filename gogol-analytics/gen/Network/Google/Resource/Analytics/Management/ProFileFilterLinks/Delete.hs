@@ -70,6 +70,7 @@ data ManagementProFileFilterLinksDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementProFileFilterLinksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ managementProFileFilterLinksDelete pMpffldWebPropertyId_ pMpffldProFileId_ pMpff
     , _mpffldAccountId = pMpffldAccountId_
     , _mpffldLinkId = pMpffldLinkId_
     }
+
 
 -- | Web property Id to which the profile filter link belongs.
 mpffldWebPropertyId :: Lens' ManagementProFileFilterLinksDelete Text

@@ -72,6 +72,7 @@ data CustomersConfigurationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersConfigurationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ customersConfigurationsDelete pCcdName_ =
     , _ccdName = pCcdName_
     , _ccdCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccdXgafv :: Lens' CustomersConfigurationsDelete (Maybe Xgafv)

@@ -58,6 +58,7 @@ newtype GroupsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ groupsDelete
     :: Text -- ^ 'gdGroupKey'
     -> GroupsDelete
 groupsDelete pGdGroupKey_ = GroupsDelete' {_gdGroupKey = pGdGroupKey_}
+
 
 -- | Email or immutable ID of the group
 gdGroupKey :: Lens' GroupsDelete Text

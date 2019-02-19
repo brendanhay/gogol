@@ -62,6 +62,7 @@ data CommentsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ commentsInsert
     -> CommentsInsert
 commentsInsert pComPart_ pComPayload_ =
   CommentsInsert' {_comPart = pComPart_, _comPayload = pComPayload_}
+
 
 -- | The part parameter identifies the properties that the API response will
 -- include. Set the parameter value to snippet. The snippet part has a

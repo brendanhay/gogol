@@ -78,6 +78,7 @@ data ProjectsTopicsSubscriptionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTopicsSubscriptionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsTopicsSubscriptionsList pPtslTopic_ =
     , _ptslPageSize = Nothing
     , _ptslCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptslXgafv :: Lens' ProjectsTopicsSubscriptionsList (Maybe Xgafv)

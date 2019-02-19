@@ -67,6 +67,7 @@ data ImagesTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImagesTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ imagesTestIAMPermissions pItiampProject_ pItiampPayload_ pItiampResource_ =
     , _itiampPayload = pItiampPayload_
     , _itiampResource = pItiampResource_
     }
+
 
 -- | Project ID for this request.
 itiampProject :: Lens' ImagesTestIAMPermissions Text

@@ -84,6 +84,7 @@ data ProjectsLocationsAcceleratorTypesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsAcceleratorTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsLocationsAcceleratorTypesList pPlatlParent_ =
     , _platlPageSize = Nothing
     , _platlCallback = Nothing
     }
+
 
 -- | The parent resource name.
 platlParent :: Lens' ProjectsLocationsAcceleratorTypesList Text

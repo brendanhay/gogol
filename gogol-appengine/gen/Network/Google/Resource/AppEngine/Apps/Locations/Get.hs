@@ -75,6 +75,7 @@ data AppsLocationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsLocationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ appsLocationsGet pAlgAppsId_ pAlgLocationsId_ =
     , _algLocationsId = pAlgLocationsId_
     , _algCallback = Nothing
     }
+
 
 -- | V1 error format.
 algXgafv :: Lens' AppsLocationsGet (Maybe Xgafv)

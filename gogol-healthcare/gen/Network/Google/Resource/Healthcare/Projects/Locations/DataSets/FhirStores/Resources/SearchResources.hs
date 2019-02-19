@@ -75,6 +75,7 @@ data ProjectsLocationsDataSetsFhirStoresResourcesSearchResources =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsFhirStoresResourcesSearchResources' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLocationsDataSetsFhirStoresResourcesSearchResources pPldsfsrsrParent_ pP
     , _pldsfsrsrUploadType = Nothing
     , _pldsfsrsrCallback = Nothing
     }
+
 
 -- | Name of the FHIR store to retrieve resources from.
 pldsfsrsrParent :: Lens' ProjectsLocationsDataSetsFhirStoresResourcesSearchResources Text

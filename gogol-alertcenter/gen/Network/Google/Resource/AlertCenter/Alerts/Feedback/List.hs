@@ -81,6 +81,7 @@ data AlertsFeedbackList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlertsFeedbackList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ alertsFeedbackList pAflAlertId_ =
     , _aflFilter = Nothing
     , _aflCallback = Nothing
     }
+
 
 -- | V1 error format.
 aflXgafv :: Lens' AlertsFeedbackList (Maybe Xgafv)

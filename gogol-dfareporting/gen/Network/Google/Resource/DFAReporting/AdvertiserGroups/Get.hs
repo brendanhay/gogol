@@ -62,6 +62,7 @@ data AdvertiserGroupsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ advertiserGroupsGet
 advertiserGroupsGet pAgggProFileId_ pAgggId_ =
   AdvertiserGroupsGet'
     {_agggProFileId = _Coerce # pAgggProFileId_, _agggId = _Coerce # pAgggId_}
+
 
 -- | User profile ID associated with this request.
 agggProFileId :: Lens' AdvertiserGroupsGet Int64

@@ -62,6 +62,7 @@ data PlacementStrategiesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementStrategiesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ placementStrategiesUpdate
 placementStrategiesUpdate pPsuProFileId_ pPsuPayload_ =
   PlacementStrategiesUpdate'
     {_psuProFileId = _Coerce # pPsuProFileId_, _psuPayload = pPsuPayload_}
+
 
 -- | User profile ID associated with this request.
 psuProFileId :: Lens' PlacementStrategiesUpdate Int64

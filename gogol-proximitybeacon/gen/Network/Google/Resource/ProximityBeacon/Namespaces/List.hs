@@ -84,6 +84,7 @@ data NamespacesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NamespacesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ namespacesList =
     , _nlProjectId = Nothing
     , _nlCallback = Nothing
     }
+
 
 -- | V1 error format.
 nlXgafv :: Lens' NamespacesList (Maybe Xgafv)

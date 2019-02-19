@@ -74,6 +74,7 @@ data ProjectsLocationsClustersSetLogging =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersSetLogging' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsLocationsClustersSetLogging pPlcslPayload_ pPlcslName_ =
     , _plcslName = pPlcslName_
     , _plcslCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcslXgafv :: Lens' ProjectsLocationsClustersSetLogging (Maybe Xgafv)

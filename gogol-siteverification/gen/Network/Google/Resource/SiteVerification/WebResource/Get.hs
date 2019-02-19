@@ -58,6 +58,7 @@ newtype WebResourceGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebResourceGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ webResourceGet
     :: Text -- ^ 'wrgId'
     -> WebResourceGet
 webResourceGet pWrgId_ = WebResourceGet' {_wrgId = pWrgId_}
+
 
 -- | The id of a verified site or domain.
 wrgId :: Lens' WebResourceGet Text

@@ -65,6 +65,7 @@ data TrainedModelsPredict =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrainedModelsPredict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ trainedModelsPredict
 trainedModelsPredict pTmpProject_ pTmpPayload_ pTmpId_ =
   TrainedModelsPredict'
     {_tmpProject = pTmpProject_, _tmpPayload = pTmpPayload_, _tmpId = pTmpId_}
+
 
 -- | The project associated with the model.
 tmpProject :: Lens' TrainedModelsPredict Text

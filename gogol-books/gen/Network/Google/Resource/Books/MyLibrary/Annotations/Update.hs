@@ -64,6 +64,7 @@ data MyLibraryAnnotationsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryAnnotationsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ myLibraryAnnotationsUpdate pMlauPayload_ pMlauAnnotationId_ =
     , _mlauAnnotationId = pMlauAnnotationId_
     , _mlauSource = Nothing
     }
+
 
 -- | Multipart request metadata.
 mlauPayload :: Lens' MyLibraryAnnotationsUpdate Annotation

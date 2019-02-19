@@ -96,6 +96,7 @@ data PhotosBatchUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PhotosBatchUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ photosBatchUpdate pPbuPayload_ =
     , _pbuPayload = pPbuPayload_
     , _pbuCallback = Nothing
     }
+
 
 -- | V1 error format.
 pbuXgafv :: Lens' PhotosBatchUpdate (Maybe Xgafv)

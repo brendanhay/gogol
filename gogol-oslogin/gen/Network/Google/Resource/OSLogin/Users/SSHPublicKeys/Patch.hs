@@ -79,6 +79,7 @@ data UsersSSHPublicKeysPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSSHPublicKeysPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ usersSSHPublicKeysPatch pUspkpPayload_ pUspkpName_ =
     , _uspkpName = pUspkpName_
     , _uspkpCallback = Nothing
     }
+
 
 -- | V1 error format.
 uspkpXgafv :: Lens' UsersSSHPublicKeysPatch (Maybe Xgafv)

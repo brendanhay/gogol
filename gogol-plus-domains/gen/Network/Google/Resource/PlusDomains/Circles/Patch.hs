@@ -60,6 +60,7 @@ data CirclesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CirclesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ circlesPatch
     -> CirclesPatch
 circlesPatch pCpPayload_ pCpCircleId_ =
   CirclesPatch' {_cpPayload = pCpPayload_, _cpCircleId = pCpCircleId_}
+
 
 -- | Multipart request metadata.
 cpPayload :: Lens' CirclesPatch Circle

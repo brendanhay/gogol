@@ -73,6 +73,7 @@ data ProjectsLocationsDataSetsDicomStoresGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsDicomStoresGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ projectsLocationsDataSetsDicomStoresGetIAMPolicy pPldsdsgipResource_ =
     , _pldsdsgipResource = pPldsdsgipResource_
     , _pldsdsgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldsdsgipXgafv :: Lens' ProjectsLocationsDataSetsDicomStoresGetIAMPolicy (Maybe Xgafv)

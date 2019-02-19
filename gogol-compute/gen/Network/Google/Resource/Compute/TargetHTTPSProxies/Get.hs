@@ -65,6 +65,7 @@ data TargetHTTPSProxiesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPSProxiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ targetHTTPSProxiesGet pThpgProject_ pThpgTargetHTTPSProxy_ =
     { _thpgProject = pThpgProject_
     , _thpgTargetHTTPSProxy = pThpgTargetHTTPSProxy_
     }
+
 
 -- | Project ID for this request.
 thpgProject :: Lens' TargetHTTPSProxiesGet Text

@@ -59,6 +59,7 @@ newtype AccountsMetadataMetricsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsMetadataMetricsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ accountsMetadataMetricsList
     -> AccountsMetadataMetricsList
 accountsMetadataMetricsList pAmmlAccountId_ =
   AccountsMetadataMetricsList' {_ammlAccountId = pAmmlAccountId_}
+
 
 -- | Account with visibility to the metrics.
 ammlAccountId :: Lens' AccountsMetadataMetricsList Text

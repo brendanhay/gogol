@@ -61,6 +61,7 @@ data CreativesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ creativesInsert
 creativesInsert pCiProFileId_ pCiPayload_ =
   CreativesInsert'
     {_ciProFileId = _Coerce # pCiProFileId_, _ciPayload = pCiPayload_}
+
 
 -- | User profile ID associated with this request.
 ciProFileId :: Lens' CreativesInsert Int64

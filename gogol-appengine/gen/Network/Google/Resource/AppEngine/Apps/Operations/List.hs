@@ -98,6 +98,7 @@ data AppsOperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -134,6 +135,7 @@ appsOperationsList pAolAppsId_ =
     , _aolPageSize = Nothing
     , _aolCallback = Nothing
     }
+
 
 -- | V1 error format.
 aolXgafv :: Lens' AppsOperationsList (Maybe Xgafv)

@@ -61,6 +61,7 @@ data ReportsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ reportsDelete pRdReportId_ pRdProFileId_ =
     { _rdReportId = _Coerce # pRdReportId_
     , _rdProFileId = _Coerce # pRdProFileId_
     }
+
 
 -- | The ID of the report.
 rdReportId :: Lens' ReportsDelete Int64

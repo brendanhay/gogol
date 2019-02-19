@@ -71,6 +71,7 @@ data ProjectsAgentSessionsEntityTypesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentSessionsEntityTypesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsAgentSessionsEntityTypesDelete pPaSetdName_ =
     , _paSetdName = pPaSetdName_
     , _paSetdCallback = Nothing
     }
+
 
 -- | V1 error format.
 paSetdXgafv :: Lens' ProjectsAgentSessionsEntityTypesDelete (Maybe Xgafv)

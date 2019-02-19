@@ -62,6 +62,7 @@ data RemarketingListSharesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingListSharesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ remarketingListSharesGet pRlsgProFileId_ pRlsgRemarketingListId_ =
     { _rlsgProFileId = _Coerce # pRlsgProFileId_
     , _rlsgRemarketingListId = _Coerce # pRlsgRemarketingListId_
     }
+
 
 -- | User profile ID associated with this request.
 rlsgProFileId :: Lens' RemarketingListSharesGet Int64

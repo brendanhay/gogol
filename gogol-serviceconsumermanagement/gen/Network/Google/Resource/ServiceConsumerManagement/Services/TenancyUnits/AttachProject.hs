@@ -90,6 +90,7 @@ data ServicesTenancyUnitsAttachProject =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesTenancyUnitsAttachProject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ servicesTenancyUnitsAttachProject pStuapPayload_ pStuapName_ =
     , _stuapName = pStuapName_
     , _stuapCallback = Nothing
     }
+
 
 -- | V1 error format.
 stuapXgafv :: Lens' ServicesTenancyUnitsAttachProject (Maybe Xgafv)

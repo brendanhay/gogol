@@ -60,6 +60,7 @@ newtype UsersSettingsGetVacation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsGetVacation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ newtype UsersSettingsGetVacation =
 usersSettingsGetVacation
     :: UsersSettingsGetVacation
 usersSettingsGetVacation = UsersSettingsGetVacation' {_usgvUserId = "me"}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

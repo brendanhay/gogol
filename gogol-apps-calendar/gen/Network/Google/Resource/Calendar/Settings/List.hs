@@ -65,6 +65,7 @@ data SettingsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ settingsList
 settingsList =
   SettingsList'
     {_slSyncToken = Nothing, _slPageToken = Nothing, _slMaxResults = Nothing}
+
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
 -- results from the previous list request. It makes the result of this list

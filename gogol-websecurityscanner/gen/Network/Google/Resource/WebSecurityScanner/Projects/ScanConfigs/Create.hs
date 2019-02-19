@@ -74,6 +74,7 @@ data ProjectsScanConfigsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsScanConfigsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsScanConfigsCreate pPsccParent_ pPsccPayload_ =
     , _psccPayload = pPsccPayload_
     , _psccCallback = Nothing
     }
+
 
 -- | Required. The parent resource name where the scan is created, which
 -- should be a project resource name in the format

@@ -66,6 +66,7 @@ data UsersSettingsSendAsSmimeInfoDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsSendAsSmimeInfoDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ usersSettingsSendAsSmimeInfoDelete pUssasidSendAsEmail_ pUssasidId_ =
     , _ussasidSendAsEmail = pUssasidSendAsEmail_
     , _ussasidId = pUssasidId_
     }
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

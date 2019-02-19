@@ -81,6 +81,7 @@ data ProjectsJobsDebugGetConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobsDebugGetConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsJobsDebugGetConfig pPjdgcJobId_ pPjdgcPayload_ pPjdgcProjectId_ =
     , _pjdgcProjectId = pPjdgcProjectId_
     , _pjdgcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjdgcXgafv :: Lens' ProjectsJobsDebugGetConfig (Maybe Xgafv)

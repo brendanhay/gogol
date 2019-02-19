@@ -78,6 +78,7 @@ data ProjectsLocationsNodesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsNodesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsNodesList pPlnlParent_ =
     , _plnlPageSize = Nothing
     , _plnlCallback = Nothing
     }
+
 
 -- | The parent resource name.
 plnlParent :: Lens' ProjectsLocationsNodesList Text

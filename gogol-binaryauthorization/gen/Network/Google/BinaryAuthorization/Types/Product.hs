@@ -34,6 +34,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -54,6 +55,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -110,6 +112,7 @@ data UserOwnedDrydockNote =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserOwnedDrydockNote' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +130,7 @@ userOwnedDrydockNote =
     , _uodnPublicKeys = Nothing
     , _uodnNoteReference = Nothing
     }
+
 
 -- | Output only. This field will contain the service account email address
 -- that this Attestor will use as the principal when querying Container
@@ -194,11 +198,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -215,6 +221,7 @@ newtype SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -223,6 +230,7 @@ newtype SetIAMPolicyRequest =
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest = SetIAMPolicyRequest' {_siprPolicy = Nothing}
+
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -251,6 +259,7 @@ data ListAttestorsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAttestorsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -262,6 +271,7 @@ listAttestorsResponse
     :: ListAttestorsResponse
 listAttestorsResponse =
   ListAttestorsResponse' {_larNextPageToken = Nothing, _larAttestors = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListAttestorsRequest.page_token field in the subsequent call to the
@@ -303,6 +313,7 @@ newtype AdmissionWhiteListPattern =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdmissionWhiteListPattern' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -312,6 +323,7 @@ admissionWhiteListPattern
     :: AdmissionWhiteListPattern
 admissionWhiteListPattern =
   AdmissionWhiteListPattern' {_awlpNamePattern = Nothing}
+
 
 -- | An image name pattern to whitelist, in the form
 -- \`registry\/path\/to\/image\`. This supports a trailing \`*\` as a
@@ -348,6 +360,7 @@ data AdmissionRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdmissionRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -365,6 +378,7 @@ admissionRule =
     , _arEvaluationMode = Nothing
     , _arRequireAttestationsBy = Nothing
     }
+
 
 -- | Required. The action when a pod creation is denied by the admission
 -- rule.
@@ -420,6 +434,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -429,6 +444,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -480,6 +496,7 @@ data IAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -493,6 +510,7 @@ iamPolicy
     :: IAMPolicy
 iamPolicy =
   IAMPolicy' {_ipEtag = Nothing, _ipVersion = Nothing, _ipBindings = Nothing}
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -550,6 +568,7 @@ data AttestorPublicKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AttestorPublicKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -567,6 +586,7 @@ attestorPublicKey =
     , _apkId = Nothing
     , _apkComment = Nothing
     }
+
 
 -- | ASCII-armored representation of a PGP public key, as the entire output
 -- by the command \`gpg --export --armor foo\'example.com\` (either LF or
@@ -613,6 +633,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -622,6 +643,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -659,6 +681,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -685,6 +708,7 @@ policy =
     , _pName = Nothing
     , _pDescription = Nothing
     }
+
 
 -- | Required. Default admission rule for a cluster without a per-cluster
 -- admission rule.
@@ -771,6 +795,7 @@ newtype PolicyClusterAdmissionRules =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PolicyClusterAdmissionRules' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -781,6 +806,7 @@ policyClusterAdmissionRules
     -> PolicyClusterAdmissionRules
 policyClusterAdmissionRules pPcarAddtional_ =
   PolicyClusterAdmissionRules' {_pcarAddtional = _Coerce # pPcarAddtional_}
+
 
 pcarAddtional :: Lens' PolicyClusterAdmissionRules (HashMap Text AdmissionRule)
 pcarAddtional
@@ -810,6 +836,7 @@ data Attestor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Attestor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -830,6 +857,7 @@ attestor =
     , _aName = Nothing
     , _aDescription = Nothing
     }
+
 
 -- | A Drydock ATTESTATION_AUTHORITY Note, created by the user.
 aUserOwnedDrydockNote :: Lens' Attestor (Maybe UserOwnedDrydockNote)
@@ -885,6 +913,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -898,6 +927,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

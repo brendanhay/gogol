@@ -67,6 +67,7 @@ data MembersPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MembersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ membersPatch pMpMemberKey_ pMpGroupKey_ pMpPayload_ =
     , _mpGroupKey = pMpGroupKey_
     , _mpPayload = pMpPayload_
     }
+
 
 -- | Email or immutable ID of the user. If ID, it should match with id of
 -- member object

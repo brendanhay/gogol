@@ -91,6 +91,7 @@ data BeaconsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ beaconsGet pBgBeaconName_ =
     , _bgProjectId = Nothing
     , _bgCallback = Nothing
     }
+
 
 -- | V1 error format.
 bgXgafv :: Lens' BeaconsGet (Maybe Xgafv)

@@ -61,6 +61,7 @@ data SubAccountsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubAccountsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ subAccountsUpdate
 subAccountsUpdate pSauProFileId_ pSauPayload_ =
   SubAccountsUpdate'
     {_sauProFileId = _Coerce # pSauProFileId_, _sauPayload = pSauPayload_}
+
 
 -- | User profile ID associated with this request.
 sauProFileId :: Lens' SubAccountsUpdate Int64

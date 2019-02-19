@@ -72,6 +72,7 @@ data ElectionsVoterInfoQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ElectionsVoterInfoQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ electionsVoterInfoQuery pEviqAddress_ pEviqPayload_ =
     , _eviqPayload = pEviqPayload_
     , _eviqOfficialOnly = False
     }
+
 
 -- | If set to true, the query will return the success codeand include any
 -- partial information when it is unable to determine a matching address or

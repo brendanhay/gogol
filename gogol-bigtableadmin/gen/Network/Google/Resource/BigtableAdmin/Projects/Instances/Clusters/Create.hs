@@ -77,6 +77,7 @@ data ProjectsInstancesClustersCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesClustersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsInstancesClustersCreate pPiccParent_ pPiccPayload_ =
     , _piccClusterId = Nothing
     , _piccCallback = Nothing
     }
+
 
 -- | The unique name of the instance in which to create the new cluster.
 -- Values are of the form \`projects\/\/instances\/\`.

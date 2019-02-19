@@ -29,6 +29,7 @@ newtype RegisterDebuggeeResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegisterDebuggeeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37,6 +38,7 @@ newtype RegisterDebuggeeResponse =
 registerDebuggeeResponse
     :: RegisterDebuggeeResponse
 registerDebuggeeResponse = RegisterDebuggeeResponse' {_rdrDebuggee = Nothing}
+
 
 -- | Debuggee resource. The field \`id\` is guaranteed to be set (in addition
 -- to the echoed fields). If the field \`is_disabled\` is set to \`true\`,
@@ -72,6 +74,7 @@ data SourceContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +95,7 @@ sourceContext =
     , _scGerrit = Nothing
     , _scGit = Nothing
     }
+
 
 -- | A SourceContext referring to a snapshot in a cloud workspace.
 scCloudWorkspace :: Lens' SourceContext (Maybe CloudWorkspaceSourceContext)
@@ -138,6 +142,7 @@ newtype SetBreakpointResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetBreakpointResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -146,6 +151,7 @@ newtype SetBreakpointResponse =
 setBreakpointResponse
     :: SetBreakpointResponse
 setBreakpointResponse = SetBreakpointResponse' {_sbrBreakpoint = Nothing}
+
 
 -- | Breakpoint resource. The field \`id\` is guaranteed to be set (in
 -- addition to the echoed fileds).
@@ -176,11 +182,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -196,11 +204,13 @@ data UpdateActiveBreakpointResponse =
   UpdateActiveBreakpointResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateActiveBreakpointResponse' with the minimum fields required to make a request.
 --
 updateActiveBreakpointResponse
     :: UpdateActiveBreakpointResponse
 updateActiveBreakpointResponse = UpdateActiveBreakpointResponse'
+
 
 instance FromJSON UpdateActiveBreakpointResponse
          where
@@ -223,6 +233,7 @@ data GerritSourceContext =
     , _gscAliasContext  :: !(Maybe AliasContext)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GerritSourceContext' with the minimum fields required to make a request.
 --
@@ -247,6 +258,7 @@ gerritSourceContext =
     , _gscHostURI = Nothing
     , _gscAliasContext = Nothing
     }
+
 
 -- | The full project name within the host. Projects may be nested, so
 -- \"project\/subproject\" is a valid project name. The \"repo name\" is
@@ -308,6 +320,7 @@ data RepoId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepoId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -318,6 +331,7 @@ data RepoId =
 repoId
     :: RepoId
 repoId = RepoId' {_riUid = Nothing, _riProjectRepoId = Nothing}
+
 
 -- | A server-assigned, globally unique identifier.
 riUid :: Lens' RepoId (Maybe Text)
@@ -352,6 +366,7 @@ newtype ExtendedSourceContextLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExtendedSourceContextLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -362,6 +377,7 @@ extendedSourceContextLabels
     -> ExtendedSourceContextLabels
 extendedSourceContextLabels pEsclAddtional_ =
   ExtendedSourceContextLabels' {_esclAddtional = _Coerce # pEsclAddtional_}
+
 
 esclAddtional :: Lens' ExtendedSourceContextLabels (HashMap Text Text)
 esclAddtional
@@ -389,6 +405,7 @@ data ProjectRepoId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectRepoId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -399,6 +416,7 @@ data ProjectRepoId =
 projectRepoId
     :: ProjectRepoId
 projectRepoId = ProjectRepoId' {_priRepoName = Nothing, _priProjectId = Nothing}
+
 
 -- | The name of the repo. Leave empty for the default repo.
 priRepoName :: Lens' ProjectRepoId (Maybe Text)
@@ -434,6 +452,7 @@ data FormatMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FormatMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -444,6 +463,7 @@ data FormatMessage =
 formatMessage
     :: FormatMessage
 formatMessage = FormatMessage' {_fmFormat = Nothing, _fmParameters = Nothing}
+
 
 -- | Format template for the message. The \`format\` uses placeholders
 -- \`$0\`, \`$1\`, etc. to reference parameters. \`$$\` can be used to
@@ -497,6 +517,7 @@ data Breakpoint =
     , _bIsFinalState         :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Breakpoint' with the minimum fields required to make a request.
 --
@@ -554,6 +575,7 @@ breakpoint =
     , _bCreateTime = Nothing
     , _bIsFinalState = Nothing
     }
+
 
 -- | Breakpoint status. The status includes an error flag and a human
 -- readable message. This field is usually unset. The message can be either
@@ -735,6 +757,7 @@ newtype BreakpointLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BreakpointLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -745,6 +768,7 @@ breakpointLabels
     -> BreakpointLabels
 breakpointLabels pBlAddtional_ =
   BreakpointLabels' {_blAddtional = _Coerce # pBlAddtional_}
+
 
 blAddtional :: Lens' BreakpointLabels (HashMap Text Text)
 blAddtional
@@ -768,6 +792,7 @@ newtype GetBreakpointResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetBreakpointResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -776,6 +801,7 @@ newtype GetBreakpointResponse =
 getBreakpointResponse
     :: GetBreakpointResponse
 getBreakpointResponse = GetBreakpointResponse' {_gbrBreakpoint = Nothing}
+
 
 -- | Complete breakpoint state. The fields \`id\` and \`location\` are
 -- guaranteed to be set.
@@ -846,6 +872,7 @@ data Variable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Variable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -872,6 +899,7 @@ variable =
     , _vName = Nothing
     , _vType = Nothing
     }
+
 
 -- | Status associated with the variable. This field will usually stay unset.
 -- A status of a single variable only applies to that variable or
@@ -951,6 +979,7 @@ data ListBreakpointsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListBreakpointsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -963,6 +992,7 @@ listBreakpointsResponse
 listBreakpointsResponse =
   ListBreakpointsResponse'
     {_lbrNextWaitToken = Nothing, _lbrBreakpoints = Nothing}
+
 
 -- | A wait token that can be used in the next call to \`list\` (REST) or
 -- \`ListBreakpoints\` (RPC) to block until the list of breakpoints has
@@ -1007,6 +1037,7 @@ newtype ListDebuggeesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDebuggeesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1015,6 +1046,7 @@ newtype ListDebuggeesResponse =
 listDebuggeesResponse
     :: ListDebuggeesResponse
 listDebuggeesResponse = ListDebuggeesResponse' {_ldrDebuggees = Nothing}
+
 
 -- | List of debuggees accessible to the calling user. The fields
 -- \`debuggee.id\` and \`description\` are guaranteed to be set. The
@@ -1047,6 +1079,7 @@ newtype UpdateActiveBreakpointRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateActiveBreakpointRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1056,6 +1089,7 @@ updateActiveBreakpointRequest
     :: UpdateActiveBreakpointRequest
 updateActiveBreakpointRequest =
   UpdateActiveBreakpointRequest' {_uabrBreakpoint = Nothing}
+
 
 -- | Updated breakpoint information. The field \`id\` must be set. The agent
 -- must echo all Breakpoint specification fields in the update.
@@ -1091,6 +1125,7 @@ data StatusMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1105,6 +1140,7 @@ statusMessage
 statusMessage =
   StatusMessage'
     {_smRefersTo = Nothing, _smIsError = Nothing, _smDescription = Nothing}
+
 
 -- | Reference to which the message applies.
 smRefersTo :: Lens' StatusMessage (Maybe StatusMessageRefersTo)
@@ -1149,6 +1185,7 @@ data ListActiveBreakpointsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListActiveBreakpointsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1166,6 +1203,7 @@ listActiveBreakpointsResponse =
     , _labrBreakpoints = Nothing
     , _labrWaitExpired = Nothing
     }
+
 
 -- | A token that can be used in the next method call to block until the list
 -- of breakpoints changes.
@@ -1219,6 +1257,7 @@ data ExtendedSourceContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExtendedSourceContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1230,6 +1269,7 @@ extendedSourceContext
     :: ExtendedSourceContext
 extendedSourceContext =
   ExtendedSourceContext' {_escContext = Nothing, _escLabels = Nothing}
+
 
 -- | Any source context.
 escContext :: Lens' ExtendedSourceContext (Maybe SourceContext)
@@ -1266,6 +1306,7 @@ data GitSourceContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GitSourceContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1276,6 +1317,7 @@ data GitSourceContext =
 gitSourceContext
     :: GitSourceContext
 gitSourceContext = GitSourceContext' {_gURL = Nothing, _gRevisionId = Nothing}
+
 
 -- | Git repository URL.
 gURL :: Lens' GitSourceContext (Maybe Text)
@@ -1311,6 +1353,7 @@ data SourceLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1324,6 +1367,7 @@ sourceLocation
     :: SourceLocation
 sourceLocation =
   SourceLocation' {_slPath = Nothing, _slLine = Nothing, _slColumn = Nothing}
+
 
 -- | Path to the source file within the source context of the target binary.
 slPath :: Lens' SourceLocation (Maybe Text)
@@ -1370,6 +1414,7 @@ data StackFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StackFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1390,6 +1435,7 @@ stackFrame =
     , _sfArguments = Nothing
     , _sfLocals = Nothing
     }
+
 
 -- | Demangled function name at the call site.
 sfFunction :: Lens' StackFrame (Maybe Text)
@@ -1448,6 +1494,7 @@ data CloudRepoSourceContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudRepoSourceContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1468,6 +1515,7 @@ cloudRepoSourceContext =
     , _crscRevisionId = Nothing
     , _crscAliasContext = Nothing
     }
+
 
 -- | The ID of the repo.
 crscRepoId :: Lens' CloudRepoSourceContext (Maybe RepoId)
@@ -1520,6 +1568,7 @@ newtype DebuggeeLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DebuggeeLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1530,6 +1579,7 @@ debuggeeLabels
     -> DebuggeeLabels
 debuggeeLabels pDlAddtional_ =
   DebuggeeLabels' {_dlAddtional = _Coerce # pDlAddtional_}
+
 
 dlAddtional :: Lens' DebuggeeLabels (HashMap Text Text)
 dlAddtional
@@ -1566,6 +1616,7 @@ data Debuggee =
     , _dSourceContexts    :: !(Maybe [SourceContext])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Debuggee' with the minimum fields required to make a request.
 --
@@ -1608,6 +1659,7 @@ debuggee =
     , _dIsInactive = Nothing
     , _dSourceContexts = Nothing
     }
+
 
 -- | Human readable message to be displayed to the user about this debuggee.
 -- Absence of this field indicates no status. The message can be either
@@ -1726,6 +1778,7 @@ data CloudWorkspaceSourceContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudWorkspaceSourceContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1738,6 +1791,7 @@ cloudWorkspaceSourceContext
 cloudWorkspaceSourceContext =
   CloudWorkspaceSourceContext'
     {_cwscWorkspaceId = Nothing, _cwscSnapshotId = Nothing}
+
 
 -- | The ID of the workspace.
 cwscWorkspaceId :: Lens' CloudWorkspaceSourceContext (Maybe CloudWorkspaceId)
@@ -1775,6 +1829,7 @@ newtype RegisterDebuggeeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegisterDebuggeeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1783,6 +1838,7 @@ newtype RegisterDebuggeeRequest =
 registerDebuggeeRequest
     :: RegisterDebuggeeRequest
 registerDebuggeeRequest = RegisterDebuggeeRequest' {_rDebuggee = Nothing}
+
 
 -- | Debuggee information to register. The fields \`project\`,
 -- \`uniquifier\`, \`description\` and \`agent_version\` of the debuggee
@@ -1811,6 +1867,7 @@ data AliasContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AliasContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1821,6 +1878,7 @@ data AliasContext =
 aliasContext
     :: AliasContext
 aliasContext = AliasContext' {_acKind = Nothing, _acName = Nothing}
+
 
 -- | The alias kind.
 acKind :: Lens' AliasContext (Maybe AliasContextKind)
@@ -1854,6 +1912,7 @@ data CloudWorkspaceId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudWorkspaceId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1864,6 +1923,7 @@ data CloudWorkspaceId =
 cloudWorkspaceId
     :: CloudWorkspaceId
 cloudWorkspaceId = CloudWorkspaceId' {_cwiRepoId = Nothing, _cwiName = Nothing}
+
 
 -- | The ID of the repo containing the workspace.
 cwiRepoId :: Lens' CloudWorkspaceId (Maybe RepoId)

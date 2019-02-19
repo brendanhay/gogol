@@ -81,6 +81,7 @@ data ReportTypesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ reportTypesList =
     , _rtlPageSize = Nothing
     , _rtlCallback = Nothing
     }
+
 
 -- | V1 error format.
 rtlXgafv :: Lens' ReportTypesList (Maybe Xgafv)

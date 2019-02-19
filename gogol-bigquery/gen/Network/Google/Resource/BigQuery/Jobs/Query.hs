@@ -64,6 +64,7 @@ data JobsQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobsQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ jobsQuery
     -> JobsQuery
 jobsQuery pJqPayload_ pJqProjectId_ =
   JobsQuery' {_jqPayload = pJqPayload_, _jqProjectId = pJqProjectId_}
+
 
 -- | Multipart request metadata.
 jqPayload :: Lens' JobsQuery QueryRequest

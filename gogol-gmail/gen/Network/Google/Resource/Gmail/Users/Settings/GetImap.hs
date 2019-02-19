@@ -59,6 +59,7 @@ newtype UsersSettingsGetImap =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsGetImap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ newtype UsersSettingsGetImap =
 usersSettingsGetImap
     :: UsersSettingsGetImap
 usersSettingsGetImap = UsersSettingsGetImap' {_usgiUserId = "me"}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

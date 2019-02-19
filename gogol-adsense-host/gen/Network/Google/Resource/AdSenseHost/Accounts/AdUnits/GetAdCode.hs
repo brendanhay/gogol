@@ -71,6 +71,7 @@ data AccountsAdUnitsGetAdCode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsAdUnitsGetAdCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ accountsAdUnitsGetAdCode pAaugacAdUnitId_ pAaugacAdClientId_ pAaugacAccountId_ =
     , _aaugacAccountId = pAaugacAccountId_
     , _aaugacHostCustomChannelId = Nothing
     }
+
 
 -- | Ad unit to get the code for.
 aaugacAdUnitId :: Lens' AccountsAdUnitsGetAdCode Text

@@ -72,6 +72,7 @@ data DisksSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DisksSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ disksSetIAMPolicy pDsipProject_ pDsipZone_ pDsipPayload_ pDsipResource_ =
     , _dsipPayload = pDsipPayload_
     , _dsipResource = pDsipResource_
     }
+
 
 -- | Project ID for this request.
 dsipProject :: Lens' DisksSetIAMPolicy Text

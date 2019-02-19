@@ -96,6 +96,7 @@ data EnterprisesDevicesOperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesDevicesOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -132,6 +133,7 @@ enterprisesDevicesOperationsList pEdolName_ =
     , _edolPageSize = Nothing
     , _edolCallback = Nothing
     }
+
 
 -- | V1 error format.
 edolXgafv :: Lens' EnterprisesDevicesOperationsList (Maybe Xgafv)

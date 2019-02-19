@@ -84,6 +84,7 @@ data ProjectsAttestorsTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAttestorsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsAttestorsTestIAMPermissions pPatipPayload_ pPatipResource_ =
     , _patipResource = pPatipResource_
     , _patipCallback = Nothing
     }
+
 
 -- | V1 error format.
 patipXgafv :: Lens' ProjectsAttestorsTestIAMPermissions (Maybe Xgafv)

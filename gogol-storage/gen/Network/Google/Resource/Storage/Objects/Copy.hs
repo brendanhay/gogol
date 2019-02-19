@@ -135,6 +135,7 @@ data ObjectsCopy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectsCopy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -199,6 +200,7 @@ objectsCopy pOcSourceObject_ pOcSourceBucket_ pOcPayload_ pOcDestinationBucket_ 
     , _ocSourceGeneration = Nothing
     , _ocDestinationObject = pOcDestinationObject_
     }
+
 
 -- | Apply a predefined set of access controls to the destination object.
 ocDestinationPredefinedACL :: Lens' ObjectsCopy (Maybe ObjectsCopyDestinationPredefinedACL)

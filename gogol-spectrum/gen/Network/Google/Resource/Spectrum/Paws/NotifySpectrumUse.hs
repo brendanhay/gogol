@@ -65,6 +65,7 @@ newtype PawsNotifySpectrumUse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsNotifySpectrumUse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ pawsNotifySpectrumUse
     -> PawsNotifySpectrumUse
 pawsNotifySpectrumUse pPnsuPayload_ =
   PawsNotifySpectrumUse' {_pnsuPayload = pPnsuPayload_}
+
 
 -- | Multipart request metadata.
 pnsuPayload :: Lens' PawsNotifySpectrumUse PawsNotifySpectrumUseRequest

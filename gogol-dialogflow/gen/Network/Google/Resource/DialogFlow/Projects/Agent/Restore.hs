@@ -80,6 +80,7 @@ data ProjectsAgentRestore =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentRestore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsAgentRestore pParParent_ pParPayload_ =
     , _parPayload = pParPayload_
     , _parCallback = Nothing
     }
+
 
 -- | Required. The project that the agent to restore is associated with.
 -- Format: \`projects\/\`.

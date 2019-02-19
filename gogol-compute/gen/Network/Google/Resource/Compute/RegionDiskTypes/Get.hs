@@ -67,6 +67,7 @@ data RegionDiskTypesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionDiskTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ regionDiskTypesGet pRdtgProject_ pRdtgDiskType_ pRdtgRegion_ =
     , _rdtgDiskType = pRdtgDiskType_
     , _rdtgRegion = pRdtgRegion_
     }
+
 
 -- | Project ID for this request.
 rdtgProject :: Lens' RegionDiskTypesGet Text

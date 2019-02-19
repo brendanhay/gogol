@@ -64,6 +64,7 @@ data WebAppsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebAppsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ webAppsUpdate pWauWebAppId_ pWauEnterpriseId_ pWauPayload_ =
     , _wauEnterpriseId = pWauEnterpriseId_
     , _wauPayload = pWauPayload_
     }
+
 
 -- | The ID of the web app.
 wauWebAppId :: Lens' WebAppsUpdate Text

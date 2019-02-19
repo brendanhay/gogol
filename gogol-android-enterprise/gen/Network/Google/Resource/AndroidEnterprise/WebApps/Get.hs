@@ -61,6 +61,7 @@ data WebAppsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebAppsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ webAppsGet
 webAppsGet pWagWebAppId_ pWagEnterpriseId_ =
   WebAppsGet'
     {_wagWebAppId = pWagWebAppId_, _wagEnterpriseId = pWagEnterpriseId_}
+
 
 -- | The ID of the web app.
 wagWebAppId :: Lens' WebAppsGet Text

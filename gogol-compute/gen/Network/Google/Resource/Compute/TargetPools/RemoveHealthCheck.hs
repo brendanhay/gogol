@@ -73,6 +73,7 @@ data TargetPoolsRemoveHealthCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolsRemoveHealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ targetPoolsRemoveHealthCheck pTprhcProject_ pTprhcTargetPool_ pTprhcPayload_ pTp
     , _tprhcPayload = pTprhcPayload_
     , _tprhcRegion = pTprhcRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

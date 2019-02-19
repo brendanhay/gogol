@@ -67,6 +67,7 @@ data ManagementRemarketingAudienceGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementRemarketingAudienceGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ managementRemarketingAudienceGet pMragWebPropertyId_ pMragAccountId_ pMragRemark
     , _mragAccountId = pMragAccountId_
     , _mragRemarketingAudienceId = pMragRemarketingAudienceId_
     }
+
 
 -- | The web property ID of the remarketing audience to retrieve.
 mragWebPropertyId :: Lens' ManagementRemarketingAudienceGet Text

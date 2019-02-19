@@ -88,6 +88,7 @@ data UsersLikedassetsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersLikedassetsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +128,7 @@ usersLikedassetsList pUllName_ =
     , _ullPageSize = Nothing
     , _ullCallback = Nothing
     }
+
 
 -- | V1 error format.
 ullXgafv :: Lens' UsersLikedassetsList (Maybe Xgafv)

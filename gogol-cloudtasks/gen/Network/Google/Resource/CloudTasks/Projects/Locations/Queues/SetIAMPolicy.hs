@@ -84,6 +84,7 @@ data ProjectsLocationsQueuesSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsQueuesSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ projectsLocationsQueuesSetIAMPolicy pPlqsipPayload_ pPlqsipResource_ =
     , _plqsipResource = pPlqsipResource_
     , _plqsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plqsipXgafv :: Lens' ProjectsLocationsQueuesSetIAMPolicy (Maybe Xgafv)

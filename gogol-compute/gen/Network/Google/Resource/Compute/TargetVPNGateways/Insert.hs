@@ -71,6 +71,7 @@ data TargetVPNGatewaysInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGatewaysInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ targetVPNGatewaysInsert pTvgiProject_ pTvgiPayload_ pTvgiRegion_ =
     , _tvgiPayload = pTvgiPayload_
     , _tvgiRegion = pTvgiRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

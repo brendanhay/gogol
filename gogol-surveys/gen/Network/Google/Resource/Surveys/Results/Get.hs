@@ -74,6 +74,7 @@ data ResultsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResultsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ resultsGet
     -> ResultsGet
 resultsGet pRgSurveyURLId_ pRgPayload_ =
   ResultsGet' {_rgSurveyURLId = pRgSurveyURLId_, _rgPayload = pRgPayload_}
+
 
 -- | External URL ID for the survey.
 rgSurveyURLId :: Lens' ResultsGet Text

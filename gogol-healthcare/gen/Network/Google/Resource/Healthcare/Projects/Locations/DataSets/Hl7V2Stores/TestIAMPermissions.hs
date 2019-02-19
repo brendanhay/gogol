@@ -85,6 +85,7 @@ data ProjectsLocationsDataSetsHl7V2StoresTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsHl7V2StoresTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsLocationsDataSetsHl7V2StoresTestIAMPermissions pPldshvstipPayload_ pPlds
     , _pldshvstipResource = pPldshvstipResource_
     , _pldshvstipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldshvstipXgafv :: Lens' ProjectsLocationsDataSetsHl7V2StoresTestIAMPermissions (Maybe Xgafv)

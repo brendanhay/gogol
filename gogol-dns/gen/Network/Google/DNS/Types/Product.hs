@@ -29,6 +29,7 @@ data OperationDNSKeyContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationDNSKeyContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40,6 +41,7 @@ operationDNSKeyContext
     :: OperationDNSKeyContext
 operationDNSKeyContext =
   OperationDNSKeyContext' {_odkcOldValue = Nothing, _odkcNewValue = Nothing}
+
 
 -- | The pre-operation DnsKey resource.
 odkcOldValue :: Lens' OperationDNSKeyContext (Maybe DNSKey)
@@ -77,6 +79,7 @@ data DNSKeysListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DNSKeysListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +100,7 @@ dnsKeysListResponse =
     , _dklrKind = "dns#dnsKeysListResponse"
     , _dklrHeader = Nothing
     }
+
 
 -- | The presence of this field indicates that there exist more results
 -- following your last page of results in pagination order. To fetch them,
@@ -159,6 +163,7 @@ data ChangesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -179,6 +184,7 @@ changesListResponse =
     , _clrKind = "dns#changesListResponse"
     , _clrHeader = Nothing
     }
+
 
 -- | The presence of this field indicates that there exist more results
 -- following your last page of results in pagination order. To fetch them,
@@ -242,6 +248,7 @@ data Project =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -262,6 +269,7 @@ project =
     , _pNumber = Nothing
     , _pQuota = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dns#project\".
@@ -320,6 +328,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -352,6 +361,7 @@ operation =
     , _oZoneContext = Nothing
     , _oDNSKeyContext = Nothing
     }
+
 
 -- | Status of the operation. Can be one of the following: \"PENDING\" or
 -- \"DONE\" (output only). A status of \"DONE\" means that the request to
@@ -437,6 +447,7 @@ data DNSKeySpec =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DNSKeySpec' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -457,6 +468,7 @@ dnsKeySpec =
     , _dksAlgorithm = Nothing
     , _dksKeyLength = Nothing
     }
+
 
 -- | Specifies whether this is a key signing key (KSK) or a zone signing key
 -- (ZSK). Key signing keys have the Secure Entry Point flag set and, when
@@ -523,6 +535,7 @@ data Change =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Change' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -552,6 +565,7 @@ change =
     , _cId = Nothing
     , _cIsServing = Nothing
     }
+
 
 -- | Status of the operation (output only). A status of \"done\" means that
 -- the request to update the authoritative servers has been sent, but the
@@ -635,6 +649,7 @@ data DNSKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DNSKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -676,6 +691,7 @@ dnsKey =
     , _dkIsActive = Nothing
     , _dkDescription = Nothing
     }
+
 
 -- | The time that this resource was created in the control plane. This is in
 -- RFC3339 text format. Output only.
@@ -794,6 +810,7 @@ data OperationManagedZoneContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationManagedZoneContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -806,6 +823,7 @@ operationManagedZoneContext
 operationManagedZoneContext =
   OperationManagedZoneContext'
     {_omzcOldValue = Nothing, _omzcNewValue = Nothing}
+
 
 -- | The pre-operation ManagedZone resource.
 omzcOldValue :: Lens' OperationManagedZoneContext (Maybe ManagedZone)
@@ -840,6 +858,7 @@ newtype ResponseHeader =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResponseHeader' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -848,6 +867,7 @@ newtype ResponseHeader =
 responseHeader
     :: ResponseHeader
 responseHeader = ResponseHeader' {_rhOperationId = Nothing}
+
 
 -- | For mutating operation requests that completed successfully. This is the
 -- client_operation_id if the client specified it, otherwise it is
@@ -878,6 +898,7 @@ data ManagedZoneOperationsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedZoneOperationsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -898,6 +919,7 @@ managedZoneOperationsListResponse =
     , _mzolrHeader = Nothing
     , _mzolrOperations = Nothing
     }
+
 
 -- | The presence of this field indicates that there exist more results
 -- following your last page of results in pagination order. To fetch them,
@@ -963,6 +985,7 @@ data ResourceRecordSetsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceRecordSetsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -983,6 +1006,7 @@ resourceRecordSetsListResponse =
     , _rrslrHeader = Nothing
     , _rrslrRrSets = Nothing
     }
+
 
 -- | The presence of this field indicates that there exist more results
 -- following your last page of results in pagination order. To fetch them,
@@ -1046,6 +1070,7 @@ data ManagedZoneDNSSecConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedZoneDNSSecConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1066,6 +1091,7 @@ managedZoneDNSSecConfig =
     , _mzdscDefaultKeySpecs = Nothing
     , _mzdscNonExistence = Nothing
     }
+
 
 -- | Specifies whether DNSSEC is enabled, and what mode it is in.
 mzdscState :: Lens' ManagedZoneDNSSecConfig (Maybe ManagedZoneDNSSecConfigState)
@@ -1127,6 +1153,7 @@ data ResourceRecordSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceRecordSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1153,6 +1180,7 @@ resourceRecordSet =
     , _rrsType = Nothing
     , _rrsRrDatas = Nothing
     }
+
 
 -- | Number of seconds that this ResourceRecordSet can be cached by
 -- resolvers.
@@ -1231,6 +1259,7 @@ data ManagedZone =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedZone' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1269,6 +1298,7 @@ managedZone =
     , _mzDNSsecConfig = Nothing
     , _mzNameServers = Nothing
     }
+
 
 -- | The time that this resource was created on the server. This is in
 -- RFC3339 text format. Output only.
@@ -1374,6 +1404,7 @@ newtype ManagedZoneLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedZoneLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1384,6 +1415,7 @@ managedZoneLabels
     -> ManagedZoneLabels
 managedZoneLabels pMzlAddtional_ =
   ManagedZoneLabels' {_mzlAddtional = _Coerce # pMzlAddtional_}
+
 
 mzlAddtional :: Lens' ManagedZoneLabels (HashMap Text Text)
 mzlAddtional
@@ -1414,6 +1446,7 @@ data Quota =
     , _qDNSKeysPerManagedZone    :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
 --
@@ -1450,6 +1483,7 @@ quota =
     , _qTotalRrDataSizePerChange = Nothing
     , _qDNSKeysPerManagedZone = Nothing
     }
+
 
 -- | Maximum allowed number of ResourceRecordSets to delete per
 -- ChangesCreateRequest.
@@ -1560,6 +1594,7 @@ data DNSKeyDigest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DNSKeyDigest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1570,6 +1605,7 @@ data DNSKeyDigest =
 dnsKeyDigest
     :: DNSKeyDigest
 dnsKeyDigest = DNSKeyDigest' {_dkdDigest = Nothing, _dkdType = Nothing}
+
 
 -- | The base-16 encoded bytes of this digest. Suitable for use in a DS
 -- resource record.
@@ -1606,6 +1642,7 @@ data ManagedZonesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedZonesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1626,6 +1663,7 @@ managedZonesListResponse =
     , _mzlrHeader = Nothing
     , _mzlrManagedZones = Nothing
     }
+
 
 -- | The presence of this field indicates that there exist more results
 -- following your last page of results in pagination order. To fetch them,

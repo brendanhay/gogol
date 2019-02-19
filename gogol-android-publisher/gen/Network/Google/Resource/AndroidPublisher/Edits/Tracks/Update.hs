@@ -72,6 +72,7 @@ data EditsTracksUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsTracksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ editsTracksUpdate pEtuTrack_ pEtuPackageName_ pEtuPayload_ pEtuEditId_ =
     , _etuPayload = pEtuPayload_
     , _etuEditId = pEtuEditId_
     }
+
 
 -- | The track to read or modify.
 etuTrack :: Lens' EditsTracksUpdate Text

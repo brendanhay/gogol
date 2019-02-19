@@ -86,6 +86,7 @@ data OperationsCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ operationsCancel pOcName_ =
     , _ocName = pOcName_
     , _ocCallback = Nothing
     }
+
 
 -- | V1 error format.
 ocXgafv :: Lens' OperationsCancel (Maybe Xgafv)

@@ -67,6 +67,7 @@ data AccountUserProFilesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountUserProFilesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ accountUserProFilesPatch pAupfpProFileId_ pAupfpPayload_ pAupfpId_ =
     , _aupfpPayload = pAupfpPayload_
     , _aupfpId = _Coerce # pAupfpId_
     }
+
 
 -- | User profile ID associated with this request.
 aupfpProFileId :: Lens' AccountUserProFilesPatch Int64

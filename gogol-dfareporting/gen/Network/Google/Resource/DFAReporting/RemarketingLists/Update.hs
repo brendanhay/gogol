@@ -62,6 +62,7 @@ data RemarketingListsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingListsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ remarketingListsUpdate
 remarketingListsUpdate pRluProFileId_ pRluPayload_ =
   RemarketingListsUpdate'
     {_rluProFileId = _Coerce # pRluProFileId_, _rluPayload = pRluPayload_}
+
 
 -- | User profile ID associated with this request.
 rluProFileId :: Lens' RemarketingListsUpdate Int64

@@ -102,6 +102,7 @@ data LayersVolumeAnnotationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LayersVolumeAnnotationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -158,6 +159,7 @@ layersVolumeAnnotationsList pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
     , _lvalMaxResults = Nothing
     , _lvalStartPosition = Nothing
     }
+
 
 -- | The start offset to start retrieving data from.
 lvalStartOffSet :: Lens' LayersVolumeAnnotationsList (Maybe Text)

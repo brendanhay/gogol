@@ -73,6 +73,7 @@ data PoolsResize =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PoolsResize' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ poolsResize pPrPoolName_ pPrZone_ pPrProjectName_ =
     , _prZone = pPrZone_
     , _prProjectName = pPrProjectName_
     }
+
 
 -- | The desired number of replicas to resize to. If this number is larger
 -- than the existing number of replicas, new replicas will be added. If the

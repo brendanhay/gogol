@@ -66,6 +66,7 @@ data ResourcesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ resourcesGet pRgProject_ pRgResource_ pRgDeployment_ =
     , _rgResource = pRgResource_
     , _rgDeployment = pRgDeployment_
     }
+
 
 -- | The project ID for this request.
 rgProject :: Lens' ResourcesGet Text

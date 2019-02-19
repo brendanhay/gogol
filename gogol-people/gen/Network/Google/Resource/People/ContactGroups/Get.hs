@@ -75,6 +75,7 @@ data ContactGroupsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ contactGroupsGet pCggResourceName_ =
     , _cggUploadType = Nothing
     , _cggCallback = Nothing
     }
+
 
 -- | V1 error format.
 cggXgafv :: Lens' ContactGroupsGet (Maybe Xgafv)

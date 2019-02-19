@@ -79,6 +79,7 @@ data ProjectsAgentSessionsEntityTypesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentSessionsEntityTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsAgentSessionsEntityTypesList pPaSetlParent_ =
     , _paSetlPageSize = Nothing
     , _paSetlCallback = Nothing
     }
+
 
 -- | Required. The session to list all session entity types from. Format:
 -- \`projects\/\/agent\/sessions\/\`.

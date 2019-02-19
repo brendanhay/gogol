@@ -80,6 +80,7 @@ data ProjectsTracesListSpans =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTracesListSpans' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsTracesListSpans pPtlsParent_ =
     , _ptlsPageToken = Nothing
     , _ptlsCallback = Nothing
     }
+
 
 -- | ID of the trace for which to list child spans. Format is
 -- \`projects\/PROJECT_ID\/traces\/TRACE_ID\`.

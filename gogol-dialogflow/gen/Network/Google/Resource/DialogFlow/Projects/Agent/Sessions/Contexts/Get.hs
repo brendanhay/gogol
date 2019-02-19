@@ -71,6 +71,7 @@ data ProjectsAgentSessionsContextsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentSessionsContextsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsAgentSessionsContextsGet pPascgName_ =
     , _pascgName = pPascgName_
     , _pascgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pascgXgafv :: Lens' ProjectsAgentSessionsContextsGet (Maybe Xgafv)

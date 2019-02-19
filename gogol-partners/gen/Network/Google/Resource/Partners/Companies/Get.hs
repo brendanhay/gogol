@@ -119,6 +119,7 @@ data CompaniesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompaniesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -179,6 +180,7 @@ companiesGet pCgCompanyId_ =
     , _cgRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _cgCallback = Nothing
     }
+
 
 -- | V1 error format.
 cgXgafv :: Lens' CompaniesGet (Maybe Xgafv)

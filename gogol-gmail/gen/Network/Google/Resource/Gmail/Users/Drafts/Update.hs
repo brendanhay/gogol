@@ -75,6 +75,7 @@ data UsersDraftsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDraftsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ usersDraftsUpdate
 usersDraftsUpdate pUduPayload_ pUduId_ =
   UsersDraftsUpdate'
     {_uduPayload = pUduPayload_, _uduUserId = "me", _uduId = pUduId_}
+
 
 -- | Multipart request metadata.
 uduPayload :: Lens' UsersDraftsUpdate Draft

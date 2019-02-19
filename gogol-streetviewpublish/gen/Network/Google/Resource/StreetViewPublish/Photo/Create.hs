@@ -93,6 +93,7 @@ data PhotoCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PhotoCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ photoCreate pPcPayload_ =
     , _pcPayload = pPcPayload_
     , _pcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pcXgafv :: Lens' PhotoCreate (Maybe Xgafv)

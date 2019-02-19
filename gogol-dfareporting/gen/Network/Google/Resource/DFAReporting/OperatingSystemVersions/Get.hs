@@ -62,6 +62,7 @@ data OperatingSystemVersionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperatingSystemVersionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ operatingSystemVersionsGet
 operatingSystemVersionsGet pOsvgProFileId_ pOsvgId_ =
   OperatingSystemVersionsGet'
     {_osvgProFileId = _Coerce # pOsvgProFileId_, _osvgId = _Coerce # pOsvgId_}
+
 
 -- | User profile ID associated with this request.
 osvgProFileId :: Lens' OperatingSystemVersionsGet Int64

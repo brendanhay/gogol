@@ -66,6 +66,7 @@ data ManagementRemarketingAudienceDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementRemarketingAudienceDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ managementRemarketingAudienceDelete pMradWebPropertyId_ pMradAccountId_ pMradRem
     , _mradAccountId = pMradAccountId_
     , _mradRemarketingAudienceId = pMradRemarketingAudienceId_
     }
+
 
 -- | Web property ID to which the remarketing audience belongs.
 mradWebPropertyId :: Lens' ManagementRemarketingAudienceDelete Text

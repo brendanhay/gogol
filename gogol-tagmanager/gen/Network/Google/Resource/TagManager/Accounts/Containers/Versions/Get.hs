@@ -60,6 +60,7 @@ data AccountsContainersVersionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersVersionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ accountsContainersVersionsGet
 accountsContainersVersionsGet pAcvgPath_ =
   AccountsContainersVersionsGet'
     {_acvgPath = pAcvgPath_, _acvgContainerVersionId = Nothing}
+
 
 -- | GTM ContainerVersion\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}

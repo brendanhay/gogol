@@ -70,6 +70,7 @@ data ManagementUnSampledReportsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementUnSampledReportsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ managementUnSampledReportsDelete pMusrdWebPropertyId_ pMusrdProFileId_ pMusrdAcc
     , _musrdAccountId = pMusrdAccountId_
     , _musrdUnSampledReportId = pMusrdUnSampledReportId_
     }
+
 
 -- | Web property ID to delete the unsampled reports for.
 musrdWebPropertyId :: Lens' ManagementUnSampledReportsDelete Text

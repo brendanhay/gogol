@@ -65,6 +65,7 @@ data CustomChannelsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomChannelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ customChannelsList pCclAdClientId_ =
     , _cclPageToken = Nothing
     , _cclMaxResults = Nothing
     }
+
 
 -- | Ad client for which to list custom channels.
 cclAdClientId :: Lens' CustomChannelsList Text

@@ -64,6 +64,7 @@ data ColumnUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColumnUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ columnUpdate pCuPayload_ pCuTableId_ pCuColumnId_ =
     , _cuTableId = pCuTableId_
     , _cuColumnId = pCuColumnId_
     }
+
 
 -- | Multipart request metadata.
 cuPayload :: Lens' ColumnUpdate Column

@@ -58,6 +58,7 @@ newtype FlagsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FlagsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ newtype FlagsList =
 flagsList
     :: FlagsList
 flagsList = FlagsList' {_flDatabaseVersion = Nothing}
+
 
 -- | Database type and version you want to retrieve flags for. By default,
 -- this method returns flags for all database types and versions.

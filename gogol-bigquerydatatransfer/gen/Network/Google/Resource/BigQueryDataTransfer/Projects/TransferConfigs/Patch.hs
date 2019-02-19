@@ -82,6 +82,7 @@ data ProjectsTransferConfigsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTransferConfigsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +120,7 @@ projectsTransferConfigsPatch pPtcpPayload_ pPtcpName_ =
     , _ptcpName = pPtcpName_
     , _ptcpCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptcpXgafv :: Lens' ProjectsTransferConfigsPatch (Maybe Xgafv)

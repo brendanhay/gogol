@@ -68,6 +68,7 @@ data ApplicationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ applicationsGet pAgApplicationId_ =
     , _agPlatformType = Nothing
     , _agLanguage = Nothing
     }
+
 
 -- | The application ID from the Google Play developer console.
 agApplicationId :: Lens' ApplicationsGet Text

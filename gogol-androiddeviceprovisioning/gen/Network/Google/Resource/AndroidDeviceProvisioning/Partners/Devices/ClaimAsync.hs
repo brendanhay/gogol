@@ -80,6 +80,7 @@ data PartnersDevicesClaimAsync =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersDevicesClaimAsync' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ partnersDevicesClaimAsync pPdcaPartnerId_ pPdcaPayload_ =
     , _pdcaPayload = pPdcaPayload_
     , _pdcaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdcaXgafv :: Lens' PartnersDevicesClaimAsync (Maybe Xgafv)

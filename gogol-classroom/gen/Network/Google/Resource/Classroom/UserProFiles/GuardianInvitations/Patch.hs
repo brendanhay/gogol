@@ -108,6 +108,7 @@ data UserProFilesGuardianInvitationsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserProFilesGuardianInvitationsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -146,6 +147,7 @@ userProFilesGuardianInvitationsPatch pUpfgipStudentId_ pUpfgipPayload_ pUpfgipIn
     , _upfgipInvitationId = pUpfgipInvitationId_
     , _upfgipCallback = Nothing
     }
+
 
 -- | The ID of the student whose guardian invitation is to be modified.
 upfgipStudentId :: Lens' UserProFilesGuardianInvitationsPatch Text

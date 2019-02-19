@@ -79,6 +79,7 @@ data PostsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ postsUpdate pPuBlogId_ pPuPayload_ pPuPostId_ =
     , _puPostId = pPuPostId_
     , _puPublish = Nothing
     }
+
 
 -- | Whether the body content of the post is included with the result
 -- (default: true).

@@ -62,6 +62,7 @@ newtype TableRefetchSheet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableRefetchSheet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ tableRefetchSheet
     :: Text -- ^ 'trsTableId'
     -> TableRefetchSheet
 tableRefetchSheet pTrsTableId_ = TableRefetchSheet' {_trsTableId = pTrsTableId_}
+
 
 -- | Table whose rows will be replaced from the spreadsheet.
 trsTableId :: Lens' TableRefetchSheet Text

@@ -65,6 +65,7 @@ data AccountsClaimwebsite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsClaimwebsite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ accountsClaimwebsite pAcMerchantId_ pAcAccountId_ =
     , _acAccountId = _Coerce # pAcAccountId_
     , _acOverwrite = Nothing
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

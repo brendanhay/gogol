@@ -59,6 +59,7 @@ newtype PlatformTypesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlatformTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ platformTypesList
     -> PlatformTypesList
 platformTypesList pPtlProFileId_ =
   PlatformTypesList' {_ptlProFileId = _Coerce # pPtlProFileId_}
+
 
 -- | User profile ID associated with this request.
 ptlProFileId :: Lens' PlatformTypesList Int64

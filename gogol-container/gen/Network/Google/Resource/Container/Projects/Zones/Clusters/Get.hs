@@ -82,6 +82,7 @@ data ProjectsZonesClustersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ projectsZonesClustersGet pPzcgZone_ pPzcgClusterId_ pPzcgProjectId_ =
     , _pzcgProjectId = pPzcgProjectId_
     , _pzcgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcgXgafv :: Lens' ProjectsZonesClustersGet (Maybe Xgafv)

@@ -72,6 +72,7 @@ data ReportsBatchGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsBatchGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ reportsBatchGet pRbgPayload_ =
     , _rbgPayload = pRbgPayload_
     , _rbgCallback = Nothing
     }
+
 
 -- | V1 error format.
 rbgXgafv :: Lens' ReportsBatchGet (Maybe Xgafv)

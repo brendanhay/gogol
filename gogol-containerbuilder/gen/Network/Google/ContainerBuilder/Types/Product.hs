@@ -41,6 +41,7 @@ data BuildStep =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildStep' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ buildStep =
     , _bsTimeout = Nothing
     , _bsVolumes = Nothing
     }
+
 
 -- | Output only. Status of the build step. At this time, build step status
 -- is only updated on build completion; step status is not updated in
@@ -244,6 +246,7 @@ data SourceProvenance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceProvenance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -261,6 +264,7 @@ sourceProvenance =
     , _spResolvedStorageSource = Nothing
     , _spFileHashes = Nothing
     }
+
 
 -- | A copy of the build\'s \`source.repo_source\`, if exists, with any
 -- revisions resolved.
@@ -316,6 +320,7 @@ data ListBuildsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListBuildsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -327,6 +332,7 @@ listBuildsResponse
     :: ListBuildsResponse
 listBuildsResponse =
   ListBuildsResponse' {_lbrNextPageToken = Nothing, _lbrBuilds = Nothing}
+
 
 -- | Token to receive the next page of results.
 lbrNextPageToken :: Lens' ListBuildsResponse (Maybe Text)
@@ -401,6 +407,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -413,6 +420,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -457,11 +465,13 @@ data RetryBuildRequest =
   RetryBuildRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RetryBuildRequest' with the minimum fields required to make a request.
 --
 retryBuildRequest
     :: RetryBuildRequest
 retryBuildRequest = RetryBuildRequest'
+
 
 instance FromJSON RetryBuildRequest where
         parseJSON
@@ -481,6 +491,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -493,6 +504,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -530,11 +542,13 @@ data CancelOperationRequest =
   CancelOperationRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
 cancelOperationRequest
     :: CancelOperationRequest
 cancelOperationRequest = CancelOperationRequest'
+
 
 instance FromJSON CancelOperationRequest where
         parseJSON
@@ -554,6 +568,7 @@ data Hash =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Hash' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -564,6 +579,7 @@ data Hash =
 hash
     :: Hash
 hash = Hash' {_hValue = Nothing, _hType = Nothing}
+
 
 -- | The hash value.
 hValue :: Lens' Hash (Maybe ByteString)
@@ -599,6 +615,7 @@ data Results =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Results' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -622,6 +639,7 @@ results =
     , _rBuildStepOutputs = Nothing
     , _rNumArtifacts = Nothing
     }
+
 
 -- | Container images that were built as a part of the build.
 rImages :: Lens' Results [BuiltImage]
@@ -695,6 +713,7 @@ newtype BuildTriggerSubstitutions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildTriggerSubstitutions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -705,6 +724,7 @@ buildTriggerSubstitutions
     -> BuildTriggerSubstitutions
 buildTriggerSubstitutions pBtsAddtional_ =
   BuildTriggerSubstitutions' {_btsAddtional = _Coerce # pBtsAddtional_}
+
 
 btsAddtional :: Lens' BuildTriggerSubstitutions (HashMap Text Text)
 btsAddtional
@@ -734,6 +754,7 @@ data RepoSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepoSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -760,6 +781,7 @@ repoSource =
     , _rsTagName = Nothing
     , _rsProjectId = Nothing
     }
+
 
 -- | Name of the Cloud Source Repository. If omitted, the name \"default\" is
 -- assumed.
@@ -830,6 +852,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -853,6 +876,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -920,11 +944,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -945,6 +971,7 @@ newtype SecretSecretEnv =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecretSecretEnv' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -955,6 +982,7 @@ secretSecretEnv
     -> SecretSecretEnv
 secretSecretEnv pSseAddtional_ =
   SecretSecretEnv' {_sseAddtional = _Coerce # pSseAddtional_}
+
 
 sseAddtional :: Lens' SecretSecretEnv (HashMap Text ByteString)
 sseAddtional
@@ -980,6 +1008,7 @@ data Artifacts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Artifacts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -990,6 +1019,7 @@ data Artifacts =
 artifacts
     :: Artifacts
 artifacts = Artifacts' {_aImages = Nothing, _aObjects = Nothing}
+
 
 -- | A list of images to be pushed upon the successful completion of all
 -- build steps. The images will be pushed using the builder service
@@ -1037,6 +1067,7 @@ data ArtifactObjects =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ArtifactObjects' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1051,6 +1082,7 @@ artifactObjects
 artifactObjects =
   ArtifactObjects'
     {_aoLocation = Nothing, _aoTiming = Nothing, _aoPaths = Nothing}
+
 
 -- | Cloud Storage bucket and optional object path, in the form
 -- \"gs:\/\/bucket\/path\/to\/somewhere\/\". (see [Bucket Name
@@ -1098,6 +1130,7 @@ data Volume =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Volume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1108,6 +1141,7 @@ data Volume =
 volume
     :: Volume
 volume = Volume' {_vPath = Nothing, _vName = Nothing}
+
 
 -- | Path at which to mount the volume. Paths must be absolute and cannot
 -- conflict with other volume paths on the same build step or with certain
@@ -1141,6 +1175,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1151,6 +1186,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1205,6 +1241,7 @@ data Build =
     , _bTags             :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Build' with the minimum fields required to make a request.
 --
@@ -1280,6 +1317,7 @@ build =
     , _bCreateTime = Nothing
     , _bTags = Nothing
     }
+
 
 -- | A list of images to be pushed upon the successful completion of all
 -- build steps. The images are pushed using the builder service account\'s
@@ -1484,6 +1522,7 @@ newtype SourceProvenanceFileHashes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceProvenanceFileHashes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1494,6 +1533,7 @@ sourceProvenanceFileHashes
     -> SourceProvenanceFileHashes
 sourceProvenanceFileHashes pSpfhAddtional_ =
   SourceProvenanceFileHashes' {_spfhAddtional = _Coerce # pSpfhAddtional_}
+
 
 spfhAddtional :: Lens' SourceProvenanceFileHashes (HashMap Text FileHashes)
 spfhAddtional
@@ -1521,6 +1561,7 @@ data Secret =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Secret' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1531,6 +1572,7 @@ data Secret =
 secret
     :: Secret
 secret = Secret' {_sKmsKeyName = Nothing, _sSecretEnv = Nothing}
+
 
 -- | Cloud KMS key name to use to decrypt these envs.
 sKmsKeyName :: Lens' Secret (Maybe Text)
@@ -1567,11 +1609,13 @@ data CancelBuildRequest =
   CancelBuildRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CancelBuildRequest' with the minimum fields required to make a request.
 --
 cancelBuildRequest
     :: CancelBuildRequest
 cancelBuildRequest = CancelBuildRequest'
+
 
 instance FromJSON CancelBuildRequest where
         parseJSON
@@ -1591,6 +1635,7 @@ data TimeSpan =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeSpan' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1601,6 +1646,7 @@ data TimeSpan =
 timeSpan
     :: TimeSpan
 timeSpan = TimeSpan' {_tsStartTime = Nothing, _tsEndTime = Nothing}
+
 
 -- | Start of time span.
 tsStartTime :: Lens' TimeSpan (Maybe UTCTime)
@@ -1639,6 +1685,7 @@ data StorageSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StorageSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1653,6 +1700,7 @@ storageSource
 storageSource =
   StorageSource'
     {_ssBucket = Nothing, _ssObject = Nothing, _ssGeneration = Nothing}
+
 
 -- | Google Cloud Storage bucket containing the source (see [Bucket Name
 -- Requirements](https:\/\/cloud.google.com\/storage\/docs\/bucket-naming#requirements)).
@@ -1696,6 +1744,7 @@ newtype ListBuildTriggersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListBuildTriggersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1704,6 +1753,7 @@ newtype ListBuildTriggersResponse =
 listBuildTriggersResponse
     :: ListBuildTriggersResponse
 listBuildTriggersResponse = ListBuildTriggersResponse' {_lbtrTriggers = Nothing}
+
 
 -- | \`BuildTriggers\` for the project, sorted by \`create_time\` descending.
 lbtrTriggers :: Lens' ListBuildTriggersResponse [BuildTrigger]
@@ -1735,6 +1785,7 @@ data ArtifactResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ArtifactResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1745,6 +1796,7 @@ data ArtifactResult =
 artifactResult
     :: ArtifactResult
 artifactResult = ArtifactResult' {_arFileHash = Nothing, _arLocation = Nothing}
+
 
 -- | The file hash of the artifact.
 arFileHash :: Lens' ArtifactResult [FileHashes]
@@ -1785,6 +1837,7 @@ newtype FileHashes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileHashes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1793,6 +1846,7 @@ newtype FileHashes =
 fileHashes
     :: FileHashes
 fileHashes = FileHashes' {_fhFileHash = Nothing}
+
 
 -- | Collection of file hashes.
 fhFileHash :: Lens' FileHashes [Hash]
@@ -1821,6 +1875,7 @@ newtype BuildSubstitutions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildSubstitutions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1831,6 +1886,7 @@ buildSubstitutions
     -> BuildSubstitutions
 buildSubstitutions pBsAddtional_ =
   BuildSubstitutions' {_bsAddtional = _Coerce # pBsAddtional_}
+
 
 bsAddtional :: Lens' BuildSubstitutions (HashMap Text Text)
 bsAddtional
@@ -1855,6 +1911,7 @@ data Source =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1865,6 +1922,7 @@ data Source =
 source
     :: Source
 source = Source' {_sRepoSource = Nothing, _sStorageSource = Nothing}
+
 
 -- | If provided, get the source from this location in a Cloud Source
 -- Repository.
@@ -1904,6 +1962,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1914,6 +1973,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -1941,6 +2001,7 @@ newtype BuildTiming =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildTiming' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1951,6 +2012,7 @@ buildTiming
     -> BuildTiming
 buildTiming pBtAddtional_ =
   BuildTiming' {_btAddtional = _Coerce # pBtAddtional_}
+
 
 btAddtional :: Lens' BuildTiming (HashMap Text TimeSpan)
 btAddtional
@@ -1974,6 +2036,7 @@ newtype BuildOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1982,6 +2045,7 @@ newtype BuildOperationMetadata =
 buildOperationMetadata
     :: BuildOperationMetadata
 buildOperationMetadata = BuildOperationMetadata' {_bomBuild = Nothing}
+
 
 -- | The build that the operation is tracking.
 bomBuild :: Lens' BuildOperationMetadata (Maybe Build)
@@ -2014,6 +2078,7 @@ data BuildOptions =
     , _boSourceProvenanceHash  :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildOptions' with the minimum fields required to make a request.
 --
@@ -2056,6 +2121,7 @@ buildOptions =
     , _boLogging = Nothing
     , _boSourceProvenanceHash = Nothing
     }
+
 
 -- | Requested disk size for the VM that runs the build. Note that this is
 -- *NOT* \"disk free\"; some of the space will be used by the operating
@@ -2197,6 +2263,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2207,6 +2274,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -2240,6 +2308,7 @@ data BuildTrigger =
     , _btCreateTime      :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildTrigger' with the minimum fields required to make a request.
 --
@@ -2279,6 +2348,7 @@ buildTrigger =
     , _btFilename = Nothing
     , _btCreateTime = Nothing
     }
+
 
 -- | Substitutions data for Build resource.
 btSubstitutions :: Lens' BuildTrigger (Maybe BuildTriggerSubstitutions)
@@ -2395,6 +2465,7 @@ data BuiltImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuiltImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2408,6 +2479,7 @@ builtImage
     :: BuiltImage
 builtImage =
   BuiltImage' {_biPushTiming = Nothing, _biName = Nothing, _biDigest = Nothing}
+
 
 -- | Output only. Stores timing information for pushing the specified image.
 biPushTiming :: Lens' BuiltImage (Maybe TimeSpan)

@@ -144,6 +144,7 @@ data AppsServicesVersionsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsServicesVersionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -186,6 +187,7 @@ appsServicesVersionsPatch pAsvpPayload_ pAsvpVersionsId_ pAsvpAppsId_ pAsvpServi
     , _asvpServicesId = pAsvpServicesId_
     , _asvpCallback = Nothing
     }
+
 
 -- | V1 error format.
 asvpXgafv :: Lens' AppsServicesVersionsPatch (Maybe Xgafv)

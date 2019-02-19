@@ -68,6 +68,7 @@ data TargetVPNGatewaysGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGatewaysGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ targetVPNGatewaysGet pTvggProject_ pTvggTargetVPNGateway_ pTvggRegion_ =
     , _tvggTargetVPNGateway = pTvggTargetVPNGateway_
     , _tvggRegion = pTvggRegion_
     }
+
 
 -- | Project ID for this request.
 tvggProject :: Lens' TargetVPNGatewaysGet Text

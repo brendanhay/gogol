@@ -30,6 +30,7 @@ data VideoOffSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoOffSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41,6 +42,7 @@ videoOffSet
     :: VideoOffSet
 videoOffSet =
   VideoOffSet' {_vosOffSetPercentage = Nothing, _vosOffSetSeconds = Nothing}
+
 
 -- | Duration, as a percentage of video duration. Do not set when
 -- offsetSeconds is set. Acceptable values are 0 to 100, inclusive.
@@ -86,6 +88,7 @@ data DeepLink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeepLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +112,7 @@ deepLink =
     , _dlAppURL = Nothing
     , _dlMobileApp = Nothing
     }
+
 
 -- | Ads served to users on these remarketing lists will use this deep link.
 -- Applicable when mobileApp.directory is APPLE_APP_STORE.
@@ -173,6 +177,7 @@ data FileList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -193,6 +198,7 @@ fileList =
     , _flKind = "dfareporting#fileList"
     , _flItems = Nothing
     }
+
 
 -- | The eTag of this response for caching purposes.
 flEtag :: Lens' FileList (Maybe Text)
@@ -245,6 +251,7 @@ data OptimizationActivity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OptimizationActivity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -262,6 +269,7 @@ optimizationActivity =
     , _oaFloodlightActivityId = Nothing
     , _oaFloodlightActivityIdDimensionValue = Nothing
     }
+
 
 -- | Weight associated with this optimization. The weight assigned will be
 -- understood in proportion to the weights assigned to the other
@@ -315,6 +323,7 @@ newtype ListPopulationClause =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListPopulationClause' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -323,6 +332,7 @@ newtype ListPopulationClause =
 listPopulationClause
     :: ListPopulationClause
 listPopulationClause = ListPopulationClause' {_lpcTerms = Nothing}
+
 
 -- | Terms of this list population clause. Each clause is made up of list
 -- population terms representing constraints and are joined by ORs.
@@ -354,6 +364,7 @@ data AdBlockingConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdBlockingConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -374,6 +385,7 @@ adBlockingConfiguration =
     , _abcEnabled = Nothing
     , _abcClickThroughURL = Nothing
     }
+
 
 -- | ID of a creative bundle to use for this campaign. If set, brand-neutral
 -- ads will select creatives from this bundle. Otherwise, a default
@@ -446,6 +458,7 @@ data CreativeCustomEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeCustomEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -484,6 +497,7 @@ creativeCustomEvent =
     , _cceArtworkLabel = Nothing
     , _cceArtworkType = Nothing
     }
+
 
 -- | Unique ID of this event used by Reporting and Data Transfer. This is a
 -- read-only field.
@@ -600,6 +614,7 @@ data ClickTag =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClickTag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -614,6 +629,7 @@ clickTag
 clickTag =
   ClickTag'
     {_ctClickThroughURL = Nothing, _ctName = Nothing, _ctEventName = Nothing}
+
 
 -- | Parameter value for the specified click tag. This field contains a
 -- click-through url.
@@ -662,6 +678,7 @@ data CampaignsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CampaignsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -679,6 +696,7 @@ campaignsListResponse =
     , _clrCampaigns = Nothing
     , _clrKind = "dfareporting#campaignsListResponse"
     }
+
 
 -- | Pagination token to be used for the next list operation.
 clrNextPageToken :: Lens' CampaignsListResponse (Maybe Text)
@@ -731,6 +749,7 @@ data GeoTargeting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GeoTargeting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -757,6 +776,7 @@ geoTargeting =
     , _gtExcludeCountries = Nothing
     , _gtPostalCodes = Nothing
     }
+
 
 -- | Regions to be targeted. For each region only dartId is required. The
 -- other fields are populated automatically when the ad is inserted or
@@ -853,6 +873,7 @@ data VideoSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -876,6 +897,7 @@ videoSettings =
     , _vsOrientation = Nothing
     , _vsSkippableSettings = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#videoSettings\".
@@ -948,6 +970,7 @@ data ReachReportCompatibleFields =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReachReportCompatibleFields' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -974,6 +997,7 @@ reachReportCompatibleFields =
     , _rrcfPivotedActivityMetrics = Nothing
     , _rrcfDimensions = Nothing
     }
+
 
 -- | Metrics which are compatible to be selected in the \"metricNames\"
 -- section of the report.
@@ -1065,6 +1089,7 @@ data Browser =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Browser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1091,6 +1116,7 @@ browser =
     , _bName = Nothing
     , _bDartId = Nothing
     }
+
 
 -- | Minor version number (number after first dot on left) of this browser.
 -- For example, for Chrome 5.0.375.86 beta, this field should be set to 0.
@@ -1173,6 +1199,7 @@ data CreativeGroupAssignment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeGroupAssignment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1185,6 +1212,7 @@ creativeGroupAssignment
 creativeGroupAssignment =
   CreativeGroupAssignment'
     {_cgaCreativeGroupNumber = Nothing, _cgaCreativeGroupId = Nothing}
+
 
 -- | Creative group number of the creative group assignment.
 cgaCreativeGroupNumber :: Lens' CreativeGroupAssignment (Maybe CreativeGroupAssignmentCreativeGroupNumber)
@@ -1227,6 +1255,7 @@ data DirectorySiteSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DirectorySiteSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1247,6 +1276,7 @@ directorySiteSettings =
     , _dssActiveViewOptOut = Nothing
     , _dssDfpSettings = Nothing
     }
+
 
 -- | Whether this site accepts interstitial ads.
 dssInterstitialPlacementAccepted :: Lens' DirectorySiteSettings (Maybe Bool)
@@ -1304,6 +1334,7 @@ data ListPopulationRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListPopulationRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1321,6 +1352,7 @@ listPopulationRule =
     , _lprFloodlightActivityId = Nothing
     , _lprListPopulationClauses = Nothing
     }
+
 
 -- | Name of floodlight activity associated with this rule. This is a
 -- read-only, auto-generated field.
@@ -1377,6 +1409,7 @@ data SizesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SizesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1389,6 +1422,7 @@ sizesListResponse
 sizesListResponse =
   SizesListResponse'
     {_slrKind = "dfareporting#sizesListResponse", _slrSizes = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#sizesListResponse\".
@@ -1429,6 +1463,7 @@ data CreativeRotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeRotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1449,6 +1484,7 @@ creativeRotation =
     , _crCreativeOptimizationConfigurationId = Nothing
     , _crType = Nothing
     }
+
 
 -- | Strategy for calculating weights. Used with
 -- CREATIVE_ROTATION_TYPE_RANDOM.
@@ -1517,6 +1553,7 @@ data TechnologyTargeting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TechnologyTargeting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1543,6 +1580,7 @@ technologyTargeting =
     , _ttConnectionTypes = Nothing
     , _ttOperatingSystems = Nothing
     }
+
 
 -- | Mobile carriers that this ad targets. For each mobile carrier only id is
 -- required, and the other fields are populated automatically when the ad
@@ -1662,6 +1700,7 @@ data InventoryItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InventoryItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1730,6 +1769,7 @@ inventoryItem =
     , _iiOrderId = Nothing
     , _iiSiteId = Nothing
     }
+
 
 -- | Placement strategy ID of this inventory item.
 iiPlacementStrategyId :: Lens' InventoryItem (Maybe Int64)
@@ -1922,6 +1962,7 @@ data ProjectsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1939,6 +1980,7 @@ projectsListResponse =
     , _plrKind = "dfareporting#projectsListResponse"
     , _plrProjects = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 plrNextPageToken :: Lens' ProjectsListResponse (Maybe Text)
@@ -1987,6 +2029,7 @@ data AdsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2004,6 +2047,7 @@ adsListResponse =
     , _alrKind = "dfareporting#adsListResponse"
     , _alrAds = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 alrNextPageToken :: Lens' AdsListResponse (Maybe Text)
@@ -2051,6 +2095,7 @@ data SiteVideoSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteVideoSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2074,6 +2119,7 @@ siteVideoSettings =
     , _svsOrientation = Nothing
     , _svsSkippableSettings = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#siteVideoSettings\".
@@ -2145,6 +2191,7 @@ data ListPopulationTerm =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListPopulationTerm' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2177,6 +2224,7 @@ listPopulationTerm =
     , _lptType = Nothing
     , _lptContains = Nothing
     }
+
 
 -- | Comparison operator of this term. This field is only relevant when type
 -- is left unset or set to CUSTOM_VARIABLE_TERM or REFERRER_TERM.
@@ -2274,6 +2322,7 @@ data TagSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TagSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2285,6 +2334,7 @@ tagSettings
     :: TagSettings
 tagSettings =
   TagSettings' {_tsDynamicTagEnabled = Nothing, _tsImageTagEnabled = Nothing}
+
 
 -- | Whether dynamic floodlight tags are enabled.
 tsDynamicTagEnabled :: Lens' TagSettings (Maybe Bool)
@@ -2324,6 +2374,7 @@ data SubAccountsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubAccountsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2341,6 +2392,7 @@ subAccountsListResponse =
     , _salrKind = "dfareporting#subaccountsListResponse"
     , _salrSubAccounts = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 salrNextPageToken :: Lens' SubAccountsListResponse (Maybe Text)
@@ -2389,6 +2441,7 @@ data RegionsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2401,6 +2454,7 @@ regionsListResponse
 regionsListResponse =
   RegionsListResponse'
     {_rlrKind = "dfareporting#regionsListResponse", _rlrRegions = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#regionsListResponse\".
@@ -2440,6 +2494,7 @@ data FloodlightActivityDynamicTag =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivityDynamicTag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2454,6 +2509,7 @@ floodlightActivityDynamicTag
 floodlightActivityDynamicTag =
   FloodlightActivityDynamicTag'
     {_fadtTag = Nothing, _fadtName = Nothing, _fadtId = Nothing}
+
 
 -- | Tag code.
 fadtTag :: Lens' FloodlightActivityDynamicTag (Maybe Text)
@@ -2496,6 +2552,7 @@ data VideoFormat =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoFormat' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2519,6 +2576,7 @@ videoFormat =
     , _vfTargetBitRate = Nothing
     , _vfId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#videoFormat\".
@@ -2588,6 +2646,7 @@ data DirectorySite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DirectorySite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2623,6 +2682,7 @@ directorySite =
     , _dsName = Nothing
     , _dsId = Nothing
     }
+
 
 -- | Directory site settings.
 dsSettings :: Lens' DirectorySite (Maybe DirectorySiteSettings)
@@ -2718,6 +2778,7 @@ data ReportFloodlightCriteriaReportProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportFloodlightCriteriaReportProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2735,6 +2796,7 @@ reportFloodlightCriteriaReportProperties =
     , _rfcrpIncludeUnattributedCookieConversions = Nothing
     , _rfcrpIncludeAttributedIPConversions = Nothing
     }
+
 
 -- | Include conversions that have no associated cookies and no exposures.
 -- It’s therefore impossible to know how the user was exposed to your ads
@@ -2807,6 +2869,7 @@ data FloodlightActivityGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivityGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2851,6 +2914,7 @@ floodlightActivityGroup =
     , _fagType = Nothing
     , _fagFloodlightConfigurationIdDimensionValue = Nothing
     }
+
 
 -- | Value of the type= parameter in the floodlight tag, which the ad servers
 -- use to identify the activity group that the activity belongs to. This is
@@ -2994,6 +3058,7 @@ data CrossDimensionReachReportCompatibleFields =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CrossDimensionReachReportCompatibleFields' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3017,6 +3082,7 @@ crossDimensionReachReportCompatibleFields =
     , _cdrrcfDimensionFilters = Nothing
     , _cdrrcfOverlapMetrics = Nothing
     }
+
 
 -- | Metrics which are compatible to be selected in the \"metricNames\"
 -- section of the report.
@@ -3101,6 +3167,7 @@ data FsCommand =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FsCommand' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3124,6 +3191,7 @@ fsCommand =
     , _fcWindowWidth = Nothing
     , _fcTop = Nothing
     }
+
 
 -- | Position in the browser where the window will open.
 fcPositionOption :: Lens' FsCommand (Maybe FsCommandPositionOption)
@@ -3191,6 +3259,7 @@ data PlacementAssignment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementAssignment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3211,6 +3280,7 @@ placementAssignment =
     , _paActive = Nothing
     , _paSSLRequired = Nothing
     }
+
 
 -- | ID of the placement to be assigned. This is a required field.
 paPlacementId :: Lens' PlacementAssignment (Maybe Int64)
@@ -3269,6 +3339,7 @@ data CreativeFieldValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3286,6 +3357,7 @@ creativeFieldValue =
     , _cfvValue = Nothing
     , _cfvId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#creativeFieldValue\".
@@ -3333,6 +3405,7 @@ data DimensionValueRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DimensionValueRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3356,6 +3429,7 @@ dimensionValueRequest =
     , _dvrStartDate = Nothing
     , _dvrDimensionName = Nothing
     }
+
 
 -- | The kind of request this is, in this case
 -- dfareporting#dimensionValueRequest.
@@ -3421,6 +3495,7 @@ data FloodlightConfigurationsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightConfigurationsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3435,6 +3510,7 @@ floodlightConfigurationsListResponse =
     { _fclrKind = "dfareporting#floodlightConfigurationsListResponse"
     , _fclrFloodlightConfigurations = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#floodlightConfigurationsListResponse\".
@@ -3480,6 +3556,7 @@ data FloodlightActivitiesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivitiesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3497,6 +3574,7 @@ floodlightActivitiesListResponse =
     , _falrKind = "dfareporting#floodlightActivitiesListResponse"
     , _falrFloodlightActivities = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 falrNextPageToken :: Lens' FloodlightActivitiesListResponse (Maybe Text)
@@ -3548,6 +3626,7 @@ data CreativeFieldAssignment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldAssignment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3560,6 +3639,7 @@ creativeFieldAssignment
 creativeFieldAssignment =
   CreativeFieldAssignment'
     {_cfaCreativeFieldId = Nothing, _cfaCreativeFieldValueId = Nothing}
+
 
 -- | ID of the creative field.
 cfaCreativeFieldId :: Lens' CreativeFieldAssignment (Maybe Int64)
@@ -3604,6 +3684,7 @@ data AdvertiserGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3624,6 +3705,7 @@ advertiserGroup =
     , _agName = Nothing
     , _agId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#advertiserGroup\".
@@ -3680,6 +3762,7 @@ data TagData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TagData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3703,6 +3786,7 @@ tagData =
     , _tdAdId = Nothing
     , _tdImpressionTag = Nothing
     }
+
 
 -- | Tag string to record a click.
 tdClickTag :: Lens' TagData (Maybe Text)
@@ -3764,6 +3848,7 @@ data DayPartTargeting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DayPartTargeting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3781,6 +3866,7 @@ dayPartTargeting =
     , _dptHoursOfDay = Nothing
     , _dptUserLocalTime = Nothing
     }
+
 
 -- | Days of the week when the ad will serve. Acceptable values are: -
 -- \"SUNDAY\" - \"MONDAY\" - \"TUESDAY\" - \"WEDNESDAY\" - \"THURSDAY\" -
@@ -3842,6 +3928,7 @@ data CreativeOptimizationConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeOptimizationConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3862,6 +3949,7 @@ creativeOptimizationConfiguration =
     , _cocOptimizationActivitys = Nothing
     , _cocId = Nothing
     }
+
 
 -- | Optimization model for this configuration.
 cocOptimizationModel :: Lens' CreativeOptimizationConfiguration (Maybe CreativeOptimizationConfigurationOptimizationModel)
@@ -3921,6 +4009,7 @@ data SiteTranscodeSetting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteTranscodeSetting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3935,6 +4024,7 @@ siteTranscodeSetting =
     { _stsKind = "dfareporting#siteTranscodeSetting"
     , _stsEnabledVideoFormats = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#siteTranscodeSetting\".
@@ -3978,6 +4068,7 @@ data CreativeClickThroughURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeClickThroughURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3995,6 +4086,7 @@ creativeClickThroughURL =
     , _cctuCustomClickThroughURL = Nothing
     , _cctuLandingPageId = Nothing
     }
+
 
 -- | Read-only convenience field representing the actual URL that will be
 -- used for this click-through. The URL is computed as follows: - If
@@ -4053,6 +4145,7 @@ data ReportCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4079,6 +4172,7 @@ reportCriteria =
     , _rcDateRange = Nothing
     , _rcDimensions = Nothing
     }
+
 
 -- | The list of names of metrics the report should include.
 rcMetricNames :: Lens' ReportCriteria [Text]
@@ -4156,6 +4250,7 @@ data PlacementStrategiesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementStrategiesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4173,6 +4268,7 @@ placementStrategiesListResponse =
     , _pslrNextPageToken = Nothing
     , _pslrKind = "dfareporting#placementStrategiesListResponse"
     }
+
 
 -- | Placement strategy collection.
 pslrPlacementStrategies :: Lens' PlacementStrategiesListResponse [PlacementStrategy]
@@ -4225,6 +4321,7 @@ data ConversionsBatchUpdateResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConversionsBatchUpdateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4242,6 +4339,7 @@ conversionsBatchUpdateResponse =
     , _cburKind = "dfareporting#conversionsBatchUpdateResponse"
     , _cburHasFailures = Nothing
     }
+
 
 -- | The update status of each conversion. Statuses are returned in the same
 -- order that conversions are updated.
@@ -4294,6 +4392,7 @@ data SubAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4317,6 +4416,7 @@ subAccount =
     , _saName = Nothing
     , _saId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#subaccount\".
@@ -4381,6 +4481,7 @@ data InventoryItemsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InventoryItemsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4398,6 +4499,7 @@ inventoryItemsListResponse =
     , _iilrNextPageToken = Nothing
     , _iilrKind = "dfareporting#inventoryItemsListResponse"
     }
+
 
 -- | Inventory item collection
 iilrInventoryItems :: Lens' InventoryItemsListResponse [InventoryItem]
@@ -4448,6 +4550,7 @@ data UniversalAdId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UniversalAdId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4458,6 +4561,7 @@ data UniversalAdId =
 universalAdId
     :: UniversalAdId
 universalAdId = UniversalAdId' {_uaiValue = Nothing, _uaiRegistry = Nothing}
+
 
 -- | ID value for this creative. Only alphanumeric characters and the
 -- following symbols are valid: \"_\/\\-\". Maximum length is 64
@@ -4530,6 +4634,7 @@ data Ad =
     , _aPlacementAssignments                  :: !(Maybe [PlacementAssignment])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Ad' with the minimum fields required to make a request.
 --
@@ -4656,6 +4761,7 @@ ad =
     , _aDefaultClickThroughEventTagProperties = Nothing
     , _aPlacementAssignments = Nothing
     }
+
 
 -- | Targeting template ID, used to apply preconfigured targeting information
 -- to this ad. This cannot be set while any of dayPartTargeting,
@@ -5065,6 +5171,7 @@ data Project =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5139,6 +5246,7 @@ project =
     , _pClientName = Nothing
     , _pTargetCpaNanos = Nothing
     }
+
 
 -- | Number of clicks that the advertiser is targeting.
 pTargetClicks :: Lens' Project (Maybe Int64)
@@ -5348,6 +5456,7 @@ data ReportFloodlightCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportFloodlightCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5377,6 +5486,7 @@ reportFloodlightCriteria =
     , _rfcFloodlightConfigId = Nothing
     , _rfcDimensions = Nothing
     }
+
 
 -- | The properties of the report.
 rfcReportProperties :: Lens' ReportFloodlightCriteria (Maybe ReportFloodlightCriteriaReportProperties)
@@ -5471,6 +5581,7 @@ data Size =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Size' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5494,6 +5605,7 @@ size =
     , _sIab = Nothing
     , _sId = Nothing
     }
+
 
 -- | Height of this size. Acceptable values are 0 to 32767, inclusive.
 sHeight :: Lens' Size (Maybe Int32)
@@ -5551,6 +5663,7 @@ data ObjectFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5568,6 +5681,7 @@ objectFilter =
     , _ofKind = "dfareporting#objectFilter"
     , _ofObjectIds = Nothing
     }
+
 
 -- | Status of the filter. NONE means the user has access to none of the
 -- objects. ALL means the user has access to all objects. ASSIGNED means
@@ -5617,6 +5731,7 @@ data SkippableSetting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SkippableSetting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5637,6 +5752,7 @@ skippableSetting =
     , _ssKind = "dfareporting#skippableSetting"
     , _ssSkippable = Nothing
     }
+
 
 -- | Amount of time to play videos served to this placement before the skip
 -- button should appear. Applicable when skippable is true.
@@ -5690,6 +5806,7 @@ data ReportsConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportsConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5707,6 +5824,7 @@ reportsConfiguration =
     , _rcReportGenerationTimeZoneId = Nothing
     , _rcLookbackConfiguration = Nothing
     }
+
 
 -- | Whether the exposure to conversion report is enabled. This report shows
 -- detailed pathway information on up to 10 of the most recent ad exposures
@@ -5774,6 +5892,7 @@ data PricingSchedule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PricingSchedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5809,6 +5928,7 @@ pricingSchedule =
     , _psPricingPeriods = Nothing
     , _psFlighted = Nothing
     }
+
 
 -- | Testing start date of this placement. The hours, minutes, and seconds of
 -- the start date should not be set, as doing so will result in an error.
@@ -5922,6 +6042,7 @@ data PostalCode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostalCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5945,6 +6066,7 @@ postalCode =
     , _pcId = Nothing
     , _pcCountryDartId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#postalCode\".
@@ -6002,6 +6124,7 @@ data AccountPermissionsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountPermissionsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6016,6 +6139,7 @@ accountPermissionsListResponse =
     { _aplrKind = "dfareporting#accountPermissionsListResponse"
     , _aplrAccountPermissions = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#accountPermissionsListResponse\".
@@ -6061,6 +6185,7 @@ data Country =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Country' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6084,6 +6209,7 @@ country =
     , _cDartId = Nothing
     , _cSSLEnabled = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#country\".
@@ -6141,6 +6267,7 @@ data OperatingSystemVersionsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperatingSystemVersionsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6155,6 +6282,7 @@ operatingSystemVersionsListResponse =
     { _osvlrKind = "dfareporting#operatingSystemVersionsListResponse"
     , _osvlrOperatingSystemVersions = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#operatingSystemVersionsListResponse\".
@@ -6199,6 +6327,7 @@ data ClickThroughURLSuffixProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClickThroughURLSuffixProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6213,6 +6342,7 @@ clickThroughURLSuffixProperties =
     { _ctuspOverrideInheritedSuffix = Nothing
     , _ctuspClickThroughURLSuffix = Nothing
     }
+
 
 -- | Whether this entity should override the inherited click-through URL
 -- suffix with its own defined value.
@@ -6260,6 +6390,7 @@ data Pricing =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Pricing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6286,6 +6417,7 @@ pricing =
     , _priFlights = Nothing
     , _priCapCostType = Nothing
     }
+
 
 -- | End date of this inventory item.
 priEndDate :: Lens' Pricing (Maybe Day)
@@ -6365,6 +6497,7 @@ data AudienceSegmentGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AudienceSegmentGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6379,6 +6512,7 @@ audienceSegmentGroup
 audienceSegmentGroup =
   AudienceSegmentGroup'
     {_asgAudienceSegments = Nothing, _asgName = Nothing, _asgId = Nothing}
+
 
 -- | Audience segments assigned to this group. The number of segments must be
 -- between 2 and 100.
@@ -6431,6 +6565,7 @@ data OperatingSystem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperatingSystem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6454,6 +6589,7 @@ operatingSystem =
     , _osMobile = Nothing
     , _osDartId = Nothing
     }
+
 
 -- | Whether this operating system is for desktop.
 osDesktop :: Lens' OperatingSystem (Maybe Bool)
@@ -6511,6 +6647,7 @@ data Flight =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Flight' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6531,6 +6668,7 @@ flight =
     , _fStartDate = Nothing
     , _fUnits = Nothing
     }
+
 
 -- | Rate or cost of this flight.
 fRateOrCost :: Lens' Flight (Maybe Int64)
@@ -6584,6 +6722,7 @@ data CitiesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CitiesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6596,6 +6735,7 @@ citiesListResponse
 citiesListResponse =
   CitiesListResponse'
     {_citKind = "dfareporting#citiesListResponse", _citCities = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#citiesListResponse\".
@@ -6634,6 +6774,7 @@ data Dimension =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Dimension' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6644,6 +6785,7 @@ data Dimension =
 dimension
     :: Dimension
 dimension = Dimension' {_dKind = "dfareporting#dimension", _dName = Nothing}
+
 
 -- | The kind of resource this is, in this case dfareporting#dimension.
 dKind :: Lens' Dimension Text
@@ -6683,6 +6825,7 @@ data ReportReachCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportReachCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6715,6 +6858,7 @@ reportReachCriteria =
     , _rrcDateRange = Nothing
     , _rrcDimensions = Nothing
     }
+
 
 -- | The list of names of Reach By Frequency metrics the report should
 -- include.
@@ -6816,6 +6960,7 @@ data CustomRichMediaEvents =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomRichMediaEvents' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6830,6 +6975,7 @@ customRichMediaEvents =
     { _crmeKind = "dfareporting#customRichMediaEvents"
     , _crmeFilteredEventIds = Nothing
     }
+
 
 -- | The kind of resource this is, in this case
 -- dfareporting#customRichMediaEvents.
@@ -6871,6 +7017,7 @@ data LanguagesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LanguagesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6883,6 +7030,7 @@ languagesListResponse
 languagesListResponse =
   LanguagesListResponse'
     {_llrKind = "dfareporting#languagesListResponse", _llrLanguages = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#languagesListResponse\".
@@ -6925,6 +7073,7 @@ data CustomViewabilityMetricConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomViewabilityMetricConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6945,6 +7094,7 @@ customViewabilityMetricConfiguration =
     , _cvmcAudible = Nothing
     , _cvmcTimeMillis = Nothing
     }
+
 
 -- | The percentage of video that must be on screen for the Custom
 -- Viewability Metric to count an impression.
@@ -7011,6 +7161,7 @@ data TargetableRemarketingListsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetableRemarketingListsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7028,6 +7179,7 @@ targetableRemarketingListsListResponse =
     , _trllrKind = "dfareporting#targetableRemarketingListsListResponse"
     , _trllrTargetableRemarketingLists = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 trllrNextPageToken :: Lens' TargetableRemarketingListsListResponse (Maybe Text)
@@ -7083,6 +7235,7 @@ data ChangeLogsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangeLogsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7100,6 +7253,7 @@ changeLogsListResponse =
     , _cllrKind = "dfareporting#changeLogsListResponse"
     , _cllrChangeLogs = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 cllrNextPageToken :: Lens' ChangeLogsListResponse (Maybe Text)
@@ -7164,6 +7318,7 @@ data AccountUserProFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountUserProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7220,6 +7375,7 @@ accountUserProFile =
     , _aupfSubAccountId = Nothing
     , _aupfCampaignFilter = Nothing
     }
+
 
 -- | Email of the user profile. The email addresss must be linked to a Google
 -- Account. This field is required on insertion and is read-only after
@@ -7383,6 +7539,7 @@ data DimensionValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DimensionValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7409,6 +7566,7 @@ dimensionValue =
     , _dvDimensionName = Nothing
     , _dvId = Nothing
     }
+
 
 -- | The eTag of this response for caching purposes.
 dvEtag :: Lens' DimensionValue (Maybe Text)
@@ -7474,6 +7632,7 @@ data Activities =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Activities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7491,6 +7650,7 @@ activities =
     , _actMetricNames = Nothing
     , _actFilters = Nothing
     }
+
 
 -- | The kind of resource this is, in this case dfareporting#activities.
 actKind :: Lens' Activities Text
@@ -7539,6 +7699,7 @@ data UserRolePermissionGroupsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolePermissionGroupsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7553,6 +7714,7 @@ userRolePermissionGroupsListResponse =
     { _urpglrUserRolePermissionGroups = Nothing
     , _urpglrKind = "dfareporting#userRolePermissionGroupsListResponse"
     }
+
 
 -- | User role permission group collection.
 urpglrUserRolePermissionGroups :: Lens' UserRolePermissionGroupsListResponse [UserRolePermissionGroup]
@@ -7598,6 +7760,7 @@ data PlacementTag =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementTag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7608,6 +7771,7 @@ data PlacementTag =
 placementTag
     :: PlacementTag
 placementTag = PlacementTag' {_ptPlacementId = Nothing, _ptTagDatas = Nothing}
+
 
 -- | Placement ID
 ptPlacementId :: Lens' PlacementTag (Maybe Int64)
@@ -7649,6 +7813,7 @@ data RemarketingListsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingListsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7666,6 +7831,7 @@ remarketingListsListResponse =
     , _rllrRemarketingLists = Nothing
     , _rllrKind = "dfareporting#remarketingListsListResponse"
     }
+
 
 -- | Pagination token to be used for the next list operation.
 rllrNextPageToken :: Lens' RemarketingListsListResponse (Maybe Text)
@@ -7722,6 +7888,7 @@ data DynamicTargetingKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DynamicTargetingKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7742,6 +7909,7 @@ dynamicTargetingKey =
     , _dtkObjectId = Nothing
     , _dtkName = Nothing
     }
+
 
 -- | Type of the object of this dynamic targeting key. This is a required
 -- field.
@@ -7858,6 +8026,7 @@ data Creative =
     , _creCreativeFieldAssignments            :: !(Maybe [CreativeFieldAssignment])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Creative' with the minimum fields required to make a request.
 --
@@ -8059,6 +8228,7 @@ creative =
     , _creRedirectURL = Nothing
     , _creCreativeFieldAssignments = Nothing
     }
+
 
 -- | Whether Flash assets associated with the creative need to be
 -- automatically converted to HTML5. This flag is enabled by default and
@@ -8794,6 +8964,7 @@ data SiteCompanionSetting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteCompanionSetting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8814,6 +8985,7 @@ siteCompanionSetting =
     , _scsCompanionsDisabled = Nothing
     , _scsEnabledSizes = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#siteCompanionSetting\".
@@ -8876,6 +9048,7 @@ data SiteContact =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteContact' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8908,6 +9081,7 @@ siteContact =
     , _scTitle = Nothing
     , _scContactType = Nothing
     }
+
 
 -- | Email address of this site contact. This is a required field.
 scEmail :: Lens' SiteContact (Maybe Text)
@@ -8984,6 +9158,7 @@ data AccountsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9001,6 +9176,7 @@ accountsListResponse =
     , _accAccounts = Nothing
     , _accKind = "dfareporting#accountsListResponse"
     }
+
 
 -- | Pagination token to be used for the next list operation.
 accNextPageToken :: Lens' AccountsListResponse (Maybe Text)
@@ -9051,6 +9227,7 @@ data DateRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DateRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9071,6 +9248,7 @@ dateRange =
     , _drStartDate = Nothing
     , _drRelativeDateRange = Nothing
     }
+
 
 -- | The kind of resource this is, in this case dfareporting#dateRange.
 drKind :: Lens' DateRange Text
@@ -9141,6 +9319,7 @@ data Report =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9203,6 +9382,7 @@ report =
     , _rCriteria = Nothing
     , _rFileName = Nothing
     }
+
 
 -- | The report\'s email delivery settings.
 rDelivery :: Lens' Report (Maybe ReportDelivery)
@@ -9363,6 +9543,7 @@ data SiteSkippableSetting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteSkippableSetting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9383,6 +9564,7 @@ siteSkippableSetting =
     , _sssKind = "dfareporting#siteSkippableSetting"
     , _sssSkippable = Nothing
     }
+
 
 -- | Amount of time to play videos served to this site before the skip button
 -- should appear. Applicable when skippable is true.
@@ -9440,6 +9622,7 @@ data Rule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Rule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9457,6 +9640,7 @@ rule =
     , _rulName = Nothing
     , _rulAssetId = Nothing
     }
+
 
 -- | A targeting template ID. The targeting from the targeting template will
 -- be used to determine whether this asset should be served. This is a
@@ -9530,6 +9714,7 @@ data Campaign =
     , _camDefaultClickThroughEventTagProperties        :: !(Maybe DefaultClickThroughEventTagProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Campaign' with the minimum fields required to make a request.
 --
@@ -9623,6 +9808,7 @@ campaign =
     , _camTraffickerEmails = Nothing
     , _camDefaultClickThroughEventTagProperties = Nothing
     }
+
 
 -- | Ad blocking settings for this campaign.
 camAdBlockingConfiguration :: Lens' Campaign (Maybe AdBlockingConfiguration)
@@ -9912,6 +10098,7 @@ data ThirdPartyAuthenticationToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThirdPartyAuthenticationToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9923,6 +10110,7 @@ thirdPartyAuthenticationToken
     :: ThirdPartyAuthenticationToken
 thirdPartyAuthenticationToken =
   ThirdPartyAuthenticationToken' {_tpatValue = Nothing, _tpatName = Nothing}
+
 
 -- | Value of the third-party authentication token. This is a read-only,
 -- auto-generated field.
@@ -9960,6 +10148,7 @@ data ClickThroughURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClickThroughURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9980,6 +10169,7 @@ clickThroughURL =
     , _ctuCustomClickThroughURL = Nothing
     , _ctuLandingPageId = Nothing
     }
+
 
 -- | Whether the campaign default landing page is used.
 ctuDefaultLandingPage :: Lens' ClickThroughURL (Maybe Bool)
@@ -10046,6 +10236,7 @@ data BrowsersListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BrowsersListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10058,6 +10249,7 @@ browsersListResponse
 browsersListResponse =
   BrowsersListResponse'
     {_blrKind = "dfareporting#browsersListResponse", _blrBrowsers = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#browsersListResponse\".
@@ -10101,6 +10293,7 @@ data SiteSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10127,6 +10320,7 @@ siteSettings =
     , _ssActiveViewOptOut = Nothing
     , _ssVpaidAdapterChoiceTemplate = Nothing
     }
+
 
 -- | Whether new cookies are disabled for this site.
 ssDisableNewCookie :: Lens' SiteSettings (Maybe Bool)
@@ -10214,6 +10408,7 @@ data ContentCategoriesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContentCategoriesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10231,6 +10426,7 @@ contentCategoriesListResponse =
     , _cclrKind = "dfareporting#contentCategoriesListResponse"
     , _cclrContentCategories = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 cclrNextPageToken :: Lens' ContentCategoriesListResponse (Maybe Text)
@@ -10280,6 +10476,7 @@ data CreativesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10297,6 +10494,7 @@ creativesListResponse =
     , _clrlKind = "dfareporting#creativesListResponse"
     , _clrlCreatives = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 clrlNextPageToken :: Lens' CreativesListResponse (Maybe Text)
@@ -10361,6 +10559,7 @@ data Account =
     , _aaDescription             :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
@@ -10427,6 +10626,7 @@ account =
     , _aaDefaultCreativeSizeId = Nothing
     , _aaDescription = Nothing
     }
+
 
 -- | Account permissions assigned to this account.
 aaAccountPermissionIds :: Lens' Account [Int64]
@@ -10631,6 +10831,7 @@ data ConversionsBatchInsertRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConversionsBatchInsertRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10648,6 +10849,7 @@ conversionsBatchInsertRequest =
     , _cbirConversions = Nothing
     , _cbirEncryptionInfo = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#conversionsBatchInsertRequest\".
@@ -10699,6 +10901,7 @@ data AccountUserProFilesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountUserProFilesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10716,6 +10919,7 @@ accountUserProFilesListResponse =
     , _aupflrAccountUserProFiles = Nothing
     , _aupflrKind = "dfareporting#accountUserProfilesListResponse"
     }
+
 
 -- | Pagination token to be used for the next list operation.
 aupflrNextPageToken :: Lens' AccountUserProFilesListResponse (Maybe Text)
@@ -10771,6 +10975,7 @@ data ContentCategory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContentCategory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10791,6 +10996,7 @@ contentCategory =
     , _conName = Nothing
     , _conId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#contentCategory\".
@@ -10848,6 +11054,7 @@ data ReportCompatibleFields =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportCompatibleFields' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10871,6 +11078,7 @@ reportCompatibleFields =
     , _rcfPivotedActivityMetrics = Nothing
     , _rcfDimensions = Nothing
     }
+
 
 -- | Metrics which are compatible to be selected in the \"metricNames\"
 -- section of the report.
@@ -10947,6 +11155,7 @@ data DeliverySchedule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeliverySchedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10967,6 +11176,7 @@ deliverySchedule =
     , _dsImpressionRatio = Nothing
     , _dsFrequencyCap = Nothing
     }
+
 
 -- | Whether or not hard cutoff is enabled. If true, the ad will not serve
 -- after the end date and time. Otherwise the ad will continue to be served
@@ -11044,6 +11254,7 @@ data RemarketingList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11091,6 +11302,7 @@ remarketingList =
     , _rlSubAccountId = Nothing
     , _rlDescription = Nothing
     }
+
 
 -- | Number of users currently in the list. This is a read-only field.
 rlListSize :: Lens' RemarketingList (Maybe Int64)
@@ -11219,6 +11431,7 @@ data DynamicTargetingKeysListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DynamicTargetingKeysListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11233,6 +11446,7 @@ dynamicTargetingKeysListResponse =
     { _dtklrKind = "dfareporting#dynamicTargetingKeysListResponse"
     , _dtklrDynamicTargetingKeys = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#dynamicTargetingKeysListResponse\".
@@ -11279,6 +11493,7 @@ data DimensionValueList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DimensionValueList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11299,6 +11514,7 @@ dimensionValueList =
     , _dvlKind = "dfareporting#dimensionValueList"
     , _dvlItems = Nothing
     }
+
 
 -- | The eTag of this response for caching purposes.
 dvlEtag :: Lens' DimensionValueList (Maybe Text)
@@ -11355,6 +11571,7 @@ data FloodlightReportCompatibleFields =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightReportCompatibleFields' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11375,6 +11592,7 @@ floodlightReportCompatibleFields =
     , _frcfDimensionFilters = Nothing
     , _frcfDimensions = Nothing
     }
+
 
 -- | Metrics which are compatible to be selected in the \"metricNames\"
 -- section of the report.
@@ -11440,6 +11658,7 @@ data UserRolePermissionGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolePermissionGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11457,6 +11676,7 @@ userRolePermissionGroup =
     , _urpgName = Nothing
     , _urpgId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#userRolePermissionGroup\".
@@ -11502,6 +11722,7 @@ data TagSetting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TagSetting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11522,6 +11743,7 @@ tagSetting =
     , _tsIncludeClickTracking = Nothing
     , _tsAdditionalKeyValues = Nothing
     }
+
 
 -- | Option specifying how keywords are embedded in ad tags. This setting can
 -- be used to specify whether keyword placeholders are inserted in
@@ -11593,6 +11815,7 @@ data ReportPathToConversionCriteriaReportProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportPathToConversionCriteriaReportProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11628,6 +11851,7 @@ reportPathToConversionCriteriaReportProperties =
     , _rptccrpIncludeUnattributedCookieConversions = Nothing
     , _rptccrpIncludeAttributedIPConversions = Nothing
     }
+
 
 -- | The maximum amount of time that can take place between interactions
 -- (clicks or impressions) by the same user. Valid values: 1-90.
@@ -11763,6 +11987,7 @@ data UserRolePermissionsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolePermissionsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11777,6 +12002,7 @@ userRolePermissionsListResponse =
     { _urplrKind = "dfareporting#userRolePermissionsListResponse"
     , _urplrUserRolePermissions = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#userRolePermissionsListResponse\".
@@ -11821,6 +12047,7 @@ data PlacementGroupsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementGroupsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11838,6 +12065,7 @@ placementGroupsListResponse =
     , _pglrKind = "dfareporting#placementGroupsListResponse"
     , _pglrPlacementGroups = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 pglrNextPageToken :: Lens' PlacementGroupsListResponse (Maybe Text)
@@ -11889,6 +12117,7 @@ data MobileCarrier =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileCarrier' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11912,6 +12141,7 @@ mobileCarrier =
     , _mcId = Nothing
     , _mcCountryDartId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#mobileCarrier\".
@@ -11977,6 +12207,7 @@ data LandingPage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LandingPage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12006,6 +12237,7 @@ landingPage =
     , _lpId = Nothing
     , _lpArchived = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#landingPage\".
@@ -12080,6 +12312,7 @@ data ConnectionTypesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConnectionTypesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12094,6 +12327,7 @@ connectionTypesListResponse =
     { _ctlrKind = "dfareporting#connectionTypesListResponse"
     , _ctlrConnectionTypes = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#connectionTypesListResponse\".
@@ -12135,6 +12369,7 @@ data OrdersListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12152,6 +12387,7 @@ ordersListResponse =
     , _olrKind = "dfareporting#ordersListResponse"
     , _olrOrders = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 olrNextPageToken :: Lens' OrdersListResponse (Maybe Text)
@@ -12200,6 +12436,7 @@ data ReportList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12220,6 +12457,7 @@ reportList =
     , _repKind = "dfareporting#reportList"
     , _repItems = Nothing
     }
+
 
 -- | The eTag of this response for caching purposes.
 repEtag :: Lens' ReportList (Maybe Text)
@@ -12279,6 +12517,7 @@ data CreativeGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12311,6 +12550,7 @@ creativeGroup =
     , _cgId = Nothing
     , _cgSubAccountId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#creativeGroup\".
@@ -12406,6 +12646,7 @@ data CampaignCreativeAssociation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CampaignCreativeAssociation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12420,6 +12661,7 @@ campaignCreativeAssociation =
     { _ccaKind = "dfareporting#campaignCreativeAssociation"
     , _ccaCreativeId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#campaignCreativeAssociation\".
@@ -12462,6 +12704,7 @@ data ConversionStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConversionStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12479,6 +12722,7 @@ conversionStatus =
     , _csConversion = Nothing
     , _csErrors = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#conversionStatus\".
@@ -12524,6 +12768,7 @@ data LookbackConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LookbackConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12536,6 +12781,7 @@ lookbackConfiguration
 lookbackConfiguration =
   LookbackConfiguration'
     {_lcClickDuration = Nothing, _lcPostImpressionActivitiesDuration = Nothing}
+
 
 -- | Lookback window, in days, from the last time a given user clicked on one
 -- of your ads. If you enter 0, clicks will not be considered as triggering
@@ -12589,6 +12835,7 @@ data FloodlightActivityPublisherDynamicTag =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivityPublisherDynamicTag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12615,6 +12862,7 @@ floodlightActivityPublisherDynamicTag =
     , _fapdtSiteId = Nothing
     , _fapdtViewThrough = Nothing
     }
+
 
 -- | Whether this tag is applicable only for click-throughs.
 fapdtClickThrough :: Lens' FloodlightActivityPublisherDynamicTag (Maybe Bool)
@@ -12696,6 +12944,7 @@ data AccountActiveAdSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountActiveAdSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12719,6 +12968,7 @@ accountActiveAdSummary =
     , _aaasActiveAds = Nothing
     , _aaasActiveAdsLimitTier = Nothing
     }
+
 
 -- | Ads that can be activated for the account.
 aaasAvailableAds :: Lens' AccountActiveAdSummary (Maybe Int64)
@@ -12785,6 +13035,7 @@ data OffSetPosition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OffSetPosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12795,6 +13046,7 @@ data OffSetPosition =
 offSetPosition
     :: OffSetPosition
 offSetPosition = OffSetPosition' {_ospLeft = Nothing, _ospTop = Nothing}
+
 
 -- | Offset distance from left side of an asset or a window.
 ospLeft :: Lens' OffSetPosition (Maybe Int32)
@@ -12830,6 +13082,7 @@ data Metric =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Metric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12840,6 +13093,7 @@ data Metric =
 metric
     :: Metric
 metric = Metric' {_mKind = "dfareporting#metric", _mName = Nothing}
+
 
 -- | The kind of resource this is, in this case dfareporting#metric.
 mKind :: Lens' Metric Text
@@ -12878,6 +13132,7 @@ data RemarketingListShare =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingListShare' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12898,6 +13153,7 @@ remarketingListShare =
     , _rlsRemarketingListId = Nothing
     , _rlsSharedAccountIds = Nothing
     }
+
 
 -- | Advertisers that the remarketing list is shared with.
 rlsSharedAdvertiserIds :: Lens' RemarketingListShare [Int64]
@@ -12958,6 +13214,7 @@ data EventTagsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventTagsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12970,6 +13227,7 @@ eventTagsListResponse
 eventTagsListResponse =
   EventTagsListResponse'
     {_etlrKind = "dfareporting#eventTagsListResponse", _etlrEventTags = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#eventTagsListResponse\".
@@ -13011,6 +13269,7 @@ data UserRolesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13028,6 +13287,7 @@ userRolesListResponse =
     , _urlrKind = "dfareporting#userRolesListResponse"
     , _urlrUserRoles = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 urlrNextPageToken :: Lens' UserRolesListResponse (Maybe Text)
@@ -13080,6 +13340,7 @@ data CompatibleFields =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompatibleFields' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13106,6 +13367,7 @@ compatibleFields =
     , _cfReportCompatibleFields = Nothing
     , _cfPathToConversionReportCompatibleFields = Nothing
     }
+
 
 -- | Contains items that are compatible to be selected for a report of type
 -- \"REACH\".
@@ -13189,6 +13451,7 @@ data AudienceSegment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AudienceSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13202,6 +13465,7 @@ audienceSegment
     :: AudienceSegment
 audienceSegment =
   AudienceSegment' {_asName = Nothing, _asId = Nothing, _asAllocation = Nothing}
+
 
 -- | Name of this audience segment. This is a required field and must be less
 -- than 65 characters long.
@@ -13248,6 +13512,7 @@ data ConversionsBatchUpdateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConversionsBatchUpdateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13265,6 +13530,7 @@ conversionsBatchUpdateRequest =
     , _cburbConversions = Nothing
     , _cburbEncryptionInfo = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#conversionsBatchUpdateRequest\".
@@ -13318,6 +13584,7 @@ data DfpSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DfpSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13341,6 +13608,7 @@ dfpSettings =
     , _dsProgrammaticPlacementAccepted = Nothing
     , _dsDfpNetworkCode = Nothing
     }
+
 
 -- | Whether this directory site accepts publisher-paid tags.
 dsPubPaidPlacementAccepted :: Lens' DfpSettings (Maybe Bool)
@@ -13410,6 +13678,7 @@ data PathToConversionReportCompatibleFields =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PathToConversionReportCompatibleFields' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13433,6 +13702,7 @@ pathToConversionReportCompatibleFields =
     , _ptcrcfCustomFloodlightVariables = Nothing
     , _ptcrcfPerInteractionDimensions = Nothing
     }
+
 
 -- | Metrics which are compatible to be selected in the \"metricNames\"
 -- section of the report.
@@ -13522,6 +13792,7 @@ data City =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'City' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13557,6 +13828,7 @@ city =
     , _ccCountryDartId = Nothing
     , _ccDartId = Nothing
     }
+
 
 -- | Metro region code of the metro region (DMA) to which this city belongs.
 ccMetroCode :: Lens' City (Maybe Text)
@@ -13649,6 +13921,7 @@ data PlatformType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlatformType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13663,6 +13936,7 @@ platformType
 platformType =
   PlatformType'
     {_ptKind = "dfareporting#platformType", _ptName = Nothing, _ptId = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#platformType\".
@@ -13704,6 +13978,7 @@ newtype KeyValueTargetingExpression =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KeyValueTargetingExpression' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13713,6 +13988,7 @@ keyValueTargetingExpression
     :: KeyValueTargetingExpression
 keyValueTargetingExpression =
   KeyValueTargetingExpression' {_kvteExpression = Nothing}
+
 
 -- | Keyword expression being targeted by the ad.
 kvteExpression :: Lens' KeyValueTargetingExpression (Maybe Text)
@@ -13742,6 +14018,7 @@ data CompanionClickThroughOverride =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompanionClickThroughOverride' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13754,6 +14031,7 @@ companionClickThroughOverride
 companionClickThroughOverride =
   CompanionClickThroughOverride'
     {_cctoCreativeId = Nothing, _cctoClickThroughURL = Nothing}
+
 
 -- | ID of the creative for this companion click-through override.
 cctoCreativeId :: Lens' CompanionClickThroughOverride (Maybe Int64)
@@ -13793,6 +14071,7 @@ data AdvertisersListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertisersListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13810,6 +14089,7 @@ advertisersListResponse =
     , _advKind = "dfareporting#advertisersListResponse"
     , _advAdvertisers = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 advNextPageToken :: Lens' AdvertisersListResponse (Maybe Text)
@@ -13858,6 +14138,7 @@ data CountriesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CountriesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13870,6 +14151,7 @@ countriesListResponse
 countriesListResponse =
   CountriesListResponse'
     {_couKind = "dfareporting#countriesListResponse", _couCountries = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#countriesListResponse\".
@@ -13909,6 +14191,7 @@ data AccountPermissionGroupsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountPermissionGroupsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13923,6 +14206,7 @@ accountPermissionGroupsListResponse =
     { _apglrKind = "dfareporting#accountPermissionGroupsListResponse"
     , _apglrAccountPermissionGroups = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#accountPermissionGroupsListResponse\".
@@ -13974,6 +14258,7 @@ data PopupWindowProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PopupWindowProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14009,6 +14294,7 @@ popupWindowProperties =
     , _pwpShowToolBar = Nothing
     , _pwpTitle = Nothing
     }
+
 
 -- | Upper-left corner coordinates of the popup window. Applicable if
 -- positionType is COORDINATES.
@@ -14100,6 +14386,7 @@ data EventTagOverride =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventTagOverride' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14110,6 +14397,7 @@ data EventTagOverride =
 eventTagOverride
     :: EventTagOverride
 eventTagOverride = EventTagOverride' {_etoEnabled = Nothing, _etoId = Nothing}
+
 
 -- | Whether this override is enabled.
 etoEnabled :: Lens' EventTagOverride (Maybe Bool)
@@ -14152,6 +14440,7 @@ data OperatingSystemVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperatingSystemVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14178,6 +14467,7 @@ operatingSystemVersion =
     , _osvName = Nothing
     , _osvId = Nothing
     }
+
 
 -- | Minor version (number after the first dot) of this operating system
 -- version.
@@ -14252,6 +14542,7 @@ data AccountPermission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountPermission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14278,6 +14569,7 @@ accountPermission =
     , _acccLevel = Nothing
     , _acccPermissionGroupId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#accountPermission\".
@@ -14353,6 +14645,7 @@ data UserProFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14385,6 +14678,7 @@ userProFile =
     , _upfSubAccountName = Nothing
     , _upfSubAccountId = Nothing
     }
+
 
 -- | The eTag of this response for caching purposes.
 upfEtag :: Lens' UserProFile (Maybe Text)
@@ -14466,6 +14760,7 @@ data OperatingSystemsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperatingSystemsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14480,6 +14775,7 @@ operatingSystemsListResponse =
     { _oslrKind = "dfareporting#operatingSystemsListResponse"
     , _oslrOperatingSystems = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#operatingSystemsListResponse\".
@@ -14522,6 +14818,7 @@ data ReportDelivery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportDelivery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14542,6 +14839,7 @@ reportDelivery =
     , _rdMessage = Nothing
     , _rdEmailOwnerDeliveryType = Nothing
     }
+
 
 -- | Whether the report should be emailed to the report owner.
 rdEmailOwner :: Lens' ReportDelivery (Maybe Bool)
@@ -14613,6 +14911,7 @@ data TargetableRemarketingList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetableRemarketingList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14657,6 +14956,7 @@ targetableRemarketingList =
     , _trlSubAccountId = Nothing
     , _trlDescription = Nothing
     }
+
 
 -- | Number of users currently in the list. This is a read-only field.
 trlListSize :: Lens' TargetableRemarketingList (Maybe Int64)
@@ -14779,6 +15079,7 @@ data PostalCodesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostalCodesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14793,6 +15094,7 @@ postalCodesListResponse =
     { _pclrKind = "dfareporting#postalCodesListResponse"
     , _pclrPostalCodes = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#postalCodesListResponse\".
@@ -14845,6 +15147,7 @@ data ChangeLog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangeLog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14895,6 +15198,7 @@ changeLog =
     , _chaSubAccountId = Nothing
     , _chaChangeTime = Nothing
     }
+
 
 -- | ID of the user who modified the object.
 chaUserProFileId :: Lens' ChangeLog (Maybe Int64)
@@ -15032,6 +15336,7 @@ data Language =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Language' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15052,6 +15357,7 @@ language =
     , _lName = Nothing
     , _lId = Nothing
     }
+
 
 -- | Format of language code is an ISO 639 two-letter language code
 -- optionally followed by an underscore followed by an ISO 3166 code.
@@ -15106,6 +15412,7 @@ data PlacementStrategy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementStrategy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15126,6 +15433,7 @@ placementStrategy =
     , _psName = Nothing
     , _psId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#placementStrategy\".
@@ -15205,6 +15513,7 @@ data FloodlightActivity =
     , _faFloodlightConfigurationIdDimensionValue :: !(Maybe DimensionValue)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FloodlightActivity' with the minimum fields required to make a request.
 --
@@ -15298,6 +15607,7 @@ floodlightActivity =
     , _faNotes = Nothing
     , _faFloodlightConfigurationIdDimensionValue = Nothing
     }
+
 
 -- | Counting method for conversions for this floodlight activity. This is a
 -- required field.
@@ -15584,6 +15894,7 @@ data CustomFloodlightVariable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomFloodlightVariable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15601,6 +15912,7 @@ customFloodlightVariable =
     , _cusValue = Nothing
     , _cusType = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#customFloodlightVariable\".
@@ -15645,6 +15957,7 @@ data PlatformTypesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlatformTypesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15659,6 +15972,7 @@ platformTypesListResponse =
     { _ptlrKind = "dfareporting#platformTypesListResponse"
     , _ptlrPlatformTypes = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#platformTypesListResponse\".
@@ -15698,6 +16012,7 @@ newtype LastModifiedInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LastModifiedInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15706,6 +16021,7 @@ newtype LastModifiedInfo =
 lastModifiedInfo
     :: LastModifiedInfo
 lastModifiedInfo = LastModifiedInfo' {_lmiTime = Nothing}
+
 
 -- | Timestamp of the last change in milliseconds since epoch.
 lmiTime :: Lens' LastModifiedInfo (Maybe Int64)
@@ -15732,6 +16048,7 @@ data TargetWindow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetWindow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15743,6 +16060,7 @@ targetWindow
     :: TargetWindow
 targetWindow =
   TargetWindow' {_twCustomHTML = Nothing, _twTargetWindowOption = Nothing}
+
 
 -- | User-entered value.
 twCustomHTML :: Lens' TargetWindow (Maybe Text)
@@ -15783,6 +16101,7 @@ data AccountPermissionGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountPermissionGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15800,6 +16119,7 @@ accountPermissionGroup =
     , _apgpName = Nothing
     , _apgpId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#accountPermissionGroup\".
@@ -15856,6 +16176,7 @@ data Advertiser =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Advertiser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15909,6 +16230,7 @@ advertiser =
     , _advdFloodlightConfigurationIdDimensionValue = Nothing
     , _advdClickThroughURLSuffix = Nothing
     }
+
 
 -- | Original floodlight configuration before any sharing occurred. Set the
 -- floodlightConfigurationId of this advertiser to
@@ -16088,6 +16410,7 @@ data UserRole =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRole' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16120,6 +16443,7 @@ userRole =
     , _urPermissions = Nothing
     , _urSubAccountId = Nothing
     }
+
 
 -- | ID of the user role that this user role is based on or copied from. This
 -- is a required field.
@@ -16216,6 +16540,7 @@ data VideoFormatsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideoFormatsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16230,6 +16555,7 @@ videoFormatsListResponse =
     { _vflrKind = "dfareporting#videoFormatsListResponse"
     , _vflrVideoFormats = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#videoFormatsListResponse\".
@@ -16271,6 +16597,7 @@ data DirectorySitesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DirectorySitesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16288,6 +16615,7 @@ directorySitesListResponse =
     , _dslrKind = "dfareporting#directorySitesListResponse"
     , _dslrDirectorySites = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 dslrNextPageToken :: Lens' DirectorySitesListResponse (Maybe Text)
@@ -16338,6 +16666,7 @@ data ConversionError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConversionError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16355,6 +16684,7 @@ conversionError =
     , _ceCode = Nothing
     , _ceMessage = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#conversionError\".
@@ -16399,6 +16729,7 @@ data PricingSchedulePricingPeriod =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PricingSchedulePricingPeriod' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16422,6 +16753,7 @@ pricingSchedulePricingPeriod =
     , _psppUnits = Nothing
     , _psppPricingComment = Nothing
     }
+
 
 -- | Pricing period end date. This date must be later than, or the same day
 -- as, the pricing period start date, but not later than the placement end
@@ -16499,6 +16831,7 @@ data Region =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Region' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16525,6 +16858,7 @@ region =
     , _regCountryDartId = Nothing
     , _regDartId = Nothing
     }
+
 
 -- | Region code.
 regRegionCode :: Lens' Region (Maybe Text)
@@ -16593,6 +16927,7 @@ data AdvertiserGroupsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserGroupsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16610,6 +16945,7 @@ advertiserGroupsListResponse =
     , _aglrKind = "dfareporting#advertiserGroupsListResponse"
     , _aglrAdvertiserGroups = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 aglrNextPageToken :: Lens' AdvertiserGroupsListResponse (Maybe Text)
@@ -16669,6 +17005,7 @@ data CreativeAssignment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeAssignment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16716,6 +17053,7 @@ creativeAssignment =
     , _caCompanionCreativeOverrides = Nothing
     , _caCreativeIdDimensionValue = Nothing
     }
+
 
 -- | Creative group assignments for this creative assignment. Only one
 -- assignment per creative group number is allowed for a maximum of two
@@ -16870,6 +17208,7 @@ data DimensionFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DimensionFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16887,6 +17226,7 @@ dimensionFilter =
     , _dfValue = Nothing
     , _dfDimensionName = Nothing
     }
+
 
 -- | The kind of resource this is, in this case dfareporting#dimensionFilter.
 dfKind :: Lens' DimensionFilter Text
@@ -16929,6 +17269,7 @@ data UserProFileList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserProFileList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16946,6 +17287,7 @@ userProFileList =
     , _upflKind = "dfareporting#userProfileList"
     , _upflItems = Nothing
     }
+
 
 -- | The eTag of this response for caching purposes.
 upflEtag :: Lens' UserProFileList (Maybe Text)
@@ -17004,6 +17346,7 @@ data FloodlightConfiguration =
     , _fcOmnitureSettings                         :: !(Maybe OmnitureSettings)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FloodlightConfiguration' with the minimum fields required to make a request.
 --
@@ -17067,6 +17410,7 @@ floodlightConfiguration =
     , _fcFirstDayOfWeek = Nothing
     , _fcOmnitureSettings = Nothing
     }
+
 
 -- | Configuration settings for dynamic and image floodlight tags.
 fcTagSettings :: Lens' FloodlightConfiguration (Maybe TagSettings)
@@ -17266,6 +17610,7 @@ data CompanionSetting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompanionSetting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17286,6 +17631,7 @@ companionSetting =
     , _comCompanionsDisabled = Nothing
     , _comEnabledSizes = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#companionSetting\".
@@ -17342,6 +17688,7 @@ data FloodlightActivityGroupsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivityGroupsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17359,6 +17706,7 @@ floodlightActivityGroupsListResponse =
     , _faglrKind = "dfareporting#floodlightActivityGroupsListResponse"
     , _faglrFloodlightActivityGroups = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 faglrNextPageToken :: Lens' FloodlightActivityGroupsListResponse (Maybe Text)
@@ -17427,6 +17775,7 @@ data Conversion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Conversion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17483,6 +17832,7 @@ conversion =
     , _conoGclid = Nothing
     , _conoOrdinal = Nothing
     }
+
 
 -- | Whether this particular request may come from a user under the age of 16
 -- (may differ by country), under compliance with the European Union\'s
@@ -17668,6 +18018,7 @@ data CreativeFieldValuesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldValuesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17685,6 +18036,7 @@ creativeFieldValuesListResponse =
     , _cfvlrKind = "dfareporting#creativeFieldValuesListResponse"
     , _cfvlrCreativeFieldValues = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 cfvlrNextPageToken :: Lens' CreativeFieldValuesListResponse (Maybe Text)
@@ -17737,6 +18089,7 @@ data RichMediaExitOverride =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RichMediaExitOverride' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17754,6 +18107,7 @@ richMediaExitOverride =
     , _rmeoClickThroughURL = Nothing
     , _rmeoExitId = Nothing
     }
+
 
 -- | Whether to use the clickThroughUrl. If false, the creative-level exit
 -- will be used.
@@ -17801,6 +18155,7 @@ data CustomViewabilityMetric =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomViewabilityMetric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17815,6 +18170,7 @@ customViewabilityMetric
 customViewabilityMetric =
   CustomViewabilityMetric'
     {_cvmName = Nothing, _cvmId = Nothing, _cvmConfiguration = Nothing}
+
 
 -- | Name of the custom viewability metric.
 cvmName :: Lens' CustomViewabilityMetric (Maybe Text)
@@ -17858,6 +18214,7 @@ data AdvertiserLandingPagesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserLandingPagesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17875,6 +18232,7 @@ advertiserLandingPagesListResponse =
     , _alplrNextPageToken = Nothing
     , _alplrKind = "dfareporting#advertiserLandingPagesListResponse"
     }
+
 
 -- | Landing page collection
 alplrLandingPages :: Lens' AdvertiserLandingPagesListResponse [LandingPage]
@@ -17928,6 +18286,7 @@ data MobileAppsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileAppsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17945,6 +18304,7 @@ mobileAppsListResponse =
     , _malrKind = "dfareporting#mobileAppsListResponse"
     , _malrMobileApps = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 malrNextPageToken :: Lens' MobileAppsListResponse (Maybe Text)
@@ -17994,6 +18354,7 @@ data SortedDimension =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SortedDimension' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18011,6 +18372,7 @@ sortedDimension =
     , _sdSortOrder = Nothing
     , _sdName = Nothing
     }
+
 
 -- | The kind of resource this is, in this case dfareporting#sortedDimension.
 sdKind :: Lens' SortedDimension Text
@@ -18053,6 +18415,7 @@ data CreativeFieldsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18070,6 +18433,7 @@ creativeFieldsListResponse =
     , _cflrKind = "dfareporting#creativeFieldsListResponse"
     , _cflrCreativeFields = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 cflrNextPageToken :: Lens' CreativeFieldsListResponse (Maybe Text)
@@ -18119,6 +18483,7 @@ data TargetingTemplatesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingTemplatesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18136,6 +18501,7 @@ targetingTemplatesListResponse =
     , _ttlrKind = "dfareporting#targetingTemplatesListResponse"
     , _ttlrTargetingTemplates = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 ttlrNextPageToken :: Lens' TargetingTemplatesListResponse (Maybe Text)
@@ -18186,6 +18552,7 @@ data PlacementsGenerateTagsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementsGenerateTagsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18200,6 +18567,7 @@ placementsGenerateTagsResponse =
     { _pgtrKind = "dfareporting#placementsGenerateTagsResponse"
     , _pgtrPlacementTags = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#placementsGenerateTagsResponse\".
@@ -18288,6 +18656,7 @@ data CreativeAsset =
     , _caaHorizontallyLocked    :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativeAsset' with the minimum fields required to make a request.
 --
@@ -18447,6 +18816,7 @@ creativeAsset =
     , _caaPosition = Nothing
     , _caaHorizontallyLocked = Nothing
     }
+
 
 -- | zIndex value of an asset. Applicable to the following creative types:
 -- all RICH_MEDIA.Additionally, only applicable to assets whose displayType
@@ -18990,6 +19360,7 @@ newtype LanguageTargeting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LanguageTargeting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18998,6 +19369,7 @@ newtype LanguageTargeting =
 languageTargeting
     :: LanguageTargeting
 languageTargeting = LanguageTargeting' {_ltLanguages = Nothing}
+
 
 -- | Languages that this ad targets. For each language only languageId is
 -- required. The other fields are populated automatically when the ad is
@@ -19031,6 +19403,7 @@ data CreativeAssetSelection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeAssetSelection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19042,6 +19415,7 @@ creativeAssetSelection
     :: CreativeAssetSelection
 creativeAssetSelection =
   CreativeAssetSelection' {_casRules = Nothing, _casDefaultAssetId = Nothing}
+
 
 -- | Rules determine which asset will be served to a viewer. Rules will be
 -- evaluated in the order in which they are stored in this list. This list
@@ -19087,6 +19461,7 @@ data PlacementsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19104,6 +19479,7 @@ placementsListResponse =
     , _plaKind = "dfareporting#placementsListResponse"
     , _plaPlacements = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 plaNextPageToken :: Lens' PlacementsListResponse (Maybe Text)
@@ -19158,6 +19534,7 @@ data ReportSchedule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportSchedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19187,6 +19564,7 @@ reportSchedule =
     , _rsRunsOnDayOfMonth = Nothing
     , _rsRepeatsOnWeekDays = Nothing
     }
+
 
 -- | Defines every how many days, weeks or months the report should be run.
 -- Needs to be set when \"repeats\" is either \"DAILY\", \"WEEKLY\" or
@@ -19282,6 +19660,7 @@ data ReportPathToConversionCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportPathToConversionCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19317,6 +19696,7 @@ reportPathToConversionCriteria =
     , _rptccActivityFilters = Nothing
     , _rptccPerInteractionDimensions = Nothing
     }
+
 
 -- | The properties of the report.
 rptccReportProperties :: Lens' ReportPathToConversionCriteria (Maybe ReportPathToConversionCriteriaReportProperties)
@@ -19431,6 +19811,7 @@ data MetrosListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetrosListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19443,6 +19824,7 @@ metrosListResponse
 metrosListResponse =
   MetrosListResponse'
     {_mlrKind = "dfareporting#metrosListResponse", _mlrMetros = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#metrosListResponse\".
@@ -19482,6 +19864,7 @@ data ConversionsBatchInsertResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConversionsBatchInsertResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19499,6 +19882,7 @@ conversionsBatchInsertResponse =
     , _cbirbKind = "dfareporting#conversionsBatchInsertResponse"
     , _cbirbHasFailures = Nothing
     }
+
 
 -- | The insert status of each conversion. Statuses are returned in the same
 -- order that conversions are inserted.
@@ -19550,6 +19934,7 @@ data OrderDocumentsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderDocumentsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19567,6 +19952,7 @@ orderDocumentsListResponse =
     , _odlrKind = "dfareporting#orderDocumentsListResponse"
     , _odlrOrderDocuments = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 odlrNextPageToken :: Lens' OrderDocumentsListResponse (Maybe Text)
@@ -19616,6 +20002,7 @@ data Recipient =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Recipient' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19633,6 +20020,7 @@ recipient =
     , _recKind = "dfareporting#recipient"
     , _recDeliveryType = Nothing
     }
+
 
 -- | The email address of the recipient.
 recEmail :: Lens' Recipient (Maybe Text)
@@ -19686,6 +20074,7 @@ data Site =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Site' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19733,6 +20122,7 @@ site =
     , _sitiSubAccountId = Nothing
     , _sitiApproved = Nothing
     }
+
 
 -- | Default video settings for new placements created under this site. This
 -- value will be used to populate the placements.videoSettings field, when
@@ -19872,6 +20262,7 @@ data UserDefinedVariableConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserDefinedVariableConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19889,6 +20280,7 @@ userDefinedVariableConfiguration =
     , _udvcDataType = Nothing
     , _udvcVariableType = Nothing
     }
+
 
 -- | User-friendly name for the variable which will appear in reports. This
 -- is a required field, must be less than 64 characters long, and cannot
@@ -19942,6 +20334,7 @@ data ReportCrossDimensionReachCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportCrossDimensionReachCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19971,6 +20364,7 @@ reportCrossDimensionReachCriteria =
     , _rcdrcDateRange = Nothing
     , _rcdrcOverlapMetricNames = Nothing
     }
+
 
 -- | Whether the report is pivoted or not. Defaults to true.
 rcdrcPivoted :: Lens' ReportCrossDimensionReachCriteria (Maybe Bool)
@@ -20058,6 +20452,7 @@ data FileURLs =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileURLs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20068,6 +20463,7 @@ data FileURLs =
 fileURLs
     :: FileURLs
 fileURLs = FileURLs' {_fuBrowserURL = Nothing, _fuAPIURL = Nothing}
+
 
 -- | The URL for downloading the report data through a browser.
 fuBrowserURL :: Lens' FileURLs (Maybe Text)
@@ -20103,6 +20499,7 @@ data CampaignCreativeAssociationsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CampaignCreativeAssociationsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20120,6 +20517,7 @@ campaignCreativeAssociationsListResponse =
     , _ccalrNextPageToken = Nothing
     , _ccalrKind = "dfareporting#campaignCreativeAssociationsListResponse"
     }
+
 
 -- | Campaign creative association collection
 ccalrCampaignCreativeAssociations :: Lens' CampaignCreativeAssociationsListResponse [CampaignCreativeAssociation]
@@ -20194,6 +20592,7 @@ data Order =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20262,6 +20661,7 @@ order =
     , _oTermsAndConditions = Nothing
     , _oApproverUserProFileIds = Nothing
     }
+
 
 -- | Seller order ID associated with this order.
 oSellerOrderId :: Lens' Order (Maybe Text)
@@ -20447,6 +20847,7 @@ data CreativeAssetId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeAssetId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20457,6 +20858,7 @@ data CreativeAssetId =
 creativeAssetId
     :: CreativeAssetId
 creativeAssetId = CreativeAssetId' {_caiName = Nothing, _caiType = Nothing}
+
 
 -- | Name of the creative asset. This is a required field while inserting an
 -- asset. After insertion, this assetIdentifier is used to identify the
@@ -20494,6 +20896,7 @@ data FrequencyCap =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FrequencyCap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20504,6 +20907,7 @@ data FrequencyCap =
 frequencyCap
     :: FrequencyCap
 frequencyCap = FrequencyCap' {_fcImpressions = Nothing, _fcDuration = Nothing}
+
 
 -- | Number of times an individual user can be served the ad within the
 -- specified duration. Acceptable values are 1 to 15, inclusive.
@@ -20555,6 +20959,7 @@ data File =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20593,6 +20998,7 @@ file =
     , _filId = Nothing
     , _filFileName = Nothing
     }
+
 
 -- | The status of the report file.
 filStatus :: Lens' File (Maybe FileStatus)
@@ -20688,6 +21094,7 @@ data CreativeGroupsListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeGroupsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20705,6 +21112,7 @@ creativeGroupsListResponse =
     , _cglrNextPageToken = Nothing
     , _cglrKind = "dfareporting#creativeGroupsListResponse"
     }
+
 
 -- | Creative group collection.
 cglrCreativeGroups :: Lens' CreativeGroupsListResponse [CreativeGroup]
@@ -20754,6 +21162,7 @@ data MobileCarriersListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileCarriersListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20768,6 +21177,7 @@ mobileCarriersListResponse =
     { _mclrMobileCarriers = Nothing
     , _mclrKind = "dfareporting#mobileCarriersListResponse"
     }
+
 
 -- | Mobile carrier collection.
 mclrMobileCarriers :: Lens' MobileCarriersListResponse [MobileCarrier]
@@ -20815,6 +21225,7 @@ data CreativeAssetMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeAssetMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20844,6 +21255,7 @@ creativeAssetMetadata =
     , _camaId = Nothing
     , _camaDetectedFeatures = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#creativeAssetMetadata\".
@@ -20946,6 +21358,7 @@ data OmnitureSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OmnitureSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20960,6 +21373,7 @@ omnitureSettings =
     { _osOmnitureCostDataEnabled = Nothing
     , _osOmnitureIntegrationEnabled = Nothing
     }
+
 
 -- | Whether placement cost data will be sent to Omniture. This property can
 -- be enabled only if omnitureIntegrationEnabled is true.
@@ -21005,6 +21419,7 @@ data ConnectionType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConnectionType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21022,6 +21437,7 @@ connectionType =
     , _cttName = Nothing
     , _cttId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#connectionType\".
@@ -21087,6 +21503,7 @@ data PlacementGroup =
     , _plalArchived                         :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlacementGroup' with the minimum fields required to make a request.
 --
@@ -21174,6 +21591,7 @@ placementGroup =
     , _plalSiteId = Nothing
     , _plalArchived = Nothing
     }
+
 
 -- | ID of the placement strategy assigned to this placement group.
 plalPlacementStrategyId :: Lens' PlacementGroup (Maybe Int64)
@@ -21462,6 +21880,7 @@ data EventTag =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventTag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21524,6 +21943,7 @@ eventTag =
     , _etType = Nothing
     , _etSiteFilterType = Nothing
     }
+
 
 -- | Status of this event tag. Must be ENABLED for this event tag to fire.
 -- This is a required field.
@@ -21710,6 +22130,7 @@ data UserRolePermission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolePermission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21733,6 +22154,7 @@ userRolePermission =
     , _useId = Nothing
     , _usePermissionGroupId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#userRolePermission\".
@@ -21795,6 +22217,7 @@ data OrderContact =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrderContact' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21818,6 +22241,7 @@ orderContact =
     , _ocContactType = Nothing
     , _ocContactInfo = Nothing
     }
+
 
 -- | ID of the user profile containing the signature that will be embedded
 -- into order documents.
@@ -21885,6 +22309,7 @@ data TranscodeSetting =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TranscodeSetting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21899,6 +22324,7 @@ transcodeSetting =
     { _tsKind = "dfareporting#transcodeSetting"
     , _tsEnabledVideoFormats = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#transcodeSetting\".
@@ -21941,6 +22367,7 @@ data FloodlightActivitiesGenerateTagResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivitiesGenerateTagResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21958,6 +22385,7 @@ floodlightActivitiesGenerateTagResponse =
     , _fagtrFloodlightActivityTag = Nothing
     , _fagtrKind = "dfareporting#floodlightActivitiesGenerateTagResponse"
     }
+
 
 -- | The global snippet section of a global site tag. The global site tag
 -- sets new cookies on your domain, which will store a unique identifier
@@ -22023,6 +22451,7 @@ data AdSlot =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdSlot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22055,6 +22484,7 @@ adSlot =
     , _assComment = Nothing
     , _assCompatibility = Nothing
     }
+
 
 -- | Height of this ad slot.
 assHeight :: Lens' AdSlot (Maybe Int64)
@@ -22142,6 +22572,7 @@ data ThirdPartyTrackingURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ThirdPartyTrackingURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22153,6 +22584,7 @@ thirdPartyTrackingURL
     :: ThirdPartyTrackingURL
 thirdPartyTrackingURL =
   ThirdPartyTrackingURL' {_tptuURL = Nothing, _tptuThirdPartyURLType = Nothing}
+
 
 -- | URL for the specified third-party URL type.
 tptuURL :: Lens' ThirdPartyTrackingURL (Maybe Text)
@@ -22202,6 +22634,7 @@ data OrderDocument =
     , _odCreatedInfo              :: !(Maybe LastModifiedInfo)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrderDocument' with the minimum fields required to make a request.
 --
@@ -22262,6 +22695,7 @@ orderDocument =
     , _odCancelled = Nothing
     , _odCreatedInfo = Nothing
     }
+
 
 -- | Whether this order document has been signed.
 odSigned :: Lens' OrderDocument (Maybe Bool)
@@ -22430,6 +22864,7 @@ data Metro =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Metro' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22459,6 +22894,7 @@ metro =
     , _metCountryDartId = Nothing
     , _metDartId = Nothing
     }
+
 
 -- | Metro code of this metro region. This is equivalent to dma_id.
 metMetroCode :: Lens' Metro (Maybe Text)
@@ -22538,6 +22974,7 @@ data MobileApp =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileApp' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22561,6 +22998,7 @@ mobileApp =
     , _maPublisherName = Nothing
     , _maDirectory = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#mobileApp\".
@@ -22654,6 +23092,7 @@ data Placement =
     , _p1PublisherUpdateInfo            :: !(Maybe LastModifiedInfo)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Placement' with the minimum fields required to make a request.
 --
@@ -22786,6 +23225,7 @@ placement =
     , _p1PaymentApproved = Nothing
     , _p1PublisherUpdateInfo = Nothing
     }
+
 
 -- | Third-party placement status.
 p1Status :: Lens' Placement (Maybe PlacementStatus)
@@ -23198,6 +23638,7 @@ data EncryptionInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EncryptionInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23218,6 +23659,7 @@ encryptionInfo =
     , _eiEncryptionEntityType = Nothing
     , _eiEncryptionEntityId = Nothing
     }
+
 
 -- | Describes whether the encrypted cookie was received from ad serving (the
 -- %m macro) or from Data Transfer.
@@ -23277,6 +23719,7 @@ data SitesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23294,6 +23737,7 @@ sitesListResponse =
     , _sitKind = "dfareporting#sitesListResponse"
     , _sitSites = Nothing
     }
+
 
 -- | Pagination token to be used for the next list operation.
 sitNextPageToken :: Lens' SitesListResponse (Maybe Text)
@@ -23353,6 +23797,7 @@ data TargetingTemplate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23400,6 +23845,7 @@ targetingTemplate =
     , _ttLanguageTargeting = Nothing
     , _ttListTargetingExpression = Nothing
     }
+
 
 -- | Geographical targeting criteria.
 ttGeoTargeting :: Lens' TargetingTemplate (Maybe GeoTargeting)
@@ -23541,6 +23987,7 @@ data CreativeField =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeField' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23570,6 +24017,7 @@ creativeField =
     , _cffId = Nothing
     , _cffSubAccountId = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#creativeField\".
@@ -23655,6 +24103,7 @@ data DefaultClickThroughEventTagProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DefaultClickThroughEventTagProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23669,6 +24118,7 @@ defaultClickThroughEventTagProperties =
     { _dctetpOverrideInheritedEventTag = Nothing
     , _dctetpDefaultClickThroughEventTagId = Nothing
     }
+
 
 -- | Whether this entity should override the inherited default click-through
 -- event tag with its own defined value.
@@ -23715,6 +24165,7 @@ newtype ListTargetingExpression =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTargetingExpression' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23723,6 +24174,7 @@ newtype ListTargetingExpression =
 listTargetingExpression
     :: ListTargetingExpression
 listTargetingExpression = ListTargetingExpression' {_lteExpression = Nothing}
+
 
 -- | Expression describing which lists are being targeted by the ad.
 lteExpression :: Lens' ListTargetingExpression (Maybe Text)

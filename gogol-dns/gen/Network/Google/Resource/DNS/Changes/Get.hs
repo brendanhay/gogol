@@ -68,6 +68,7 @@ data ChangesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ changesGet pCgProject_ pCgChangeId_ pCgManagedZone_ =
     , _cgManagedZone = pCgManagedZone_
     , _cgClientOperationId = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 cgProject :: Lens' ChangesGet Text

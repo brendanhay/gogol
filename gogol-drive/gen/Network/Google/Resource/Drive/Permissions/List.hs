@@ -71,6 +71,7 @@ data PermissionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ permissionsList pPlFileId_ =
     , _plPageSize = Nothing
     , _plSupportsTeamDrives = False
     }
+
 
 -- | The token for continuing a previous list request on the next page. This
 -- should be set to the value of \'nextPageToken\' from the previous

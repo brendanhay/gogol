@@ -61,6 +61,7 @@ data PretargetingConfigInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PretargetingConfigInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ pretargetingConfigInsert
 pretargetingConfigInsert pPciPayload_ pPciAccountId_ =
   PretargetingConfigInsert'
     {_pciPayload = pPciPayload_, _pciAccountId = _Coerce # pPciAccountId_}
+
 
 -- | Multipart request metadata.
 pciPayload :: Lens' PretargetingConfigInsert PretargetingConfig

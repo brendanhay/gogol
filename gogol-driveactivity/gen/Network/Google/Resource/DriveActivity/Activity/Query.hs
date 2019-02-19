@@ -72,6 +72,7 @@ data ActivityQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ activityQuery pAqPayload_ =
     , _aqPayload = pAqPayload_
     , _aqCallback = Nothing
     }
+
 
 -- | V1 error format.
 aqXgafv :: Lens' ActivityQuery (Maybe Xgafv)

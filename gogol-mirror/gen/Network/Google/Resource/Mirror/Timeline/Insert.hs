@@ -67,6 +67,7 @@ newtype TimelineInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimelineInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ timelineInsert
     :: TimelineItem -- ^ 'tiPayload'
     -> TimelineInsert
 timelineInsert pTiPayload_ = TimelineInsert' {_tiPayload = pTiPayload_}
+
 
 -- | Multipart request metadata.
 tiPayload :: Lens' TimelineInsert TimelineItem

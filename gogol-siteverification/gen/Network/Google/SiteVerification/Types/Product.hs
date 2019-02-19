@@ -30,6 +30,7 @@ data SiteVerificationWebResourceGettokenRequestSite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteVerificationWebResourceGettokenRequestSite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42,6 +43,7 @@ siteVerificationWebResourceGettokenRequestSite
 siteVerificationWebResourceGettokenRequestSite =
   SiteVerificationWebResourceGettokenRequestSite'
     {_svwrgrsIdentifier = Nothing, _svwrgrsType = Nothing}
+
 
 -- | The site identifier. If the type is set to SITE, the identifier is a
 -- URL. If the type is set to INET_DOMAIN, the site identifier is a domain
@@ -86,6 +88,7 @@ data SiteVerificationWebResourceGettokenResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteVerificationWebResourceGettokenResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +101,7 @@ siteVerificationWebResourceGettokenResponse
 siteVerificationWebResourceGettokenResponse =
   SiteVerificationWebResourceGettokenResponse'
     {_svwrgrToken = Nothing, _svwrgrMethod = Nothing}
+
 
 -- | The verification token. The token must be placed appropriately in order
 -- for verification to succeed.
@@ -142,6 +146,7 @@ newtype SiteVerificationWebResourceListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteVerificationWebResourceListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -151,6 +156,7 @@ siteVerificationWebResourceListResponse
     :: SiteVerificationWebResourceListResponse
 siteVerificationWebResourceListResponse =
   SiteVerificationWebResourceListResponse' {_svwrlrItems = Nothing}
+
 
 -- | The list of sites that are owned by the authenticated user.
 svwrlrItems :: Lens' SiteVerificationWebResourceListResponse [SiteVerificationWebResourceResource]
@@ -185,6 +191,7 @@ data SiteVerificationWebResourceResourceSite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteVerificationWebResourceResourceSite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -197,6 +204,7 @@ siteVerificationWebResourceResourceSite
 siteVerificationWebResourceResourceSite =
   SiteVerificationWebResourceResourceSite'
     {_svwrrsIdentifier = Nothing, _svwrrsType = Nothing}
+
 
 -- | The site identifier. If the type is set to SITE, the identifier is a
 -- URL. If the type is set to INET_DOMAIN, the site identifier is a domain
@@ -239,6 +247,7 @@ data SiteVerificationWebResourceGettokenRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteVerificationWebResourceGettokenRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -251,6 +260,7 @@ siteVerificationWebResourceGettokenRequest
 siteVerificationWebResourceGettokenRequest =
   SiteVerificationWebResourceGettokenRequest'
     {_svwrgrSite = Nothing, _svwrgrVerificationMethod = Nothing}
+
 
 -- | The site for which a verification token will be generated.
 svwrgrSite :: Lens' SiteVerificationWebResourceGettokenRequest (Maybe SiteVerificationWebResourceGettokenRequestSite)
@@ -296,6 +306,7 @@ data SiteVerificationWebResourceResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteVerificationWebResourceResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -310,6 +321,7 @@ siteVerificationWebResourceResource
 siteVerificationWebResourceResource =
   SiteVerificationWebResourceResource'
     {_svwrrOwners = Nothing, _svwrrId = Nothing, _svwrrSite = Nothing}
+
 
 -- | The email addresses of all verified owners.
 svwrrOwners :: Lens' SiteVerificationWebResourceResource [Text]

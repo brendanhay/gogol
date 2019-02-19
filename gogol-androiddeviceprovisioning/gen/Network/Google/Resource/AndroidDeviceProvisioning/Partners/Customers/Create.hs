@@ -83,6 +83,7 @@ data PartnersCustomersCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersCustomersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ partnersCustomersCreate pPccParent_ pPccPayload_ =
     , _pccPayload = pPccPayload_
     , _pccCallback = Nothing
     }
+
 
 -- | Required. The parent resource ID in the format
 -- \`partners\/[PARTNER_ID]\` that identifies the reseller.

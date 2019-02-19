@@ -61,6 +61,7 @@ data UserRolesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ userRolesUpdate
 userRolesUpdate pUruProFileId_ pUruPayload_ =
   UserRolesUpdate'
     {_uruProFileId = _Coerce # pUruProFileId_, _uruPayload = pUruPayload_}
+
 
 -- | User profile ID associated with this request.
 uruProFileId :: Lens' UserRolesUpdate Int64

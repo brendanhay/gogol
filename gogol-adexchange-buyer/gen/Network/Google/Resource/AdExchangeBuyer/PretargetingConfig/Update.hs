@@ -64,6 +64,7 @@ data PretargetingConfigUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PretargetingConfigUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ pretargetingConfigUpdate pPcuPayload_ pPcuAccountId_ pPcuConfigId_ =
     , _pcuAccountId = _Coerce # pPcuAccountId_
     , _pcuConfigId = _Coerce # pPcuConfigId_
     }
+
 
 -- | Multipart request metadata.
 pcuPayload :: Lens' PretargetingConfigUpdate PretargetingConfig

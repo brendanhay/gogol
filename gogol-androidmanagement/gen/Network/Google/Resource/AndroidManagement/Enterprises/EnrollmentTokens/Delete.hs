@@ -72,6 +72,7 @@ data EnterprisesEnrollmentTokensDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesEnrollmentTokensDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ enterprisesEnrollmentTokensDelete pEetdName_ =
     , _eetdName = pEetdName_
     , _eetdCallback = Nothing
     }
+
 
 -- | V1 error format.
 eetdXgafv :: Lens' EnterprisesEnrollmentTokensDelete (Maybe Xgafv)

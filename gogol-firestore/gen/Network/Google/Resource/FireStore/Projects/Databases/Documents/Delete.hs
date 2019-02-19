@@ -76,6 +76,7 @@ data ProjectsDatabasesDocumentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesDocumentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsDatabasesDocumentsDelete pPdddName_ =
     , _pdddName = pPdddName_
     , _pdddCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdddXgafv :: Lens' ProjectsDatabasesDocumentsDelete (Maybe Xgafv)

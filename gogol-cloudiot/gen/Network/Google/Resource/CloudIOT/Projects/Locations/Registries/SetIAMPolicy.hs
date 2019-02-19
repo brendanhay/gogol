@@ -77,6 +77,7 @@ data ProjectsLocationsRegistriesSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsLocationsRegistriesSetIAMPolicy pPlrsipPayload_ pPlrsipResource_ =
     , _plrsipResource = pPlrsipResource_
     , _plrsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrsipXgafv :: Lens' ProjectsLocationsRegistriesSetIAMPolicy (Maybe Xgafv)

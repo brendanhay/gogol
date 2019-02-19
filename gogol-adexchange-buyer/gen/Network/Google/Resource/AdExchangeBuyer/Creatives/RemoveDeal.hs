@@ -64,6 +64,7 @@ data CreativesRemoveDeal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativesRemoveDeal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ creativesRemoveDeal pCrdBuyerCreativeId_ pCrdDealId_ pCrdAccountId_ =
     , _crdDealId = _Coerce # pCrdDealId_
     , _crdAccountId = _Coerce # pCrdAccountId_
     }
+
 
 -- | The buyer-specific id for this creative.
 crdBuyerCreativeId :: Lens' CreativesRemoveDeal Text

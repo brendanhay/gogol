@@ -75,6 +75,7 @@ data MattersSavedQueriesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersSavedQueriesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ mattersSavedQueriesDelete pMsqdSavedQueryId_ pMsqdMatterId_ =
     , _msqdMatterId = pMsqdMatterId_
     , _msqdCallback = Nothing
     }
+
 
 -- | V1 error format.
 msqdXgafv :: Lens' MattersSavedQueriesDelete (Maybe Xgafv)

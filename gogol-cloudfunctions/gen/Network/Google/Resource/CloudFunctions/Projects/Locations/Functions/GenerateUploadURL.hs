@@ -96,6 +96,7 @@ data ProjectsLocationsFunctionsGenerateUploadURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsFunctionsGenerateUploadURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +128,7 @@ projectsLocationsFunctionsGenerateUploadURL pPlfguuParent_ pPlfguuPayload_ =
     , _plfguuPayload = pPlfguuPayload_
     , _plfguuCallback = Nothing
     }
+
 
 -- | The project and location in which the Google Cloud Storage signed URL
 -- should be generated, specified in the format

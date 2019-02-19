@@ -63,6 +63,7 @@ newtype PawsGetSpectrum =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PawsGetSpectrum' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ pawsGetSpectrum
     :: PawsGetSpectrumRequest -- ^ 'pgsPayload'
     -> PawsGetSpectrum
 pawsGetSpectrum pPgsPayload_ = PawsGetSpectrum' {_pgsPayload = pPgsPayload_}
+
 
 -- | Multipart request metadata.
 pgsPayload :: Lens' PawsGetSpectrum PawsGetSpectrumRequest

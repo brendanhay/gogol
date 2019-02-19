@@ -66,6 +66,7 @@ data ManagementWebPropertiesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementWebPropertiesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ managementWebPropertiesPatch pMwppWebPropertyId_ pMwppPayload_ pMwppAccountId_ =
     , _mwppPayload = pMwppPayload_
     , _mwppAccountId = pMwppAccountId_
     }
+
 
 -- | Web property ID
 mwppWebPropertyId :: Lens' ManagementWebPropertiesPatch Text

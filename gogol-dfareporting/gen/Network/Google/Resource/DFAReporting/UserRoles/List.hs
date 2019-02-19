@@ -85,6 +85,7 @@ data UserRolesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ userRolesList pUrlProFileId_ =
     , _urlSubAccountId = Nothing
     , _urlMaxResults = 1000
     }
+
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"userrole*2015\" will return objects with names like

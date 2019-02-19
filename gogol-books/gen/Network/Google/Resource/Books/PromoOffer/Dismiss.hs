@@ -76,6 +76,7 @@ data PromoOfferDismiss =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PromoOfferDismiss' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ promoOfferDismiss =
     , _podProduct = Nothing
     , _podAndroidId = Nothing
     }
+
 
 -- | device manufacturer
 podManufacturer :: Lens' PromoOfferDismiss (Maybe Text)

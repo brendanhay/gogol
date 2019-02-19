@@ -83,6 +83,7 @@ data ProjectsSinksCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSinksCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsSinksCreate pPscParent_ pPscPayload_ =
     , _pscPayload = pPscPayload_
     , _pscCallback = Nothing
     }
+
 
 -- | Required. The resource in which to create the sink:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

@@ -75,6 +75,7 @@ data ProjectsServiceAccountsGenerateAccessToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServiceAccountsGenerateAccessToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsServiceAccountsGenerateAccessToken pPsagatPayload_ pPsagatName_ =
     , _psagatName = pPsagatName_
     , _psagatCallback = Nothing
     }
+
 
 -- | V1 error format.
 psagatXgafv :: Lens' ProjectsServiceAccountsGenerateAccessToken (Maybe Xgafv)

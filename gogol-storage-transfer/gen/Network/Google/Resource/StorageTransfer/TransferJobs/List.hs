@@ -78,6 +78,7 @@ data TransferJobsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferJobsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ transferJobsList =
     , _tjlPageSize = Nothing
     , _tjlCallback = Nothing
     }
+
 
 -- | V1 error format.
 tjlXgafv :: Lens' TransferJobsList (Maybe Xgafv)

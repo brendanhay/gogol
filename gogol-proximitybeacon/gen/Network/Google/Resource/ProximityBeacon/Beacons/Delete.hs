@@ -85,6 +85,7 @@ data BeaconsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ beaconsDelete pBBeaconName_ =
     , _bProjectId = Nothing
     , _bCallback = Nothing
     }
+
 
 -- | V1 error format.
 bXgafv :: Lens' BeaconsDelete (Maybe Xgafv)

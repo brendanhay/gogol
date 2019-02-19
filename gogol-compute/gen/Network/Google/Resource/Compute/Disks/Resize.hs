@@ -75,6 +75,7 @@ data DisksResize =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DisksResize' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ disksResize pDrProject_ pDrDisk_ pDrZone_ pDrPayload_ =
     , _drZone = pDrZone_
     , _drPayload = pDrPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

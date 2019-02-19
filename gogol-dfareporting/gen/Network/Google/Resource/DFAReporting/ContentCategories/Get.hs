@@ -62,6 +62,7 @@ data ContentCategoriesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContentCategoriesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ contentCategoriesGet
 contentCategoriesGet pCcgProFileId_ pCcgId_ =
   ContentCategoriesGet'
     {_ccgProFileId = _Coerce # pCcgProFileId_, _ccgId = _Coerce # pCcgId_}
+
 
 -- | User profile ID associated with this request.
 ccgProFileId :: Lens' ContentCategoriesGet Int64

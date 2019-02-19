@@ -70,6 +70,7 @@ data ProjectsLocationsJobsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsJobsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsLocationsJobsDelete pPljdName_ =
     , _pljdName = pPljdName_
     , _pljdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljdXgafv :: Lens' ProjectsLocationsJobsDelete (Maybe Xgafv)

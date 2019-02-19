@@ -66,6 +66,7 @@ data NotificationsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ notificationsPatch pNpPayload_ pNpCustomer_ pNpNotificationId_ =
     , _npCustomer = pNpCustomer_
     , _npNotificationId = pNpNotificationId_
     }
+
 
 -- | Multipart request metadata.
 npPayload :: Lens' NotificationsPatch Notification

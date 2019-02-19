@@ -75,6 +75,7 @@ data ProjectsModelsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsModelsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ projectsModelsGet pPmgName_ =
     , _pmgName = pPmgName_
     , _pmgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmgXgafv :: Lens' ProjectsModelsGet (Maybe Xgafv)

@@ -74,6 +74,7 @@ data ProjectsServiceAccountsGenerateIdToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServiceAccountsGenerateIdToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsServiceAccountsGenerateIdToken pPsagitPayload_ pPsagitName_ =
     , _psagitName = pPsagitName_
     , _psagitCallback = Nothing
     }
+
 
 -- | V1 error format.
 psagitXgafv :: Lens' ProjectsServiceAccountsGenerateIdToken (Maybe Xgafv)

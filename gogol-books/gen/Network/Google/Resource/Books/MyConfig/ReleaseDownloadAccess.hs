@@ -68,6 +68,7 @@ data MyConfigReleaseDownloadAccess =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyConfigReleaseDownloadAccess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ myConfigReleaseDownloadAccess pMcrdaCpksver_ pMcrdaVolumeIds_ =
     , _mcrdaVolumeIds = _Coerce # pMcrdaVolumeIds_
     , _mcrdaSource = Nothing
     }
+
 
 -- | The device\/version ID from which to release the restriction.
 mcrdaCpksver :: Lens' MyConfigReleaseDownloadAccess Text

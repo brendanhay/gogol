@@ -76,6 +76,7 @@ data ProjectsOperationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsOperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ projectsOperationsDelete pPodName_ =
     , _podName = pPodName_
     , _podCallback = Nothing
     }
+
 
 -- | V1 error format.
 podXgafv :: Lens' ProjectsOperationsDelete (Maybe Xgafv)

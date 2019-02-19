@@ -79,6 +79,7 @@ data ProjectsGetRemoteConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGetRemoteConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsGetRemoteConfig pPgrcProject_ =
     , _pgrcBearerToken = Nothing
     , _pgrcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgrcXgafv :: Lens' ProjectsGetRemoteConfig (Maybe Xgafv)

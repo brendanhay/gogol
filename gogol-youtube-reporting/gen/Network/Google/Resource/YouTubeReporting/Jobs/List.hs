@@ -81,6 +81,7 @@ data JobsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ jobsList =
     , _jlPageSize = Nothing
     , _jlCallback = Nothing
     }
+
 
 -- | V1 error format.
 jlXgafv :: Lens' JobsList (Maybe Xgafv)

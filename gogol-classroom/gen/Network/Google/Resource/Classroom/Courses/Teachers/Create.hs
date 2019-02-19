@@ -91,6 +91,7 @@ data CoursesTeachersCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesTeachersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ coursesTeachersCreate pCtcCourseId_ pCtcPayload_ =
     , _ctcPayload = pCtcPayload_
     , _ctcCallback = Nothing
     }
+
 
 -- | V1 error format.
 ctcXgafv :: Lens' CoursesTeachersCreate (Maybe Xgafv)

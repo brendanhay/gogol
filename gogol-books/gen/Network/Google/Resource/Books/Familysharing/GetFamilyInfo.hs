@@ -58,6 +58,7 @@ newtype FamilysharingGetFamilyInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FamilysharingGetFamilyInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ newtype FamilysharingGetFamilyInfo =
 familysharingGetFamilyInfo
     :: FamilysharingGetFamilyInfo
 familysharingGetFamilyInfo = FamilysharingGetFamilyInfo' {_fgfiSource = Nothing}
+
 
 -- | String to identify the originator of this request.
 fgfiSource :: Lens' FamilysharingGetFamilyInfo (Maybe Text)

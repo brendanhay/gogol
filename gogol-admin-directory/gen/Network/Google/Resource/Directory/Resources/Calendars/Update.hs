@@ -71,6 +71,7 @@ data ResourcesCalendarsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesCalendarsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ resourcesCalendarsUpdate pRcuPayload_ pRcuCustomer_ pRcuCalendarResourceId_ =
     , _rcuCustomer = pRcuCustomer_
     , _rcuCalendarResourceId = pRcuCalendarResourceId_
     }
+
 
 -- | Multipart request metadata.
 rcuPayload :: Lens' ResourcesCalendarsUpdate CalendarResource

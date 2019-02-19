@@ -80,6 +80,7 @@ data ProjectsSubscriptionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSubscriptionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsSubscriptionsDelete pPsdSubscription_ =
     , _psdSubscription = pPsdSubscription_
     , _psdCallback = Nothing
     }
+
 
 -- | V1 error format.
 psdXgafv :: Lens' ProjectsSubscriptionsDelete (Maybe Xgafv)

@@ -81,6 +81,7 @@ data UsersImportSSHPublicKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersImportSSHPublicKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ usersImportSSHPublicKey pUispkParent_ pUispkPayload_ =
     , _uispkProjectId = Nothing
     , _uispkCallback = Nothing
     }
+
 
 -- | The unique ID for the user in format \`users\/{user}\`.
 uispkParent :: Lens' UsersImportSSHPublicKey Text

@@ -62,6 +62,7 @@ data SurveysUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SurveysUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ surveysUpdate
     -> SurveysUpdate
 surveysUpdate pSuSurveyURLId_ pSuPayload_ =
   SurveysUpdate' {_suSurveyURLId = pSuSurveyURLId_, _suPayload = pSuPayload_}
+
 
 -- | External URL ID for the survey.
 suSurveyURLId :: Lens' SurveysUpdate Text

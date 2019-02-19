@@ -68,6 +68,7 @@ data RegionBackendServicesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionBackendServicesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ regionBackendServicesDelete pRbsdProject_ pRbsdRegion_ pRbsdBackendService_ =
     , _rbsdRegion = pRbsdRegion_
     , _rbsdBackendService = pRbsdBackendService_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

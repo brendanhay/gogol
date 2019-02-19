@@ -70,6 +70,7 @@ data ProjectsTopicsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTopicsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsTopicsGet pPtgTopic_ =
     , _ptgTopic = pPtgTopic_
     , _ptgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptgXgafv :: Lens' ProjectsTopicsGet (Maybe Xgafv)

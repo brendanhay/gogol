@@ -61,6 +61,7 @@ data CampaignsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CampaignsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ campaignsInsert
 campaignsInsert pCamProFileId_ pCamPayload_ =
   CampaignsInsert'
     {_camProFileId = _Coerce # pCamProFileId_, _camPayload = pCamPayload_}
+
 
 -- | User profile ID associated with this request.
 camProFileId :: Lens' CampaignsInsert Int64

@@ -60,6 +60,7 @@ data AccountsContainersWorkspacesTagsRevert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesTagsRevert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ accountsContainersWorkspacesTagsRevert
 accountsContainersWorkspacesTagsRevert pAcwtrcPath_ =
   AccountsContainersWorkspacesTagsRevert'
     {_acwtrcPath = pAcwtrcPath_, _acwtrcFingerprint = Nothing}
+
 
 -- | GTM Tag\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/tags\/{tag_id}

@@ -87,6 +87,7 @@ data ProjectsLocationsClustersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsLocationsClustersDelete pPlcdName_ =
     , _plcdProjectId = Nothing
     , _plcdCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcdXgafv :: Lens' ProjectsLocationsClustersDelete (Maybe Xgafv)

@@ -62,6 +62,7 @@ data AspsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AspsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ aspsGet
     -> AspsGet
 aspsGet pAgCodeId_ pAgUserKey_ =
   AspsGet' {_agCodeId = _Coerce # pAgCodeId_, _agUserKey = pAgUserKey_}
+
 
 -- | The unique ID of the ASP.
 agCodeId :: Lens' AspsGet Int32

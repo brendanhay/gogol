@@ -63,6 +63,7 @@ data QuestsAccept =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuestsAccept' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ questsAccept
     -> QuestsAccept
 questsAccept pQaQuestId_ =
   QuestsAccept' {_qaLanguage = Nothing, _qaQuestId = pQaQuestId_}
+
 
 -- | The preferred language to use for strings returned by this method.
 qaLanguage :: Lens' QuestsAccept (Maybe Text)

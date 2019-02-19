@@ -81,6 +81,7 @@ data ProjectsTimeSeriesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTimeSeriesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsTimeSeriesCreate pPtscPayload_ pPtscName_ =
     , _ptscName = pPtscName_
     , _ptscCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptscXgafv :: Lens' ProjectsTimeSeriesCreate (Maybe Xgafv)

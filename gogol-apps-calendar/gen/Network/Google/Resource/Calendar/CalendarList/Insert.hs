@@ -63,6 +63,7 @@ data CalendarListInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CalendarListInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ calendarListInsert
     -> CalendarListInsert
 calendarListInsert pCliPayload_ =
   CalendarListInsert' {_cliPayload = pCliPayload_, _cliColorRgbFormat = Nothing}
+
 
 -- | Multipart request metadata.
 cliPayload :: Lens' CalendarListInsert CalendarListEntry

@@ -81,6 +81,7 @@ data ProjectsTriggersPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTriggersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsTriggersPatch pPtpTriggerId_ pPtpPayload_ pPtpProjectId_ =
     , _ptpProjectId = pPtpProjectId_
     , _ptpCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptpXgafv :: Lens' ProjectsTriggersPatch (Maybe Xgafv)

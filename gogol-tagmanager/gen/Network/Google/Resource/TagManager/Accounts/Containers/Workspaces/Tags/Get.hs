@@ -56,6 +56,7 @@ newtype AccountsContainersWorkspacesTagsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesTagsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ accountsContainersWorkspacesTagsGet
     -> AccountsContainersWorkspacesTagsGet
 accountsContainersWorkspacesTagsGet pAcwtgPath_ =
   AccountsContainersWorkspacesTagsGet' {_acwtgPath = pAcwtgPath_}
+
 
 -- | GTM Tag\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/tags\/{tag_id}

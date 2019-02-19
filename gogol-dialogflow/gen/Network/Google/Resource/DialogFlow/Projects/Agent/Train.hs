@@ -76,6 +76,7 @@ data ProjectsAgentTrain =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentTrain' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsAgentTrain pPatParent_ pPatPayload_ =
     , _patPayload = pPatPayload_
     , _patCallback = Nothing
     }
+
 
 -- | Required. The project that the agent to train is associated with.
 -- Format: \`projects\/\`.

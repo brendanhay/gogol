@@ -66,6 +66,7 @@ data SubscriptionsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ subscriptionsInsert pSiPayload_ pSiCustomerId_ =
     , _siCustomerId = pSiCustomerId_
     , _siCustomerAuthToken = Nothing
     }
+
 
 -- | Multipart request metadata.
 siPayload :: Lens' SubscriptionsInsert Subscription

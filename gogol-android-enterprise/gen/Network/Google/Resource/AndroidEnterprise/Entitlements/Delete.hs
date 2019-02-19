@@ -65,6 +65,7 @@ data EntitlementsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntitlementsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ entitlementsDelete pEdEntitlementId_ pEdEnterpriseId_ pEdUserId_ =
     , _edEnterpriseId = pEdEnterpriseId_
     , _edUserId = pEdUserId_
     }
+
 
 -- | The ID of the entitlement (a product ID), e.g.
 -- \"app:com.google.android.gm\".

@@ -70,6 +70,7 @@ data ProjectsLocationsJobsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsJobsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsLocationsJobsGet pPljgName_ =
     , _pljgName = pPljgName_
     , _pljgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljgXgafv :: Lens' ProjectsLocationsJobsGet (Maybe Xgafv)

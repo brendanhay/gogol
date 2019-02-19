@@ -62,6 +62,7 @@ data FloodlightActivityGroupsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivityGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ floodlightActivityGroupsGet
 floodlightActivityGroupsGet pFaggProFileId_ pFaggId_ =
   FloodlightActivityGroupsGet'
     {_faggProFileId = _Coerce # pFaggProFileId_, _faggId = _Coerce # pFaggId_}
+
 
 -- | User profile ID associated with this request.
 faggProFileId :: Lens' FloodlightActivityGroupsGet Int64

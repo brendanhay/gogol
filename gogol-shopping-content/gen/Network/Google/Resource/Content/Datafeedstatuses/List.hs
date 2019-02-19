@@ -64,6 +64,7 @@ data DatafeedstatusesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedstatusesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ datafeedstatusesList pDlMerchantId_ =
     , _dlPageToken = Nothing
     , _dlMaxResults = Nothing
     }
+
 
 -- | The ID of the account that manages the datafeeds. This account cannot be
 -- a multi-client account.

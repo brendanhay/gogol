@@ -61,6 +61,7 @@ data CirclesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CirclesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ circlesInsert
     -> CirclesInsert
 circlesInsert pCiPayload_ pCiUserId_ =
   CirclesInsert' {_ciPayload = pCiPayload_, _ciUserId = pCiUserId_}
+
 
 -- | Multipart request metadata.
 ciPayload :: Lens' CirclesInsert Circle

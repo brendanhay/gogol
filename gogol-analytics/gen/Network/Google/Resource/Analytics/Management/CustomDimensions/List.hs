@@ -70,6 +70,7 @@ data ManagementCustomDimensionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementCustomDimensionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ managementCustomDimensionsList pMcdlWebPropertyId_ pMcdlAccountId_ =
     , _mcdlStartIndex = Nothing
     , _mcdlMaxResults = Nothing
     }
+
 
 -- | Web property ID for the custom dimensions to retrieve.
 mcdlWebPropertyId :: Lens' ManagementCustomDimensionsList Text

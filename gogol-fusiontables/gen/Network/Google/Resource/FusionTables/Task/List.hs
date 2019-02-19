@@ -67,6 +67,7 @@ data TaskList' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TaskList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ taskList' pTlTableId_ =
     , _tlStartIndex = Nothing
     , _tlMaxResults = Nothing
     }
+
 
 -- | Continuation token specifying which result page to return.
 tlPageToken :: Lens' TaskList' (Maybe Text)

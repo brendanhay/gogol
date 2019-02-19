@@ -73,6 +73,7 @@ data ProjectsGroupsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGroupsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ projectsGroupsDelete pPgdName_ =
     , _pgdRecursive = Nothing
     , _pgdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgdXgafv :: Lens' ProjectsGroupsDelete (Maybe Xgafv)

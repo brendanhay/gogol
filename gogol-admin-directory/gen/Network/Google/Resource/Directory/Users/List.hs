@@ -92,6 +92,7 @@ data UsersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +137,7 @@ usersList =
     , _ulPageToken = Nothing
     , _ulMaxResults = Nothing
     }
+
 
 -- | Event on which subscription is intended (if subscribing)
 ulEvent :: Lens' UsersList (Maybe UsersListEvent)

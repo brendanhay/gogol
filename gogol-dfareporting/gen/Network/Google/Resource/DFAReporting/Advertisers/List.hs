@@ -101,6 +101,7 @@ data AdvertisersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertisersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -149,6 +150,7 @@ advertisersList pAllProFileId_ =
     , _allFloodlightConfigurationIds = Nothing
     , _allMaxResults = 1000
     }
+
 
 -- | Select only advertisers with the specified status.
 allStatus :: Lens' AdvertisersList (Maybe AdvertisersListStatus)

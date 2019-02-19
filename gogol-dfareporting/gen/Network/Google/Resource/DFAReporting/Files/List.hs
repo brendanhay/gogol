@@ -73,6 +73,7 @@ data FilesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ filesList pFlProFileId_ =
     , _flSortField = FLSFLastModifiedTime
     , _flMaxResults = 10
     }
+
 
 -- | The DFA profile ID.
 flProFileId :: Lens' FilesList Int64

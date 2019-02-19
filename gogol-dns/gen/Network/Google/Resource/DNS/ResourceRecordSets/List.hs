@@ -75,6 +75,7 @@ data ResourceRecordSetsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceRecordSetsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ resourceRecordSetsList pRrslProject_ pRrslManagedZone_ =
     , _rrslManagedZone = pRrslManagedZone_
     , _rrslMaxResults = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 rrslProject :: Lens' ResourceRecordSetsList Text

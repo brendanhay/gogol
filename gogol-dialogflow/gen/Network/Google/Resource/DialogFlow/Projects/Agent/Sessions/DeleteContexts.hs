@@ -72,6 +72,7 @@ data ProjectsAgentSessionsDeleteContexts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentSessionsDeleteContexts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsAgentSessionsDeleteContexts pPasdcParent_ =
     , _pasdcUploadType = Nothing
     , _pasdcCallback = Nothing
     }
+
 
 -- | Required. The name of the session to delete all contexts from. Format:
 -- \`projects\/\/agent\/sessions\/\`.

@@ -73,6 +73,7 @@ data GetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ getIAMPolicy pGipResource_ =
     , _gipResource = pGipResource_
     , _gipCallback = Nothing
     }
+
 
 -- | V1 error format.
 gipXgafv :: Lens' GetIAMPolicy (Maybe Xgafv)

@@ -57,6 +57,7 @@ newtype ContactsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ contactsInsert
     :: Contact -- ^ 'ciPayload'
     -> ContactsInsert
 contactsInsert pCiPayload_ = ContactsInsert' {_ciPayload = pCiPayload_}
+
 
 -- | Multipart request metadata.
 ciPayload :: Lens' ContactsInsert Contact

@@ -57,6 +57,7 @@ newtype CirclesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CirclesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ circlesGet
     :: Text -- ^ 'cgCircleId'
     -> CirclesGet
 circlesGet pCgCircleId_ = CirclesGet' {_cgCircleId = pCgCircleId_}
+
 
 -- | The ID of the circle to get.
 cgCircleId :: Lens' CirclesGet Text

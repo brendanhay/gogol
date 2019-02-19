@@ -75,6 +75,7 @@ data ProjectsDatabasesDocumentsCommit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesDocumentsCommit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsDatabasesDocumentsCommit pPddcDatabase_ pPddcPayload_ =
     , _pddcPayload = pPddcPayload_
     , _pddcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pddcXgafv :: Lens' ProjectsDatabasesDocumentsCommit (Maybe Xgafv)

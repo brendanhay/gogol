@@ -74,6 +74,7 @@ data PeopleCreateContact =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeopleCreateContact' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ peopleCreateContact pPccPayload_ =
     , _pccPayload = pPccPayload_
     , _pccCallback = Nothing
     }
+
 
 -- | The resource name of the owning person resource.
 pccParent :: Lens' PeopleCreateContact (Maybe Text)

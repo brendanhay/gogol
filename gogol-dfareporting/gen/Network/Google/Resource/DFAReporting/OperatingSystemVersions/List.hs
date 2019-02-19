@@ -59,6 +59,7 @@ newtype OperatingSystemVersionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperatingSystemVersionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ operatingSystemVersionsList
     -> OperatingSystemVersionsList
 operatingSystemVersionsList pOsvlProFileId_ =
   OperatingSystemVersionsList' {_osvlProFileId = _Coerce # pOsvlProFileId_}
+
 
 -- | User profile ID associated with this request.
 osvlProFileId :: Lens' OperatingSystemVersionsList Int64

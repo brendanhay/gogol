@@ -30,6 +30,7 @@ data ObjectOwner =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectOwner' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40,6 +41,7 @@ data ObjectOwner =
 objectOwner
     :: ObjectOwner
 objectOwner = ObjectOwner' {_ooEntity = Nothing, _ooEntityId = Nothing}
+
 
 -- | The entity, in the form user-userId.
 ooEntity :: Lens' ObjectOwner (Maybe Text)
@@ -73,6 +75,7 @@ newtype BucketVersioning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketVersioning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +84,7 @@ newtype BucketVersioning =
 bucketVersioning
     :: BucketVersioning
 bucketVersioning = BucketVersioning' {_bvEnabled = Nothing}
+
 
 -- | While set to true, versioning is fully enabled for this bucket.
 bvEnabled :: Lens' BucketVersioning (Maybe Bool)
@@ -111,6 +115,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -134,6 +139,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -205,6 +211,7 @@ data BucketRetentionPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketRetentionPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -222,6 +229,7 @@ bucketRetentionPolicy =
     , _brpEffectiveTime = Nothing
     , _brpIsLocked = Nothing
     }
+
 
 -- | The duration in seconds that objects need to be retained. Retention
 -- duration must be greater than zero and less than 100 years. Note that
@@ -273,6 +281,7 @@ data Buckets =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Buckets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -287,6 +296,7 @@ buckets
 buckets =
   Buckets'
     {_bNextPageToken = Nothing, _bKind = "storage#buckets", _bItems = Nothing}
+
 
 -- | The continuation token, used to page through large result sets. Provide
 -- this value in a subsequent request to return the next page of results.
@@ -331,6 +341,7 @@ newtype BucketBilling =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketBilling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -339,6 +350,7 @@ newtype BucketBilling =
 bucketBilling
     :: BucketBilling
 bucketBilling = BucketBilling' {_bbRequesterPays = Nothing}
+
 
 -- | When set to true, Requester Pays is enabled for this bucket.
 bbRequesterPays :: Lens' BucketBilling (Maybe Bool)
@@ -373,6 +385,7 @@ data Notification =
     , _nCustomAttributes :: !(Maybe NotificationCustom_attributes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
@@ -409,6 +422,7 @@ notification =
     , _nId = Nothing
     , _nCustomAttributes = Nothing
     }
+
 
 -- | HTTP 1.1 Entity tag for this subscription notification.
 nEtag :: Lens' Notification (Maybe Text)
@@ -499,6 +513,7 @@ data BucketLogging =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketLogging' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -510,6 +525,7 @@ bucketLogging
     :: BucketLogging
 bucketLogging =
   BucketLogging' {_blLogBucket = Nothing, _blLogObjectPrefix = Nothing}
+
 
 -- | The destination bucket where the current bucket\'s logs should be
 -- placed.
@@ -546,6 +562,7 @@ newtype ObjectMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -556,6 +573,7 @@ objectMetadata
     -> ObjectMetadata
 objectMetadata pOmAddtional_ =
   ObjectMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | An individual metadata entry.
 omAddtional :: Lens' ObjectMetadata (HashMap Text Text)
@@ -585,6 +603,7 @@ data BucketLifecycleRuleItemCondition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketLifecycleRuleItemCondition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -611,6 +630,7 @@ bucketLifecycleRuleItemCondition =
     , _blricMatchesPattern = Nothing
     , _blricCreatedBefore = Nothing
     }
+
 
 -- | Age of an object (in days). This condition is satisfied when an object
 -- reaches the specified age.
@@ -700,6 +720,7 @@ newtype BucketLifecycle =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketLifecycle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -708,6 +729,7 @@ newtype BucketLifecycle =
 bucketLifecycle
     :: BucketLifecycle
 bucketLifecycle = BucketLifecycle' {_blRule = Nothing}
+
 
 -- | A lifecycle management rule, which is made of an action to take and the
 -- condition(s) under which the action will be taken.
@@ -735,6 +757,7 @@ newtype BucketLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -745,6 +768,7 @@ bucketLabels
     -> BucketLabels
 bucketLabels pBlAddtional_ =
   BucketLabels' {_blAddtional = _Coerce # pBlAddtional_}
+
 
 -- | An individual label entry.
 blAddtional :: Lens' BucketLabels (HashMap Text Text)
@@ -777,6 +801,7 @@ data Channel =
     , _cType        :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
@@ -816,6 +841,7 @@ channel =
     , _cId = Nothing
     , _cType = Nothing
     }
+
 
 -- | A version-specific identifier for the watched resource.
 cResourceURI :: Lens' Channel (Maybe Text)
@@ -903,6 +929,7 @@ data BucketLifecycleRuleItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketLifecycleRuleItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -914,6 +941,7 @@ bucketLifecycleRuleItem
     :: BucketLifecycleRuleItem
 bucketLifecycleRuleItem =
   BucketLifecycleRuleItem' {_blriAction = Nothing, _blriCondition = Nothing}
+
 
 -- | The action to take.
 blriAction :: Lens' BucketLifecycleRuleItem (Maybe BucketLifecycleRuleItemAction)
@@ -951,6 +979,7 @@ data BucketCORSItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketCORSItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -971,6 +1000,7 @@ bucketCORSItem =
     , _bciResponseHeader = Nothing
     , _bciMethod = Nothing
     }
+
 
 -- | The value, in seconds, to return in the Access-Control-Max-Age header
 -- used in preflight responses.
@@ -1035,6 +1065,7 @@ data ObjectAccessControlProjectTeam =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectAccessControlProjectTeam' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1047,6 +1078,7 @@ objectAccessControlProjectTeam
 objectAccessControlProjectTeam =
   ObjectAccessControlProjectTeam'
     {_oacptProjectNumber = Nothing, _oacptTeam = Nothing}
+
 
 -- | The project number.
 oacptProjectNumber :: Lens' ObjectAccessControlProjectTeam (Maybe Text)
@@ -1085,6 +1117,7 @@ data ObjectCustomerEncryption =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectCustomerEncryption' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1097,6 +1130,7 @@ objectCustomerEncryption
 objectCustomerEncryption =
   ObjectCustomerEncryption'
     {_oceKeySha256 = Nothing, _oceEncryptionAlgorithm = Nothing}
+
 
 -- | SHA256 hash value of the encryption key.
 oceKeySha256 :: Lens' ObjectCustomerEncryption (Maybe Text)
@@ -1157,6 +1191,7 @@ data Bucket =
     , _bucDefaultEventBasedHold :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Bucket' with the minimum fields required to make a request.
 --
@@ -1241,6 +1276,7 @@ bucket =
     , _bucACL = Nothing
     , _bucDefaultEventBasedHold = Nothing
     }
+
 
 -- | HTTP 1.1 Entity tag for the bucket.
 bucEtag :: Lens' Bucket (Maybe Text)
@@ -1485,6 +1521,7 @@ data Objects =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Objects' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1505,6 +1542,7 @@ objects =
     , _oItems = Nothing
     , _oPrefixes = Nothing
     }
+
 
 -- | The continuation token, used to page through large result sets. Provide
 -- this value in a subsequent request to return the next page of results.
@@ -1560,6 +1598,7 @@ data BucketAccessControls =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketAccessControls' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1572,6 +1611,7 @@ bucketAccessControls
 bucketAccessControls =
   BucketAccessControls'
     {_bacKind = "storage#bucketAccessControls", _bacItems = Nothing}
+
 
 -- | The kind of item this is. For lists of bucket access control entries,
 -- this is always storage#bucketAccessControls.
@@ -1609,6 +1649,7 @@ newtype BucketEncryption =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketEncryption' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1617,6 +1658,7 @@ newtype BucketEncryption =
 bucketEncryption
     :: BucketEncryption
 bucketEncryption = BucketEncryption' {_beDefaultKmsKeyName = Nothing}
+
 
 -- | A Cloud KMS key that will be used to encrypt objects inserted into this
 -- bucket, if no encryption method is specified.
@@ -1648,6 +1690,7 @@ data ComposeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ComposeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1665,6 +1708,7 @@ composeRequest =
     , _crKind = "storage#composeRequest"
     , _crSourceObjects = Nothing
     }
+
 
 -- | Properties of the resulting object.
 crDestination :: Lens' ComposeRequest (Maybe Object)
@@ -1712,6 +1756,7 @@ data ServiceAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1724,6 +1769,7 @@ serviceAccount
 serviceAccount =
   ServiceAccount'
     {_saKind = "storage#serviceAccount", _saEmailAddress = Nothing}
+
 
 -- | The kind of item this is. For notifications, this is always
 -- storage#notification.
@@ -1761,6 +1807,7 @@ data BucketOwner =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketOwner' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1771,6 +1818,7 @@ data BucketOwner =
 bucketOwner
     :: BucketOwner
 bucketOwner = BucketOwner' {_boEntity = Nothing, _boEntityId = Nothing}
+
 
 -- | The entity, in the form project-owner-projectId.
 boEntity :: Lens' BucketOwner (Maybe Text)
@@ -1805,6 +1853,7 @@ data ComposeRequestSourceObjectsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ComposeRequestSourceObjectsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1822,6 +1871,7 @@ composeRequestSourceObjectsItem =
     , _crsoiObjectPreconditions = Nothing
     , _crsoiGeneration = Nothing
     }
+
 
 -- | The source object\'s name. All source objects must reside in the same
 -- bucket.
@@ -1869,6 +1919,7 @@ newtype ChannelParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1879,6 +1930,7 @@ channelParams
     -> ChannelParams
 channelParams pCpAddtional_ =
   ChannelParams' {_cpAddtional = _Coerce # pCpAddtional_}
+
 
 -- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
@@ -1904,6 +1956,7 @@ data PolicyBindingsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PolicyBindingsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1918,6 +1971,7 @@ policyBindingsItem
 policyBindingsItem =
   PolicyBindingsItem'
     {_pbiMembers = Nothing, _pbiRole = Nothing, _pbiCondition = Nothing}
+
 
 -- | A collection of identifiers for members who may assume the provided
 -- role. Recognized identifiers are as follows: - allUsers — A special
@@ -2030,6 +2084,7 @@ data Object =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Object' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2131,6 +2186,7 @@ object' =
     , _objMD5Hash = Nothing
     , _objContentType = Nothing
     }
+
 
 -- | Whether an object is under temporary hold. While this flag is set to
 -- true, the object is protected against deletion and overwrites. A common
@@ -2428,6 +2484,7 @@ newtype ComposeRequestSourceObjectsItemObjectPreconditions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ComposeRequestSourceObjectsItemObjectPreconditions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2438,6 +2495,7 @@ composeRequestSourceObjectsItemObjectPreconditions
 composeRequestSourceObjectsItemObjectPreconditions =
   ComposeRequestSourceObjectsItemObjectPreconditions'
     {_crsoiopIfGenerationMatch = Nothing}
+
 
 -- | Only perform the composition if the generation of the source object that
 -- would be used matches this value. If this value and a generation are
@@ -2478,6 +2536,7 @@ data BucketAccessControlProjectTeam =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketAccessControlProjectTeam' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2490,6 +2549,7 @@ bucketAccessControlProjectTeam
 bucketAccessControlProjectTeam =
   BucketAccessControlProjectTeam'
     {_bacptProjectNumber = Nothing, _bacptTeam = Nothing}
+
 
 -- | The project number.
 bacptProjectNumber :: Lens' BucketAccessControlProjectTeam (Maybe Text)
@@ -2527,6 +2587,7 @@ data ObjectAccessControls =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectAccessControls' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2539,6 +2600,7 @@ objectAccessControls
 objectAccessControls =
   ObjectAccessControls'
     {_oacKind = "storage#objectAccessControls", _oacItems = Nothing}
+
 
 -- | The kind of item this is. For lists of object access control entries,
 -- this is always storage#objectAccessControls.
@@ -2579,6 +2641,7 @@ data BucketWebsite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketWebsite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2590,6 +2653,7 @@ bucketWebsite
     :: BucketWebsite
 bucketWebsite =
   BucketWebsite' {_bwMainPageSuffix = Nothing, _bwNotFoundPage = Nothing}
+
 
 -- | If the requested object path is missing, the service will ensure the
 -- path has a trailing \'\/\', append this suffix, and attempt to retrieve
@@ -2641,6 +2705,7 @@ data BucketAccessControl =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketAccessControl' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2682,6 +2747,7 @@ bucketAccessControl =
     , _bacaEntity = Nothing
     , _bacaEntityId = Nothing
     }
+
 
 -- | The email address associated with the entity, if any.
 bacaEmail :: Lens' BucketAccessControl (Maybe Text)
@@ -2784,6 +2850,7 @@ data BucketLifecycleRuleItemAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketLifecycleRuleItemAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2796,6 +2863,7 @@ bucketLifecycleRuleItemAction
 bucketLifecycleRuleItemAction =
   BucketLifecycleRuleItemAction'
     {_blriaStorageClass = Nothing, _blriaType = Nothing}
+
 
 -- | Target storage class. Required iff the type of the action is
 -- SetStorageClass.
@@ -2834,6 +2902,7 @@ data TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2848,6 +2917,7 @@ testIAMPermissionsResponse =
     { _tiprKind = "storage#testIamPermissionsResponse"
     , _tiprPermissions = Nothing
     }
+
 
 -- | The kind of item this is.
 tiprKind :: Lens' TestIAMPermissionsResponse Text
@@ -2902,6 +2972,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2922,6 +2993,7 @@ policy =
     , _pKind = "storage#policy"
     , _pBindings = Nothing
     }
+
 
 -- | HTTP 1.1 Entity tag for the policy.
 pEtag :: Lens' Policy (Maybe ByteString)
@@ -2980,6 +3052,7 @@ newtype BucketIAMConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketIAMConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2989,6 +3062,7 @@ bucketIAMConfiguration
     :: BucketIAMConfiguration
 bucketIAMConfiguration =
   BucketIAMConfiguration' {_bicBucketPolicyOnly = Nothing}
+
 
 -- | The bucket\'s Bucket Policy Only configuration.
 bicBucketPolicyOnly :: Lens' BucketIAMConfiguration (Maybe BucketIAMConfigurationBucketPolicyOnly)
@@ -3029,6 +3103,7 @@ data ObjectAccessControl =
     , _oacaEntityId    :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectAccessControl' with the minimum fields required to make a request.
 --
@@ -3077,6 +3152,7 @@ objectAccessControl =
     , _oacaGeneration = Nothing
     , _oacaEntityId = Nothing
     }
+
 
 -- | The email address associated with the entity, if any.
 oacaEmail :: Lens' ObjectAccessControl (Maybe Text)
@@ -3194,6 +3270,7 @@ data Notifications =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Notifications' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3205,6 +3282,7 @@ notifications
     :: Notifications
 notifications =
   Notifications' {_notKind = "storage#notifications", _notItems = Nothing}
+
 
 -- | The kind of item this is. For lists of notifications, this is always
 -- storage#notifications.
@@ -3243,6 +3321,7 @@ newtype NotificationCustom_attributes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationCustom_attributes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3253,6 +3332,7 @@ notificationCustom_attributes
     -> NotificationCustom_attributes
 notificationCustom_attributes pNcAddtional_ =
   NotificationCustom_attributes' {_ncAddtional = _Coerce # pNcAddtional_}
+
 
 ncAddtional :: Lens' NotificationCustom_attributes (HashMap Text Text)
 ncAddtional
@@ -3279,6 +3359,7 @@ data BucketIAMConfigurationBucketPolicyOnly =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketIAMConfigurationBucketPolicyOnly' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3291,6 +3372,7 @@ bucketIAMConfigurationBucketPolicyOnly
 bucketIAMConfigurationBucketPolicyOnly =
   BucketIAMConfigurationBucketPolicyOnly'
     {_bicbpoLockedTime = Nothing, _bicbpoEnabled = Nothing}
+
 
 -- | The deadline time for changing iamConfiguration.bucketPolicyOnly.enabled
 -- from true to false in RFC 3339 format.
@@ -3340,6 +3422,7 @@ data RewriteResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RewriteResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3366,6 +3449,7 @@ rewriteResponse =
     , _rrTotalBytesRewritten = Nothing
     , _rrRewriteToken = Nothing
     }
+
 
 -- | The kind of item this is.
 rrKind :: Lens' RewriteResponse Text

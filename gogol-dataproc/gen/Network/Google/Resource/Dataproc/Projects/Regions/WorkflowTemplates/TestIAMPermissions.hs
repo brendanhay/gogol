@@ -85,6 +85,7 @@ data ProjectsRegionsWorkflowTemplatesTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ projectsRegionsWorkflowTemplatesTestIAMPermissions pPrwttipPayload_ pPrwttipReso
     , _prwttipResource = pPrwttipResource_
     , _prwttipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prwttipXgafv :: Lens' ProjectsRegionsWorkflowTemplatesTestIAMPermissions (Maybe Xgafv)

@@ -74,6 +74,7 @@ data SettingsSearchApplicationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsSearchApplicationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ settingsSearchApplicationsDelete pSsadName_ =
     , _ssadDebugOptionsEnableDebugging = Nothing
     , _ssadCallback = Nothing
     }
+
 
 -- | V1 error format.
 ssadXgafv :: Lens' SettingsSearchApplicationsDelete (Maybe Xgafv)

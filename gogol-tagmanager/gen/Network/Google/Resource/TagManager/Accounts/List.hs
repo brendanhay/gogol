@@ -58,6 +58,7 @@ newtype AccountsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ newtype AccountsList =
 accountsList
     :: AccountsList
 accountsList = AccountsList' {_alPageToken = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 alPageToken :: Lens' AccountsList (Maybe Text)

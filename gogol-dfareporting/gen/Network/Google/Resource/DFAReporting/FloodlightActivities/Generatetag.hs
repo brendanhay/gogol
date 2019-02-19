@@ -63,6 +63,7 @@ data FloodlightActivitiesGeneratetag =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivitiesGeneratetag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ floodlightActivitiesGeneratetag pFagProFileId_ =
     { _fagFloodlightActivityId = Nothing
     , _fagProFileId = _Coerce # pFagProFileId_
     }
+
 
 -- | Floodlight activity ID for which we want to generate a tag.
 fagFloodlightActivityId :: Lens' FloodlightActivitiesGeneratetag (Maybe Int64)

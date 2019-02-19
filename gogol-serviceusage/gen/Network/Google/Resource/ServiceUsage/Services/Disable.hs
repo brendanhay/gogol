@@ -84,6 +84,7 @@ data ServicesDisable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesDisable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ servicesDisable pSdPayload_ pSdName_ =
     , _sdName = pSdName_
     , _sdCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdXgafv :: Lens' ServicesDisable (Maybe Xgafv)

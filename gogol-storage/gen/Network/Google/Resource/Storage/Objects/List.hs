@@ -82,6 +82,7 @@ data ObjectsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ objectsList pOlBucket_ =
     , _olDelimiter = Nothing
     , _olMaxResults = 1000
     }
+
 
 -- | Filter results to objects whose names begin with this prefix.
 olPrefix :: Lens' ObjectsList (Maybe Text)

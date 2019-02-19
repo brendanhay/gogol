@@ -75,6 +75,7 @@ data DisksCreateSnapshot =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DisksCreateSnapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ disksCreateSnapshot pDcsProject_ pDcsDisk_ pDcsZone_ pDcsPayload_ =
     , _dcsZone = pDcsZone_
     , _dcsPayload = pDcsPayload_
     }
+
 
 dcsGuestFlush :: Lens' DisksCreateSnapshot (Maybe Bool)
 dcsGuestFlush

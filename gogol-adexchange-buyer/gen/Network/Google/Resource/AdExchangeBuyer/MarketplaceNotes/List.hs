@@ -62,6 +62,7 @@ data MarketplaceNotesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MarketplaceNotesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ marketplaceNotesList
 marketplaceNotesList pMnlProposalId_ =
   MarketplaceNotesList'
     {_mnlProposalId = pMnlProposalId_, _mnlPqlQuery = Nothing}
+
 
 -- | The proposalId to get notes for. To search across all proposals specify
 -- order_id = \'-\' as part of the URL.

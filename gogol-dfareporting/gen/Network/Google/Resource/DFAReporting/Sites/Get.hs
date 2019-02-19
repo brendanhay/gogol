@@ -61,6 +61,7 @@ data SitesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ sitesGet
 sitesGet pSggProFileId_ pSggId_ =
   SitesGet'
     {_sggProFileId = _Coerce # pSggProFileId_, _sggId = _Coerce # pSggId_}
+
 
 -- | User profile ID associated with this request.
 sggProFileId :: Lens' SitesGet Int64

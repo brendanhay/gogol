@@ -83,6 +83,7 @@ data EntityUsageReportsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityUsageReportsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ entityUsageReportsGet pEurgEntityType_ pEurgDate_ pEurgEntityKey_ =
     , _eurgPageToken = Nothing
     , _eurgMaxResults = Nothing
     }
+
 
 -- | Type of object. Should be one of - gplus_communities.
 eurgEntityType :: Lens' EntityUsageReportsGet Text

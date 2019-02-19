@@ -62,6 +62,7 @@ data PlayersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ playersGet
     -> PlayersGet
 playersGet pPgPlayerId_ =
   PlayersGet' {_pgLanguage = Nothing, _pgPlayerId = pPgPlayerId_}
+
 
 -- | The preferred language to use for strings returned by this method.
 pgLanguage :: Lens' PlayersGet (Maybe Text)

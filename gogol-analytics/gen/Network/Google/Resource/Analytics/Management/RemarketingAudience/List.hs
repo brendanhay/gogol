@@ -73,6 +73,7 @@ data ManagementRemarketingAudienceList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementRemarketingAudienceList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ managementRemarketingAudienceList pMralWebPropertyId_ pMralAccountId_ =
     , _mralStartIndex = Nothing
     , _mralMaxResults = Nothing
     }
+
 
 -- | The web property ID of the remarketing audiences to retrieve.
 mralWebPropertyId :: Lens' ManagementRemarketingAudienceList Text

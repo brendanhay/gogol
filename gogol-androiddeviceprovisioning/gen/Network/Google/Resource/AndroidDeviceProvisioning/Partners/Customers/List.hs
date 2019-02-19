@@ -83,6 +83,7 @@ data PartnersCustomersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersCustomersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ partnersCustomersList pPclPartnerId_ =
     , _pclPageSize = Nothing
     , _pclCallback = Nothing
     }
+
 
 -- | V1 error format.
 pclXgafv :: Lens' PartnersCustomersList (Maybe Xgafv)

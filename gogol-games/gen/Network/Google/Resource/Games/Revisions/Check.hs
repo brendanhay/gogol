@@ -59,6 +59,7 @@ newtype RevisionsCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RevisionsCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ revisionsCheck
     -> RevisionsCheck
 revisionsCheck pRcClientRevision_ =
   RevisionsCheck' {_rcClientRevision = pRcClientRevision_}
+
 
 -- | The revision of the client SDK used by your application. Format:
 -- [PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of PLATFORM_TYPE are:

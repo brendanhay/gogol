@@ -57,6 +57,7 @@ newtype TimelineGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimelineGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ timelineGet
     :: Text -- ^ 'tgId'
     -> TimelineGet
 timelineGet pTgId_ = TimelineGet' {_tgId = pTgId_}
+
 
 -- | The ID of the timeline item.
 tgId :: Lens' TimelineGet Text

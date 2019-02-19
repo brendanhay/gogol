@@ -74,6 +74,7 @@ data FoldersOperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ foldersOperationsGet pFogName_ =
     , _fogName = pFogName_
     , _fogCallback = Nothing
     }
+
 
 -- | V1 error format.
 fogXgafv :: Lens' FoldersOperationsGet (Maybe Xgafv)

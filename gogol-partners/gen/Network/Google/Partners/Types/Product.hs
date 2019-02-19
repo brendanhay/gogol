@@ -34,6 +34,7 @@ data LatLng =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44,6 +45,7 @@ data LatLng =
 latLng
     :: LatLng
 latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -81,6 +83,7 @@ data ListUserStatesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListUserStatesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +96,7 @@ listUserStatesResponse
 listUserStatesResponse =
   ListUserStatesResponse'
     {_lusrUserStates = Nothing, _lusrResponseMetadata = Nothing}
+
 
 -- | User\'s states.
 lusrUserStates :: Lens' ListUserStatesResponse [Text]
@@ -133,6 +137,7 @@ data EventData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -143,6 +148,7 @@ data EventData =
 eventData
     :: EventData
 eventData = EventData' {_edValues = Nothing, _edKey = Nothing}
+
 
 -- | Data values.
 edValues :: Lens' EventData [Text]
@@ -188,6 +194,7 @@ data HistoricalOffer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistoricalOffer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -232,6 +239,7 @@ historicalOffer =
     , _hoClientName = Nothing
     , _hoExpirationTime = Nothing
     }
+
 
 -- | Time offer was first created.
 hoCreationTime :: Lens' HistoricalOffer (Maybe UTCTime)
@@ -349,6 +357,7 @@ data RequestMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RequestMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -372,6 +381,7 @@ requestMetadata =
     , _rmUserOverrides = Nothing
     , _rmPartnersSessionId = Nothing
     }
+
 
 -- | Experiment IDs the current request belongs to.
 rmExperimentIds :: Lens' RequestMetadata [Text]
@@ -437,6 +447,7 @@ data CertificationStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CertificationStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -457,6 +468,7 @@ certificationStatus =
     , _csType = Nothing
     , _csExamStatuses = Nothing
     }
+
 
 -- | Number of people who are certified,
 csUserCount :: Lens' CertificationStatus (Maybe Int32)
@@ -511,6 +523,7 @@ data DebugInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DebugInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -528,6 +541,7 @@ debugInfo =
     , _diServerTraceInfo = Nothing
     , _diServerInfo = Nothing
     }
+
 
 -- | URL of the service that handled this request.
 diServiceURL :: Lens' DebugInfo (Maybe Text)
@@ -574,6 +588,7 @@ data OptIns =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OptIns' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -597,6 +612,7 @@ optIns =
     , _oiSpecialOffers = Nothing
     , _oiMarketComm = Nothing
     }
+
 
 -- | An opt-in to allow recieivng phone calls about their Partners account.
 oiPhoneContact :: Lens' OptIns (Maybe Bool)
@@ -660,6 +676,7 @@ data AnalyticsDataPoint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyticsDataPoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -671,6 +688,7 @@ analyticsDataPoint
     :: AnalyticsDataPoint
 analyticsDataPoint =
   AnalyticsDataPoint' {_adpEventCount = Nothing, _adpEventLocations = Nothing}
+
 
 -- | Number of times the type of event occurred. Meaning depends on context
 -- (e.g. profile views, contacts, etc.).
@@ -713,6 +731,7 @@ data GetCompanyResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetCompanyResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -724,6 +743,7 @@ getCompanyResponse
     :: GetCompanyResponse
 getCompanyResponse =
   GetCompanyResponse' {_gcrResponseMetadata = Nothing, _gcrCompany = Nothing}
+
 
 -- | Current response metadata.
 gcrResponseMetadata :: Lens' GetCompanyResponse (Maybe ResponseMetadata)
@@ -763,6 +783,7 @@ data PublicProFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PublicProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -786,6 +807,7 @@ publicProFile =
     , _ppfDisplayName = Nothing
     , _ppfId = Nothing
     }
+
 
 -- | The URL of the public profile.
 ppfURL :: Lens' PublicProFile (Maybe Text)
@@ -849,6 +871,7 @@ data ExamStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExamStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -875,6 +898,7 @@ examStatus =
     , _esTaken = Nothing
     , _esExamType = Nothing
     }
+
 
 -- | Whether this exam has been passed and not expired.
 esPassed :: Lens' ExamStatus (Maybe Bool)
@@ -940,6 +964,7 @@ data CertificationExamStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CertificationExamStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -951,6 +976,7 @@ certificationExamStatus
     :: CertificationExamStatus
 certificationExamStatus =
   CertificationExamStatus' {_cesNumberUsersPass = Nothing, _cesType = Nothing}
+
 
 -- | The number of people who have passed the certification exam.
 cesNumberUsersPass :: Lens' CertificationExamStatus (Maybe Int32)
@@ -996,6 +1022,7 @@ data Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1034,6 +1061,7 @@ location =
     , _lLocality = Nothing
     , _lAdministrativeArea = Nothing
     }
+
 
 -- | The latitude and longitude of the location, in degrees.
 lLatLng :: Lens' Location (Maybe LatLng)
@@ -1132,11 +1160,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1154,6 +1184,7 @@ data TrafficSource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrafficSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1165,6 +1196,7 @@ trafficSource
     :: TrafficSource
 trafficSource =
   TrafficSource' {_tsTrafficSubId = Nothing, _tsTrafficSourceId = Nothing}
+
 
 -- | Second level identifier to indicate where the traffic comes from. An
 -- identifier has multiple letters created by a team which redirected the
@@ -1209,6 +1241,7 @@ data ListOffersHistoryResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOffersHistoryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1235,6 +1268,7 @@ listOffersHistoryResponse =
     , _lohrTotalResults = Nothing
     , _lohrOffers = Nothing
     }
+
 
 -- | Supply this token in a ListOffersHistoryRequest to retrieve the next
 -- page.
@@ -1311,6 +1345,7 @@ data Money =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Money' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1323,6 +1358,7 @@ data Money =
 money
     :: Money
 money = Money' {_mCurrencyCode = Nothing, _mNanos = Nothing, _mUnits = Nothing}
+
 
 -- | The 3-letter currency code defined in ISO 4217.
 mCurrencyCode :: Lens' Money (Maybe Text)
@@ -1374,6 +1410,7 @@ data ListCompaniesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListCompaniesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1391,6 +1428,7 @@ listCompaniesResponse =
     , _lcrResponseMetadata = Nothing
     , _lcrCompanies = Nothing
     }
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- \`ListCompaniesRequest.page_token\` field in the subsequent call to
@@ -1443,6 +1481,7 @@ data Certification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Certification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1466,6 +1505,7 @@ certification =
     , _cCertificationType = Nothing
     , _cAchieved = Nothing
     }
+
 
 -- | The date the user last achieved certification.
 cLastAchieved :: Lens' Certification (Maybe UTCTime)
@@ -1525,6 +1565,7 @@ data RecaptchaChallenge =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RecaptchaChallenge' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1536,6 +1577,7 @@ recaptchaChallenge
     :: RecaptchaChallenge
 recaptchaChallenge =
   RecaptchaChallenge' {_rcResponse = Nothing, _rcId = Nothing}
+
 
 -- | The response to the reCaptcha challenge.
 rcResponse :: Lens' RecaptchaChallenge (Maybe Text)
@@ -1571,6 +1613,7 @@ data CreateLeadResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateLeadResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1588,6 +1631,7 @@ createLeadResponse =
     , _clrResponseMetadata = Nothing
     , _clrLead = Nothing
     }
+
 
 -- | The outcome of <https://www.google.com/recaptcha/ reCaptcha> validation.
 clrRecaptchaStatus :: Lens' CreateLeadResponse (Maybe CreateLeadResponseRecaptchaStatus)
@@ -1634,6 +1678,7 @@ data UserOverrides =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserOverrides' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1644,6 +1689,7 @@ data UserOverrides =
 userOverrides
     :: UserOverrides
 userOverrides = UserOverrides' {_uoIPAddress = Nothing, _uoUserId = Nothing}
+
 
 -- | IP address to use instead of the user\'s geo-located IP address.
 uoIPAddress :: Lens' UserOverrides (Maybe Text)
@@ -1680,6 +1726,7 @@ data Analytics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Analytics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1700,6 +1747,7 @@ analytics =
     , _aSearchViews = Nothing
     , _aContacts = Nothing
     }
+
 
 -- | Instances of users viewing the \`Company\` profile on the specified
 -- date.
@@ -1751,6 +1799,7 @@ newtype ResponseMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResponseMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1759,6 +1808,7 @@ newtype ResponseMetadata =
 responseMetadata
     :: ResponseMetadata
 responseMetadata = ResponseMetadata' {_rmDebugInfo = Nothing}
+
 
 -- | Debug information about this request.
 rmDebugInfo :: Lens' ResponseMetadata (Maybe DebugInfo)
@@ -1787,6 +1837,7 @@ data LogMessageRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogMessageRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1807,6 +1858,7 @@ logMessageRequest =
     , _lmrDetails = Nothing
     , _lmrLevel = Nothing
     }
+
 
 -- | Current request metadata.
 lmrRequestMetadata :: Lens' LogMessageRequest (Maybe RequestMetadata)
@@ -1860,6 +1912,7 @@ data LocalizedCompanyInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocalizedCompanyInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1880,6 +1933,7 @@ localizedCompanyInfo =
     , _lciCountryCodes = Nothing
     , _lciDisplayName = Nothing
     }
+
 
 -- | Language code of the localized company info, as defined by
 -- <https://tools.ietf.org/html/bcp47 BCP 47> (IETF BCP 47, \"Tags for
@@ -1947,6 +2001,7 @@ data AvailableOffer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AvailableOffer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1991,6 +2046,7 @@ availableOffer =
     , _aoDescription = Nothing
     , _aoAvailable = Nothing
     }
+
 
 -- | Should special text be shown on the offers page.
 aoShowSpecialOfferCopy :: Lens' AvailableOffer (Maybe Bool)
@@ -2110,6 +2166,7 @@ newtype LogMessageRequestClientInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogMessageRequestClientInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2120,6 +2177,7 @@ logMessageRequestClientInfo
     -> LogMessageRequestClientInfo
 logMessageRequestClientInfo pLmrciAddtional_ =
   LogMessageRequestClientInfo' {_lmrciAddtional = _Coerce # pLmrciAddtional_}
+
 
 lmrciAddtional :: Lens' LogMessageRequestClientInfo (HashMap Text Text)
 lmrciAddtional
@@ -2163,6 +2221,7 @@ data CompanyRelation =
     , _crResolvedTimestamp    :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CompanyRelation' with the minimum fields required to make a request.
 --
@@ -2229,6 +2288,7 @@ companyRelation =
     , _crPrimaryLanguageCode = Nothing
     , _crResolvedTimestamp = Nothing
     }
+
 
 -- | The timestamp of when affiliation was requested. \'OutputOnly
 crCreationTime :: Lens' CompanyRelation (Maybe UTCTime)
@@ -2411,6 +2471,7 @@ data User =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2455,6 +2516,7 @@ user =
     , _uAvailableAdwordsManagerAccounts = Nothing
     , _uLastAccessTime = Nothing
     }
+
 
 -- | The list of achieved certifications. These are calculated based on exam
 -- results and other requirements. \'OutputOnly
@@ -2600,6 +2662,7 @@ data Date =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2612,6 +2675,7 @@ data Date =
 date
     :: Date
 date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -2674,6 +2738,7 @@ data Lead =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Lead' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2727,6 +2792,7 @@ lead =
     , _leaGpsMotivations = Nothing
     , _leaCreateTime = Nothing
     }
+
 
 -- | First name of lead source.
 leaGivenName :: Lens' Lead (Maybe Text)
@@ -2865,6 +2931,7 @@ data AdWordsManagerAccountInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdWordsManagerAccountInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2876,6 +2943,7 @@ adWordsManagerAccountInfo
     :: AdWordsManagerAccountInfo
 adWordsManagerAccountInfo =
   AdWordsManagerAccountInfo' {_awmaiCustomerName = Nothing, _awmaiId = Nothing}
+
 
 -- | Name of the customer this account represents.
 awmaiCustomerName :: Lens' AdWordsManagerAccountInfo (Maybe Text)
@@ -2912,6 +2980,7 @@ newtype LogMessageResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogMessageResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2920,6 +2989,7 @@ newtype LogMessageResponse =
 logMessageResponse
     :: LogMessageResponse
 logMessageResponse = LogMessageResponse' {_lmrResponseMetadata = Nothing}
+
 
 -- | Current response metadata.
 lmrResponseMetadata :: Lens' LogMessageResponse (Maybe ResponseMetadata)
@@ -2956,6 +3026,7 @@ data OfferCustomer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OfferCustomer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2991,6 +3062,7 @@ offerCustomer =
     , _ocExternalCid = Nothing
     , _ocEligibilityDaysLeft = Nothing
     }
+
 
 -- | Time the customer was created.
 ocCreationTime :: Lens' OfferCustomer (Maybe UTCTime)
@@ -3082,6 +3154,7 @@ newtype GetPartnersStatusResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetPartnersStatusResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3091,6 +3164,7 @@ getPartnersStatusResponse
     :: GetPartnersStatusResponse
 getPartnersStatusResponse =
   GetPartnersStatusResponse' {_gpsrResponseMetadata = Nothing}
+
 
 -- | Current response metadata.
 gpsrResponseMetadata :: Lens' GetPartnersStatusResponse (Maybe ResponseMetadata)
@@ -3123,6 +3197,7 @@ data ListAnalyticsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAnalyticsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3143,6 +3218,7 @@ listAnalyticsResponse =
     , _larResponseMetadata = Nothing
     , _larAnalyticsSummary = Nothing
     }
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- \`ListAnalyticsRequest.page_token\` field in the subsequent call to
@@ -3222,6 +3298,7 @@ data Company =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Company' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3296,6 +3373,7 @@ company =
     , _cServices = Nothing
     , _cPrimaryLocation = Nothing
     }
+
 
 -- | Company type labels listed on the company\'s profile.
 cCompanyTypes :: Lens' Company [Text]
@@ -3517,6 +3595,7 @@ newtype LogUserEventResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogUserEventResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3525,6 +3604,7 @@ newtype LogUserEventResponse =
 logUserEventResponse
     :: LogUserEventResponse
 logUserEventResponse = LogUserEventResponse' {_luerResponseMetadata = Nothing}
+
 
 -- | Current response metadata.
 luerResponseMetadata :: Lens' LogUserEventResponse (Maybe ResponseMetadata)
@@ -3555,6 +3635,7 @@ data ListOffersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOffersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3572,6 +3653,7 @@ listOffersResponse =
     , _lorNoOfferReason = Nothing
     , _lorResponseMetadata = Nothing
     }
+
 
 -- | Available Offers to be distributed.
 lorAvailableOffers :: Lens' ListOffersResponse [AvailableOffer]
@@ -3633,6 +3715,7 @@ data UserProFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3686,6 +3769,7 @@ userProFile =
     , _upfAdwordsManagerAccount = Nothing
     , _upfProFilePublic = Nothing
     }
+
 
 -- | The user\'s given name.
 upfGivenName :: Lens' UserProFile (Maybe Text)
@@ -3838,6 +3922,7 @@ data AnalyticsSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnalyticsSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3855,6 +3940,7 @@ analyticsSummary =
     , _asProFileViewsCount = Nothing
     , _asSearchViewsCount = Nothing
     }
+
 
 -- | Aggregated number of times users contacted the \`Company\` for given
 -- date range.
@@ -3912,6 +3998,7 @@ data LogUserEventRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogUserEventRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3941,6 +4028,7 @@ logUserEventRequest =
     , _luerEventDatas = Nothing
     , _luerEventAction = Nothing
     }
+
 
 -- | The category the action belongs to.
 luerEventCategory :: Lens' LogUserEventRequest (Maybe LogUserEventRequestEventCategory)
@@ -4016,6 +4104,7 @@ data SpecializationStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpecializationStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4028,6 +4117,7 @@ specializationStatus
 specializationStatus =
   SpecializationStatus'
     {_ssBadgeSpecialization = Nothing, _ssBadgeSpecializationState = Nothing}
+
 
 -- | The specialization this status is for.
 ssBadgeSpecialization :: Lens' SpecializationStatus (Maybe SpecializationStatusBadgeSpecialization)
@@ -4068,6 +4158,7 @@ data Rank =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Rank' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4078,6 +4169,7 @@ data Rank =
 rank
     :: Rank
 rank = Rank' {_rValue = Nothing, _rType = Nothing}
+
 
 -- | The numerical value of the rank.
 rValue :: Lens' Rank (Maybe Double)
@@ -4112,6 +4204,7 @@ data ListLeadsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLeadsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4132,6 +4225,7 @@ listLeadsResponse =
     , _llrResponseMetadata = Nothing
     , _llrTotalSize = Nothing
     }
+
 
 -- | The list of leads.
 llrLeads :: Lens' ListLeadsResponse [Lead]
@@ -4191,6 +4285,7 @@ data CountryOfferInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CountryOfferInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4211,6 +4306,7 @@ countryOfferInfo =
     , _coiOfferType = Nothing
     , _coiSpendXAmount = Nothing
     }
+
 
 -- | (localized) Get Y amount for that country\'s offer.
 coiGetYAmount :: Lens' CountryOfferInfo (Maybe Text)
@@ -4264,6 +4360,7 @@ data CreateLeadRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateLeadRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4281,6 +4378,7 @@ createLeadRequest =
     , _cRecaptchaChallenge = Nothing
     , _cLead = Nothing
     }
+
 
 -- | Current request metadata.
 cRequestMetadata :: Lens' CreateLeadRequest (Maybe RequestMetadata)

@@ -82,6 +82,7 @@ data ProjectsLocationsDataSetsAnnotationStoresList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsAnnotationStoresList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ projectsLocationsDataSetsAnnotationStoresList pPldsaslParent_ =
     , _pldsaslPageSize = Nothing
     , _pldsaslCallback = Nothing
     }
+
 
 -- | Name of the dataset.
 pldsaslParent :: Lens' ProjectsLocationsDataSetsAnnotationStoresList Text

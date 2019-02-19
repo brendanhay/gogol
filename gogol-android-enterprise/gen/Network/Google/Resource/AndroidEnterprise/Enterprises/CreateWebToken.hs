@@ -68,6 +68,7 @@ data EnterprisesCreateWebToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesCreateWebToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ enterprisesCreateWebToken
 enterprisesCreateWebToken pEcwtEnterpriseId_ pEcwtPayload_ =
   EnterprisesCreateWebToken'
     {_ecwtEnterpriseId = pEcwtEnterpriseId_, _ecwtPayload = pEcwtPayload_}
+
 
 -- | The ID of the enterprise.
 ecwtEnterpriseId :: Lens' EnterprisesCreateWebToken Text

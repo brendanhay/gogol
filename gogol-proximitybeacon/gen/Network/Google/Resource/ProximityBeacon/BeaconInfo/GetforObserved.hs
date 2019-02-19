@@ -80,6 +80,7 @@ data BeaconInfoGetforObserved =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconInfoGetforObserved' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ beaconInfoGetforObserved pBigoPayload_ =
     , _bigoPayload = pBigoPayload_
     , _bigoCallback = Nothing
     }
+
 
 -- | V1 error format.
 bigoXgafv :: Lens' BeaconInfoGetforObserved (Maybe Xgafv)

@@ -61,6 +61,7 @@ data AccountsUserPermissionsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsUserPermissionsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ accountsUserPermissionsCreate
 accountsUserPermissionsCreate pAupcParent_ pAupcPayload_ =
   AccountsUserPermissionsCreate'
     {_aupcParent = pAupcParent_, _aupcPayload = pAupcPayload_}
+
 
 -- | GTM Account\'s API relative path. Example: accounts\/{account_id}
 aupcParent :: Lens' AccountsUserPermissionsCreate Text

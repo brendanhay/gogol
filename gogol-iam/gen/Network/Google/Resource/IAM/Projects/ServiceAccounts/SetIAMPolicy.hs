@@ -74,6 +74,7 @@ data ProjectsServiceAccountsSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServiceAccountsSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsServiceAccountsSetIAMPolicy pPsasipPayload_ pPsasipResource_ =
     , _psasipResource = pPsasipResource_
     , _psasipCallback = Nothing
     }
+
 
 -- | V1 error format.
 psasipXgafv :: Lens' ProjectsServiceAccountsSetIAMPolicy (Maybe Xgafv)

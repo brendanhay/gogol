@@ -75,6 +75,7 @@ data VolumesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ volumesGet pVgVolumeId_ =
     , _vgProjection = Nothing
     , _vgUserLibraryConsistentRead = Nothing
     }
+
 
 -- | ISO-3166-1 code to override the IP-based location.
 vgCountry :: Lens' VolumesGet (Maybe Text)

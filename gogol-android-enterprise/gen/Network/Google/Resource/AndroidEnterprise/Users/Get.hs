@@ -61,6 +61,7 @@ data UsersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ usersGet
     -> UsersGet
 usersGet pUgEnterpriseId_ pUgUserId_ =
   UsersGet' {_ugEnterpriseId = pUgEnterpriseId_, _ugUserId = pUgUserId_}
+
 
 -- | The ID of the enterprise.
 ugEnterpriseId :: Lens' UsersGet Text

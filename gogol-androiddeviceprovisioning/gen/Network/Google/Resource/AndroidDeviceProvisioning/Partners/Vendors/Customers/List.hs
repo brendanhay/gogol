@@ -78,6 +78,7 @@ data PartnersVendorsCustomersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersVendorsCustomersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ partnersVendorsCustomersList pPvclParent_ =
     , _pvclPageSize = Nothing
     , _pvclCallback = Nothing
     }
+
 
 -- | Required. The resource name in the format
 -- \`partners\/[PARTNER_ID]\/vendors\/[VENDOR_ID]\`.

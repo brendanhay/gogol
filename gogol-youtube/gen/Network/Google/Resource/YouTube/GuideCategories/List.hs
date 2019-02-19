@@ -69,6 +69,7 @@ data GuideCategoriesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GuideCategoriesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ guideCategoriesList pGclPart_ =
     , _gclHl = "en-US"
     , _gclId = Nothing
     }
+
 
 -- | The part parameter specifies the guideCategory resource properties that
 -- the API response will include. Set the parameter value to snippet.

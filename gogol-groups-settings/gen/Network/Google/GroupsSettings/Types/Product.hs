@@ -71,6 +71,7 @@ data Groups =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Groups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -208,6 +209,7 @@ groups =
     , _gWhoCanMarkFavoriteReplyOnOwnTopic = Nothing
     , _gAllowWebPosting = Nothing
     }
+
 
 -- | Email id of the group
 gEmail :: Lens' Groups (Maybe Text)

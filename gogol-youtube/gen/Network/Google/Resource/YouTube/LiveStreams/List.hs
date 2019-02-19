@@ -76,6 +76,7 @@ data LiveStreamsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveStreamsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ liveStreamsList pLslPart_ =
     , _lslPageToken = Nothing
     , _lslMaxResults = 5
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- liveStream resource properties that the API response will include. The

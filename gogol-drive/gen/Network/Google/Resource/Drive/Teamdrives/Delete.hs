@@ -59,6 +59,7 @@ newtype TeamdrivesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeamdrivesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ teamdrivesDelete
     -> TeamdrivesDelete
 teamdrivesDelete pTdTeamDriveId_ =
   TeamdrivesDelete' {_tdTeamDriveId = pTdTeamDriveId_}
+
 
 -- | The ID of the Team Drive
 tdTeamDriveId :: Lens' TeamdrivesDelete Text

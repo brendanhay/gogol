@@ -31,6 +31,7 @@ newtype ContainerStartedEventPortMAppings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContainerStartedEventPortMAppings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42,6 +43,7 @@ containerStartedEventPortMAppings
 containerStartedEventPortMAppings pCsepmaAddtional_ =
   ContainerStartedEventPortMAppings'
     {_csepmaAddtional = _Coerce # pCsepmaAddtional_}
+
 
 csepmaAddtional :: Lens' ContainerStartedEventPortMAppings (HashMap Text Int32)
 csepmaAddtional
@@ -72,6 +74,7 @@ data Event =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Event' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +88,7 @@ event
     :: Event
 event =
   Event' {_eDetails = Nothing, _eTimestamp = Nothing, _eDescription = Nothing}
+
 
 -- | Machine-readable details about the event.
 eDetails :: Lens' Event (Maybe EventDetails)
@@ -128,6 +132,7 @@ newtype CheckInRequestEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckInRequestEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -138,6 +143,7 @@ checkInRequestEvent
     -> CheckInRequestEvent
 checkInRequestEvent pCireAddtional_ =
   CheckInRequestEvent' {_cireAddtional = _Coerce # pCireAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 cireAddtional :: Lens' CheckInRequestEvent (HashMap Text JSONValue)
@@ -199,6 +205,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -211,6 +218,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -258,6 +266,7 @@ newtype OperationSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -268,6 +277,7 @@ operationSchema
     -> OperationSchema
 operationSchema pOsAddtional_ =
   OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -296,6 +306,7 @@ newtype RunPipelineRequestLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RunPipelineRequestLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -306,6 +317,7 @@ runPipelineRequestLabels
     -> RunPipelineRequestLabels
 runPipelineRequestLabels pRprlAddtional_ =
   RunPipelineRequestLabels' {_rprlAddtional = _Coerce # pRprlAddtional_}
+
 
 rprlAddtional :: Lens' RunPipelineRequestLabels (HashMap Text Text)
 rprlAddtional
@@ -332,6 +344,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -344,6 +357,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -385,6 +399,7 @@ data FailedEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FailedEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -395,6 +410,7 @@ data FailedEvent =
 failedEvent
     :: FailedEvent
 failedEvent = FailedEvent' {_feCause = Nothing, _feCode = Nothing}
+
 
 -- | The human-readable description of the cause of the failure.
 feCause :: Lens' FailedEvent (Maybe Text)
@@ -423,11 +439,13 @@ data CancelOperationRequest =
   CancelOperationRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
 cancelOperationRequest
     :: CancelOperationRequest
 cancelOperationRequest = CancelOperationRequest'
+
 
 instance FromJSON CancelOperationRequest where
         parseJSON
@@ -449,6 +467,7 @@ data WorkerStatus =
     , _wsFreeRamBytes  :: !(Maybe (Textual Word64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WorkerStatus' with the minimum fields required to make a request.
 --
@@ -473,6 +492,7 @@ workerStatus =
     , _wsBootDisk = Nothing
     , _wsFreeRamBytes = Nothing
     }
+
 
 -- | Total RAM.
 wsTotalRamBytes :: Lens' WorkerStatus (Maybe Word64)
@@ -537,6 +557,7 @@ data ContainerStoppedEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContainerStoppedEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -551,6 +572,7 @@ containerStoppedEvent
 containerStoppedEvent =
   ContainerStoppedEvent'
     {_cseExitStatus = Nothing, _cseActionId = Nothing, _cseStderr = Nothing}
+
 
 -- | The exit status of the container.
 cseExitStatus :: Lens' ContainerStoppedEvent (Maybe Int32)
@@ -602,6 +624,7 @@ data CheckInResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckInResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -613,6 +636,7 @@ checkInResponse
     :: CheckInResponse
 checkInResponse =
   CheckInResponse' {_cirDeadline = Nothing, _cirMetadata = Nothing}
+
 
 -- | The deadline by which the worker must request an extension. The backend
 -- will allow for network transmission time and other delays, but the
@@ -653,6 +677,7 @@ data WorkerAssignedEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerAssignedEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -664,6 +689,7 @@ workerAssignedEvent
     :: WorkerAssignedEvent
 workerAssignedEvent =
   WorkerAssignedEvent' {_waeZone = Nothing, _waeInstance = Nothing}
+
 
 -- | The zone the worker is running in.
 waeZone :: Lens' WorkerAssignedEvent (Maybe Text)
@@ -698,6 +724,7 @@ newtype OperationMetadataLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadataLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -708,6 +735,7 @@ operationMetadataLabels
     -> OperationMetadataLabels
 operationMetadataLabels pOmlAddtional_ =
   OperationMetadataLabels' {_omlAddtional = _Coerce # pOmlAddtional_}
+
 
 omlAddtional :: Lens' OperationMetadataLabels (HashMap Text Text)
 omlAddtional
@@ -737,6 +765,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -760,6 +789,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -820,11 +850,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -846,6 +878,7 @@ data Disk =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Disk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -866,6 +899,7 @@ disk =
     , _dName = Nothing
     , _dType = Nothing
     }
+
 
 -- | An optional image to put on the disk before attaching it to the VM.
 dSourceImage :: Lens' Disk (Maybe Text)
@@ -923,6 +957,7 @@ data UnexpectedExitStatusEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnexpectedExitStatusEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -935,6 +970,7 @@ unexpectedExitStatusEvent
 unexpectedExitStatusEvent =
   UnexpectedExitStatusEvent'
     {_ueseExitStatus = Nothing, _ueseActionId = Nothing}
+
 
 -- | The exit status of the container.
 ueseExitStatus :: Lens' UnexpectedExitStatusEvent (Maybe Int32)
@@ -974,6 +1010,7 @@ data DelayedEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DelayedEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -984,6 +1021,7 @@ data DelayedEvent =
 delayedEvent
     :: DelayedEvent
 delayedEvent = DelayedEvent' {_deMetrics = Nothing, _deCause = Nothing}
+
 
 -- | If the delay was caused by a resource shortage, this field lists the
 -- Compute Engine metrics that are preventing this operation from running
@@ -1029,6 +1067,7 @@ newtype ActionPortMAppings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActionPortMAppings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1039,6 +1078,7 @@ actionPortMAppings
     -> ActionPortMAppings
 actionPortMAppings pApmaAddtional_ =
   ActionPortMAppings' {_apmaAddtional = _Coerce # pApmaAddtional_}
+
 
 apmaAddtional :: Lens' ActionPortMAppings (HashMap Text Int32)
 apmaAddtional
@@ -1063,6 +1103,7 @@ newtype MetadataLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetadataLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1073,6 +1114,7 @@ metadataLabels
     -> MetadataLabels
 metadataLabels pMlAddtional_ =
   MetadataLabels' {_mlAddtional = _Coerce # pMlAddtional_}
+
 
 mlAddtional :: Lens' MetadataLabels (HashMap Text Text)
 mlAddtional
@@ -1099,6 +1141,7 @@ data CheckInRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckInRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1119,6 +1162,7 @@ checkInRequest =
     , _cirResult = Nothing
     , _cirDeadlineExpired = Nothing
     }
+
 
 -- | A workflow specific event occurred.
 cirEvent :: Lens' CheckInRequest (Maybe CheckInRequestEvent)
@@ -1170,6 +1214,7 @@ newtype ContainerKilledEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContainerKilledEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1178,6 +1223,7 @@ newtype ContainerKilledEvent =
 containerKilledEvent
     :: ContainerKilledEvent
 containerKilledEvent = ContainerKilledEvent' {_ckeActionId = Nothing}
+
 
 -- | The numeric ID of the action that started the container.
 ckeActionId :: Lens' ContainerKilledEvent (Maybe Int32)
@@ -1204,6 +1250,7 @@ newtype PullStoppedEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PullStoppedEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1212,6 +1259,7 @@ newtype PullStoppedEvent =
 pullStoppedEvent
     :: PullStoppedEvent
 pullStoppedEvent = PullStoppedEvent' {_pseImageURI = Nothing}
+
 
 -- | The URI of the image that was pulled.
 pseImageURI :: Lens' PullStoppedEvent (Maybe Text)
@@ -1240,6 +1288,7 @@ newtype ActionLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActionLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1250,6 +1299,7 @@ actionLabels
     -> ActionLabels
 actionLabels pAlAddtional_ =
   ActionLabels' {_alAddtional = _Coerce # pAlAddtional_}
+
 
 alAddtional :: Lens' ActionLabels (HashMap Text Text)
 alAddtional
@@ -1272,6 +1322,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1282,6 +1333,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1308,6 +1360,7 @@ data Network =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Network' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1322,6 +1375,7 @@ network
 network =
   Network'
     {_nUsePrivateAddress = Nothing, _nName = Nothing, _nSubnetwork = Nothing}
+
 
 -- | If set to true, do not attach a public IP address to the VM. Note that
 -- without a public IP address, additional configuration is required to
@@ -1376,6 +1430,7 @@ newtype EventDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1386,6 +1441,7 @@ eventDetails
     -> EventDetails
 eventDetails pEdAddtional_ =
   EventDetails' {_edAddtional = _Coerce # pEdAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 edAddtional :: Lens' EventDetails (HashMap Text JSONValue)
@@ -1420,6 +1476,7 @@ data Action =
     , _aPidNamespace :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Action' with the minimum fields required to make a request.
 --
@@ -1465,6 +1522,7 @@ action =
     , _aTimeout = Nothing
     , _aPidNamespace = Nothing
     }
+
 
 -- | If specified, overrides the \`CMD\` specified in the container. If the
 -- container also has an \`ENTRYPOINT\` the values are used as entrypoint
@@ -1626,6 +1684,7 @@ data Secret =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Secret' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1636,6 +1695,7 @@ data Secret =
 secret
     :: Secret
 secret = Secret' {_sKeyName = Nothing, _sCipherText = Nothing}
+
 
 -- | The name of the Cloud KMS key that will be used to decrypt the secret
 -- value. The VM service account must have the required permissions and
@@ -1673,6 +1733,7 @@ newtype WorkerStatusAttachedDisks =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerStatusAttachedDisks' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1683,6 +1744,7 @@ workerStatusAttachedDisks
     -> WorkerStatusAttachedDisks
 workerStatusAttachedDisks pWsadAddtional_ =
   WorkerStatusAttachedDisks' {_wsadAddtional = _Coerce # pWsadAddtional_}
+
 
 wsadAddtional :: Lens' WorkerStatusAttachedDisks (HashMap Text DiskStatus)
 wsadAddtional
@@ -1711,6 +1773,7 @@ newtype OperationMetadataRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadataRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1721,6 +1784,7 @@ operationMetadataRequest
     -> OperationMetadataRequest
 operationMetadataRequest pOmrAddtional_ =
   OperationMetadataRequest' {_omrAddtional = _Coerce # pOmrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omrAddtional :: Lens' OperationMetadataRequest (HashMap Text JSONValue)
@@ -1750,6 +1814,7 @@ data Resources =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Resources' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1770,6 +1835,7 @@ resources =
     , _rVirtualMachine = Nothing
     , _rProjectId = Nothing
     }
+
 
 -- | The list of zones allowed for VM allocation. If set, the \`regions\`
 -- field must not be set.
@@ -1826,6 +1892,7 @@ data DiskStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1837,6 +1904,7 @@ diskStatus
     :: DiskStatus
 diskStatus =
   DiskStatus' {_dsTotalSpaceBytes = Nothing, _dsFreeSpaceBytes = Nothing}
+
 
 -- | Total disk space.
 dsTotalSpaceBytes :: Lens' DiskStatus (Maybe Word64)
@@ -1880,6 +1948,7 @@ newtype VirtualMachineLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VirtualMachineLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1890,6 +1959,7 @@ virtualMachineLabels
     -> VirtualMachineLabels
 virtualMachineLabels pVmlAddtional_ =
   VirtualMachineLabels' {_vmlAddtional = _Coerce # pVmlAddtional_}
+
 
 vmlAddtional :: Lens' VirtualMachineLabels (HashMap Text Text)
 vmlAddtional
@@ -1914,6 +1984,7 @@ newtype OperationMetadataRuntimeMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadataRuntimeMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1924,6 +1995,7 @@ operationMetadataRuntimeMetadata
     -> OperationMetadataRuntimeMetadata
 operationMetadataRuntimeMetadata pOmrmAddtional_ =
   OperationMetadataRuntimeMetadata' {_omrmAddtional = _Coerce # pOmrmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omrmAddtional :: Lens' OperationMetadataRuntimeMetadata (HashMap Text JSONValue)
@@ -1962,6 +2034,7 @@ data VirtualMachine =
     , _vmPreemptible         :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VirtualMachine' with the minimum fields required to make a request.
 --
@@ -2004,6 +2077,7 @@ virtualMachine =
     , _vmNvidiaDriverVersion = Nothing
     , _vmPreemptible = Nothing
     }
+
 
 -- | The VM network configuration.
 vmNetwork :: Lens' VirtualMachine (Maybe Network)
@@ -2145,6 +2219,7 @@ data ServiceAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2155,6 +2230,7 @@ data ServiceAccount =
 serviceAccount
     :: ServiceAccount
 serviceAccount = ServiceAccount' {_saEmail = Nothing, _saScopes = Nothing}
+
 
 -- | Email address of the service account. If not specified, the default
 -- Compute Engine service account for the project will be used.
@@ -2192,6 +2268,7 @@ newtype CheckInResponseMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckInResponseMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2202,6 +2279,7 @@ checkInResponseMetadata
     -> CheckInResponseMetadata
 checkInResponseMetadata pCirmAddtional_ =
   CheckInResponseMetadata' {_cirmAddtional = _Coerce # pCirmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 cirmAddtional :: Lens' CheckInResponseMetadata (HashMap Text JSONValue)
@@ -2229,6 +2307,7 @@ data Accelerator =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Accelerator' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2239,6 +2318,7 @@ data Accelerator =
 accelerator
     :: Accelerator
 accelerator = Accelerator' {_aCount = Nothing, _aType = Nothing}
+
 
 -- | How many accelerators of this type to attach.
 aCount :: Lens' Accelerator (Maybe Int64)
@@ -2279,6 +2359,7 @@ newtype PipelineEnvironment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PipelineEnvironment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2289,6 +2370,7 @@ pipelineEnvironment
     -> PipelineEnvironment
 pipelineEnvironment pPeAddtional_ =
   PipelineEnvironment' {_peAddtional = _Coerce # pPeAddtional_}
+
 
 peAddtional :: Lens' PipelineEnvironment (HashMap Text Text)
 peAddtional
@@ -2314,6 +2396,7 @@ data WorkerReleasedEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WorkerReleasedEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2325,6 +2408,7 @@ workerReleasedEvent
     :: WorkerReleasedEvent
 workerReleasedEvent =
   WorkerReleasedEvent' {_wreZone = Nothing, _wreInstance = Nothing}
+
 
 -- | The zone the worker was running in.
 wreZone :: Lens' WorkerReleasedEvent (Maybe Text)
@@ -2360,6 +2444,7 @@ data ContainerStartedEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContainerStartedEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2374,6 +2459,7 @@ containerStartedEvent
 containerStartedEvent =
   ContainerStartedEvent'
     {_cIPAddress = Nothing, _cActionId = Nothing, _cPortMAppings = Nothing}
+
 
 -- | The public IP address that can be used to connect to the container. This
 -- field is only populated when at least one port mapping is present. If
@@ -2425,6 +2511,7 @@ data RunPipelineRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RunPipelineRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2436,6 +2523,7 @@ runPipelineRequest
     :: RunPipelineRequest
 runPipelineRequest =
   RunPipelineRequest' {_rprPipeline = Nothing, _rprLabels = Nothing}
+
 
 -- | The description of the pipeline to run.
 rprPipeline :: Lens' RunPipelineRequest (Maybe Pipeline)
@@ -2478,6 +2566,7 @@ data Pipeline =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Pipeline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2498,6 +2587,7 @@ pipeline =
     , _pResources = Nothing
     , _pTimeout = Nothing
     }
+
 
 -- | The list of actions to execute, in the order they are specified.
 pActions :: Lens' Pipeline [Action]
@@ -2556,6 +2646,7 @@ newtype ImportVariantsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImportVariantsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2564,6 +2655,7 @@ newtype ImportVariantsResponse =
 importVariantsResponse
     :: ImportVariantsResponse
 importVariantsResponse = ImportVariantsResponse' {_ivrCallSetIds = Nothing}
+
 
 -- | IDs of the call sets created during the import.
 ivrCallSetIds :: Lens' ImportVariantsResponse [Text]
@@ -2594,6 +2686,7 @@ newtype ImportReadGroupSetsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImportReadGroupSetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2603,6 +2696,7 @@ importReadGroupSetsResponse
     :: ImportReadGroupSetsResponse
 importReadGroupSetsResponse =
   ImportReadGroupSetsResponse' {_irgsrReadGroupSetIds = Nothing}
+
 
 -- | IDs of the read group sets that were created.
 irgsrReadGroupSetIds :: Lens' ImportReadGroupSetsResponse [Text]
@@ -2640,6 +2734,7 @@ data Metadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2666,6 +2761,7 @@ metadata =
     , _mLabels = Nothing
     , _mCreateTime = Nothing
     }
+
 
 -- | The first time at which resources were allocated to execute the
 -- pipeline.
@@ -2735,6 +2831,7 @@ data Mount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Mount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2747,6 +2844,7 @@ data Mount =
 mount
     :: Mount
 mount = Mount' {_mPath = Nothing, _mDisk = Nothing, _mReadOnly = Nothing}
+
 
 -- | The path to mount the disk inside the container.
 mPath :: Lens' Mount (Maybe Text)
@@ -2785,6 +2883,7 @@ newtype PullStartedEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PullStartedEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2793,6 +2892,7 @@ newtype PullStartedEvent =
 pullStartedEvent
     :: PullStartedEvent
 pullStartedEvent = PullStartedEvent' {_pImageURI = Nothing}
+
 
 -- | The URI of the image that was pulled.
 pImageURI :: Lens' PullStartedEvent (Maybe Text)
@@ -2816,11 +2916,13 @@ data RunPipelineResponse =
   RunPipelineResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RunPipelineResponse' with the minimum fields required to make a request.
 --
 runPipelineResponse
     :: RunPipelineResponse
 runPipelineResponse = RunPipelineResponse'
+
 
 instance FromJSON RunPipelineResponse where
         parseJSON
@@ -2846,6 +2948,7 @@ data OperationMetadata =
     , _omRequest         :: !(Maybe OperationMetadataRequest)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -2882,6 +2985,7 @@ operationMetadata =
     , _omRuntimeMetadata = Nothing
     , _omRequest = Nothing
     }
+
 
 -- | This field is deprecated. Use \`labels\` instead. Optionally provided by
 -- the caller when submitting the request that creates the operation.
@@ -2989,6 +3093,7 @@ newtype ActionEnvironment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActionEnvironment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2999,6 +3104,7 @@ actionEnvironment
     -> ActionEnvironment
 actionEnvironment pAeAddtional_ =
   ActionEnvironment' {_aeAddtional = _Coerce # pAeAddtional_}
+
 
 aeAddtional :: Lens' ActionEnvironment (HashMap Text Text)
 aeAddtional
@@ -3026,6 +3132,7 @@ data ComputeEngine =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ComputeEngine' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3046,6 +3153,7 @@ computeEngine =
     , _ceMachineType = Nothing
     , _ceInstanceName = Nothing
     }
+
 
 -- | The availability zone in which the instance resides.
 ceZone :: Lens' ComputeEngine (Maybe Text)
@@ -3099,6 +3207,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3109,6 +3218,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -3135,6 +3245,7 @@ data OperationEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3149,6 +3260,7 @@ operationEvent
 operationEvent =
   OperationEvent'
     {_oeStartTime = Nothing, _oeEndTime = Nothing, _oeDescription = Nothing}
+
 
 -- | Optional time of when event started.
 oeStartTime :: Lens' OperationEvent (Maybe UTCTime)
@@ -3196,6 +3308,7 @@ newtype RuntimeMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RuntimeMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3204,6 +3317,7 @@ newtype RuntimeMetadata =
 runtimeMetadata
     :: RuntimeMetadata
 runtimeMetadata = RuntimeMetadata' {_rmComputeEngine = Nothing}
+
 
 -- | Execution information specific to Google Compute Engine.
 rmComputeEngine :: Lens' RuntimeMetadata (Maybe ComputeEngine)

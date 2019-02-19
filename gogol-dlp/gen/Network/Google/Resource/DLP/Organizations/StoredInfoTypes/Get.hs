@@ -75,6 +75,7 @@ data OrganizationsStoredInfoTypesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsStoredInfoTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ organizationsStoredInfoTypesGet pOsitgName_ =
     , _ositgName = pOsitgName_
     , _ositgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ositgXgafv :: Lens' OrganizationsStoredInfoTypesGet (Maybe Xgafv)

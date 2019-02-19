@@ -67,6 +67,7 @@ data ACLUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ACLUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ aclUpdate pAuCalendarId_ pAuRuleId_ pAuPayload_ =
     , _auPayload = pAuPayload_
     , _auSendNotifications = Nothing
     }
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

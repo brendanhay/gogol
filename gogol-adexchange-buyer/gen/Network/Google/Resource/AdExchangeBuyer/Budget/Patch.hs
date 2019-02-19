@@ -67,6 +67,7 @@ data BudgetPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BudgetPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ budgetPatch pBpPayload_ pBpAccountId_ pBpBillingId_ =
     , _bpAccountId = _Coerce # pBpAccountId_
     , _bpBillingId = _Coerce # pBpBillingId_
     }
+
 
 -- | Multipart request metadata.
 bpPayload :: Lens' BudgetPatch Budget

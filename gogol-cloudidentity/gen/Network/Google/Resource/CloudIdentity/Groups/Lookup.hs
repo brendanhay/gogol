@@ -79,6 +79,7 @@ data GroupsLookup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsLookup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ groupsLookup =
     , _glGroupKeyNamespace = Nothing
     , _glCallback = Nothing
     }
+
 
 -- | V1 error format.
 glXgafv :: Lens' GroupsLookup (Maybe Xgafv)

@@ -70,6 +70,7 @@ data ManagementCustomDataSourcesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementCustomDataSourcesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ managementCustomDataSourcesList pMcdslWebPropertyId_ pMcdslAccountId_ =
     , _mcdslStartIndex = Nothing
     , _mcdslMaxResults = Nothing
     }
+
 
 -- | Web property Id for the custom data sources to retrieve.
 mcdslWebPropertyId :: Lens' ManagementCustomDataSourcesList Text

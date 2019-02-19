@@ -62,6 +62,7 @@ data GroupsAliasesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupsAliasesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ groupsAliasesDelete
     -> GroupsAliasesDelete
 groupsAliasesDelete pGadGroupKey_ pGadAlias_ =
   GroupsAliasesDelete' {_gadGroupKey = pGadGroupKey_, _gadAlias = pGadAlias_}
+
 
 -- | Email or immutable ID of the group
 gadGroupKey :: Lens' GroupsAliasesDelete Text

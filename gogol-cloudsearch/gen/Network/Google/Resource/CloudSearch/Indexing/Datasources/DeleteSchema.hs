@@ -75,6 +75,7 @@ data IndexingDatasourcesDeleteSchema =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IndexingDatasourcesDeleteSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ indexingDatasourcesDeleteSchema pIddsName_ =
     , _iddsDebugOptionsEnableDebugging = Nothing
     , _iddsCallback = Nothing
     }
+
 
 -- | V1 error format.
 iddsXgafv :: Lens' IndexingDatasourcesDeleteSchema (Maybe Xgafv)

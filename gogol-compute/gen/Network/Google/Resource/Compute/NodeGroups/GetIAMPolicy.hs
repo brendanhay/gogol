@@ -68,6 +68,7 @@ data NodeGroupsGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ nodeGroupsGetIAMPolicy pNggipProject_ pNggipZone_ pNggipResource_ =
     , _nggipZone = pNggipZone_
     , _nggipResource = pNggipResource_
     }
+
 
 -- | Project ID for this request.
 nggipProject :: Lens' NodeGroupsGetIAMPolicy Text

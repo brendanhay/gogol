@@ -77,6 +77,7 @@ data ProjectsInstancesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsInstancesUpdate pPiuPayload_ pPiuName_ =
     , _piuName = pPiuName_
     , _piuCallback = Nothing
     }
+
 
 -- | V1 error format.
 piuXgafv :: Lens' ProjectsInstancesUpdate (Maybe Xgafv)

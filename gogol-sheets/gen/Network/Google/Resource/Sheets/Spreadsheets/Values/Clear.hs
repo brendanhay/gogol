@@ -85,6 +85,7 @@ data SpreadsheetsValuesClear =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsValuesClear' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ spreadsheetsValuesClear pSvcSpreadsheetId_ pSvcPayload_ pSvcRange_ =
     , _svcRange = pSvcRange_
     , _svcCallback = Nothing
     }
+
 
 -- | V1 error format.
 svcXgafv :: Lens' SpreadsheetsValuesClear (Maybe Xgafv)

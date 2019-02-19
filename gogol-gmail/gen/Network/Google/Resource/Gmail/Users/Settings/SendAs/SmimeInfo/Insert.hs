@@ -68,6 +68,7 @@ data UsersSettingsSendAsSmimeInfoInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsSendAsSmimeInfoInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ usersSettingsSendAsSmimeInfoInsert pUssasiiPayload_ pUssasiiSendAsEmail_ =
     , _ussasiiUserId = "me"
     , _ussasiiSendAsEmail = pUssasiiSendAsEmail_
     }
+
 
 -- | Multipart request metadata.
 ussasiiPayload :: Lens' UsersSettingsSendAsSmimeInfoInsert SmimeInfo

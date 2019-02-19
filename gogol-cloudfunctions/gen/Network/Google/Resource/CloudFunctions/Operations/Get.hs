@@ -74,6 +74,7 @@ data OperationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ operationsGet pOgName_ =
     , _ogName = pOgName_
     , _ogCallback = Nothing
     }
+
 
 -- | V1 error format.
 ogXgafv :: Lens' OperationsGet (Maybe Xgafv)

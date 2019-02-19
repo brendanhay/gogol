@@ -62,6 +62,7 @@ data TurnBasedMatchesJoin =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchesJoin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ turnBasedMatchesJoin
     -> TurnBasedMatchesJoin
 turnBasedMatchesJoin pTbmjMatchId_ =
   TurnBasedMatchesJoin' {_tbmjLanguage = Nothing, _tbmjMatchId = pTbmjMatchId_}
+
 
 -- | The preferred language to use for strings returned by this method.
 tbmjLanguage :: Lens' TurnBasedMatchesJoin (Maybe Text)

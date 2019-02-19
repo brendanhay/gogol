@@ -87,6 +87,7 @@ data InvitationsAccept =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InvitationsAccept' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ invitationsAccept pIaId_ =
     , _iaId = pIaId_
     , _iaCallback = Nothing
     }
+
 
 -- | V1 error format.
 iaXgafv :: Lens' InvitationsAccept (Maybe Xgafv)

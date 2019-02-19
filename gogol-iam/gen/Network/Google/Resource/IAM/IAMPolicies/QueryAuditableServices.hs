@@ -74,6 +74,7 @@ data IAMPoliciesQueryAuditableServices =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IAMPoliciesQueryAuditableServices' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ iamPoliciesQueryAuditableServices pIpqasPayload_ =
     , _ipqasPayload = pIpqasPayload_
     , _ipqasCallback = Nothing
     }
+
 
 -- | V1 error format.
 ipqasXgafv :: Lens' IAMPoliciesQueryAuditableServices (Maybe Xgafv)

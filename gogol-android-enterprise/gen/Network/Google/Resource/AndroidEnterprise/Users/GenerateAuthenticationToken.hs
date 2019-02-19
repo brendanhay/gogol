@@ -71,6 +71,7 @@ data UsersGenerateAuthenticationToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersGenerateAuthenticationToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ usersGenerateAuthenticationToken
 usersGenerateAuthenticationToken pUgatEnterpriseId_ pUgatUserId_ =
   UsersGenerateAuthenticationToken'
     {_ugatEnterpriseId = pUgatEnterpriseId_, _ugatUserId = pUgatUserId_}
+
 
 -- | The ID of the enterprise.
 ugatEnterpriseId :: Lens' UsersGenerateAuthenticationToken Text

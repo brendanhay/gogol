@@ -62,6 +62,7 @@ data OrgUnitsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrgUnitsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ orgUnitsDelete pOudOrgUnitPath_ pOudCustomerId_ =
     { _oudOrgUnitPath = _Coerce # pOudOrgUnitPath_
     , _oudCustomerId = pOudCustomerId_
     }
+
 
 -- | Full path of the organizational unit or its ID
 oudOrgUnitPath :: Lens' OrgUnitsDelete [Text]

@@ -91,6 +91,7 @@ data BeaconsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeaconsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +127,7 @@ beaconsList =
     , _blPageSize = Nothing
     , _blCallback = Nothing
     }
+
 
 -- | V1 error format.
 blXgafv :: Lens' BeaconsList (Maybe Xgafv)

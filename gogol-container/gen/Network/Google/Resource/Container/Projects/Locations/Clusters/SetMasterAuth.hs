@@ -78,6 +78,7 @@ data ProjectsLocationsClustersSetMasterAuth =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersSetMasterAuth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsLocationsClustersSetMasterAuth pPlcsmaPayload_ pPlcsmaName_ =
     , _plcsmaName = pPlcsmaName_
     , _plcsmaCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcsmaXgafv :: Lens' ProjectsLocationsClustersSetMasterAuth (Maybe Xgafv)

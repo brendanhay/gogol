@@ -62,6 +62,7 @@ data BudgetGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BudgetGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ budgetGet pBgAccountId_ pBgBillingId_ =
     { _bgAccountId = _Coerce # pBgAccountId_
     , _bgBillingId = _Coerce # pBgBillingId_
     }
+
 
 -- | The account id to get the budget information for.
 bgAccountId :: Lens' BudgetGet Int64

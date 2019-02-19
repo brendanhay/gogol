@@ -74,6 +74,7 @@ data ProjectsLocationsWorkflowTemplatesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ projectsLocationsWorkflowTemplatesDelete pPlwtdName_ =
     , _plwtdVersion = Nothing
     , _plwtdCallback = Nothing
     }
+
 
 -- | V1 error format.
 plwtdXgafv :: Lens' ProjectsLocationsWorkflowTemplatesDelete (Maybe Xgafv)

@@ -57,6 +57,7 @@ newtype AccountsContainersWorkspacesVariablesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesVariablesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ accountsContainersWorkspacesVariablesGet
     -> AccountsContainersWorkspacesVariablesGet
 accountsContainersWorkspacesVariablesGet pAcwvgPath_ =
   AccountsContainersWorkspacesVariablesGet' {_acwvgPath = pAcwvgPath_}
+
 
 -- | GTM Variable\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/variables\/{variable_id}

@@ -65,6 +65,7 @@ data CreativeFieldValuesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldValuesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ creativeFieldValuesDelete pCfvdCreativeFieldId_ pCfvdProFileId_ pCfvdId_ =
     , _cfvdProFileId = _Coerce # pCfvdProFileId_
     , _cfvdId = _Coerce # pCfvdId_
     }
+
 
 -- | Creative field ID for this creative field value.
 cfvdCreativeFieldId :: Lens' CreativeFieldValuesDelete Int64

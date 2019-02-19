@@ -57,6 +57,7 @@ newtype BillingInfoGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingInfoGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ billingInfoGet
     -> BillingInfoGet
 billingInfoGet pBigAccountId_ =
   BillingInfoGet' {_bigAccountId = _Coerce # pBigAccountId_}
+
 
 -- | The account id.
 bigAccountId :: Lens' BillingInfoGet Int32

@@ -55,6 +55,7 @@ data BuildBazelRemoteExecutionV2Digest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2Digest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ buildBazelRemoteExecutionV2Digest
 buildBazelRemoteExecutionV2Digest =
   BuildBazelRemoteExecutionV2Digest'
     {_bbrevdSizeBytes = Nothing, _bbrevdHash = Nothing}
+
 
 -- | The size of the blob, in bytes.
 bbrevdSizeBytes :: Lens' BuildBazelRemoteExecutionV2Digest (Maybe Int64)
@@ -142,6 +144,7 @@ data GoogleRpcStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleRpcStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -156,6 +159,7 @@ googleRpcStatus
 googleRpcStatus =
   GoogleRpcStatus'
     {_grsDetails = Nothing, _grsCode = Nothing, _grsMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -203,6 +207,7 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -213,6 +218,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest'
     {_gdravgwprName = Nothing}
+
 
 -- | Name of the worker pool to retrieve. Format:
 -- \`projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]\/workerpools\/[POOL_ID]\`.
@@ -250,6 +256,7 @@ data GoogleDevtoolsRemoteexecutionV1testOutputDirectory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testOutputDirectory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -267,6 +274,7 @@ googleDevtoolsRemoteexecutionV1testOutputDirectory =
     , _gdrvodDigest = Nothing
     , _gdrvodTreeDigest = Nothing
     }
+
 
 -- | The full path of the directory relative to the working directory. The
 -- path separator is a forward slash \`\/\`. Since this is a relative path,
@@ -323,6 +331,7 @@ data BuildBazelRemoteExecutionV2OutputSymlink =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2OutputSymlink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -335,6 +344,7 @@ buildBazelRemoteExecutionV2OutputSymlink
 buildBazelRemoteExecutionV2OutputSymlink =
   BuildBazelRemoteExecutionV2OutputSymlink'
     {_bbrevosPath = Nothing, _bbrevosTarget = Nothing}
+
 
 -- | The full path of the symlink relative to the working directory,
 -- including the filename. The path separator is a forward slash \`\/\`.
@@ -385,6 +395,7 @@ data GoogleDevtoolsRemoteexecutionV1testTree =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testTree' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -397,6 +408,7 @@ googleDevtoolsRemoteexecutionV1testTree
 googleDevtoolsRemoteexecutionV1testTree =
   GoogleDevtoolsRemoteexecutionV1testTree'
     {_gdrvtChildren = Nothing, _gdrvtRoot = Nothing}
+
 
 -- | All the child directories: the directories referred to by the root and,
 -- recursively, all its children. In order to reconstruct the directory
@@ -446,6 +458,7 @@ data GoogleDevtoolsRemoteworkersV1test2FileMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2FileMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -466,6 +479,7 @@ googleDevtoolsRemoteworkersV1test2FileMetadata =
     , _gdrvfmIsExecutable = Nothing
     , _gdrvfmDigest = Nothing
     }
+
 
 -- | If the file is small enough, its contents may also or alternatively be
 -- listed here.
@@ -533,6 +547,7 @@ newtype GoogleLongrunningOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -544,6 +559,7 @@ googleLongrunningOperationMetadata
 googleLongrunningOperationMetadata pGlomAddtional_ =
   GoogleLongrunningOperationMetadata'
     {_glomAddtional = _Coerce # pGlomAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glomAddtional :: Lens' GoogleLongrunningOperationMetadata (HashMap Text JSONValue)
@@ -581,6 +597,7 @@ data GoogleDevtoolsRemoteworkersV1test2Digest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2Digest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -593,6 +610,7 @@ googleDevtoolsRemoteworkersV1test2Digest
 googleDevtoolsRemoteworkersV1test2Digest =
   GoogleDevtoolsRemoteworkersV1test2Digest'
     {_gdrvdSizeBytes = Nothing, _gdrvdHash = Nothing}
+
 
 -- | The size of the contents. While this is not strictly required as part of
 -- an identifier (after all, any given hash will have exactly one canonical
@@ -642,6 +660,7 @@ data BuildBazelRemoteExecutionV2ServerCapabilities =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ServerCapabilities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -665,6 +684,7 @@ buildBazelRemoteExecutionV2ServerCapabilities =
     , _bbrevscDeprecatedAPIVersion = Nothing
     , _bbrevscLowAPIVersion = Nothing
     }
+
 
 -- | Latest RE API version supported.
 bbrevscHighAPIVersion :: Lens' BuildBazelRemoteExecutionV2ServerCapabilities (Maybe BuildBazelSemverSemVer)
@@ -751,6 +771,7 @@ data BuildBazelRemoteExecutionV2Action =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2Action' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -771,6 +792,7 @@ buildBazelRemoteExecutionV2Action =
     , _bbrevaInputRootDigest = Nothing
     , _bbrevaTimeout = Nothing
     }
+
 
 -- | If true, then the \`Action\`\'s result cannot be cached.
 bbrevaDoNotCache :: Lens' BuildBazelRemoteExecutionV2Action (Maybe Bool)
@@ -846,6 +868,7 @@ data BuildBazelRemoteExecutionV2OutputDirectory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2OutputDirectory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -858,6 +881,7 @@ buildBazelRemoteExecutionV2OutputDirectory
 buildBazelRemoteExecutionV2OutputDirectory =
   BuildBazelRemoteExecutionV2OutputDirectory'
     {_bbrevodPath = Nothing, _bbrevodTreeDigest = Nothing}
+
 
 -- | The full path of the directory relative to the working directory. The
 -- path separator is a forward slash \`\/\`. Since this is a relative path,
@@ -929,6 +953,7 @@ data GoogleDevtoolsRemoteexecutionV1testDigest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testDigest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -941,6 +966,7 @@ googleDevtoolsRemoteexecutionV1testDigest
 googleDevtoolsRemoteexecutionV1testDigest =
   GoogleDevtoolsRemoteexecutionV1testDigest'
     {_gSizeBytes = Nothing, _gHash = Nothing}
+
 
 -- | The size of the blob, in bytes.
 gSizeBytes :: Lens' GoogleDevtoolsRemoteexecutionV1testDigest (Maybe Int64)
@@ -983,6 +1009,7 @@ data BuildBazelRemoteExecutionV2Tree =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2Tree' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -995,6 +1022,7 @@ buildBazelRemoteExecutionV2Tree
 buildBazelRemoteExecutionV2Tree =
   BuildBazelRemoteExecutionV2Tree'
     {_bbrevtChildren = Nothing, _bbrevtRoot = Nothing}
+
 
 -- | All the child directories: the directories referred to by the root and,
 -- recursively, all its children. In order to reconstruct the directory
@@ -1042,6 +1070,7 @@ data GoogleDevtoolsRemoteexecutionV1testActionResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testActionResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1071,6 +1100,7 @@ googleDevtoolsRemoteexecutionV1testActionResult =
     , _gdrvarStderrDigest = Nothing
     , _gdrvarStdoutRaw = Nothing
     }
+
 
 -- | The output directories of the action. For each output directory
 -- requested in the \`output_directories\` field of the Action, if the
@@ -1201,6 +1231,7 @@ data BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1213,6 +1244,7 @@ buildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange
 buildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange =
   BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange'
     {_bbrevpcprMinPriority = Nothing, _bbrevpcprMaxPriority = Nothing}
+
 
 bbrevpcprMinPriority :: Lens' BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange (Maybe Int32)
 bbrevpcprMinPriority
@@ -1259,6 +1291,7 @@ data BuildBazelRemoteExecutionV2OutputFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2OutputFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1276,6 +1309,7 @@ buildBazelRemoteExecutionV2OutputFile =
     , _bbrevofIsExecutable = Nothing
     , _bbrevofDigest = Nothing
     }
+
 
 -- | The full path of the file relative to the working directory, including
 -- the filename. The path separator is a forward slash \`\/\`. Since this
@@ -1326,6 +1360,7 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1343,6 +1378,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest =
     , _gdravcirInstanceId = Nothing
     , _gdravcirInstance = Nothing
     }
+
 
 -- | Resource name of the project containing the instance. Format:
 -- \`projects\/[PROJECT_ID]\`.
@@ -1422,6 +1458,7 @@ data BuildBazelRemoteExecutionV2Directory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2Directory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1439,6 +1476,7 @@ buildBazelRemoteExecutionV2Directory =
     , _bbrevdSymlinks = Nothing
     , _bbrevdFiles = Nothing
     }
+
 
 -- | The subdirectories in the directory.
 bbrevdDirectories :: Lens' BuildBazelRemoteExecutionV2Directory [BuildBazelRemoteExecutionV2DirectoryNode]
@@ -1494,6 +1532,7 @@ data BuildBazelRemoteExecutionV2DirectoryNode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2DirectoryNode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1506,6 +1545,7 @@ buildBazelRemoteExecutionV2DirectoryNode
 buildBazelRemoteExecutionV2DirectoryNode =
   BuildBazelRemoteExecutionV2DirectoryNode'
     {_bbrevdnName = Nothing, _bbrevdnDigest = Nothing}
+
 
 -- | The name of the directory.
 bbrevdnName :: Lens' BuildBazelRemoteExecutionV2DirectoryNode (Maybe Text)
@@ -1549,6 +1589,7 @@ data GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1566,6 +1607,7 @@ googleDevtoolsRemoteworkersV1test2CommandTaskTimeouts =
     , _gdrvcttShutdown = Nothing
     , _gdrvcttExecution = Nothing
     }
+
 
 -- | This specifies the maximum amount of time the task can be idle - that
 -- is, go without generating some output in either stdout or stderr. If the
@@ -1636,6 +1678,7 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1656,6 +1699,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaInstance =
     , _gdraviName = Nothing
     , _gdraviLoggingEnabled = Nothing
     }
+
 
 -- | Output only. State of the instance.
 gdraviState :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance (Maybe GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstanceState)
@@ -1718,6 +1762,7 @@ data GoogleDevtoolsRemoteexecutionV1testToolDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testToolDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1730,6 +1775,7 @@ googleDevtoolsRemoteexecutionV1testToolDetails
 googleDevtoolsRemoteexecutionV1testToolDetails =
   GoogleDevtoolsRemoteexecutionV1testToolDetails'
     {_gdrvtdToolName = Nothing, _gdrvtdToolVersion = Nothing}
+
 
 -- | Name of the tool, e.g. bazel.
 gdrvtdToolName :: Lens' GoogleDevtoolsRemoteexecutionV1testToolDetails (Maybe Text)
@@ -1774,6 +1820,7 @@ data BuildBazelRemoteExecutionV2ExecutionCapabilities =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecutionCapabilities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1791,6 +1838,7 @@ buildBazelRemoteExecutionV2ExecutionCapabilities =
     , _bbrevecExecEnabled = Nothing
     , _bbrevecDigestFunction = Nothing
     }
+
 
 -- | Supported execution priority range.
 bbrevecExecutionPriorityCapabilities :: Lens' BuildBazelRemoteExecutionV2ExecutionCapabilities (Maybe BuildBazelRemoteExecutionV2PriorityCapabilities)
@@ -1845,6 +1893,7 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1857,6 +1906,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest'
     {_gdravuwprUpdateMask = Nothing, _gdravuwprWorkerPool = Nothing}
+
 
 -- | The update mask applies to worker_pool. For the \`FieldMask\`
 -- definition, see
@@ -1905,6 +1955,7 @@ newtype BuildBazelRemoteExecutionV2BatchReadBlobsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchReadBlobsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1915,6 +1966,7 @@ buildBazelRemoteExecutionV2BatchReadBlobsRequest
 buildBazelRemoteExecutionV2BatchReadBlobsRequest =
   BuildBazelRemoteExecutionV2BatchReadBlobsRequest'
     {_bbrevbrbrDigests = Nothing}
+
 
 -- | The individual blob digests.
 bbrevbrbrDigests :: Lens' BuildBazelRemoteExecutionV2BatchReadBlobsRequest [BuildBazelRemoteExecutionV2Digest]
@@ -1957,6 +2009,7 @@ data GoogleDevtoolsRemoteexecutionV1testOutputFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testOutputFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1977,6 +2030,7 @@ googleDevtoolsRemoteexecutionV1testOutputFile =
     , _gdrvofIsExecutable = Nothing
     , _gdrvofDigest = Nothing
     }
+
 
 -- | The full path of the file relative to the input root, including the
 -- filename. The path separator is a forward slash \`\/\`. Since this is a
@@ -2044,6 +2098,7 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2064,6 +2119,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool =
     , _gdravwpWorkerCount = Nothing
     , _gdravwpName = Nothing
     }
+
 
 -- | Specifies the properties, such as machine type and disk size, used for
 -- creating workers in a worker pool.
@@ -2128,6 +2184,7 @@ data BuildBazelRemoteExecutionV2SymlinkNode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2SymlinkNode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2140,6 +2197,7 @@ buildBazelRemoteExecutionV2SymlinkNode
 buildBazelRemoteExecutionV2SymlinkNode =
   BuildBazelRemoteExecutionV2SymlinkNode'
     {_bbrevsnName = Nothing, _bbrevsnTarget = Nothing}
+
 
 -- | The name of the symlink.
 bbrevsnName :: Lens' BuildBazelRemoteExecutionV2SymlinkNode (Maybe Text)
@@ -2183,6 +2241,7 @@ newtype GoogleRpcStatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleRpcStatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2193,6 +2252,7 @@ googleRpcStatusDetailsItem
     -> GoogleRpcStatusDetailsItem
 googleRpcStatusDetailsItem pGrsdiAddtional_ =
   GoogleRpcStatusDetailsItem' {_grsdiAddtional = _Coerce # pGrsdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 grsdiAddtional :: Lens' GoogleRpcStatusDetailsItem (HashMap Text JSONValue)
@@ -2221,6 +2281,7 @@ data GoogleDevtoolsRemoteexecutionV1testDirectoryNode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testDirectoryNode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2233,6 +2294,7 @@ googleDevtoolsRemoteexecutionV1testDirectoryNode
 googleDevtoolsRemoteexecutionV1testDirectoryNode =
   GoogleDevtoolsRemoteexecutionV1testDirectoryNode'
     {_gdrvdnName = Nothing, _gdrvdnDigest = Nothing}
+
 
 -- | The name of the directory.
 gdrvdnName :: Lens' GoogleDevtoolsRemoteexecutionV1testDirectoryNode (Maybe Text)
@@ -2276,6 +2338,7 @@ data GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2288,6 +2351,7 @@ googleDevtoolsRemoteworkersV1test2DirectoryMetadata
 googleDevtoolsRemoteworkersV1test2DirectoryMetadata =
   GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata'
     {_gdrvdmPath = Nothing, _gdrvdmDigest = Nothing}
+
 
 -- | The path of the directory, as in FileMetadata.path.
 gdrvdmPath :: Lens' GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata (Maybe Text)
@@ -2351,6 +2415,7 @@ data GoogleDevtoolsRemoteexecutionV1testDirectory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testDirectory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2363,6 +2428,7 @@ googleDevtoolsRemoteexecutionV1testDirectory
 googleDevtoolsRemoteexecutionV1testDirectory =
   GoogleDevtoolsRemoteexecutionV1testDirectory'
     {_gdrvdDirectories = Nothing, _gdrvdFiles = Nothing}
+
 
 -- | The subdirectories in the directory.
 gdrvdDirectories :: Lens' GoogleDevtoolsRemoteexecutionV1testDirectory [GoogleDevtoolsRemoteexecutionV1testDirectoryNode]
@@ -2418,6 +2484,7 @@ data BuildBazelRemoteExecutionV2ActionResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ActionResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2456,6 +2523,7 @@ buildBazelRemoteExecutionV2ActionResult =
     , _bbrevarStderrDigest = Nothing
     , _bbrevarStdoutRaw = Nothing
     }
+
 
 -- | The details of the execution that originally produced this result.
 bbrevarExecutionMetadata :: Lens' BuildBazelRemoteExecutionV2ActionResult (Maybe BuildBazelRemoteExecutionV2ExecutedActionMetadata)
@@ -2638,6 +2706,7 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2648,6 +2717,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest'
     {_gdravdwprName = Nothing}
+
 
 -- | Name of the worker pool to delete. Format:
 -- \`projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]\/workerpools\/[POOL_ID]\`.
@@ -2683,6 +2753,7 @@ data GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2695,6 +2766,7 @@ googleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable
 googleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable =
   GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable'
     {_gdrvctievValue = Nothing, _gdrvctievName = Nothing}
+
 
 -- | The envvar value.
 gdrvctievValue :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable (Maybe Text)
@@ -2741,6 +2813,7 @@ data GoogleDevtoolsRemoteexecutionV1testExecuteResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testExecuteResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2761,6 +2834,7 @@ googleDevtoolsRemoteexecutionV1testExecuteResponse =
     , _gdrverResult = Nothing
     , _gdrverCachedResult = Nothing
     }
+
 
 -- | If the status has a code other than \`OK\`, it indicates that the action
 -- did not finish execution. For example, if the operation times out during
@@ -2835,6 +2909,7 @@ data BuildBazelSemverSemVer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelSemverSemVer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2855,6 +2930,7 @@ buildBazelSemverSemVer =
     , _bbssvPatch = Nothing
     , _bbssvPrerelease = Nothing
     }
+
 
 -- | The minor version, e.g. 2 for 10.2.3.
 bbssvMinor :: Lens' BuildBazelSemverSemVer (Maybe Int32)
@@ -2911,6 +2987,7 @@ data GoogleDevtoolsRemoteworkersV1test2CommandOverhead =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandOverhead' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2923,6 +3000,7 @@ googleDevtoolsRemoteworkersV1test2CommandOverhead
 googleDevtoolsRemoteworkersV1test2CommandOverhead =
   GoogleDevtoolsRemoteworkersV1test2CommandOverhead'
     {_gdrvcoOverhead = Nothing, _gdrvcoDuration = Nothing}
+
 
 -- | The amount of time *not* spent executing the command (ie
 -- uploading\/downloading files).
@@ -2971,6 +3049,7 @@ data BuildBazelRemoteExecutionV2LogFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2LogFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2983,6 +3062,7 @@ buildBazelRemoteExecutionV2LogFile
 buildBazelRemoteExecutionV2LogFile =
   BuildBazelRemoteExecutionV2LogFile'
     {_bbrevlfHumanReadable = Nothing, _bbrevlfDigest = Nothing}
+
 
 -- | This is a hint as to the purpose of the log, and is set to true if the
 -- log is human-readable text that can be usefully displayed to a user, and
@@ -3027,6 +3107,7 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3044,6 +3125,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest =
     , _gdravcwprPoolId = Nothing
     , _gdravcwprWorkerPool = Nothing
     }
+
 
 -- | Resource name of the instance in which to create the new worker pool.
 -- Format: \`projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]\`.
@@ -3102,6 +3184,7 @@ data GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3114,6 +3197,7 @@ googleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable
 googleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable =
   GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable'
     {_gdrvcevValue = Nothing, _gdrvcevName = Nothing}
+
 
 -- | The variable value.
 gdrvcevValue :: Lens' GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable (Maybe Text)
@@ -3154,6 +3238,7 @@ newtype BuildBazelRemoteExecutionV2FindMissingBlobsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2FindMissingBlobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3164,6 +3249,7 @@ buildBazelRemoteExecutionV2FindMissingBlobsResponse
 buildBazelRemoteExecutionV2FindMissingBlobsResponse =
   BuildBazelRemoteExecutionV2FindMissingBlobsResponse'
     {_bbrevfmbrMissingBlobDigests = Nothing}
+
 
 -- | A list of the blobs requested *not* present in the storage.
 bbrevfmbrMissingBlobDigests :: Lens' BuildBazelRemoteExecutionV2FindMissingBlobsResponse [BuildBazelRemoteExecutionV2Digest]
@@ -3204,6 +3290,7 @@ data GoogleDevtoolsRemoteworkersV1test2Directory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2Directory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3216,6 +3303,7 @@ googleDevtoolsRemoteworkersV1test2Directory
 googleDevtoolsRemoteworkersV1test2Directory =
   GoogleDevtoolsRemoteworkersV1test2Directory'
     {_gDirectories = Nothing, _gFiles = Nothing}
+
 
 -- | Any subdirectories
 gDirectories :: Lens' GoogleDevtoolsRemoteworkersV1test2Directory [GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata]
@@ -3268,6 +3356,7 @@ data GoogleDevtoolsRemoteexecutionV1testRequestMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testRequestMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3288,6 +3377,7 @@ googleDevtoolsRemoteexecutionV1testRequestMetadata =
     , _gdrvrmActionId = Nothing
     , _gdrvrmToolDetails = Nothing
     }
+
 
 -- | An identifier to tie multiple tool invocations together. For example,
 -- runs of foo_test, bar_test and baz_test on a post-submit of a given
@@ -3355,6 +3445,7 @@ newtype BuildBazelRemoteExecutionV2ExecutionPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecutionPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3364,6 +3455,7 @@ buildBazelRemoteExecutionV2ExecutionPolicy
     :: BuildBazelRemoteExecutionV2ExecutionPolicy
 buildBazelRemoteExecutionV2ExecutionPolicy =
   BuildBazelRemoteExecutionV2ExecutionPolicy' {_bbrevepPriority = Nothing}
+
 
 -- | The priority (relative importance) of this action. Generally, a lower
 -- value means that the action should be run sooner than actions having a
@@ -3408,6 +3500,7 @@ newtype BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3418,6 +3511,7 @@ buildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
 buildBazelRemoteExecutionV2ActionCacheUpdateCapabilities =
   BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities'
     {_bbrevacucUpdateEnabled = Nothing}
+
 
 bbrevacucUpdateEnabled :: Lens' BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities (Maybe Bool)
 bbrevacucUpdateEnabled
@@ -3451,6 +3545,7 @@ newtype GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3462,6 +3557,7 @@ googleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
 googleDevtoolsRemoteworkersV1test2CommandResultMetadataItem pGdrvcrmiAddtional_ =
   GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem'
     {_gdrvcrmiAddtional = _Coerce # pGdrvcrmiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 gdrvcrmiAddtional :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem (HashMap Text JSONValue)
@@ -3496,6 +3592,7 @@ data BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3508,6 +3605,7 @@ buildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
 buildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest =
   BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest'
     {_bbrevbubrrData = Nothing, _bbrevbubrrDigest = Nothing}
+
 
 -- | The raw binary data.
 bbrevbubrrData :: Lens' BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest (Maybe ByteString)
@@ -3550,6 +3648,7 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3560,6 +3659,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse
 googleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse'
     {_gdravlwprWorkerPools = Nothing}
+
 
 -- | The list of worker pools in a given instance.
 gdravlwprWorkerPools :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse [GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool]
@@ -3603,6 +3703,7 @@ data GoogleDevtoolsRemoteworkersV1test2CommandResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3629,6 +3730,7 @@ googleDevtoolsRemoteworkersV1test2CommandResult =
     , _gdrvcrMetadata = Nothing
     , _gdrvcrDuration = Nothing
     }
+
 
 -- | An overall status for the command. For example, if the command timed
 -- out, this might have a code of DEADLINE_EXCEEDED; if it was killed by
@@ -3725,6 +3827,7 @@ data GoogleDevtoolsRemoteexecutionV1testFileNode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testFileNode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3742,6 +3845,7 @@ googleDevtoolsRemoteexecutionV1testFileNode =
     , _gdrvfnIsExecutable = Nothing
     , _gdrvfnDigest = Nothing
     }
+
 
 -- | The name of the file.
 gdrvfnName :: Lens' GoogleDevtoolsRemoteexecutionV1testFileNode (Maybe Text)
@@ -3800,6 +3904,7 @@ data GoogleDevtoolsRemoteworkersV1test2AdminTemp =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2AdminTemp' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3812,6 +3917,7 @@ googleDevtoolsRemoteworkersV1test2AdminTemp
 googleDevtoolsRemoteworkersV1test2AdminTemp =
   GoogleDevtoolsRemoteworkersV1test2AdminTemp'
     {_gdrvatCommand = Nothing, _gdrvatArg = Nothing}
+
 
 -- | The admin action; see \`Command\` for legal values.
 gdrvatCommand :: Lens' GoogleDevtoolsRemoteworkersV1test2AdminTemp (Maybe GoogleDevtoolsRemoteworkersV1test2AdminTempCommand)
@@ -3860,6 +3966,7 @@ data GoogleDevtoolsRemotebuildbotCommandDurations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildbotCommandDurations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3889,6 +3996,7 @@ googleDevtoolsRemotebuildbotCommandDurations =
     , _gdrcdIsoPrepDone = Nothing
     , _gdrcdUpload = Nothing
     }
+
 
 -- | The time spent uploading the stdout logs.
 gdrcdStdout :: Lens' GoogleDevtoolsRemotebuildbotCommandDurations (Maybe Scientific)
@@ -3990,6 +4098,7 @@ data BuildBazelRemoteExecutionV2PlatformProperty =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2PlatformProperty' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4002,6 +4111,7 @@ buildBazelRemoteExecutionV2PlatformProperty
 buildBazelRemoteExecutionV2PlatformProperty =
   BuildBazelRemoteExecutionV2PlatformProperty'
     {_bbrevppValue = Nothing, _bbrevppName = Nothing}
+
 
 -- | The property value.
 bbrevppValue :: Lens' BuildBazelRemoteExecutionV2PlatformProperty (Maybe Text)
@@ -4040,12 +4150,14 @@ data BuildBazelRemoteExecutionV2WaitExecutionRequest =
   BuildBazelRemoteExecutionV2WaitExecutionRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2WaitExecutionRequest' with the minimum fields required to make a request.
 --
 buildBazelRemoteExecutionV2WaitExecutionRequest
     :: BuildBazelRemoteExecutionV2WaitExecutionRequest
 buildBazelRemoteExecutionV2WaitExecutionRequest =
   BuildBazelRemoteExecutionV2WaitExecutionRequest'
+
 
 instance FromJSON
            BuildBazelRemoteExecutionV2WaitExecutionRequest
@@ -4073,6 +4185,7 @@ data GoogleDevtoolsRemoteworkersV1test2CommandOutputs =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandOutputs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4085,6 +4198,7 @@ googleDevtoolsRemoteworkersV1test2CommandOutputs
 googleDevtoolsRemoteworkersV1test2CommandOutputs =
   GoogleDevtoolsRemoteworkersV1test2CommandOutputs'
     {_gdrvcoOutputs = Nothing, _gdrvcoExitCode = Nothing}
+
 
 -- | The output files. The blob referenced by the digest should contain one
 -- of the following (implementation-dependent): * A marshalled
@@ -4144,6 +4258,7 @@ data BuildBazelRemoteExecutionV2ExecutedActionMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecutedActionMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4182,6 +4297,7 @@ buildBazelRemoteExecutionV2ExecutedActionMetadata =
     , _bbreveamExecutionCompletedTimestamp = Nothing
     , _bbreveamInputFetchCompletedTimestamp = Nothing
     }
+
 
 -- | When the worker finished uploading action outputs.
 bbreveamOutputUploadCompletedTimestamp :: Lens' BuildBazelRemoteExecutionV2ExecutedActionMetadata (Maybe UTCTime)
@@ -4311,6 +4427,7 @@ data GoogleDevtoolsRemoteworkersV1test2Blob =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2Blob' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4323,6 +4440,7 @@ googleDevtoolsRemoteworkersV1test2Blob
 googleDevtoolsRemoteworkersV1test2Blob =
   GoogleDevtoolsRemoteworkersV1test2Blob'
     {_gdrvbContents = Nothing, _gdrvbDigest = Nothing}
+
 
 -- | The contents of the blob.
 gdrvbContents :: Lens' GoogleDevtoolsRemoteworkersV1test2Blob (Maybe ByteString)
@@ -4363,6 +4481,7 @@ newtype BuildBazelRemoteExecutionV2FindMissingBlobsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2FindMissingBlobsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4373,6 +4492,7 @@ buildBazelRemoteExecutionV2FindMissingBlobsRequest
 buildBazelRemoteExecutionV2FindMissingBlobsRequest =
   BuildBazelRemoteExecutionV2FindMissingBlobsRequest'
     {_bbrevfmbrBlobDigests = Nothing}
+
 
 -- | A list of the blobs to check.
 bbrevfmbrBlobDigests :: Lens' BuildBazelRemoteExecutionV2FindMissingBlobsRequest [BuildBazelRemoteExecutionV2Digest]
@@ -4416,6 +4536,7 @@ newtype GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4427,6 +4548,7 @@ googleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs
 googleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs pGdrverslAddtional_ =
   GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs'
     {_gdrverslAddtional = _Coerce # pGdrverslAddtional_}
+
 
 gdrverslAddtional :: Lens' GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs (HashMap Text GoogleDevtoolsRemoteexecutionV1testLogFile)
 gdrverslAddtional
@@ -4459,6 +4581,7 @@ data BuildBazelRemoteExecutionV2GetTreeResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2GetTreeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4471,6 +4594,7 @@ buildBazelRemoteExecutionV2GetTreeResponse
 buildBazelRemoteExecutionV2GetTreeResponse =
   BuildBazelRemoteExecutionV2GetTreeResponse'
     {_bbrevgtrDirectories = Nothing, _bbrevgtrNextPageToken = Nothing}
+
 
 -- | The directories descended from the requested root.
 bbrevgtrDirectories :: Lens' BuildBazelRemoteExecutionV2GetTreeResponse [BuildBazelRemoteExecutionV2Directory]
@@ -4518,6 +4642,7 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4528,6 +4653,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest'
     {_gdravgirName = Nothing}
+
 
 -- | Name of the instance to retrieve. Format:
 -- \`projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]\`.
@@ -4562,6 +4688,7 @@ newtype BuildBazelRemoteExecutionV2ResultsCachePolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ResultsCachePolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4571,6 +4698,7 @@ buildBazelRemoteExecutionV2ResultsCachePolicy
     :: BuildBazelRemoteExecutionV2ResultsCachePolicy
 buildBazelRemoteExecutionV2ResultsCachePolicy =
   BuildBazelRemoteExecutionV2ResultsCachePolicy' {_bbrevrcpPriority = Nothing}
+
 
 -- | The priority (relative importance) of this content in the overall cache.
 -- Generally, a lower value means a longer retention time or other
@@ -4615,6 +4743,7 @@ data BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4632,6 +4761,7 @@ buildBazelRemoteExecutionV2BatchReadBlobsResponseResponse =
     , _bbrevbrbrrData = Nothing
     , _bbrevbrbrrDigest = Nothing
     }
+
 
 -- | The result of attempting to download that blob.
 bbrevbrbrrStatus :: Lens' BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse (Maybe GoogleRpcStatus)
@@ -4687,6 +4817,7 @@ data BuildBazelRemoteExecutionV2ExecuteRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecuteRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4707,6 +4838,7 @@ buildBazelRemoteExecutionV2ExecuteRequest =
     , _bbreverResultsCachePolicy = Nothing
     , _bbreverActionDigest = Nothing
     }
+
 
 -- | An optional policy for execution of the action. The server will have a
 -- default policy if this is not provided.
@@ -4771,6 +4903,7 @@ newtype BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4781,6 +4914,7 @@ buildBazelRemoteExecutionV2BatchUpdateBlobsResponse
 buildBazelRemoteExecutionV2BatchUpdateBlobsResponse =
   BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse'
     {_bbrevbubrResponses = Nothing}
+
 
 -- | The responses to the requests.
 bbrevbubrResponses :: Lens' BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse [BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse]
@@ -4824,6 +4958,7 @@ newtype BuildBazelRemoteExecutionV2ExecuteResponseServerLogs =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecuteResponseServerLogs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4835,6 +4970,7 @@ buildBazelRemoteExecutionV2ExecuteResponseServerLogs
 buildBazelRemoteExecutionV2ExecuteResponseServerLogs pBbreverslAddtional_ =
   BuildBazelRemoteExecutionV2ExecuteResponseServerLogs'
     {_bbreverslAddtional = _Coerce # pBbreverslAddtional_}
+
 
 bbreverslAddtional :: Lens' BuildBazelRemoteExecutionV2ExecuteResponseServerLogs (HashMap Text BuildBazelRemoteExecutionV2LogFile)
 bbreverslAddtional
@@ -4873,6 +5009,7 @@ newtype GoogleLongrunningOperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningOperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4884,6 +5021,7 @@ googleLongrunningOperationResponse
 googleLongrunningOperationResponse pGlorAddtional_ =
   GoogleLongrunningOperationResponse'
     {_glorAddtional = _Coerce # pGlorAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glorAddtional :: Lens' GoogleLongrunningOperationResponse (HashMap Text JSONValue)
@@ -4915,6 +5053,7 @@ data BuildBazelRemoteExecutionV2FileNode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2FileNode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4932,6 +5071,7 @@ buildBazelRemoteExecutionV2FileNode =
     , _bbrevfnIsExecutable = Nothing
     , _bbrevfnDigest = Nothing
     }
+
 
 -- | The name of the file.
 bbrevfnName :: Lens' BuildBazelRemoteExecutionV2FileNode (Maybe Text)
@@ -4976,6 +5116,7 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4986,6 +5127,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse
 googleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse'
     {_gdravlirInstances = Nothing}
+
 
 -- | The list of instances in a given project.
 gdravlirInstances :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse [GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance]
@@ -5025,6 +5167,7 @@ data GoogleDevtoolsRemoteworkersV1test2CommandTask =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandTask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5042,6 +5185,7 @@ googleDevtoolsRemoteworkersV1test2CommandTask =
     , _gdrvctExpectedOutputs = Nothing
     , _gdrvctTimeouts = Nothing
     }
+
 
 -- | The inputs to the task.
 gdrvctInputs :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandTask (Maybe GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs)
@@ -5096,6 +5240,7 @@ data GoogleDevtoolsRemoteexecutionV1testCommand =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testCommand' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5108,6 +5253,7 @@ googleDevtoolsRemoteexecutionV1testCommand
 googleDevtoolsRemoteexecutionV1testCommand =
   GoogleDevtoolsRemoteexecutionV1testCommand'
     {_gdrvcArguments = Nothing, _gdrvcEnvironmentVariables = Nothing}
+
 
 -- | The arguments to the command. The first argument must be the path to the
 -- executable, which must be either a relative path, in which case it is
@@ -5169,6 +5315,7 @@ data GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5189,6 +5336,7 @@ googleDevtoolsRemoteexecutionV1testExecuteOperationMetadata =
     , _gdrveomStdoutStreamName = Nothing
     , _gdrveomActionDigest = Nothing
     }
+
 
 gdrveomStage :: Lens' GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata (Maybe GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadataStage)
 gdrveomStage
@@ -5253,6 +5401,7 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5276,6 +5425,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig =
     , _gdravwcDiskType = Nothing
     , _gdravwcMinCPUPlatform = Nothing
     }
+
 
 -- | Required. Size of the disk attached to the worker, in GB. See
 -- https:\/\/cloud.google.com\/compute\/docs\/disks\/
@@ -5358,6 +5508,7 @@ data BuildBazelRemoteExecutionV2ExecuteResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecuteResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5381,6 +5532,7 @@ buildBazelRemoteExecutionV2ExecuteResponse =
     , _bbreverCachedResult = Nothing
     , _bbreverMessage = Nothing
     }
+
 
 -- | If the status has a code other than \`OK\`, it indicates that the action
 -- did not finish execution. For example, if the operation times out during
@@ -5463,6 +5615,7 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5473,6 +5626,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest'
     {_gdravdirName = Nothing}
+
 
 -- | Name of the instance to delete. Format:
 -- \`projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]\`.
@@ -5509,6 +5663,7 @@ data GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5529,6 +5684,7 @@ googleDevtoolsRemoteworkersV1test2CommandTaskInputs =
     , _gdrvctiEnvironmentVariables = Nothing
     , _gdrvctiInlineBlobs = Nothing
     }
+
 
 -- | The command itself to run (e.g., argv). This field should be passed
 -- directly to the underlying operating system, and so it must be sensible
@@ -5616,6 +5772,7 @@ data BuildBazelRemoteExecutionV2CommandEnvironmentVariable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2CommandEnvironmentVariable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5628,6 +5785,7 @@ buildBazelRemoteExecutionV2CommandEnvironmentVariable
 buildBazelRemoteExecutionV2CommandEnvironmentVariable =
   BuildBazelRemoteExecutionV2CommandEnvironmentVariable'
     {_bbrevcevValue = Nothing, _bbrevcevName = Nothing}
+
 
 -- | The variable value.
 bbrevcevValue :: Lens' BuildBazelRemoteExecutionV2CommandEnvironmentVariable (Maybe Text)
@@ -5668,6 +5826,7 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5678,6 +5837,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest'
     {_gdravlirParent = Nothing}
+
 
 -- | Resource name of the project. Format: \`projects\/[PROJECT_ID]\`.
 gdravlirParent :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest (Maybe Text)
@@ -5713,6 +5873,7 @@ newtype BuildBazelRemoteExecutionV2PriorityCapabilities =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2PriorityCapabilities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5723,6 +5884,7 @@ buildBazelRemoteExecutionV2PriorityCapabilities
 buildBazelRemoteExecutionV2PriorityCapabilities =
   BuildBazelRemoteExecutionV2PriorityCapabilities'
     {_bbrevpcPriorities = Nothing}
+
 
 bbrevpcPriorities :: Lens' BuildBazelRemoteExecutionV2PriorityCapabilities [BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange]
 bbrevpcPriorities
@@ -5759,6 +5921,7 @@ newtype BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5769,6 +5932,7 @@ buildBazelRemoteExecutionV2BatchUpdateBlobsRequest
 buildBazelRemoteExecutionV2BatchUpdateBlobsRequest =
   BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest'
     {_bbrevbubrRequests = Nothing}
+
 
 -- | The individual upload requests.
 bbrevbubrRequests :: Lens' BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest [BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest]
@@ -5806,6 +5970,7 @@ data GoogleDevtoolsRemoteexecutionV1testLogFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testLogFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5818,6 +5983,7 @@ googleDevtoolsRemoteexecutionV1testLogFile
 googleDevtoolsRemoteexecutionV1testLogFile =
   GoogleDevtoolsRemoteexecutionV1testLogFile'
     {_gdrvlfHumanReadable = Nothing, _gdrvlfDigest = Nothing}
+
 
 -- | This is a hint as to the purpose of the log, and is set to true if the
 -- log is human-readable text that can be usefully displayed to a user, and
@@ -5871,6 +6037,7 @@ data BuildBazelRemoteExecutionV2RequestMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2RequestMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5891,6 +6058,7 @@ buildBazelRemoteExecutionV2RequestMetadata =
     , _bbrevrmActionId = Nothing
     , _bbrevrmToolDetails = Nothing
     }
+
 
 -- | An identifier to tie multiple tool invocations together. For example,
 -- runs of foo_test, bar_test and baz_test on a post-submit of a given
@@ -5959,6 +6127,7 @@ newtype BuildBazelRemoteExecutionV2Platform =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2Platform' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5968,6 +6137,7 @@ buildBazelRemoteExecutionV2Platform
     :: BuildBazelRemoteExecutionV2Platform
 buildBazelRemoteExecutionV2Platform =
   BuildBazelRemoteExecutionV2Platform' {_bbrevpProperties = Nothing}
+
 
 -- | The properties that make up this platform. In order to ensure that
 -- equivalent \`Platform\`s always hash to the same value, the properties
@@ -6007,6 +6177,7 @@ data BuildBazelRemoteExecutionV2ExecuteOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecuteOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6027,6 +6198,7 @@ buildBazelRemoteExecutionV2ExecuteOperationMetadata =
     , _bbreveomStdoutStreamName = Nothing
     , _bbreveomActionDigest = Nothing
     }
+
 
 bbreveomStage :: Lens' BuildBazelRemoteExecutionV2ExecuteOperationMetadata (Maybe BuildBazelRemoteExecutionV2ExecuteOperationMetadataStage)
 bbreveomStage
@@ -6088,6 +6260,7 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6098,6 +6271,7 @@ googleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest'
     {_gdravlwprParent = Nothing}
+
 
 -- | Resource name of the instance. Format:
 -- \`projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]\`.
@@ -6142,6 +6316,7 @@ data BuildBazelRemoteExecutionV2Command =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2Command' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6168,6 +6343,7 @@ buildBazelRemoteExecutionV2Command =
     , _bbrevcOutputFiles = Nothing
     , _bbrevcEnvironmentVariables = Nothing
     }
+
 
 -- | The platform requirements for the execution environment. The server MAY
 -- choose to execute the action on any worker satisfying the requirements,
@@ -6295,6 +6471,7 @@ data BuildBazelRemoteExecutionV2ToolDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ToolDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6307,6 +6484,7 @@ buildBazelRemoteExecutionV2ToolDetails
 buildBazelRemoteExecutionV2ToolDetails =
   BuildBazelRemoteExecutionV2ToolDetails'
     {_bbrevtdToolName = Nothing, _bbrevtdToolVersion = Nothing}
+
 
 -- | Name of the tool, e.g. bazel.
 bbrevtdToolName :: Lens' BuildBazelRemoteExecutionV2ToolDetails (Maybe Text)
@@ -6351,6 +6529,7 @@ data BuildBazelRemoteExecutionV2CacheCapabilities =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2CacheCapabilities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6374,6 +6553,7 @@ buildBazelRemoteExecutionV2CacheCapabilities =
     , _bbrevccActionCacheUpdateCapabilities = Nothing
     , _bbrevccCachePriorityCapabilities = Nothing
     }
+
 
 -- | Whether absolute symlink targets are supported.
 bbrevccSymlinkAbsolutePathStrategy :: Lens' BuildBazelRemoteExecutionV2CacheCapabilities (Maybe BuildBazelRemoteExecutionV2CacheCapabilitiesSymlinkAbsolutePathStrategy)
@@ -6456,6 +6636,7 @@ data GoogleDevtoolsRemotebuildbotCommandEvents =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemotebuildbotCommandEvents' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6473,6 +6654,7 @@ googleDevtoolsRemotebuildbotCommandEvents =
     , _gdrceNumErrors = Nothing
     , _gdrceNumWarnings = Nothing
     }
+
 
 -- | Indicates whether we are using a cached Docker image (true) or had to
 -- pull the Docker image (false) for this command.
@@ -6528,6 +6710,7 @@ data GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6548,6 +6731,7 @@ googleDevtoolsRemoteworkersV1test2CommandTaskOutputs =
     , _gdrvctoFiles = Nothing
     , _gdrvctoStdoutDestination = Nothing
     }
+
 
 -- | A list of expected directories, relative to the execution root. All
 -- paths MUST be delimited by forward slashes.
@@ -6628,6 +6812,7 @@ data GoogleLongrunningOperation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningOperation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6651,6 +6836,7 @@ googleLongrunningOperation =
     , _gloName = Nothing
     , _gloMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -6719,6 +6905,7 @@ data BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6731,6 +6918,7 @@ buildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
 buildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse =
   BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse'
     {_bStatus = Nothing, _bDigest = Nothing}
+
 
 -- | The result of attempting to upload that blob.
 bStatus :: Lens' BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse (Maybe GoogleRpcStatus)
@@ -6769,6 +6957,7 @@ newtype BuildBazelRemoteExecutionV2BatchReadBlobsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchReadBlobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6779,6 +6968,7 @@ buildBazelRemoteExecutionV2BatchReadBlobsResponse
 buildBazelRemoteExecutionV2BatchReadBlobsResponse =
   BuildBazelRemoteExecutionV2BatchReadBlobsResponse'
     {_bbrevbrbrResponses = Nothing}
+
 
 -- | The responses to the requests.
 bbrevbrbrResponses :: Lens' BuildBazelRemoteExecutionV2BatchReadBlobsResponse [BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse]

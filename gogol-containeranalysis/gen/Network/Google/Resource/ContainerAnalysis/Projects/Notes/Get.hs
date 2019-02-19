@@ -70,6 +70,7 @@ data ProjectsNotesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsNotesGet pPngName_ =
     , _pngName = pPngName_
     , _pngCallback = Nothing
     }
+
 
 -- | V1 error format.
 pngXgafv :: Lens' ProjectsNotesGet (Maybe Xgafv)

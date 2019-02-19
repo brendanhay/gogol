@@ -88,6 +88,7 @@ data EditsBundlesUpload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsBundlesUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ editsBundlesUpload pEbuPackageName_ pEbuEditId_ =
     , _ebuAckBundleInstallationWarning = Nothing
     , _ebuEditId = pEbuEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

@@ -56,11 +56,13 @@ data LiaSettingsListposDataproviders =
   LiaSettingsListposDataproviders'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsListposDataproviders' with the minimum fields required to make a request.
 --
 liaSettingsListposDataproviders
     :: LiaSettingsListposDataproviders
 liaSettingsListposDataproviders = LiaSettingsListposDataproviders'
+
 
 instance GoogleRequest
            LiaSettingsListposDataproviders

@@ -98,6 +98,7 @@ data TransferOperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -134,6 +135,7 @@ transferOperationsList pTolName_ =
     , _tolPageSize = Nothing
     , _tolCallback = Nothing
     }
+
 
 -- | V1 error format.
 tolXgafv :: Lens' TransferOperationsList (Maybe Xgafv)

@@ -59,6 +59,7 @@ newtype ManagementClientIdHashClientId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementClientIdHashClientId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ managementClientIdHashClientId
     -> ManagementClientIdHashClientId
 managementClientIdHashClientId pMcihciPayload_ =
   ManagementClientIdHashClientId' {_mcihciPayload = pMcihciPayload_}
+
 
 -- | Multipart request metadata.
 mcihciPayload :: Lens' ManagementClientIdHashClientId HashClientIdRequest

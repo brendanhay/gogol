@@ -30,6 +30,7 @@ newtype AuditLogServiceData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogServiceData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40,6 +41,7 @@ auditLogServiceData
     -> AuditLogServiceData
 auditLogServiceData pAlsdAddtional_ =
   AuditLogServiceData' {_alsdAddtional = _Coerce # pAlsdAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 alsdAddtional :: Lens' AuditLogServiceData (HashMap Text JSONValue)
@@ -66,6 +68,7 @@ newtype AuditLogMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +79,7 @@ auditLogMetadata
     -> AuditLogMetadata
 auditLogMetadata pAlmAddtional_ =
   AuditLogMetadata' {_almAddtional = _Coerce # pAlmAddtional_}
+
 
 -- | Properties of the object.
 almAddtional :: Lens' AuditLogMetadata (HashMap Text JSONValue)
@@ -136,6 +140,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -148,6 +153,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -198,6 +204,7 @@ data RequestMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RequestMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -221,6 +228,7 @@ requestMetadata =
     , _rmCallerNetwork = Nothing
     , _rmRequestAttributes = Nothing
     }
+
 
 -- | The user agent of the caller. This information is not authenticated and
 -- should be treated accordingly. For example: +
@@ -310,6 +318,7 @@ newtype ResourceLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -320,6 +329,7 @@ resourceLabels
     -> ResourceLabels
 resourceLabels pRlAddtional_ =
   ResourceLabels' {_rlAddtional = _Coerce # pRlAddtional_}
+
 
 rlAddtional :: Lens' ResourceLabels (HashMap Text Text)
 rlAddtional
@@ -344,6 +354,7 @@ data ReportRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -355,6 +366,7 @@ reportRequest
     :: ReportRequest
 reportRequest =
   ReportRequest' {_rrServiceConfigId = Nothing, _rrOperations = Nothing}
+
 
 -- | Specifies which version of service config should be used to process the
 -- request. If unspecified or no matching version can be found, the latest
@@ -403,6 +415,7 @@ data CheckRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -423,6 +436,7 @@ checkRequest =
     , _crServiceConfigId = Nothing
     , _crSkipActivationCheck = Nothing
     }
+
 
 -- | The operation to be checked.
 crOperation :: Lens' CheckRequest (Maybe Operation)
@@ -485,6 +499,7 @@ newtype MetricValueLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricValueLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -495,6 +510,7 @@ metricValueLabels
     -> MetricValueLabels
 metricValueLabels pMvlAddtional_ =
   MetricValueLabels' {_mvlAddtional = _Coerce # pMvlAddtional_}
+
 
 mvlAddtional :: Lens' MetricValueLabels (HashMap Text Text)
 mvlAddtional
@@ -531,6 +547,7 @@ data Distribution =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Distribution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -566,6 +583,7 @@ distribution =
     , _dBucketCounts = Nothing
     , _dExplicitBuckets = Nothing
     }
+
 
 -- | The sum of squared deviations from the mean: Sum[i=1..count]((x_i -
 -- mean)^2) where each x_i is a sample values. If \`count\` is zero then
@@ -675,6 +693,7 @@ data ExponentialBuckets =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExponentialBuckets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -692,6 +711,7 @@ exponentialBuckets =
     , _ebScale = Nothing
     , _ebNumFiniteBuckets = Nothing
     }
+
 
 -- | The i\'th exponential bucket covers the interval [scale *
 -- growth_factor^(i-1), scale * growth_factor^i) where i ranges from 1 to
@@ -752,6 +772,7 @@ data Peer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Peer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -778,6 +799,7 @@ peer =
     , _pLabels = Nothing
     , _pPort = Nothing
     }
+
 
 -- | The CLDR country\/region code associated with the above IP address. If
 -- the IP address is private, the \`region_code\` should reflect the
@@ -844,6 +866,7 @@ data AuthorizationInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthorizationInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -864,6 +887,7 @@ authorizationInfo =
     , _aiResource = Nothing
     , _aiPermission = Nothing
     }
+
 
 -- | Whether or not authorization for \`resource\` and \`permission\` was
 -- granted.
@@ -931,6 +955,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -978,6 +1003,7 @@ operation =
     , _oMetricValueSets = Nothing
     , _oLogEntries = Nothing
     }
+
 
 -- | DO NOT USE. This is an experimental field.
 oImportance :: Lens' Operation (Maybe OperationImportance)
@@ -1143,6 +1169,7 @@ data MetricValueSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricValueSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1154,6 +1181,7 @@ metricValueSet
     :: MetricValueSet
 metricValueSet =
   MetricValueSet' {_mvsMetricName = Nothing, _mvsMetricValues = Nothing}
+
 
 -- | The metric name defined in the service configuration.
 mvsMetricName :: Lens' MetricValueSet (Maybe Text)
@@ -1194,6 +1222,7 @@ newtype LogEntryLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogEntryLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1204,6 +1233,7 @@ logEntryLabels
     -> LogEntryLabels
 logEntryLabels pLelAddtional_ =
   LogEntryLabels' {_lelAddtional = _Coerce # pLelAddtional_}
+
 
 lelAddtional :: Lens' LogEntryLabels (HashMap Text Text)
 lelAddtional
@@ -1229,6 +1259,7 @@ newtype LogEntryProtoPayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogEntryProtoPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1239,6 +1270,7 @@ logEntryProtoPayload
     -> LogEntryProtoPayload
 logEntryProtoPayload pLeppAddtional_ =
   LogEntryProtoPayload' {_leppAddtional = _Coerce # pLeppAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 leppAddtional :: Lens' LogEntryProtoPayload (HashMap Text JSONValue)
@@ -1267,6 +1299,7 @@ data LinearBuckets =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LinearBuckets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1281,6 +1314,7 @@ linearBuckets
 linearBuckets =
   LinearBuckets'
     {_lbOffSet = Nothing, _lbWidth = Nothing, _lbNumFiniteBuckets = Nothing}
+
 
 -- | The i\'th linear bucket covers the interval [offset + (i-1) * width,
 -- offset + i * width) where i ranges from 1 to num_finite_buckets,
@@ -1338,6 +1372,7 @@ data Auth =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Auth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1361,6 +1396,7 @@ auth =
     , _aPrincipal = Nothing
     , _aAccessLevels = Nothing
     }
+
 
 -- | The authorized presenter of the credential. Reflects the optional
 -- Authorized Presenter (\`azp\`) claim within a JWT or the OAuth client
@@ -1452,6 +1488,7 @@ data QuotaInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuotaInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1469,6 +1506,7 @@ quotaInfo =
     , _qiQuotaMetrics = Nothing
     , _qiQuotaConsumed = Nothing
     }
+
 
 -- | Quota Metrics that have exceeded quota limits. For QuotaGroup-based
 -- quota, this is QuotaGroup.name For QuotaLimit-based quota, this is
@@ -1539,6 +1577,7 @@ data Money =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Money' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1551,6 +1590,7 @@ data Money =
 money
     :: Money
 money = Money' {_mCurrencyCode = Nothing, _mNanos = Nothing, _mUnits = Nothing}
+
 
 -- | The 3-letter currency code defined in ISO 4217.
 mCurrencyCode :: Lens' Money (Maybe Text)
@@ -1602,6 +1642,7 @@ data ConsumerInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConsumerInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1616,6 +1657,7 @@ consumerInfo
 consumerInfo =
   ConsumerInfo'
     {_ciProjectNumber = Nothing, _ciConsumerNumber = Nothing, _ciType = Nothing}
+
 
 -- | The Google cloud project number, e.g. 1234567890. A value of 0 indicates
 -- no project number is found. NOTE: This field is deprecated after Chemist
@@ -1663,6 +1705,7 @@ newtype AllocateInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AllocateInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1671,6 +1714,7 @@ newtype AllocateInfo =
 allocateInfo
     :: AllocateInfo
 allocateInfo = AllocateInfo' {_aiUnusedArguments = Nothing}
+
 
 -- | A list of label keys that were unused by the server in processing the
 -- request. Thus, for similar requests repeated in a certain future time
@@ -1710,6 +1754,7 @@ data QuotaOperation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuotaOperation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1736,6 +1781,7 @@ quotaOperation =
     , _qoOperationId = Nothing
     , _qoConsumerId = Nothing
     }
+
 
 -- | Quota mode for this operation.
 qoQuotaMode :: Lens' QuotaOperation (Maybe QuotaOperationQuotaMode)
@@ -1821,6 +1867,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1831,6 +1878,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1859,6 +1907,7 @@ data CheckError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1879,6 +1928,7 @@ checkError =
     , _ceCode = Nothing
     , _ceDetail = Nothing
     }
+
 
 -- | Subject to whom this error applies. See the specific code enum for more
 -- details on this field. For example: - “project:” - “folder:” -
@@ -1927,6 +1977,7 @@ newtype QuotaOperationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuotaOperationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1937,6 +1988,7 @@ quotaOperationLabels
     -> QuotaOperationLabels
 quotaOperationLabels pQolAddtional_ =
   QuotaOperationLabels' {_qolAddtional = _Coerce # pQolAddtional_}
+
 
 qolAddtional :: Lens' QuotaOperationLabels (HashMap Text Text)
 qolAddtional
@@ -1962,6 +2014,7 @@ data ReportError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1972,6 +2025,7 @@ data ReportError =
 reportError
     :: ReportError
 reportError = ReportError' {_reStatus = Nothing, _reOperationId = Nothing}
+
 
 -- | Details of the error when processing the Operation.
 reStatus :: Lens' ReportError (Maybe Status)
@@ -2015,6 +2069,7 @@ newtype AuthClaims =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthClaims' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2024,6 +2079,7 @@ authClaims
     :: HashMap Text JSONValue -- ^ 'acAddtional'
     -> AuthClaims
 authClaims pAcAddtional_ = AuthClaims' {_acAddtional = _Coerce # pAcAddtional_}
+
 
 -- | Properties of the object.
 acAddtional :: Lens' AuthClaims (HashMap Text JSONValue)
@@ -2063,6 +2119,7 @@ data HTTPRequest =
     , _httprReferer                        :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPRequest' with the minimum fields required to make a request.
 --
@@ -2117,6 +2174,7 @@ hTTPRequest =
     , _httprCacheHit = Nothing
     , _httprReferer = Nothing
     }
+
 
 -- | The response code indicating the status of the response. Examples: 200,
 -- 404.
@@ -2280,6 +2338,7 @@ newtype AuthenticationInfoThirdPartyPrincipal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthenticationInfoThirdPartyPrincipal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2291,6 +2350,7 @@ authenticationInfoThirdPartyPrincipal
 authenticationInfoThirdPartyPrincipal pAitppAddtional_ =
   AuthenticationInfoThirdPartyPrincipal'
     {_aitppAddtional = _Coerce # pAitppAddtional_}
+
 
 -- | Properties of the object.
 aitppAddtional :: Lens' AuthenticationInfoThirdPartyPrincipal (HashMap Text JSONValue)
@@ -2323,6 +2383,7 @@ data ResourceInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2340,6 +2401,7 @@ resourceInfo =
     , _riResourceContainer = Nothing
     , _riResourceLocation = Nothing
     }
+
 
 -- | Name of the resource. This is used for auditing purposes.
 riResourceName :: Lens' ResourceInfo (Maybe Text)
@@ -2398,6 +2460,7 @@ data MetricValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetricValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2433,6 +2496,7 @@ metricValue =
     , _mvInt64Value = Nothing
     , _mvLabels = Nothing
     }
+
 
 -- | A boolean value.
 mvBoolValue :: Lens' MetricValue (Maybe Bool)
@@ -2529,6 +2593,7 @@ data ResourceLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2541,6 +2606,7 @@ resourceLocation
 resourceLocation =
   ResourceLocation'
     {_rlOriginalLocations = Nothing, _rlCurrentLocations = Nothing}
+
 
 -- | The locations of a resource prior to the execution of the operation.
 -- Requests that mutate the resource\'s location must populate both the
@@ -2588,6 +2654,7 @@ newtype PeerLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeerLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2597,6 +2664,7 @@ peerLabels
     :: HashMap Text Text -- ^ 'plAddtional'
     -> PeerLabels
 peerLabels pPlAddtional_ = PeerLabels' {_plAddtional = _Coerce # pPlAddtional_}
+
 
 plAddtional :: Lens' PeerLabels (HashMap Text Text)
 plAddtional
@@ -2620,6 +2688,7 @@ newtype QuotaProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuotaProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2628,6 +2697,7 @@ newtype QuotaProperties =
 quotaProperties
     :: QuotaProperties
 quotaProperties = QuotaProperties' {_qpQuotaMode = Nothing}
+
 
 -- | Quota mode for this operation.
 qpQuotaMode :: Lens' QuotaProperties (Maybe QuotaPropertiesQuotaMode)
@@ -2658,6 +2728,7 @@ data Resource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Resource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2678,6 +2749,7 @@ resource =
     , _rLabels = Nothing
     , _rType = Nothing
     }
+
 
 -- | The name of the service that this resource belongs to, such as
 -- \`pubsub.googleapis.com\`. The service may be different from the DNS
@@ -2736,6 +2808,7 @@ data AllocateQuotaRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AllocateQuotaRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2748,6 +2821,7 @@ allocateQuotaRequest
 allocateQuotaRequest =
   AllocateQuotaRequest'
     {_aqrServiceConfigId = Nothing, _aqrAllocateOperation = Nothing}
+
 
 -- | Specifies which version of service configuration should be used to
 -- process the request. If unspecified or no matching version can be found,
@@ -2791,6 +2865,7 @@ newtype AuditLogResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2801,6 +2876,7 @@ auditLogResponse
     -> AuditLogResponse
 auditLogResponse pAlrAddtional_ =
   AuditLogResponse' {_alrAddtional = _Coerce # pAlrAddtional_}
+
 
 -- | Properties of the object.
 alrAddtional :: Lens' AuditLogResponse (HashMap Text JSONValue)
@@ -2827,6 +2903,7 @@ newtype RequestHeaders =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RequestHeaders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2837,6 +2914,7 @@ requestHeaders
     -> RequestHeaders
 requestHeaders pRhAddtional_ =
   RequestHeaders' {_rhAddtional = _Coerce # pRhAddtional_}
+
 
 rhAddtional :: Lens' RequestHeaders (HashMap Text Text)
 rhAddtional
@@ -2864,6 +2942,7 @@ data CheckResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2887,6 +2966,7 @@ checkResponse =
     , _cCheckInfo = Nothing
     , _cOperationId = Nothing
     }
+
 
 -- | Indicate the decision of the check. If no check errors are present, the
 -- service should process the operation. Otherwise the service should use
@@ -2956,6 +3036,7 @@ newtype AuditLogResourceOriginalState =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogResourceOriginalState' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2966,6 +3047,7 @@ auditLogResourceOriginalState
     -> AuditLogResourceOriginalState
 auditLogResourceOriginalState pAlrosAddtional_ =
   AuditLogResourceOriginalState' {_alrosAddtional = _Coerce # pAlrosAddtional_}
+
 
 -- | Properties of the object.
 alrosAddtional :: Lens' AuditLogResourceOriginalState (HashMap Text JSONValue)
@@ -2995,6 +3077,7 @@ data ReportResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3012,6 +3095,7 @@ reportResponse =
     , _rReportInfos = Nothing
     , _rServiceConfigId = Nothing
     }
+
 
 -- | Partial failures, one for each \`Operation\` in the request that failed
 -- processing. There are three possible combinations of the RPC status: 1.
@@ -3079,6 +3163,7 @@ data LogEntryOperation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogEntryOperation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3099,6 +3184,7 @@ logEntryOperation =
     , _leoLast = Nothing
     , _leoId = Nothing
     }
+
 
 -- | Optional. Set this to True if this is the first log entry in the
 -- operation.
@@ -3150,6 +3236,7 @@ data ReportInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReportInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3160,6 +3247,7 @@ data ReportInfo =
 reportInfo
     :: ReportInfo
 reportInfo = ReportInfo' {_riQuotaInfo = Nothing, _riOperationId = Nothing}
+
 
 -- | Quota usage info when processing the \`Operation\`.
 riQuotaInfo :: Lens' ReportInfo (Maybe QuotaInfo)
@@ -3205,6 +3293,7 @@ data LogEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3246,6 +3335,7 @@ logEntry =
     , _leTimestamp = Nothing
     , _leTrace = Nothing
     }
+
 
 -- | Optional. Information about an operation associated with the log entry,
 -- if applicable.
@@ -3362,6 +3452,7 @@ newtype AuditLogRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3372,6 +3463,7 @@ auditLogRequest
     -> AuditLogRequest
 auditLogRequest pAAddtional_ =
   AuditLogRequest' {_aAddtional = _Coerce # pAAddtional_}
+
 
 -- | Properties of the object.
 aAddtional :: Lens' AuditLogRequest (HashMap Text JSONValue)
@@ -3408,6 +3500,7 @@ newtype OperationLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3418,6 +3511,7 @@ operationLabels
     -> OperationLabels
 operationLabels pOlAddtional_ =
   OperationLabels' {_olAddtional = _Coerce # pOlAddtional_}
+
 
 olAddtional :: Lens' OperationLabels (HashMap Text Text)
 olAddtional
@@ -3442,6 +3536,7 @@ data CheckInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CheckInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3452,6 +3547,7 @@ data CheckInfo =
 checkInfo
     :: CheckInfo
 checkInfo = CheckInfo' {_ciConsumerInfo = Nothing, _ciUnusedArguments = Nothing}
+
 
 -- | Consumer info of this check.
 ciConsumerInfo :: Lens' CheckInfo (Maybe ConsumerInfo)
@@ -3497,6 +3593,7 @@ data AllocateQuotaResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AllocateQuotaResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3520,6 +3617,7 @@ allocateQuotaResponse =
     , _aServiceConfigId = Nothing
     , _aOperationId = Nothing
     }
+
 
 -- | WARNING: DO NOT use this field until this warning message is removed.
 aAllocateInfo :: Lens' AllocateQuotaResponse (Maybe AllocateInfo)
@@ -3591,6 +3689,7 @@ newtype ExplicitBuckets =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExplicitBuckets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3599,6 +3698,7 @@ newtype ExplicitBuckets =
 explicitBuckets
     :: ExplicitBuckets
 explicitBuckets = ExplicitBuckets' {_ebBounds = Nothing}
+
 
 -- | \'bound\' is a list of strictly increasing boundaries between buckets.
 -- Note that a list of length N-1 defines N buckets because of
@@ -3637,6 +3737,7 @@ data QuotaError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuotaError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3651,6 +3752,7 @@ quotaError
 quotaError =
   QuotaError'
     {_qeSubject = Nothing, _qeCode = Nothing, _qeDescription = Nothing}
+
 
 -- | Subject to whom this error applies. See the specific enum for more
 -- details on this field. For example, \"clientip:\" or \"project:\".
@@ -3696,6 +3798,7 @@ data AuthenticationInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthenticationInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3716,6 +3819,7 @@ authenticationInfo =
     , _aiAuthoritySelector = Nothing
     , _aiServiceAccountKeyName = Nothing
     }
+
 
 -- | The third party identification (if any) of the authenticated user making
 -- the request. When the JSON object represented here has a proto
@@ -3786,6 +3890,7 @@ newtype QuotaInfoQuotaConsumed =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuotaInfoQuotaConsumed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3796,6 +3901,7 @@ quotaInfoQuotaConsumed
     -> QuotaInfoQuotaConsumed
 quotaInfoQuotaConsumed pQiqcAddtional_ =
   QuotaInfoQuotaConsumed' {_qiqcAddtional = _Coerce # pQiqcAddtional_}
+
 
 qiqcAddtional :: Lens' QuotaInfoQuotaConsumed (HashMap Text Int32)
 qiqcAddtional
@@ -3833,6 +3939,7 @@ data AuditLog =
     , _alRequest               :: !(Maybe AuditLogRequest)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLog' with the minimum fields required to make a request.
 --
@@ -3884,6 +3991,7 @@ auditLog =
     , _alAuthenticationInfo = Nothing
     , _alRequest = Nothing
     }
+
 
 -- | Metadata about the operation.
 alRequestMetadata :: Lens' AuditLog (Maybe RequestMetadata)
@@ -4041,6 +4149,7 @@ newtype OperationUserLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationUserLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4051,6 +4160,7 @@ operationUserLabels
     -> OperationUserLabels
 operationUserLabels pOulAddtional_ =
   OperationUserLabels' {_oulAddtional = _Coerce # pOulAddtional_}
+
 
 oulAddtional :: Lens' OperationUserLabels (HashMap Text Text)
 oulAddtional
@@ -4075,6 +4185,7 @@ newtype LogEntryStructPayload =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogEntryStructPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4085,6 +4196,7 @@ logEntryStructPayload
     -> LogEntryStructPayload
 logEntryStructPayload pLespAddtional_ =
   LogEntryStructPayload' {_lespAddtional = _Coerce # pLespAddtional_}
+
 
 -- | Properties of the object.
 lespAddtional :: Lens' LogEntryStructPayload (HashMap Text JSONValue)
@@ -4124,6 +4236,7 @@ data Request' =
     , _rHost     :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Request' with the minimum fields required to make a request.
 --
@@ -4172,6 +4285,7 @@ request' =
     , _rId = Nothing
     , _rHost = Nothing
     }
+
 
 -- | The HTTP URL path.
 rPath :: Lens' Request' (Maybe Text)

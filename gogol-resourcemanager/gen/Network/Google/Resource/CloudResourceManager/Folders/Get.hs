@@ -76,6 +76,7 @@ data FoldersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ foldersGet pFgName_ =
     , _fgName = pFgName_
     , _fgCallback = Nothing
     }
+
 
 -- | V1 error format.
 fgXgafv :: Lens' FoldersGet (Maybe Xgafv)

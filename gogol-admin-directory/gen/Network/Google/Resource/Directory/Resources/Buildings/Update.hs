@@ -71,6 +71,7 @@ data ResourcesBuildingsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesBuildingsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ resourcesBuildingsUpdate pRbuBuildingId_ pRbuPayload_ pRbuCustomer_ =
     , _rbuCustomer = pRbuCustomer_
     , _rbuCoordinatesSource = RBUCSSourceUnspecified
     }
+
 
 -- | The ID of the building to update.
 rbuBuildingId :: Lens' ResourcesBuildingsUpdate Text

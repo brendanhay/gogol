@@ -65,6 +65,7 @@ data RegionOperationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionOperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ regionOperationsDelete pRodProject_ pRodOperation_ pRodRegion_ =
     , _rodOperation = pRodOperation_
     , _rodRegion = pRodRegion_
     }
+
 
 -- | Project ID for this request.
 rodProject :: Lens' RegionOperationsDelete Text

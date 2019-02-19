@@ -64,6 +64,7 @@ data ColumnList' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ColumnList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ columnList'
 columnList' pClTableId_ =
   ColumnList''
     {_clPageToken = Nothing, _clTableId = pClTableId_, _clMaxResults = Nothing}
+
 
 -- | Continuation token specifying which result page to return.
 clPageToken :: Lens' ColumnList' (Maybe Text)

@@ -87,6 +87,7 @@ data ProjectsJobsSearchForAlert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobsSearchForAlert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ projectsJobsSearchForAlert pPjsfaParent_ pPjsfaPayload_ =
     , _pjsfaPayload = pPjsfaPayload_
     , _pjsfaCallback = Nothing
     }
+
 
 -- | Required. The resource name of the project to search within. The format
 -- is \"projects\/{project_id}\", for example,

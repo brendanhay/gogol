@@ -73,6 +73,7 @@ data RegionDisksInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionDisksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ regionDisksInsert pRdiProject_ pRdiPayload_ pRdiRegion_ =
     , _rdiPayload = pRdiPayload_
     , _rdiRegion = pRdiRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

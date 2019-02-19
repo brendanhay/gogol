@@ -74,6 +74,7 @@ data SettingsDatasourcesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsDatasourcesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ settingsDatasourcesGet pSdgName_ =
     , _sdgDebugOptionsEnableDebugging = Nothing
     , _sdgCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdgXgafv :: Lens' SettingsDatasourcesGet (Maybe Xgafv)

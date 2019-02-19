@@ -74,6 +74,7 @@ data ProjectsLocationsNodesStart =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsNodesStart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsLocationsNodesStart pPlnsPayload_ pPlnsName_ =
     , _plnsName = pPlnsName_
     , _plnsCallback = Nothing
     }
+
 
 -- | V1 error format.
 plnsXgafv :: Lens' ProjectsLocationsNodesStart (Maybe Xgafv)

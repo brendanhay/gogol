@@ -58,6 +58,7 @@ newtype ApplicationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ applicationsGet
     -> ApplicationsGet
 applicationsGet pAgApplicationId_ =
   ApplicationsGet' {_agApplicationId = _Coerce # pAgApplicationId_}
+
 
 -- | ID of the application resource to be retrieved.
 agApplicationId :: Lens' ApplicationsGet Int64

@@ -69,6 +69,7 @@ data PoolsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PoolsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ poolsList pPlZone_ pPlProjectName_ =
     , _plPageToken = Nothing
     , _plMaxResults = 500
     }
+
 
 -- | The zone for this replica pool.
 plZone :: Lens' PoolsList Text

@@ -66,6 +66,7 @@ data ResourcesFeaturesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesFeaturesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ resourcesFeaturesPatch pRfpPayload_ pRfpCustomer_ pRfpFeatureKey_ =
     , _rfpCustomer = pRfpCustomer_
     , _rfpFeatureKey = pRfpFeatureKey_
     }
+
 
 -- | Multipart request metadata.
 rfpPayload :: Lens' ResourcesFeaturesPatch Feature

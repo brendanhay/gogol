@@ -62,6 +62,7 @@ data UserRolePermissionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserRolePermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ userRolePermissionsList
 userRolePermissionsList pUrplProFileId_ =
   UserRolePermissionsList'
     {_urplIds = Nothing, _urplProFileId = _Coerce # pUrplProFileId_}
+
 
 -- | Select only user role permissions with these IDs.
 urplIds :: Lens' UserRolePermissionsList [Int64]

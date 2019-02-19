@@ -88,6 +88,7 @@ data CoursesAnnouncementsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesAnnouncementsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +120,7 @@ coursesAnnouncementsCreate pCouCourseId_ pCouPayload_ =
     , _couPayload = pCouPayload_
     , _couCallback = Nothing
     }
+
 
 -- | V1 error format.
 couXgafv :: Lens' CoursesAnnouncementsCreate (Maybe Xgafv)

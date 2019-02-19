@@ -58,6 +58,7 @@ newtype CustomersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ customersGet
     :: Text -- ^ 'cgCustomerKey'
     -> CustomersGet
 customersGet pCgCustomerKey_ = CustomersGet' {_cgCustomerKey = pCgCustomerKey_}
+
 
 -- | Id of the customer to be retrieved
 cgCustomerKey :: Lens' CustomersGet Text

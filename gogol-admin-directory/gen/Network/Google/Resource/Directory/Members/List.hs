@@ -71,6 +71,7 @@ data MembersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MembersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ membersList pMlGroupKey_ =
     , _mlIncludeDerivedMembership = Nothing
     , _mlMaxResults = Nothing
     }
+
 
 -- | Comma separated role values to filter list results on.
 mlRoles :: Lens' MembersList (Maybe Text)

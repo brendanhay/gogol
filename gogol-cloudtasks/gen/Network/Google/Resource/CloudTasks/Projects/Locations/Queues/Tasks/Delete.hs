@@ -74,6 +74,7 @@ data ProjectsLocationsQueuesTasksDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsQueuesTasksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ projectsLocationsQueuesTasksDelete pPlqtdName_ =
     , _plqtdName = pPlqtdName_
     , _plqtdCallback = Nothing
     }
+
 
 -- | V1 error format.
 plqtdXgafv :: Lens' ProjectsLocationsQueuesTasksDelete (Maybe Xgafv)

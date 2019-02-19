@@ -70,6 +70,7 @@ data LicenseAssignmentsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicenseAssignmentsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ licenseAssignmentsPatch pLapSKUId_ pLapPayload_ pLapUserId_ pLapProductId_ =
     , _lapUserId = pLapUserId_
     , _lapProductId = pLapProductId_
     }
+
 
 -- | Name for sku for which license would be revoked
 lapSKUId :: Lens' LicenseAssignmentsPatch Text

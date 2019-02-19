@@ -87,6 +87,7 @@ data TargetableRemarketingListsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetableRemarketingListsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ targetableRemarketingListsList pTrllAdvertiserId_ pTrllProFileId_ =
     , _trllSortField = TRLLSFID
     , _trllMaxResults = 1000
     }
+
 
 -- | Select only targetable remarketing lists targetable by these
 -- advertisers.

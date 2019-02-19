@@ -64,6 +64,7 @@ data OrdersAdvancetestOrder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersAdvancetestOrder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ ordersAdvancetestOrder
 ordersAdvancetestOrder pOaoMerchantId_ pOaoOrderId_ =
   OrdersAdvancetestOrder'
     {_oaoMerchantId = _Coerce # pOaoMerchantId_, _oaoOrderId = pOaoOrderId_}
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

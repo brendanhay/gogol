@@ -63,7 +63,7 @@ module Network.Google
     , download
     , upload
 
-    , Body        (..)
+    , GBody        (..)
     , bodyContentType
 
     , sourceBody
@@ -266,7 +266,7 @@ upload :: ( MonadGoogle s m
           , GoogleRequest (MediaUpload a)
           )
        => a
-       -> Body
+       -> GBody
        -> m (Rs (MediaUpload a))
 upload x = send . MediaUpload x
 

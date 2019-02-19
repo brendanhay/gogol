@@ -63,6 +63,7 @@ data LiveStreamsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveStreamsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ liveStreamsDelete pLsdId_ =
     , _lsdOnBehalfOfContentOwnerChannel = Nothing
     , _lsdId = pLsdId_
     }
+
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the

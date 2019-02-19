@@ -66,6 +66,7 @@ data LicenseAssignmentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicenseAssignmentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ licenseAssignmentsDelete pLadSKUId_ pLadUserId_ pLadProductId_ =
     , _ladUserId = pLadUserId_
     , _ladProductId = pLadProductId_
     }
+
 
 -- | Name for sku
 ladSKUId :: Lens' LicenseAssignmentsDelete Text

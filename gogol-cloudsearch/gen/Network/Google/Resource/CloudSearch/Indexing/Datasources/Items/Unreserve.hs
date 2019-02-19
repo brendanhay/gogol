@@ -80,6 +80,7 @@ data IndexingDatasourcesItemsUnreserve =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IndexingDatasourcesItemsUnreserve' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ indexingDatasourcesItemsUnreserve pIdiuPayload_ pIdiuName_ =
     , _idiuName = pIdiuName_
     , _idiuCallback = Nothing
     }
+
 
 -- | V1 error format.
 idiuXgafv :: Lens' IndexingDatasourcesItemsUnreserve (Maybe Xgafv)

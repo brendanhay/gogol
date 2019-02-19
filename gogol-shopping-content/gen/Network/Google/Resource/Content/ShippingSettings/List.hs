@@ -66,6 +66,7 @@ data ShippingSettingsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShippingSettingsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ shippingSettingsList pSslMerchantId_ =
     , _sslPageToken = Nothing
     , _sslMaxResults = Nothing
     }
+
 
 -- | The ID of the managing account. This must be a multi-client account.
 sslMerchantId :: Lens' ShippingSettingsList Word64

@@ -64,6 +64,7 @@ data TrainedModelsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrainedModelsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ trainedModelsUpdate
 trainedModelsUpdate pTmuProject_ pTmuPayload_ pTmuId_ =
   TrainedModelsUpdate'
     {_tmuProject = pTmuProject_, _tmuPayload = pTmuPayload_, _tmuId = pTmuId_}
+
 
 -- | The project associated with the model.
 tmuProject :: Lens' TrainedModelsUpdate Text

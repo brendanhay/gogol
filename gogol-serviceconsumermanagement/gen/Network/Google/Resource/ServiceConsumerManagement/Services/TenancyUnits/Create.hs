@@ -75,6 +75,7 @@ data ServicesTenancyUnitsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesTenancyUnitsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ servicesTenancyUnitsCreate pStucParent_ pStucPayload_ =
     , _stucPayload = pStucPayload_
     , _stucCallback = Nothing
     }
+
 
 -- | services\/{service}\/{collection id}\/{resource id} {collection id} is
 -- the cloud resource collection type representing the service consumer,

@@ -46,6 +46,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -56,6 +57,7 @@ data AuditConfig =
 auditConfig
     :: AuditConfig
 auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -98,6 +100,7 @@ data ProjectConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +118,7 @@ projectConfig =
     , _pcEnablePrivateKeyCheck = Nothing
     , _pcName = Nothing
     }
+
 
 -- | How this project publishes a change in the repositories through Cloud
 -- Pub\/Sub. Keyed by the topic names.
@@ -165,6 +169,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -185,6 +190,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -240,6 +246,7 @@ data ListReposResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListReposResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -251,6 +258,7 @@ listReposResponse
     :: ListReposResponse
 listReposResponse =
   ListReposResponse' {_lrrNextPageToken = Nothing, _lrrRepos = Nothing}
+
 
 -- | If non-empty, additional repositories exist within the project. These
 -- can be retrieved by including this value in the next ListReposRequest\'s
@@ -293,11 +301,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -315,6 +325,7 @@ data UpdateRepoRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateRepoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -326,6 +337,7 @@ updateRepoRequest
     :: UpdateRepoRequest
 updateRepoRequest =
   UpdateRepoRequest' {_urrUpdateMask = Nothing, _urrRepo = Nothing}
+
 
 -- | A FieldMask specifying which fields of the repo to modify. Only the
 -- fields in the mask will be modified. If no mask is provided, this
@@ -363,6 +375,7 @@ data SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -374,6 +387,7 @@ setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
   SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -417,6 +431,7 @@ data PubsubConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PubsubConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -434,6 +449,7 @@ pubsubConfig =
     , _pcServiceAccountEmail = Nothing
     , _pcMessageFormat = Nothing
     }
+
 
 -- | A topic of Cloud Pub\/Sub. Values are of the form
 -- \`projects\/\/topics\/\`. The project needs to be the same project as
@@ -484,6 +500,7 @@ data UpdateProjectConfigRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateProjectConfigRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -496,6 +513,7 @@ updateProjectConfigRequest
 updateProjectConfigRequest =
   UpdateProjectConfigRequest'
     {_upcrProjectConfig = Nothing, _upcrUpdateMask = Nothing}
+
 
 -- | The new configuration for the project.
 upcrProjectConfig :: Lens' UpdateProjectConfigRequest (Maybe ProjectConfig)
@@ -534,6 +552,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -543,6 +562,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -577,6 +597,7 @@ newtype RepoPubsubConfigs =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepoPubsubConfigs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -587,6 +608,7 @@ repoPubsubConfigs
     -> RepoPubsubConfigs
 repoPubsubConfigs pRpcAddtional_ =
   RepoPubsubConfigs' {_rpcAddtional = _Coerce # pRpcAddtional_}
+
 
 rpcAddtional :: Lens' RepoPubsubConfigs (HashMap Text PubsubConfig)
 rpcAddtional
@@ -611,6 +633,7 @@ newtype ProjectConfigPubsubConfigs =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectConfigPubsubConfigs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -621,6 +644,7 @@ projectConfigPubsubConfigs
     -> ProjectConfigPubsubConfigs
 projectConfigPubsubConfigs pPcpcAddtional_ =
   ProjectConfigPubsubConfigs' {_pcpcAddtional = _Coerce # pPcpcAddtional_}
+
 
 pcpcAddtional :: Lens' ProjectConfigPubsubConfigs (HashMap Text PubsubConfig)
 pcpcAddtional
@@ -651,6 +675,7 @@ data Repo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Repo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -674,6 +699,7 @@ repo =
     , _rName = Nothing
     , _rMirrorConfig = Nothing
     }
+
 
 -- | How this repository publishes a change in the repository through Cloud
 -- Pub\/Sub. Keyed by the topic names.
@@ -735,6 +761,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -744,6 +771,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -795,6 +823,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -815,6 +844,7 @@ policy =
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -883,6 +913,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -894,6 +925,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -936,6 +968,7 @@ data MirrorConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MirrorConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -950,6 +983,7 @@ mirrorConfig
 mirrorConfig =
   MirrorConfig'
     {_mcURL = Nothing, _mcDeployKeyId = Nothing, _mcWebhookId = Nothing}
+
 
 -- | URL of the main repository at the other hosting service.
 mcURL :: Lens' MirrorConfig (Maybe Text)
@@ -998,6 +1032,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1011,6 +1046,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

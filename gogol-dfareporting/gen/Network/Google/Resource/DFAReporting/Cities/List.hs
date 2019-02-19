@@ -71,6 +71,7 @@ data CitiesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CitiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ citiesList pCitProFileId_ =
     , _citCountryDartIds = Nothing
     , _citDartIds = Nothing
     }
+
 
 -- | Select only cities from these regions.
 citRegionDartIds :: Lens' CitiesList [Int64]

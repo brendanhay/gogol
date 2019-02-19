@@ -80,6 +80,7 @@ data AppsServicesVersionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsServicesVersionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ appsServicesVersionsDelete pAsvdVersionsId_ pAsvdAppsId_ pAsvdServicesId_ =
     , _asvdServicesId = pAsvdServicesId_
     , _asvdCallback = Nothing
     }
+
 
 -- | V1 error format.
 asvdXgafv :: Lens' AppsServicesVersionsDelete (Maybe Xgafv)

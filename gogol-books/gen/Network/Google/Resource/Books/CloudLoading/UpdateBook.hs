@@ -59,6 +59,7 @@ newtype CloudLoadingUpdateBook =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudLoadingUpdateBook' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ cloudLoadingUpdateBook
     -> CloudLoadingUpdateBook
 cloudLoadingUpdateBook pClubPayload_ =
   CloudLoadingUpdateBook' {_clubPayload = pClubPayload_}
+
 
 -- | Multipart request metadata.
 clubPayload :: Lens' CloudLoadingUpdateBook BooksCloudLoadingResource

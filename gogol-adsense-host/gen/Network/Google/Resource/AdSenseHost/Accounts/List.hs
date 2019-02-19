@@ -59,6 +59,7 @@ newtype AccountsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ accountsList
     -> AccountsList
 accountsList pAlFilterAdClientId_ =
   AccountsList' {_alFilterAdClientId = _Coerce # pAlFilterAdClientId_}
+
 
 -- | Ad clients to list accounts for.
 alFilterAdClientId :: Lens' AccountsList [Text]

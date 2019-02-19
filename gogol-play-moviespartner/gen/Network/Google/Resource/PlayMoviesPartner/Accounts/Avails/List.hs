@@ -111,6 +111,7 @@ data AccountsAvailsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsAvailsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -171,6 +172,7 @@ accountsAvailsList pAalAccountId_ =
     , _aalPageSize = Nothing
     , _aalCallback = Nothing
     }
+
 
 -- | Filter Avails that match a case-insensitive, partner-specific custom id.
 -- NOTE: this field is deprecated and will be removed on V2; \`alt_ids\`

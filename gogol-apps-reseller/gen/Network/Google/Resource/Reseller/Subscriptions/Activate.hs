@@ -63,6 +63,7 @@ data SubscriptionsActivate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsActivate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ subscriptionsActivate
 subscriptionsActivate pSaCustomerId_ pSaSubscriptionId_ =
   SubscriptionsActivate'
     {_saCustomerId = pSaCustomerId_, _saSubscriptionId = pSaSubscriptionId_}
+
 
 -- | Either the customer\'s primary domain name or the customer\'s unique
 -- identifier. If using the domain name, we do not recommend using a

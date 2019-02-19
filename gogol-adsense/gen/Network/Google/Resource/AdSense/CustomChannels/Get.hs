@@ -61,6 +61,7 @@ data CustomChannelsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomChannelsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ customChannelsGet pCcgCustomChannelId_ pCcgAdClientId_ =
     { _ccgCustomChannelId = pCcgCustomChannelId_
     , _ccgAdClientId = pCcgAdClientId_
     }
+
 
 -- | Custom channel to retrieve.
 ccgCustomChannelId :: Lens' CustomChannelsGet Text

@@ -70,6 +70,7 @@ data SpacesMessagesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpacesMessagesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ spacesMessagesDelete pSmdName_ =
     , _smdName = pSmdName_
     , _smdCallback = Nothing
     }
+
 
 -- | V1 error format.
 smdXgafv :: Lens' SpacesMessagesDelete (Maybe Xgafv)

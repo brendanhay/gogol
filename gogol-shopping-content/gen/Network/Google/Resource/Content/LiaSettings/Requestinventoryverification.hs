@@ -67,6 +67,7 @@ data LiaSettingsRequestinventoryverification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsRequestinventoryverification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ liaSettingsRequestinventoryverification pLsrMerchantId_ pLsrCountry_ pLsrAccount
     , _lsrCountry = pLsrCountry_
     , _lsrAccountId = _Coerce # pLsrAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

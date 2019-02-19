@@ -61,6 +61,7 @@ data MobileAppsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileAppsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ mobileAppsGet
     -> MobileAppsGet
 mobileAppsGet pMagProFileId_ pMagId_ =
   MobileAppsGet' {_magProFileId = _Coerce # pMagProFileId_, _magId = pMagId_}
+
 
 -- | User profile ID associated with this request.
 magProFileId :: Lens' MobileAppsGet Int64

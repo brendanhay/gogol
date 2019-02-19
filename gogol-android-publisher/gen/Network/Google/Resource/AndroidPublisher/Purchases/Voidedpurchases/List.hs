@@ -75,6 +75,7 @@ data PurchasesVoidedpurchasesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PurchasesVoidedpurchasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ purchasesVoidedpurchasesList pPvlPackageName_ =
     , _pvlStartIndex = Nothing
     , _pvlMaxResults = Nothing
     }
+
 
 -- | The package name of the application for which voided purchases need to
 -- be returned (for example, \'com.some.thing\').

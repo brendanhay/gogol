@@ -59,6 +59,7 @@ newtype SchemasList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SchemasList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ schemasList
     :: Text -- ^ 'slCustomerId'
     -> SchemasList
 schemasList pSlCustomerId_ = SchemasList' {_slCustomerId = pSlCustomerId_}
+
 
 -- | Immutable ID of the G Suite account
 slCustomerId :: Lens' SchemasList Text

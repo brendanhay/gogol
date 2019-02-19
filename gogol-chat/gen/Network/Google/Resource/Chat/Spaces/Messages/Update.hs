@@ -76,6 +76,7 @@ data SpacesMessagesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpacesMessagesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ spacesMessagesUpdate pSmuPayload_ pSmuName_ =
     , _smuName = pSmuName_
     , _smuCallback = Nothing
     }
+
 
 -- | V1 error format.
 smuXgafv :: Lens' SpacesMessagesUpdate (Maybe Xgafv)

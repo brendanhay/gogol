@@ -58,6 +58,7 @@ newtype ElectionsElectionQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ElectionsElectionQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ electionsElectionQuery
     -> ElectionsElectionQuery
 electionsElectionQuery pEeqPayload_ =
   ElectionsElectionQuery' {_eeqPayload = pEeqPayload_}
+
 
 -- | Multipart request metadata.
 eeqPayload :: Lens' ElectionsElectionQuery ElectionsQueryRequest

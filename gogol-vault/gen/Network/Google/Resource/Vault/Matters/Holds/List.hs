@@ -84,6 +84,7 @@ data MattersHoldsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersHoldsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ mattersHoldsList pMhlMatterId_ =
     , _mhlPageSize = Nothing
     , _mhlCallback = Nothing
     }
+
 
 -- | V1 error format.
 mhlXgafv :: Lens' MattersHoldsList (Maybe Xgafv)

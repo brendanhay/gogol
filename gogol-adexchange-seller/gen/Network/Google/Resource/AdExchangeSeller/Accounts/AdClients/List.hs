@@ -64,6 +64,7 @@ data AccountsAdClientsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsAdClientsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ accountsAdClientsList pAaclAccountId_ =
     , _aaclPageToken = Nothing
     , _aaclMaxResults = Nothing
     }
+
 
 -- | Account to which the ad client belongs.
 aaclAccountId :: Lens' AccountsAdClientsList Text

@@ -63,6 +63,7 @@ data DevicesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DevicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ devicesList
     -> DevicesList
 devicesList pDlEnterpriseId_ pDlUserId_ =
   DevicesList' {_dlEnterpriseId = pDlEnterpriseId_, _dlUserId = pDlUserId_}
+
 
 -- | The ID of the enterprise.
 dlEnterpriseId :: Lens' DevicesList Text

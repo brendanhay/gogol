@@ -84,6 +84,7 @@ data ProjectsZonesClustersMaster =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersMaster' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsZonesClustersMaster pPzcmZone_ pPzcmPayload_ pPzcmClusterId_ pPzcmProjec
     , _pzcmProjectId = pPzcmProjectId_
     , _pzcmCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcmXgafv :: Lens' ProjectsZonesClustersMaster (Maybe Xgafv)

@@ -62,6 +62,7 @@ newtype AchievementsResetForAllPlayers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementsResetForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ achievementsResetForAllPlayers
     -> AchievementsResetForAllPlayers
 achievementsResetForAllPlayers pArfapAchievementId_ =
   AchievementsResetForAllPlayers' {_arfapAchievementId = pArfapAchievementId_}
+
 
 -- | The ID of the achievement used by this method.
 arfapAchievementId :: Lens' AchievementsResetForAllPlayers Text

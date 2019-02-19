@@ -66,6 +66,7 @@ data ProposalsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProposalsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ proposalsUpdate pPuUpdateAction_ pPuRevisionNumber_ pPuPayload_ pPuProposalId_ =
     , _puPayload = pPuPayload_
     , _puProposalId = pPuProposalId_
     }
+
 
 -- | The proposed action to take on the proposal. This field is required and
 -- it must be set when updating a proposal.

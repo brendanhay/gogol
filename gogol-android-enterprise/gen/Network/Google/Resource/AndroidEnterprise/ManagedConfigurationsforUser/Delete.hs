@@ -67,6 +67,7 @@ data ManagedConfigurationsforUserDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfigurationsforUserDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ managedConfigurationsforUserDelete pMcudEnterpriseId_ pMcudUserId_ pMcudManagedC
     , _mcudUserId = pMcudUserId_
     , _mcudManagedConfigurationForUserId = pMcudManagedConfigurationForUserId_
     }
+
 
 -- | The ID of the enterprise.
 mcudEnterpriseId :: Lens' ManagedConfigurationsforUserDelete Text

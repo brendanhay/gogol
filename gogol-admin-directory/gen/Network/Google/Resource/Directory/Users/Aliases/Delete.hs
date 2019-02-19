@@ -62,6 +62,7 @@ data UsersAliasesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersAliasesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ usersAliasesDelete
     -> UsersAliasesDelete
 usersAliasesDelete pUadAlias_ pUadUserKey_ =
   UsersAliasesDelete' {_uadAlias = pUadAlias_, _uadUserKey = pUadUserKey_}
+
 
 -- | The alias to be removed
 uadAlias :: Lens' UsersAliasesDelete Text

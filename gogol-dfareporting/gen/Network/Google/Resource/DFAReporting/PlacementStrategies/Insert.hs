@@ -62,6 +62,7 @@ data PlacementStrategiesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementStrategiesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ placementStrategiesInsert
 placementStrategiesInsert pPsiProFileId_ pPsiPayload_ =
   PlacementStrategiesInsert'
     {_psiProFileId = _Coerce # pPsiProFileId_, _psiPayload = pPsiPayload_}
+
 
 -- | User profile ID associated with this request.
 psiProFileId :: Lens' PlacementStrategiesInsert Int64

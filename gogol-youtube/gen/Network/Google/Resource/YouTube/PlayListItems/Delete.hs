@@ -60,6 +60,7 @@ data PlayListItemsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayListItemsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ playListItemsDelete
 playListItemsDelete pPlidId_ =
   PlayListItemsDelete'
     {_plidOnBehalfOfContentOwner = Nothing, _plidId = pPlidId_}
+
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the

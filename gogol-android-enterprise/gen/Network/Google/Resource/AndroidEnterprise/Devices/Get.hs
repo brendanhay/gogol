@@ -65,6 +65,7 @@ data DevicesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DevicesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ devicesGet pDgEnterpriseId_ pDgUserId_ pDgDeviceId_ =
     , _dgUserId = pDgUserId_
     , _dgDeviceId = pDgDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 dgEnterpriseId :: Lens' DevicesGet Text

@@ -86,6 +86,7 @@ data ProjectsLocationsInstancesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsInstancesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -125,6 +126,7 @@ projectsLocationsInstancesList pPlilParent_ =
     , _plilPageSize = Nothing
     , _plilCallback = Nothing
     }
+
 
 -- | The project and location for which to retrieve instance information, in
 -- the format projects\/{project_id}\/locations\/{location}. In Cloud

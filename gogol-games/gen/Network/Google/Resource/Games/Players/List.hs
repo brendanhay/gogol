@@ -69,6 +69,7 @@ data PlayersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ playersList pPlCollection_ =
     , _plPageToken = Nothing
     , _plMaxResults = Nothing
     }
+
 
 -- | Collection of players being retrieved
 plCollection :: Lens' PlayersList PlayersListCollection

@@ -84,6 +84,7 @@ data EnterprisesGetServiceAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesGetServiceAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ enterprisesGetServiceAccount
 enterprisesGetServiceAccount pEgsaEnterpriseId_ =
   EnterprisesGetServiceAccount'
     {_egsaKeyType = Nothing, _egsaEnterpriseId = pEgsaEnterpriseId_}
+
 
 -- | The type of credential to return with the service account. Required.
 egsaKeyType :: Lens' EnterprisesGetServiceAccount (Maybe EnterprisesGetServiceAccountKeyType)

@@ -75,6 +75,7 @@ data ProjectsRegionsWorkflowTemplatesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsRegionsWorkflowTemplatesCreate pPrwtcParent_ pPrwtcPayload_ =
     , _prwtcPayload = pPrwtcPayload_
     , _prwtcCallback = Nothing
     }
+
 
 -- | Required. The \"resource name\" of the region, as described in
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names of the form

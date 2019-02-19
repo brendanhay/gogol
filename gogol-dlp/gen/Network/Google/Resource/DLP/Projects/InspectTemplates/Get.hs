@@ -73,6 +73,7 @@ data ProjectsInspectTemplatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInspectTemplatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ projectsInspectTemplatesGet pPitgName_ =
     , _pitgName = pPitgName_
     , _pitgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pitgXgafv :: Lens' ProjectsInspectTemplatesGet (Maybe Xgafv)

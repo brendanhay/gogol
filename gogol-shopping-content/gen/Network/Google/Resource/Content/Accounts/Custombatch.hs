@@ -61,6 +61,7 @@ newtype AccountsCustombatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ accountsCustombatch
     -> AccountsCustombatch
 accountsCustombatch pAccPayload_ =
   AccountsCustombatch' {_accPayload = pAccPayload_}
+
 
 -- | Multipart request metadata.
 accPayload :: Lens' AccountsCustombatch AccountsCustomBatchRequest

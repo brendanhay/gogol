@@ -108,6 +108,7 @@ data FoldersCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -138,6 +139,7 @@ foldersCreate pFcPayload_ =
     , _fcPayload = pFcPayload_
     , _fcCallback = Nothing
     }
+
 
 -- | The resource name of the new Folder\'s parent. Must be of the form
 -- \`folders\/{folder_id}\` or \`organizations\/{org_id}\`.

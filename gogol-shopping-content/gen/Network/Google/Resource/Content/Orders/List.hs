@@ -79,6 +79,7 @@ data OrdersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrdersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ ordersList pOllMerchantId_ =
     , _ollPlacedDateStart = Nothing
     , _ollMaxResults = Nothing
     }
+
 
 -- | Obtains orders placed before this date (exclusively), in ISO 8601
 -- format.

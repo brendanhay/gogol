@@ -70,6 +70,7 @@ data SinksGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SinksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ sinksGet pSgSinkName_ =
     , _sgSinkName = pSgSinkName_
     , _sgCallback = Nothing
     }
+
 
 -- | V1 error format.
 sgXgafv :: Lens' SinksGet (Maybe Xgafv)

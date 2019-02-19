@@ -76,6 +76,7 @@ data UsersDraftsSend =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDraftsSend' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ usersDraftsSend
     -> UsersDraftsSend
 usersDraftsSend pUdsPayload_ =
   UsersDraftsSend' {_udsPayload = pUdsPayload_, _udsUserId = "me"}
+
 
 -- | Multipart request metadata.
 udsPayload :: Lens' UsersDraftsSend Draft

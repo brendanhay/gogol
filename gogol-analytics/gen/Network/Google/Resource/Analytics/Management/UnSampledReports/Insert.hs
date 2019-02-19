@@ -71,6 +71,7 @@ data ManagementUnSampledReportsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementUnSampledReportsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +96,7 @@ managementUnSampledReportsInsert pMusriWebPropertyId_ pMusriProFileId_ pMusriPay
     , _musriPayload = pMusriPayload_
     , _musriAccountId = pMusriAccountId_
     }
+
 
 -- | Web property ID to create the unsampled report for.
 musriWebPropertyId :: Lens' ManagementUnSampledReportsInsert Text

@@ -62,6 +62,7 @@ data FloodlightConfigurationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightConfigurationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ floodlightConfigurationsList
 floodlightConfigurationsList pFclProFileId_ =
   FloodlightConfigurationsList'
     {_fclIds = Nothing, _fclProFileId = _Coerce # pFclProFileId_}
+
 
 -- | Set of IDs of floodlight configurations to retrieve. Required field;
 -- otherwise an empty list will be returned.

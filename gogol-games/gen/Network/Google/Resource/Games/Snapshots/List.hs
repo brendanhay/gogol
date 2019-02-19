@@ -70,6 +70,7 @@ data SnapshotsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ snapshotsList pSlPlayerId_ =
     , _slPlayerId = pSlPlayerId_
     , _slMaxResults = Nothing
     }
+
 
 -- | The preferred language to use for strings returned by this method.
 slLanguage :: Lens' SnapshotsList (Maybe Text)

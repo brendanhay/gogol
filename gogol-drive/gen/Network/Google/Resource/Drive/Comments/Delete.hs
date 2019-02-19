@@ -61,6 +61,7 @@ data CommentsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ commentsDelete
     -> CommentsDelete
 commentsDelete pCdFileId_ pCdCommentId_ =
   CommentsDelete' {_cdFileId = pCdFileId_, _cdCommentId = pCdCommentId_}
+
 
 -- | The ID of the file.
 cdFileId :: Lens' CommentsDelete Text

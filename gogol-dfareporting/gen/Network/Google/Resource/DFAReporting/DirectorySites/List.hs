@@ -96,6 +96,7 @@ data DirectorySitesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DirectorySitesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -141,6 +142,7 @@ directorySitesList pDslProFileId_ =
     , _dslMaxResults = 1000
     , _dslDfpNetworkCode = Nothing
     }
+
 
 -- | Allows searching for objects by name, ID or URL. Wildcards (*) are
 -- allowed. For example, \"directory site*2015\" will return objects with

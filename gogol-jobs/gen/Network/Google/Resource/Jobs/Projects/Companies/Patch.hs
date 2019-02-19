@@ -78,6 +78,7 @@ data ProjectsCompaniesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsCompaniesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsCompaniesPatch pPcpPayload_ pPcpName_ =
     , _pcpName = pPcpName_
     , _pcpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pcpXgafv :: Lens' ProjectsCompaniesPatch (Maybe Xgafv)

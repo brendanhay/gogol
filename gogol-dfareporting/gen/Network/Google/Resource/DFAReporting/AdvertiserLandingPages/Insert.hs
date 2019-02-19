@@ -62,6 +62,7 @@ data AdvertiserLandingPagesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserLandingPagesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ advertiserLandingPagesInsert
 advertiserLandingPagesInsert pAlpiProFileId_ pAlpiPayload_ =
   AdvertiserLandingPagesInsert'
     {_alpiProFileId = _Coerce # pAlpiProFileId_, _alpiPayload = pAlpiPayload_}
+
 
 -- | User profile ID associated with this request.
 alpiProFileId :: Lens' AdvertiserLandingPagesInsert Int64

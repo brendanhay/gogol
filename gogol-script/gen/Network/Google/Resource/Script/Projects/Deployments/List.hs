@@ -79,6 +79,7 @@ data ProjectsDeploymentsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDeploymentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ projectsDeploymentsList pPdlScriptId_ =
     , _pdlPageSize = Nothing
     , _pdlCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdlXgafv :: Lens' ProjectsDeploymentsList (Maybe Xgafv)

@@ -86,6 +86,7 @@ data CaptionsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CaptionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ captionsUpdate pCapPart_ pCapPayload_ =
     , _capOnBehalfOfContentOwner = Nothing
     , _capSync = Nothing
     }
+
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
 -- of

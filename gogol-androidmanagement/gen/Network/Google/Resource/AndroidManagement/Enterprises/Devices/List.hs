@@ -78,6 +78,7 @@ data EnterprisesDevicesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesDevicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ enterprisesDevicesList pEdlParent_ =
     , _edlPageSize = Nothing
     , _edlCallback = Nothing
     }
+
 
 -- | The name of the enterprise in the form enterprises\/{enterpriseId}.
 edlParent :: Lens' EnterprisesDevicesList Text

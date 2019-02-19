@@ -84,6 +84,7 @@ data ProjectsSnapshotsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSnapshotsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsSnapshotsGet pPsgsSnapshot_ =
     , _psgsUploadType = Nothing
     , _psgsCallback = Nothing
     }
+
 
 -- | V1 error format.
 psgsXgafv :: Lens' ProjectsSnapshotsGet (Maybe Xgafv)

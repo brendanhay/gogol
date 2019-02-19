@@ -76,6 +76,7 @@ data ProjectsServiceAccountsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServiceAccountsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsServiceAccountsUpdate pPsauPayload_ pPsauName_ =
     , _psauName = pPsauName_
     , _psauCallback = Nothing
     }
+
 
 -- | V1 error format.
 psauXgafv :: Lens' ProjectsServiceAccountsUpdate (Maybe Xgafv)

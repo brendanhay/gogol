@@ -34,6 +34,7 @@ data LatLng =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44,6 +45,7 @@ data LatLng =
 latLng
     :: LatLng
 latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -80,6 +82,7 @@ newtype LocationEnrichment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationEnrichment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +91,7 @@ newtype LocationEnrichment =
 locationEnrichment
     :: LocationEnrichment
 locationEnrichment = LocationEnrichment' {_leLocation = Nothing}
+
 
 -- | Location for this enrichment item.
 leLocation :: Lens' LocationEnrichment (Maybe Location)
@@ -116,6 +120,7 @@ data DateFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DateFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +131,7 @@ data DateFilter =
 dateFilter
     :: DateFilter
 dateFilter = DateFilter' {_dfDates = Nothing, _dfRanges = Nothing}
+
 
 -- | List of dates that the media items must have been created on. There is a
 -- maximum of 5 dates that can be included per request.
@@ -172,6 +178,7 @@ data Photo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Photo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -198,6 +205,7 @@ photo =
     , _pIsoEquivalent = Nothing
     , _pApertureFNumber = Nothing
     }
+
 
 -- | Focal length of the photo.
 pFocalLength :: Lens' Photo (Maybe Double)
@@ -267,6 +275,7 @@ newtype TextEnrichment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TextEnrichment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -275,6 +284,7 @@ newtype TextEnrichment =
 textEnrichment
     :: TextEnrichment
 textEnrichment = TextEnrichment' {_teText = Nothing}
+
 
 -- | Text for this text enrichment item.
 teText :: Lens' TextEnrichment (Maybe Text)
@@ -334,6 +344,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -346,6 +357,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -391,6 +403,7 @@ newtype AddEnrichmentToAlbumResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddEnrichmentToAlbumResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -400,6 +413,7 @@ addEnrichmentToAlbumResponse
     :: AddEnrichmentToAlbumResponse
 addEnrichmentToAlbumResponse =
   AddEnrichmentToAlbumResponse' {_aetarEnrichmentItem = Nothing}
+
 
 -- | [Output only] Enrichment which was added.
 aetarEnrichmentItem :: Lens' AddEnrichmentToAlbumResponse (Maybe EnrichmentItem)
@@ -429,6 +443,7 @@ data SearchMediaItemsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchMediaItemsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -441,6 +456,7 @@ searchMediaItemsResponse
 searchMediaItemsResponse =
   SearchMediaItemsResponse'
     {_smirNextPageToken = Nothing, _smirMediaItems = Nothing}
+
 
 -- | [Output only] Token to use to get the next set of media items. Its
 -- presence is the only reliable indicator of more media items being
@@ -480,11 +496,13 @@ data JoinSharedAlbumResponse =
   JoinSharedAlbumResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JoinSharedAlbumResponse' with the minimum fields required to make a request.
 --
 joinSharedAlbumResponse
     :: JoinSharedAlbumResponse
 joinSharedAlbumResponse = JoinSharedAlbumResponse'
+
 
 instance FromJSON JoinSharedAlbumResponse where
         parseJSON
@@ -503,6 +521,7 @@ newtype CreateAlbumRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateAlbumRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -511,6 +530,7 @@ newtype CreateAlbumRequest =
 createAlbumRequest
     :: CreateAlbumRequest
 createAlbumRequest = CreateAlbumRequest' {_carAlbum = Nothing}
+
 
 -- | The album to be created.
 carAlbum :: Lens' CreateAlbumRequest (Maybe Album)
@@ -535,6 +555,7 @@ data Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -545,6 +566,7 @@ data Location =
 location
     :: Location
 location = Location' {_lLatlng = Nothing, _lLocationName = Nothing}
+
 
 -- | Position of the location on the map.
 lLatlng :: Lens' Location (Maybe LatLng)
@@ -582,6 +604,7 @@ data NewEnrichmentItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NewEnrichmentItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -599,6 +622,7 @@ newEnrichmentItem =
     , _neiTextEnrichment = Nothing
     , _neiMapEnrichment = Nothing
     }
+
 
 -- | Location to be added to the album.
 neiLocationEnrichment :: Lens' NewEnrichmentItem (Maybe LocationEnrichment)
@@ -649,6 +673,7 @@ data ShareInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShareInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -666,6 +691,7 @@ shareInfo =
     , _siShareToken = Nothing
     , _siSharedAlbumOptions = Nothing
     }
+
 
 -- | A link to the album that\'s now shared on the Google Photos website and
 -- app. Anyone with the link can access this shared album and see all of
@@ -717,6 +743,7 @@ data BatchCreateMediaItemsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchCreateMediaItemsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -734,6 +761,7 @@ batchCreateMediaItemsRequest =
     , _bcmirNewMediaItems = Nothing
     , _bcmirAlbumPosition = Nothing
     }
+
 
 -- | Identifier of the album where the media item(s) will be added. They will
 -- also be added to the user\'s library. This is an optional field.
@@ -788,6 +816,7 @@ data Filters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Filters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -808,6 +837,7 @@ filters =
     , _fMediaTypeFilter = Nothing
     , _fContentFilter = Nothing
     }
+
 
 -- | Filters the media items based on their creation date.
 fDateFilter :: Lens' Filters (Maybe DateFilter)
@@ -861,6 +891,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -871,6 +902,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -897,6 +929,7 @@ data DateRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DateRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -907,6 +940,7 @@ data DateRange =
 dateRange
     :: DateRange
 dateRange = DateRange' {_drEndDate = Nothing, _drStartDate = Nothing}
+
 
 -- | The end date (included as part of the range) in the same format as the
 -- start date.
@@ -944,6 +978,7 @@ data SharedAlbumOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SharedAlbumOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -956,6 +991,7 @@ sharedAlbumOptions
 sharedAlbumOptions =
   SharedAlbumOptions'
     {_saoIsCollaborative = Nothing, _saoIsCommentable = Nothing}
+
 
 -- | True if the shared album allows collaborators (users who have joined the
 -- album) to add media items to it. Defaults to false.
@@ -1000,6 +1036,7 @@ data MediaMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MediaMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1023,6 +1060,7 @@ mediaMetadata =
     , _mmWidth = Nothing
     , _mmVideo = Nothing
     }
+
 
 -- | Time when the media item was first created (not when it was uploaded to
 -- Google Photos).
@@ -1080,6 +1118,7 @@ newtype ShareAlbumResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShareAlbumResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1088,6 +1127,7 @@ newtype ShareAlbumResponse =
 shareAlbumResponse
     :: ShareAlbumResponse
 shareAlbumResponse = ShareAlbumResponse' {_sarShareInfo = Nothing}
+
 
 -- | [Output only] Information about the shared album.
 sarShareInfo :: Lens' ShareAlbumResponse (Maybe ShareInfo)
@@ -1117,6 +1157,7 @@ data Video =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Video' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1137,6 +1178,7 @@ video =
     , _vCameraModel = Nothing
     , _vFps = Nothing
     }
+
 
 -- | Processing status of the video.
 vStatus :: Lens' Video (Maybe VideoStatus)
@@ -1192,6 +1234,7 @@ data MediaItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MediaItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1221,6 +1264,7 @@ mediaItem =
     , _miContributorInfo = Nothing
     , _miDescription = Nothing
     }
+
 
 -- | Google Photos URL for the media item. This link will only be available
 -- to the user if they\'re signed in.
@@ -1304,6 +1348,7 @@ data Date =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1316,6 +1361,7 @@ data Date =
 date
     :: Date
 date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year\/month where the day is not significant.
@@ -1361,6 +1407,7 @@ newtype EnrichmentItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnrichmentItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1369,6 +1416,7 @@ newtype EnrichmentItem =
 enrichmentItem
     :: EnrichmentItem
 enrichmentItem = EnrichmentItem' {_eiId = Nothing}
+
 
 -- | Identifier of the enrichment item.
 eiId :: Lens' EnrichmentItem (Maybe Text)
@@ -1392,6 +1440,7 @@ data ListSharedAlbumsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSharedAlbumsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1404,6 +1453,7 @@ listSharedAlbumsResponse
 listSharedAlbumsResponse =
   ListSharedAlbumsResponse'
     {_lsarNextPageToken = Nothing, _lsarSharedAlbums = Nothing}
+
 
 -- | [Output only] Token to use to get the next set of shared albums.
 -- Populated if there are more shared albums to retrieve for this request.
@@ -1446,6 +1496,7 @@ newtype MediaTypeFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MediaTypeFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1454,6 +1505,7 @@ newtype MediaTypeFilter =
 mediaTypeFilter
     :: MediaTypeFilter
 mediaTypeFilter = MediaTypeFilter' {_mtfMediaTypes = Nothing}
+
 
 -- | The types of media items to be included. This field should only be
 -- populated with one media type, multiple media types will result in an
@@ -1487,6 +1539,7 @@ data NewMediaItemResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NewMediaItemResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1504,6 +1557,7 @@ newMediaItemResult =
     , _nmirUploadToken = Nothing
     , _nmirMediaItem = Nothing
     }
+
 
 -- | If an error occurred during the creation of this media item, this field
 -- will be populated with information related to the error. Details of this
@@ -1558,6 +1612,7 @@ data Album =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Album' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1587,6 +1642,7 @@ album =
     , _aTotalMediaItems = Nothing
     , _aTitle = Nothing
     }
+
 
 -- | [Output only] True if media items can be created in the album. This
 -- field is based on the scopes granted and permissions of the album. If
@@ -1668,6 +1724,7 @@ newtype SimpleMediaItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SimpleMediaItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1676,6 +1733,7 @@ newtype SimpleMediaItem =
 simpleMediaItem
     :: SimpleMediaItem
 simpleMediaItem = SimpleMediaItem' {_smiUploadToken = Nothing}
+
 
 -- | Token identifying the media bytes which have been uploaded to Google.
 smiUploadToken :: Lens' SimpleMediaItem (Maybe Text)
@@ -1705,6 +1763,7 @@ data ContributorInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContributorInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1717,6 +1776,7 @@ contributorInfo
 contributorInfo =
   ContributorInfo'
     {_ciProFilePictureBaseURL = Nothing, _ciDisplayName = Nothing}
+
 
 -- | URL to the profile picture of the contributor.
 ciProFilePictureBaseURL :: Lens' ContributorInfo (Maybe Text)
@@ -1755,6 +1815,7 @@ data ListAlbumsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAlbumsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1766,6 +1827,7 @@ listAlbumsResponse
     :: ListAlbumsResponse
 listAlbumsResponse =
   ListAlbumsResponse' {_larNextPageToken = Nothing, _larAlbums = Nothing}
+
 
 -- | [Output only] Token to use to get the next set of albums. Populated if
 -- there are more albums to retrieve for this request.
@@ -1807,6 +1869,7 @@ data MapEnrichment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MapEnrichment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1817,6 +1880,7 @@ data MapEnrichment =
 mapEnrichment
     :: MapEnrichment
 mapEnrichment = MapEnrichment' {_meDestination = Nothing, _meOrigin = Nothing}
+
 
 -- | Destination location for this enrichemt item.
 meDestination :: Lens' MapEnrichment (Maybe Location)
@@ -1861,6 +1925,7 @@ data SearchMediaItemsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SearchMediaItemsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1881,6 +1946,7 @@ searchMediaItemsRequest =
     , _smirPageToken = Nothing
     , _smirPageSize = Nothing
     }
+
 
 -- | Identifier of an album. If populated will list all media items in
 -- specified album. Cannot be set in conjunction with any filters.
@@ -1939,6 +2005,7 @@ data NewMediaItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NewMediaItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1950,6 +2017,7 @@ newMediaItem
     :: NewMediaItem
 newMediaItem =
   NewMediaItem' {_nmiSimpleMediaItem = Nothing, _nmiDescription = Nothing}
+
 
 -- | A new media item that has been uploaded via the included uploadToken.
 nmiSimpleMediaItem :: Lens' NewMediaItem (Maybe SimpleMediaItem)
@@ -1989,6 +2057,7 @@ data AddEnrichmentToAlbumRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddEnrichmentToAlbumRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2001,6 +2070,7 @@ addEnrichmentToAlbumRequest
 addEnrichmentToAlbumRequest =
   AddEnrichmentToAlbumRequest'
     {_aetarNewEnrichmentItem = Nothing, _aetarAlbumPosition = Nothing}
+
 
 -- | The enrichment to be added.
 aetarNewEnrichmentItem :: Lens' AddEnrichmentToAlbumRequest (Maybe NewEnrichmentItem)
@@ -2041,6 +2111,7 @@ newtype JoinSharedAlbumRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JoinSharedAlbumRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2049,6 +2120,7 @@ newtype JoinSharedAlbumRequest =
 joinSharedAlbumRequest
     :: JoinSharedAlbumRequest
 joinSharedAlbumRequest = JoinSharedAlbumRequest' {_jsarShareToken = Nothing}
+
 
 -- | Token indicating the shared album to join on behalf of the user.
 jsarShareToken :: Lens' JoinSharedAlbumRequest (Maybe Text)
@@ -2076,6 +2148,7 @@ newtype ShareAlbumRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShareAlbumRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2084,6 +2157,7 @@ newtype ShareAlbumRequest =
 shareAlbumRequest
     :: ShareAlbumRequest
 shareAlbumRequest = ShareAlbumRequest' {_sarSharedAlbumOptions = Nothing}
+
 
 -- | Options to be set when converting the album to a shared album.
 sarSharedAlbumOptions :: Lens' ShareAlbumRequest (Maybe SharedAlbumOptions)
@@ -2115,6 +2189,7 @@ data AlbumPosition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AlbumPosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2132,6 +2207,7 @@ albumPosition =
     , _apRelativeEnrichmentItemId = Nothing
     , _apPosition = Nothing
     }
+
 
 -- | The media item to which the position is relative to. Only used when
 -- position type is AFTER_MEDIA_ITEM.
@@ -2193,6 +2269,7 @@ data ContentFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContentFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2207,6 +2284,7 @@ contentFilter =
     { _cfIncludedContentCategories = Nothing
     , _cfExcludedContentCategories = Nothing
     }
+
 
 -- | The set of categories that must be present in the media items in the
 -- result. The items in the set are ORed. There is a maximum of 10
@@ -2253,6 +2331,7 @@ newtype BatchCreateMediaItemsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchCreateMediaItemsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2262,6 +2341,7 @@ batchCreateMediaItemsResponse
     :: BatchCreateMediaItemsResponse
 batchCreateMediaItemsResponse =
   BatchCreateMediaItemsResponse' {_bcmirNewMediaItemResults = Nothing}
+
 
 -- | [Output only] List of media items which were created.
 bcmirNewMediaItemResults :: Lens' BatchCreateMediaItemsResponse [NewMediaItemResult]

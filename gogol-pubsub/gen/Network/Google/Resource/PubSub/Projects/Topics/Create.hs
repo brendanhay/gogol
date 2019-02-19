@@ -75,6 +75,7 @@ data ProjectsTopicsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTopicsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsTopicsCreate pPtcPayload_ pPtcName_ =
     , _ptcName = pPtcName_
     , _ptcCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptcXgafv :: Lens' ProjectsTopicsCreate (Maybe Xgafv)

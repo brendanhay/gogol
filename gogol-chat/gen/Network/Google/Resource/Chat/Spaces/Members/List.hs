@@ -78,6 +78,7 @@ data SpacesMembersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpacesMembersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ spacesMembersList pSmlParent_ =
     , _smlPageSize = Nothing
     , _smlCallback = Nothing
     }
+
 
 -- | Required. The resource name of the space for which membership list is to
 -- be fetched, in the form \"spaces\/*\". Example: spaces\/AAAAMpdlehY

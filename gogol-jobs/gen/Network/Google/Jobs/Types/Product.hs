@@ -34,6 +34,7 @@ data LatLng =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44,6 +45,7 @@ data LatLng =
 latLng
     :: LatLng
 latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -82,6 +84,7 @@ data ApplicationInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +99,7 @@ applicationInfo
 applicationInfo =
   ApplicationInfo'
     {_aiURIs = Nothing, _aiEmails = Nothing, _aiInstruction = Nothing}
+
 
 -- | Optional but at least one of uris, emails or instruction must be
 -- specified. Use this URI field to direct an applicant to a website, for
@@ -157,6 +161,7 @@ data MatchingJob =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MatchingJob' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -180,6 +185,7 @@ matchingJob =
     , _mjSearchTextSnippet = Nothing
     , _mjJob = Nothing
     }
+
 
 -- | Contains snippets of text from the Job.job_title field most closely
 -- matching a search query\'s keywords, if available. The matching query
@@ -279,6 +285,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -291,6 +298,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -342,6 +350,7 @@ data RequestMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RequestMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -362,6 +371,7 @@ requestMetadata =
     , _rmSessionId = Nothing
     , _rmDeviceInfo = Nothing
     }
+
 
 -- | Required. The client-defined scope or source of the service call, which
 -- typically is the domain on which the service has been implemented and is
@@ -431,6 +441,7 @@ data UpdateCompanyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateCompanyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -442,6 +453,7 @@ updateCompanyRequest
     :: UpdateCompanyRequest
 updateCompanyRequest =
   UpdateCompanyRequest' {_ucrUpdateMask = Nothing, _ucrCompany = Nothing}
+
 
 -- | Optional but strongly recommended for the best service experience. If
 -- update_mask is provided, only the specified fields in company are
@@ -483,6 +495,7 @@ data UpdateJobRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateJobRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -494,6 +507,7 @@ updateJobRequest
     :: UpdateJobRequest
 updateJobRequest =
   UpdateJobRequest' {_ujrUpdateMask = Nothing, _ujrJob = Nothing}
+
 
 -- | Optional but strongly recommended to be provided for the best service
 -- experience. If update_mask is provided, only the specified fields in job
@@ -533,6 +547,7 @@ data BucketizedCount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketizedCount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -543,6 +558,7 @@ data BucketizedCount =
 bucketizedCount
     :: BucketizedCount
 bucketizedCount = BucketizedCount' {_bcCount = Nothing, _bcRange = Nothing}
+
 
 -- | Number of jobs whose numeric field value fall into \`range\`.
 bcCount :: Lens' BucketizedCount (Maybe Int32)
@@ -580,6 +596,7 @@ data CompensationInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompensationInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -597,6 +614,7 @@ compensationInfo =
     , _ciEntries = Nothing
     , _ciAnnualizedBaseCompensationRange = Nothing
     }
+
 
 -- | Output only. Annualized total compensation range. Computed as all
 -- compensation entries\' CompensationEntry.compensation times
@@ -653,6 +671,7 @@ newtype CreateCompanyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateCompanyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -661,6 +680,7 @@ newtype CreateCompanyRequest =
 createCompanyRequest
     :: CreateCompanyRequest
 createCompanyRequest = CreateCompanyRequest' {_ccrCompany = Nothing}
+
 
 -- | Required. The company to be created.
 ccrCompany :: Lens' CreateCompanyRequest (Maybe Company)
@@ -685,6 +705,7 @@ newtype HistogramQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistogramQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -693,6 +714,7 @@ newtype HistogramQuery =
 histogramQuery
     :: HistogramQuery
 histogramQuery = HistogramQuery' {_hqHistogramQuery = Nothing}
+
 
 -- | An expression specifies a histogram request against matching resources
 -- (for example, jobs) for searches. Expression syntax is a aggregation
@@ -780,6 +802,7 @@ newtype CreateJobRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateJobRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -788,6 +811,7 @@ newtype CreateJobRequest =
 createJobRequest
     :: CreateJobRequest
 createJobRequest = CreateJobRequest' {_cjrJob = Nothing}
+
 
 -- | Required. The Job to be created.
 cjrJob :: Lens' CreateJobRequest (Maybe Job)
@@ -813,6 +837,7 @@ data CompletionResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompletionResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -827,6 +852,7 @@ completionResult
 completionResult =
   CompletionResult'
     {_crSuggestion = Nothing, _crImageURI = Nothing, _crType = Nothing}
+
 
 -- | The suggestion for the query.
 crSuggestion :: Lens' CompletionResult (Maybe Text)
@@ -871,6 +897,7 @@ data Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -891,6 +918,7 @@ location =
     , _lPostalAddress = Nothing
     , _lRadiusInMiles = Nothing
     }
+
 
 -- | An object representing a latitude\/longitude pair.
 lLatLng :: Lens' Location (Maybe LatLng)
@@ -957,6 +985,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -980,6 +1009,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -1047,11 +1077,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1077,6 +1109,7 @@ data ClientEvent =
     , _ceEventId       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ClientEvent' with the minimum fields required to make a request.
 --
@@ -1104,6 +1137,7 @@ clientEvent =
     , _ceCreateTime = Nothing
     , _ceEventId = Nothing
     }
+
 
 -- | Required. A unique ID generated in the API responses. It can be found in
 -- ResponseMetadata.request_id.
@@ -1180,6 +1214,7 @@ data CompensationHistogramRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompensationHistogramRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1192,6 +1227,7 @@ compensationHistogramRequest
 compensationHistogramRequest =
   CompensationHistogramRequest'
     {_chrBucketingOption = Nothing, _chrType = Nothing}
+
 
 -- | Required. Numeric histogram options, like buckets, whether include min
 -- or max value.
@@ -1231,6 +1267,7 @@ data Money =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Money' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1243,6 +1280,7 @@ data Money =
 money
     :: Money
 money = Money' {_mCurrencyCode = Nothing, _mNanos = Nothing, _mUnits = Nothing}
+
 
 -- | The 3-letter currency code defined in ISO 4217.
 mCurrencyCode :: Lens' Money (Maybe Text)
@@ -1294,6 +1332,7 @@ data ListCompaniesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListCompaniesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1311,6 +1350,7 @@ listCompaniesResponse =
     , _lcrCompanies = Nothing
     , _lcrMetadata = Nothing
     }
+
 
 -- | A token to retrieve the next page of results.
 lcrNextPageToken :: Lens' ListCompaniesResponse (Maybe Text)
@@ -1362,6 +1402,7 @@ data CommuteFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommuteFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1388,6 +1429,7 @@ commuteFilter =
     , _cfRoadTraffic = Nothing
     , _cfDePartureTime = Nothing
     }
+
 
 -- | Required. The method of transportation for which to calculate the
 -- commute time.
@@ -1469,6 +1511,7 @@ newtype BatchDeleteJobsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchDeleteJobsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1477,6 +1520,7 @@ newtype BatchDeleteJobsRequest =
 batchDeleteJobsRequest
     :: BatchDeleteJobsRequest
 batchDeleteJobsRequest = BatchDeleteJobsRequest' {_bdjrFilter = Nothing}
+
 
 -- | Required. The filter string specifies the jobs to be deleted. Supported
 -- operator: =, AND The fields eligible for filtering are: *
@@ -1513,6 +1557,7 @@ newtype JobCustomAttributes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobCustomAttributes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1523,6 +1568,7 @@ jobCustomAttributes
     -> JobCustomAttributes
 jobCustomAttributes pJcaAddtional_ =
   JobCustomAttributes' {_jcaAddtional = _Coerce # pJcaAddtional_}
+
 
 jcaAddtional :: Lens' JobCustomAttributes (HashMap Text CustomAttribute)
 jcaAddtional
@@ -1548,6 +1594,7 @@ data JobEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1558,6 +1605,7 @@ data JobEvent =
 jobEvent
     :: JobEvent
 jobEvent = JobEvent' {_jeJobs = Nothing, _jeType = Nothing}
+
 
 -- | Required. The job name(s) associated with this event. For example, if
 -- this is an impression event, this field contains the identifiers of all
@@ -1607,6 +1655,7 @@ data SearchJobsRequest =
     , _sjrHistogramFacets          :: !(Maybe HistogramFacets)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchJobsRequest' with the minimum fields required to make a request.
 --
@@ -1661,6 +1710,7 @@ searchJobsRequest =
     , _sjrPageSize = Nothing
     , _sjrHistogramFacets = Nothing
     }
+
 
 -- | Required. The meta information collected about the job searcher, used to
 -- improve the search quality of the service.. The identifiers, (such as
@@ -1886,6 +1936,7 @@ newtype HistogramQueryResultHistogram =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistogramQueryResultHistogram' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1896,6 +1947,7 @@ histogramQueryResultHistogram
     -> HistogramQueryResultHistogram
 histogramQueryResultHistogram pHqrhAddtional_ =
   HistogramQueryResultHistogram' {_hqrhAddtional = _Coerce # pHqrhAddtional_}
+
 
 hqrhAddtional :: Lens' HistogramQueryResultHistogram (HashMap Text Int64)
 hqrhAddtional
@@ -1921,6 +1973,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1931,6 +1984,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1957,6 +2011,7 @@ data HistogramQueryResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistogramQueryResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1968,6 +2023,7 @@ histogramQueryResult
     :: HistogramQueryResult
 histogramQueryResult =
   HistogramQueryResult' {_hqrHistogramQuery = Nothing, _hqrHistogram = Nothing}
+
 
 -- | Requested histogram expression.
 hqrHistogramQuery :: Lens' HistogramQueryResult (Maybe Text)
@@ -2013,6 +2069,7 @@ data CustomAttributeHistogramRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomAttributeHistogramRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2030,6 +2087,7 @@ customAttributeHistogramRequest =
     , _cahrKey = Nothing
     , _cahrStringValueHistogram = Nothing
     }
+
 
 -- | Optional. Specifies buckets used to perform a range histogram on Job\'s
 -- filterable long custom field values, or min\/max value requirements.
@@ -2083,6 +2141,7 @@ newtype ResponseMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResponseMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2091,6 +2150,7 @@ newtype ResponseMetadata =
 responseMetadata
     :: ResponseMetadata
 responseMetadata = ResponseMetadata' {_rmRequestId = Nothing}
+
 
 -- | A unique id associated with this call. This id is logged for tracking
 -- purposes.
@@ -2118,6 +2178,7 @@ data CommuteInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommuteInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2129,6 +2190,7 @@ commuteInfo
     :: CommuteInfo
 commuteInfo =
   CommuteInfo' {_ciTravelDuration = Nothing, _ciJobLocation = Nothing}
+
 
 -- | The number of seconds required to travel to the job location from the
 -- query location. A duration of 0 seconds indicates that the job is not
@@ -2171,6 +2233,7 @@ data CustomAttributeHistogramResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomAttributeHistogramResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2188,6 +2251,7 @@ customAttributeHistogramResult =
     , _cLongValueHistogramResult = Nothing
     , _cKey = Nothing
     }
+
 
 -- | Stores a map from the values of string custom field associated with
 -- \`key\` to the number of jobs with that value in this histogram result.
@@ -2237,6 +2301,7 @@ data BucketRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2247,6 +2312,7 @@ data BucketRange =
 bucketRange
     :: BucketRange
 bucketRange = BucketRange' {_brTo = Nothing, _brFrom = Nothing}
+
 
 -- | Ending value of the bucket range.
 brTo :: Lens' BucketRange (Maybe Double)
@@ -2283,6 +2349,7 @@ data NumericBucketingResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NumericBucketingResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2297,6 +2364,7 @@ numericBucketingResult
 numericBucketingResult =
   NumericBucketingResult'
     {_nbrMaxValue = Nothing, _nbrCounts = Nothing, _nbrMinValue = Nothing}
+
 
 -- | Stores the maximum value of the numeric field. Is populated only if
 -- [NumericBucketingOption.requires_min_max] is set to true.
@@ -2346,6 +2414,7 @@ data JobDerivedInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobDerivedInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2357,6 +2426,7 @@ jobDerivedInfo
     :: JobDerivedInfo
 jobDerivedInfo =
   JobDerivedInfo' {_jdiJobCategories = Nothing, _jdiLocations = Nothing}
+
 
 -- | Job categories derived from Job.title and Job.description.
 jdiJobCategories :: Lens' JobDerivedInfo [Text]
@@ -2398,6 +2468,7 @@ newtype CompanyDerivedInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompanyDerivedInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2406,6 +2477,7 @@ newtype CompanyDerivedInfo =
 companyDerivedInfo
     :: CompanyDerivedInfo
 companyDerivedInfo = CompanyDerivedInfo' {_cdiHeadquartersLocation = Nothing}
+
 
 -- | A structured headquarters location of the company, resolved from
 -- Company.hq_location if provided.
@@ -2440,6 +2512,7 @@ data CompensationFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompensationFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2460,6 +2533,7 @@ compensationFilter =
     , _cfUnits = Nothing
     , _cfType = Nothing
     }
+
 
 -- | Optional. Whether to include jobs whose compensation range is
 -- unspecified.
@@ -2527,6 +2601,7 @@ data Company =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Company' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2574,6 +2649,7 @@ company =
     , _cExternalId = Nothing
     , _cDerivedInfo = Nothing
     }
+
 
 -- | Optional. Set to true if it is the hiring agency that post jobs for
 -- other employers. Defaults to false if not provided.
@@ -2713,6 +2789,7 @@ data CustomAttribute =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomAttribute' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2730,6 +2807,7 @@ customAttribute =
     , _caFilterable = Nothing
     , _caStringValues = Nothing
     }
+
 
 -- | Optional but exactly one of string_values or long_values must be
 -- specified. This field is used to perform number range search. (\`EQ\`,
@@ -2817,6 +2895,7 @@ data Job =
     , _jPostingCreateTime  :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
@@ -2916,6 +2995,7 @@ job =
     , _jRequisitionId = Nothing
     , _jPostingCreateTime = Nothing
     }
+
 
 -- | Optional. The department or functional area within the company with the
 -- open position. The maximum number of allowed characters is 255.
@@ -3279,6 +3359,7 @@ data HistogramResults =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistogramResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3296,6 +3377,7 @@ histogramResults =
     , _hrCustomAttributeHistogramResults = Nothing
     , _hrCompensationHistogramResults = Nothing
     }
+
 
 -- | Specifies histogram results that matches
 -- HistogramFacets.simple_histogram_facets.
@@ -3358,6 +3440,7 @@ data LocationFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LocationFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3381,6 +3464,7 @@ locationFilter =
     , _lfTelecommutePreference = Nothing
     , _lfAddress = Nothing
     }
+
 
 -- | Optional. The latitude and longitude of the geographic center from which
 -- to search. This field\'s ignored if \`address\` is provided.
@@ -3463,6 +3547,7 @@ data ListJobsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListJobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3477,6 +3562,7 @@ listJobsResponse
 listJobsResponse =
   ListJobsResponse'
     {_ljrNextPageToken = Nothing, _ljrJobs = Nothing, _ljrMetadata = Nothing}
+
 
 -- | A token to retrieve the next page of results.
 ljrNextPageToken :: Lens' ListJobsResponse (Maybe Text)
@@ -3523,6 +3609,7 @@ data CompensationHistogramResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompensationHistogramResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3534,6 +3621,7 @@ compensationHistogramResult
     :: CompensationHistogramResult
 compensationHistogramResult =
   CompensationHistogramResult' {_cResult = Nothing, _cType = Nothing}
+
 
 -- | Histogram result.
 cResult :: Lens' CompensationHistogramResult (Maybe NumericBucketingResult)
@@ -3576,6 +3664,7 @@ data JobQuery =
     , _jqExcludedJobs          :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobQuery' with the minimum fields required to make a request.
 --
@@ -3624,6 +3713,7 @@ jobQuery =
     , _jqEmploymentTypes = Nothing
     , _jqExcludedJobs = Nothing
     }
+
 
 -- | Optional. This filter specifies the locale of jobs to search against,
 -- for example, \"en-US\". If a value isn\'t specified, the search results
@@ -3821,6 +3911,7 @@ newtype CreateClientEventRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateClientEventRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3830,6 +3921,7 @@ createClientEventRequest
     :: CreateClientEventRequest
 createClientEventRequest =
   CreateClientEventRequest' {_ccerClientEvent = Nothing}
+
 
 -- | Required. Events issued when end user interacts with customer\'s
 -- application that uses Cloud Talent Solution.
@@ -3859,6 +3951,7 @@ data SpellingCorrection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpellingCorrection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3870,6 +3963,7 @@ spellingCorrection
     :: SpellingCorrection
 spellingCorrection =
   SpellingCorrection' {_scCorrected = Nothing, _scCorrectedText = Nothing}
+
 
 -- | Indicates if the query was corrected by the spell checker.
 scCorrected :: Lens' SpellingCorrection (Maybe Bool)
@@ -3906,6 +4000,7 @@ data CompleteQueryResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompleteQueryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3918,6 +4013,7 @@ completeQueryResponse
 completeQueryResponse =
   CompleteQueryResponse'
     {_cqrMetadata = Nothing, _cqrCompletionResults = Nothing}
+
 
 -- | Additional information for the API invocation, such as the request
 -- tracking id.
@@ -3963,6 +4059,7 @@ data TimeOfDay' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3983,6 +4080,7 @@ timeOfDay =
     , _todMinutes = Nothing
     , _todSeconds = Nothing
     }
+
 
 -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
 todNanos :: Lens' TimeOfDay' (Maybe Int32)
@@ -4048,6 +4146,7 @@ data CompensationEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompensationEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4074,6 +4173,7 @@ compensationEntry =
     , _ceDescription = Nothing
     , _ceUnit = Nothing
     }
+
 
 -- | Optional. Compensation amount.
 ceAmount :: Lens' CompensationEntry (Maybe Money)
@@ -4144,6 +4244,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4154,6 +4255,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -4179,6 +4281,7 @@ data CompensationRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompensationRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4191,6 +4294,7 @@ compensationRange
 compensationRange =
   CompensationRange'
     {_crMaxCompensation = Nothing, _crMinCompensation = Nothing}
+
 
 -- | Optional. The maximum amount of compensation. If left empty, the value
 -- is set to a maximal compensation value and the currency code is set to
@@ -4233,6 +4337,7 @@ data CustomRankingInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomRankingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4245,6 +4350,7 @@ customRankingInfo
 customRankingInfo =
   CustomRankingInfo'
     {_criImportanceLevel = Nothing, _criRankingExpression = Nothing}
+
 
 -- | Required. Controls over how important the score of
 -- CustomRankingInfo.ranking_expression gets applied to job\'s final
@@ -4294,6 +4400,7 @@ data ProcessingOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProcessingOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4306,6 +4413,7 @@ processingOptions
 processingOptions =
   ProcessingOptions'
     {_poHTMLSanitization = Nothing, _poDisableStreetAddressResolution = Nothing}
+
 
 -- | Optional. Option for job HTML content sanitization. Applied fields are:
 -- * description * applicationInfo.instruction * incentives *
@@ -4370,6 +4478,7 @@ data PostalAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostalAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4411,6 +4520,7 @@ postalAddress =
     , _paRevision = Nothing
     , _paOrganization = Nothing
     }
+
 
 -- | Optional. BCP-47 language code of the contents of this address (if
 -- known). This is often the UI language of the input form or is expected
@@ -4572,6 +4682,7 @@ data DeviceInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeviceInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4582,6 +4693,7 @@ data DeviceInfo =
 deviceInfo
     :: DeviceInfo
 deviceInfo = DeviceInfo' {_diId = Nothing, _diDeviceType = Nothing}
+
 
 -- | Optional. A device-specific ID. The ID must be a unique identifier that
 -- distinguishes the device from other devices.
@@ -4618,6 +4730,7 @@ data NumericBucketingOption =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NumericBucketingOption' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4630,6 +4743,7 @@ numericBucketingOption
 numericBucketingOption =
   NumericBucketingOption'
     {_nboBucketBounds = Nothing, _nboRequiresMinMax = Nothing}
+
 
 -- | Required. Two adjacent values form a histogram bucket. Values should be
 -- in ascending order. For example, if [5, 10, 15] are provided, four
@@ -4680,6 +4794,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4690,6 +4805,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -4716,6 +4832,7 @@ data HistogramFacets =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistogramFacets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4733,6 +4850,7 @@ histogramFacets =
     , _hfCustomAttributeHistogramFacets = Nothing
     , _hfSimpleHistogramFacets = Nothing
     }
+
 
 -- | Optional. Specifies compensation field-based histogram requests.
 -- Duplicate values of CompensationHistogramRequest.type are not allowed.
@@ -4794,6 +4912,7 @@ data HistogramResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistogramResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4805,6 +4924,7 @@ histogramResult
     :: HistogramResult
 histogramResult =
   HistogramResult' {_hrValues = Nothing, _hrSearchType = Nothing}
+
 
 -- | A map from the values of field to the number of jobs with that value in
 -- this search result. Key: search type (filter names, such as the
@@ -4842,6 +4962,7 @@ newtype CustomAttributeHistogramResultStringValueHistogramResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomAttributeHistogramResultStringValueHistogramResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4853,6 +4974,7 @@ customAttributeHistogramResultStringValueHistogramResult
 customAttributeHistogramResultStringValueHistogramResult pCahrsvhrAddtional_ =
   CustomAttributeHistogramResultStringValueHistogramResult'
     {_cahrsvhrAddtional = _Coerce # pCahrsvhrAddtional_}
+
 
 cahrsvhrAddtional :: Lens' CustomAttributeHistogramResultStringValueHistogramResult (HashMap Text Int32)
 cahrsvhrAddtional
@@ -4887,6 +5009,7 @@ newtype ClientEventExtraInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClientEventExtraInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4897,6 +5020,7 @@ clientEventExtraInfo
     -> ClientEventExtraInfo
 clientEventExtraInfo pCeeiAddtional_ =
   ClientEventExtraInfo' {_ceeiAddtional = _Coerce # pCeeiAddtional_}
+
 
 ceeiAddtional :: Lens' ClientEventExtraInfo (HashMap Text Text)
 ceeiAddtional
@@ -4930,6 +5054,7 @@ data SearchJobsResponse =
     , _sjrSpellCorrection         :: !(Maybe SpellingCorrection)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchJobsResponse' with the minimum fields required to make a request.
 --
@@ -4969,6 +5094,7 @@ searchJobsResponse =
     , _sjrBroadenedQueryJobsCount = Nothing
     , _sjrSpellCorrection = Nothing
     }
+
 
 -- | The token that specifies the starting position of the next page of
 -- results. This field is empty if there are no more results.
@@ -5099,6 +5225,7 @@ newtype HistogramResultValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistogramResultValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5109,6 +5236,7 @@ histogramResultValues
     -> HistogramResultValues
 histogramResultValues pHrvAddtional_ =
   HistogramResultValues' {_hrvAddtional = _Coerce # pHrvAddtional_}
+
 
 hrvAddtional :: Lens' HistogramResultValues (HashMap Text Int32)
 hrvAddtional
@@ -5134,6 +5262,7 @@ data TimestampRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimestampRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5144,6 +5273,7 @@ data TimestampRange =
 timestampRange
     :: TimestampRange
 timestampRange = TimestampRange' {_trStartTime = Nothing, _trEndTime = Nothing}
+
 
 -- | Begin of the period.
 trStartTime :: Lens' TimestampRange (Maybe UTCTime)

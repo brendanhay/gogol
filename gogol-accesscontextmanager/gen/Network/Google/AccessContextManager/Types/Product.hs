@@ -65,6 +65,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -125,6 +127,7 @@ data BasicLevel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BasicLevel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +139,7 @@ basicLevel
     :: BasicLevel
 basicLevel =
   BasicLevel' {_blConditions = Nothing, _blCombiningFunction = Nothing}
+
 
 -- | Required. A list of requirements for the \`AccessLevel\` to be granted.
 blConditions :: Lens' BasicLevel [Condition]
@@ -186,6 +190,7 @@ data AccessLevel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessLevel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -212,6 +217,7 @@ accessLevel =
     , _alDescription = Nothing
     , _alCreateTime = Nothing
     }
+
 
 -- | A \`BasicLevel\` composed of \`Conditions\`.
 alBasic :: Lens' AccessLevel (Maybe BasicLevel)
@@ -281,6 +287,7 @@ data ServicePerimeterConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicePerimeterConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -301,6 +308,7 @@ servicePerimeterConfig =
     , _spcRestrictedServices = Nothing
     , _spcAccessLevels = Nothing
     }
+
 
 -- | GCP services that are not subject to the Service Perimeter restrictions.
 -- May contain a list of services or a single wildcard \"*\". For example,
@@ -398,6 +406,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -421,6 +430,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -501,6 +511,7 @@ data ServicePerimeter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicePerimeter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -530,6 +541,7 @@ servicePerimeter =
     , _spDescription = Nothing
     , _spCreateTime = Nothing
     }
+
 
 -- | Current ServicePerimeter configuration. Specifies sets of resources,
 -- restricted\/unrestricted services and access levels that determine
@@ -611,6 +623,7 @@ data ListAccessPoliciesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAccessPoliciesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -623,6 +636,7 @@ listAccessPoliciesResponse
 listAccessPoliciesResponse =
   ListAccessPoliciesResponse'
     {_laprNextPageToken = Nothing, _laprAccessPolicies = Nothing}
+
 
 -- | The pagination token to retrieve the next page of results. If the value
 -- is empty, no further results remain.
@@ -662,6 +676,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -672,6 +687,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -697,6 +713,7 @@ data OSConstraint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OSConstraint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -707,6 +724,7 @@ data OSConstraint =
 osConstraint
     :: OSConstraint
 osConstraint = OSConstraint' {_ocOSType = Nothing, _ocMinimumVersion = Nothing}
+
 
 -- | Required. The allowed OS type.
 ocOSType :: Lens' OSConstraint (Maybe OSConstraintOSType)
@@ -752,6 +770,7 @@ data AccessPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -775,6 +794,7 @@ accessPolicy =
     , _apTitle = Nothing
     , _apCreateTime = Nothing
     }
+
 
 -- | Required. The parent of this \`AccessPolicy\` in the Cloud Resource
 -- Hierarchy. Currently immutable once created. Format:
@@ -832,6 +852,7 @@ data ListServicePerimetersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListServicePerimetersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -844,6 +865,7 @@ listServicePerimetersResponse
 listServicePerimetersResponse =
   ListServicePerimetersResponse'
     {_lsprNextPageToken = Nothing, _lsprServicePerimeters = Nothing}
+
 
 -- | The pagination token to retrieve the next page of results. If the value
 -- is empty, no further results remain.
@@ -885,6 +907,7 @@ data ListAccessLevelsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAccessLevelsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -897,6 +920,7 @@ listAccessLevelsResponse
 listAccessLevelsResponse =
   ListAccessLevelsResponse'
     {_lalrNextPageToken = Nothing, _lalrAccessLevels = Nothing}
+
 
 -- | The pagination token to retrieve the next page of results. If the value
 -- is empty, no further results remain.
@@ -940,6 +964,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -950,6 +975,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -985,6 +1011,7 @@ data DevicePolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DevicePolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1005,6 +1032,7 @@ devicePolicy =
     , _dpAllowedEncryptionStatuses = Nothing
     , _dpAllowedDeviceManagementLevels = Nothing
     }
+
 
 -- | Allowed OS versions, an empty list allows all types and all versions.
 dpOSConstraints :: Lens' DevicePolicy [OSConstraint]
@@ -1078,6 +1106,7 @@ data Condition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1101,6 +1130,7 @@ condition =
     , _cDevicePolicy = Nothing
     , _cRequiredAccessLevels = Nothing
     }
+
 
 -- | The request must be made by one of the provided user or service
 -- accounts. Groups are not supported. Syntax: \`user:{emailid}\`
@@ -1189,6 +1219,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1199,6 +1230,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)

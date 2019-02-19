@@ -60,6 +60,7 @@ newtype RelyingPartyEmailLinkSignin =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartyEmailLinkSignin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ relyingPartyEmailLinkSignin
     -> RelyingPartyEmailLinkSignin
 relyingPartyEmailLinkSignin pRpelsPayload_ =
   RelyingPartyEmailLinkSignin' {_rpelsPayload = pRpelsPayload_}
+
 
 -- | Multipart request metadata.
 rpelsPayload :: Lens' RelyingPartyEmailLinkSignin IdentitytoolkitRelyingPartyEmailLinkSigninRequest

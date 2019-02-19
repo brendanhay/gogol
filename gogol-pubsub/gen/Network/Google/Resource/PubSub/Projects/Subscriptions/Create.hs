@@ -92,6 +92,7 @@ data ProjectsSubscriptionsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSubscriptionsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ projectsSubscriptionsCreate pPscPayload_ pPscName_ =
     , _pscName = pPscName_
     , _pscCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscXgafv :: Lens' ProjectsSubscriptionsCreate (Maybe Xgafv)

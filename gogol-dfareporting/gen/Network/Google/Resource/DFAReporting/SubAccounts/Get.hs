@@ -61,6 +61,7 @@ data SubAccountsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubAccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ subAccountsGet
 subAccountsGet pSagProFileId_ pSagId_ =
   SubAccountsGet'
     {_sagProFileId = _Coerce # pSagProFileId_, _sagId = _Coerce # pSagId_}
+
 
 -- | User profile ID associated with this request.
 sagProFileId :: Lens' SubAccountsGet Int64

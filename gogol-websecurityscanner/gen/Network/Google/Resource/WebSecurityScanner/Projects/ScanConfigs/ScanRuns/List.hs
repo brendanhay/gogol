@@ -80,6 +80,7 @@ data ProjectsScanConfigsScanRunsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsScanConfigsScanRunsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsScanConfigsScanRunsList pPscsrlParent_ =
     , _pscsrlPageSize = Nothing
     , _pscsrlCallback = Nothing
     }
+
 
 -- | Required. The parent resource name, which should be a scan resource name
 -- in the format \'projects\/{projectId}\/scanConfigs\/{scanConfigId}\'.

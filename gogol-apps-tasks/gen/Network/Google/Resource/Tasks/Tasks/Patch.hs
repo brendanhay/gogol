@@ -64,6 +64,7 @@ data TasksPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TasksPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ tasksPatch
 tasksPatch pTpPayload_ pTpTaskList_ pTpTask_ =
   TasksPatch'
     {_tpPayload = pTpPayload_, _tpTaskList = pTpTaskList_, _tpTask = pTpTask_}
+
 
 -- | Multipart request metadata.
 tpPayload :: Lens' TasksPatch Task

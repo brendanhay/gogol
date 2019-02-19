@@ -67,6 +67,7 @@ data SSLCertsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ sslCertsDelete pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
     , _scdSha1Fingerprint = pScdSha1Fingerprint_
     , _scdInstance = pScdInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 scdProject :: Lens' SSLCertsDelete Text

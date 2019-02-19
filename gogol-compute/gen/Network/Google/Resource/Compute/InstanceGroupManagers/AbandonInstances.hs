@@ -98,6 +98,7 @@ data InstanceGroupManagersAbandonInstances =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersAbandonInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -125,6 +126,7 @@ instanceGroupManagersAbandonInstances pIgmaiProject_ pIgmaiInstanceGroupManager_
     , _igmaiZone = pIgmaiZone_
     , _igmaiPayload = pIgmaiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

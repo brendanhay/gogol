@@ -61,6 +61,7 @@ data WebAppsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebAppsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ webAppsDelete
 webAppsDelete pWadWebAppId_ pWadEnterpriseId_ =
   WebAppsDelete'
     {_wadWebAppId = pWadWebAppId_, _wadEnterpriseId = pWadEnterpriseId_}
+
 
 -- | The ID of the web app.
 wadWebAppId :: Lens' WebAppsDelete Text

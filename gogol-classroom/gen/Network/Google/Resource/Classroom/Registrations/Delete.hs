@@ -73,6 +73,7 @@ data RegistrationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegistrationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ registrationsDelete pRdRegistrationId_ =
     , _rdUploadType = Nothing
     , _rdCallback = Nothing
     }
+
 
 -- | The \`registration_id\` of the \`Registration\` to be deleted.
 rdRegistrationId :: Lens' RegistrationsDelete Text

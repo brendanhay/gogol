@@ -61,6 +61,7 @@ data EventTagsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventTagsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ eventTagsInsert
 eventTagsInsert pEtiProFileId_ pEtiPayload_ =
   EventTagsInsert'
     {_etiProFileId = _Coerce # pEtiProFileId_, _etiPayload = pEtiPayload_}
+
 
 -- | User profile ID associated with this request.
 etiProFileId :: Lens' EventTagsInsert Int64

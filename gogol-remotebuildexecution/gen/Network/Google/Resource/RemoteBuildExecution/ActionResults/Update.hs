@@ -105,6 +105,7 @@ data ActionResultsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActionResultsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -147,6 +148,7 @@ actionResultsUpdate pAruSizeBytes_ pAruHash_ pAruPayload_ pAruInstanceName_ =
     , _aruInstanceName = pAruInstanceName_
     , _aruCallback = Nothing
     }
+
 
 -- | The size of the blob, in bytes.
 aruSizeBytes :: Lens' ActionResultsUpdate Int64

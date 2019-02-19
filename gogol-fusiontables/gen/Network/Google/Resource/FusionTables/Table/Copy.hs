@@ -61,6 +61,7 @@ data TableCopy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableCopy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ tableCopy
     -> TableCopy
 tableCopy pTcTableId_ =
   TableCopy' {_tcTableId = pTcTableId_, _tcCopyPresentation = Nothing}
+
 
 -- | ID of the table that is being copied.
 tcTableId :: Lens' TableCopy Text

@@ -84,6 +84,7 @@ data ServicesConsumersTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesConsumersTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ servicesConsumersTestIAMPermissions pSctipPayload_ pSctipResource_ =
     , _sctipResource = pSctipResource_
     , _sctipCallback = Nothing
     }
+
 
 -- | V1 error format.
 sctipXgafv :: Lens' ServicesConsumersTestIAMPermissions (Maybe Xgafv)

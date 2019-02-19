@@ -63,6 +63,7 @@ data UsersMessagesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersMessagesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ usersMessagesDelete
     -> UsersMessagesDelete
 usersMessagesDelete pUmdId_ =
   UsersMessagesDelete' {_umdUserId = "me", _umdId = pUmdId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

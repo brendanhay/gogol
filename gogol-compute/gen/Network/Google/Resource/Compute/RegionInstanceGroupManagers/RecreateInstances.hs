@@ -93,6 +93,7 @@ data RegionInstanceGroupManagersRecreateInstances =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagersRecreateInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ regionInstanceGroupManagersRecreateInstances pRigmriProject_ pRigmriInstanceGrou
     , _rigmriPayload = pRigmriPayload_
     , _rigmriRegion = pRigmriRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

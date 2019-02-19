@@ -73,6 +73,7 @@ data SettingsSearchApplicationsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsSearchApplicationsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ settingsSearchApplicationsCreate pSsacPayload_ =
     , _ssacPayload = pSsacPayload_
     , _ssacCallback = Nothing
     }
+
 
 -- | V1 error format.
 ssacXgafv :: Lens' SettingsSearchApplicationsCreate (Maybe Xgafv)

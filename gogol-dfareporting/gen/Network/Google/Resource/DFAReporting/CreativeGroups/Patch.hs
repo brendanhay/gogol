@@ -67,6 +67,7 @@ data CreativeGroupsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeGroupsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ creativeGroupsPatch pCgpProFileId_ pCgpPayload_ pCgpId_ =
     , _cgpPayload = pCgpPayload_
     , _cgpId = _Coerce # pCgpId_
     }
+
 
 -- | User profile ID associated with this request.
 cgpProFileId :: Lens' CreativeGroupsPatch Int64

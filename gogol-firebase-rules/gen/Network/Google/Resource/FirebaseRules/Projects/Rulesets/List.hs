@@ -85,6 +85,7 @@ data ProjectsRulesetsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRulesetsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ projectsRulesetsList pPrlName_ =
     , _prlPageSize = Nothing
     , _prlCallback = Nothing
     }
+
 
 -- | V1 error format.
 prlXgafv :: Lens' ProjectsRulesetsList (Maybe Xgafv)

@@ -63,6 +63,7 @@ data MarketplaceDealsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MarketplaceDealsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ marketplaceDealsInsert
 marketplaceDealsInsert pMdiPayload_ pMdiProposalId_ =
   MarketplaceDealsInsert'
     {_mdiPayload = pMdiPayload_, _mdiProposalId = pMdiProposalId_}
+
 
 -- | Multipart request metadata.
 mdiPayload :: Lens' MarketplaceDealsInsert AddOrderDealsRequest

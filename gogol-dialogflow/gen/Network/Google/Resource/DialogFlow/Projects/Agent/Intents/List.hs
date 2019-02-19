@@ -85,6 +85,7 @@ data ProjectsAgentIntentsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentIntentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +125,7 @@ projectsAgentIntentsList pPailParent_ =
     , _pailPageSize = Nothing
     , _pailCallback = Nothing
     }
+
 
 -- | Required. The agent to list all intents from. Format:
 -- \`projects\/\/agent\`.

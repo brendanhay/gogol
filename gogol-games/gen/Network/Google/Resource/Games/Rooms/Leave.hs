@@ -66,6 +66,7 @@ data RoomsLeave =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoomsLeave' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -82,6 +83,7 @@ roomsLeave
 roomsLeave pRlPayload_ pRlRoomId_ =
   RoomsLeave'
     {_rlPayload = pRlPayload_, _rlRoomId = pRlRoomId_, _rlLanguage = Nothing}
+
 
 -- | Multipart request metadata.
 rlPayload :: Lens' RoomsLeave RoomLeaveRequest

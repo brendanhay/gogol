@@ -93,6 +93,7 @@ data ServicesRolloutsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesRolloutsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +125,7 @@ servicesRolloutsCreate pSrcPayload_ pSrcServiceName_ =
     , _srcServiceName = pSrcServiceName_
     , _srcCallback = Nothing
     }
+
 
 -- | V1 error format.
 srcXgafv :: Lens' ServicesRolloutsCreate (Maybe Xgafv)

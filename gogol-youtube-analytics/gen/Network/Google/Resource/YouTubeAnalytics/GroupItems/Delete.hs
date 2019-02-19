@@ -75,6 +75,7 @@ data GroupItemsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GroupItemsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ groupItemsDelete =
     , _gidId = Nothing
     , _gidCallback = Nothing
     }
+
 
 -- | V1 error format.
 gidXgafv :: Lens' GroupItemsDelete (Maybe Xgafv)

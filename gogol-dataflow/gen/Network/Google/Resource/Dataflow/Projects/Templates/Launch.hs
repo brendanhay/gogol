@@ -91,6 +91,7 @@ data ProjectsTemplatesLaunch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTemplatesLaunch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -137,6 +138,7 @@ projectsTemplatesLaunch pPtlPayload_ pPtlProjectId_ =
     , _ptlCallback = Nothing
     , _ptlDynamicTemplateGcsPath = Nothing
     }
+
 
 -- | V1 error format.
 ptlXgafv :: Lens' ProjectsTemplatesLaunch (Maybe Xgafv)

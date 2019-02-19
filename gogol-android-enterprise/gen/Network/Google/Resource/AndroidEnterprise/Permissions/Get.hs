@@ -62,6 +62,7 @@ data PermissionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PermissionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ permissionsGet
     -> PermissionsGet
 permissionsGet pPgPermissionId_ =
   PermissionsGet' {_pgLanguage = Nothing, _pgPermissionId = pPgPermissionId_}
+
 
 -- | The BCP47 tag for the user\'s preferred language (e.g. \"en-US\",
 -- \"de\")

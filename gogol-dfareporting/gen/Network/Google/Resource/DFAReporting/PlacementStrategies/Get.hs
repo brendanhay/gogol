@@ -62,6 +62,7 @@ data PlacementStrategiesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementStrategiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ placementStrategiesGet
 placementStrategiesGet pPsgProFileId_ pPsgId_ =
   PlacementStrategiesGet'
     {_psgProFileId = _Coerce # pPsgProFileId_, _psgId = _Coerce # pPsgId_}
+
 
 -- | User profile ID associated with this request.
 psgProFileId :: Lens' PlacementStrategiesGet Int64

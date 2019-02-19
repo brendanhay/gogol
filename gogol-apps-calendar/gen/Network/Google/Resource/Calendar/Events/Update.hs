@@ -82,6 +82,7 @@ data EventsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ eventsUpdate pEuCalendarId_ pEuPayload_ pEuEventId_ =
     , _euAlwaysIncludeEmail = Nothing
     , _euEventId = pEuEventId_
     }
+
 
 -- | Version number of conference data supported by the API client. Version 0
 -- assumes no conference data support and ignores conference data in the

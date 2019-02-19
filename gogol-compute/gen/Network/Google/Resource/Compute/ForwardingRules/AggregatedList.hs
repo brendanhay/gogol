@@ -72,6 +72,7 @@ data ForwardingRulesAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingRulesAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ forwardingRulesAggregatedList pFralProject_ =
     , _fralPageToken = Nothing
     , _fralMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

@@ -67,6 +67,7 @@ data PermissionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PermissionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ permissionsGet pPgFileId_ pPgPermissionId_ =
     , _pgSupportsTeamDrives = False
     , _pgPermissionId = pPgPermissionId_
     }
+
 
 -- | Issue the request as a domain administrator; if set to true, then the
 -- requester will be granted access if they are an administrator of the

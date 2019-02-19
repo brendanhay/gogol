@@ -76,6 +76,7 @@ data DocumentsAnalyzeSyntax =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentsAnalyzeSyntax' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ documentsAnalyzeSyntax pDPayload_ =
     , _dPayload = pDPayload_
     , _dCallback = Nothing
     }
+
 
 -- | V1 error format.
 dXgafv :: Lens' DocumentsAnalyzeSyntax (Maybe Xgafv)

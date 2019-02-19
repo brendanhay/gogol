@@ -76,6 +76,7 @@ data EnterprisesPoliciesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesPoliciesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ enterprisesPoliciesPatch pEppPayload_ pEppName_ =
     , _eppName = pEppName_
     , _eppCallback = Nothing
     }
+
 
 -- | V1 error format.
 eppXgafv :: Lens' EnterprisesPoliciesPatch (Maybe Xgafv)

@@ -73,6 +73,7 @@ data ResourcesCalendarsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesCalendarsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ resourcesCalendarsList pRclCustomer_ =
     , _rclPageToken = Nothing
     , _rclMaxResults = Nothing
     }
+
 
 -- | Field(s) to sort results by in either ascending or descending order.
 -- Supported fields include resourceId, resourceName, capacity, buildingId,

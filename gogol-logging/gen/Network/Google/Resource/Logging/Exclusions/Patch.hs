@@ -77,6 +77,7 @@ data ExclusionsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExclusionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ exclusionsPatch pEpPayload_ pEpName_ =
     , _epName = pEpName_
     , _epCallback = Nothing
     }
+
 
 -- | V1 error format.
 epXgafv :: Lens' ExclusionsPatch (Maybe Xgafv)

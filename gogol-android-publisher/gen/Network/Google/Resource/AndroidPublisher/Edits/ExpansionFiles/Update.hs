@@ -79,6 +79,7 @@ data EditsExpansionFilesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsExpansionFilesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ editsExpansionFilesUpdate pEefuPackageName_ pEefuAPKVersionCode_ pEefuPayload_ p
     , _eefuExpansionFileType = pEefuExpansionFileType_
     , _eefuEditId = pEefuEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

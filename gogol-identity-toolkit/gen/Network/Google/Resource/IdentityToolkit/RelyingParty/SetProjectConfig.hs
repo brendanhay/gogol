@@ -62,6 +62,7 @@ newtype RelyingPartySetProjectConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartySetProjectConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ relyingPartySetProjectConfig
     -> RelyingPartySetProjectConfig
 relyingPartySetProjectConfig pRpspcPayload_ =
   RelyingPartySetProjectConfig' {_rpspcPayload = pRpspcPayload_}
+
 
 -- | Multipart request metadata.
 rpspcPayload :: Lens' RelyingPartySetProjectConfig IdentitytoolkitRelyingPartySetProjectConfigRequest

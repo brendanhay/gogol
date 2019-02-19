@@ -57,6 +57,7 @@ newtype SavedadstylesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SavedadstylesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ savedadstylesGet
     -> SavedadstylesGet
 savedadstylesGet pSgSavedAdStyleId_ =
   SavedadstylesGet' {_sgSavedAdStyleId = pSgSavedAdStyleId_}
+
 
 -- | Saved ad style to retrieve.
 sgSavedAdStyleId :: Lens' SavedadstylesGet Text

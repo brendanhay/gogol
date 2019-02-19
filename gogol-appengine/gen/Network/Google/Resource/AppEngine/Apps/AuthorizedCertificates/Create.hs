@@ -76,6 +76,7 @@ data AppsAuthorizedCertificatesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsAuthorizedCertificatesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ appsAuthorizedCertificatesCreate pAaccPayload_ pAaccAppsId_ =
     , _aaccAppsId = pAaccAppsId_
     , _aaccCallback = Nothing
     }
+
 
 -- | V1 error format.
 aaccXgafv :: Lens' AppsAuthorizedCertificatesCreate (Maybe Xgafv)

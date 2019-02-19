@@ -60,6 +60,7 @@ newtype LeaderboardConfigurationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardConfigurationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ leaderboardConfigurationsGet
     -> LeaderboardConfigurationsGet
 leaderboardConfigurationsGet pLcgLeaderboardId_ =
   LeaderboardConfigurationsGet' {_lcgLeaderboardId = pLcgLeaderboardId_}
+
 
 -- | The ID of the leaderboard.
 lcgLeaderboardId :: Lens' LeaderboardConfigurationsGet Text

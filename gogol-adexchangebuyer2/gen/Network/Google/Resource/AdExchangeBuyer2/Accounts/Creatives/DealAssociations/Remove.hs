@@ -81,6 +81,7 @@ data AccountsCreativesDealAssociationsRemove =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCreativesDealAssociationsRemove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ accountsCreativesDealAssociationsRemove pAcdarCreativeId_ pAcdarPayload_ pAcdarA
     , _acdarAccountId = pAcdarAccountId_
     , _acdarCallback = Nothing
     }
+
 
 -- | V1 error format.
 acdarXgafv :: Lens' AccountsCreativesDealAssociationsRemove (Maybe Xgafv)

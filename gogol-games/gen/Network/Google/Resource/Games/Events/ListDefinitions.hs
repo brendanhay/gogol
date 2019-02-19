@@ -64,6 +64,7 @@ data EventsListDefinitions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsListDefinitions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ eventsListDefinitions
 eventsListDefinitions =
   EventsListDefinitions'
     {_eldLanguage = Nothing, _eldPageToken = Nothing, _eldMaxResults = Nothing}
+
 
 -- | The preferred language to use for strings returned by this method.
 eldLanguage :: Lens' EventsListDefinitions (Maybe Text)

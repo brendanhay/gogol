@@ -61,6 +61,7 @@ data PretargetingConfigGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PretargetingConfigGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ pretargetingConfigGet pPcgAccountId_ pPcgConfigId_ =
     { _pcgAccountId = _Coerce # pPcgAccountId_
     , _pcgConfigId = _Coerce # pPcgConfigId_
     }
+
 
 -- | The account id to get the pretargeting config for.
 pcgAccountId :: Lens' PretargetingConfigGet Int64

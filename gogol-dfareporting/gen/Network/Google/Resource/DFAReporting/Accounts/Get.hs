@@ -61,6 +61,7 @@ data AccountsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ accountsGet
 accountsGet pAggProFileId_ pAggId_ =
   AccountsGet'
     {_aggProFileId = _Coerce # pAggProFileId_, _aggId = _Coerce # pAggId_}
+
 
 -- | User profile ID associated with this request.
 aggProFileId :: Lens' AccountsGet Int64

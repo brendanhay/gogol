@@ -61,6 +61,7 @@ data PostsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ postsDelete
     -> PostsDelete
 postsDelete pPdBlogId_ pPdPostId_ =
   PostsDelete' {_pdBlogId = pPdBlogId_, _pdPostId = pPdPostId_}
+
 
 -- | The ID of the Blog.
 pdBlogId :: Lens' PostsDelete Text

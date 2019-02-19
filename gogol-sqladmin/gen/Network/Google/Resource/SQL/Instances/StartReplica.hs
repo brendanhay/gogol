@@ -62,6 +62,7 @@ data InstancesStartReplica =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesStartReplica' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ instancesStartReplica
 instancesStartReplica pInsProject_ pInsInstance_ =
   InstancesStartReplica'
     {_insProject = pInsProject_, _insInstance = pInsInstance_}
+
 
 -- | ID of the project that contains the read replica.
 insProject :: Lens' InstancesStartReplica Text

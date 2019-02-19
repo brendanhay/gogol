@@ -92,6 +92,7 @@ data ProjectsTopicsSnapshotsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTopicsSnapshotsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -125,6 +126,7 @@ projectsTopicsSnapshotsList pPtsltTopic_ =
     , _ptsltPageSize = Nothing
     , _ptsltCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptsltXgafv :: Lens' ProjectsTopicsSnapshotsList (Maybe Xgafv)

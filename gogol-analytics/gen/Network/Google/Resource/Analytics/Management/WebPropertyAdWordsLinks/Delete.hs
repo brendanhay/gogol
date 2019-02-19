@@ -67,6 +67,7 @@ data ManagementWebPropertyAdWordsLinksDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ managementWebPropertyAdWordsLinksDelete pMwpawldWebPropertyId_ pMwpawldAccountId
     , _mwpawldAccountId = pMwpawldAccountId_
     , _mwpawldWebPropertyAdWordsLinkId = pMwpawldWebPropertyAdWordsLinkId_
     }
+
 
 -- | Web property ID to delete the Google Ads link for.
 mwpawldWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksDelete Text

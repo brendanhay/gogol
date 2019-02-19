@@ -67,6 +67,7 @@ data PermissionsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PermissionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ permissionsDelete pPdFileId_ pPdPermissionId_ =
     , _pdSupportsTeamDrives = False
     , _pdPermissionId = pPdPermissionId_
     }
+
 
 -- | Issue the request as a domain administrator; if set to true, then the
 -- requester will be granted access if they are an administrator of the

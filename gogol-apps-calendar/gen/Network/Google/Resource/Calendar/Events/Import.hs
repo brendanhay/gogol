@@ -70,6 +70,7 @@ data EventsImport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsImport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ eventsImport pEiCalendarId_ pEiPayload_ =
     , _eiPayload = pEiPayload_
     , _eiSupportsAttachments = Nothing
     }
+
 
 -- | Version number of conference data supported by the API client. Version 0
 -- assumes no conference data support and ignores conference data in the

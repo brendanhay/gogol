@@ -75,6 +75,7 @@ data MobileAppsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileAppsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ mobileAppsList pMalProFileId_ =
     , _malPageToken = Nothing
     , _malMaxResults = 1000
     }
+
 
 -- | Select only apps from these directories.
 malDirectories :: Lens' MobileAppsList [MobileAppsListDirectories]

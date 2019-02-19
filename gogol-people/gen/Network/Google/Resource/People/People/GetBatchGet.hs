@@ -84,6 +84,7 @@ data PeopleGetBatchGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeopleGetBatchGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ peopleGetBatchGet =
     , _pgbgResourceNames = Nothing
     , _pgbgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgbgXgafv :: Lens' PeopleGetBatchGet (Maybe Xgafv)

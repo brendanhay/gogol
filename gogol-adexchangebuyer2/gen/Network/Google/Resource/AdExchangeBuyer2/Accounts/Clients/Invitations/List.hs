@@ -85,6 +85,7 @@ data AccountsClientsInvitationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsClientsInvitationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ accountsClientsInvitationsList pAcilAccountId_ pAcilClientAccountId_ =
     , _acilPageSize = Nothing
     , _acilCallback = Nothing
     }
+
 
 -- | V1 error format.
 acilXgafv :: Lens' AccountsClientsInvitationsList (Maybe Xgafv)

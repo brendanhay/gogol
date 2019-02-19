@@ -61,6 +61,7 @@ data GrouplicensesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GrouplicensesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ grouplicensesGet
 grouplicensesGet pGgEnterpriseId_ pGgGroupLicenseId_ =
   GrouplicensesGet'
     {_ggEnterpriseId = pGgEnterpriseId_, _ggGroupLicenseId = pGgGroupLicenseId_}
+
 
 -- | The ID of the enterprise.
 ggEnterpriseId :: Lens' GrouplicensesGet Text

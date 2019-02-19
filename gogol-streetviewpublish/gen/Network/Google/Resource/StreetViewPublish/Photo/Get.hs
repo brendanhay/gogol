@@ -87,6 +87,7 @@ data PhotoGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PhotoGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ photoGet pPgPhotoId_ =
     , _pgPhotoId = pPgPhotoId_
     , _pgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgXgafv :: Lens' PhotoGet (Maybe Xgafv)

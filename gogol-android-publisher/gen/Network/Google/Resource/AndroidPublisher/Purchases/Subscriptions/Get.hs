@@ -69,6 +69,7 @@ data PurchasesSubscriptionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PurchasesSubscriptionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ purchasesSubscriptionsGet pPsgPackageName_ pPsgToken_ pPsgSubscriptionId_ =
     , _psgToken = pPsgToken_
     , _psgSubscriptionId = pPsgSubscriptionId_
     }
+
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').

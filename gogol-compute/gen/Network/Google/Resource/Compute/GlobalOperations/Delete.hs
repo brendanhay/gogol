@@ -62,6 +62,7 @@ data GlobalOperationsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GlobalOperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ globalOperationsDelete
 globalOperationsDelete pGodProject_ pGodOperation_ =
   GlobalOperationsDelete'
     {_godProject = pGodProject_, _godOperation = pGodOperation_}
+
 
 -- | Project ID for this request.
 godProject :: Lens' GlobalOperationsDelete Text

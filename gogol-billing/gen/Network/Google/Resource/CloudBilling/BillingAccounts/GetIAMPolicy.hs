@@ -76,6 +76,7 @@ data BillingAccountsGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BillingAccountsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ billingAccountsGetIAMPolicy pBagipResource_ =
     , _bagipResource = pBagipResource_
     , _bagipCallback = Nothing
     }
+
 
 -- | V1 error format.
 bagipXgafv :: Lens' BillingAccountsGetIAMPolicy (Maybe Xgafv)

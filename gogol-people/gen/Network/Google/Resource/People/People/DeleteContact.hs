@@ -70,6 +70,7 @@ data PeopleDeleteContact =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeopleDeleteContact' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ peopleDeleteContact pPdcResourceName_ =
     , _pdcUploadType = Nothing
     , _pdcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdcXgafv :: Lens' PeopleDeleteContact (Maybe Xgafv)

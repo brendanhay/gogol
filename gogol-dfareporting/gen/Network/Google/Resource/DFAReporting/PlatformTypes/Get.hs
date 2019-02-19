@@ -61,6 +61,7 @@ data PlatformTypesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlatformTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ platformTypesGet
 platformTypesGet pPtgProFileId_ pPtgId_ =
   PlatformTypesGet'
     {_ptgProFileId = _Coerce # pPtgProFileId_, _ptgId = _Coerce # pPtgId_}
+
 
 -- | User profile ID associated with this request.
 ptgProFileId :: Lens' PlatformTypesGet Int64

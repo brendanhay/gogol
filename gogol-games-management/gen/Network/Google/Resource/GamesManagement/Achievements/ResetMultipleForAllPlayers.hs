@@ -63,6 +63,7 @@ newtype AchievementsResetMultipleForAllPlayers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementsResetMultipleForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ achievementsResetMultipleForAllPlayers
     -> AchievementsResetMultipleForAllPlayers
 achievementsResetMultipleForAllPlayers pArmfapPayload_ =
   AchievementsResetMultipleForAllPlayers' {_armfapPayload = pArmfapPayload_}
+
 
 -- | Multipart request metadata.
 armfapPayload :: Lens' AchievementsResetMultipleForAllPlayers AchievementResetMultipleForAllRequest

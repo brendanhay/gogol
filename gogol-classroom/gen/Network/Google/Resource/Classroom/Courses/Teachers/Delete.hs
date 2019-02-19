@@ -85,6 +85,7 @@ data CoursesTeachersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesTeachersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ coursesTeachersDelete pCtdCourseId_ pCtdUserId_ =
     , _ctdUserId = pCtdUserId_
     , _ctdCallback = Nothing
     }
+
 
 -- | V1 error format.
 ctdXgafv :: Lens' CoursesTeachersDelete (Maybe Xgafv)

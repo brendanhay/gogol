@@ -67,6 +67,7 @@ data ManagementRemarketingAudienceInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementRemarketingAudienceInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ managementRemarketingAudienceInsert pMraiWebPropertyId_ pMraiPayload_ pMraiAccou
     , _mraiPayload = pMraiPayload_
     , _mraiAccountId = pMraiAccountId_
     }
+
 
 -- | Web property ID for which to create the remarketing audience.
 mraiWebPropertyId :: Lens' ManagementRemarketingAudienceInsert Text

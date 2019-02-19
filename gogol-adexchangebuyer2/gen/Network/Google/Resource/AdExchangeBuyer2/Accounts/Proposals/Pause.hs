@@ -87,6 +87,7 @@ data AccountsProposalsPause =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsProposalsPause' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ accountsProposalsPause pAppPayload_ pAppProposalId_ pAppAccountId_ =
     , _appAccountId = pAppAccountId_
     , _appCallback = Nothing
     }
+
 
 -- | V1 error format.
 appXgafv :: Lens' AccountsProposalsPause (Maybe Xgafv)

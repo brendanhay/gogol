@@ -75,6 +75,7 @@ data ProjectsModelsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsModelsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ projectsModelsDelete pPmdName_ =
     , _pmdName = pPmdName_
     , _pmdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmdXgafv :: Lens' ProjectsModelsDelete (Maybe Xgafv)

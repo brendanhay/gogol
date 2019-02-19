@@ -85,6 +85,7 @@ data OrganizationsSinksPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsSinksPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ organizationsSinksPatch pOspPayload_ pOspSinkName_ =
     , _ospSinkName = pOspSinkName_
     , _ospCallback = Nothing
     }
+
 
 -- | V1 error format.
 ospXgafv :: Lens' OrganizationsSinksPatch (Maybe Xgafv)

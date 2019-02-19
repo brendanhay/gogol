@@ -33,6 +33,7 @@ data GamesPlayerExperienceInfoResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GamesPlayerExperienceInfoResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -53,6 +54,7 @@ gamesPlayerExperienceInfoResource =
     , _gpeirNextLevel = Nothing
     , _gpeirLastLevelUpTimestampMillis = Nothing
     }
+
 
 -- | The current number of experience points for the player.
 gpeirCurrentExperiencePoints :: Lens' GamesPlayerExperienceInfoResource (Maybe Int64)
@@ -116,6 +118,7 @@ data PlayerName =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerName' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -126,6 +129,7 @@ data PlayerName =
 playerName
     :: PlayerName
 playerName = PlayerName' {_pnGivenName = Nothing, _pnFamilyName = Nothing}
+
 
 -- | The given name of this player. In some places, this is known as the
 -- first name.
@@ -163,6 +167,7 @@ data PlayerScoreResetAllResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerScoreResetAllResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -177,6 +182,7 @@ playerScoreResetAllResponse =
     { _psrarResults = Nothing
     , _psrarKind = "gamesManagement#playerScoreResetAllResponse"
     }
+
 
 -- | The leaderboard reset results.
 psrarResults :: Lens' PlayerScoreResetAllResponse [PlayerScoreResetResponse]
@@ -218,6 +224,7 @@ data GamesPlayedResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GamesPlayedResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -229,6 +236,7 @@ gamesPlayedResource
     :: GamesPlayedResource
 gamesPlayedResource =
   GamesPlayedResource' {_gprAutoMatched = Nothing, _gprTimeMillis = Nothing}
+
 
 -- | True if the player was auto-matched with the currently authenticated
 -- user.
@@ -270,6 +278,7 @@ data GamesPlayerLevelResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GamesPlayerLevelResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -287,6 +296,7 @@ gamesPlayerLevelResource =
     , _gplrMinExperiencePoints = Nothing
     , _gplrLevel = Nothing
     }
+
 
 -- | The maximum experience points for this level.
 gplrMaxExperiencePoints :: Lens' GamesPlayerLevelResource (Maybe Int64)
@@ -338,6 +348,7 @@ data PlayerScoreResetResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayerScoreResetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -355,6 +366,7 @@ playerScoreResetResponse =
     , _psrrResetScoreTimeSpans = Nothing
     , _psrrDefinitionId = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesManagement#playerScoreResetResponse.
@@ -406,6 +418,7 @@ data ScoresResetMultipleForAllRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScoresResetMultipleForAllRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -420,6 +433,7 @@ scoresResetMultipleForAllRequest =
     { _srmfarKind = "gamesManagement#scoresResetMultipleForAllRequest"
     , _srmfarLeaderboardIds = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesManagement#scoresResetMultipleForAllRequest.
@@ -463,6 +477,7 @@ data QuestsResetMultipleForAllRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuestsResetMultipleForAllRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -477,6 +492,7 @@ questsResetMultipleForAllRequest =
     { _qrmfarKind = "gamesManagement#questsResetMultipleForAllRequest"
     , _qrmfarQuestIds = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesManagement#questsResetMultipleForAllRequest.
@@ -521,6 +537,7 @@ data HiddenPlayerList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HiddenPlayerList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -538,6 +555,7 @@ hiddenPlayerList =
     , _hplKind = "gamesManagement#hiddenPlayerList"
     , _hplItems = Nothing
     }
+
 
 -- | The pagination token for the next page of results.
 hplNextPageToken :: Lens' HiddenPlayerList (Maybe Text)
@@ -584,6 +602,7 @@ data EventsResetMultipleForAllRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsResetMultipleForAllRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -598,6 +617,7 @@ eventsResetMultipleForAllRequest =
     { _ermfarKind = "gamesManagement#eventsResetMultipleForAllRequest"
     , _ermfarEventIds = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesManagement#eventsResetMultipleForAllRequest.
@@ -641,6 +661,7 @@ data AchievementResetMultipleForAllRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementResetMultipleForAllRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -655,6 +676,7 @@ achievementResetMultipleForAllRequest =
     { _armfarKind = "gamesManagement#achievementResetMultipleForAllRequest"
     , _armfarAchievementIds = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesManagement#achievementResetMultipleForAllRequest.
@@ -700,6 +722,7 @@ data HiddenPlayer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HiddenPlayer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -717,6 +740,7 @@ hiddenPlayer =
     , _hpHiddenTimeMillis = Nothing
     , _hpPlayer = Nothing
     }
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesManagement#hiddenPlayer.
@@ -761,6 +785,7 @@ data AchievementResetAllResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementResetAllResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -775,6 +800,7 @@ achievementResetAllResponse =
     { _ararResults = Nothing
     , _ararKind = "gamesManagement#achievementResetAllResponse"
     }
+
 
 -- | The achievement reset results.
 ararResults :: Lens' AchievementResetAllResponse [AchievementResetResponse]
@@ -824,6 +850,7 @@ data Player =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Player' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -868,6 +895,7 @@ player =
     , _pPlayerId = Nothing
     , _pProFileSettings = Nothing
     }
+
 
 -- | The url to the landscape mode player banner image.
 pBannerURLLandscape :: Lens' Player (Maybe Text)
@@ -987,6 +1015,7 @@ data ProFileSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFileSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -999,6 +1028,7 @@ proFileSettings
 proFileSettings =
   ProFileSettings'
     {_pfsProFileVisible = Nothing, _pfsKind = "gamesManagement#profileSettings"}
+
 
 -- | The player\'s current profile visibility. This field is visible to both
 -- 1P and 3P APIs.
@@ -1039,6 +1069,7 @@ data AchievementResetResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementResetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1059,6 +1090,7 @@ achievementResetResponse =
     , _arrCurrentState = Nothing
     , _arrDefinitionId = Nothing
     }
+
 
 -- | Flag to indicate if the requested update actually occurred.
 arrUpdateOccurred :: Lens' AchievementResetResponse (Maybe Bool)

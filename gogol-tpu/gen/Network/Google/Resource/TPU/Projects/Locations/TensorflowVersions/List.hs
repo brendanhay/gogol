@@ -85,6 +85,7 @@ data ProjectsLocationsTensorflowVersionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsTensorflowVersionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -124,6 +125,7 @@ projectsLocationsTensorflowVersionsList pPltvlParent_ =
     , _pltvlPageSize = Nothing
     , _pltvlCallback = Nothing
     }
+
 
 -- | The parent resource name.
 pltvlParent :: Lens' ProjectsLocationsTensorflowVersionsList Text

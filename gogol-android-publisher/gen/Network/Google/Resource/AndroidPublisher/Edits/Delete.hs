@@ -65,6 +65,7 @@ data EditsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ editsDelete
     -> EditsDelete
 editsDelete pEdPackageName_ pEdEditId_ =
   EditsDelete' {_edPackageName = pEdPackageName_, _edEditId = pEdEditId_}
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

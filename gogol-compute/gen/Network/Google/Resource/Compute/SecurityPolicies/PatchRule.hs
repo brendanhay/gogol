@@ -70,6 +70,7 @@ data SecurityPoliciesPatchRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPoliciesPatchRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ securityPoliciesPatchRule pSpprProject_ pSpprPayload_ pSpprSecurityPolicy_ =
     , _spprPayload = pSpprPayload_
     , _spprSecurityPolicy = pSpprSecurityPolicy_
     }
+
 
 -- | The priority of the rule to patch.
 spprPriority :: Lens' SecurityPoliciesPatchRule (Maybe Int32)

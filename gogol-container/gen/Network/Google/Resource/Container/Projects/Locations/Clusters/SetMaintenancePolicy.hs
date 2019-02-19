@@ -75,6 +75,7 @@ data ProjectsLocationsClustersSetMaintenancePolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersSetMaintenancePolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLocationsClustersSetMaintenancePolicy pPlcsmpPayload_ pPlcsmpName_ =
     , _plcsmpName = pPlcsmpName_
     , _plcsmpCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcsmpXgafv :: Lens' ProjectsLocationsClustersSetMaintenancePolicy (Maybe Xgafv)

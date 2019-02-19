@@ -73,6 +73,7 @@ data EnterprisesApplicationsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesApplicationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ enterprisesApplicationsGet pEagName_ =
     , _eagName = pEagName_
     , _eagCallback = Nothing
     }
+
 
 -- | V1 error format.
 eagXgafv :: Lens' EnterprisesApplicationsGet (Maybe Xgafv)

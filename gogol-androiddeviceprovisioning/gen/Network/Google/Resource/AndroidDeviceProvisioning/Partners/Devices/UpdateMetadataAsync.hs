@@ -82,6 +82,7 @@ data PartnersDevicesUpdateMetadataAsync =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartnersDevicesUpdateMetadataAsync' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ partnersDevicesUpdateMetadataAsync pPdumaPartnerId_ pPdumaPayload_ =
     , _pdumaPayload = pPdumaPayload_
     , _pdumaCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdumaXgafv :: Lens' PartnersDevicesUpdateMetadataAsync (Maybe Xgafv)

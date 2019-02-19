@@ -82,6 +82,7 @@ data MyLibraryBookshelvesVolumesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryBookshelvesVolumesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ myLibraryBookshelvesVolumesList pMlbvlShelf_ =
     , _mlbvlMaxResults = Nothing
     , _mlbvlShowPreOrders = Nothing
     }
+
 
 -- | ISO-3166-1 code to override the IP-based location.
 mlbvlCountry :: Lens' MyLibraryBookshelvesVolumesList (Maybe Text)

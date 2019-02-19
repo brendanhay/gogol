@@ -29,6 +29,7 @@ newtype Suggestion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Suggestion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37,6 +38,7 @@ newtype Suggestion =
 suggestion
     :: Suggestion
 suggestion = Suggestion' {_sSubtype = Nothing}
+
 
 -- | The sub-type of this event.
 sSubtype :: Lens' Suggestion (Maybe SuggestionSubtype)
@@ -61,6 +63,7 @@ newtype Impersonation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Impersonation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +72,7 @@ newtype Impersonation =
 impersonation
     :: Impersonation
 impersonation = Impersonation' {_iImpersonatedUser = Nothing}
+
 
 -- | The impersonated user.
 iImpersonatedUser :: Lens' Impersonation (Maybe User)
@@ -95,11 +99,13 @@ data Edit =
   Edit'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Edit' with the minimum fields required to make a request.
 --
 edit
     :: Edit
 edit = Edit'
+
 
 instance FromJSON Edit where
         parseJSON = withObject "Edit" (\ o -> pure Edit')
@@ -125,6 +131,7 @@ data ActionDetail =
     , _adMove             :: !(Maybe Move)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActionDetail' with the minimum fields required to make a request.
 --
@@ -167,6 +174,7 @@ actionDetail =
     , _adDelete = Nothing
     , _adMove = Nothing
     }
+
 
 -- | An object was edited.
 adEdit :: Lens' ActionDetail (Maybe Edit)
@@ -262,6 +270,7 @@ data Group =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -272,6 +281,7 @@ data Group =
 group'
     :: Group
 group' = Group' {_gEmail = Nothing, _gTitle = Nothing}
+
 
 -- | The email address of the group.
 gEmail :: Lens' Group (Maybe Text)
@@ -303,6 +313,7 @@ data TimeRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -313,6 +324,7 @@ data TimeRange =
 timeRange
     :: TimeRange
 timeRange = TimeRange' {_trStartTime = Nothing, _trEndTime = Nothing}
+
 
 -- | The start of the time range.
 trStartTime :: Lens' TimeRange (Maybe UTCTime)
@@ -354,6 +366,7 @@ data QueryDriveActivityRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryDriveActivityRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -380,6 +393,7 @@ queryDriveActivityRequest =
     , _qdarPageToken = Nothing
     , _qdarPageSize = Nothing
     }
+
 
 -- | Return activities for this Drive folder and all children and
 -- descendants. The format is \"items\/ITEM_ID\".
@@ -465,6 +479,7 @@ data DriveItemReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DriveItemReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -485,6 +500,7 @@ driveItemReference =
     , _dirTitle = Nothing
     , _dirFile = Nothing
     }
+
 
 -- | The Drive item is a folder.
 dirFolder :: Lens' DriveItemReference (Maybe Folder)
@@ -530,6 +546,7 @@ data KnownUser =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KnownUser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -540,6 +557,7 @@ data KnownUser =
 knownUser
     :: KnownUser
 knownUser = KnownUser' {_kuPersonName = Nothing, _kuIsCurrentUser = Nothing}
+
 
 -- | The identifier for this user that can be used with the People API to get
 -- more information. The format is \"people\/ACCOUNT_ID\". See
@@ -578,6 +596,7 @@ data TargetReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -589,6 +608,7 @@ targetReference
     :: TargetReference
 targetReference =
   TargetReference' {_trTeamDrive = Nothing, _trDriveItem = Nothing}
+
 
 -- | The target is a Team Drive.
 trTeamDrive :: Lens' TargetReference (Maybe TeamDriveReference)
@@ -623,6 +643,7 @@ newtype Copy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Copy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -631,6 +652,7 @@ newtype Copy =
 copy
     :: Copy
 copy = Copy' {_cOriginalObject = Nothing}
+
 
 -- | The the original object.
 cOriginalObject :: Lens' Copy (Maybe TargetReference)
@@ -659,6 +681,7 @@ data PermissionChange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PermissionChange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -671,6 +694,7 @@ permissionChange
 permissionChange =
   PermissionChange'
     {_pcAddedPermissions = Nothing, _pcRemovedPermissions = Nothing}
+
 
 -- | The set of permissions added by this change.
 pcAddedPermissions :: Lens' PermissionChange [Permission]
@@ -713,6 +737,7 @@ data QueryDriveActivityResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryDriveActivityResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -725,6 +750,7 @@ queryDriveActivityResponse
 queryDriveActivityResponse =
   QueryDriveActivityResponse'
     {_qdarNextPageToken = Nothing, _qdarActivities = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -765,6 +791,7 @@ newtype Post' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Post' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -773,6 +800,7 @@ newtype Post' =
 post
     :: Post'
 post = Post'' {_pSubtype = Nothing}
+
 
 -- | The sub-type of this event.
 pSubtype :: Lens' Post' (Maybe PostSubtype)
@@ -796,6 +824,7 @@ newtype Restore =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Restore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -804,6 +833,7 @@ newtype Restore =
 restore
     :: Restore
 restore = Restore' {_rType = Nothing}
+
 
 -- | The type of restore action taken.
 rType :: Lens' Restore (Maybe RestoreType)
@@ -828,6 +858,7 @@ data Domain =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Domain' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -838,6 +869,7 @@ data Domain =
 domain
     :: Domain
 domain = Domain' {_dLegacyId = Nothing, _dName = Nothing}
+
 
 -- | An opaque string used to identify this domain.
 dLegacyId :: Lens' Domain (Maybe Text)
@@ -868,11 +900,13 @@ data Administrator =
   Administrator'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Administrator' with the minimum fields required to make a request.
 --
 administrator
     :: Administrator
 administrator = Administrator'
+
 
 instance FromJSON Administrator where
         parseJSON
@@ -891,6 +925,7 @@ newtype DataLeakPreventionChange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataLeakPreventionChange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -899,6 +934,7 @@ newtype DataLeakPreventionChange =
 dataLeakPreventionChange
     :: DataLeakPreventionChange
 dataLeakPreventionChange = DataLeakPreventionChange' {_dlpcType = Nothing}
+
 
 -- | The type of Data Leak Prevention (DLP) change.
 dlpcType :: Lens' DataLeakPreventionChange (Maybe DataLeakPreventionChangeType)
@@ -926,6 +962,7 @@ data Actor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Actor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -949,6 +986,7 @@ actor =
     , _aUser = Nothing
     , _aAnonymous = Nothing
     }
+
 
 -- | An account acting on behalf of another.
 aImpersonation :: Lens' Actor (Maybe Impersonation)
@@ -1004,6 +1042,7 @@ newtype Folder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Folder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1012,6 +1051,7 @@ newtype Folder =
 folder
     :: Folder
 folder = Folder' {_fType = Nothing}
+
 
 -- | The type of Drive folder.
 fType :: Lens' Folder (Maybe FolderType)
@@ -1039,6 +1079,7 @@ data Action =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Action' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1062,6 +1103,7 @@ action =
     , _aTarget = Nothing
     , _aDetail = Nothing
     }
+
 
 -- | The action occurred over this time range.
 aTimeRange :: Lens' Action (Maybe TimeRange)
@@ -1120,6 +1162,7 @@ data TeamDrive =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeamDrive' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1133,6 +1176,7 @@ teamDrive
     :: TeamDrive
 teamDrive =
   TeamDrive' {_tdRoot = Nothing, _tdName = Nothing, _tdTitle = Nothing}
+
 
 -- | The root of this Team Drive.
 tdRoot :: Lens' TeamDrive (Maybe DriveItem)
@@ -1169,11 +1213,13 @@ data UnknownUser =
   UnknownUser'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UnknownUser' with the minimum fields required to make a request.
 --
 unknownUser
     :: UnknownUser
 unknownUser = UnknownUser'
+
 
 instance FromJSON UnknownUser where
         parseJSON
@@ -1193,6 +1239,7 @@ data Owner =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Owner' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1205,6 +1252,7 @@ data Owner =
 owner
     :: Owner
 owner = Owner' {_oDomain = Nothing, _oTeamDrive = Nothing, _oUser = Nothing}
+
 
 -- | The domain of the Drive item owner.
 oDomain :: Lens' Owner (Maybe Domain)
@@ -1244,6 +1292,7 @@ newtype ApplicationReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ApplicationReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1252,6 +1301,7 @@ newtype ApplicationReference =
 applicationReference
     :: ApplicationReference
 applicationReference = ApplicationReference' {_arType = Nothing}
+
 
 -- | The reference type corresponding to this event.
 arType :: Lens' ApplicationReference (Maybe ApplicationReferenceType)
@@ -1280,6 +1330,7 @@ data ConsolidationStrategy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConsolidationStrategy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1291,6 +1342,7 @@ consolidationStrategy
     :: ConsolidationStrategy
 consolidationStrategy =
   ConsolidationStrategy' {_csNone = Nothing, _csLegacy = Nothing}
+
 
 -- | The individual activities are not consolidated.
 csNone :: Lens' ConsolidationStrategy (Maybe NoConsolidation)
@@ -1325,6 +1377,7 @@ data User =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1339,6 +1392,7 @@ user
 user =
   User'
     {_uKnownUser = Nothing, _uUnknownUser = Nothing, _uDeletedUser = Nothing}
+
 
 -- | A known user.
 uKnownUser :: Lens' User (Maybe KnownUser)
@@ -1378,11 +1432,13 @@ data DeletedUser =
   DeletedUser'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeletedUser' with the minimum fields required to make a request.
 --
 deletedUser
     :: DeletedUser
 deletedUser = DeletedUser'
+
 
 instance FromJSON DeletedUser where
         parseJSON
@@ -1402,6 +1458,7 @@ data Create =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Create' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1414,6 +1471,7 @@ data Create =
 create
     :: Create
 create = Create' {_cCopy = Nothing, _cNew = Nothing, _cUpload = Nothing}
+
 
 -- | If present, indicates the object was created by copying an existing
 -- Drive object.
@@ -1452,11 +1510,13 @@ data New =
   New'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'New' with the minimum fields required to make a request.
 --
 new
     :: New
 new = New'
+
 
 instance FromJSON New where
         parseJSON = withObject "New" (\ o -> pure New')
@@ -1474,6 +1534,7 @@ data TeamDriveReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TeamDriveReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1485,6 +1546,7 @@ teamDriveReference
     :: TeamDriveReference
 teamDriveReference =
   TeamDriveReference' {_tdrName = Nothing, _tdrTitle = Nothing}
+
 
 -- | The resource name of the Team Drive. The format is
 -- \"teamDrives\/TEAM_DRIVE_ID\".
@@ -1517,11 +1579,13 @@ data AnonymousUser =
   AnonymousUser'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AnonymousUser' with the minimum fields required to make a request.
 --
 anonymousUser
     :: AnonymousUser
 anonymousUser = AnonymousUser'
+
 
 instance FromJSON AnonymousUser where
         parseJSON
@@ -1538,11 +1602,13 @@ data Anyone =
   Anyone'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Anyone' with the minimum fields required to make a request.
 --
 anyone
     :: Anyone
 anyone = Anyone'
+
 
 instance FromJSON Anyone where
         parseJSON = withObject "Anyone" (\ o -> pure Anyone')
@@ -1560,6 +1626,7 @@ data RestrictionChange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RestrictionChange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1571,6 +1638,7 @@ restrictionChange
     :: RestrictionChange
 restrictionChange =
   RestrictionChange' {_rcFeature = Nothing, _rcNewRestriction = Nothing}
+
 
 -- | The feature which had a change in restriction policy.
 rcFeature :: Lens' RestrictionChange (Maybe RestrictionChangeFeature)
@@ -1609,11 +1677,13 @@ data Legacy =
   Legacy'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Legacy' with the minimum fields required to make a request.
 --
 legacy
     :: Legacy
 legacy = Legacy'
+
 
 instance FromJSON Legacy where
         parseJSON = withObject "Legacy" (\ o -> pure Legacy')
@@ -1632,6 +1702,7 @@ data FileComment =
     , _fcLinkToDiscussion   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FileComment' with the minimum fields required to make a request.
 --
@@ -1653,6 +1724,7 @@ fileComment =
     , _fcLegacyCommentId = Nothing
     , _fcLinkToDiscussion = Nothing
     }
+
 
 -- | The Drive item containing this comment.
 fcParent :: Lens' FileComment (Maybe DriveItem)
@@ -1710,6 +1782,7 @@ data Rename =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Rename' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1720,6 +1793,7 @@ data Rename =
 rename
     :: Rename
 rename = Rename' {_rNewTitle = Nothing, _rOldTitle = Nothing}
+
 
 -- | The new title of the drive object.
 rNewTitle :: Lens' Rename (Maybe Text)
@@ -1752,11 +1826,13 @@ data Upload =
   Upload'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Upload' with the minimum fields required to make a request.
 --
 upload
     :: Upload
 upload = Upload'
+
 
 instance FromJSON Upload where
         parseJSON = withObject "Upload" (\ o -> pure Upload')
@@ -1771,11 +1847,13 @@ data NoConsolidation =
   NoConsolidation'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NoConsolidation' with the minimum fields required to make a request.
 --
 noConsolidation
     :: NoConsolidation
 noConsolidation = NoConsolidation'
+
 
 instance FromJSON NoConsolidation where
         parseJSON
@@ -1794,6 +1872,7 @@ newtype Assignment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Assignment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1802,6 +1881,7 @@ newtype Assignment =
 assignment
     :: Assignment
 assignment = Assignment' {_aSubtype = Nothing}
+
 
 -- | The sub-type of this event.
 aSubtype :: Lens' Assignment (Maybe AssignmentSubtype)
@@ -1825,6 +1905,7 @@ newtype SettingsChange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsChange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1833,6 +1914,7 @@ newtype SettingsChange =
 settingsChange
     :: SettingsChange
 settingsChange = SettingsChange' {_scRestrictionChanges = Nothing}
+
 
 -- | The set of changes made to restrictions.
 scRestrictionChanges :: Lens' SettingsChange [RestrictionChange]
@@ -1868,6 +1950,7 @@ data Comment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1888,6 +1971,7 @@ comment =
     , _cMentionedUsers = Nothing
     , _cAssignment = Nothing
     }
+
 
 -- | A change on a suggestion.
 cSuggestion :: Lens' Comment (Maybe Suggestion)
@@ -1943,6 +2027,7 @@ data Permission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1969,6 +2054,7 @@ permission =
     , _pAnyone = Nothing
     , _pAllowDiscovery = Nothing
     }
+
 
 -- | The group to whom this permission applies.
 pGroup :: Lens' Permission (Maybe Group)
@@ -2026,11 +2112,13 @@ data File =
   File'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
 file
     :: File
 file = File'
+
 
 instance FromJSON File where
         parseJSON = withObject "File" (\ o -> pure File')
@@ -2047,6 +2135,7 @@ newtype Delete' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Delete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2055,6 +2144,7 @@ newtype Delete' =
 delete'
     :: Delete'
 delete' = Delete'' {_dType = Nothing}
+
 
 -- | The type of delete action taken.
 dType :: Lens' Delete' (Maybe DeleteType)
@@ -2080,6 +2170,7 @@ data Target =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Target' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2094,6 +2185,7 @@ target
 target =
   Target'
     {_tTeamDrive = Nothing, _tFileComment = Nothing, _tDriveItem = Nothing}
+
 
 -- | The target is a Team Drive.
 tTeamDrive :: Lens' Target (Maybe TeamDrive)
@@ -2136,6 +2228,7 @@ data Move =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Move' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2146,6 +2239,7 @@ data Move =
 move
     :: Move
 move = Move' {_mAddedParents = Nothing, _mRemovedParents = Nothing}
+
 
 -- | The added parent object(s).
 mAddedParents :: Lens' Move [TargetReference]
@@ -2198,6 +2292,7 @@ data DriveActivity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DriveActivity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2224,6 +2319,7 @@ driveActivity =
     , _daPrimaryActionDetail = Nothing
     , _daTimestamp = Nothing
     }
+
 
 -- | The activity occurred over this time range.
 daTimeRange :: Lens' DriveActivity (Maybe TimeRange)
@@ -2304,6 +2400,7 @@ data DriveItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DriveItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2330,6 +2427,7 @@ driveItem =
     , _diTitle = Nothing
     , _diFile = Nothing
     }
+
 
 -- | The Drive item is a folder.
 diFolder :: Lens' DriveItem (Maybe Folder)
@@ -2387,6 +2485,7 @@ newtype SystemEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SystemEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2395,6 +2494,7 @@ newtype SystemEvent =
 systemEvent
     :: SystemEvent
 systemEvent = SystemEvent' {_seType = Nothing}
+
 
 -- | The type of the system event that may triggered activity.
 seType :: Lens' SystemEvent (Maybe SystemEventType)

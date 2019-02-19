@@ -65,6 +65,7 @@ data InstanceTemplatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceTemplatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ instanceTemplatesGet
 instanceTemplatesGet pItgProject_ pItgInstanceTemplate_ =
   InstanceTemplatesGet'
     {_itgProject = pItgProject_, _itgInstanceTemplate = pItgInstanceTemplate_}
+
 
 -- | Project ID for this request.
 itgProject :: Lens' InstanceTemplatesGet Text

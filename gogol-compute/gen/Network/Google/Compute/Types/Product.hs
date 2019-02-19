@@ -31,6 +31,7 @@ data InstanceAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -45,6 +46,7 @@ instanceAggregatedListWarning
 instanceAggregatedListWarning =
   InstanceAggregatedListWarning'
     {_ialwData = Nothing, _ialwCode = Nothing, _ialwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -95,6 +97,7 @@ data TargetHTTPSProxyList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPSProxyList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +124,7 @@ targetHTTPSProxyList =
     , _thplWarning = Nothing
     , _thplId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -190,6 +194,7 @@ data RoutersScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoutersScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -201,6 +206,7 @@ routersScopedList
     :: RoutersScopedList
 routersScopedList =
   RoutersScopedList' {_rslRouters = Nothing, _rslWarning = Nothing}
+
 
 -- | A list of routers contained in this scope.
 rslRouters :: Lens' RoutersScopedList [Router]
@@ -238,6 +244,7 @@ data RouterStatusResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterStatusResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -250,6 +257,7 @@ routerStatusResponse
 routerStatusResponse =
   RouterStatusResponse'
     {_rsrKind = "compute#routerStatusResponse", _rsrResult = Nothing}
+
 
 -- | Type of resource.
 rsrKind :: Lens' RouterStatusResponse Text
@@ -282,6 +290,7 @@ newtype RegionInstanceGroupManagersDeleteInstancesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagersDeleteInstancesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -292,6 +301,7 @@ regionInstanceGroupManagersDeleteInstancesRequest
 regionInstanceGroupManagersDeleteInstancesRequest =
   RegionInstanceGroupManagersDeleteInstancesRequest'
     {_rigmdirInstances = Nothing}
+
 
 -- | The URLs of one or more instances to delete. This can be a full URL or a
 -- partial URL, such as zones\/[ZONE]\/instances\/[INSTANCE_NAME].
@@ -330,6 +340,7 @@ data InterconnectDiagnosticsLinkLACPStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectDiagnosticsLinkLACPStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -347,6 +358,7 @@ interconnectDiagnosticsLinkLACPStatus =
     , _idllacpsNeighborSystemId = Nothing
     , _idllacpsGoogleSystemId = Nothing
     }
+
 
 idllacpsState :: Lens' InterconnectDiagnosticsLinkLACPStatus (Maybe InterconnectDiagnosticsLinkLACPStatusState)
 idllacpsState
@@ -394,6 +406,7 @@ data AddressesScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddressesScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -405,6 +418,7 @@ addressesScopedList
     :: AddressesScopedList
 addressesScopedList =
   AddressesScopedList' {_aslAddresses = Nothing, _aslWarning = Nothing}
+
 
 -- | [Output Only] A list of addresses contained in this scope.
 aslAddresses :: Lens' AddressesScopedList [Address]
@@ -442,6 +456,7 @@ data OperationWarningsItemDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationWarningsItemDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -453,6 +468,7 @@ operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
   OperationWarningsItemDataItem' {_owidiValue = Nothing, _owidiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
@@ -494,6 +510,7 @@ data InstanceGroupManagerUpdatePolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagerUpdatePolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -514,6 +531,7 @@ instanceGroupManagerUpdatePolicy =
     , _igmupMinimalAction = Nothing
     , _igmupType = Nothing
     }
+
 
 -- | The maximum number of instances that can be created above the specified
 -- targetSize during the update process. By default, a fixed value of 1 is
@@ -588,6 +606,7 @@ data RegionInstanceGroupsListInstancesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupsListInstancesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -600,6 +619,7 @@ regionInstanceGroupsListInstancesRequest
 regionInstanceGroupsListInstancesRequest =
   RegionInstanceGroupsListInstancesRequest'
     {_riglirInstanceState = Nothing, _riglirPortName = Nothing}
+
 
 -- | Instances in which state should be returned. Valid options are: \'ALL\',
 -- \'RUNNING\'. By default, it lists all instances.
@@ -646,6 +666,7 @@ data BackendServiceAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServiceAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -660,6 +681,7 @@ backendServiceAggregatedListWarning
 backendServiceAggregatedListWarning =
   BackendServiceAggregatedListWarning'
     {_bsalwData = Nothing, _bsalwCode = Nothing, _bsalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -723,6 +745,7 @@ data SSLPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -767,6 +790,7 @@ sslPolicy =
     , _spMinTLSVersion = Nothing
     , _spDescription = Nothing
     }
+
 
 -- | [Output only] Type of the resource. Always compute#sslPolicyfor SSL
 -- policies.
@@ -905,6 +929,7 @@ data BackendServiceListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServiceListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -917,6 +942,7 @@ backendServiceListWarningDataItem
 backendServiceListWarningDataItem =
   BackendServiceListWarningDataItem'
     {_bslwdiValue = Nothing, _bslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 bslwdiValue :: Lens' BackendServiceListWarningDataItem (Maybe Text)
@@ -959,6 +985,7 @@ data FirewallDeniedItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FirewallDeniedItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -970,6 +997,7 @@ firewallDeniedItem
     :: FirewallDeniedItem
 firewallDeniedItem =
   FirewallDeniedItem' {_fdiIPProtocol = Nothing, _fdiPorts = Nothing}
+
 
 -- | The IP protocol to which this rule applies. The protocol type is
 -- required when creating a firewall rule. This value can either be one of
@@ -1013,6 +1041,7 @@ newtype InstanceGroupManagersAbandonInstancesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersAbandonInstancesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1022,6 +1051,7 @@ instanceGroupManagersAbandonInstancesRequest
     :: InstanceGroupManagersAbandonInstancesRequest
 instanceGroupManagersAbandonInstancesRequest =
   InstanceGroupManagersAbandonInstancesRequest' {_igmairInstances = Nothing}
+
 
 -- | The URLs of one or more instances to abandon. This can be a full URL or
 -- a partial URL, such as zones\/[ZONE]\/instances\/[INSTANCE_NAME].
@@ -1059,6 +1089,7 @@ newtype MachineTypeAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypeAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1069,6 +1100,7 @@ machineTypeAggregatedListItems
     -> MachineTypeAggregatedListItems
 machineTypeAggregatedListItems pMtaliAddtional_ =
   MachineTypeAggregatedListItems' {_mtaliAddtional = _Coerce # pMtaliAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of machine types.
 mtaliAddtional :: Lens' MachineTypeAggregatedListItems (HashMap Text MachineTypesScopedList)
@@ -1097,6 +1129,7 @@ newtype DiskTypeAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskTypeAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1107,6 +1140,7 @@ diskTypeAggregatedListItems
     -> DiskTypeAggregatedListItems
 diskTypeAggregatedListItems pDtaliAddtional_ =
   DiskTypeAggregatedListItems' {_dtaliAddtional = _Coerce # pDtaliAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of disk types.
 dtaliAddtional :: Lens' DiskTypeAggregatedListItems (HashMap Text DiskTypesScopedList)
@@ -1133,6 +1167,7 @@ data InstancesSetLabelsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesSetLabelsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1145,6 +1180,7 @@ instancesSetLabelsRequest
 instancesSetLabelsRequest =
   InstancesSetLabelsRequest'
     {_islrLabels = Nothing, _islrLabelFingerprint = Nothing}
+
 
 islrLabels :: Lens' InstancesSetLabelsRequest (Maybe InstancesSetLabelsRequestLabels)
 islrLabels
@@ -1187,6 +1223,7 @@ data RouterAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1213,6 +1250,7 @@ routerAggregatedList =
     , _ralWarning = Nothing
     , _ralId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -1283,6 +1321,7 @@ data FirewallList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FirewallList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1309,6 +1348,7 @@ firewallList =
     , _flWarning = Nothing
     , _flId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -1378,6 +1418,7 @@ data InstancesScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1392,6 +1433,7 @@ instancesScopedListWarning
 instancesScopedListWarning =
   InstancesScopedListWarning'
     {_islwData = Nothing, _islwCode = Nothing, _islwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -1436,6 +1478,7 @@ newtype RegionInstanceGroupManagersRecreateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagersRecreateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1445,6 +1488,7 @@ regionInstanceGroupManagersRecreateRequest
     :: RegionInstanceGroupManagersRecreateRequest
 regionInstanceGroupManagersRecreateRequest =
   RegionInstanceGroupManagersRecreateRequest' {_rigmrrInstances = Nothing}
+
 
 -- | The URLs of one or more instances to recreate. This can be a full URL or
 -- a partial URL, such as zones\/[ZONE]\/instances\/[INSTANCE_NAME].
@@ -1483,6 +1527,7 @@ newtype InstanceLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1493,6 +1538,7 @@ instanceLabels
     -> InstanceLabels
 instanceLabels pIlAddtional_ =
   InstanceLabels' {_ilAddtional = _Coerce # pIlAddtional_}
+
 
 ilAddtional :: Lens' InstanceLabels (HashMap Text Text)
 ilAddtional
@@ -1519,6 +1565,7 @@ data BackendServicesScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServicesScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1533,6 +1580,7 @@ backendServicesScopedListWarning
 backendServicesScopedListWarning =
   BackendServicesScopedListWarning'
     {_bsslwData = Nothing, _bsslwCode = Nothing, _bsslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -1583,6 +1631,7 @@ data SecurityPolicyRuleMatcher =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPolicyRuleMatcher' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1595,6 +1644,7 @@ securityPolicyRuleMatcher
 securityPolicyRuleMatcher =
   SecurityPolicyRuleMatcher'
     {_sprmVersionedExpr = Nothing, _sprmConfig = Nothing}
+
 
 -- | Preconfigured versioned expression. If this field is specified, config
 -- must also be specified. Available preconfigured expressions along with
@@ -1640,6 +1690,7 @@ data InstanceGroupList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1666,6 +1717,7 @@ instanceGroupList =
     , _iglWarning = Nothing
     , _iglId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -1734,6 +1786,7 @@ newtype InstancesSetMachineTypeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesSetMachineTypeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1743,6 +1796,7 @@ instancesSetMachineTypeRequest
     :: InstancesSetMachineTypeRequest
 instancesSetMachineTypeRequest =
   InstancesSetMachineTypeRequest' {_ismtrMachineType = Nothing}
+
 
 -- | Full or partial URL of the machine type resource. See Machine Types for
 -- a full list of machine types. For example:
@@ -1776,6 +1830,7 @@ data VMEndpointNATMAppings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VMEndpointNATMAppings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1788,6 +1843,7 @@ vMEndpointNATMAppings
 vMEndpointNATMAppings =
   VMEndpointNATMAppings'
     {_vmenatmaInstanceName = Nothing, _vmenatmaInterfaceNATMAppings = Nothing}
+
 
 -- | Name of the VM instance which the endpoint belongs to
 vmenatmaInstanceName :: Lens' VMEndpointNATMAppings (Maybe Text)
@@ -1829,6 +1885,7 @@ data CustomerEncryptionKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerEncryptionKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1843,6 +1900,7 @@ customerEncryptionKey
 customerEncryptionKey =
   CustomerEncryptionKey'
     {_cekKmsKeyName = Nothing, _cekSha256 = Nothing, _cekRawKey = Nothing}
+
 
 -- | The name of the encryption key that is stored in Google Cloud KMS.
 cekKmsKeyName :: Lens' CustomerEncryptionKey (Maybe Text)
@@ -1887,6 +1945,7 @@ newtype AutoscalerAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalerAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1897,6 +1956,7 @@ autoscalerAggregatedListItems
     -> AutoscalerAggregatedListItems
 autoscalerAggregatedListItems pAaliAddtional_ =
   AutoscalerAggregatedListItems' {_aaliAddtional = _Coerce # pAaliAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of autoscalers.
 aaliAddtional :: Lens' AutoscalerAggregatedListItems (HashMap Text AutoscalersScopedList)
@@ -1924,6 +1984,7 @@ data InstanceListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1935,6 +1996,7 @@ instanceListWarningDataItem
     :: InstanceListWarningDataItem
 instanceListWarningDataItem =
   InstanceListWarningDataItem' {_ilwdiValue = Nothing, _ilwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ilwdiValue :: Lens' InstanceListWarningDataItem (Maybe Text)
@@ -1973,6 +2035,7 @@ newtype InstanceGroupManagersSetInstanceTemplateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersSetInstanceTemplateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1983,6 +2046,7 @@ instanceGroupManagersSetInstanceTemplateRequest
 instanceGroupManagersSetInstanceTemplateRequest =
   InstanceGroupManagersSetInstanceTemplateRequest'
     {_igmsitrInstanceTemplate = Nothing}
+
 
 -- | The URL of the instance template that is specified for this managed
 -- instance group. The group uses this template to create all new instances
@@ -2025,6 +2089,7 @@ data DeprecationStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DeprecationStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2048,6 +2113,7 @@ deprecationStatus =
     , _dsObsolete = Nothing
     , _dsDeprecated = Nothing
     }
+
 
 -- | The deprecation state of this resource. This can be DEPRECATED,
 -- OBSOLETE, or DELETED. Operations which create a new resource using a
@@ -2116,6 +2182,7 @@ data HTTPSHealthCheckListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPSHealthCheckListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2128,6 +2195,7 @@ httpsHealthCheckListWarningDataItem
 httpsHealthCheckListWarningDataItem =
   HTTPSHealthCheckListWarningDataItem'
     {_hhclwdiValue = Nothing, _hhclwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 hhclwdiValue :: Lens' HTTPSHealthCheckListWarningDataItem (Maybe Text)
@@ -2187,6 +2255,7 @@ data Snapshot =
     , _sDescription             :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Snapshot' with the minimum fields required to make a request.
 --
@@ -2250,6 +2319,7 @@ snapshot =
     , _sLabelFingerprint = Nothing
     , _sDescription = Nothing
     }
+
 
 -- | [Output Only] An indicator whether storageBytes is in a stable state or
 -- it is being adjusted as a result of shared storage reallocation. This
@@ -2447,6 +2517,7 @@ data RouterStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2470,6 +2541,7 @@ routerStatus =
     , _rsNATStatus = Nothing
     , _rsBestRoutes = Nothing
     }
+
 
 -- | Best routes learned by this router.
 rsBestRoutesForRouter :: Lens' RouterStatus [Route]
@@ -2537,6 +2609,7 @@ data AutoscalingPolicyCustomMetricUtilization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalingPolicyCustomMetricUtilization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2554,6 +2627,7 @@ autoscalingPolicyCustomMetricUtilization =
     , _apcmuMetric = Nothing
     , _apcmuUtilizationTargetType = Nothing
     }
+
 
 -- | The target value of the metric that autoscaler should maintain. This
 -- must be a positive value. A utilization metric scales number of virtual
@@ -2619,6 +2693,7 @@ data ForwardingRuleList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingRuleList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2645,6 +2720,7 @@ forwardingRuleList =
     , _frlWarning = Nothing
     , _frlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -2722,6 +2798,7 @@ data NodeGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2760,6 +2837,7 @@ nodeGroup =
     , _ngNodeTemplate = Nothing
     , _ngDescription = Nothing
     }
+
 
 ngStatus :: Lens' NodeGroup (Maybe NodeGroupStatus)
 ngStatus = lens _ngStatus (\ s a -> s{_ngStatus = a})
@@ -2859,6 +2937,7 @@ data VPNTunnelsScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VPNTunnelsScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2870,6 +2949,7 @@ vpnTunnelsScopedList
     :: VPNTunnelsScopedList
 vpnTunnelsScopedList =
   VPNTunnelsScopedList' {_vtslVPNTunnels = Nothing, _vtslWarning = Nothing}
+
 
 -- | A list of vpn tunnels contained in this scope.
 vtslVPNTunnels :: Lens' VPNTunnelsScopedList [VPNTunnel]
@@ -2910,6 +2990,7 @@ data SubnetworkSecondaryRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworkSecondaryRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2921,6 +3002,7 @@ subnetworkSecondaryRange
     :: SubnetworkSecondaryRange
 subnetworkSecondaryRange =
   SubnetworkSecondaryRange' {_ssrRangeName = Nothing, _ssrIPCIdRRange = Nothing}
+
 
 -- | The name associated with this subnetwork secondary range, used when
 -- adding an alias IP range to a VM instance. The name must be 1-63
@@ -2962,6 +3044,7 @@ data NodeTypesScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTypesScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2973,6 +3056,7 @@ nodeTypesScopedList
     :: NodeTypesScopedList
 nodeTypesScopedList =
   NodeTypesScopedList' {_ntslNodeTypes = Nothing, _ntslWarning = Nothing}
+
 
 -- | [Output Only] A list of node types contained in this scope.
 ntslNodeTypes :: Lens' NodeTypesScopedList [NodeType]
@@ -3013,6 +3097,7 @@ data RegionInstanceGroupsListInstancesWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupsListInstancesWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3027,6 +3112,7 @@ regionInstanceGroupsListInstancesWarning
 regionInstanceGroupsListInstancesWarning =
   RegionInstanceGroupsListInstancesWarning'
     {_rigliwData = Nothing, _rigliwCode = Nothing, _rigliwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -3097,6 +3183,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3114,6 +3201,7 @@ auditConfig =
     , _acAuditLogConfigs = Nothing
     , _acExemptedMembers = Nothing
     }
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -3164,6 +3252,7 @@ data AcceleratorTypeAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorTypeAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3176,6 +3265,7 @@ acceleratorTypeAggregatedListWarningDataItem
 acceleratorTypeAggregatedListWarningDataItem =
   AcceleratorTypeAggregatedListWarningDataItem'
     {_atalwdiValue = Nothing, _atalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 atalwdiValue :: Lens' AcceleratorTypeAggregatedListWarningDataItem (Maybe Text)
@@ -3222,6 +3312,7 @@ data InstanceGroupsSetNamedPortsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsSetNamedPortsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3234,6 +3325,7 @@ instanceGroupsSetNamedPortsRequest
 instanceGroupsSetNamedPortsRequest =
   InstanceGroupsSetNamedPortsRequest'
     {_igsnprFingerprint = Nothing, _igsnprNamedPorts = Nothing}
+
 
 -- | The fingerprint of the named ports information for this instance group.
 -- Use this optional property to prevent conflicts when multiple users
@@ -3283,6 +3375,7 @@ newtype NodeTemplateNodeAffinityLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplateNodeAffinityLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3293,6 +3386,7 @@ nodeTemplateNodeAffinityLabels
     -> NodeTemplateNodeAffinityLabels
 nodeTemplateNodeAffinityLabels pNtnalAddtional_ =
   NodeTemplateNodeAffinityLabels' {_ntnalAddtional = _Coerce # pNtnalAddtional_}
+
 
 ntnalAddtional :: Lens' NodeTemplateNodeAffinityLabels (HashMap Text Text)
 ntnalAddtional
@@ -3325,6 +3419,7 @@ data OperationList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3351,6 +3446,7 @@ operationList =
     , _olWarning = Nothing
     , _olId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -3420,6 +3516,7 @@ data NodeGroupListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3434,6 +3531,7 @@ nodeGroupListWarning
 nodeGroupListWarning =
   NodeGroupListWarning'
     {_nglwData = Nothing, _nglwCode = Nothing, _nglwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -3484,6 +3582,7 @@ data DiskList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3510,6 +3609,7 @@ diskList =
     , _dlWarning = Nothing
     , _dlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -3575,6 +3675,7 @@ newtype TargetPoolsAddInstanceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolsAddInstanceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3584,6 +3685,7 @@ targetPoolsAddInstanceRequest
     :: TargetPoolsAddInstanceRequest
 targetPoolsAddInstanceRequest =
   TargetPoolsAddInstanceRequest' {_tpairInstances = Nothing}
+
 
 -- | A full or partial URL to an instance to add to this target pool. This
 -- can be a full or partial URL. For example, the following are valid URLs:
@@ -3618,6 +3720,7 @@ newtype NodeGroupsDeleteNodesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsDeleteNodesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3627,6 +3730,7 @@ nodeGroupsDeleteNodesRequest
     :: NodeGroupsDeleteNodesRequest
 nodeGroupsDeleteNodesRequest =
   NodeGroupsDeleteNodesRequest' {_ngdnrNodes = Nothing}
+
 
 ngdnrNodes :: Lens' NodeGroupsDeleteNodesRequest [Text]
 ngdnrNodes
@@ -3659,6 +3763,7 @@ data RegionAutoscalerList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionAutoscalerList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3685,6 +3790,7 @@ regionAutoscalerList =
     , _rWarning = Nothing
     , _rId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -3749,6 +3855,7 @@ data HealthCheckListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HealthCheckListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3760,6 +3867,7 @@ healthCheckListWarningDataItem
     :: HealthCheckListWarningDataItem
 healthCheckListWarningDataItem =
   HealthCheckListWarningDataItem' {_hclwdiValue = Nothing, _hclwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 hclwdiValue :: Lens' HealthCheckListWarningDataItem (Maybe Text)
@@ -3801,6 +3909,7 @@ data NodeGroupAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3813,6 +3922,7 @@ nodeGroupAggregatedListWarningDataItem
 nodeGroupAggregatedListWarningDataItem =
   NodeGroupAggregatedListWarningDataItem'
     {_ngalwdiValue = Nothing, _ngalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ngalwdiValue :: Lens' NodeGroupAggregatedListWarningDataItem (Maybe Text)
@@ -3856,6 +3966,7 @@ newtype InstanceGroupsAddInstancesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsAddInstancesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3865,6 +3976,7 @@ instanceGroupsAddInstancesRequest
     :: InstanceGroupsAddInstancesRequest
 instanceGroupsAddInstancesRequest =
   InstanceGroupsAddInstancesRequest' {_igairInstances = Nothing}
+
 
 -- | The list of instances to add to the instance group.
 igairInstances :: Lens' InstanceGroupsAddInstancesRequest [InstanceReference]
@@ -3899,6 +4011,7 @@ data NodeGroupNode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupNode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3919,6 +4032,7 @@ nodeGroupNode =
     , _ngnInstances = Nothing
     , _ngnNodeType = Nothing
     }
+
 
 ngnStatus :: Lens' NodeGroupNode (Maybe NodeGroupNodeStatus)
 ngnStatus
@@ -3972,6 +4086,7 @@ data InstanceGroupManagerList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagerList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3998,6 +4113,7 @@ instanceGroupManagerList =
     , _igmlWarning = Nothing
     , _igmlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -4068,6 +4184,7 @@ data InstanceGroupManagerVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagerVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4085,6 +4202,7 @@ instanceGroupManagerVersion =
     , _igmvTargetSize = Nothing
     , _igmvName = Nothing
     }
+
 
 igmvInstanceTemplate :: Lens' InstanceGroupManagerVersion (Maybe Text)
 igmvInstanceTemplate
@@ -4138,6 +4256,7 @@ data SubnetworksScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworksScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4152,6 +4271,7 @@ subnetworksScopedListWarning
 subnetworksScopedListWarning =
   SubnetworksScopedListWarning'
     {_sslwData = Nothing, _sslwCode = Nothing, _sslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -4196,6 +4316,7 @@ newtype NodeGroupsSetNodeTemplateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsSetNodeTemplateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4205,6 +4326,7 @@ nodeGroupsSetNodeTemplateRequest
     :: NodeGroupsSetNodeTemplateRequest
 nodeGroupsSetNodeTemplateRequest =
   NodeGroupsSetNodeTemplateRequest' {_ngsntrNodeTemplate = Nothing}
+
 
 -- | Full or partial URL of the node template resource to be updated for this
 -- node group.
@@ -4239,6 +4361,7 @@ data AcceleratorTypeListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorTypeListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4253,6 +4376,7 @@ acceleratorTypeListWarning
 acceleratorTypeListWarning =
   AcceleratorTypeListWarning'
     {_atlwData = Nothing, _atlwCode = Nothing, _atlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -4325,6 +4449,7 @@ data Image =
     , _iSourceSnapshot              :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
@@ -4418,6 +4543,7 @@ image =
     , _iDeprecated = Nothing
     , _iSourceSnapshot = Nothing
     }
+
 
 -- | [Output Only] The status of the image. An image can be used to create
 -- other resources, such as instances, only after the image has been
@@ -4705,6 +4831,7 @@ data NetworksAddPeeringRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworksAddPeeringRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4722,6 +4849,7 @@ networksAddPeeringRequest =
     , _naprName = Nothing
     , _naprAutoCreateRoutes = Nothing
     }
+
 
 -- | URL of the peer network. It can be either full URL or partial URL. The
 -- peer network may belong to a different project. If the partial URL does
@@ -4767,6 +4895,7 @@ data NodeTemplatesScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplatesScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4778,6 +4907,7 @@ nodeTemplatesScopedList
     :: NodeTemplatesScopedList
 nodeTemplatesScopedList =
   NodeTemplatesScopedList' {_nNodeTemplates = Nothing, _nWarning = Nothing}
+
 
 -- | [Output Only] A list of node templates contained in this scope.
 nNodeTemplates :: Lens' NodeTemplatesScopedList [NodeTemplate]
@@ -4818,6 +4948,7 @@ data URLMapListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMapListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4832,6 +4963,7 @@ urlMapListWarning
 urlMapListWarning =
   URLMapListWarning'
     {_umlwData = Nothing, _umlwCode = Nothing, _umlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -4877,6 +5009,7 @@ data NodeGroupsScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4889,6 +5022,7 @@ nodeGroupsScopedListWarningDataItem
 nodeGroupsScopedListWarningDataItem =
   NodeGroupsScopedListWarningDataItem'
     {_ngslwdiValue = Nothing, _ngslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ngslwdiValue :: Lens' NodeGroupsScopedListWarningDataItem (Maybe Text)
@@ -4943,6 +5077,7 @@ data URLMap =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4984,6 +5119,7 @@ urlMap =
     , _umHostRules = Nothing
     , _umDescription = Nothing
     }
+
 
 -- | The list of expected URL mapping tests. Request to update this UrlMap
 -- will succeed only if all of the test cases pass. You can specify a
@@ -5116,6 +5252,7 @@ data ImageListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5130,6 +5267,7 @@ imageListWarning
 imageListWarning =
   ImageListWarning'
     {_ilwData = Nothing, _ilwCode = Nothing, _ilwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -5178,6 +5316,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5198,6 +5337,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -5250,6 +5390,7 @@ newtype SSLPolicyReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLPolicyReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5258,6 +5399,7 @@ newtype SSLPolicyReference =
 sslPolicyReference
     :: SSLPolicyReference
 sslPolicyReference = SSLPolicyReference' {_sprSSLPolicy = Nothing}
+
 
 -- | URL of the SSL policy resource. Set this to empty string to clear any
 -- existing SSL policy associated with the target proxy resource.
@@ -5284,6 +5426,7 @@ newtype InstanceGroupAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5295,6 +5438,7 @@ instanceGroupAggregatedListItems
 instanceGroupAggregatedListItems pIgaliAddtional_ =
   InstanceGroupAggregatedListItems'
     {_igaliAddtional = _Coerce # pIgaliAddtional_}
+
 
 -- | The name of the scope that contains this set of instance groups.
 igaliAddtional :: Lens' InstanceGroupAggregatedListItems (HashMap Text InstanceGroupsScopedList)
@@ -5329,6 +5473,7 @@ data TargetPoolList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5355,6 +5500,7 @@ targetPoolList =
     , _tplWarning = Nothing
     , _tplId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -5433,6 +5579,7 @@ data AcceleratorType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5468,6 +5615,7 @@ acceleratorType =
     , _atDescription = Nothing
     , _atDeprecated = Nothing
     }
+
 
 -- | [Output Only] The type of the resource. Always compute#acceleratorType
 -- for accelerator types.
@@ -5559,6 +5707,7 @@ data BackendBucketListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendBucketListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5571,6 +5720,7 @@ backendBucketListWarningDataItem
 backendBucketListWarningDataItem =
   BackendBucketListWarningDataItem'
     {_bblwdiValue = Nothing, _bblwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 bblwdiValue :: Lens' BackendBucketListWarningDataItem (Maybe Text)
@@ -5613,6 +5763,7 @@ data AcceleratorTypesScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorTypesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5625,6 +5776,7 @@ acceleratorTypesScopedListWarningDataItem
 acceleratorTypesScopedListWarningDataItem =
   AcceleratorTypesScopedListWarningDataItem'
     {_atslwdiValue = Nothing, _atslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 atslwdiValue :: Lens' AcceleratorTypesScopedListWarningDataItem (Maybe Text)
@@ -5674,6 +5826,7 @@ data RegionDiskTypeList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionDiskTypeList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5700,6 +5853,7 @@ regionDiskTypeList =
     , _rdtlWarning = Nothing
     , _rdtlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -5773,6 +5927,7 @@ data TargetInstanceAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetInstanceAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5799,6 +5954,7 @@ targetInstanceAggregatedList =
     , _tialWarning = Nothing
     , _tialId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -5866,6 +6022,7 @@ data NodeGroupsListNodesWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsListNodesWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5878,6 +6035,7 @@ nodeGroupsListNodesWarningDataItem
 nodeGroupsListNodesWarningDataItem =
   NodeGroupsListNodesWarningDataItem'
     {_nglnwdiValue = Nothing, _nglnwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 nglnwdiValue :: Lens' NodeGroupsListNodesWarningDataItem (Maybe Text)
@@ -5924,6 +6082,7 @@ data UsableSubnetworksAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsableSubnetworksAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5950,6 +6109,7 @@ usableSubnetworksAggregatedList =
     , _usalWarning = Nothing
     , _usalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -6023,6 +6183,7 @@ data DisksScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DisksScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6033,6 +6194,7 @@ data DisksScopedList =
 disksScopedList
     :: DisksScopedList
 disksScopedList = DisksScopedList' {_dslWarning = Nothing, _dslDisks = Nothing}
+
 
 -- | [Output Only] Informational warning which replaces the list of disks
 -- when the list is empty.
@@ -6070,6 +6232,7 @@ data InterconnectLocationListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectLocationListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6082,6 +6245,7 @@ interconnectLocationListWarningDataItem
 interconnectLocationListWarningDataItem =
   InterconnectLocationListWarningDataItem'
     {_illwdiValue = Nothing, _illwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 illwdiValue :: Lens' InterconnectLocationListWarningDataItem (Maybe Text)
@@ -6127,6 +6291,7 @@ data InstanceGroupManagersScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6139,6 +6304,7 @@ instanceGroupManagersScopedList
 instanceGroupManagersScopedList =
   InstanceGroupManagersScopedList'
     {_igmslWarning = Nothing, _igmslInstanceGroupManagers = Nothing}
+
 
 -- | [Output Only] The warning that replaces the list of managed instance
 -- groups when the list is empty.
@@ -6183,6 +6349,7 @@ data SubnetworkListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworkListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6197,6 +6364,7 @@ subnetworkListWarning
 subnetworkListWarning =
   SubnetworkListWarning'
     {_slwData = Nothing, _slwCode = Nothing, _slwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -6256,6 +6424,7 @@ data HealthCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6309,6 +6478,7 @@ healthCheck =
     , _hcUnhealthyThreshold = Nothing
     , _hcHTTPSHealthCheck = Nothing
     }
+
 
 -- | A so-far unhealthy instance will be marked healthy after this many
 -- consecutive successes. The default value is 2.
@@ -6459,6 +6629,7 @@ data HTTPHealthCheckListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPHealthCheckListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6476,6 +6647,7 @@ hTTPHealthCheckListWarning =
     , _httphclwCode = Nothing
     , _httphclwMessage = Nothing
     }
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -6525,6 +6697,7 @@ data SSLPoliciesListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLPoliciesListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6539,6 +6712,7 @@ sslPoliciesListWarning
 sslPoliciesListWarning =
   SSLPoliciesListWarning'
     {_splwData = Nothing, _splwCode = Nothing, _splwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -6584,6 +6758,7 @@ newtype CommitmentAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitmentAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6594,6 +6769,7 @@ commitmentAggregatedListItems
     -> CommitmentAggregatedListItems
 commitmentAggregatedListItems pCaliAddtional_ =
   CommitmentAggregatedListItems' {_caliAddtional = _Coerce # pCaliAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of commitments.
 caliAddtional :: Lens' CommitmentAggregatedListItems (HashMap Text CommitmentsScopedList)
@@ -6625,6 +6801,7 @@ data DiskAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6651,6 +6828,7 @@ diskAggregatedList =
     , _dalWarning = Nothing
     , _dalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -6717,6 +6895,7 @@ data InstanceGroupsListInstancesWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsListInstancesWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6729,6 +6908,7 @@ instanceGroupsListInstancesWarningDataItem
 instanceGroupsListInstancesWarningDataItem =
   InstanceGroupsListInstancesWarningDataItem'
     {_igliwdiValue = Nothing, _igliwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 igliwdiValue :: Lens' InstanceGroupsListInstancesWarningDataItem (Maybe Text)
@@ -6776,6 +6956,7 @@ data InstanceWithNamedPorts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceWithNamedPorts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6790,6 +6971,7 @@ instanceWithNamedPorts
 instanceWithNamedPorts =
   InstanceWithNamedPorts'
     {_iwnpStatus = Nothing, _iwnpNamedPorts = Nothing, _iwnpInstance = Nothing}
+
 
 -- | [Output Only] The status of the instance.
 iwnpStatus :: Lens' InstanceWithNamedPorts (Maybe InstanceWithNamedPortsStatus)
@@ -6836,6 +7018,7 @@ data InterconnectListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6850,6 +7033,7 @@ interconnectListWarning
 interconnectListWarning =
   InterconnectListWarning'
     {_iData = Nothing, _iCode = Nothing, _iMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -6892,6 +7076,7 @@ data ForwardingRulesScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingRulesScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6904,6 +7089,7 @@ forwardingRulesScopedList
 forwardingRulesScopedList =
   ForwardingRulesScopedList'
     {_frslWarning = Nothing, _frslForwardingRules = Nothing}
+
 
 -- | Informational warning which replaces the list of forwarding rules when
 -- the list is empty.
@@ -6942,6 +7128,7 @@ newtype InstanceReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6950,6 +7137,7 @@ newtype InstanceReference =
 instanceReference
     :: InstanceReference
 instanceReference = InstanceReference' {_iInstance = Nothing}
+
 
 -- | The URL for a specific instance.
 iInstance :: Lens' InstanceReference (Maybe Text)
@@ -6978,6 +7166,7 @@ data OperationAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7004,6 +7193,7 @@ operationAggregatedList =
     , _oalWarning = Nothing
     , _oalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -7071,6 +7261,7 @@ data OperationsScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationsScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7082,6 +7273,7 @@ operationsScopedList
     :: OperationsScopedList
 operationsScopedList =
   OperationsScopedList' {_oslWarning = Nothing, _oslOperations = Nothing}
+
 
 -- | [Output Only] Informational warning which replaces the list of
 -- operations when the list is empty.
@@ -7122,6 +7314,7 @@ data NamedPort =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NamedPort' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7132,6 +7325,7 @@ data NamedPort =
 namedPort
     :: NamedPort
 namedPort = NamedPort' {_npName = Nothing, _npPort = Nothing}
+
 
 -- | The name for this named port. The name must be 1-63 characters long, and
 -- comply with RFC1035.
@@ -7165,6 +7359,7 @@ data SubnetworkAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworkAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7177,6 +7372,7 @@ subnetworkAggregatedListWarningDataItem
 subnetworkAggregatedListWarningDataItem =
   SubnetworkAggregatedListWarningDataItem'
     {_salwdiValue = Nothing, _salwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 salwdiValue :: Lens' SubnetworkAggregatedListWarningDataItem (Maybe Text)
@@ -7226,6 +7422,7 @@ data InterconnectDiagnosticsLinkStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectDiagnosticsLinkStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7252,6 +7449,7 @@ interconnectDiagnosticsLinkStatus =
     , _idlsArpCaches = Nothing
     , _idlsTransmittingOpticalPower = Nothing
     }
+
 
 idlsLacpStatus :: Lens' InterconnectDiagnosticsLinkStatus (Maybe InterconnectDiagnosticsLinkLACPStatus)
 idlsLacpStatus
@@ -7331,6 +7529,7 @@ data TargetInstanceList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetInstanceList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7357,6 +7556,7 @@ targetInstanceList =
     , _tilWarning = Nothing
     , _tilId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -7427,6 +7627,7 @@ data TargetTCPProxyListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetTCPProxyListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7441,6 +7642,7 @@ targetTCPProxyListWarning
 targetTCPProxyListWarning =
   TargetTCPProxyListWarning'
     {_ttplwData = Nothing, _ttplwCode = Nothing, _ttplwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -7491,6 +7693,7 @@ data InstanceGroupManagerAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagerAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7517,6 +7720,7 @@ instanceGroupManagerAggregatedList =
     , _igmalWarning = Nothing
     , _igmalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -7598,6 +7802,7 @@ data BackendBucket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendBucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7633,6 +7838,7 @@ backendBucket =
     , _bbId = Nothing
     , _bbDescription = Nothing
     }
+
 
 -- | Type of the resource.
 bbKind :: Lens' BackendBucket Text
@@ -7724,6 +7930,7 @@ newtype ProjectsEnableXpnResourceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsEnableXpnResourceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7733,6 +7940,7 @@ projectsEnableXpnResourceRequest
     :: ProjectsEnableXpnResourceRequest
 projectsEnableXpnResourceRequest =
   ProjectsEnableXpnResourceRequest' {_pexrrXpnResource = Nothing}
+
 
 -- | Service resource (a.k.a service project) ID.
 pexrrXpnResource :: Lens' ProjectsEnableXpnResourceRequest (Maybe XpnResourceId)
@@ -7764,6 +7972,7 @@ data TargetPoolsScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolsScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7775,6 +7984,7 @@ targetPoolsScopedList
     :: TargetPoolsScopedList
 targetPoolsScopedList =
   TargetPoolsScopedList' {_tpslWarning = Nothing, _tpslTargetPools = Nothing}
+
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
@@ -7814,6 +8024,7 @@ newtype InterconnectAttachmentAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7825,6 +8036,7 @@ interconnectAttachmentAggregatedListItems
 interconnectAttachmentAggregatedListItems pIaaliAddtional_ =
   InterconnectAttachmentAggregatedListItems'
     {_iaaliAddtional = _Coerce # pIaaliAddtional_}
+
 
 -- | Name of the scope containing this set of interconnect attachments.
 iaaliAddtional :: Lens' InterconnectAttachmentAggregatedListItems (HashMap Text InterconnectAttachmentsScopedList)
@@ -7858,6 +8070,7 @@ data InstanceGroupManagerAutoHealingPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagerAutoHealingPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7870,6 +8083,7 @@ instanceGroupManagerAutoHealingPolicy
 instanceGroupManagerAutoHealingPolicy =
   InstanceGroupManagerAutoHealingPolicy'
     {_igmahpHealthCheck = Nothing, _igmahpInitialDelaySec = Nothing}
+
 
 -- | The URL for the health check that signals autohealing.
 igmahpHealthCheck :: Lens' InstanceGroupManagerAutoHealingPolicy (Maybe Text)
@@ -7931,6 +8145,7 @@ data LogConfigCounterOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogConfigCounterOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7942,6 +8157,7 @@ logConfigCounterOptions
     :: LogConfigCounterOptions
 logConfigCounterOptions =
   LogConfigCounterOptions' {_lccoField = Nothing, _lccoMetric = Nothing}
+
 
 -- | The field value to attribute.
 lccoField :: Lens' LogConfigCounterOptions (Maybe Text)
@@ -7975,6 +8191,7 @@ newtype InstancesSetMinCPUPlatformRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesSetMinCPUPlatformRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7984,6 +8201,7 @@ instancesSetMinCPUPlatformRequest
     :: InstancesSetMinCPUPlatformRequest
 instancesSetMinCPUPlatformRequest =
   InstancesSetMinCPUPlatformRequest' {_ismcprMinCPUPlatform = Nothing}
+
 
 -- | Minimum cpu\/platform this instance should be started at.
 ismcprMinCPUPlatform :: Lens' InstancesSetMinCPUPlatformRequest (Maybe Text)
@@ -8019,6 +8237,7 @@ data ForwardingRuleAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingRuleAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8045,6 +8264,7 @@ forwardingRuleAggregatedList =
     , _fralWarning = Nothing
     , _fralId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -8112,6 +8332,7 @@ newtype TargetReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8120,6 +8341,7 @@ newtype TargetReference =
 targetReference
     :: TargetReference
 targetReference = TargetReference' {_trTarget = Nothing}
+
 
 trTarget :: Lens' TargetReference (Maybe Text)
 trTarget = lens _trTarget (\ s a -> s{_trTarget = a})
@@ -8145,6 +8367,7 @@ data TargetPoolAggregatedList =
     , _tpalId            :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetPoolAggregatedList' with the minimum fields required to make a request.
 --
@@ -8172,6 +8395,7 @@ targetPoolAggregatedList =
     , _tpalWarning = Nothing
     , _tpalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -8239,6 +8463,7 @@ data OperationsScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8251,6 +8476,7 @@ operationsScopedListWarningDataItem
 operationsScopedListWarningDataItem =
   OperationsScopedListWarningDataItem'
     {_oslwdiValue = Nothing, _oslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 oslwdiValue :: Lens' OperationsScopedListWarningDataItem (Maybe Text)
@@ -8293,6 +8519,7 @@ data GlobalSetLabelsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GlobalSetLabelsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8305,6 +8532,7 @@ globalSetLabelsRequest
 globalSetLabelsRequest =
   GlobalSetLabelsRequest'
     {_gslrLabels = Nothing, _gslrLabelFingerprint = Nothing}
+
 
 -- | A list of labels to apply for this resource. Each label key & value must
 -- comply with RFC1035. Specifically, the name must be 1-63 characters long
@@ -8366,6 +8594,7 @@ data TargetPool =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPool' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8410,6 +8639,7 @@ targetPool =
     , _tpDescription = Nothing
     , _tpHealthChecks = Nothing
     }
+
 
 -- | Session affinity option, must be one of the following values: NONE:
 -- Connections from the same client IP may go to any instance in the pool.
@@ -8568,6 +8798,7 @@ data ImageList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8594,6 +8825,7 @@ imageList =
     , _ilWarning = Nothing
     , _ilId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -8659,6 +8891,7 @@ data OperationAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8671,6 +8904,7 @@ operationAggregatedListWarningDataItem
 operationAggregatedListWarningDataItem =
   OperationAggregatedListWarningDataItem'
     {_oalwdiValue = Nothing, _oalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 oalwdiValue :: Lens' OperationAggregatedListWarningDataItem (Maybe Text)
@@ -8717,6 +8951,7 @@ data ForwardingRuleListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingRuleListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8731,6 +8966,7 @@ forwardingRuleListWarning
 forwardingRuleListWarning =
   ForwardingRuleListWarning'
     {_frlwData = Nothing, _frlwCode = Nothing, _frlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -8779,6 +9015,7 @@ data VPNTunnelsScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VPNTunnelsScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8793,6 +9030,7 @@ vpnTunnelsScopedListWarning
 vpnTunnelsScopedListWarning =
   VPNTunnelsScopedListWarning'
     {_vtslwData = Nothing, _vtslwCode = Nothing, _vtslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -8838,6 +9076,7 @@ newtype RegionDisksResizeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionDisksResizeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8846,6 +9085,7 @@ newtype RegionDisksResizeRequest =
 regionDisksResizeRequest
     :: RegionDisksResizeRequest
 regionDisksResizeRequest = RegionDisksResizeRequest' {_rdrrSizeGb = Nothing}
+
 
 -- | The new size of the regional persistent disk, which is specified in GB.
 rdrrSizeGb :: Lens' RegionDisksResizeRequest (Maybe Int64)
@@ -8875,6 +9115,7 @@ data NodeTypesScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTypesScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8889,6 +9130,7 @@ nodeTypesScopedListWarning
 nodeTypesScopedListWarning =
   NodeTypesScopedListWarning'
     {_ntslwData = Nothing, _ntslwCode = Nothing, _ntslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -8936,6 +9178,7 @@ data NodeTemplateNodeTypeFlexibility =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplateNodeTypeFlexibility' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8950,6 +9193,7 @@ nodeTemplateNodeTypeFlexibility
 nodeTemplateNodeTypeFlexibility =
   NodeTemplateNodeTypeFlexibility'
     {_ntntfMemory = Nothing, _ntntfCPUs = Nothing, _ntntfLocalSsd = Nothing}
+
 
 ntntfMemory :: Lens' NodeTemplateNodeTypeFlexibility (Maybe Text)
 ntntfMemory
@@ -8990,6 +9234,7 @@ data LicenseResourceRequirements =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicenseResourceRequirements' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9002,6 +9247,7 @@ licenseResourceRequirements
 licenseResourceRequirements =
   LicenseResourceRequirements'
     {_lrrMinMemoryMb = Nothing, _lrrMinGuestCPUCount = Nothing}
+
 
 -- | Minimum memory required to use the Instance. Enforced at Instance
 -- creation and Instance start.
@@ -9044,6 +9290,7 @@ data RegionDiskTypeListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionDiskTypeListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9058,6 +9305,7 @@ regionDiskTypeListWarning
 regionDiskTypeListWarning =
   RegionDiskTypeListWarning'
     {_rdtlwData = Nothing, _rdtlwCode = Nothing, _rdtlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -9103,6 +9351,7 @@ newtype TargetSSLProxiesSetBackendServiceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetSSLProxiesSetBackendServiceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9112,6 +9361,7 @@ targetSSLProxiesSetBackendServiceRequest
     :: TargetSSLProxiesSetBackendServiceRequest
 targetSSLProxiesSetBackendServiceRequest =
   TargetSSLProxiesSetBackendServiceRequest' {_tspsbsrService = Nothing}
+
 
 -- | The URL of the new BackendService resource for the targetSslProxy.
 tspsbsrService :: Lens' TargetSSLProxiesSetBackendServiceRequest (Maybe Text)
@@ -9169,6 +9419,7 @@ data ForwardingRule =
     , _frBackendService      :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ForwardingRule' with the minimum fields required to make a request.
 --
@@ -9238,6 +9489,7 @@ forwardingRule =
     , _frTarget = Nothing
     , _frBackendService = Nothing
     }
+
 
 -- | This signifies the networking tier used for configuring this load
 -- balancer and can only take the following values: PREMIUM , STANDARD. For
@@ -9496,6 +9748,7 @@ data URLMapList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMapList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9522,6 +9775,7 @@ urlMapList =
     , _umlWarning = Nothing
     , _umlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -9590,6 +9844,7 @@ data ForwardingRulesScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingRulesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9602,6 +9857,7 @@ forwardingRulesScopedListWarningDataItem
 forwardingRulesScopedListWarningDataItem =
   ForwardingRulesScopedListWarningDataItem'
     {_frslwdiValue = Nothing, _frslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 frslwdiValue :: Lens' ForwardingRulesScopedListWarningDataItem (Maybe Text)
@@ -9649,6 +9905,7 @@ data TargetInstanceAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetInstanceAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9663,6 +9920,7 @@ targetInstanceAggregatedListWarning
 targetInstanceAggregatedListWarning =
   TargetInstanceAggregatedListWarning'
     {_tialwData = Nothing, _tialwCode = Nothing, _tialwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -9711,6 +9969,7 @@ data InstanceGroupManagersScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9723,6 +9982,7 @@ instanceGroupManagersScopedListWarningDataItem
 instanceGroupManagersScopedListWarningDataItem =
   InstanceGroupManagersScopedListWarningDataItem'
     {_igmslwdiValue = Nothing, _igmslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 igmslwdiValue :: Lens' InstanceGroupManagersScopedListWarningDataItem (Maybe Text)
@@ -9770,6 +10030,7 @@ data SubnetworksScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworksScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9781,6 +10042,7 @@ subnetworksScopedList
     :: SubnetworksScopedList
 subnetworksScopedList =
   SubnetworksScopedList' {_sslSubnetworks = Nothing, _sslWarning = Nothing}
+
 
 -- | A list of subnetworks contained in this scope.
 sslSubnetworks :: Lens' SubnetworksScopedList [Subnetwork]
@@ -9825,6 +10087,7 @@ data AcceleratorTypeList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorTypeList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9851,6 +10114,7 @@ acceleratorTypeList =
     , _atlWarning = Nothing
     , _atlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -9920,6 +10184,7 @@ data DiskAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9932,6 +10197,7 @@ diskAggregatedListWarningDataItem
 diskAggregatedListWarningDataItem =
   DiskAggregatedListWarningDataItem'
     {_dalwdiValue = Nothing, _dalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 dalwdiValue :: Lens' DiskAggregatedListWarningDataItem (Maybe Text)
@@ -9976,6 +10242,7 @@ data TargetPoolListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9990,6 +10257,7 @@ targetPoolListWarning
 targetPoolListWarning =
   TargetPoolListWarning'
     {_tplwData = Nothing, _tplwCode = Nothing, _tplwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -10038,6 +10306,7 @@ data NodeTemplatesScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplatesScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10052,6 +10321,7 @@ nodeTemplatesScopedListWarning
 nodeTemplatesScopedListWarning =
   NodeTemplatesScopedListWarning'
     {_nData = Nothing, _nCode = Nothing, _nMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -10095,6 +10365,7 @@ data TargetPoolAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10107,6 +10378,7 @@ targetPoolAggregatedListWarningDataItem
 targetPoolAggregatedListWarningDataItem =
   TargetPoolAggregatedListWarningDataItem'
     {_tpalwdiValue = Nothing, _tpalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 tpalwdiValue :: Lens' TargetPoolAggregatedListWarningDataItem (Maybe Text)
@@ -10166,6 +10438,7 @@ data Project =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10213,6 +10486,7 @@ project =
     , _pDescription = Nothing
     , _pCommonInstanceMetadata = Nothing
     }
+
 
 -- | [Output Only] The role this project has in a shared VPC configuration.
 -- Currently only HOST projects are differentiated.
@@ -10342,6 +10616,7 @@ newtype RegionInstanceGroupManagersListInstancesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagersListInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10352,6 +10627,7 @@ regionInstanceGroupManagersListInstancesResponse
 regionInstanceGroupManagersListInstancesResponse =
   RegionInstanceGroupManagersListInstancesResponse'
     {_rigmlirManagedInstances = Nothing}
+
 
 -- | A list of managed instances.
 rigmlirManagedInstances :: Lens' RegionInstanceGroupManagersListInstancesResponse [ManagedInstance]
@@ -10415,6 +10691,7 @@ data Operation =
     , _oClientOperationId   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -10493,6 +10770,7 @@ operation =
     , _oTargetLink = Nothing
     , _oClientOperationId = Nothing
     }
+
 
 -- | [Output Only] The unique target ID, which identifies a specific
 -- incarnation of the target resource.
@@ -10704,6 +10982,7 @@ data DisksScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DisksScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10715,6 +10994,7 @@ disksScopedListWarningDataItem
     :: DisksScopedListWarningDataItem
 disksScopedListWarningDataItem =
   DisksScopedListWarningDataItem' {_dslwdiValue = Nothing, _dslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 dslwdiValue :: Lens' DisksScopedListWarningDataItem (Maybe Text)
@@ -10784,6 +11064,7 @@ data Disk =
     , _dSourceSnapshot              :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Disk' with the minimum fields required to make a request.
 --
@@ -10880,6 +11161,7 @@ disk =
     , _dSourceSnapshotEncryptionKey = Nothing
     , _dSourceSnapshot = Nothing
     }
+
 
 -- | [Output Only] The status of disk creation.
 dStatus :: Lens' Disk (Maybe DiskStatus)
@@ -11191,6 +11473,7 @@ data UsableSubnetworksAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsableSubnetworksAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11203,6 +11486,7 @@ usableSubnetworksAggregatedListWarningDataItem
 usableSubnetworksAggregatedListWarningDataItem =
   UsableSubnetworksAggregatedListWarningDataItem'
     {_usalwdiValue = Nothing, _usalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 usalwdiValue :: Lens' UsableSubnetworksAggregatedListWarningDataItem (Maybe Text)
@@ -11254,6 +11538,7 @@ data NodeGroupList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11280,6 +11565,7 @@ nodeGroupList =
     , _nglWarning = Nothing
     , _nglId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -11349,6 +11635,7 @@ data DiskMoveRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskMoveRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11360,6 +11647,7 @@ diskMoveRequest
     :: DiskMoveRequest
 diskMoveRequest =
   DiskMoveRequest' {_dmrTargetDisk = Nothing, _dmrDestinationZone = Nothing}
+
 
 -- | The URL of the target disk to move. This can be a full or partial URL.
 -- For example, the following are all valid URLs to a disk: -
@@ -11402,6 +11690,7 @@ data SSLPolicyWarningsItemDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLPolicyWarningsItemDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11413,6 +11702,7 @@ sslPolicyWarningsItemDataItem
     :: SSLPolicyWarningsItemDataItem
 sslPolicyWarningsItemDataItem =
   SSLPolicyWarningsItemDataItem' {_spwidiValue = Nothing, _spwidiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 spwidiValue :: Lens' SSLPolicyWarningsItemDataItem (Maybe Text)
@@ -11453,6 +11743,7 @@ newtype AutoscalingPolicyLoadBalancingUtilization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalingPolicyLoadBalancingUtilization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11462,6 +11753,7 @@ autoscalingPolicyLoadBalancingUtilization
     :: AutoscalingPolicyLoadBalancingUtilization
 autoscalingPolicyLoadBalancingUtilization =
   AutoscalingPolicyLoadBalancingUtilization' {_aplbuUtilizationTarget = Nothing}
+
 
 -- | Fraction of backend capacity utilization (set in HTTP(S) load balancing
 -- configuration) that autoscaler should maintain. Must be a positive float
@@ -11500,6 +11792,7 @@ data ForwardingRuleAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingRuleAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11512,6 +11805,7 @@ forwardingRuleAggregatedListWarningDataItem
 forwardingRuleAggregatedListWarningDataItem =
   ForwardingRuleAggregatedListWarningDataItem'
     {_fralwdiValue = Nothing, _fralwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 fralwdiValue :: Lens' ForwardingRuleAggregatedListWarningDataItem (Maybe Text)
@@ -11558,6 +11852,7 @@ data TargetPoolsScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11570,6 +11865,7 @@ targetPoolsScopedListWarningDataItem
 targetPoolsScopedListWarningDataItem =
   TargetPoolsScopedListWarningDataItem'
     {_tpslwdiValue = Nothing, _tpslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 tpslwdiValue :: Lens' TargetPoolsScopedListWarningDataItem (Maybe Text)
@@ -11635,6 +11931,7 @@ data InstanceGroupManager =
     , _igmNamedPorts          :: !(Maybe [NamedPort])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceGroupManager' with the minimum fields required to make a request.
 --
@@ -11707,6 +12004,7 @@ instanceGroupManager =
     , _igmInstanceGroup = Nothing
     , _igmNamedPorts = Nothing
     }
+
 
 -- | [Output Only] The status of this managed instance group.
 igmStatus :: Lens' InstanceGroupManager (Maybe InstanceGroupManagerStatus)
@@ -11931,6 +12229,7 @@ data InstanceGroupManagerListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagerListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11945,6 +12244,7 @@ instanceGroupManagerListWarning
 instanceGroupManagerListWarning =
   InstanceGroupManagerListWarning'
     {_igmlwData = Nothing, _igmlwCode = Nothing, _igmlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -11996,6 +12296,7 @@ data RegionInstanceGroupsListInstances =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupsListInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12022,6 +12323,7 @@ regionInstanceGroupsListInstances =
     , _rigliWarning = Nothing
     , _rigliId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -12097,6 +12399,7 @@ data DiskListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12111,6 +12414,7 @@ diskListWarning
 diskListWarning =
   DiskListWarning'
     {_dlwData = Nothing, _dlwCode = Nothing, _dlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -12157,6 +12461,7 @@ data TCPHealthCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TCPHealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12180,6 +12485,7 @@ tcpHealthCheck =
     , _thcPort = Nothing
     , _thcRequest = Nothing
     }
+
 
 -- | The bytes to match against the beginning of the response data. If left
 -- empty (the default value), any response will indicate health. The
@@ -12245,6 +12551,7 @@ data InstanceGroupManagerAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagerAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12257,6 +12564,7 @@ instanceGroupManagerAggregatedListWarningDataItem
 instanceGroupManagerAggregatedListWarningDataItem =
   InstanceGroupManagerAggregatedListWarningDataItem'
     {_igmalwdiValue = Nothing, _igmalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 igmalwdiValue :: Lens' InstanceGroupManagerAggregatedListWarningDataItem (Maybe Text)
@@ -12303,6 +12611,7 @@ newtype TestPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12311,6 +12620,7 @@ newtype TestPermissionsResponse =
 testPermissionsResponse
     :: TestPermissionsResponse
 testPermissionsResponse = TestPermissionsResponse' {_tprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -12344,6 +12654,7 @@ data RegionAutoscalerListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionAutoscalerListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12358,6 +12669,7 @@ regionAutoscalerListWarning
 regionAutoscalerListWarning =
   RegionAutoscalerListWarning'
     {_ralwData = Nothing, _ralwCode = Nothing, _ralwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -12403,6 +12715,7 @@ data TargetInstanceListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetInstanceListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12415,6 +12728,7 @@ targetInstanceListWarningDataItem
 targetInstanceListWarningDataItem =
   TargetInstanceListWarningDataItem'
     {_tilwdiValue = Nothing, _tilwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 tilwdiValue :: Lens' TargetInstanceListWarningDataItem (Maybe Text)
@@ -12459,6 +12773,7 @@ data OperationListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12473,6 +12788,7 @@ operationListWarning
 operationListWarning =
   OperationListWarning'
     {_olwData = Nothing, _olwCode = Nothing, _olwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -12515,6 +12831,7 @@ newtype InstanceGroupsRemoveInstancesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsRemoveInstancesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12524,6 +12841,7 @@ instanceGroupsRemoveInstancesRequest
     :: InstanceGroupsRemoveInstancesRequest
 instanceGroupsRemoveInstancesRequest =
   InstanceGroupsRemoveInstancesRequest' {_igrirInstances = Nothing}
+
 
 -- | The list of instances to remove from the instance group.
 igrirInstances :: Lens' InstanceGroupsRemoveInstancesRequest [InstanceReference]
@@ -12561,6 +12879,7 @@ data InterconnectAttachmentPartnerMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentPartnerMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12578,6 +12897,7 @@ interconnectAttachmentPartnerMetadata =
     , _iapmInterconnectName = Nothing
     , _iapmPartnerName = Nothing
     }
+
 
 -- | URL of the Partner?s portal for this Attachment. Partners may customise
 -- this to be a deep-link to the specific resource on the Partner portal.
@@ -12630,6 +12950,7 @@ data MachineTypeListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypeListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12641,6 +12962,7 @@ machineTypeListWarningDataItem
     :: MachineTypeListWarningDataItem
 machineTypeListWarningDataItem =
   MachineTypeListWarningDataItem' {_mtlwdiValue = Nothing, _mtlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 mtlwdiValue :: Lens' MachineTypeListWarningDataItem (Maybe Text)
@@ -12681,6 +13003,7 @@ newtype NetworksRemovePeeringRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworksRemovePeeringRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12690,6 +13013,7 @@ networksRemovePeeringRequest
     :: NetworksRemovePeeringRequest
 networksRemovePeeringRequest =
   NetworksRemovePeeringRequest' {_nrprName = Nothing}
+
 
 -- | Name of the peering, which should conform to RFC1035.
 nrprName :: Lens' NetworksRemovePeeringRequest (Maybe Text)
@@ -12714,6 +13038,7 @@ data TargetHTTPProxyListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPProxyListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12726,6 +13051,7 @@ targetHTTPProxyListWarningDataItem
 targetHTTPProxyListWarningDataItem =
   TargetHTTPProxyListWarningDataItem'
     {_thttpplwdiValue = Nothing, _thttpplwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 thttpplwdiValue :: Lens' TargetHTTPProxyListWarningDataItem (Maybe Text)
@@ -12772,6 +13098,7 @@ data MachineTypeAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypeAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12786,6 +13113,7 @@ machineTypeAggregatedListWarning
 machineTypeAggregatedListWarning =
   MachineTypeAggregatedListWarning'
     {_mtalwData = Nothing, _mtalwCode = Nothing, _mtalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -12834,6 +13162,7 @@ data NodeTemplateAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplateAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12846,6 +13175,7 @@ nodeTemplateAggregatedListWarningDataItem
 nodeTemplateAggregatedListWarningDataItem =
   NodeTemplateAggregatedListWarningDataItem'
     {_ntalwdiValue = Nothing, _ntalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ntalwdiValue :: Lens' NodeTemplateAggregatedListWarningDataItem (Maybe Text)
@@ -12896,6 +13226,7 @@ data BackendBucketList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendBucketList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -12922,6 +13253,7 @@ backendBucketList =
     , _bblWarning = Nothing
     , _bblId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -12991,6 +13323,7 @@ newtype InterconnectAttachmentPrivateInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentPrivateInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13000,6 +13333,7 @@ interconnectAttachmentPrivateInfo
     :: InterconnectAttachmentPrivateInfo
 interconnectAttachmentPrivateInfo =
   InterconnectAttachmentPrivateInfo' {_iapiTag8021q = Nothing}
+
 
 -- | [Output Only] 802.1q encapsulation tag to be used for traffic between
 -- Google and the customer, going to and from this network and region.
@@ -13031,6 +13365,7 @@ data AcceleratorTypesScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorTypesScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13043,6 +13378,7 @@ acceleratorTypesScopedList
 acceleratorTypesScopedList =
   AcceleratorTypesScopedList'
     {_atslAcceleratorTypes = Nothing, _atslWarning = Nothing}
+
 
 -- | [Output Only] A list of accelerator types contained in this scope.
 atslAcceleratorTypes :: Lens' AcceleratorTypesScopedList [AcceleratorType]
@@ -13084,6 +13420,7 @@ data BackendServiceCdnPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServiceCdnPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13101,6 +13438,7 @@ backendServiceCdnPolicy =
     , _bscpSignedURLKeyNames = Nothing
     , _bscpCacheKeyPolicy = Nothing
     }
+
 
 -- | Maximum number of seconds the response to a signed URL request will be
 -- considered fresh. After this time period, the response will be
@@ -13156,6 +13494,7 @@ data RouteWarningsItemDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouteWarningsItemDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13167,6 +13506,7 @@ routeWarningsItemDataItem
     :: RouteWarningsItemDataItem
 routeWarningsItemDataItem =
   RouteWarningsItemDataItem' {_rwidiValue = Nothing, _rwidiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 rwidiValue :: Lens' RouteWarningsItemDataItem (Maybe Text)
@@ -13210,6 +13550,7 @@ data NodeGroupAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13236,6 +13577,7 @@ nodeGroupAggregatedList =
     , _ngalWarning = Nothing
     , _ngalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -13305,6 +13647,7 @@ data VPNTunnelListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VPNTunnelListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13319,6 +13662,7 @@ vpnTunnelListWarning
 vpnTunnelListWarning =
   VPNTunnelListWarning'
     {_vtlwData = Nothing, _vtlwCode = Nothing, _vtlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -13364,6 +13708,7 @@ newtype BackendServiceAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServiceAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13375,6 +13720,7 @@ backendServiceAggregatedListItems
 backendServiceAggregatedListItems pBsaliAddtional_ =
   BackendServiceAggregatedListItems'
     {_bsaliAddtional = _Coerce # pBsaliAddtional_}
+
 
 -- | Name of the scope containing this set of BackendServices.
 bsaliAddtional :: Lens' BackendServiceAggregatedListItems (HashMap Text BackendServicesScopedList)
@@ -13404,6 +13750,7 @@ newtype InstanceAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13414,6 +13761,7 @@ instanceAggregatedListItems
     -> InstanceAggregatedListItems
 instanceAggregatedListItems pIaliAddtional_ =
   InstanceAggregatedListItems' {_ialiAddtional = _Coerce # pIaliAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of instances.
 ialiAddtional :: Lens' InstanceAggregatedListItems (HashMap Text InstancesScopedList)
@@ -13443,6 +13791,7 @@ data AutoscalersScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalersScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13457,6 +13806,7 @@ autoscalersScopedListWarning
 autoscalersScopedListWarning =
   AutoscalersScopedListWarning'
     {_aslwData = Nothing, _aslwCode = Nothing, _aslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -13506,6 +13856,7 @@ data DiskInstantiationConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskInstantiationConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13526,6 +13877,7 @@ diskInstantiationConfig =
     , _dicCustomImage = Nothing
     , _dicDeviceName = Nothing
     }
+
 
 -- | Specifies whether the disk will be auto-deleted when the instance is
 -- deleted (but not when the disk is detached from the instance).
@@ -13594,6 +13946,7 @@ data DiskTypeAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskTypeAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13608,6 +13961,7 @@ diskTypeAggregatedListWarning
 diskTypeAggregatedListWarning =
   DiskTypeAggregatedListWarning'
     {_dtalwData = Nothing, _dtalwCode = Nothing, _dtalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -13654,6 +14008,7 @@ data DiskTypeListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskTypeListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13665,6 +14020,7 @@ diskTypeListWarningDataItem
     :: DiskTypeListWarningDataItem
 diskTypeListWarningDataItem =
   DiskTypeListWarningDataItem' {_dtlwdiValue = Nothing, _dtlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 dtlwdiValue :: Lens' DiskTypeListWarningDataItem (Maybe Text)
@@ -13712,6 +14068,7 @@ data SecurityPolicyRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPolicyRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13738,6 +14095,7 @@ securityPolicyRule =
     , _sprMatch = Nothing
     , _sprDescription = Nothing
     }
+
 
 -- | An integer indicating the priority of a rule in the list. The priority
 -- must be a positive value between 0 and 2147483647. Rules are evaluated
@@ -13809,6 +14167,7 @@ newtype InterconnectsGetDiagnosticsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectsGetDiagnosticsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13818,6 +14177,7 @@ interconnectsGetDiagnosticsResponse
     :: InterconnectsGetDiagnosticsResponse
 interconnectsGetDiagnosticsResponse =
   InterconnectsGetDiagnosticsResponse' {_igdrResult = Nothing}
+
 
 igdrResult :: Lens' InterconnectsGetDiagnosticsResponse (Maybe InterconnectDiagnostics)
 igdrResult
@@ -13845,6 +14205,7 @@ data VPNTunnelAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VPNTunnelAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13857,6 +14218,7 @@ vpnTunnelAggregatedListWarningDataItem
 vpnTunnelAggregatedListWarningDataItem =
   VPNTunnelAggregatedListWarningDataItem'
     {_vtalwdiValue = Nothing, _vtalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 vtalwdiValue :: Lens' VPNTunnelAggregatedListWarningDataItem (Maybe Text)
@@ -13903,6 +14265,7 @@ data FixedOrPercent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FixedOrPercent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13917,6 +14280,7 @@ fixedOrPercent
 fixedOrPercent =
   FixedOrPercent'
     {_fopCalculated = Nothing, _fopPercent = Nothing, _fopFixed = Nothing}
+
 
 -- | [Output Only] Absolute value of VM instances calculated based on the
 -- specific mode. - If the value is fixed, then the caculated value is
@@ -13970,6 +14334,7 @@ newtype FirewallLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FirewallLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -13978,6 +14343,7 @@ newtype FirewallLogConfig =
 firewallLogConfig
     :: FirewallLogConfig
 firewallLogConfig = FirewallLogConfig' {_flcEnable = Nothing}
+
 
 -- | This field denotes whether to enable logging for a particular firewall
 -- rule.
@@ -14017,6 +14383,7 @@ data RouterNAT =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterNAT' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14055,6 +14422,7 @@ routerNAT =
     , _rnatTCPEstablishedIdleTimeoutSec = Nothing
     , _rnatTCPTransitoryIdleTimeoutSec = Nothing
     }
+
 
 -- | Specify the NatIpAllocateOption. If it is AUTO_ONLY, then nat_ip should
 -- be empty.
@@ -14183,6 +14551,7 @@ data AutoscalerAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalerAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14197,6 +14566,7 @@ autoscalerAggregatedListWarning
 autoscalerAggregatedListWarning =
   AutoscalerAggregatedListWarning'
     {_aalwData = Nothing, _aalwCode = Nothing, _aalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -14243,6 +14613,7 @@ data AutoscalerListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalerListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14254,6 +14625,7 @@ autoscalerListWarningDataItem
     :: AutoscalerListWarningDataItem
 autoscalerListWarningDataItem =
   AutoscalerListWarningDataItem' {_alwdiValue = Nothing, _alwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 alwdiValue :: Lens' AutoscalerListWarningDataItem (Maybe Text)
@@ -14295,6 +14667,7 @@ data NodeTypeListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTypeListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14309,6 +14682,7 @@ nodeTypeListWarning
 nodeTypeListWarning =
   NodeTypeListWarning'
     {_ntlwData = Nothing, _ntlwCode = Nothing, _ntlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -14359,6 +14733,7 @@ data HealthCheckList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HealthCheckList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14385,6 +14760,7 @@ healthCheckList =
     , _hclWarning = Nothing
     , _hclId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -14454,6 +14830,7 @@ newtype ManagedInstanceLastAttemptErrors =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedInstanceLastAttemptErrors' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14463,6 +14840,7 @@ managedInstanceLastAttemptErrors
     :: ManagedInstanceLastAttemptErrors
 managedInstanceLastAttemptErrors =
   ManagedInstanceLastAttemptErrors' {_milaeErrors = Nothing}
+
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -14499,6 +14877,7 @@ data RouterStatusNATStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterStatusNATStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14525,6 +14904,7 @@ routerStatusNATStatus =
     , _rsnatsNumVMEndpointsWithNATMAppings = Nothing
     , _rsnatsUserAllocatedNATIPs = Nothing
     }
+
 
 -- | A list of fully qualified URLs of reserved IP address resources.
 rsnatsUserAllocatedNATIPResources :: Lens' RouterStatusNATStatus [Text]
@@ -14611,6 +14991,7 @@ newtype TargetPoolsRemoveInstanceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolsRemoveInstanceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14620,6 +15001,7 @@ targetPoolsRemoveInstanceRequest
     :: TargetPoolsRemoveInstanceRequest
 targetPoolsRemoveInstanceRequest =
   TargetPoolsRemoveInstanceRequest' {_tprirInstances = Nothing}
+
 
 -- | URLs of the instances to be removed from target pool.
 tprirInstances :: Lens' TargetPoolsRemoveInstanceRequest [InstanceReference]
@@ -14652,6 +15034,7 @@ data NodeTypeAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTypeAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14663,6 +15046,7 @@ nodeTypeAggregatedListWarningDataItem
     :: NodeTypeAggregatedListWarningDataItem
 nodeTypeAggregatedListWarningDataItem =
   NodeTypeAggregatedListWarningDataItem' {_nValue = Nothing, _nKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 nValue :: Lens' NodeTypeAggregatedListWarningDataItem (Maybe Text)
@@ -14703,6 +15087,7 @@ data TargetInstancesScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetInstancesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14715,6 +15100,7 @@ targetInstancesScopedListWarningDataItem
 targetInstancesScopedListWarningDataItem =
   TargetInstancesScopedListWarningDataItem'
     {_tislwdiValue = Nothing, _tislwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 tislwdiValue :: Lens' TargetInstancesScopedListWarningDataItem (Maybe Text)
@@ -14763,6 +15149,7 @@ data MachineTypesScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypesScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14777,6 +15164,7 @@ machineTypesScopedListWarning
 machineTypesScopedListWarning =
   MachineTypesScopedListWarning'
     {_mtslwData = Nothing, _mtslwCode = Nothing, _mtslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -14823,6 +15211,7 @@ data ZoneSetLabelsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZoneSetLabelsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14834,6 +15223,7 @@ zoneSetLabelsRequest
     :: ZoneSetLabelsRequest
 zoneSetLabelsRequest =
   ZoneSetLabelsRequest' {_zslrLabels = Nothing, _zslrLabelFingerprint = Nothing}
+
 
 -- | The labels to set for this resource.
 zslrLabels :: Lens' ZoneSetLabelsRequest (Maybe ZoneSetLabelsRequestLabels)
@@ -14885,6 +15275,7 @@ data TargetInstance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -14920,6 +15311,7 @@ targetInstance =
     , _tiDescription = Nothing
     , _tiInstance = Nothing
     }
+
 
 -- | [Output Only] The type of the resource. Always compute#targetInstance
 -- for target instances.
@@ -15022,6 +15414,7 @@ data TargetPoolInstanceHealth =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolInstanceHealth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15036,6 +15429,7 @@ targetPoolInstanceHealth =
     { _tpihKind = "compute#targetPoolInstanceHealth"
     , _tpihHealthStatus = Nothing
     }
+
 
 -- | [Output Only] Type of resource. Always compute#targetPoolInstanceHealth
 -- when checking the health of an instance.
@@ -15077,6 +15471,7 @@ data AcceleratorTypeAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorTypeAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15103,6 +15498,7 @@ acceleratorTypeAggregatedList =
     , _atalWarning = Nothing
     , _atalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -15174,6 +15570,7 @@ newtype NetworkRoutingConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkRoutingConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15182,6 +15579,7 @@ newtype NetworkRoutingConfig =
 networkRoutingConfig
     :: NetworkRoutingConfig
 networkRoutingConfig = NetworkRoutingConfig' {_nrcRoutingMode = Nothing}
+
 
 -- | The network-wide routing mode to use. If set to REGIONAL, this
 -- network\'s cloud routers will only advertise routes with subnets of this
@@ -15215,6 +15613,7 @@ data NodeTemplateListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplateListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15229,6 +15628,7 @@ nodeTemplateListWarning
 nodeTemplateListWarning =
   NodeTemplateListWarning'
     {_nodData = Nothing, _nodCode = Nothing, _nodMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -15271,6 +15671,7 @@ newtype InstanceGroupManagersListManagedInstancesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersListManagedInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15281,6 +15682,7 @@ instanceGroupManagersListManagedInstancesResponse
 instanceGroupManagersListManagedInstancesResponse =
   InstanceGroupManagersListManagedInstancesResponse'
     {_igmlmirManagedInstances = Nothing}
+
 
 -- | [Output Only] The list of instances in the managed instance group.
 igmlmirManagedInstances :: Lens' InstanceGroupManagersListManagedInstancesResponse [ManagedInstance]
@@ -15330,6 +15732,7 @@ data InstanceProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15374,6 +15777,7 @@ instanceProperties =
     , _ipDescription = Nothing
     , _ipTags = Nothing
     }
+
 
 -- | A list of service accounts with specified scopes. Access tokens for
 -- these service accounts are available to the instances that are created
@@ -15512,6 +15916,7 @@ newtype ProjectsListXpnHostsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsListXpnHostsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15521,6 +15926,7 @@ projectsListXpnHostsRequest
     :: ProjectsListXpnHostsRequest
 projectsListXpnHostsRequest =
   ProjectsListXpnHostsRequest' {_plxhrOrganization = Nothing}
+
 
 -- | Optional organization ID managed by Cloud Resource Manager, for which to
 -- list shared VPC host projects. If not specified, the organization will
@@ -15554,6 +15960,7 @@ data RegionListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15568,6 +15975,7 @@ regionListWarning
 regionListWarning =
   RegionListWarning'
     {_rlwData = Nothing, _rlwCode = Nothing, _rlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -15611,6 +16019,7 @@ data NodeGroupsScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15622,6 +16031,7 @@ nodeGroupsScopedList
     :: NodeGroupsScopedList
 nodeGroupsScopedList =
   NodeGroupsScopedList' {_ngslNodeGroups = Nothing, _ngslWarning = Nothing}
+
 
 -- | [Output Only] A list of node groups contained in this scope.
 ngslNodeGroups :: Lens' NodeGroupsScopedList [NodeGroup]
@@ -15664,6 +16074,7 @@ data DiskTypesScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskTypesScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15678,6 +16089,7 @@ diskTypesScopedListWarning
 diskTypesScopedListWarning =
   DiskTypesScopedListWarning'
     {_dtslwData = Nothing, _dtslwCode = Nothing, _dtslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -15724,6 +16136,7 @@ data RegionInstanceGroupManagerListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagerListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15736,6 +16149,7 @@ regionInstanceGroupManagerListWarningDataItem
 regionInstanceGroupManagerListWarningDataItem =
   RegionInstanceGroupManagerListWarningDataItem'
     {_rigmlwdiValue = Nothing, _rigmlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 rigmlwdiValue :: Lens' RegionInstanceGroupManagerListWarningDataItem (Maybe Text)
@@ -15793,6 +16207,7 @@ data AttachedDiskInitializeParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AttachedDiskInitializeParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15822,6 +16237,7 @@ attachedDiskInitializeParams =
     , _adipLabels = Nothing
     , _adipDescription = Nothing
     }
+
 
 -- | The source image to create this disk. When creating a new instance, one
 -- of initializeParams.sourceImage or disks.source is required except for
@@ -15928,6 +16344,7 @@ data UsableSubnetworkSecondaryRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsableSubnetworkSecondaryRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15940,6 +16357,7 @@ usableSubnetworkSecondaryRange
 usableSubnetworkSecondaryRange =
   UsableSubnetworkSecondaryRange'
     {_ussrRangeName = Nothing, _ussrIPCIdRRange = Nothing}
+
 
 -- | The name associated with this subnetwork secondary range, used when
 -- adding an alias IP range to a VM instance. The name must be 1-63
@@ -15980,6 +16398,7 @@ data AddressesScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddressesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -15992,6 +16411,7 @@ addressesScopedListWarningDataItem
 addressesScopedListWarningDataItem =
   AddressesScopedListWarningDataItem'
     {_aslwdiValue = Nothing, _aslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 aslwdiValue :: Lens' AddressesScopedListWarningDataItem (Maybe Text)
@@ -16034,6 +16454,7 @@ data InstanceGroupListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16046,6 +16467,7 @@ instanceGroupListWarningDataItem
 instanceGroupListWarningDataItem =
   InstanceGroupListWarningDataItem'
     {_iglwdiValue = Nothing, _iglwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 iglwdiValue :: Lens' InstanceGroupListWarningDataItem (Maybe Text)
@@ -16095,6 +16517,7 @@ data NetworkInterface =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkInterface' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16127,6 +16550,7 @@ networkInterface =
     , _niSubnetwork = Nothing
     , _niAccessConfigs = Nothing
     }
+
 
 -- | [Output Only] Type of the resource. Always compute#networkInterface for
 -- network interfaces.
@@ -16241,6 +16665,7 @@ data RouterListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16254,6 +16679,7 @@ routerListWarning
     :: RouterListWarning
 routerListWarning =
   RouterListWarning' {_rData = Nothing, _rCode = Nothing, _rMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -16296,6 +16722,7 @@ data FirewallListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FirewallListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16307,6 +16734,7 @@ firewallListWarningDataItem
     :: FirewallListWarningDataItem
 firewallListWarningDataItem =
   FirewallListWarningDataItem' {_flwdiValue = Nothing, _flwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 flwdiValue :: Lens' FirewallListWarningDataItem (Maybe Text)
@@ -16345,6 +16773,7 @@ newtype TargetPoolsRemoveHealthCheckRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolsRemoveHealthCheckRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16354,6 +16783,7 @@ targetPoolsRemoveHealthCheckRequest
     :: TargetPoolsRemoveHealthCheckRequest
 targetPoolsRemoveHealthCheckRequest =
   TargetPoolsRemoveHealthCheckRequest' {_tprhcrHealthChecks = Nothing}
+
 
 -- | Health check URL to be removed. This can be a full or valid partial URL.
 -- For example, the following are valid URLs: -
@@ -16391,6 +16821,7 @@ data RegionInstanceGroupManagersSetTargetPoolsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagersSetTargetPoolsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16403,6 +16834,7 @@ regionInstanceGroupManagersSetTargetPoolsRequest
 regionInstanceGroupManagersSetTargetPoolsRequest =
   RegionInstanceGroupManagersSetTargetPoolsRequest'
     {_rigmstprFingerprint = Nothing, _rigmstprTargetPools = Nothing}
+
 
 -- | Fingerprint of the target pools information, which is a hash of the
 -- contents. This field is used for optimistic locking when you update the
@@ -16454,6 +16886,7 @@ data BackendBucketCdnPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendBucketCdnPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16466,6 +16899,7 @@ backendBucketCdnPolicy
 backendBucketCdnPolicy =
   BackendBucketCdnPolicy'
     {_bbcpSignedURLCacheMaxAgeSec = Nothing, _bbcpSignedURLKeyNames = Nothing}
+
 
 -- | Maximum number of seconds the response to a signed URL request will be
 -- considered fresh. After this time period, the response will be
@@ -16518,6 +16952,7 @@ data TargetSSLProxyList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetSSLProxyList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16544,6 +16979,7 @@ targetSSLProxyList =
     , _tsplWarning = Nothing
     , _tsplId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -16612,6 +17048,7 @@ data CustomerEncryptionKeyProtectedDisk =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerEncryptionKeyProtectedDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16624,6 +17061,7 @@ customerEncryptionKeyProtectedDisk
 customerEncryptionKeyProtectedDisk =
   CustomerEncryptionKeyProtectedDisk'
     {_cekpdDiskEncryptionKey = Nothing, _cekpdSource = Nothing}
+
 
 -- | Decrypts data associated with the disk with a customer-supplied
 -- encryption key.
@@ -16669,6 +17107,7 @@ data InstanceTemplateList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceTemplateList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16695,6 +17134,7 @@ instanceTemplateList =
     , _itlWarning = Nothing
     , _itlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -16767,6 +17207,7 @@ data Reference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Reference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16787,6 +17228,7 @@ reference =
     , _refReferenceType = Nothing
     , _refTarget = Nothing
     }
+
 
 -- | [Output Only] Type of the resource. Always compute#reference for
 -- references.
@@ -16840,6 +17282,7 @@ data InstanceGroupAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16854,6 +17297,7 @@ instanceGroupAggregatedListWarning
 instanceGroupAggregatedListWarning =
   InstanceGroupAggregatedListWarning'
     {_igalwData = Nothing, _igalwCode = Nothing, _igalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -16907,6 +17351,7 @@ data RouteList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouteList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -16933,6 +17378,7 @@ routeList =
     , _rlWarning = Nothing
     , _rlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -17003,6 +17449,7 @@ data InstanceListReferrers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceListReferrers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17029,6 +17476,7 @@ instanceListReferrers =
     , _ilrWarning = Nothing
     , _ilrId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -17109,6 +17557,7 @@ data Router =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Router' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17153,6 +17602,7 @@ router =
     , _rouNATs = Nothing
     , _rouDescription = Nothing
     }
+
 
 -- | BGP information that needs to be configured into the routing stack to
 -- establish the BGP peering. It must specify peer ASN and either interface
@@ -17275,6 +17725,7 @@ data RouterAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17287,6 +17738,7 @@ routerAggregatedListWarningDataItem
 routerAggregatedListWarningDataItem =
   RouterAggregatedListWarningDataItem'
     {_ralwdiValue = Nothing, _ralwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ralwdiValue :: Lens' RouterAggregatedListWarningDataItem (Maybe Text)
@@ -17329,6 +17781,7 @@ data RoutersScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoutersScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17341,6 +17794,7 @@ routersScopedListWarningDataItem
 routersScopedListWarningDataItem =
   RoutersScopedListWarningDataItem'
     {_rslwdiValue = Nothing, _rslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 rslwdiValue :: Lens' RoutersScopedListWarningDataItem (Maybe Text)
@@ -17382,6 +17836,7 @@ newtype SubnetworksSetPrivateIPGoogleAccessRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworksSetPrivateIPGoogleAccessRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17392,6 +17847,7 @@ subnetworksSetPrivateIPGoogleAccessRequest
 subnetworksSetPrivateIPGoogleAccessRequest =
   SubnetworksSetPrivateIPGoogleAccessRequest'
     {_sspigarPrivateIPGoogleAccess = Nothing}
+
 
 sspigarPrivateIPGoogleAccess :: Lens' SubnetworksSetPrivateIPGoogleAccessRequest (Maybe Bool)
 sspigarPrivateIPGoogleAccess
@@ -17427,6 +17883,7 @@ data TargetHTTPSProxyListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPSProxyListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17439,6 +17896,7 @@ targetHTTPSProxyListWarningDataItem
 targetHTTPSProxyListWarningDataItem =
   TargetHTTPSProxyListWarningDataItem'
     {_thplwdiValue = Nothing, _thplwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 thplwdiValue :: Lens' TargetHTTPSProxyListWarningDataItem (Maybe Text)
@@ -17486,6 +17944,7 @@ data TargetVPNGatewayList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGatewayList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17512,6 +17971,7 @@ targetVPNGatewayList =
     , _tvglWarning = Nothing
     , _tvglId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -17586,6 +18046,7 @@ data SSLCertificateList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertificateList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17612,6 +18073,7 @@ sslCertificateList =
     , _sclWarning = Nothing
     , _sclId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -17680,6 +18142,7 @@ data FirewallAllowedItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FirewallAllowedItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17691,6 +18154,7 @@ firewallAllowedItem
     :: FirewallAllowedItem
 firewallAllowedItem =
   FirewallAllowedItem' {_faiIPProtocol = Nothing, _faiPorts = Nothing}
+
 
 -- | The IP protocol to which this rule applies. The protocol type is
 -- required when creating a firewall rule. This value can either be one of
@@ -17736,6 +18200,7 @@ data RouterAdvertisedIPRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterAdvertisedIPRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17747,6 +18212,7 @@ routerAdvertisedIPRange
     :: RouterAdvertisedIPRange
 routerAdvertisedIPRange =
   RouterAdvertisedIPRange' {_rairRange = Nothing, _rairDescription = Nothing}
+
 
 -- | The IP range to advertise. The value must be a CIDR-formatted string.
 rairRange :: Lens' RouterAdvertisedIPRange (Maybe Text)
@@ -17782,6 +18248,7 @@ data RouterListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17793,6 +18260,7 @@ routerListWarningDataItem
     :: RouterListWarningDataItem
 routerListWarningDataItem =
   RouterListWarningDataItem' {_rlwdiValue = Nothing, _rlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 rlwdiValue :: Lens' RouterListWarningDataItem (Maybe Text)
@@ -17838,6 +18306,7 @@ data Rule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Rule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17867,6 +18336,7 @@ rule =
     , _rPermissions = Nothing
     , _rDescription = Nothing
     }
+
 
 -- | Required
 rAction :: Lens' Rule (Maybe RuleAction)
@@ -17953,6 +18423,7 @@ data BackendServiceAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServiceAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -17979,6 +18450,7 @@ backendServiceAggregatedList =
     , _bsalWarning = Nothing
     , _bsalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -18059,6 +18531,7 @@ data Network =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Network' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18103,6 +18576,7 @@ network =
     , _nDescription = Nothing
     , _nPeerings = Nothing
     }
+
 
 -- | When set to true, the VPC network is created in \"auto\" mode. When set
 -- to false, the VPC network is created in \"custom\" mode. An auto mode
@@ -18234,6 +18708,7 @@ data RoutersScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoutersScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18248,6 +18723,7 @@ routersScopedListWarning
 routersScopedListWarning =
   RoutersScopedListWarning'
     {_rslwData = Nothing, _rslwCode = Nothing, _rslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -18297,6 +18773,7 @@ data UsableSubnetwork =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsableSubnetwork' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18317,6 +18794,7 @@ usableSubnetwork =
     , _usIPCIdRRange = Nothing
     , _usSubnetwork = Nothing
     }
+
 
 -- | Network URL.
 usNetwork :: Lens' UsableSubnetwork (Maybe Text)
@@ -18372,6 +18850,7 @@ data TargetHTTPSProxyListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPSProxyListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18386,6 +18865,7 @@ targetHTTPSProxyListWarning
 targetHTTPSProxyListWarning =
   TargetHTTPSProxyListWarning'
     {_thplwData = Nothing, _thplwCode = Nothing, _thplwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -18435,6 +18915,7 @@ data AddressesScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddressesScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18449,6 +18930,7 @@ addressesScopedListWarning
 addressesScopedListWarning =
   AddressesScopedListWarning'
     {_aData = Nothing, _aCode = Nothing, _aMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -18500,6 +18982,7 @@ data SecurityPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18532,6 +19015,7 @@ securityPolicy =
     , _secId = Nothing
     , _secDescription = Nothing
     }
+
 
 -- | A list of rules that belong to this policy. There must always be a
 -- default rule (rule with priority 2147483647 and match \"*\"). If no
@@ -18632,6 +19116,7 @@ data InstanceGroupAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18644,6 +19129,7 @@ instanceGroupAggregatedListWarningDataItem
 instanceGroupAggregatedListWarningDataItem =
   InstanceGroupAggregatedListWarningDataItem'
     {_igalwdiValue = Nothing, _igalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 igalwdiValue :: Lens' InstanceGroupAggregatedListWarningDataItem (Maybe Text)
@@ -18692,6 +19178,7 @@ data ImageRawDisk =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageRawDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18709,6 +19196,7 @@ imageRawDisk =
     , _irdSource = Nothing
     , _irdSha1Checksum = Nothing
     }
+
 
 -- | The format used to encode and transmit the block device, which should be
 -- TAR. This is just a container and transmission format and not a runtime
@@ -18761,6 +19249,7 @@ data InstanceAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18787,6 +19276,7 @@ instanceAggregatedList =
     , _ialWarning = Nothing
     , _ialId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -18852,6 +19342,7 @@ newtype TargetTCPProxiesSetBackendServiceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetTCPProxiesSetBackendServiceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18861,6 +19352,7 @@ targetTCPProxiesSetBackendServiceRequest
     :: TargetTCPProxiesSetBackendServiceRequest
 targetTCPProxiesSetBackendServiceRequest =
   TargetTCPProxiesSetBackendServiceRequest' {_ttpsbsrService = Nothing}
+
 
 -- | The URL of the new BackendService resource for the targetTcpProxy.
 ttpsbsrService :: Lens' TargetTCPProxiesSetBackendServiceRequest (Maybe Text)
@@ -18897,6 +19389,7 @@ data SSLHealthCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLHealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -18920,6 +19413,7 @@ sslHealthCheck =
     , _shcPort = Nothing
     , _shcRequest = Nothing
     }
+
 
 -- | The bytes to match against the beginning of the response data. If left
 -- empty (the default value), any response will indicate health. The
@@ -19003,6 +19497,7 @@ data Address =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Address' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19062,6 +19557,7 @@ address =
     , _aDescription = Nothing
     , _aAddressType = Nothing
     }
+
 
 -- | The prefix length if the resource reprensents an IP range.
 aPrefixLength :: Lens' Address (Maybe Int32)
@@ -19224,6 +19720,7 @@ newtype NodeGroupAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19234,6 +19731,7 @@ nodeGroupAggregatedListItems
     -> NodeGroupAggregatedListItems
 nodeGroupAggregatedListItems pNgaliAddtional_ =
   NodeGroupAggregatedListItems' {_ngaliAddtional = _Coerce # pNgaliAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of node groups.
 ngaliAddtional :: Lens' NodeGroupAggregatedListItems (HashMap Text NodeGroupsScopedList)
@@ -19263,6 +19761,7 @@ data InstanceGroupListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19277,6 +19776,7 @@ instanceGroupListWarning
 instanceGroupListWarning =
   InstanceGroupListWarning'
     {_iglwData = Nothing, _iglwCode = Nothing, _iglwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -19324,6 +19824,7 @@ newtype AttachedDiskInitializeParamsLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AttachedDiskInitializeParamsLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19335,6 +19836,7 @@ attachedDiskInitializeParamsLabels
 attachedDiskInitializeParamsLabels pAdiplAddtional_ =
   AttachedDiskInitializeParamsLabels'
     {_adiplAddtional = _Coerce # pAdiplAddtional_}
+
 
 adiplAddtional :: Lens' AttachedDiskInitializeParamsLabels (HashMap Text Text)
 adiplAddtional
@@ -19372,6 +19874,7 @@ data Zone =
     , _zDeprecated            :: !(Maybe DeprecationStatus)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Zone' with the minimum fields required to make a request.
 --
@@ -19411,6 +19914,7 @@ zone =
     , _zDescription = Nothing
     , _zDeprecated = Nothing
     }
+
 
 -- | [Output Only] Status of the zone, either UP or DOWN.
 zStatus :: Lens' Zone (Maybe ZoneStatus)
@@ -19504,6 +20008,7 @@ data RouterBGP =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterBGP' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19524,6 +20029,7 @@ routerBGP =
     , _rbAdvertisedGroups = Nothing
     , _rbAdvertisedIPRanges = Nothing
     }
+
 
 -- | Local BGP Autonomous System Number (ASN). Must be an RFC6996 private
 -- ASN, either 16-bit or 32-bit. The value will be fixed for this router
@@ -19593,6 +20099,7 @@ data FirewallListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FirewallListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19607,6 +20114,7 @@ firewallListWarning
 firewallListWarning =
   FirewallListWarning'
     {_flwData = Nothing, _flwCode = Nothing, _flwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -19650,6 +20158,7 @@ data BackendServicesScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServicesScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19662,6 +20171,7 @@ backendServicesScopedList
 backendServicesScopedList =
   BackendServicesScopedList'
     {_bsslWarning = Nothing, _bsslBackendServices = Nothing}
+
 
 -- | Informational warning which replaces the list of backend services when
 -- the list is empty.
@@ -19700,6 +20210,7 @@ newtype InstanceGroupManagersRecreateInstancesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersRecreateInstancesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19709,6 +20220,7 @@ instanceGroupManagersRecreateInstancesRequest
     :: InstanceGroupManagersRecreateInstancesRequest
 instanceGroupManagersRecreateInstancesRequest =
   InstanceGroupManagersRecreateInstancesRequest' {_igmrirInstances = Nothing}
+
 
 -- | The URLs of one or more instances to recreate. This can be a full URL or
 -- a partial URL, such as zones\/[ZONE]\/instances\/[INSTANCE_NAME].
@@ -19745,6 +20257,7 @@ newtype TargetSSLProxiesSetSSLCertificatesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetSSLProxiesSetSSLCertificatesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19754,6 +20267,7 @@ targetSSLProxiesSetSSLCertificatesRequest
     :: TargetSSLProxiesSetSSLCertificatesRequest
 targetSSLProxiesSetSSLCertificatesRequest =
   TargetSSLProxiesSetSSLCertificatesRequest' {_tspsscrSSLCertificates = Nothing}
+
 
 -- | New set of URLs to SslCertificate resources to associate with this
 -- TargetSslProxy. Currently exactly one ssl certificate must be specified.
@@ -19793,6 +20307,7 @@ data RouterAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19807,6 +20322,7 @@ routerAggregatedListWarning
 routerAggregatedListWarning =
   RouterAggregatedListWarning'
     {_rouData = Nothing, _rouCode = Nothing, _rouMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -19850,6 +20366,7 @@ data InstancesScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19861,6 +20378,7 @@ instancesScopedList
     :: InstancesScopedList
 instancesScopedList =
   InstancesScopedList' {_islWarning = Nothing, _islInstances = Nothing}
+
 
 -- | [Output Only] Informational warning which replaces the list of instances
 -- when the list is empty.
@@ -19898,6 +20416,7 @@ newtype AcceleratorTypeAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorTypeAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19909,6 +20428,7 @@ acceleratorTypeAggregatedListItems
 acceleratorTypeAggregatedListItems pAtaliAddtional_ =
   AcceleratorTypeAggregatedListItems'
     {_ataliAddtional = _Coerce # pAtaliAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of accelerator
 -- types.
@@ -19939,6 +20459,7 @@ data TargetVPNGatewayAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGatewayAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -19951,6 +20472,7 @@ targetVPNGatewayAggregatedListWarningDataItem
 targetVPNGatewayAggregatedListWarningDataItem =
   TargetVPNGatewayAggregatedListWarningDataItem'
     {_tvgalwdiValue = Nothing, _tvgalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 tvgalwdiValue :: Lens' TargetVPNGatewayAggregatedListWarningDataItem (Maybe Text)
@@ -20002,6 +20524,7 @@ newtype HealthCheckReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HealthCheckReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20010,6 +20533,7 @@ newtype HealthCheckReference =
 healthCheckReference
     :: HealthCheckReference
 healthCheckReference = HealthCheckReference' {_hcrHealthCheck = Nothing}
+
 
 hcrHealthCheck :: Lens' HealthCheckReference (Maybe Text)
 hcrHealthCheck
@@ -20036,6 +20560,7 @@ newtype TargetInstanceAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetInstanceAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20047,6 +20572,7 @@ targetInstanceAggregatedListItems
 targetInstanceAggregatedListItems pTialiAddtional_ =
   TargetInstanceAggregatedListItems'
     {_tialiAddtional = _Coerce # pTialiAddtional_}
+
 
 -- | Name of the scope containing this set of target instances.
 tialiAddtional :: Lens' TargetInstanceAggregatedListItems (HashMap Text TargetInstancesScopedList)
@@ -20075,6 +20601,7 @@ newtype TargetHTTPSProxiesSetQuicOverrideRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPSProxiesSetQuicOverrideRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20084,6 +20611,7 @@ targetHTTPSProxiesSetQuicOverrideRequest
     :: TargetHTTPSProxiesSetQuicOverrideRequest
 targetHTTPSProxiesSetQuicOverrideRequest =
   TargetHTTPSProxiesSetQuicOverrideRequest' {_thpsqorQuicOverride = Nothing}
+
 
 -- | QUIC policy for the TargetHttpsProxy resource.
 thpsqorQuicOverride :: Lens' TargetHTTPSProxiesSetQuicOverrideRequest (Maybe TargetHTTPSProxiesSetQuicOverrideRequestQuicOverride)
@@ -20120,6 +20648,7 @@ data TargetSSLProxyListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetSSLProxyListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20134,6 +20663,7 @@ targetSSLProxyListWarning
 targetSSLProxyListWarning =
   TargetSSLProxyListWarning'
     {_tsplwData = Nothing, _tsplwCode = Nothing, _tsplwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -20182,6 +20712,7 @@ data InstanceTemplateListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceTemplateListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20196,6 +20727,7 @@ instanceTemplateListWarning
 instanceTemplateListWarning =
   InstanceTemplateListWarning'
     {_itlwData = Nothing, _itlwCode = Nothing, _itlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -20243,6 +20775,7 @@ data InstanceListReferrersWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceListReferrersWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20257,6 +20790,7 @@ instanceListReferrersWarning
 instanceListReferrersWarning =
   InstanceListReferrersWarning'
     {_ilrwData = Nothing, _ilrwCode = Nothing, _ilrwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -20304,6 +20838,7 @@ data RouteListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouteListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20318,6 +20853,7 @@ routeListWarning
 routeListWarning =
   RouteListWarning'
     {_rlwlData = Nothing, _rlwlCode = Nothing, _rlwlMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -20367,6 +20903,7 @@ data InstanceGroupAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20393,6 +20930,7 @@ instanceGroupAggregatedList =
     , _igalWarning = Nothing
     , _igalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -20492,6 +21030,7 @@ data Route =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Route' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20551,6 +21090,7 @@ route =
     , _rrTags = Nothing
     , _rrNextHopInstance = Nothing
     }
+
 
 -- | [Output Only] The network peering name that should handle matching
 -- packets, which should conform to RFC1035.
@@ -20721,6 +21261,7 @@ data TargetVPNGatewaysScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGatewaysScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20733,6 +21274,7 @@ targetVPNGatewaysScopedListWarningDataItem
 targetVPNGatewaysScopedListWarningDataItem =
   TargetVPNGatewaysScopedListWarningDataItem'
     {_tvgslwdiValue = Nothing, _tvgslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 tvgslwdiValue :: Lens' TargetVPNGatewaysScopedListWarningDataItem (Maybe Text)
@@ -20784,6 +21326,7 @@ data InterconnectLocationRegionInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectLocationRegionInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20801,6 +21344,7 @@ interconnectLocationRegionInfo =
     , _ilriExpectedRttMs = Nothing
     , _ilriRegion = Nothing
     }
+
 
 -- | Identifies the network presence of this location.
 ilriLocationPresence :: Lens' InterconnectLocationRegionInfo (Maybe InterconnectLocationRegionInfoLocationPresence)
@@ -20847,6 +21391,7 @@ newtype TargetHTTPSProxiesSetSSLCertificatesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPSProxiesSetSSLCertificatesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20857,6 +21402,7 @@ targetHTTPSProxiesSetSSLCertificatesRequest
 targetHTTPSProxiesSetSSLCertificatesRequest =
   TargetHTTPSProxiesSetSSLCertificatesRequest'
     {_thpsscrSSLCertificates = Nothing}
+
 
 -- | New set of SslCertificate resources to associate with this
 -- TargetHttpsProxy resource. Currently exactly one SslCertificate resource
@@ -20905,6 +21451,7 @@ data InstanceTemplate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -20940,6 +21487,7 @@ instanceTemplate =
     , _itDescription = Nothing
     , _itProperties = Nothing
     }
+
 
 -- | The source instance used to create the template. You can provide this as
 -- a partial or full URL to the resource. For example, the following are
@@ -21044,6 +21592,7 @@ data XpnResourceId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'XpnResourceId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21054,6 +21603,7 @@ data XpnResourceId =
 xpnResourceId
     :: XpnResourceId
 xpnResourceId = XpnResourceId' {_xriId = Nothing, _xriType = Nothing}
+
 
 -- | The ID of the service resource. In the case of projects, this field
 -- supports project id (e.g., my-project-123) and project number (e.g.
@@ -21091,6 +21641,7 @@ data RouterList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21117,6 +21668,7 @@ routerList =
     , _rllWarning = Nothing
     , _rllId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -21196,6 +21748,7 @@ data TargetSSLProxy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetSSLProxy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21234,6 +21787,7 @@ targetSSLProxy =
     , _tspProxyHeader = Nothing
     , _tspDescription = Nothing
     }
+
 
 -- | URL of SslPolicy resource that will be associated with the
 -- TargetSslProxy resource. If not set, the TargetSslProxy resource will
@@ -21343,6 +21897,7 @@ newtype InstanceGroupManagerStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagerStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21352,6 +21907,7 @@ instanceGroupManagerStatus
     :: InstanceGroupManagerStatus
 instanceGroupManagerStatus =
   InstanceGroupManagerStatus' {_igmsIsStable = Nothing}
+
 
 -- | [Output Only] A bit indicating whether the managed instance group is in
 -- a stable state. A stable state means that: none of the instances in the
@@ -21385,6 +21941,7 @@ data SSLCertificateListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertificateListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21399,6 +21956,7 @@ sslCertificateListWarning
 sslCertificateListWarning =
   SSLCertificateListWarning'
     {_sclwData = Nothing, _sclwCode = Nothing, _sclwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -21444,6 +22002,7 @@ data SnapshotListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21455,6 +22014,7 @@ snapshotListWarningDataItem
     :: SnapshotListWarningDataItem
 snapshotListWarningDataItem =
   SnapshotListWarningDataItem' {_slwdiValue = Nothing, _slwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 slwdiValue :: Lens' SnapshotListWarningDataItem (Maybe Text)
@@ -21505,6 +22065,7 @@ data TargetVPNGateway =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGateway' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21546,6 +22107,7 @@ targetVPNGateway =
     , _tvgDescription = Nothing
     , _tvgForwardingRules = Nothing
     }
+
 
 -- | [Output Only] The status of the VPN gateway.
 tvgStatus :: Lens' TargetVPNGateway (Maybe TargetVPNGatewayStatus)
@@ -21667,6 +22229,7 @@ data ResourceCommitment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceCommitment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21678,6 +22241,7 @@ resourceCommitment
     :: ResourceCommitment
 resourceCommitment =
   ResourceCommitment' {_rcAmount = Nothing, _rcType = Nothing}
+
 
 -- | The amount of the resource purchased (in a type-dependent unit, such as
 -- bytes). For vCPUs, this can just be an integer. For memory, this must be
@@ -21719,6 +22283,7 @@ data BackendServiceIAP =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServiceIAP' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21739,6 +22304,7 @@ backendServiceIAP =
     , _bsiapOAuth2ClientSecret = Nothing
     , _bsiapOAuth2ClientId = Nothing
     }
+
 
 bsiapEnabled :: Lens' BackendServiceIAP (Maybe Bool)
 bsiapEnabled
@@ -21793,6 +22359,7 @@ data TargetVPNGatewayListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGatewayListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21807,6 +22374,7 @@ targetVPNGatewayListWarning
 targetVPNGatewayListWarning =
   TargetVPNGatewayListWarning'
     {_tvglwData = Nothing, _tvglwCode = Nothing, _tvglwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -21853,6 +22421,7 @@ data VMEndpointNATMAppingsListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VMEndpointNATMAppingsListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21865,6 +22434,7 @@ vMEndpointNATMAppingsListWarningDataItem
 vMEndpointNATMAppingsListWarningDataItem =
   VMEndpointNATMAppingsListWarningDataItem'
     {_vmenatmalwdiValue = Nothing, _vmenatmalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 vmenatmalwdiValue :: Lens' VMEndpointNATMAppingsListWarningDataItem (Maybe Text)
@@ -21911,6 +22481,7 @@ newtype URLMapsValidateResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMapsValidateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21919,6 +22490,7 @@ newtype URLMapsValidateResponse =
 urlMapsValidateResponse
     :: URLMapsValidateResponse
 urlMapsValidateResponse = URLMapsValidateResponse' {_umvrResult = Nothing}
+
 
 umvrResult :: Lens' URLMapsValidateResponse (Maybe URLMapValidationResult)
 umvrResult
@@ -21953,6 +22525,7 @@ data SSLCertificate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -21985,6 +22558,7 @@ sslCertificate =
     , _scCertificate = Nothing
     , _scDescription = Nothing
     }
+
 
 -- | A write-only private key in PEM format. Only insert requests will
 -- include this field.
@@ -22084,6 +22658,7 @@ data RouterStatusBGPPeerStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterStatusBGPPeerStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22122,6 +22697,7 @@ routerStatusBGPPeerStatus =
     , _rsbpsAdvertisedRoutes = Nothing
     , _rsbpsLinkedVPNTunnel = Nothing
     }
+
 
 -- | Status of the BGP peer: {UP, DOWN}
 rsbpsStatus :: Lens' RouterStatusBGPPeerStatus (Maybe RouterStatusBGPPeerStatusStatus)
@@ -22221,6 +22797,7 @@ newtype URLMapReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMapReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22229,6 +22806,7 @@ newtype URLMapReference =
 urlMapReference
     :: URLMapReference
 urlMapReference = URLMapReference' {_umrURLMap = Nothing}
+
 
 umrURLMap :: Lens' URLMapReference (Maybe Text)
 umrURLMap
@@ -22251,6 +22829,7 @@ newtype TargetPoolsAddHealthCheckRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolsAddHealthCheckRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22260,6 +22839,7 @@ targetPoolsAddHealthCheckRequest
     :: TargetPoolsAddHealthCheckRequest
 targetPoolsAddHealthCheckRequest =
   TargetPoolsAddHealthCheckRequest' {_tpahcrHealthChecks = Nothing}
+
 
 -- | The HttpHealthCheck to add to the target pool.
 tpahcrHealthChecks :: Lens' TargetPoolsAddHealthCheckRequest [HealthCheckReference]
@@ -22293,6 +22873,7 @@ data CommitmentsScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitmentsScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22304,6 +22885,7 @@ commitmentsScopedList
     :: CommitmentsScopedList
 commitmentsScopedList =
   CommitmentsScopedList' {_cslWarning = Nothing, _cslCommitments = Nothing}
+
 
 -- | [Output Only] Informational warning which replaces the list of
 -- commitments when the list is empty.
@@ -22343,6 +22925,7 @@ newtype DiskAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22353,6 +22936,7 @@ diskAggregatedListItems
     -> DiskAggregatedListItems
 diskAggregatedListItems pDaliAddtional_ =
   DiskAggregatedListItems' {_daliAddtional = _Coerce # pDaliAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of disks.
 daliAddtional :: Lens' DiskAggregatedListItems (HashMap Text DisksScopedList)
@@ -22381,6 +22965,7 @@ data TargetVPNGatewayAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGatewayAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22395,6 +22980,7 @@ targetVPNGatewayAggregatedListWarning
 targetVPNGatewayAggregatedListWarning =
   TargetVPNGatewayAggregatedListWarning'
     {_tvgalwData = Nothing, _tvgalwCode = Nothing, _tvgalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -22447,6 +23033,7 @@ data UsageExportLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsageExportLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22459,6 +23046,7 @@ usageExportLocation
 usageExportLocation =
   UsageExportLocation'
     {_uelReportNamePrefix = Nothing, _uelBucketName = Nothing}
+
 
 -- | An optional prefix for the name of the usage report object stored in
 -- bucketName. If not supplied, defaults to usage. The report is stored as
@@ -22509,6 +23097,7 @@ data ZoneList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZoneList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22535,6 +23124,7 @@ zoneList =
     , _zlWarning = Nothing
     , _zlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -22600,6 +23190,7 @@ data SSLCertificateListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertificateListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22612,6 +23203,7 @@ sslCertificateListWarningDataItem
 sslCertificateListWarningDataItem =
   SSLCertificateListWarningDataItem'
     {_sclwdiValue = Nothing, _sclwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 sclwdiValue :: Lens' SSLCertificateListWarningDataItem (Maybe Text)
@@ -22653,6 +23245,7 @@ newtype DistributionPolicyZoneConfiguration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DistributionPolicyZoneConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22662,6 +23255,7 @@ distributionPolicyZoneConfiguration
     :: DistributionPolicyZoneConfiguration
 distributionPolicyZoneConfiguration =
   DistributionPolicyZoneConfiguration' {_dpzcZone = Nothing}
+
 
 -- | The URL of the zone. The zone must exist in the region where the managed
 -- instance group is located.
@@ -22689,6 +23283,7 @@ newtype TargetTCPProxiesSetProxyHeaderRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetTCPProxiesSetProxyHeaderRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22698,6 +23293,7 @@ targetTCPProxiesSetProxyHeaderRequest
     :: TargetTCPProxiesSetProxyHeaderRequest
 targetTCPProxiesSetProxyHeaderRequest =
   TargetTCPProxiesSetProxyHeaderRequest' {_ttpsphrProxyHeader = Nothing}
+
 
 -- | The new type of proxy header to append before sending data to the
 -- backend. NONE or PROXY_V1 are allowed.
@@ -22739,6 +23335,7 @@ data RouterBGPPeer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterBGPPeer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22777,6 +23374,7 @@ routerBGPPeer =
     , _rbpManagementType = Nothing
     , _rbpAdvertisedIPRanges = Nothing
     }
+
 
 -- | IP address of the interface inside Google Cloud Platform. Only IPv4 is
 -- supported.
@@ -22900,6 +23498,7 @@ newtype SubnetworksExpandIPCIdRRangeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworksExpandIPCIdRRangeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22909,6 +23508,7 @@ subnetworksExpandIPCIdRRangeRequest
     :: SubnetworksExpandIPCIdRRangeRequest
 subnetworksExpandIPCIdRRangeRequest =
   SubnetworksExpandIPCIdRRangeRequest' {_seicirrrIPCIdRRange = Nothing}
+
 
 -- | The IP (in CIDR format or netmask) of internal addresses that are legal
 -- on this Subnetwork. This range should be disjoint from other subnetworks
@@ -22947,6 +23547,7 @@ data ManagedInstance =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -22970,6 +23571,7 @@ managedInstance =
     , _miInstanceStatus = Nothing
     , _miInstance = Nothing
     }
+
 
 -- | [Output Only] Information about the last attempt to create or delete the
 -- instance.
@@ -23052,6 +23654,7 @@ newtype InstanceGroupManagerAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagerAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23063,6 +23666,7 @@ instanceGroupManagerAggregatedListItems
 instanceGroupManagerAggregatedListItems pIgmaliAddtional_ =
   InstanceGroupManagerAggregatedListItems'
     {_igmaliAddtional = _Coerce # pIgmaliAddtional_}
+
 
 -- | [Output Only] The name of the scope that contains this set of managed
 -- instance groups.
@@ -23095,6 +23699,7 @@ newtype InstanceGroupManagersDeleteInstancesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersDeleteInstancesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23104,6 +23709,7 @@ instanceGroupManagersDeleteInstancesRequest
     :: InstanceGroupManagersDeleteInstancesRequest
 instanceGroupManagersDeleteInstancesRequest =
   InstanceGroupManagersDeleteInstancesRequest' {_igmdirInstances = Nothing}
+
 
 -- | The URLs of one or more instances to delete. This can be a full URL or a
 -- partial URL, such as zones\/[ZONE]\/instances\/[INSTANCE_NAME].
@@ -23149,6 +23755,7 @@ data Backend =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Backend' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23184,6 +23791,7 @@ backend =
     , _bDescription = Nothing
     , _bCapacityScaler = Nothing
     }
+
 
 -- | The fully-qualified URL of an Instance Group or Network Endpoint Group
 -- resource. In case of instance group this defines the list of instances
@@ -23322,6 +23930,7 @@ data TargetVPNGatewaysScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGatewaysScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23336,6 +23945,7 @@ targetVPNGatewaysScopedListWarning
 targetVPNGatewaysScopedListWarning =
   TargetVPNGatewaysScopedListWarning'
     {_tvgslwData = Nothing, _tvgslwCode = Nothing, _tvgslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -23390,6 +24000,7 @@ data AddressList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddressList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23416,6 +24027,7 @@ addressList =
     , _alWarning = Nothing
     , _alId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -23482,6 +24094,7 @@ data TargetVPNGatewayListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGatewayListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23494,6 +24107,7 @@ targetVPNGatewayListWarningDataItem
 targetVPNGatewayListWarningDataItem =
   TargetVPNGatewayListWarningDataItem'
     {_tvglwdiValue = Nothing, _tvglwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 tvglwdiValue :: Lens' TargetVPNGatewayListWarningDataItem (Maybe Text)
@@ -23536,6 +24150,7 @@ newtype ForwardingRuleAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingRuleAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23547,6 +24162,7 @@ forwardingRuleAggregatedListItems
 forwardingRuleAggregatedListItems pFraliAddtional_ =
   ForwardingRuleAggregatedListItems'
     {_fraliAddtional = _Coerce # pFraliAddtional_}
+
 
 -- | Name of the scope containing this set of addresses.
 fraliAddtional :: Lens' ForwardingRuleAggregatedListItems (HashMap Text ForwardingRulesScopedList)
@@ -23580,6 +24196,7 @@ data InterconnectAttachmentAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23606,6 +24223,7 @@ interconnectAttachmentAggregatedList =
     , _iaalWarning = Nothing
     , _iaalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -23678,6 +24296,7 @@ newtype OperationAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23688,6 +24307,7 @@ operationAggregatedListItems
     -> OperationAggregatedListItems
 operationAggregatedListItems pOaliAddtional_ =
   OperationAggregatedListItems' {_oaliAddtional = _Coerce # pOaliAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of operations.
 oaliAddtional :: Lens' OperationAggregatedListItems (HashMap Text OperationsScopedList)
@@ -23721,6 +24341,7 @@ data InstanceGroupManagerActionsSummary =
     , _igmasAbandoning             :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceGroupManagerActionsSummary' with the minimum fields required to make a request.
 --
@@ -23757,6 +24378,7 @@ instanceGroupManagerActionsSummary =
     , _igmasRecreating = Nothing
     , _igmasAbandoning = Nothing
     }
+
 
 -- | [Output Only] The number of instances in the managed instance group that
 -- are scheduled to be deleted or are currently being deleted.
@@ -23886,6 +24508,7 @@ data XpnHostList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'XpnHostList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23912,6 +24535,7 @@ xpnHostList =
     , _xhlWarning = Nothing
     , _xhlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -23981,6 +24605,7 @@ data InstanceTemplateListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceTemplateListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -23993,6 +24618,7 @@ instanceTemplateListWarningDataItem
 instanceTemplateListWarningDataItem =
   InstanceTemplateListWarningDataItem'
     {_itlwdiValue = Nothing, _itlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 itlwdiValue :: Lens' InstanceTemplateListWarningDataItem (Maybe Text)
@@ -24036,6 +24662,7 @@ data ServiceAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24046,6 +24673,7 @@ data ServiceAccount =
 serviceAccount
     :: ServiceAccount
 serviceAccount = ServiceAccount' {_saEmail = Nothing, _saScopes = Nothing}
+
 
 -- | Email address of the service account.
 saEmail :: Lens' ServiceAccount (Maybe Text)
@@ -24083,6 +24711,7 @@ data SnapshotListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24096,6 +24725,7 @@ snapshotListWarning
     :: SnapshotListWarning
 snapshotListWarning =
   SnapshotListWarning' {_sData = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -24137,6 +24767,7 @@ newtype RegionInstanceGroupManagersAbandonInstancesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagersAbandonInstancesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24147,6 +24778,7 @@ regionInstanceGroupManagersAbandonInstancesRequest
 regionInstanceGroupManagersAbandonInstancesRequest =
   RegionInstanceGroupManagersAbandonInstancesRequest'
     {_rigmairInstances = Nothing}
+
 
 -- | The URLs of one or more instances to abandon. This can be a full URL or
 -- a partial URL, such as zones\/[ZONE]\/instances\/[INSTANCE_NAME].
@@ -24189,6 +24821,7 @@ data NetworkList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24215,6 +24848,7 @@ networkList =
     , _nlWarning = Nothing
     , _nlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -24288,6 +24922,7 @@ data NetworkPeering =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkPeering' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24311,6 +24946,7 @@ networkPeering =
     , _netName = Nothing
     , _netAutoCreateRoutes = Nothing
     }
+
 
 -- | [Output Only] State for the peering.
 netState :: Lens' NetworkPeering (Maybe NetworkPeeringState)
@@ -24379,6 +25015,7 @@ data TargetSSLProxyListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetSSLProxyListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24391,6 +25028,7 @@ targetSSLProxyListWarningDataItem
 targetSSLProxyListWarningDataItem =
   TargetSSLProxyListWarningDataItem'
     {_tsplwdiValue = Nothing, _tsplwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 tsplwdiValue :: Lens' TargetSSLProxyListWarningDataItem (Maybe Text)
@@ -24432,6 +25070,7 @@ newtype InstanceGroupsListInstancesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsListInstancesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24441,6 +25080,7 @@ instanceGroupsListInstancesRequest
     :: InstanceGroupsListInstancesRequest
 instanceGroupsListInstancesRequest =
   InstanceGroupsListInstancesRequest' {_iglirInstanceState = Nothing}
+
 
 -- | A filter for the state of the instances in the instance group. Valid
 -- options are ALL or RUNNING. If you do not specify this parameter the
@@ -24474,6 +25114,7 @@ data InstanceListReferrersWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceListReferrersWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24486,6 +25127,7 @@ instanceListReferrersWarningDataItem
 instanceListReferrersWarningDataItem =
   InstanceListReferrersWarningDataItem'
     {_ilrwdiValue = Nothing, _ilrwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ilrwdiValue :: Lens' InstanceListReferrersWarningDataItem (Maybe Text)
@@ -24529,6 +25171,7 @@ data RouteListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouteListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24540,6 +25183,7 @@ routeListWarningDataItem
     :: RouteListWarningDataItem
 routeListWarningDataItem =
   RouteListWarningDataItem' {_rValue = Nothing, _rKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 rValue :: Lens' RouteListWarningDataItem (Maybe Text)
@@ -24577,6 +25221,7 @@ data InterconnectAttachmentsScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentsScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24589,6 +25234,7 @@ interconnectAttachmentsScopedList
 interconnectAttachmentsScopedList =
   InterconnectAttachmentsScopedList'
     {_iaslWarning = Nothing, _iaslInterconnectAttachments = Nothing}
+
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
@@ -24634,6 +25280,7 @@ data SecurityPolicyList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPolicyList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24657,6 +25304,7 @@ securityPolicyList =
     , _splWarning = Nothing
     , _splId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -24723,6 +25371,7 @@ data CommitmentAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitmentAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24749,6 +25398,7 @@ commitmentAggregatedList =
     , _calWarning = Nothing
     , _calId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -24820,6 +25470,7 @@ data RegionInstanceGroupList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24846,6 +25497,7 @@ regionInstanceGroupList =
     , _riglWarning = Nothing
     , _riglId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -24916,6 +25568,7 @@ data VMEndpointNATMAppingsListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VMEndpointNATMAppingsListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24933,6 +25586,7 @@ vMEndpointNATMAppingsListWarning =
     , _vmenatmalwCode = Nothing
     , _vmenatmalwMessage = Nothing
     }
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -24984,6 +25638,7 @@ newtype TargetPoolAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -24994,6 +25649,7 @@ targetPoolAggregatedListItems
     -> TargetPoolAggregatedListItems
 targetPoolAggregatedListItems pTpaliAddtional_ =
   TargetPoolAggregatedListItems' {_tpaliAddtional = _Coerce # pTpaliAddtional_}
+
 
 -- | Name of the scope containing this set of target pools.
 tpaliAddtional :: Lens' TargetPoolAggregatedListItems (HashMap Text TargetPoolsScopedList)
@@ -25020,6 +25676,7 @@ newtype NodeGroupsAddNodesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsAddNodesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25029,6 +25686,7 @@ nodeGroupsAddNodesRequest
     :: NodeGroupsAddNodesRequest
 nodeGroupsAddNodesRequest =
   NodeGroupsAddNodesRequest' {_nganrAdditionalNodeCount = Nothing}
+
 
 -- | Count of additional nodes to be added to the node group.
 nganrAdditionalNodeCount :: Lens' NodeGroupsAddNodesRequest (Maybe Int32)
@@ -25064,6 +25722,7 @@ data NodeTypeAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTypeAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25090,6 +25749,7 @@ nodeTypeAggregatedList =
     , _ntalWarning = Nothing
     , _ntalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -25157,6 +25817,7 @@ data TargetInstancesScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetInstancesScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25169,6 +25830,7 @@ targetInstancesScopedList
 targetInstancesScopedList =
   TargetInstancesScopedList'
     {_tislWarning = Nothing, _tislTargetInstances = Nothing}
+
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
@@ -25208,6 +25870,7 @@ data SubnetworkListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworkListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25219,6 +25882,7 @@ subnetworkListWarningDataItem
     :: SubnetworkListWarningDataItem
 subnetworkListWarningDataItem =
   SubnetworkListWarningDataItem' {_sValue = Nothing, _sKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 sValue :: Lens' SubnetworkListWarningDataItem (Maybe Text)
@@ -25255,6 +25919,7 @@ newtype ProjectsDisableXpnResourceRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDisableXpnResourceRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25264,6 +25929,7 @@ projectsDisableXpnResourceRequest
     :: ProjectsDisableXpnResourceRequest
 projectsDisableXpnResourceRequest =
   ProjectsDisableXpnResourceRequest' {_pdxrrXpnResource = Nothing}
+
 
 -- | Service resource (a.k.a service project) ID.
 pdxrrXpnResource :: Lens' ProjectsDisableXpnResourceRequest (Maybe XpnResourceId)
@@ -25295,6 +25961,7 @@ newtype AddressAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddressAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25305,6 +25972,7 @@ addressAggregatedListItems
     -> AddressAggregatedListItems
 addressAggregatedListItems pAAddtional_ =
   AddressAggregatedListItems' {_aAddtional = _Coerce # pAAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of addresses.
 aAddtional :: Lens' AddressAggregatedListItems (HashMap Text AddressesScopedList)
@@ -25335,6 +26003,7 @@ data AutoscalerList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalerList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25361,6 +26030,7 @@ autoscalerList =
     , _autWarning = Nothing
     , _autId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -25430,6 +26100,7 @@ data InterconnectListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25441,6 +26112,7 @@ interconnectListWarningDataItem
     :: InterconnectListWarningDataItem
 interconnectListWarningDataItem =
   InterconnectListWarningDataItem' {_iValue = Nothing, _iKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 iValue :: Lens' InterconnectListWarningDataItem (Maybe Text)
@@ -25481,6 +26153,7 @@ data SubnetworkAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworkAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25495,6 +26168,7 @@ subnetworkAggregatedListWarning
 subnetworkAggregatedListWarning =
   SubnetworkAggregatedListWarning'
     {_salwData = Nothing, _salwCode = Nothing, _salwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -25557,6 +26231,7 @@ data InterconnectLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25610,6 +26285,7 @@ interconnectLocation =
     , _intContinent = Nothing
     , _intDescription = Nothing
     }
+
 
 -- | [Output Only] A provider-assigned Identifier for this facility (e.g.,
 -- Ashburn-DC1).
@@ -25759,6 +26435,7 @@ newtype TargetSSLProxiesSetProxyHeaderRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetSSLProxiesSetProxyHeaderRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25768,6 +26445,7 @@ targetSSLProxiesSetProxyHeaderRequest
     :: TargetSSLProxiesSetProxyHeaderRequest
 targetSSLProxiesSetProxyHeaderRequest =
   TargetSSLProxiesSetProxyHeaderRequest' {_tspsphrProxyHeader = Nothing}
+
 
 -- | The new type of proxy header to append before sending data to the
 -- backend. NONE or PROXY_V1 are allowed.
@@ -25805,6 +26483,7 @@ data VPNTunnelAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VPNTunnelAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25831,6 +26510,7 @@ vpnTunnelAggregatedList =
     , _vtalWarning = Nothing
     , _vtalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -25898,6 +26578,7 @@ data SSLPoliciesListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLPoliciesListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25909,6 +26590,7 @@ sslPoliciesListWarningDataItem
     :: SSLPoliciesListWarningDataItem
 sslPoliciesListWarningDataItem =
   SSLPoliciesListWarningDataItem' {_splwdiValue = Nothing, _splwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 splwdiValue :: Lens' SSLPoliciesListWarningDataItem (Maybe Text)
@@ -25954,6 +26636,7 @@ data InterconnectCircuitInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectCircuitInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -25971,6 +26654,7 @@ interconnectCircuitInfo =
     , _iciCustomerDemarcId = Nothing
     , _iciGoogleDemarcId = Nothing
     }
+
 
 -- | Google-assigned unique ID for this circuit. Assigned at circuit turn-up.
 iciGoogleCircuitId :: Lens' InterconnectCircuitInfo (Maybe Text)
@@ -26029,6 +26713,7 @@ data AttachedDisk =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AttachedDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -26076,6 +26761,7 @@ attachedDisk =
     , _adType = Nothing
     , _adIndex = Nothing
     }
+
 
 -- | Encrypts or decrypts a disk using a customer-supplied encryption key. If
 -- you are creating a new disk, this field encrypts the new disk using an
@@ -26233,6 +26919,7 @@ data HTTPHealthCheckListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPHealthCheckListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -26245,6 +26932,7 @@ hTTPHealthCheckListWarningDataItem
 hTTPHealthCheckListWarningDataItem =
   HTTPHealthCheckListWarningDataItem'
     {_httphclwdiValue = Nothing, _httphclwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 httphclwdiValue :: Lens' HTTPHealthCheckListWarningDataItem (Maybe Text)
@@ -26294,6 +26982,7 @@ data DiskTypeList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskTypeList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -26320,6 +27009,7 @@ diskTypeList =
     , _dtlWarning = Nothing
     , _dtlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -26389,6 +27079,7 @@ data RegionInstanceGroupsSetNamedPortsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupsSetNamedPortsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -26401,6 +27092,7 @@ regionInstanceGroupsSetNamedPortsRequest
 regionInstanceGroupsSetNamedPortsRequest =
   RegionInstanceGroupsSetNamedPortsRequest'
     {_rigsnprFingerprint = Nothing, _rigsnprNamedPorts = Nothing}
+
 
 -- | The fingerprint of the named ports information for this instance group.
 -- Use this optional property to prevent conflicts when multiple users
@@ -26450,6 +27142,7 @@ newtype TestPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -26458,6 +27151,7 @@ newtype TestPermissionsRequest =
 testPermissionsRequest
     :: TestPermissionsRequest
 testPermissionsRequest = TestPermissionsRequest' {_tPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \'resource\'. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed.
@@ -26488,6 +27182,7 @@ data TargetTCPProxyListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetTCPProxyListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -26500,6 +27195,7 @@ targetTCPProxyListWarningDataItem
 targetTCPProxyListWarningDataItem =
   TargetTCPProxyListWarningDataItem'
     {_ttplwdiValue = Nothing, _ttplwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ttplwdiValue :: Lens' TargetTCPProxyListWarningDataItem (Maybe Text)
@@ -26543,6 +27239,7 @@ data ProjectsGetXpnResources =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGetXpnResources' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -26560,6 +27257,7 @@ projectsGetXpnResources =
     , _pgxrKind = "compute#projectsGetXpnResources"
     , _pgxrResources = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -26616,6 +27314,7 @@ data MachineTypeList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypeList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -26642,6 +27341,7 @@ machineTypeList =
     , _mtlWarning = Nothing
     , _mtlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -26716,6 +27416,7 @@ data TargetHTTPProxyList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPProxyList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -26742,6 +27443,7 @@ targetHTTPProxyList =
     , _thttpplWarning = Nothing
     , _thttpplId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -26817,6 +27519,7 @@ data NodeGroupsListNodesWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsListNodesWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -26831,6 +27534,7 @@ nodeGroupsListNodesWarning
 nodeGroupsListNodesWarning =
   NodeGroupsListNodesWarning'
     {_nglnwData = Nothing, _nglnwCode = Nothing, _nglnwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -26881,6 +27585,7 @@ data NodeTemplateAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplateAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -26907,6 +27612,7 @@ nodeTemplateAggregatedList =
     , _nodWarning = Nothing
     , _nodId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -26976,6 +27682,7 @@ data InterconnectLocationListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectLocationListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -26990,6 +27697,7 @@ interconnectLocationListWarning
 interconnectLocationListWarning =
   InterconnectLocationListWarning'
     {_illwData = Nothing, _illwCode = Nothing, _illwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -27038,6 +27746,7 @@ data InstanceGroupsListInstancesWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsListInstancesWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27052,6 +27761,7 @@ instanceGroupsListInstancesWarning
 instanceGroupsListInstancesWarning =
   InstanceGroupsListInstancesWarning'
     {_igliwData = Nothing, _igliwCode = Nothing, _igliwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -27105,6 +27815,7 @@ data RegionInstanceGroupManagerList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagerList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27131,6 +27842,7 @@ regionInstanceGroupManagerList =
     , _rigmlWarning = Nothing
     , _rigmlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -27205,6 +27917,7 @@ data DiskTypesScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskTypesScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27216,6 +27929,7 @@ diskTypesScopedList
     :: DiskTypesScopedList
 diskTypesScopedList =
   DiskTypesScopedList' {_dtslDiskTypes = Nothing, _dtslWarning = Nothing}
+
 
 -- | [Output Only] A list of disk types contained in this scope.
 dtslDiskTypes :: Lens' DiskTypesScopedList [DiskType]
@@ -27255,6 +27969,7 @@ data LogConfigCloudAuditOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogConfigCloudAuditOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27267,6 +27982,7 @@ logConfigCloudAuditOptions
 logConfigCloudAuditOptions =
   LogConfigCloudAuditOptions'
     {_lccaoAuthorizationLoggingOptions = Nothing, _lccaoLogName = Nothing}
+
 
 -- | Information used by the Cloud Audit Logging pipeline.
 lccaoAuthorizationLoggingOptions :: Lens' LogConfigCloudAuditOptions (Maybe AuthorizationLoggingOptions)
@@ -27303,6 +28019,7 @@ newtype ProjectsSetDefaultNetworkTierRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSetDefaultNetworkTierRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27312,6 +28029,7 @@ projectsSetDefaultNetworkTierRequest
     :: ProjectsSetDefaultNetworkTierRequest
 projectsSetDefaultNetworkTierRequest =
   ProjectsSetDefaultNetworkTierRequest' {_psdntrNetworkTier = Nothing}
+
 
 -- | Default network tier to be set.
 psdntrNetworkTier :: Lens' ProjectsSetDefaultNetworkTierRequest (Maybe ProjectsSetDefaultNetworkTierRequestNetworkTier)
@@ -27344,6 +28062,7 @@ data ImageListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27355,6 +28074,7 @@ imageListWarningDataItem
     :: ImageListWarningDataItem
 imageListWarningDataItem =
   ImageListWarningDataItem' {_imaValue = Nothing, _imaKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 imaValue :: Lens' ImageListWarningDataItem (Maybe Text)
@@ -27392,6 +28112,7 @@ data AcceleratorTypeListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorTypeListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27404,6 +28125,7 @@ acceleratorTypeListWarningDataItem
 acceleratorTypeListWarningDataItem =
   AcceleratorTypeListWarningDataItem'
     {_atlwdiValue = Nothing, _atlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 atlwdiValue :: Lens' AcceleratorTypeListWarningDataItem (Maybe Text)
@@ -27453,6 +28175,7 @@ data InterconnectOutageNotification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectOutageNotification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27485,6 +28208,7 @@ interconnectOutageNotification =
     , _ionSource = Nothing
     , _ionDescription = Nothing
     }
+
 
 -- | State of this notification. Note that the \"NS_\" versions of this enum
 -- have been deprecated in favor of the unprefixed values.
@@ -27576,6 +28300,7 @@ data NodeTemplateList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplateList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27602,6 +28327,7 @@ nodeTemplateList =
     , _ntlWarning = Nothing
     , _ntlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -27675,6 +28401,7 @@ data DiskTypeAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskTypeAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27701,6 +28428,7 @@ diskTypeAggregatedList =
     , _dtalWarning = Nothing
     , _dtalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -27771,6 +28499,7 @@ data HTTPHealthCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPHealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27797,6 +28526,7 @@ hTTPHealthCheck =
     , _httphcPortName = Nothing
     , _httphcPort = Nothing
     }
+
 
 -- | The string to match anywhere in the first 1024 bytes of the response
 -- body. If left empty (the default value), the status code determines
@@ -27872,6 +28602,7 @@ data URLMapListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMapListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27883,6 +28614,7 @@ urlMapListWarningDataItem
     :: URLMapListWarningDataItem
 urlMapListWarningDataItem =
   URLMapListWarningDataItem' {_umlwdiValue = Nothing, _umlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 umlwdiValue :: Lens' URLMapListWarningDataItem (Maybe Text)
@@ -27925,6 +28657,7 @@ data RouterNATSubnetworkToNAT =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterNATSubnetworkToNAT' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -27942,6 +28675,7 @@ routerNATSubnetworkToNAT =
     , _rnatstnatName = Nothing
     , _rnatstnatSecondaryIPRangeNames = Nothing
     }
+
 
 -- | Specify the options for NAT ranges in the Subnetwork. All usages of
 -- single value are valid except NAT_IP_RANGE_OPTION_UNSPECIFIED. The only
@@ -27998,6 +28732,7 @@ data BackendServiceGroupHealth =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServiceGroupHealth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28012,6 +28747,7 @@ backendServiceGroupHealth =
     { _bsghKind = "compute#backendServiceGroupHealth"
     , _bsghHealthStatus = Nothing
     }
+
 
 -- | [Output Only] Type of resource. Always compute#backendServiceGroupHealth
 -- for the health of backend services.
@@ -28052,6 +28788,7 @@ data AutoscalersScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalersScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28063,6 +28800,7 @@ autoscalersScopedList
     :: AutoscalersScopedList
 autoscalersScopedList =
   AutoscalersScopedList' {_aAutoscalers = Nothing, _aWarning = Nothing}
+
 
 -- | [Output Only] A list of autoscalers contained in this scope.
 aAutoscalers :: Lens' AutoscalersScopedList [Autoscaler]
@@ -28100,6 +28838,7 @@ newtype LogConfigDataAccessOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogConfigDataAccessOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28109,6 +28848,7 @@ logConfigDataAccessOptions
     :: LogConfigDataAccessOptions
 logConfigDataAccessOptions =
   LogConfigDataAccessOptions' {_lcdaoLogMode = Nothing}
+
 
 -- | Whether Gin logging should happen in a fail-closed manner at the caller.
 -- This is relevant only in the LocalIAM implementation, for now. NOTE:
@@ -28144,6 +28884,7 @@ data AutoscalerAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalerAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28170,6 +28911,7 @@ autoscalerAggregatedList =
     , _aalWarning = Nothing
     , _aalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -28236,6 +28978,7 @@ newtype RouterAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28246,6 +28989,7 @@ routerAggregatedListItems
     -> RouterAggregatedListItems
 routerAggregatedListItems pRaliAddtional_ =
   RouterAggregatedListItems' {_raliAddtional = _Coerce # pRaliAddtional_}
+
 
 -- | Name of the scope containing this set of routers.
 raliAddtional :: Lens' RouterAggregatedListItems (HashMap Text RoutersScopedList)
@@ -28275,6 +29019,7 @@ data AcceleratorTypesScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorTypesScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28289,6 +29034,7 @@ acceleratorTypesScopedListWarning
 acceleratorTypesScopedListWarning =
   AcceleratorTypesScopedListWarning'
     {_atslwData = Nothing, _atslwCode = Nothing, _atslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -28346,6 +29092,7 @@ data TargetTCPProxy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetTCPProxy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28378,6 +29125,7 @@ targetTCPProxy =
     , _ttpProxyHeader = Nothing
     , _ttpDescription = Nothing
     }
+
 
 -- | URL to the BackendService resource.
 ttpService :: Lens' TargetTCPProxy (Maybe Text)
@@ -28469,6 +29217,7 @@ data BackendBucketListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendBucketListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28483,6 +29232,7 @@ backendBucketListWarning
 backendBucketListWarning =
   BackendBucketListWarning'
     {_bblwData = Nothing, _bblwCode = Nothing, _bblwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -28529,6 +29279,7 @@ newtype ImageLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImageLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28538,6 +29289,7 @@ imageLabels
     :: HashMap Text Text -- ^ 'iAddtional'
     -> ImageLabels
 imageLabels pIAddtional_ = ImageLabels' {_iAddtional = _Coerce # pIAddtional_}
+
 
 iAddtional :: Lens' ImageLabels (HashMap Text Text)
 iAddtional
@@ -28560,6 +29312,7 @@ newtype DistributionPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DistributionPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28568,6 +29321,7 @@ newtype DistributionPolicy =
 distributionPolicy
     :: DistributionPolicy
 distributionPolicy = DistributionPolicy' {_dpZones = Nothing}
+
 
 -- | Zones where the regional managed instance group will create and manage
 -- instances.
@@ -28595,6 +29349,7 @@ data NodeGroupListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28606,6 +29361,7 @@ nodeGroupListWarningDataItem
     :: NodeGroupListWarningDataItem
 nodeGroupListWarningDataItem =
   NodeGroupListWarningDataItem' {_nglwdiValue = Nothing, _nglwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 nglwdiValue :: Lens' NodeGroupListWarningDataItem (Maybe Text)
@@ -28651,6 +29407,7 @@ data AutoscalingPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalingPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28677,6 +29434,7 @@ autoscalingPolicy =
     , _apMinNumReplicas = Nothing
     , _apCoolDownPeriodSec = Nothing
     }
+
 
 -- | Configuration parameters of autoscaling based on a custom metric.
 apCustomMetricUtilizations :: Lens' AutoscalingPolicy [AutoscalingPolicyCustomMetricUtilization]
@@ -28767,6 +29525,7 @@ data NodeGroupAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28781,6 +29540,7 @@ nodeGroupAggregatedListWarning
 nodeGroupAggregatedListWarning =
   NodeGroupAggregatedListWarning'
     {_ngalwData = Nothing, _ngalwCode = Nothing, _ngalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -28833,6 +29593,7 @@ data RegionList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28859,6 +29620,7 @@ regionList =
     , _regWarning = Nothing
     , _regId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -28931,6 +29693,7 @@ data SchedulingNodeAffinity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SchedulingNodeAffinity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -28945,6 +29708,7 @@ schedulingNodeAffinity
 schedulingNodeAffinity =
   SchedulingNodeAffinity'
     {_snaOperator = Nothing, _snaValues = Nothing, _snaKey = Nothing}
+
 
 -- | Defines the operation of node selection.
 snaOperator :: Lens' SchedulingNodeAffinity (Maybe SchedulingNodeAffinityOperator)
@@ -28992,6 +29756,7 @@ data VPNTunnelList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VPNTunnelList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -29018,6 +29783,7 @@ vpnTunnelList =
     , _vtlWarning = Nothing
     , _vtlId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -29089,6 +29855,7 @@ data AcceleratorTypeAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorTypeAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -29103,6 +29870,7 @@ acceleratorTypeAggregatedListWarning
 acceleratorTypeAggregatedListWarning =
   AcceleratorTypeAggregatedListWarning'
     {_atalwData = Nothing, _atalwCode = Nothing, _atalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -29152,6 +29920,7 @@ data RegionInstanceGroupsListInstancesWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupsListInstancesWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -29164,6 +29933,7 @@ regionInstanceGroupsListInstancesWarningDataItem
 regionInstanceGroupsListInstancesWarningDataItem =
   RegionInstanceGroupsListInstancesWarningDataItem'
     {_rigliwdiValue = Nothing, _rigliwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 rigliwdiValue :: Lens' RegionInstanceGroupsListInstancesWarningDataItem (Maybe Text)
@@ -29235,6 +30005,7 @@ data Interconnect =
     , _iiCircuitInfos            :: !(Maybe [InterconnectCircuitInfo])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Interconnect' with the minimum fields required to make a request.
 --
@@ -29310,6 +30081,7 @@ interconnect =
     , _iiNocContactEmail = Nothing
     , _iiCircuitInfos = Nothing
     }
+
 
 -- | [Output Only] The current state of whether or not this Interconnect is
 -- functional.
@@ -29535,6 +30307,7 @@ newtype MachineTypeScratchDisksItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypeScratchDisksItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -29544,6 +30317,7 @@ machineTypeScratchDisksItem
     :: MachineTypeScratchDisksItem
 machineTypeScratchDisksItem =
   MachineTypeScratchDisksItem' {_mtsdiDiskGb = Nothing}
+
 
 -- | Size of the scratch disk, defined in GB.
 mtsdiDiskGb :: Lens' MachineTypeScratchDisksItem (Maybe Int32)
@@ -29570,6 +30344,7 @@ data SubnetworksScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworksScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -29582,6 +30357,7 @@ subnetworksScopedListWarningDataItem
 subnetworksScopedListWarningDataItem =
   SubnetworksScopedListWarningDataItem'
     {_sslwdiValue = Nothing, _sslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 sslwdiValue :: Lens' SubnetworksScopedListWarningDataItem (Maybe Text)
@@ -29625,6 +30401,7 @@ data MachineTypesScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypesScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -29636,6 +30413,7 @@ machineTypesScopedList
     :: MachineTypesScopedList
 machineTypesScopedList =
   MachineTypesScopedList' {_mtslMachineTypes = Nothing, _mtslWarning = Nothing}
+
 
 -- | [Output Only] A list of machine types contained in this scope.
 mtslMachineTypes :: Lens' MachineTypesScopedList [MachineType]
@@ -29689,6 +30467,7 @@ data Subnetwork =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Subnetwork' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -29739,6 +30518,7 @@ subnetwork =
     , _subDescription = Nothing
     , _subPrivateIPGoogleAccess = Nothing
     }
+
 
 -- | [Output Only] Type of the resource. Always compute#subnetwork for
 -- Subnetwork resources.
@@ -29902,6 +30682,7 @@ data HealthCheckListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HealthCheckListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -29916,6 +30697,7 @@ healthCheckListWarning
 healthCheckListWarning =
   HealthCheckListWarning'
     {_hclwData = Nothing, _hclwCode = Nothing, _hclwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -29965,6 +30747,7 @@ data MachineTypeAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypeAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -29991,6 +30774,7 @@ machineTypeAggregatedList =
     , _mtalWarning = Nothing
     , _mtalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -30062,6 +30846,7 @@ data NodeGroupsScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -30076,6 +30861,7 @@ nodeGroupsScopedListWarning
 nodeGroupsScopedListWarning =
   NodeGroupsScopedListWarning'
     {_ngslwData = Nothing, _ngslwCode = Nothing, _ngslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -30127,6 +30913,7 @@ data NodeTypeList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTypeList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -30153,6 +30940,7 @@ nodeTypeList =
     , _ntltWarning = Nothing
     , _ntltId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -30233,6 +31021,7 @@ data DiskType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -30274,6 +31063,7 @@ diskType =
     , _dtDefaultDiskSizeGb = Nothing
     , _dtDeprecated = Nothing
     }
+
 
 -- | [Output Only] Type of the resource. Always compute#diskType for disk
 -- types.
@@ -30382,6 +31172,7 @@ data NodeTemplateAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplateAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -30396,6 +31187,7 @@ nodeTemplateAggregatedListWarning
 nodeTemplateAggregatedListWarning =
   NodeTemplateAggregatedListWarning'
     {_ntalwData = Nothing, _ntalwCode = Nothing, _ntalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -30444,6 +31236,7 @@ data AutoscalerAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalerAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -30456,6 +31249,7 @@ autoscalerAggregatedListWarningDataItem
 autoscalerAggregatedListWarningDataItem =
   AutoscalerAggregatedListWarningDataItem'
     {_aalwdiValue = Nothing, _aalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 aalwdiValue :: Lens' AutoscalerAggregatedListWarningDataItem (Maybe Text)
@@ -30501,6 +31295,7 @@ newtype ZoneSetLabelsRequestLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZoneSetLabelsRequestLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -30511,6 +31306,7 @@ zoneSetLabelsRequestLabels
     -> ZoneSetLabelsRequestLabels
 zoneSetLabelsRequestLabels pZslrlAddtional_ =
   ZoneSetLabelsRequestLabels' {_zslrlAddtional = _Coerce # pZslrlAddtional_}
+
 
 zslrlAddtional :: Lens' ZoneSetLabelsRequestLabels (HashMap Text Text)
 zslrlAddtional
@@ -30536,6 +31332,7 @@ data NodeTypeListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTypeListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -30547,6 +31344,7 @@ nodeTypeListWarningDataItem
     :: NodeTypeListWarningDataItem
 nodeTypeListWarningDataItem =
   NodeTypeListWarningDataItem' {_ntlwdiValue = Nothing, _ntlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ntlwdiValue :: Lens' NodeTypeListWarningDataItem (Maybe Text)
@@ -30590,6 +31388,7 @@ data URLMapValidationResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMapValidationResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -30610,6 +31409,7 @@ urlMapValidationResult =
     , _umvrTestPassed = Nothing
     , _umvrTestFailures = Nothing
     }
+
 
 umvrLoadErrors :: Lens' URLMapValidationResult [Text]
 umvrLoadErrors
@@ -30669,6 +31469,7 @@ data Metadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -30683,6 +31484,7 @@ metadata
 metadata =
   Metadata'
     {_mKind = "compute#metadata", _mFingerprint = Nothing, _mItems = Nothing}
+
 
 -- | [Output Only] Type of the resource. Always compute#metadata for
 -- metadata.
@@ -30735,6 +31537,7 @@ data RouteWarningsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouteWarningsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -30749,6 +31552,7 @@ routeWarningsItem
 routeWarningsItem =
   RouteWarningsItem'
     {_rwiData = Nothing, _rwiCode = Nothing, _rwiMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -30796,6 +31600,7 @@ data NodeGroupsListNodes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsListNodes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -30822,6 +31627,7 @@ nodeGroupsListNodes =
     , _nglnWarning = Nothing
     , _nglnId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -30898,6 +31704,7 @@ data InterconnectLocationList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectLocationList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -30924,6 +31731,7 @@ interconnectLocationList =
     , _illWarning = Nothing
     , _illId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -30992,6 +31800,7 @@ newtype SSLPoliciesListAvailableFeaturesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLPoliciesListAvailableFeaturesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31001,6 +31810,7 @@ sslPoliciesListAvailableFeaturesResponse
     :: SSLPoliciesListAvailableFeaturesResponse
 sslPoliciesListAvailableFeaturesResponse =
   SSLPoliciesListAvailableFeaturesResponse' {_splafrFeatures = Nothing}
+
 
 splafrFeatures :: Lens' SSLPoliciesListAvailableFeaturesResponse [Text]
 splafrFeatures
@@ -31035,6 +31845,7 @@ newtype InstancePropertiesLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancePropertiesLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31045,6 +31856,7 @@ instancePropertiesLabels
     -> InstancePropertiesLabels
 instancePropertiesLabels pIplAddtional_ =
   InstancePropertiesLabels' {_iplAddtional = _Coerce # pIplAddtional_}
+
 
 iplAddtional :: Lens' InstancePropertiesLabels (HashMap Text Text)
 iplAddtional
@@ -31069,6 +31881,7 @@ data MachineTypesScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31081,6 +31894,7 @@ machineTypesScopedListWarningDataItem
 machineTypesScopedListWarningDataItem =
   MachineTypesScopedListWarningDataItem'
     {_mtslwdiValue = Nothing, _mtslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 mtslwdiValue :: Lens' MachineTypesScopedListWarningDataItem (Maybe Text)
@@ -31126,6 +31940,7 @@ data DiskTypeListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskTypeListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31140,6 +31955,7 @@ diskTypeListWarning
 diskTypeListWarning =
   DiskTypeListWarning'
     {_dtlwData = Nothing, _dtlwCode = Nothing, _dtlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -31185,6 +32001,7 @@ data NodeTemplateListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplateListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31196,6 +32013,7 @@ nodeTemplateListWarningDataItem
     :: NodeTemplateListWarningDataItem
 nodeTemplateListWarningDataItem =
   NodeTemplateListWarningDataItem' {_nodValue = Nothing, _nodKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 nodValue :: Lens' NodeTemplateListWarningDataItem (Maybe Text)
@@ -31234,6 +32052,7 @@ data RegionListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31245,6 +32064,7 @@ regionListWarningDataItem
     :: RegionListWarningDataItem
 regionListWarningDataItem =
   RegionListWarningDataItem' {_regValue = Nothing, _regKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 regValue :: Lens' RegionListWarningDataItem (Maybe Text)
@@ -31281,6 +32101,7 @@ newtype InstancesSetMachineResourcesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesSetMachineResourcesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31290,6 +32111,7 @@ instancesSetMachineResourcesRequest
     :: InstancesSetMachineResourcesRequest
 instancesSetMachineResourcesRequest =
   InstancesSetMachineResourcesRequest' {_ismrrGuestAccelerators = Nothing}
+
 
 -- | A list of the type and count of accelerator cards attached to the
 -- instance.
@@ -31325,6 +32147,7 @@ data InstancesSetServiceAccountRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesSetServiceAccountRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31337,6 +32160,7 @@ instancesSetServiceAccountRequest
 instancesSetServiceAccountRequest =
   InstancesSetServiceAccountRequest'
     {_issarEmail = Nothing, _issarScopes = Nothing}
+
 
 -- | Email address of the service account.
 issarEmail :: Lens' InstancesSetServiceAccountRequest (Maybe Text)
@@ -31374,6 +32198,7 @@ newtype SecurityPolicyReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPolicyReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31383,6 +32208,7 @@ securityPolicyReference
     :: SecurityPolicyReference
 securityPolicyReference =
   SecurityPolicyReference' {_sprSecurityPolicy = Nothing}
+
 
 sprSecurityPolicy :: Lens' SecurityPolicyReference (Maybe Text)
 sprSecurityPolicy
@@ -31411,6 +32237,7 @@ data DiskTypesScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskTypesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31423,6 +32250,7 @@ diskTypesScopedListWarningDataItem
 diskTypesScopedListWarningDataItem =
   DiskTypesScopedListWarningDataItem'
     {_dtslwdiValue = Nothing, _dtslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 dtslwdiValue :: Lens' DiskTypesScopedListWarningDataItem (Maybe Text)
@@ -31468,6 +32296,7 @@ data VMEndpointNATMAppingsInterfaceNATMAppings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VMEndpointNATMAppingsInterfaceNATMAppings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31488,6 +32317,7 @@ vMEndpointNATMAppingsInterfaceNATMAppings =
     , _vmenatmainatmaNATIPPortRanges = Nothing
     , _vmenatmainatmaNumTotalNATPorts = Nothing
     }
+
 
 -- | Alias IP range for this interface endpoint. It will be a private (RFC
 -- 1918) IP range. Examples: \"10.33.4.55\/32\", or \"192.168.5.0\/24\".
@@ -31559,6 +32389,7 @@ data VPNTunnelAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VPNTunnelAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31573,6 +32404,7 @@ vpnTunnelAggregatedListWarning
 vpnTunnelAggregatedListWarning =
   VPNTunnelAggregatedListWarning'
     {_vtalwData = Nothing, _vtalwCode = Nothing, _vtalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -31628,6 +32460,7 @@ data TargetHTTPProxy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPProxy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31657,6 +32490,7 @@ targetHTTPProxy =
     , _thttppId = Nothing
     , _thttppDescription = Nothing
     }
+
 
 -- | URL to the UrlMap resource that defines the mapping from URL to the
 -- BackendService.
@@ -31757,6 +32591,7 @@ data MachineType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31810,6 +32645,7 @@ machineType =
     , _mtDescription = Nothing
     , _mtDeprecated = Nothing
     }
+
 
 -- | [Output Only] Whether this machine type has a shared CPU. See
 -- Shared-core machine types for more information.
@@ -31959,6 +32795,7 @@ data AcceleratorConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcceleratorConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -31971,6 +32808,7 @@ acceleratorConfig
 acceleratorConfig =
   AcceleratorConfig'
     {_acAcceleratorCount = Nothing, _acAcceleratorType = Nothing}
+
 
 -- | The number of the guest accelerator cards exposed to this instance.
 acAcceleratorCount :: Lens' AcceleratorConfig (Maybe Int32)
@@ -32015,6 +32853,7 @@ data AutoscalerListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalerListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32029,6 +32868,7 @@ autoscalerListWarning
 autoscalerListWarning =
   AutoscalerListWarning'
     {_alwData = Nothing, _alwCode = Nothing, _alwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -32072,6 +32912,7 @@ data MachineTypeAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypeAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32084,6 +32925,7 @@ machineTypeAggregatedListWarningDataItem
 machineTypeAggregatedListWarningDataItem =
   MachineTypeAggregatedListWarningDataItem'
     {_mtalwdiValue = Nothing, _mtalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 mtalwdiValue :: Lens' MachineTypeAggregatedListWarningDataItem (Maybe Text)
@@ -32130,6 +32972,7 @@ newtype OperationError =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32138,6 +32981,7 @@ newtype OperationError =
 operationError
     :: OperationError
 operationError = OperationError' {_oeErrors = Nothing}
+
 
 -- | [Output Only] The array of errors encountered while processing this
 -- operation.
@@ -32168,6 +33012,7 @@ data NodeTypeAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTypeAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32182,6 +33027,7 @@ nodeTypeAggregatedListWarning
 nodeTypeAggregatedListWarning =
   NodeTypeAggregatedListWarning'
     {_ntalwtData = Nothing, _ntalwtCode = Nothing, _ntalwtMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -32232,6 +33078,7 @@ data TargetInstancesScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetInstancesScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32246,6 +33093,7 @@ targetInstancesScopedListWarning
 targetInstancesScopedListWarning =
   TargetInstancesScopedListWarning'
     {_tislwData = Nothing, _tislwCode = Nothing, _tislwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -32298,6 +33146,7 @@ data SubnetworkAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworkAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32324,6 +33173,7 @@ subnetworkAggregatedList =
     , _salWarning = Nothing
     , _salId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -32390,6 +33240,7 @@ data VPNTunnelListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VPNTunnelListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32401,6 +33252,7 @@ vpnTunnelListWarningDataItem
     :: VPNTunnelListWarningDataItem
 vpnTunnelListWarningDataItem =
   VPNTunnelListWarningDataItem' {_vtlwdiValue = Nothing, _vtlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 vtlwdiValue :: Lens' VPNTunnelListWarningDataItem (Maybe Text)
@@ -32441,6 +33293,7 @@ data InterconnectDiagnosticsLinkOpticalPower =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectDiagnosticsLinkOpticalPower' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32453,6 +33306,7 @@ interconnectDiagnosticsLinkOpticalPower
 interconnectDiagnosticsLinkOpticalPower =
   InterconnectDiagnosticsLinkOpticalPower'
     {_idlopState = Nothing, _idlopValue = Nothing}
+
 
 idlopState :: Lens' InterconnectDiagnosticsLinkOpticalPower (Maybe InterconnectDiagnosticsLinkOpticalPowerState)
 idlopState
@@ -32494,6 +33348,7 @@ newtype DisksResizeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DisksResizeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32502,6 +33357,7 @@ newtype DisksResizeRequest =
 disksResizeRequest
     :: DisksResizeRequest
 disksResizeRequest = DisksResizeRequest' {_drrSizeGb = Nothing}
+
 
 -- | The new size of the persistent disk, which is specified in GB.
 drrSizeGb :: Lens' DisksResizeRequest (Maybe Int64)
@@ -32527,6 +33383,7 @@ data AutoscalersScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalersScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32538,6 +33395,7 @@ autoscalersScopedListWarningDataItem
     :: AutoscalersScopedListWarningDataItem
 autoscalersScopedListWarningDataItem =
   AutoscalersScopedListWarningDataItem' {_aValue = Nothing, _aKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 aValue :: Lens' AutoscalersScopedListWarningDataItem (Maybe Text)
@@ -32579,6 +33437,7 @@ data ZoneSetPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZoneSetPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32593,6 +33452,7 @@ zoneSetPolicyRequest
 zoneSetPolicyRequest =
   ZoneSetPolicyRequest'
     {_zsprEtag = Nothing, _zsprBindings = Nothing, _zsprPolicy = Nothing}
+
 
 -- | Flatten Policy to create a backward compatible wire-format. Deprecated.
 -- Use \'policy\' to specify the etag.
@@ -32642,6 +33502,7 @@ data DiskTypeAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskTypeAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32654,6 +33515,7 @@ diskTypeAggregatedListWarningDataItem
 diskTypeAggregatedListWarningDataItem =
   DiskTypeAggregatedListWarningDataItem'
     {_dtalwdiValue = Nothing, _dtalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 dtalwdiValue :: Lens' DiskTypeAggregatedListWarningDataItem (Maybe Text)
@@ -32699,6 +33561,7 @@ data RegionInstanceGroupManagerListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagerListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32713,6 +33576,7 @@ regionInstanceGroupManagerListWarning
 regionInstanceGroupManagerListWarning =
   RegionInstanceGroupManagerListWarning'
     {_rigmlwData = Nothing, _rigmlwCode = Nothing, _rigmlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -32762,6 +33626,7 @@ newtype RegionInstanceGroupManagersSetTemplateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupManagersSetTemplateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32772,6 +33637,7 @@ regionInstanceGroupManagersSetTemplateRequest
 regionInstanceGroupManagersSetTemplateRequest =
   RegionInstanceGroupManagersSetTemplateRequest'
     {_rigmstrInstanceTemplate = Nothing}
+
 
 -- | URL of the InstanceTemplate resource from which all new instances will
 -- be created.
@@ -32813,6 +33679,7 @@ data InstanceGroupsListInstances =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsListInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32839,6 +33706,7 @@ instanceGroupsListInstances =
     , _igliWarning = Nothing
     , _igliId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -32927,6 +33795,7 @@ data Autoscaler =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Autoscaler' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -32971,6 +33840,7 @@ autoscaler =
     , _aaDescription = Nothing
     , _aaTarget = Nothing
     }
+
 
 -- | [Output Only] The status of the autoscaler configuration.
 aaStatus :: Lens' Autoscaler (Maybe AutoscalerStatus)
@@ -33094,6 +33964,7 @@ data MachineTypeListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MachineTypeListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33108,6 +33979,7 @@ machineTypeListWarning
 machineTypeListWarning =
   MachineTypeListWarning'
     {_mtlwData = Nothing, _mtlwCode = Nothing, _mtlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -33155,6 +34027,7 @@ data TargetHTTPProxyListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPProxyListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33172,6 +34045,7 @@ targetHTTPProxyListWarning =
     , _thttpplwCode = Nothing
     , _thttpplwMessage = Nothing
     }
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -33221,6 +34095,7 @@ data DiskAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33235,6 +34110,7 @@ diskAggregatedListWarning
 diskAggregatedListWarning =
   DiskAggregatedListWarning'
     {_dalwData = Nothing, _dalwCode = Nothing, _dalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -33282,6 +34158,7 @@ data TargetPoolAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33296,6 +34173,7 @@ targetPoolAggregatedListWarning
 targetPoolAggregatedListWarning =
   TargetPoolAggregatedListWarning'
     {_tpalwData = Nothing, _tpalwCode = Nothing, _tpalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -33345,6 +34223,7 @@ data UsableSubnetworksAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsableSubnetworksAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33359,6 +34238,7 @@ usableSubnetworksAggregatedListWarning
 usableSubnetworksAggregatedListWarning =
   UsableSubnetworksAggregatedListWarning'
     {_usalwData = Nothing, _usalwCode = Nothing, _usalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -33412,6 +34292,7 @@ data DisksScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DisksScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33426,6 +34307,7 @@ disksScopedListWarning
 disksScopedListWarning =
   DisksScopedListWarning'
     {_dslwData = Nothing, _dslwCode = Nothing, _dslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -33471,6 +34353,7 @@ data NodeTemplatesScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplatesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33483,6 +34366,7 @@ nodeTemplatesScopedListWarningDataItem
 nodeTemplatesScopedListWarningDataItem =
   NodeTemplatesScopedListWarningDataItem'
     {_ntslwdiValue = Nothing, _ntslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ntslwdiValue :: Lens' NodeTemplatesScopedListWarningDataItem (Maybe Text)
@@ -33527,6 +34411,7 @@ newtype TargetVPNGatewayAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGatewayAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33538,6 +34423,7 @@ targetVPNGatewayAggregatedListItems
 targetVPNGatewayAggregatedListItems pTvgaliAddtional_ =
   TargetVPNGatewayAggregatedListItems'
     {_tvgaliAddtional = _Coerce # pTvgaliAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of target VPN
 -- gateways.
@@ -33569,6 +34455,7 @@ newtype DiskLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33578,6 +34465,7 @@ diskLabels
     :: HashMap Text Text -- ^ 'dlAddtional'
     -> DiskLabels
 diskLabels pDlAddtional_ = DiskLabels' {_dlAddtional = _Coerce # pDlAddtional_}
+
 
 dlAddtional :: Lens' DiskLabels (HashMap Text Text)
 dlAddtional
@@ -33601,6 +34489,7 @@ data InstanceGroupManagerListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagerListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33613,6 +34502,7 @@ instanceGroupManagerListWarningDataItem
 instanceGroupManagerListWarningDataItem =
   InstanceGroupManagerListWarningDataItem'
     {_igmlwdiValue = Nothing, _igmlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 igmlwdiValue :: Lens' InstanceGroupManagerListWarningDataItem (Maybe Text)
@@ -33660,6 +34550,7 @@ data ForwardingRuleAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingRuleAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33674,6 +34565,7 @@ forwardingRuleAggregatedListWarning
 forwardingRuleAggregatedListWarning =
   ForwardingRuleAggregatedListWarning'
     {_fralwData = Nothing, _fralwCode = Nothing, _fralwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -33723,6 +34615,7 @@ data SSLPolicyWarningsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLPolicyWarningsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33737,6 +34630,7 @@ sslPolicyWarningsItem
 sslPolicyWarningsItem =
   SSLPolicyWarningsItem'
     {_spwiData = Nothing, _spwiCode = Nothing, _spwiMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -33783,6 +34677,7 @@ data GlobalSetPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GlobalSetPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33797,6 +34692,7 @@ globalSetPolicyRequest
 globalSetPolicyRequest =
   GlobalSetPolicyRequest'
     {_gsprEtag = Nothing, _gsprBindings = Nothing, _gsprPolicy = Nothing}
+
 
 -- | Flatten Policy to create a backward compatible wire-format. Deprecated.
 -- Use \'policy\' to specify the etag.
@@ -33846,6 +34742,7 @@ data RegionAutoscalerListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionAutoscalerListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33858,6 +34755,7 @@ regionAutoscalerListWarningDataItem
 regionAutoscalerListWarningDataItem =
   RegionAutoscalerListWarningDataItem'
     {_ralwdiaValue = Nothing, _ralwdiaKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ralwdiaValue :: Lens' RegionAutoscalerListWarningDataItem (Maybe Text)
@@ -33906,6 +34804,7 @@ newtype GlobalSetLabelsRequestLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GlobalSetLabelsRequestLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33916,6 +34815,7 @@ globalSetLabelsRequestLabels
     -> GlobalSetLabelsRequestLabels
 globalSetLabelsRequestLabels pGslrlAddtional_ =
   GlobalSetLabelsRequestLabels' {_gslrlAddtional = _Coerce # pGslrlAddtional_}
+
 
 gslrlAddtional :: Lens' GlobalSetLabelsRequestLabels (HashMap Text Text)
 gslrlAddtional
@@ -33945,6 +34845,7 @@ data TargetPoolsScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolsScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -33959,6 +34860,7 @@ targetPoolsScopedListWarning
 targetPoolsScopedListWarning =
   TargetPoolsScopedListWarning'
     {_tpslwData = Nothing, _tpslwCode = Nothing, _tpslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -34007,6 +34909,7 @@ data HealthStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HealthStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -34027,6 +34930,7 @@ healthStatus =
     , _hsPort = Nothing
     , _hsInstance = Nothing
     }
+
 
 -- | The IP address represented by this resource.
 hsIPAddress :: Lens' HealthStatus (Maybe Text)
@@ -34082,6 +34986,7 @@ data TargetTCPProxyList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetTCPProxyList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -34108,6 +35013,7 @@ targetTCPProxyList =
     , _ttplWarning = Nothing
     , _ttplId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -34186,6 +35092,7 @@ data Region =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Region' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -34224,6 +35131,7 @@ region =
     , _regeDescription = Nothing
     , _regeDeprecated = Nothing
     }
+
 
 -- | [Output Only] Status of the region, either UP or DOWN.
 regeStatus :: Lens' Region (Maybe RegionStatus)
@@ -34321,6 +35229,7 @@ data OperationListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -34332,6 +35241,7 @@ operationListWarningDataItem
     :: OperationListWarningDataItem
 operationListWarningDataItem =
   OperationListWarningDataItem' {_olwdiValue = Nothing, _olwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 olwdiValue :: Lens' OperationListWarningDataItem (Maybe Text)
@@ -34371,6 +35281,7 @@ newtype GuestOSFeature =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GuestOSFeature' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -34379,6 +35290,7 @@ newtype GuestOSFeature =
 guestOSFeature
     :: GuestOSFeature
 guestOSFeature = GuestOSFeature' {_gofType = Nothing}
+
 
 -- | The ID of a supported feature. Read Enabling guest operating system
 -- features to see a list of available options.
@@ -34419,6 +35331,7 @@ data VPNTunnel =
     , _vtDescription           :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VPNTunnel' with the minimum fields required to make a request.
 --
@@ -34479,6 +35392,7 @@ vpnTunnel =
     , _vtRegion = Nothing
     , _vtDescription = Nothing
     }
+
 
 -- | [Output Only] Detailed status message for the VPN tunnel.
 vtDetailedStatus :: Lens' VPNTunnel (Maybe Text)
@@ -34649,6 +35563,7 @@ data InstanceGroupManagerAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagerAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -34663,6 +35578,7 @@ instanceGroupManagerAggregatedListWarning
 instanceGroupManagerAggregatedListWarning =
   InstanceGroupManagerAggregatedListWarning'
     {_igmalwData = Nothing, _igmalwCode = Nothing, _igmalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -34715,6 +35631,7 @@ data DiskListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DiskListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -34726,6 +35643,7 @@ diskListWarningDataItem
     :: DiskListWarningDataItem
 diskListWarningDataItem =
   DiskListWarningDataItem' {_dlwdiValue = Nothing, _dlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 dlwdiValue :: Lens' DiskListWarningDataItem (Maybe Text)
@@ -34766,6 +35684,7 @@ newtype SourceInstanceParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceInstanceParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -34774,6 +35693,7 @@ newtype SourceInstanceParams =
 sourceInstanceParams
     :: SourceInstanceParams
 sourceInstanceParams = SourceInstanceParams' {_sipDiskConfigs = Nothing}
+
 
 -- | Attached disks configuration. If not provided, defaults are applied: For
 -- boot disk and any other R\/W disks, new custom images will be created
@@ -34808,6 +35728,7 @@ data AliasIPRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AliasIPRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -34819,6 +35740,7 @@ aliasIPRange
     :: AliasIPRange
 aliasIPRange =
   AliasIPRange' {_airIPCIdRRange = Nothing, _airSubnetworkRangeName = Nothing}
+
 
 -- | The IP CIDR range represented by this alias IP range. This IP CIDR range
 -- must belong to the specified subnetwork and cannot contain IP addresses
@@ -34863,6 +35785,7 @@ data NodeTypesScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTypesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -34875,6 +35798,7 @@ nodeTypesScopedListWarningDataItem
 nodeTypesScopedListWarningDataItem =
   NodeTypesScopedListWarningDataItem'
     {_ntslwditValue = Nothing, _ntslwditKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ntslwditValue :: Lens' NodeTypesScopedListWarningDataItem (Maybe Text)
@@ -34920,6 +35844,7 @@ data TargetInstanceListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetInstanceListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -34934,6 +35859,7 @@ targetInstanceListWarning
 targetInstanceListWarning =
   TargetInstanceListWarning'
     {_tilwData = Nothing, _tilwCode = Nothing, _tilwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -34990,6 +35916,7 @@ data NodeType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35034,6 +35961,7 @@ nodeType =
     , _ntDescription = Nothing
     , _ntDeprecated = Nothing
     }
+
 
 -- | [Output Only] The type of the resource. Always compute#nodeType for node
 -- types.
@@ -35147,6 +36075,7 @@ newtype AuthorizationLoggingOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuthorizationLoggingOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35156,6 +36085,7 @@ authorizationLoggingOptions
     :: AuthorizationLoggingOptions
 authorizationLoggingOptions =
   AuthorizationLoggingOptions' {_aloPermissionType = Nothing}
+
 
 -- | The type of the permission that was checked.
 aloPermissionType :: Lens' AuthorizationLoggingOptions (Maybe AuthorizationLoggingOptionsPermissionType)
@@ -35206,6 +36136,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35232,6 +36163,7 @@ policy =
     , _pBindings = Nothing
     , _pIAMOwned = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -35318,6 +36250,7 @@ data OperationAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35332,6 +36265,7 @@ operationAggregatedListWarning
 operationAggregatedListWarning =
   OperationAggregatedListWarning'
     {_oalwData = Nothing, _oalwCode = Nothing, _oalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -35378,6 +36312,7 @@ data TargetInstanceAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetInstanceAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35390,6 +36325,7 @@ targetInstanceAggregatedListWarningDataItem
 targetInstanceAggregatedListWarningDataItem =
   TargetInstanceAggregatedListWarningDataItem'
     {_tialwdiValue = Nothing, _tialwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 tialwdiValue :: Lens' TargetInstanceAggregatedListWarningDataItem (Maybe Text)
@@ -35439,6 +36375,7 @@ data OperationsScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationsScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35453,6 +36390,7 @@ operationsScopedListWarning
 operationsScopedListWarning =
   OperationsScopedListWarning'
     {_oslwData = Nothing, _oslwCode = Nothing, _oslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -35498,6 +36436,7 @@ data RegionDiskTypeListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionDiskTypeListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35510,6 +36449,7 @@ regionDiskTypeListWarningDataItem
 regionDiskTypeListWarningDataItem =
   RegionDiskTypeListWarningDataItem'
     {_rdtlwdiValue = Nothing, _rdtlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 rdtlwdiValue :: Lens' RegionDiskTypeListWarningDataItem (Maybe Text)
@@ -35552,6 +36492,7 @@ data ForwardingRuleListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingRuleListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35564,6 +36505,7 @@ forwardingRuleListWarningDataItem
 forwardingRuleListWarningDataItem =
   ForwardingRuleListWarningDataItem'
     {_frlwdiValue = Nothing, _frlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 frlwdiValue :: Lens' ForwardingRuleListWarningDataItem (Maybe Text)
@@ -35609,6 +36551,7 @@ data Scheduling =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Scheduling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35629,6 +36572,7 @@ scheduling =
     , _sOnHostMaintenance = Nothing
     , _sPreemptible = Nothing
     }
+
 
 -- | Specifies whether the instance should be automatically restarted if it
 -- is terminated by Compute Engine (not terminated by a user). You can only
@@ -35693,6 +36637,7 @@ data VPNTunnelsScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VPNTunnelsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35705,6 +36650,7 @@ vpnTunnelsScopedListWarningDataItem
 vpnTunnelsScopedListWarningDataItem =
   VPNTunnelsScopedListWarningDataItem'
     {_vtslwdiValue = Nothing, _vtslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 vtslwdiValue :: Lens' VPNTunnelsScopedListWarningDataItem (Maybe Text)
@@ -35752,6 +36698,7 @@ data InterconnectList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35778,6 +36725,7 @@ interconnectList =
     , _intnWarning = Nothing
     , _intnId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -35847,6 +36795,7 @@ data TargetPoolListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetPoolListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35858,6 +36807,7 @@ targetPoolListWarningDataItem
     :: TargetPoolListWarningDataItem
 targetPoolListWarningDataItem =
   TargetPoolListWarningDataItem' {_tplwdiValue = Nothing, _tplwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 tplwdiValue :: Lens' TargetPoolListWarningDataItem (Maybe Text)
@@ -35909,6 +36859,7 @@ data NodeTemplate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -35953,6 +36904,7 @@ nodeTemplate =
     , _nttRegion = Nothing
     , _nttDescription = Nothing
     }
+
 
 -- | [Output Only] The status of the node template. One of the following
 -- values: CREATING, READY, and DELETING.
@@ -36084,6 +37036,7 @@ data SubnetworkList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworkList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36110,6 +37063,7 @@ subnetworkList =
     , _slWarning = Nothing
     , _slId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -36179,6 +37133,7 @@ data ForwardingRulesScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingRulesScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36193,6 +37148,7 @@ forwardingRulesScopedListWarning
 forwardingRulesScopedListWarning =
   ForwardingRulesScopedListWarning'
     {_frslwData = Nothing, _frslwCode = Nothing, _frslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -36246,6 +37202,7 @@ data HTTPHealthCheckList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPHealthCheckList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36272,6 +37229,7 @@ hTTPHealthCheckList =
     , _httphclWarning = Nothing
     , _httphclId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -36347,6 +37305,7 @@ data InstanceGroupManagersScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36361,6 +37320,7 @@ instanceGroupManagersScopedListWarning
 instanceGroupManagersScopedListWarning =
   InstanceGroupManagersScopedListWarning'
     {_igmslwData = Nothing, _igmslwCode = Nothing, _igmslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -36416,6 +37376,7 @@ data SSLPoliciesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLPoliciesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36442,6 +37403,7 @@ sslPoliciesList =
     , _sslplWarning = Nothing
     , _sslplId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -36512,6 +37474,7 @@ newtype URLMapsValidateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMapsValidateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36520,6 +37483,7 @@ newtype URLMapsValidateRequest =
 urlMapsValidateRequest
     :: URLMapsValidateRequest
 urlMapsValidateRequest = URLMapsValidateRequest' {_umvrResource = Nothing}
+
 
 -- | Content of the UrlMap to be validated.
 umvrResource :: Lens' URLMapsValidateRequest (Maybe URLMap)
@@ -36546,6 +37510,7 @@ data InstanceGroupManagersSetTargetPoolsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersSetTargetPoolsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36558,6 +37523,7 @@ instanceGroupManagersSetTargetPoolsRequest
 instanceGroupManagersSetTargetPoolsRequest =
   InstanceGroupManagersSetTargetPoolsRequest'
     {_igmstprFingerprint = Nothing, _igmstprTargetPools = Nothing}
+
 
 -- | The fingerprint of the target pools information. Use this optional
 -- property to prevent conflicts when multiple users change the target
@@ -36633,6 +37599,7 @@ data Commitment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Commitment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36680,6 +37647,7 @@ commitment =
     , _cStartTimestamp = Nothing
     , _cDescription = Nothing
     }
+
 
 -- | [Output Only] Status of the commitment with regards to eventual
 -- expiration (each commitment has an end date defined). One of the
@@ -36810,6 +37778,7 @@ data HTTPSHealthCheckList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPSHealthCheckList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36836,6 +37805,7 @@ httpsHealthCheckList =
     , _hhclWarning = Nothing
     , _hhclId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -36904,6 +37874,7 @@ data AddressListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddressListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36915,6 +37886,7 @@ addressListWarningDataItem
     :: AddressListWarningDataItem
 addressListWarningDataItem =
   AddressListWarningDataItem' {_addValue = Nothing, _addKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 addValue :: Lens' AddressListWarningDataItem (Maybe Text)
@@ -36953,6 +37925,7 @@ data OperationErrorErrorsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationErrorErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36967,6 +37940,7 @@ operationErrorErrorsItem
 operationErrorErrorsItem =
   OperationErrorErrorsItem'
     {_oeeiLocation = Nothing, _oeeiCode = Nothing, _oeeiMessage = Nothing}
+
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -37010,6 +37984,7 @@ data CommitmentListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitmentListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37024,6 +37999,7 @@ commitmentListWarning
 commitmentListWarning =
   CommitmentListWarning'
     {_clwData = Nothing, _clwCode = Nothing, _clwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -37076,6 +38052,7 @@ data License =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'License' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37114,6 +38091,7 @@ license =
     , _lDescription = Nothing
     , _lLicenseCode = Nothing
     }
+
 
 -- | [Output Only] Deprecated. This field no longer reflects whether a
 -- license charges a usage fee.
@@ -37217,6 +38195,7 @@ data PathRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PathRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37227,6 +38206,7 @@ data PathRule =
 pathRule
     :: PathRule
 pathRule = PathRule' {_prService = Nothing, _prPaths = Nothing}
+
 
 -- | The full or partial URL of the backend service resource to which traffic
 -- is directed if this rule is matched. If routeAction is additionally
@@ -37272,6 +38252,7 @@ data LicenseCodeLicenseAlias =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicenseCodeLicenseAlias' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37283,6 +38264,7 @@ licenseCodeLicenseAlias
     :: LicenseCodeLicenseAlias
 licenseCodeLicenseAlias =
   LicenseCodeLicenseAlias' {_lclaSelfLink = Nothing, _lclaDescription = Nothing}
+
 
 -- | [Output Only] URL of license corresponding to this License Code.
 lclaSelfLink :: Lens' LicenseCodeLicenseAlias (Maybe Text)
@@ -37318,6 +38300,7 @@ data InterconnectAttachmentsScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37330,6 +38313,7 @@ interconnectAttachmentsScopedListWarningDataItem
 interconnectAttachmentsScopedListWarningDataItem =
   InterconnectAttachmentsScopedListWarningDataItem'
     {_iaslwdiValue = Nothing, _iaslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 iaslwdiValue :: Lens' InterconnectAttachmentsScopedListWarningDataItem (Maybe Text)
@@ -37376,6 +38360,7 @@ data SecurityPolicyListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPolicyListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37387,6 +38372,7 @@ securityPolicyListWarningDataItem
     :: SecurityPolicyListWarningDataItem
 securityPolicyListWarningDataItem =
   SecurityPolicyListWarningDataItem' {_secValue = Nothing, _secKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 secValue :: Lens' SecurityPolicyListWarningDataItem (Maybe Text)
@@ -37431,6 +38417,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37442,6 +38429,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -37481,6 +38469,7 @@ data CommitmentsScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitmentsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37493,6 +38482,7 @@ commitmentsScopedListWarningDataItem
 commitmentsScopedListWarningDataItem =
   CommitmentsScopedListWarningDataItem'
     {_cslwdiValue = Nothing, _cslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 cslwdiValue :: Lens' CommitmentsScopedListWarningDataItem (Maybe Text)
@@ -37561,6 +38551,7 @@ data InterconnectAttachment =
     , _iaPrivateInterconnectInfo :: !(Maybe InterconnectAttachmentPrivateInfo)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InterconnectAttachment' with the minimum fields required to make a request.
 --
@@ -37642,6 +38633,7 @@ interconnectAttachment =
     , _iaDescription = Nothing
     , _iaPrivateInterconnectInfo = Nothing
     }
+
 
 -- | [Output Only] The current state of this attachment\'s functionality.
 iaState :: Lens' InterconnectAttachment (Maybe InterconnectAttachmentState)
@@ -37896,6 +38888,7 @@ data InstanceList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37922,6 +38915,7 @@ instanceList =
     , _insWarning = Nothing
     , _insId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -37991,6 +38985,7 @@ newtype RegionSetLabelsRequestLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionSetLabelsRequestLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38001,6 +38996,7 @@ regionSetLabelsRequestLabels
     -> RegionSetLabelsRequestLabels
 regionSetLabelsRequestLabels pRslrlAddtional_ =
   RegionSetLabelsRequestLabels' {_rslrlAddtional = _Coerce # pRslrlAddtional_}
+
 
 rslrlAddtional :: Lens' RegionSetLabelsRequestLabels (HashMap Text Text)
 rslrlAddtional
@@ -38027,6 +39023,7 @@ data NetworkListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38038,6 +39035,7 @@ networkListWarningDataItem
     :: NetworkListWarningDataItem
 networkListWarningDataItem =
   NetworkListWarningDataItem' {_nlwdiValue = Nothing, _nlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 nlwdiValue :: Lens' NetworkListWarningDataItem (Maybe Text)
@@ -38082,6 +39080,7 @@ data CacheKeyPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CacheKeyPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38105,6 +39104,7 @@ cacheKeyPolicy =
     , _ckpQueryStringBlackList = Nothing
     , _ckpIncludeQueryString = Nothing
     }
+
 
 -- | Names of query string parameters to include in cache keys. All other
 -- parameters will be excluded. Either specify query_string_whitelist or
@@ -38182,6 +39182,7 @@ data CommitmentAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitmentAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38194,6 +39195,7 @@ commitmentAggregatedListWarningDataItem
 commitmentAggregatedListWarningDataItem =
   CommitmentAggregatedListWarningDataItem'
     {_calwdiValue = Nothing, _calwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 calwdiValue :: Lens' CommitmentAggregatedListWarningDataItem (Maybe Text)
@@ -38239,6 +39241,7 @@ data RegionInstanceGroupListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38251,6 +39254,7 @@ regionInstanceGroupListWarningDataItem
 regionInstanceGroupListWarningDataItem =
   RegionInstanceGroupListWarningDataItem'
     {_riglwdiValue = Nothing, _riglwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 riglwdiValue :: Lens' RegionInstanceGroupListWarningDataItem (Maybe Text)
@@ -38295,6 +39299,7 @@ newtype SubnetworkAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworkAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38305,6 +39310,7 @@ subnetworkAggregatedListItems
     -> SubnetworkAggregatedListItems
 subnetworkAggregatedListItems pSaliAddtional_ =
   SubnetworkAggregatedListItems' {_saliAddtional = _Coerce # pSaliAddtional_}
+
 
 -- | Name of the scope containing this set of Subnetworks.
 saliAddtional :: Lens' SubnetworkAggregatedListItems (HashMap Text SubnetworksScopedList)
@@ -38332,6 +39338,7 @@ data InterconnectAttachmentAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38344,6 +39351,7 @@ interconnectAttachmentAggregatedListWarningDataItem
 interconnectAttachmentAggregatedListWarningDataItem =
   InterconnectAttachmentAggregatedListWarningDataItem'
     {_iaalwdiValue = Nothing, _iaalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 iaalwdiValue :: Lens' InterconnectAttachmentAggregatedListWarningDataItem (Maybe Text)
@@ -38392,6 +39400,7 @@ data InterconnectAttachmentListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38406,6 +39415,7 @@ interconnectAttachmentListWarning
 interconnectAttachmentListWarning =
   InterconnectAttachmentListWarning'
     {_intData = Nothing, _intCode = Nothing, _intMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -38456,6 +39466,7 @@ data Condition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38482,6 +39493,7 @@ condition =
     , _cSys = Nothing
     , _cSvc = Nothing
     }
+
 
 -- | An operator to apply the subject with.
 cOp :: Lens' Condition (Maybe ConditionOp)
@@ -38540,6 +39552,7 @@ data AddressAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddressAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38554,6 +39567,7 @@ addressAggregatedListWarning
 addressAggregatedListWarning =
   AddressAggregatedListWarning'
     {_addData = Nothing, _addCode = Nothing, _addMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -38596,6 +39610,7 @@ newtype ManagedInstanceLastAttempt =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedInstanceLastAttempt' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38604,6 +39619,7 @@ newtype ManagedInstanceLastAttempt =
 managedInstanceLastAttempt
     :: ManagedInstanceLastAttempt
 managedInstanceLastAttempt = ManagedInstanceLastAttempt' {_milaErrors = Nothing}
+
 
 -- | [Output Only] Encountered errors during the last attempt to create or
 -- delete the instance.
@@ -38632,6 +39648,7 @@ data LicensesListResponseWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicensesListResponseWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38646,6 +39663,7 @@ licensesListResponseWarning
 licensesListResponseWarning =
   LicensesListResponseWarning'
     {_llrwData = Nothing, _llrwCode = Nothing, _llrwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -38691,6 +39709,7 @@ data AutoscalerStatusDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalerStatusDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38702,6 +39721,7 @@ autoscalerStatusDetails
     :: AutoscalerStatusDetails
 autoscalerStatusDetails =
   AutoscalerStatusDetails' {_asdType = Nothing, _asdMessage = Nothing}
+
 
 -- | The type of error returned.
 asdType :: Lens' AutoscalerStatusDetails (Maybe AutoscalerStatusDetailsType)
@@ -38740,6 +39760,7 @@ data BackendServiceList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServiceList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38766,6 +39787,7 @@ backendServiceList =
     , _bslWarning = Nothing
     , _bslId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -38835,6 +39857,7 @@ data XpnHostListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'XpnHostListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38846,6 +39869,7 @@ xpnHostListWarningDataItem
     :: XpnHostListWarningDataItem
 xpnHostListWarningDataItem =
   XpnHostListWarningDataItem' {_xhlwdiValue = Nothing, _xhlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 xhlwdiValue :: Lens' XpnHostListWarningDataItem (Maybe Text)
@@ -38886,6 +39910,7 @@ data ZoneListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZoneListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38897,6 +39922,7 @@ zoneListWarningDataItem
     :: ZoneListWarningDataItem
 zoneListWarningDataItem =
   ZoneListWarningDataItem' {_zlwdiValue = Nothing, _zlwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 zlwdiValue :: Lens' ZoneListWarningDataItem (Maybe Text)
@@ -38937,6 +39963,7 @@ data RegionSetPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionSetPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -38951,6 +39978,7 @@ regionSetPolicyRequest
 regionSetPolicyRequest =
   RegionSetPolicyRequest'
     {_rsprEtag = Nothing, _rsprBindings = Nothing, _rsprPolicy = Nothing}
+
 
 -- | Flatten Policy to create a backward compatible wire-format. Deprecated.
 -- Use \'policy\' to specify the etag.
@@ -39003,6 +40031,7 @@ data InstanceGroupsScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39017,6 +40046,7 @@ instanceGroupsScopedListWarning
 instanceGroupsScopedListWarning =
   InstanceGroupsScopedListWarning'
     {_igslwData = Nothing, _igslwCode = Nothing, _igslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -39064,6 +40094,7 @@ newtype AutoscalingPolicyCPUUtilization =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoscalingPolicyCPUUtilization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39073,6 +40104,7 @@ autoscalingPolicyCPUUtilization
     :: AutoscalingPolicyCPUUtilization
 autoscalingPolicyCPUUtilization =
   AutoscalingPolicyCPUUtilization' {_apcuUtilizationTarget = Nothing}
+
 
 -- | The target CPU utilization that the autoscaler should maintain. Must be
 -- a float value in the range (0, 1]. If not specified, the default is 0.6.
@@ -39113,6 +40145,7 @@ data InstanceGroupsScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39125,6 +40158,7 @@ instanceGroupsScopedListWarningDataItem
 instanceGroupsScopedListWarningDataItem =
   InstanceGroupsScopedListWarningDataItem'
     {_igslwdiValue = Nothing, _igslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 igslwdiValue :: Lens' InstanceGroupsScopedListWarningDataItem (Maybe Text)
@@ -39169,6 +40203,7 @@ newtype SecurityPolicyRuleMatcherConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPolicyRuleMatcherConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39178,6 +40213,7 @@ securityPolicyRuleMatcherConfig
     :: SecurityPolicyRuleMatcherConfig
 securityPolicyRuleMatcherConfig =
   SecurityPolicyRuleMatcherConfig' {_sprmcSrcIPRanges = Nothing}
+
 
 -- | CIDR IP address range.
 sprmcSrcIPRanges :: Lens' SecurityPolicyRuleMatcherConfig [Text]
@@ -39210,6 +40246,7 @@ data LicensesListResponseWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicensesListResponseWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39222,6 +40259,7 @@ licensesListResponseWarningDataItem
 licensesListResponseWarningDataItem =
   LicensesListResponseWarningDataItem'
     {_llrwdiValue = Nothing, _llrwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 llrwdiValue :: Lens' LicensesListResponseWarningDataItem (Maybe Text)
@@ -39266,6 +40304,7 @@ data XpnHostListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'XpnHostListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39280,6 +40319,7 @@ xpnHostListWarning
 xpnHostListWarning =
   XpnHostListWarning'
     {_xhlwData = Nothing, _xhlwCode = Nothing, _xhlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -39324,6 +40364,7 @@ newtype ResourceGroupReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceGroupReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39332,6 +40373,7 @@ newtype ResourceGroupReference =
 resourceGroupReference
     :: ResourceGroupReference
 resourceGroupReference = ResourceGroupReference' {_rgrGroup = Nothing}
+
 
 -- | A URI referencing one of the instance groups or network endpoint groups
 -- listed in the backend service.
@@ -39361,6 +40403,7 @@ data VMEndpointNATMAppingsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VMEndpointNATMAppingsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39387,6 +40430,7 @@ vMEndpointNATMAppingsList =
     , _vmenatmalWarning = Nothing
     , _vmenatmalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -39482,6 +40526,7 @@ data Firewall =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Firewall' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39547,6 +40592,7 @@ firewall =
     , _fTargetServiceAccounts = Nothing
     , _fDescription = Nothing
     }
+
 
 -- | If source tags are specified, the firewall rule applies only to traffic
 -- with source IPs that match the primary network interfaces of VM
@@ -39790,6 +40836,7 @@ data InterconnectAttachmentsScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentsScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39804,6 +40851,7 @@ interconnectAttachmentsScopedListWarning
 interconnectAttachmentsScopedListWarning =
   InterconnectAttachmentsScopedListWarning'
     {_iaslwData = Nothing, _iaslwCode = Nothing, _iaslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -39858,6 +40906,7 @@ data HostRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HostRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39872,6 +40921,7 @@ hostRule
 hostRule =
   HostRule'
     {_hrHosts = Nothing, _hrDescription = Nothing, _hrPathMatcher = Nothing}
+
 
 -- | The list of host patterns to match. They must be valid hostnames, except
 -- * will match any string of ([a-z0-9-.]*). In that case, * must be the
@@ -39922,6 +40972,7 @@ data SecurityPolicyListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPolicyListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -39936,6 +40987,7 @@ securityPolicyListWarning
 securityPolicyListWarning =
   SecurityPolicyListWarning'
     {_secData = Nothing, _secCode = Nothing, _secMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -39982,6 +41034,7 @@ data Quota =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40002,6 +41055,7 @@ quota =
     , _qLimit = Nothing
     , _qUsage = Nothing
     }
+
 
 -- | [Output Only] Owning resource. This is the resource on which this quota
 -- is applied.
@@ -40064,6 +41118,7 @@ data InstanceGroup =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40111,6 +41166,7 @@ instanceGroup =
     , _ig1Description = Nothing
     , _ig1NamedPorts = Nothing
     }
+
 
 -- | [Output Only] The total number of instances in the instance group.
 ig1Size :: Lens' InstanceGroup (Maybe Int32)
@@ -40246,6 +41302,7 @@ data AddressListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddressListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40260,6 +41317,7 @@ addressListWarning
 addressListWarning =
   AddressListWarning'
     {_alwlData = Nothing, _alwlCode = Nothing, _alwlMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -40305,6 +41363,7 @@ data RegionSetLabelsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionSetLabelsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40317,6 +41376,7 @@ regionSetLabelsRequest
 regionSetLabelsRequest =
   RegionSetLabelsRequest'
     {_rslrLabels = Nothing, _rslrLabelFingerprint = Nothing}
+
 
 -- | The labels to set for this resource.
 rslrLabels :: Lens' RegionSetLabelsRequest (Maybe RegionSetLabelsRequestLabels)
@@ -40361,6 +41421,7 @@ data RouterInterface =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RouterInterface' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40384,6 +41445,7 @@ routerInterface =
     , _riIPRange = Nothing
     , _riLinkedVPNTunnel = Nothing
     }
+
 
 -- | URI of the linked interconnect attachment. It must be in the same region
 -- as the router. Each interface can have at most one linked resource and
@@ -40459,6 +41521,7 @@ data NetworkListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40473,6 +41536,7 @@ networkListWarning
 networkListWarning =
   NetworkListWarning'
     {_nlwData = Nothing, _nlwCode = Nothing, _nlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -40521,6 +41585,7 @@ data SnapshotList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40547,6 +41612,7 @@ snapshotList =
     , _snaWarning = Nothing
     , _snaId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -40618,6 +41684,7 @@ data InterconnectDiagnostics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectDiagnostics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40632,6 +41699,7 @@ interconnectDiagnostics
 interconnectDiagnostics =
   InterconnectDiagnostics'
     {_idMACAddress = Nothing, _idArpCaches = Nothing, _idLinks = Nothing}
+
 
 -- | The MAC address of the Interconnect\'s bundle interface.
 idMACAddress :: Lens' InterconnectDiagnostics (Maybe Text)
@@ -40688,6 +41756,7 @@ data LicenseCode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicenseCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40723,6 +41792,7 @@ licenseCode =
     , _lcLicenseAlias = Nothing
     , _lcDescription = Nothing
     }
+
 
 -- | [Output Only] Current state of this License Code.
 lcState :: Lens' LicenseCode (Maybe LicenseCodeState)
@@ -40817,6 +41887,7 @@ data TestFailure =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestFailure' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40837,6 +41908,7 @@ testFailure =
     , _tfHost = Nothing
     , _tfActualService = Nothing
     }
+
 
 tfPath :: Lens' TestFailure (Maybe Text)
 tfPath = lens _tfPath (\ s a -> s{_tfPath = a})
@@ -40881,6 +41953,7 @@ data CommitmentListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitmentListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40892,6 +41965,7 @@ commitmentListWarningDataItem
     :: CommitmentListWarningDataItem
 commitmentListWarningDataItem =
   CommitmentListWarningDataItem' {_clwdiValue = Nothing, _clwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 clwdiValue :: Lens' CommitmentListWarningDataItem (Maybe Text)
@@ -40934,6 +42008,7 @@ data CommitmentsScopedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitmentsScopedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40948,6 +42023,7 @@ commitmentsScopedListWarning
 commitmentsScopedListWarning =
   CommitmentsScopedListWarning'
     {_cslwData = Nothing, _cslwCode = Nothing, _cslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -40997,6 +42073,7 @@ data SerialPortOutput =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SerialPortOutput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41020,6 +42097,7 @@ serialPortOutput =
     , _spoStart = Nothing
     , _spoSelfLink = Nothing
     }
+
 
 -- | [Output Only] The position of the next byte of content from the serial
 -- console output. Use this value in the next request as the start
@@ -41086,6 +42164,7 @@ data TargetVPNGatewayAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGatewayAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41112,6 +42191,7 @@ targetVPNGatewayAggregatedList =
     , _tvgalWarning = Nothing
     , _tvgalId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -41185,6 +42265,7 @@ data InterconnectAttachmentAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41199,6 +42280,7 @@ interconnectAttachmentAggregatedListWarning
 interconnectAttachmentAggregatedListWarning =
   InterconnectAttachmentAggregatedListWarning'
     {_iaalwData = Nothing, _iaalwCode = Nothing, _iaalwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -41251,6 +42333,7 @@ data MetadataItemsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetadataItemsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41261,6 +42344,7 @@ data MetadataItemsItem =
 metadataItemsItem
     :: MetadataItemsItem
 metadataItemsItem = MetadataItemsItem' {_miiValue = Nothing, _miiKey = Nothing}
+
 
 -- | Value for the metadata entry. These are free-form strings, and only have
 -- meaning as interpreted by the image running in the instance. The only
@@ -41300,6 +42384,7 @@ data SignedURLKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SignedURLKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41310,6 +42395,7 @@ data SignedURLKey =
 signedURLKey
     :: SignedURLKey
 signedURLKey = SignedURLKey' {_sukKeyValue = Nothing, _sukKeyName = Nothing}
+
 
 -- | 128-bit key value used for signing the URL. The key value must be a
 -- valid RFC 4648 Section 5 base64url encoded string.
@@ -41361,6 +42447,7 @@ data TargetHTTPSProxy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetHTTPSProxy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41399,6 +42486,7 @@ targetHTTPSProxy =
     , _thpId = Nothing
     , _thpDescription = Nothing
     }
+
 
 -- | URL of SslPolicy resource that will be associated with the
 -- TargetHttpsProxy resource. If not set, the TargetHttpsProxy resource
@@ -41518,6 +42606,7 @@ newtype ConnectionDraining =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConnectionDraining' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41526,6 +42615,7 @@ newtype ConnectionDraining =
 connectionDraining
     :: ConnectionDraining
 connectionDraining = ConnectionDraining' {_cdDrainingTimeoutSec = Nothing}
+
 
 -- | Time for which instance will be drained (not accept new connections, but
 -- still work to finish started).
@@ -41557,6 +42647,7 @@ data InterconnectAttachmentListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41569,6 +42660,7 @@ interconnectAttachmentListWarningDataItem
 interconnectAttachmentListWarningDataItem =
   InterconnectAttachmentListWarningDataItem'
     {_ialwdiValue = Nothing, _ialwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 ialwdiValue :: Lens' InterconnectAttachmentListWarningDataItem (Maybe Text)
@@ -41614,6 +42706,7 @@ data CacheInvalidationRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CacheInvalidationRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41625,6 +42718,7 @@ cacheInvalidationRule
     :: CacheInvalidationRule
 cacheInvalidationRule =
   CacheInvalidationRule' {_cirPath = Nothing, _cirHost = Nothing}
+
 
 cirPath :: Lens' CacheInvalidationRule (Maybe Text)
 cirPath = lens _cirPath (\ s a -> s{_cirPath = a})
@@ -41656,6 +42750,7 @@ data AddressAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddressAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41668,6 +42763,7 @@ addressAggregatedListWarningDataItem
 addressAggregatedListWarningDataItem =
   AddressAggregatedListWarningDataItem'
     {_aalwdiaValue = Nothing, _aalwdiaKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 aalwdiaValue :: Lens' AddressAggregatedListWarningDataItem (Maybe Text)
@@ -41711,6 +42807,7 @@ data TargetVPNGatewaysScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetVPNGatewaysScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41723,6 +42820,7 @@ targetVPNGatewaysScopedList
 targetVPNGatewaysScopedList =
   TargetVPNGatewaysScopedList'
     {_tvgslTargetVPNGateways = Nothing, _tvgslWarning = Nothing}
+
 
 -- | [Output Only] A list of target vpn gateways contained in this scope.
 tvgslTargetVPNGateways :: Lens' TargetVPNGatewaysScopedList [TargetVPNGateway]
@@ -41765,6 +42863,7 @@ data CommitmentAggregatedListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitmentAggregatedListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41779,6 +42878,7 @@ commitmentAggregatedListWarning
 commitmentAggregatedListWarning =
   CommitmentAggregatedListWarning'
     {_calwData = Nothing, _calwCode = Nothing, _calwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -41827,6 +42927,7 @@ data RegionInstanceGroupListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionInstanceGroupListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41841,6 +42942,7 @@ regionInstanceGroupListWarning
 regionInstanceGroupListWarning =
   RegionInstanceGroupListWarning'
     {_riglwData = Nothing, _riglwCode = Nothing, _riglwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -41895,6 +42997,7 @@ data AccessConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccessConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41924,6 +43027,7 @@ accessConfig =
     , _acPublicPtrDomainName = Nothing
     , _acType = OneToOneNAT
     }
+
 
 -- | This signifies the networking tier used for configuring this access
 -- configuration and can only take the following values: PREMIUM, STANDARD.
@@ -42009,6 +43113,7 @@ data LogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42023,6 +43128,7 @@ logConfig
 logConfig =
   LogConfig'
     {_lcCloudAudit = Nothing, _lcDataAccess = Nothing, _lcCounter = Nothing}
+
 
 -- | Cloud audit options.
 lcCloudAudit :: Lens' LogConfig (Maybe LogConfigCloudAuditOptions)
@@ -42066,6 +43172,7 @@ data ZoneListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZoneListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42080,6 +43187,7 @@ zoneListWarning
 zoneListWarning =
   ZoneListWarning'
     {_zlwData = Nothing, _zlwCode = Nothing, _zlwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -42124,6 +43232,7 @@ data ManagedInstanceLastAttemptErrorsErrorsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedInstanceLastAttemptErrorsErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42141,6 +43250,7 @@ managedInstanceLastAttemptErrorsErrorsItem =
     , _milaeeiCode = Nothing
     , _milaeeiMessage = Nothing
     }
+
 
 -- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
@@ -42191,6 +43301,7 @@ data InstancesScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42203,6 +43314,7 @@ instancesScopedListWarningDataItem
 instancesScopedListWarningDataItem =
   InstancesScopedListWarningDataItem'
     {_islwdiValue = Nothing, _islwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 islwdiValue :: Lens' InstancesScopedListWarningDataItem (Maybe Text)
@@ -42246,6 +43358,7 @@ newtype SnapshotLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42256,6 +43369,7 @@ snapshotLabels
     -> SnapshotLabels
 snapshotLabels pSlAddtional_ =
   SnapshotLabels' {_slAddtional = _Coerce # pSlAddtional_}
+
 
 slAddtional :: Lens' SnapshotLabels (HashMap Text Text)
 slAddtional
@@ -42279,6 +43393,7 @@ data BackendServicesScopedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServicesScopedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42291,6 +43406,7 @@ backendServicesScopedListWarningDataItem
 backendServicesScopedListWarningDataItem =
   BackendServicesScopedListWarningDataItem'
     {_bsslwdiValue = Nothing, _bsslwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 bsslwdiValue :: Lens' BackendServicesScopedListWarningDataItem (Maybe Text)
@@ -42336,6 +43452,7 @@ newtype NodeTemplateAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplateAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42347,6 +43464,7 @@ nodeTemplateAggregatedListItems
 nodeTemplateAggregatedListItems pNtaliAddtional_ =
   NodeTemplateAggregatedListItems'
     {_ntaliAddtional = _Coerce # pNtaliAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of node templates.
 ntaliAddtional :: Lens' NodeTemplateAggregatedListItems (HashMap Text NodeTemplatesScopedList)
@@ -42397,6 +43515,7 @@ data BackendService =
     , _bsPort                 :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendService' with the minimum fields required to make a request.
 --
@@ -42472,6 +43591,7 @@ backendService =
     , _bsHealthChecks = Nothing
     , _bsPort = Nothing
     }
+
 
 -- | Type of session affinity to use. The default is NONE. When the load
 -- balancing scheme is EXTERNAL, can be NONE, CLIENT_IP, or
@@ -42706,6 +43826,7 @@ data InstanceListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42720,6 +43841,7 @@ instanceListWarning
 instanceListWarning =
   InstanceListWarning'
     {_insData = Nothing, _insCode = Nothing, _insMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -42763,6 +43885,7 @@ data InstanceMoveRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceMoveRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42775,6 +43898,7 @@ instanceMoveRequest
 instanceMoveRequest =
   InstanceMoveRequest'
     {_imrTargetInstance = Nothing, _imrDestinationZone = Nothing}
+
 
 -- | The URL of the target instance to move. This can be a full or partial
 -- URL. For example, the following are all valid URLs to an instance: -
@@ -42821,6 +43945,7 @@ data InterconnectDiagnosticsARPEntry =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectDiagnosticsARPEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42833,6 +43958,7 @@ interconnectDiagnosticsARPEntry
 interconnectDiagnosticsARPEntry =
   InterconnectDiagnosticsARPEntry'
     {_idarpeIPAddress = Nothing, _idarpeMACAddress = Nothing}
+
 
 -- | The IP address of this ARP neighbor.
 idarpeIPAddress :: Lens' InterconnectDiagnosticsARPEntry (Maybe Text)
@@ -42875,6 +44001,7 @@ data CommitmentList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitmentList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42901,6 +44028,7 @@ commitmentList =
     , _clWarning = Nothing
     , _clId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -42966,6 +44094,7 @@ newtype InstancesSetLabelsRequestLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesSetLabelsRequestLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42977,6 +44106,7 @@ instancesSetLabelsRequestLabels
 instancesSetLabelsRequestLabels pIslrlAddtional_ =
   InstancesSetLabelsRequestLabels'
     {_islrlAddtional = _Coerce # pIslrlAddtional_}
+
 
 islrlAddtional :: Lens' InstancesSetLabelsRequestLabels (HashMap Text Text)
 islrlAddtional
@@ -43004,6 +44134,7 @@ data InstanceGroupsScopedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupsScopedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43016,6 +44147,7 @@ instanceGroupsScopedList
 instanceGroupsScopedList =
   InstanceGroupsScopedList'
     {_igslWarning = Nothing, _igslInstanceGroups = Nothing}
+
 
 -- | [Output Only] An informational warning that replaces the list of
 -- instance groups when the list is empty.
@@ -43055,6 +44187,7 @@ newtype InstancesStartWithEncryptionKeyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesStartWithEncryptionKeyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43064,6 +44197,7 @@ instancesStartWithEncryptionKeyRequest
     :: InstancesStartWithEncryptionKeyRequest
 instancesStartWithEncryptionKeyRequest =
   InstancesStartWithEncryptionKeyRequest' {_iswekrDisks = Nothing}
+
 
 -- | Array of disks associated with this instance that are protected with a
 -- customer-supplied encryption key. In order to start the instance, the
@@ -43104,6 +44238,7 @@ data HTTPSHealthCheck =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPSHealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43130,6 +44265,7 @@ httpsHealthCheck =
     , _hhcPortName = Nothing
     , _hhcPort = Nothing
     }
+
 
 -- | The string to match anywhere in the first 1024 bytes of the response
 -- body. If left empty (the default value), the status code determines
@@ -43202,6 +44338,7 @@ newtype VPNTunnelAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VPNTunnelAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43212,6 +44349,7 @@ vpnTunnelAggregatedListItems
     -> VPNTunnelAggregatedListItems
 vpnTunnelAggregatedListItems pVtaliAddtional_ =
   VPNTunnelAggregatedListItems' {_vtaliAddtional = _Coerce # pVtaliAddtional_}
+
 
 -- | Name of the scope containing this set of vpn tunnels.
 vtaliAddtional :: Lens' VPNTunnelAggregatedListItems (HashMap Text VPNTunnelsScopedList)
@@ -43239,6 +44377,7 @@ data InstanceAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43251,6 +44390,7 @@ instanceAggregatedListWarningDataItem
 instanceAggregatedListWarningDataItem =
   InstanceAggregatedListWarningDataItem'
     {_insValue = Nothing, _insKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 insValue :: Lens' InstanceAggregatedListWarningDataItem (Maybe Text)
@@ -43292,6 +44432,7 @@ data Tags =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Tags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43302,6 +44443,7 @@ data Tags =
 tags
     :: Tags
 tags = Tags' {_tFingerprint = Nothing, _tItems = Nothing}
+
 
 -- | Specifies a fingerprint for this request, which is essentially a hash of
 -- the tags\' contents and used for optimistic locking. The fingerprint is
@@ -43348,6 +44490,7 @@ data AddressAggregatedList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AddressAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43374,6 +44517,7 @@ addressAggregatedList =
     , _addWarning = Nothing
     , _addId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -43446,6 +44590,7 @@ data InterconnectAttachmentList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43472,6 +44617,7 @@ interconnectAttachmentList =
     , _ialaWarning = Nothing
     , _ialaId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -43544,6 +44690,7 @@ data OperationWarningsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationWarningsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43558,6 +44705,7 @@ operationWarningsItem
 operationWarningsItem =
   OperationWarningsItem'
     {_owiData = Nothing, _owiCode = Nothing, _owiMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -43603,6 +44751,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43616,6 +44765,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -43678,6 +44828,7 @@ data URLMapTest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'URLMapTest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43698,6 +44849,7 @@ urlMapTest =
     , _umtHost = Nothing
     , _umtDescription = Nothing
     }
+
 
 -- | Path portion of the URL.
 umtPath :: Lens' URLMapTest (Maybe Text)
@@ -43747,6 +44899,7 @@ data HTTPSHealthCheckListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HTTPSHealthCheckListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43761,6 +44914,7 @@ httpsHealthCheckListWarning
 httpsHealthCheckListWarning =
   HTTPSHealthCheckListWarning'
     {_hhclwData = Nothing, _hhclwCode = Nothing, _hhclwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":
@@ -43807,6 +44961,7 @@ newtype NodeTypeAggregatedListItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTypeAggregatedListItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43817,6 +44972,7 @@ nodeTypeAggregatedListItems
     -> NodeTypeAggregatedListItems
 nodeTypeAggregatedListItems pNAddtional_ =
   NodeTypeAggregatedListItems' {_nAddtional = _Coerce # pNAddtional_}
+
 
 -- | [Output Only] Name of the scope containing this set of node types.
 nAddtional :: Lens' NodeTypeAggregatedListItems (HashMap Text NodeTypesScopedList)
@@ -43841,6 +44997,7 @@ newtype RoutersPreviewResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RoutersPreviewResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43849,6 +45006,7 @@ newtype RoutersPreviewResponse =
 routersPreviewResponse
     :: RoutersPreviewResponse
 routersPreviewResponse = RoutersPreviewResponse' {_rprResource = Nothing}
+
 
 -- | Preview of given router.
 rprResource :: Lens' RoutersPreviewResponse (Maybe Router)
@@ -43878,6 +45036,7 @@ data LicensesListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicensesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43901,6 +45060,7 @@ licensesListResponse =
     , _llrWarning = Nothing
     , _llrId = Nothing
     }
+
 
 -- | [Output Only] This token allows you to get the next page of results for
 -- list requests. If the number of results is larger than maxResults, use
@@ -43963,6 +45123,7 @@ data BackendServiceAggregatedListWarningDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServiceAggregatedListWarningDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -43975,6 +45136,7 @@ backendServiceAggregatedListWarningDataItem
 backendServiceAggregatedListWarningDataItem =
   BackendServiceAggregatedListWarningDataItem'
     {_bsalwdiValue = Nothing, _bsalwdiKey = Nothing}
+
 
 -- | [Output Only] A warning data value corresponding to the key.
 bsalwdiValue :: Lens' BackendServiceAggregatedListWarningDataItem (Maybe Text)
@@ -44045,6 +45207,7 @@ data Instance =
     , _i1Tags               :: !(Maybe Tags)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
@@ -44129,6 +45292,7 @@ instance' =
     , _i1Description = Nothing
     , _i1Tags = Nothing
     }
+
 
 -- | [Output Only] The status of the instance. One of the following values:
 -- PROVISIONING, STAGING, RUNNING, STOPPING, STOPPED, SUSPENDING,
@@ -44393,6 +45557,7 @@ data PathMatcher =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PathMatcher' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44413,6 +45578,7 @@ pathMatcher =
     , _pmPathRules = Nothing
     , _pmDescription = Nothing
     }
+
 
 -- | The full or partial URL to the BackendService resource. This will be
 -- used if none of the pathRules or routeRules defined by this PathMatcher
@@ -44490,6 +45656,7 @@ data BackendServiceListWarning =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BackendServiceListWarning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44504,6 +45671,7 @@ backendServiceListWarning
 backendServiceListWarning =
   BackendServiceListWarning'
     {_bslwData = Nothing, _bslwCode = Nothing, _bslwMessage = Nothing}
+
 
 -- | [Output Only] Metadata about this warning in key: value format. For
 -- example: \"data\": [ { \"key\": \"scope\", \"value\":

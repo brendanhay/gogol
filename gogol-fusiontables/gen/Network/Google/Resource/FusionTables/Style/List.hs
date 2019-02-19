@@ -65,6 +65,7 @@ data StyleList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StyleList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ styleList
 styleList pSlTableId_ =
   StyleList'
     {_slPageToken = Nothing, _slTableId = pSlTableId_, _slMaxResults = Nothing}
+
 
 -- | Continuation token specifying which result page to return. Optional.
 slPageToken :: Lens' StyleList (Maybe Text)

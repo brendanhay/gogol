@@ -63,6 +63,7 @@ data DatafeedsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DatafeedsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ datafeedsUpdate pDuMerchantId_ pDuPayload_ pDuDatafeedId_ =
     , _duPayload = pDuPayload_
     , _duDatafeedId = _Coerce # pDuDatafeedId_
     }
+
 
 -- | The ID of the account that manages the datafeed. This account cannot be
 -- a multi-client account.

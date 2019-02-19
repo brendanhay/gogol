@@ -63,6 +63,7 @@ data ResourcesCalendarsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourcesCalendarsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ resourcesCalendarsDelete pRcdCustomer_ pRcdCalendarResourceId_ =
     { _rcdCustomer = pRcdCustomer_
     , _rcdCalendarResourceId = pRcdCalendarResourceId_
     }
+
 
 -- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your

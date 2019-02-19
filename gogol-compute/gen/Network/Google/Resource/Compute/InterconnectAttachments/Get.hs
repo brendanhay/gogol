@@ -66,6 +66,7 @@ data InterconnectAttachmentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectAttachmentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ interconnectAttachmentsGet pIagProject_ pIagRegion_ pIagInterconnectAttachment_ 
     , _iagRegion = pIagRegion_
     , _iagInterconnectAttachment = pIagInterconnectAttachment_
     }
+
 
 -- | Project ID for this request.
 iagProject :: Lens' InterconnectAttachmentsGet Text

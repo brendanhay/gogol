@@ -71,6 +71,7 @@ data ProjectsLocationsTransferConfigsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsTransferConfigsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsLocationsTransferConfigsGet pPltcgName_ =
     , _pltcgName = pPltcgName_
     , _pltcgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pltcgXgafv :: Lens' ProjectsLocationsTransferConfigsGet (Maybe Xgafv)

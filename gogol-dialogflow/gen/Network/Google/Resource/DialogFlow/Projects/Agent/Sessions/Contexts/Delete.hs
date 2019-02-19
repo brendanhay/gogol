@@ -71,6 +71,7 @@ data ProjectsAgentSessionsContextsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentSessionsContextsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsAgentSessionsContextsDelete pPascdName_ =
     , _pascdName = pPascdName_
     , _pascdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pascdXgafv :: Lens' ProjectsAgentSessionsContextsDelete (Maybe Xgafv)

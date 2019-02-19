@@ -71,6 +71,7 @@ data SubscriptionsChangePlan =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsChangePlan' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ subscriptionsChangePlan pScpPayload_ pScpCustomerId_ pScpSubscriptionId_ =
     , _scpCustomerId = pScpCustomerId_
     , _scpSubscriptionId = pScpSubscriptionId_
     }
+
 
 -- | Multipart request metadata.
 scpPayload :: Lens' SubscriptionsChangePlan ChangePlanRequest

@@ -68,6 +68,7 @@ data UsersDataSourcesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersDataSourcesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ usersDataSourcesUpdate pUdsuDataSourceId_ pUdsuPayload_ pUdsuUserId_ =
     , _udsuPayload = pUdsuPayload_
     , _udsuUserId = pUdsuUserId_
     }
+
 
 -- | The data stream ID of the data source to update.
 udsuDataSourceId :: Lens' UsersDataSourcesUpdate Text

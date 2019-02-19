@@ -89,6 +89,7 @@ data ProjectsContentInspect =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsContentInspect' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ projectsContentInspect pPciParent_ pPciPayload_ =
     , _pciPayload = pPciPayload_
     , _pciCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id.
 pciParent :: Lens' ProjectsContentInspect Text

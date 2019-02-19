@@ -70,6 +70,7 @@ data CustomersDevicesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersDevicesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ customersDevicesGet pCdgName_ =
     , _cdgName = pCdgName_
     , _cdgCallback = Nothing
     }
+
 
 -- | V1 error format.
 cdgXgafv :: Lens' CustomersDevicesGet (Maybe Xgafv)

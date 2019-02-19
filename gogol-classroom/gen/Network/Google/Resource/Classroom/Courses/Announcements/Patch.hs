@@ -94,6 +94,7 @@ data CoursesAnnouncementsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesAnnouncementsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -132,6 +133,7 @@ coursesAnnouncementsPatch pCapCourseId_ pCapPayload_ pCapId_ =
     , _capId = pCapId_
     , _capCallback = Nothing
     }
+
 
 -- | V1 error format.
 capXgafv :: Lens' CoursesAnnouncementsPatch (Maybe Xgafv)

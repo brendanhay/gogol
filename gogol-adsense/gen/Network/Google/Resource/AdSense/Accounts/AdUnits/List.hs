@@ -71,6 +71,7 @@ data AccountsAdUnitsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsAdUnitsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ accountsAdUnitsList pAaulAdClientId_ pAaulAccountId_ =
     , _aaulPageToken = Nothing
     , _aaulMaxResults = Nothing
     }
+
 
 -- | Whether to include inactive ad units. Default: true.
 aaulIncludeInactive :: Lens' AccountsAdUnitsList (Maybe Bool)

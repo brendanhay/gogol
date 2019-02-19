@@ -67,6 +67,7 @@ data UsersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ usersGet pUgUserKey_ =
     , _ugProjection = UGPBasic
     , _ugUserKey = pUgUserKey_
     }
+
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
 ugViewType :: Lens' UsersGet UsersGetViewType

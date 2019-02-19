@@ -62,6 +62,7 @@ newtype RelyingPartySendVerificationCode =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartySendVerificationCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -72,6 +73,7 @@ relyingPartySendVerificationCode
     -> RelyingPartySendVerificationCode
 relyingPartySendVerificationCode pRpsvcPayload_ =
   RelyingPartySendVerificationCode' {_rpsvcPayload = pRpsvcPayload_}
+
 
 -- | Multipart request metadata.
 rpsvcPayload :: Lens' RelyingPartySendVerificationCode IdentitytoolkitRelyingPartySendVerificationCodeRequest

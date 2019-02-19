@@ -59,6 +59,7 @@ newtype AccountstatusesCustombatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountstatusesCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ accountstatusesCustombatch
     -> AccountstatusesCustombatch
 accountstatusesCustombatch pAcPayload_ =
   AccountstatusesCustombatch' {_acPayload = pAcPayload_}
+
 
 -- | Multipart request metadata.
 acPayload :: Lens' AccountstatusesCustombatch AccountstatusesCustomBatchRequest

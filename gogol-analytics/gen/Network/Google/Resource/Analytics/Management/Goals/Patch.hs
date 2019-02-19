@@ -73,6 +73,7 @@ data ManagementGoalsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementGoalsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +102,7 @@ managementGoalsPatch pMgpWebPropertyId_ pMgpGoalId_ pMgpProFileId_ pMgpPayload_ 
     , _mgpPayload = pMgpPayload_
     , _mgpAccountId = pMgpAccountId_
     }
+
 
 -- | Web property ID to update the goal.
 mgpWebPropertyId :: Lens' ManagementGoalsPatch Text

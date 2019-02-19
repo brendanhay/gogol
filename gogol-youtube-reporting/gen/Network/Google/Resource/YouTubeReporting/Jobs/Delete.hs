@@ -74,6 +74,7 @@ data JobsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'JobsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ jobsDelete pJdJobId_ =
     , _jdOnBehalfOfContentOwner = Nothing
     , _jdCallback = Nothing
     }
+
 
 -- | V1 error format.
 jdXgafv :: Lens' JobsDelete (Maybe Xgafv)

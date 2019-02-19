@@ -99,6 +99,7 @@ data CoursesCourseWorkCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesCourseWorkCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -130,6 +131,7 @@ coursesCourseWorkCreate pCcwcCourseId_ pCcwcPayload_ =
     , _ccwcPayload = pCcwcPayload_
     , _ccwcCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccwcXgafv :: Lens' CoursesCourseWorkCreate (Maybe Xgafv)

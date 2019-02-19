@@ -82,6 +82,7 @@ data FoldersGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ foldersGetIAMPolicy pFgipPayload_ pFgipResource_ =
     , _fgipResource = pFgipResource_
     , _fgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 fgipXgafv :: Lens' FoldersGetIAMPolicy (Maybe Xgafv)

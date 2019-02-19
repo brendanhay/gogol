@@ -81,6 +81,7 @@ data AccountsCreativesWatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsCreativesWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ accountsCreativesWatch pAcwCreativeId_ pAcwPayload_ pAcwAccountId_ =
     , _acwAccountId = pAcwAccountId_
     , _acwCallback = Nothing
     }
+
 
 -- | V1 error format.
 acwXgafv :: Lens' AccountsCreativesWatch (Maybe Xgafv)

@@ -65,6 +65,7 @@ data InventoryItemsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InventoryItemsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ inventoryItemsGet pIigProFileId_ pIigId_ pIigProjectId_ =
     , _iigId = _Coerce # pIigId_
     , _iigProjectId = _Coerce # pIigProjectId_
     }
+
 
 -- | User profile ID associated with this request.
 iigProFileId :: Lens' InventoryItemsGet Int64

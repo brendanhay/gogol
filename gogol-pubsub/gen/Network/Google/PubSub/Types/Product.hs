@@ -30,6 +30,7 @@ data PushConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PushConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -40,6 +41,7 @@ data PushConfig =
 pushConfig
     :: PushConfig
 pushConfig = PushConfig' {_pcAttributes = Nothing, _pcPushEndpoint = Nothing}
+
 
 -- | Endpoint configuration attributes. Every endpoint has a set of API
 -- supported attributes that can be used to control different aspects of
@@ -91,6 +93,7 @@ data ReceivedMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReceivedMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +104,7 @@ data ReceivedMessage =
 receivedMessage
     :: ReceivedMessage
 receivedMessage = ReceivedMessage' {_rmAckId = Nothing, _rmMessage = Nothing}
+
 
 -- | This ID can be used to acknowledge the received message.
 rmAckId :: Lens' ReceivedMessage (Maybe Text)
@@ -144,6 +148,7 @@ data Snapshot =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Snapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -164,6 +169,7 @@ snapshot =
     , _sLabels = Nothing
     , _sExpireTime = Nothing
     }
+
 
 -- | The name of the topic from which this snapshot is retaining messages.
 sTopic :: Lens' Snapshot (Maybe Text)
@@ -223,6 +229,7 @@ data ListTopicSnapshotsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTopicSnapshotsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -235,6 +242,7 @@ listTopicSnapshotsResponse
 listTopicSnapshotsResponse =
   ListTopicSnapshotsResponse'
     {_ltsrNextPageToken = Nothing, _ltsrSnapshots = Nothing}
+
 
 -- | If not empty, indicates that there may be more snapshots that match the
 -- request; this value should be passed in a new
@@ -281,6 +289,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -301,6 +310,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -355,6 +365,7 @@ data ModifyAckDeadlineRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModifyAckDeadlineRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -367,6 +378,7 @@ modifyAckDeadlineRequest
 modifyAckDeadlineRequest =
   ModifyAckDeadlineRequest'
     {_madrAckIds = Nothing, _madrAckDeadlineSeconds = Nothing}
+
 
 -- | List of acknowledgment IDs.
 madrAckIds :: Lens' ModifyAckDeadlineRequest [Text]
@@ -414,6 +426,7 @@ newtype ModifyPushConfigRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModifyPushConfigRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -422,6 +435,7 @@ newtype ModifyPushConfigRequest =
 modifyPushConfigRequest
     :: ModifyPushConfigRequest
 modifyPushConfigRequest = ModifyPushConfigRequest' {_mpcrPushConfig = Nothing}
+
 
 -- | The push configuration for future deliveries. An empty \`pushConfig\`
 -- indicates that the Pub\/Sub system should stop pushing messages from the
@@ -455,11 +469,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -486,6 +502,7 @@ data PubsubMessage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PubsubMessage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -506,6 +523,7 @@ pubsubMessage =
     , _pmAttributes = Nothing
     , _pmMessageId = Nothing
     }
+
 
 -- | The message data field. If this field is empty, the message must contain
 -- at least one attribute.
@@ -565,6 +583,7 @@ data ListTopicSubscriptionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTopicSubscriptionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -577,6 +596,7 @@ listTopicSubscriptionsResponse
 listTopicSubscriptionsResponse =
   ListTopicSubscriptionsResponse'
     {_lNextPageToken = Nothing, _lSubscriptions = Nothing}
+
 
 -- | If not empty, indicates that there may be more subscriptions that match
 -- the request; this value should be passed in a new
@@ -620,6 +640,7 @@ data ListTopicsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTopicsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -631,6 +652,7 @@ listTopicsResponse
     :: ListTopicsResponse
 listTopicsResponse =
   ListTopicsResponse' {_ltrNextPageToken = Nothing, _ltrTopics = Nothing}
+
 
 -- | If not empty, indicates that there may be more topics that match the
 -- request; this value should be passed in a new \`ListTopicsRequest\`.
@@ -670,6 +692,7 @@ newtype PullResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PullResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -678,6 +701,7 @@ newtype PullResponse =
 pullResponse
     :: PullResponse
 pullResponse = PullResponse' {_prReceivedMessages = Nothing}
+
 
 -- | Received Pub\/Sub messages. The list will be empty if there are no more
 -- messages available in the backlog. For JSON, the response can be
@@ -717,6 +741,7 @@ data ListSnapshotsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSnapshotsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -728,6 +753,7 @@ listSnapshotsResponse
     :: ListSnapshotsResponse
 listSnapshotsResponse =
   ListSnapshotsResponse' {_lsrNextPageToken = Nothing, _lsrSnapshots = Nothing}
+
 
 -- | If not empty, indicates that there may be more snapshot that match the
 -- request; this value should be passed in a new \`ListSnapshotsRequest\`.
@@ -767,6 +793,7 @@ newtype SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -775,6 +802,7 @@ newtype SetIAMPolicyRequest =
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest = SetIAMPolicyRequest' {_siprPolicy = Nothing}
+
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -806,6 +834,7 @@ data CreateSnapshotRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateSnapshotRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -817,6 +846,7 @@ createSnapshotRequest
     :: CreateSnapshotRequest
 createSnapshotRequest =
   CreateSnapshotRequest' {_csrLabels = Nothing, _csrSubscription = Nothing}
+
 
 -- | See
 -- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
@@ -864,6 +894,7 @@ data SeekRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SeekRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -874,6 +905,7 @@ data SeekRequest =
 seekRequest
     :: SeekRequest
 seekRequest = SeekRequest' {_srSnapshot = Nothing, _srTime = Nothing}
+
 
 -- | The snapshot to seek to. The snapshot\'s topic must be the same as that
 -- of the provided subscription. Format is
@@ -921,6 +953,7 @@ data Topic =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Topic' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -931,6 +964,7 @@ data Topic =
 topic
     :: Topic
 topic = Topic' {_tName = Nothing, _tLabels = Nothing}
+
 
 -- | The name of the topic. It must have the format
 -- \`\"projects\/{project}\/topics\/{topic}\"\`. \`{topic}\` must start
@@ -969,6 +1003,7 @@ newtype TopicLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TopicLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -979,6 +1014,7 @@ topicLabels
     -> TopicLabels
 topicLabels pTlAddtional_ =
   TopicLabels' {_tlAddtional = _Coerce # pTlAddtional_}
+
 
 tlAddtional :: Lens' TopicLabels (HashMap Text Text)
 tlAddtional
@@ -1003,6 +1039,7 @@ newtype CreateSnapshotRequestLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreateSnapshotRequestLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1013,6 +1050,7 @@ createSnapshotRequestLabels
     -> CreateSnapshotRequestLabels
 createSnapshotRequestLabels pCsrlAddtional_ =
   CreateSnapshotRequestLabels' {_csrlAddtional = _Coerce # pCsrlAddtional_}
+
 
 csrlAddtional :: Lens' CreateSnapshotRequestLabels (HashMap Text Text)
 csrlAddtional
@@ -1042,6 +1080,7 @@ data UpdateSnapshotRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateSnapshotRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1053,6 +1092,7 @@ updateSnapshotRequest
     :: UpdateSnapshotRequest
 updateSnapshotRequest =
   UpdateSnapshotRequest' {_usrSnapshot = Nothing, _usrUpdateMask = Nothing}
+
 
 -- | The updated snapshot object.
 usrSnapshot :: Lens' UpdateSnapshotRequest (Maybe Snapshot)
@@ -1090,6 +1130,7 @@ data PullRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PullRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1101,6 +1142,7 @@ pullRequest
     :: PullRequest
 pullRequest =
   PullRequest' {_prMaxMessages = Nothing, _prReturnImmediately = Nothing}
+
 
 -- | The maximum number of messages returned for this request. The Pub\/Sub
 -- system may return fewer than the number specified.
@@ -1143,6 +1185,7 @@ newtype PubsubMessageAttributes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PubsubMessageAttributes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1153,6 +1196,7 @@ pubsubMessageAttributes
     -> PubsubMessageAttributes
 pubsubMessageAttributes pPmaAddtional_ =
   PubsubMessageAttributes' {_pmaAddtional = _Coerce # pPmaAddtional_}
+
 
 pmaAddtional :: Lens' PubsubMessageAttributes (HashMap Text Text)
 pmaAddtional
@@ -1177,6 +1221,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1186,6 +1231,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1219,6 +1265,7 @@ newtype PublishResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PublishResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1227,6 +1274,7 @@ newtype PublishResponse =
 publishResponse
     :: PublishResponse
 publishResponse = PublishResponse' {_prMessageIds = Nothing}
+
 
 -- | The server-assigned ID of each published message, in the same order as
 -- the messages in the request. IDs are guaranteed to be unique within the
@@ -1257,6 +1305,7 @@ newtype PublishRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PublishRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1265,6 +1314,7 @@ newtype PublishRequest =
 publishRequest
     :: PublishRequest
 publishRequest = PublishRequest' {_prMessages = Nothing}
+
 
 -- | The messages to publish.
 prMessages :: Lens' PublishRequest [PubsubMessage]
@@ -1293,6 +1343,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1302,6 +1353,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1352,6 +1404,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1364,6 +1417,7 @@ data Policy =
 policy
     :: Policy
 policy = Policy' {_pEtag = Nothing, _pVersion = Nothing, _pBindings = Nothing}
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -1416,11 +1470,13 @@ data SeekResponse =
   SeekResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SeekResponse' with the minimum fields required to make a request.
 --
 seekResponse
     :: SeekResponse
 seekResponse = SeekResponse'
+
 
 instance FromJSON SeekResponse where
         parseJSON
@@ -1440,6 +1496,7 @@ newtype ExpirationPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExpirationPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1448,6 +1505,7 @@ newtype ExpirationPolicy =
 expirationPolicy
     :: ExpirationPolicy
 expirationPolicy = ExpirationPolicy' {_epTtl = Nothing}
+
 
 -- | Specifies the \"time-to-live\" duration for an associated resource. The
 -- resource expires if it is not active for a period of \`ttl\`. The
@@ -1492,6 +1550,7 @@ newtype PushConfigAttributes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PushConfigAttributes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1502,6 +1561,7 @@ pushConfigAttributes
     -> PushConfigAttributes
 pushConfigAttributes pPcaAddtional_ =
   PushConfigAttributes' {_pcaAddtional = _Coerce # pPcaAddtional_}
+
 
 pcaAddtional :: Lens' PushConfigAttributes (HashMap Text Text)
 pcaAddtional
@@ -1532,6 +1592,7 @@ data Subscription =
     , _subExpirationPolicy         :: !(Maybe ExpirationPolicy)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
 --
@@ -1565,6 +1626,7 @@ subscription =
     , _subAckDeadlineSeconds = Nothing
     , _subExpirationPolicy = Nothing
     }
+
 
 -- | If push delivery is used with this subscription, this field is used to
 -- configure it. An empty \`pushConfig\` signifies that the subscriber will
@@ -1699,6 +1761,7 @@ data UpdateSubscriptionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateSubscriptionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1710,6 +1773,7 @@ updateSubscriptionRequest
     :: UpdateSubscriptionRequest
 updateSubscriptionRequest =
   UpdateSubscriptionRequest' {_uUpdateMask = Nothing, _uSubscription = Nothing}
+
 
 -- | Indicates which fields in the provided subscription to update. Must be
 -- specified and non-empty.
@@ -1747,6 +1811,7 @@ newtype SubscriptionLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1757,6 +1822,7 @@ subscriptionLabels
     -> SubscriptionLabels
 subscriptionLabels pSlAddtional_ =
   SubscriptionLabels' {_slAddtional = _Coerce # pSlAddtional_}
+
 
 slAddtional :: Lens' SubscriptionLabels (HashMap Text Text)
 slAddtional
@@ -1781,6 +1847,7 @@ newtype SnapshotLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SnapshotLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1791,6 +1858,7 @@ snapshotLabels
     -> SnapshotLabels
 snapshotLabels pSAddtional_ =
   SnapshotLabels' {_sAddtional = _Coerce # pSAddtional_}
+
 
 sAddtional :: Lens' SnapshotLabels (HashMap Text Text)
 sAddtional
@@ -1815,6 +1883,7 @@ data ListSubscriptionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSubscriptionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1827,6 +1896,7 @@ listSubscriptionsResponse
 listSubscriptionsResponse =
   ListSubscriptionsResponse'
     {_lisNextPageToken = Nothing, _lisSubscriptions = Nothing}
+
 
 -- | If not empty, indicates that there may be more subscriptions that match
 -- the request; this value should be passed in a new
@@ -1870,6 +1940,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1883,6 +1954,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -1943,6 +2015,7 @@ data UpdateTopicRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateTopicRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1954,6 +2027,7 @@ updateTopicRequest
     :: UpdateTopicRequest
 updateTopicRequest =
   UpdateTopicRequest' {_utrUpdateMask = Nothing, _utrTopic = Nothing}
+
 
 -- | Indicates which fields in the provided topic to update. Must be
 -- specified and non-empty. Note that if \`update_mask\` contains
@@ -1993,6 +2067,7 @@ newtype AcknowledgeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AcknowledgeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2001,6 +2076,7 @@ newtype AcknowledgeRequest =
 acknowledgeRequest
     :: AcknowledgeRequest
 acknowledgeRequest = AcknowledgeRequest' {_arAckIds = Nothing}
+
 
 -- | The acknowledgment ID for the messages being acknowledged that was
 -- returned by the Pub\/Sub system in the \`Pull\` response. Must not be

@@ -68,6 +68,7 @@ data RollingUpdatesCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollingUpdatesCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ rollingUpdatesCancel pRucRollingUpdate_ pRucProject_ pRucZone_ =
     , _rucProject = pRucProject_
     , _rucZone = pRucZone_
     }
+
 
 -- | The name of the update.
 rucRollingUpdate :: Lens' RollingUpdatesCancel Text

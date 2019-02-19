@@ -60,6 +60,7 @@ data LiaSettingsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiaSettingsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ liaSettingsGet pLsgMerchantId_ pLsgAccountId_ =
     { _lsgMerchantId = _Coerce # pLsgMerchantId_
     , _lsgAccountId = _Coerce # pLsgAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

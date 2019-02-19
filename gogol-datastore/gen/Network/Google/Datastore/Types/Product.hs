@@ -34,6 +34,7 @@ data LatLng =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -44,6 +45,7 @@ data LatLng =
 latLng
     :: LatLng
 latLng = LatLng' {_llLatitude = Nothing, _llLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
@@ -83,6 +85,7 @@ data TransactionOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransactionOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +97,7 @@ transactionOptions
     :: TransactionOptions
 transactionOptions =
   TransactionOptions' {_toReadWrite = Nothing, _toReadOnly = Nothing}
+
 
 -- | The transaction should allow both reads and writes.
 toReadWrite :: Lens' TransactionOptions (Maybe ReadWrite)
@@ -164,6 +168,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -176,6 +181,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -225,6 +231,7 @@ newtype GoogleLongrunningOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -236,6 +243,7 @@ googleLongrunningOperationMetadata
 googleLongrunningOperationMetadata pGlomAddtional_ =
   GoogleLongrunningOperationMetadata'
     {_glomAddtional = _Coerce # pGlomAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glomAddtional :: Lens' GoogleLongrunningOperationMetadata (HashMap Text JSONValue)
@@ -265,6 +273,7 @@ newtype ReadWrite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReadWrite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -273,6 +282,7 @@ newtype ReadWrite =
 readWrite
     :: ReadWrite
 readWrite = ReadWrite' {_rwPreviousTransaction = Nothing}
+
 
 -- | The transaction identifier of the transaction being retried.
 rwPreviousTransaction :: Lens' ReadWrite (Maybe ByteString)
@@ -303,6 +313,7 @@ newtype GoogleDatastoreAdminV1beta1ExportEntitiesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1ExportEntitiesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -313,6 +324,7 @@ googleDatastoreAdminV1beta1ExportEntitiesResponse
 googleDatastoreAdminV1beta1ExportEntitiesResponse =
   GoogleDatastoreAdminV1beta1ExportEntitiesResponse'
     {_gdaveerOutputURL = Nothing}
+
 
 -- | Location of the output metadata file. This can be used to begin an
 -- import into Cloud Datastore (this project or another project). See
@@ -350,6 +362,7 @@ newtype RollbackRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -358,6 +371,7 @@ newtype RollbackRequest =
 rollbackRequest
     :: RollbackRequest
 rollbackRequest = RollbackRequest' {_rrTransaction = Nothing}
+
 
 -- | The transaction identifier, returned by a call to
 -- Datastore.BeginTransaction.
@@ -387,6 +401,7 @@ data ReserveIdsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReserveIdsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -398,6 +413,7 @@ reserveIdsRequest
     :: ReserveIdsRequest
 reserveIdsRequest =
   ReserveIdsRequest' {_rirKeys = Nothing, _rirDatabaseId = Nothing}
+
 
 -- | A list of keys with complete key paths whose numeric IDs should not be
 -- auto-allocated.
@@ -446,6 +462,7 @@ data PartitionId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PartitionId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -456,6 +473,7 @@ data PartitionId =
 partitionId
     :: PartitionId
 partitionId = PartitionId' {_piNamespaceId = Nothing, _piProjectId = Nothing}
+
 
 -- | If not empty, the ID of the namespace to which the entities belong.
 piNamespaceId :: Lens' PartitionId (Maybe Text)
@@ -492,6 +510,7 @@ data GoogleDatastoreAdminV1ListIndexesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1ListIndexesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -504,6 +523,7 @@ googleDatastoreAdminV1ListIndexesResponse
 googleDatastoreAdminV1ListIndexesResponse =
   GoogleDatastoreAdminV1ListIndexesResponse'
     {_gdavlirNextPageToken = Nothing, _gdavlirIndexes = Nothing}
+
 
 -- | The standard List next-page token.
 gdavlirNextPageToken :: Lens' GoogleDatastoreAdminV1ListIndexesResponse (Maybe Text)
@@ -554,6 +574,7 @@ data QueryResultBatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueryResultBatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -583,6 +604,7 @@ queryResultBatch =
     , _qrbMoreResults = Nothing
     , _qrbEndCursor = Nothing
     }
+
 
 -- | The number of results skipped, typically because of an offset.
 qrbSkippedResults :: Lens' QueryResultBatch (Maybe Int32)
@@ -675,6 +697,7 @@ newtype EntityProperties =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -685,6 +708,7 @@ entityProperties
     -> EntityProperties
 entityProperties pEpAddtional_ =
   EntityProperties' {_epAddtional = _Coerce # pEpAddtional_}
+
 
 epAddtional :: Lens' EntityProperties (HashMap Text Value)
 epAddtional
@@ -708,6 +732,7 @@ newtype GoogleDatastoreAdminV1ImportEntitiesRequestLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1ImportEntitiesRequestLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -719,6 +744,7 @@ googleDatastoreAdminV1ImportEntitiesRequestLabels
 googleDatastoreAdminV1ImportEntitiesRequestLabels pGdavierlAddtional_ =
   GoogleDatastoreAdminV1ImportEntitiesRequestLabels'
     {_gdavierlAddtional = _Coerce # pGdavierlAddtional_}
+
 
 gdavierlAddtional :: Lens' GoogleDatastoreAdminV1ImportEntitiesRequestLabels (HashMap Text Text)
 gdavierlAddtional
@@ -750,6 +776,7 @@ newtype BeginTransactionRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeginTransactionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -759,6 +786,7 @@ beginTransactionRequest
     :: BeginTransactionRequest
 beginTransactionRequest =
   BeginTransactionRequest' {_btrTransactionOptions = Nothing}
+
 
 -- | Options for a new transaction.
 btrTransactionOptions :: Lens' BeginTransactionRequest (Maybe TransactionOptions)
@@ -792,6 +820,7 @@ data RunQueryRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RunQueryRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -812,6 +841,7 @@ runQueryRequest =
     , _rqrQuery = Nothing
     , _rqrReadOptions = Nothing
     }
+
 
 -- | Entities are partitioned into subsets, identified by a partition ID.
 -- Queries are scoped to a single partition. This partition ID is
@@ -863,6 +893,7 @@ newtype AllocateIdsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AllocateIdsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -871,6 +902,7 @@ newtype AllocateIdsRequest =
 allocateIdsRequest
     :: AllocateIdsRequest
 allocateIdsRequest = AllocateIdsRequest' {_airKeys = Nothing}
+
 
 -- | A list of keys with incomplete key paths for which to allocate IDs. No
 -- key may be reserved\/read-only.
@@ -902,6 +934,7 @@ data GoogleDatastoreAdminV1ExportEntitiesMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1ExportEntitiesMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -925,6 +958,7 @@ googleDatastoreAdminV1ExportEntitiesMetadata =
     , _gdaveemEntityFilter = Nothing
     , _gdaveemCommon = Nothing
     }
+
 
 -- | An estimate of the number of bytes processed.
 gdaveemProgressBytes :: Lens' GoogleDatastoreAdminV1ExportEntitiesMetadata (Maybe GoogleDatastoreAdminV1Progress)
@@ -999,6 +1033,7 @@ data GoogleDatastoreAdminV1beta1CommonMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1CommonMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1022,6 +1057,7 @@ googleDatastoreAdminV1beta1CommonMetadata =
     , _gdavcmLabels = Nothing
     , _gdavcmOperationType = Nothing
     }
+
 
 -- | The current state of the Operation.
 gdavcmState :: Lens' GoogleDatastoreAdminV1beta1CommonMetadata (Maybe GoogleDatastoreAdminV1beta1CommonMetadataState)
@@ -1091,11 +1127,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1113,6 +1151,7 @@ data CompositeFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CompositeFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1123,6 +1162,7 @@ data CompositeFilter =
 compositeFilter
     :: CompositeFilter
 compositeFilter = CompositeFilter' {_cfOp = Nothing, _cfFilters = Nothing}
+
 
 -- | The operator for combining multiple filters.
 cfOp :: Lens' CompositeFilter (Maybe CompositeFilterOp)
@@ -1159,6 +1199,7 @@ data GoogleDatastoreAdminV1IndexOperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1IndexOperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1176,6 +1217,7 @@ googleDatastoreAdminV1IndexOperationMetadata =
     , _gdaviomCommon = Nothing
     , _gdaviomIndexId = Nothing
     }
+
 
 -- | An estimate of the number of entities processed.
 gdaviomProgressEntities :: Lens' GoogleDatastoreAdminV1IndexOperationMetadata (Maybe GoogleDatastoreAdminV1Progress)
@@ -1231,6 +1273,7 @@ data GoogleDatastoreAdminV1beta1ImportEntitiesMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1ImportEntitiesMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1254,6 +1297,7 @@ googleDatastoreAdminV1beta1ImportEntitiesMetadata =
     , _gdaviemInputURL = Nothing
     , _gdaviemCommon = Nothing
     }
+
 
 -- | An estimate of the number of bytes processed.
 gdaviemProgressBytes :: Lens' GoogleDatastoreAdminV1beta1ImportEntitiesMetadata (Maybe GoogleDatastoreAdminV1beta1Progress)
@@ -1325,6 +1369,7 @@ data GoogleDatastoreAdminV1beta1Progress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1Progress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1337,6 +1382,7 @@ googleDatastoreAdminV1beta1Progress
 googleDatastoreAdminV1beta1Progress =
   GoogleDatastoreAdminV1beta1Progress'
     {_gdavpWorkCompleted = Nothing, _gdavpWorkEstimated = Nothing}
+
 
 -- | The amount of work that has been completed. Note that this may be
 -- greater than work_estimated.
@@ -1379,6 +1425,7 @@ newtype BeginTransactionResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BeginTransactionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1387,6 +1434,7 @@ newtype BeginTransactionResponse =
 beginTransactionResponse
     :: BeginTransactionResponse
 beginTransactionResponse = BeginTransactionResponse' {_btrTransaction = Nothing}
+
 
 -- | The transaction identifier (always present).
 btrTransaction :: Lens' BeginTransactionResponse (Maybe ByteString)
@@ -1417,6 +1465,7 @@ data MutationResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MutationResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1431,6 +1480,7 @@ mutationResult
 mutationResult =
   MutationResult'
     {_mrConflictDetected = Nothing, _mrKey = Nothing, _mrVersion = Nothing}
+
 
 -- | Whether a conflict was detected for this mutation. Always false when a
 -- conflict detection strategy field is not set in the mutation.
@@ -1479,6 +1529,7 @@ newtype AllocateIdsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AllocateIdsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1487,6 +1538,7 @@ newtype AllocateIdsResponse =
 allocateIdsResponse
     :: AllocateIdsResponse
 allocateIdsResponse = AllocateIdsResponse' {_aKeys = Nothing}
+
 
 -- | The keys specified in the request (in the same order), each with its key
 -- path completed with a newly allocated ID.
@@ -1518,6 +1570,7 @@ data GqlQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GqlQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1538,6 +1591,7 @@ gqlQuery =
     , _gqQueryString = Nothing
     , _gqAllowLiterals = Nothing
     }
+
 
 -- | Numbered binding site \'1 references the first numbered parameter,
 -- effectively using 1-based indexing, rather than the usual 0. For each
@@ -1604,6 +1658,7 @@ data RunQueryResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RunQueryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1614,6 +1669,7 @@ data RunQueryResponse =
 runQueryResponse
     :: RunQueryResponse
 runQueryResponse = RunQueryResponse' {_rBatch = Nothing, _rQuery = Nothing}
+
 
 -- | A batch of query results (always present).
 rBatch :: Lens' RunQueryResponse (Maybe QueryResultBatch)
@@ -1645,6 +1701,7 @@ newtype GoogleDatastoreAdminV1ExportEntitiesRequestLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1ExportEntitiesRequestLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1656,6 +1713,7 @@ googleDatastoreAdminV1ExportEntitiesRequestLabels
 googleDatastoreAdminV1ExportEntitiesRequestLabels pGdaveerlAddtional_ =
   GoogleDatastoreAdminV1ExportEntitiesRequestLabels'
     {_gdaveerlAddtional = _Coerce # pGdaveerlAddtional_}
+
 
 gdaveerlAddtional :: Lens' GoogleDatastoreAdminV1ExportEntitiesRequestLabels (HashMap Text Text)
 gdaveerlAddtional
@@ -1699,6 +1757,7 @@ data Value =
     , _vBlobValue          :: !(Maybe Bytes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
 --
@@ -1747,6 +1806,7 @@ value =
     , _vNullValue = Nothing
     , _vBlobValue = Nothing
     }
+
 
 -- | A key value.
 vKeyValue :: Lens' Value (Maybe Key)
@@ -1879,6 +1939,7 @@ newtype GoogleDatastoreAdminV1CommonMetadataLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1CommonMetadataLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1890,6 +1951,7 @@ googleDatastoreAdminV1CommonMetadataLabels
 googleDatastoreAdminV1CommonMetadataLabels pGdavcmlAddtional_ =
   GoogleDatastoreAdminV1CommonMetadataLabels'
     {_gdavcmlAddtional = _Coerce # pGdavcmlAddtional_}
+
 
 gdavcmlAddtional :: Lens' GoogleDatastoreAdminV1CommonMetadataLabels (HashMap Text Text)
 gdavcmlAddtional
@@ -1920,6 +1982,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1930,6 +1993,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1955,6 +2019,7 @@ data LookupRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LookupRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1965,6 +2030,7 @@ data LookupRequest =
 lookupRequest
     :: LookupRequest
 lookupRequest = LookupRequest' {_lrKeys = Nothing, _lrReadOptions = Nothing}
+
 
 -- | Keys of entities to look up.
 lrKeys :: Lens' LookupRequest [Key]
@@ -2005,6 +2071,7 @@ data GoogleDatastoreAdminV1CommonMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1CommonMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2028,6 +2095,7 @@ googleDatastoreAdminV1CommonMetadata =
     , _gLabels = Nothing
     , _gOperationType = Nothing
     }
+
 
 -- | The current state of the Operation.
 gState :: Lens' GoogleDatastoreAdminV1CommonMetadata (Maybe GoogleDatastoreAdminV1CommonMetadataState)
@@ -2091,6 +2159,7 @@ data GoogleDatastoreAdminV1ExportEntitiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1ExportEntitiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2108,6 +2177,7 @@ googleDatastoreAdminV1ExportEntitiesRequest =
     , _gdaveerEntityFilter = Nothing
     , _gdaveerLabels = Nothing
     }
+
 
 -- | Location for the export metadata and data files. The full resource URL
 -- of the external storage location. Currently, only Google Cloud Storage
@@ -2176,6 +2246,7 @@ data Mutation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Mutation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2199,6 +2270,7 @@ mutation =
     , _mDelete = Nothing
     , _mUpdate = Nothing
     }
+
 
 -- | The version of the entity that this mutation is being applied to. If
 -- this does not match the current version on the server, the mutation
@@ -2261,6 +2333,7 @@ newtype GqlQueryNamedBindings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GqlQueryNamedBindings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2271,6 +2344,7 @@ gqlQueryNamedBindings
     -> GqlQueryNamedBindings
 gqlQueryNamedBindings pGqnbAddtional_ =
   GqlQueryNamedBindings' {_gqnbAddtional = _Coerce # pGqnbAddtional_}
+
 
 gqnbAddtional :: Lens' GqlQueryNamedBindings (HashMap Text GqlQueryParameter)
 gqnbAddtional
@@ -2297,6 +2371,7 @@ newtype GoogleDatastoreAdminV1ExportEntitiesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1ExportEntitiesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2306,6 +2381,7 @@ googleDatastoreAdminV1ExportEntitiesResponse
     :: GoogleDatastoreAdminV1ExportEntitiesResponse
 googleDatastoreAdminV1ExportEntitiesResponse =
   GoogleDatastoreAdminV1ExportEntitiesResponse' {_gOutputURL = Nothing}
+
 
 -- | Location of the output metadata file. This can be used to begin an
 -- import into Cloud Datastore (this project or another project). See
@@ -2342,6 +2418,7 @@ newtype PropertyReference =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PropertyReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2350,6 +2427,7 @@ newtype PropertyReference =
 propertyReference
     :: PropertyReference
 propertyReference = PropertyReference' {_prName = Nothing}
+
 
 -- | The name of the property. If name includes \".\"s, it may be interpreted
 -- as a property name path.
@@ -2378,6 +2456,7 @@ data Key =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Key' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2388,6 +2467,7 @@ data Key =
 key
     :: Key
 key = Key' {_kPartitionId = Nothing, _kPath = Nothing}
+
 
 -- | Entities are partitioned into subsets, currently identified by a project
 -- ID and namespace ID. Queries are scoped to a single partition.
@@ -2438,6 +2518,7 @@ data GoogleDatastoreAdminV1ImportEntitiesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1ImportEntitiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2455,6 +2536,7 @@ googleDatastoreAdminV1ImportEntitiesRequest =
     , _gdavierInputURL = Nothing
     , _gdavierLabels = Nothing
     }
+
 
 -- | Optionally specify which kinds\/namespaces are to be imported. If
 -- provided, the list must be a subset of the EntityFilter used in creating
@@ -2520,6 +2602,7 @@ data PropertyFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PropertyFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2533,6 +2616,7 @@ propertyFilter
     :: PropertyFilter
 propertyFilter =
   PropertyFilter' {_pfProperty = Nothing, _pfOp = Nothing, _pfValue = Nothing}
+
 
 -- | The property to filter by.
 pfProperty :: Lens' PropertyFilter (Maybe PropertyReference)
@@ -2579,6 +2663,7 @@ data Query =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Query' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2614,6 +2699,7 @@ query =
     , _qFilter = Nothing
     , _qOrder = Nothing
     }
+
 
 -- | A starting point for the query results. Query cursors are returned in
 -- query result batches and [can only be used to continue the same
@@ -2716,6 +2802,7 @@ newtype ArrayValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ArrayValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2724,6 +2811,7 @@ newtype ArrayValue =
 arrayValue
     :: ArrayValue
 arrayValue = ArrayValue' {_avValues = Nothing}
+
 
 -- | Values in the array. The order of values in an array is preserved as
 -- long as all values have identical settings for \'exclude_from_indexes\'.
@@ -2753,6 +2841,7 @@ data EntityResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntityResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2766,6 +2855,7 @@ entityResult
     :: EntityResult
 entityResult =
   EntityResult' {_erCursor = Nothing, _erVersion = Nothing, _erEntity = Nothing}
+
 
 -- | A cursor that points to the position after the result entity. Set only
 -- when the \`EntityResult\` is part of a \`QueryResultBatch\` message.
@@ -2814,6 +2904,7 @@ data CommitResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2825,6 +2916,7 @@ commitResponse
     :: CommitResponse
 commitResponse =
   CommitResponse' {_crIndexUpdates = Nothing, _crMutationResults = Nothing}
+
 
 -- | The number of index entries updated during the commit, or zero if none
 -- were updated.
@@ -2867,6 +2959,7 @@ newtype KindExpression =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KindExpression' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2875,6 +2968,7 @@ newtype KindExpression =
 kindExpression
     :: KindExpression
 kindExpression = KindExpression' {_keName = Nothing}
+
 
 -- | The name of the kind.
 keName :: Lens' KindExpression (Maybe Text)
@@ -2905,6 +2999,7 @@ newtype GoogleLongrunningOperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningOperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2916,6 +3011,7 @@ googleLongrunningOperationResponse
 googleLongrunningOperationResponse pGlorAddtional_ =
   GoogleLongrunningOperationResponse'
     {_glorAddtional = _Coerce # pGlorAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glorAddtional :: Lens' GoogleLongrunningOperationResponse (HashMap Text JSONValue)
@@ -2946,6 +3042,7 @@ data ReadOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReadOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2957,6 +3054,7 @@ readOptions
     :: ReadOptions
 readOptions =
   ReadOptions' {_roReadConsistency = Nothing, _roTransaction = Nothing}
+
 
 -- | The non-transactional read consistency to use. Cannot be set to
 -- \`STRONG\` for global queries.
@@ -3005,6 +3103,7 @@ data GoogleDatastoreAdminV1EntityFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1EntityFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3017,6 +3116,7 @@ googleDatastoreAdminV1EntityFilter
 googleDatastoreAdminV1EntityFilter =
   GoogleDatastoreAdminV1EntityFilter'
     {_gdavefNamespaceIds = Nothing, _gdavefKinds = Nothing}
+
 
 -- | An empty list represents all namespaces. This is the preferred usage for
 -- projects that don\'t use namespaces. An empty string element represents
@@ -3061,11 +3161,13 @@ data RollbackResponse =
   RollbackResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollbackResponse' with the minimum fields required to make a request.
 --
 rollbackResponse
     :: RollbackResponse
 rollbackResponse = RollbackResponse'
+
 
 instance FromJSON RollbackResponse where
         parseJSON
@@ -3084,6 +3186,7 @@ newtype Projection =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Projection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3092,6 +3195,7 @@ newtype Projection =
 projection
     :: Projection
 projection = Projection' {_pProperty = Nothing}
+
 
 -- | The property to project.
 pProperty :: Lens' Projection (Maybe PropertyReference)
@@ -3114,11 +3218,13 @@ data ReserveIdsResponse =
   ReserveIdsResponse'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReserveIdsResponse' with the minimum fields required to make a request.
 --
 reserveIdsResponse
     :: ReserveIdsResponse
 reserveIdsResponse = ReserveIdsResponse'
+
 
 instance FromJSON ReserveIdsResponse where
         parseJSON
@@ -3138,6 +3244,7 @@ data Filter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3148,6 +3255,7 @@ data Filter =
 filter'
     :: Filter
 filter' = Filter' {_fCompositeFilter = Nothing, _fPropertyFilter = Nothing}
+
 
 -- | A composite filter.
 fCompositeFilter :: Lens' Filter (Maybe CompositeFilter)
@@ -3190,6 +3298,7 @@ data GoogleDatastoreAdminV1Index =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1Index' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3216,6 +3325,7 @@ googleDatastoreAdminV1Index =
     , _gdaviAncestor = Nothing
     , _gdaviProperties = Nothing
     }
+
 
 -- | The state of the index. Output only.
 gdaviState :: Lens' GoogleDatastoreAdminV1Index (Maybe GoogleDatastoreAdminV1IndexState)
@@ -3286,6 +3396,7 @@ newtype GoogleDatastoreAdminV1beta1CommonMetadataLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1CommonMetadataLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3297,6 +3408,7 @@ googleDatastoreAdminV1beta1CommonMetadataLabels
 googleDatastoreAdminV1beta1CommonMetadataLabels pGAddtional_ =
   GoogleDatastoreAdminV1beta1CommonMetadataLabels'
     {_gAddtional = _Coerce # pGAddtional_}
+
 
 gAddtional :: Lens' GoogleDatastoreAdminV1beta1CommonMetadataLabels (HashMap Text Text)
 gAddtional
@@ -3329,6 +3441,7 @@ data CommitRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommitRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3343,6 +3456,7 @@ commitRequest
 commitRequest =
   CommitRequest'
     {_crMutations = Nothing, _crMode = Nothing, _crTransaction = Nothing}
+
 
 -- | The mutations to perform. When mode is \`TRANSACTIONAL\`, mutations
 -- affecting a single entity are applied in order. The following sequences
@@ -3396,6 +3510,7 @@ data GoogleLongrunningListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3408,6 +3523,7 @@ googleLongrunningListOperationsResponse
 googleLongrunningListOperationsResponse =
   GoogleLongrunningListOperationsResponse'
     {_gllorNextPageToken = Nothing, _gllorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 gllorNextPageToken :: Lens' GoogleLongrunningListOperationsResponse (Maybe Text)
@@ -3456,6 +3572,7 @@ data GoogleDatastoreAdminV1ImportEntitiesMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1ImportEntitiesMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3479,6 +3596,7 @@ googleDatastoreAdminV1ImportEntitiesMetadata =
     , _gInputURL = Nothing
     , _gCommon = Nothing
     }
+
 
 -- | An estimate of the number of bytes processed.
 gProgressBytes :: Lens' GoogleDatastoreAdminV1ImportEntitiesMetadata (Maybe GoogleDatastoreAdminV1Progress)
@@ -3545,6 +3663,7 @@ data GoogleDatastoreAdminV1Progress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1Progress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3557,6 +3676,7 @@ googleDatastoreAdminV1Progress
 googleDatastoreAdminV1Progress =
   GoogleDatastoreAdminV1Progress'
     {_gWorkCompleted = Nothing, _gWorkEstimated = Nothing}
+
 
 -- | The amount of work that has been completed. Note that this may be
 -- greater than work_estimated.
@@ -3602,6 +3722,7 @@ data PathElement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PathElement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3615,6 +3736,7 @@ pathElement
     :: PathElement
 pathElement =
   PathElement' {_peKind = Nothing, _peName = Nothing, _peId = Nothing}
+
 
 -- | The kind of the entity. A kind matching regex \`__.*__\` is
 -- reserved\/read-only. A kind must not contain more than 1500 bytes when
@@ -3661,6 +3783,7 @@ data Entity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Entity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3671,6 +3794,7 @@ data Entity =
 entity
     :: Entity
 entity = Entity' {_eKey = Nothing, _eProperties = Nothing}
+
 
 -- | The entity\'s key. An entity must have a key, unless otherwise
 -- documented (for example, an entity in \`Value.entity_value\` may have no
@@ -3718,6 +3842,7 @@ data GoogleDatastoreAdminV1beta1EntityFilter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1EntityFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3730,6 +3855,7 @@ googleDatastoreAdminV1beta1EntityFilter
 googleDatastoreAdminV1beta1EntityFilter =
   GoogleDatastoreAdminV1beta1EntityFilter'
     {_gNamespaceIds = Nothing, _gKinds = Nothing}
+
 
 -- | An empty list represents all namespaces. This is the preferred usage for
 -- projects that don\'t use namespaces. An empty string element represents
@@ -3776,11 +3902,13 @@ data ReadOnly =
   ReadOnly'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReadOnly' with the minimum fields required to make a request.
 --
 readOnly
     :: ReadOnly
 readOnly = ReadOnly'
+
 
 instance FromJSON ReadOnly where
         parseJSON
@@ -3799,6 +3927,7 @@ data GoogleDatastoreAdminV1IndexedProperty =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1IndexedProperty' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3811,6 +3940,7 @@ googleDatastoreAdminV1IndexedProperty
 googleDatastoreAdminV1IndexedProperty =
   GoogleDatastoreAdminV1IndexedProperty'
     {_gdavipDirection = Nothing, _gdavipName = Nothing}
+
 
 -- | The indexed property\'s direction. Must not be DIRECTION_UNSPECIFIED.
 -- Required.
@@ -3852,6 +3982,7 @@ data LookupResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LookupResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3866,6 +3997,7 @@ lookupResponse
 lookupResponse =
   LookupResponse'
     {_lrDeferred = Nothing, _lrFound = Nothing, _lrMissing = Nothing}
+
 
 -- | A list of keys that were not looked up due to resource constraints. The
 -- order of results in this field is undefined and has no relation to the
@@ -3924,6 +4056,7 @@ data GoogleLongrunningOperation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleLongrunningOperation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3947,6 +4080,7 @@ googleLongrunningOperation =
     , _gloName = Nothing
     , _gloMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -4014,6 +4148,7 @@ data PropertyOrder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PropertyOrder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4024,6 +4159,7 @@ data PropertyOrder =
 propertyOrder
     :: PropertyOrder
 propertyOrder = PropertyOrder' {_poProperty = Nothing, _poDirection = Nothing}
+
 
 -- | The property to order by.
 poProperty :: Lens' PropertyOrder (Maybe PropertyReference)
@@ -4062,6 +4198,7 @@ data GoogleDatastoreAdminV1beta1ExportEntitiesMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDatastoreAdminV1beta1ExportEntitiesMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4085,6 +4222,7 @@ googleDatastoreAdminV1beta1ExportEntitiesMetadata =
     , _gooEntityFilter = Nothing
     , _gooCommon = Nothing
     }
+
 
 -- | An estimate of the number of bytes processed.
 gooProgressBytes :: Lens' GoogleDatastoreAdminV1beta1ExportEntitiesMetadata (Maybe GoogleDatastoreAdminV1beta1Progress)
@@ -4156,6 +4294,7 @@ data GqlQueryParameter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GqlQueryParameter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4167,6 +4306,7 @@ gqlQueryParameter
     :: GqlQueryParameter
 gqlQueryParameter =
   GqlQueryParameter' {_gqpCursor = Nothing, _gqpValue = Nothing}
+
 
 -- | A query cursor. Query cursors are returned in query result batches.
 gqpCursor :: Lens' GqlQueryParameter (Maybe ByteString)

@@ -57,6 +57,7 @@ newtype ContactsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ contactsGet
     :: Text -- ^ 'cgId'
     -> ContactsGet
 contactsGet pCgId_ = ContactsGet' {_cgId = pCgId_}
+
 
 -- | The ID of the contact.
 cgId :: Lens' ContactsGet Text

@@ -68,6 +68,7 @@ data SSLCertificatesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLCertificatesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ sslCertificatesInsert pSciProject_ pSciPayload_ =
     , _sciProject = pSciProject_
     , _sciPayload = pSciPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

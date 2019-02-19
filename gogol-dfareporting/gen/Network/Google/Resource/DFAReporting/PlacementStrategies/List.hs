@@ -83,6 +83,7 @@ data PlacementStrategiesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacementStrategiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ placementStrategiesList pPslProFileId_ =
     , _pslSortField = PSLSFID
     , _pslMaxResults = 1000
     }
+
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"placementstrategy*2015\" will return objects with names

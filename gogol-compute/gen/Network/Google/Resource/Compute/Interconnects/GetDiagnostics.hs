@@ -64,6 +64,7 @@ data InterconnectsGetDiagnostics =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InterconnectsGetDiagnostics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ interconnectsGetDiagnostics
 interconnectsGetDiagnostics pIgdsProject_ pIgdsInterconnect_ =
   InterconnectsGetDiagnostics'
     {_igdsProject = pIgdsProject_, _igdsInterconnect = pIgdsInterconnect_}
+
 
 -- | Project ID for this request.
 igdsProject :: Lens' InterconnectsGetDiagnostics Text

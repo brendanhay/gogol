@@ -60,6 +60,7 @@ data PretargetingConfigDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PretargetingConfigDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ pretargetingConfigDelete pPcdAccountId_ pPcdConfigId_ =
     { _pcdAccountId = _Coerce # pPcdAccountId_
     , _pcdConfigId = _Coerce # pPcdConfigId_
     }
+
 
 -- | The account id to delete the pretargeting config for.
 pcdAccountId :: Lens' PretargetingConfigDelete Int64

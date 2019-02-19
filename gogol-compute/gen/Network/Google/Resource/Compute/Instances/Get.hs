@@ -67,6 +67,7 @@ data InstancesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ instancesGet
 instancesGet pIgProject_ pIgZone_ pIgInstance_ =
   InstancesGet'
     {_igProject = pIgProject_, _igZone = pIgZone_, _igInstance = pIgInstance_}
+
 
 -- | Project ID for this request.
 igProject :: Lens' InstancesGet Text

@@ -70,6 +70,7 @@ data ProjectsLocationsEnvironmentsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsEnvironmentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsLocationsEnvironmentsGet pPlegName_ =
     , _plegName = pPlegName_
     , _plegCallback = Nothing
     }
+
 
 -- | V1 error format.
 plegXgafv :: Lens' ProjectsLocationsEnvironmentsGet (Maybe Xgafv)

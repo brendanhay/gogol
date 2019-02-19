@@ -31,6 +31,7 @@ data Installation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Installation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -41,6 +42,7 @@ data Installation =
 installation
     :: Installation
 installation = Installation' {_iLocation = Nothing, _iName = Nothing}
+
 
 -- | Required. All of the places within the filesystem versions of this
 -- package have been found.
@@ -81,6 +83,7 @@ data Vulnerability =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Vulnerability' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -101,6 +104,7 @@ vulnerability =
     , _vDetails = Nothing
     , _vWindowsDetails = Nothing
     }
+
 
 -- | The CVSS score for this vulnerability.
 vCvssScore :: Lens' Vulnerability (Maybe Double)
@@ -196,6 +200,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -208,6 +213,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -255,6 +261,7 @@ newtype VulnerabilityOccurrencesSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VulnerabilityOccurrencesSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -264,6 +271,7 @@ vulnerabilityOccurrencesSummary
     :: VulnerabilityOccurrencesSummary
 vulnerabilityOccurrencesSummary =
   VulnerabilityOccurrencesSummary' {_vosCounts = Nothing}
+
 
 -- | A listing by resource of the number of fixable and total
 -- vulnerabilities.
@@ -306,6 +314,7 @@ data BuildProvenance =
     , _bpLogsURI          :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildProvenance' with the minimum fields required to make a request.
 --
@@ -354,6 +363,7 @@ buildProvenance =
     , _bpCreateTime = Nothing
     , _bpLogsURI = Nothing
     }
+
 
 -- | E-mail address of the user who initiated this build. Note that this was
 -- the user\'s e-mail address at the time the build was initiated; this
@@ -495,6 +505,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -505,6 +516,7 @@ data AuditConfig =
 auditConfig
     :: AuditConfig
 auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -558,6 +570,7 @@ data Occurrence =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Occurrence' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -608,6 +621,7 @@ occurrence =
     , _oCreateTime = Nothing
     , _oDeployment = Nothing
     }
+
 
 -- | Describes the installation of a package on the linked resource.
 oInstallation :: Lens' Occurrence (Maybe GrafeasV1beta1PackageDetails)
@@ -738,6 +752,7 @@ data GrafeasV1beta1VulnerabilityDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GrafeasV1beta1VulnerabilityDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -767,6 +782,7 @@ grafeasV1beta1VulnerabilityDetails =
     , _gvvdShortDescription = Nothing
     , _gvvdType = Nothing
     }
+
 
 -- | Output only. A detailed description of this vulnerability.
 gvvdLongDescription :: Lens' GrafeasV1beta1VulnerabilityDetails (Maybe Text)
@@ -857,6 +873,7 @@ newtype SourceFileHashes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceFileHashes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -867,6 +884,7 @@ sourceFileHashes
     -> SourceFileHashes
 sourceFileHashes pSfhAddtional_ =
   SourceFileHashes' {_sfhAddtional = _Coerce # pSfhAddtional_}
+
 
 sfhAddtional :: Lens' SourceFileHashes (HashMap Text FileHashes)
 sfhAddtional
@@ -895,6 +913,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -915,6 +934,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -973,6 +993,7 @@ data Command =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Command' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -999,6 +1020,7 @@ command =
     , _cName = Nothing
     , _cId = Nothing
     }
+
 
 -- | Working directory (relative to project source root) used when running
 -- this command.
@@ -1063,6 +1085,7 @@ data KnowledgeBase =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'KnowledgeBase' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1073,6 +1096,7 @@ data KnowledgeBase =
 knowledgeBase
     :: KnowledgeBase
 knowledgeBase = KnowledgeBase' {_kbURL = Nothing, _kbName = Nothing}
+
 
 -- | A link to the KB in the Windows update catalog -
 -- https:\/\/www.catalog.update.microsoft.com\/
@@ -1102,11 +1126,13 @@ data GetIAMPolicyRequest =
   GetIAMPolicyRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -1127,6 +1153,7 @@ newtype Discovery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Discovery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1135,6 +1162,7 @@ newtype Discovery =
 discovery
     :: Discovery
 discovery = Discovery' {_dAnalysisKind = Nothing}
+
 
 -- | Required. Immutable. The kind of analysis that is handled by this
 -- discovery.
@@ -1163,6 +1191,7 @@ data Hash =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Hash' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1173,6 +1202,7 @@ data Hash =
 hash
     :: Hash
 hash = Hash' {_hValue = Nothing, _hType = Nothing}
+
 
 -- | Required. The hash value.
 hValue :: Lens' Hash (Maybe ByteString)
@@ -1208,6 +1238,7 @@ data Basis =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Basis' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1218,6 +1249,7 @@ data Basis =
 basis
     :: Basis
 basis = Basis' {_bFingerprint = Nothing, _bResourceURL = Nothing}
+
 
 -- | Required. Immutable. The fingerprint of the base image.
 bFingerprint :: Lens' Basis (Maybe Fingerprint)
@@ -1253,6 +1285,7 @@ newtype BatchCreateNotesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchCreateNotesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1261,6 +1294,7 @@ newtype BatchCreateNotesRequest =
 batchCreateNotesRequest
     :: BatchCreateNotesRequest
 batchCreateNotesRequest = BatchCreateNotesRequest' {_bcnrNotes = Nothing}
+
 
 -- | The notes to create. Max allowed length is 1000.
 bcnrNotes :: Lens' BatchCreateNotesRequest (Maybe BatchCreateNotesRequestNotes)
@@ -1290,6 +1324,7 @@ data SourceContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1310,6 +1345,7 @@ sourceContext =
     , _scGit = Nothing
     , _scLabels = Nothing
     }
+
 
 -- | A SourceContext referring to a revision in a Google Cloud Source Repo.
 scCloudRepo :: Lens' SourceContext (Maybe CloudRepoSourceContext)
@@ -1360,6 +1396,7 @@ data Distribution =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Distribution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1386,6 +1423,7 @@ distribution =
     , _dDescription = Nothing
     , _dLatestVersion = Nothing
     }
+
 
 -- | The distribution channel-specific homepage for this package.
 dURL :: Lens' Distribution (Maybe Text)
@@ -1452,6 +1490,7 @@ newtype BatchCreateOccurrencesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchCreateOccurrencesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1461,6 +1500,7 @@ batchCreateOccurrencesRequest
     :: BatchCreateOccurrencesRequest
 batchCreateOccurrencesRequest =
   BatchCreateOccurrencesRequest' {_bcorOccurrences = Nothing}
+
 
 -- | The occurrences to create. Max allowed length is 1000.
 bcorOccurrences :: Lens' BatchCreateOccurrencesRequest [Occurrence]
@@ -1492,6 +1532,7 @@ data ListOccurrencesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOccurrencesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1504,6 +1545,7 @@ listOccurrencesResponse
 listOccurrencesResponse =
   ListOccurrencesResponse'
     {_lorOccurrences = Nothing, _lorNextPageToken = Nothing}
+
 
 -- | The occurrences requested.
 lorOccurrences :: Lens' ListOccurrencesResponse [Occurrence]
@@ -1549,6 +1591,7 @@ data Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1561,6 +1604,7 @@ data Location =
 location
     :: Location
 location = Location' {_lPath = Nothing, _lVersion = Nothing, _lCpeURI = Nothing}
+
 
 -- | The path from which we gathered that this package\/version is installed.
 lPath :: Lens' Location (Maybe Text)
@@ -1603,11 +1647,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1626,6 +1672,7 @@ data GerritSourceContext =
     , _gscAliasContext  :: !(Maybe AliasContext)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GerritSourceContext' with the minimum fields required to make a request.
 --
@@ -1647,6 +1694,7 @@ gerritSourceContext =
     , _gscHostURI = Nothing
     , _gscAliasContext = Nothing
     }
+
 
 -- | The full project name within the host. Projects may be nested, so
 -- \"project\/subproject\" is a valid project name. The \"repo name\" is
@@ -1701,6 +1749,7 @@ data RepoId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RepoId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1711,6 +1760,7 @@ data RepoId =
 repoId
     :: RepoId
 repoId = RepoId' {_riUid = Nothing, _riProjectRepoId = Nothing}
+
 
 -- | A server-assigned, globally unique identifier.
 riUid :: Lens' RepoId (Maybe Text)
@@ -1746,6 +1796,7 @@ data ListNoteOccurrencesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListNoteOccurrencesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1758,6 +1809,7 @@ listNoteOccurrencesResponse
 listNoteOccurrencesResponse =
   ListNoteOccurrencesResponse'
     {_lnorOccurrences = Nothing, _lnorNextPageToken = Nothing}
+
 
 -- | The occurrences attached to the specified note.
 lnorOccurrences :: Lens' ListNoteOccurrencesResponse [Occurrence]
@@ -1811,6 +1863,7 @@ data Note =
     , _nCreateTime           :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Note' with the minimum fields required to make a request.
 --
@@ -1868,6 +1921,7 @@ note =
     , _nExpirationTime = Nothing
     , _nCreateTime = Nothing
     }
+
 
 -- | A note describing a package vulnerability.
 nVulnerability :: Lens' Note (Maybe Vulnerability)
@@ -2014,6 +2068,7 @@ newtype BatchCreateNotesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchCreateNotesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2022,6 +2077,7 @@ newtype BatchCreateNotesResponse =
 batchCreateNotesResponse
     :: BatchCreateNotesResponse
 batchCreateNotesResponse = BatchCreateNotesResponse' {_bNotes = Nothing}
+
 
 -- | The notes that were created.
 bNotes :: Lens' BatchCreateNotesResponse [Note]
@@ -2051,6 +2107,7 @@ data ProjectRepoId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectRepoId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2061,6 +2118,7 @@ data ProjectRepoId =
 projectRepoId
     :: ProjectRepoId
 projectRepoId = ProjectRepoId' {_priRepoName = Nothing, _priProjectId = Nothing}
+
 
 -- | The name of the repo. Leave empty for the default repo.
 priRepoName :: Lens' ProjectRepoId (Maybe Text)
@@ -2097,6 +2155,7 @@ data Fingerprint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Fingerprint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2110,6 +2169,7 @@ fingerprint
     :: Fingerprint
 fingerprint =
   Fingerprint' {_fV2Name = Nothing, _fV2Blob = Nothing, _fV1Name = Nothing}
+
 
 -- | Output only. The name of the image\'s v2 blobs computed via: [bottom] :=
 -- v2_blobbottom := sha256(v2_blob[N] + \" \" + v2_name[N+1]) Only the name
@@ -2159,6 +2219,7 @@ newtype Hint =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Hint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2167,6 +2228,7 @@ newtype Hint =
 hint
     :: Hint
 hint = Hint' {_hHumanReadableName = Nothing}
+
 
 -- | Required. The human readable name of this attestation authority, for
 -- example \"qa\".
@@ -2198,6 +2260,7 @@ data PackageIssue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PackageIssue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2215,6 +2278,7 @@ packageIssue =
     , _piFixedLocation = Nothing
     , _piSeverityName = Nothing
     }
+
 
 -- | Required. The location of the vulnerability.
 piAffectedLocation :: Lens' PackageIssue (Maybe VulnerabilityLocation)
@@ -2259,6 +2323,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2269,6 +2334,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2295,6 +2361,7 @@ data Build =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Build' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2305,6 +2372,7 @@ data Build =
 build
     :: Build
 build = Build' {_bSignature = Nothing, _bBuilderVersion = Nothing}
+
 
 -- | Signature of the build in occurrences pointing to this build note
 -- containing build details.
@@ -2348,6 +2416,7 @@ newtype Attestation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Attestation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2356,6 +2425,7 @@ newtype Attestation =
 attestation
     :: Attestation
 attestation = Attestation' {_aPgpSignedAttestation = Nothing}
+
 
 -- | A PGP signed attestation.
 aPgpSignedAttestation :: Lens' Attestation (Maybe PgpSignedAttestation)
@@ -2387,6 +2457,7 @@ data Artifact =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Artifact' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2399,6 +2470,7 @@ data Artifact =
 artifact
     :: Artifact
 artifact = Artifact' {_aChecksum = Nothing, _aNames = Nothing, _aId = Nothing}
+
 
 -- | Hash or checksum value of a binary, or Docker Registry 2.0 digest of a
 -- container.
@@ -2446,6 +2518,7 @@ data SetIAMPolicyRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2457,6 +2530,7 @@ setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
   SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -2499,6 +2573,7 @@ newtype BuildProvenanceBuildOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildProvenanceBuildOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2509,6 +2584,7 @@ buildProvenanceBuildOptions
     -> BuildProvenanceBuildOptions
 buildProvenanceBuildOptions pBpboAddtional_ =
   BuildProvenanceBuildOptions' {_bpboAddtional = _Coerce # pBpboAddtional_}
+
 
 bpboAddtional :: Lens' BuildProvenanceBuildOptions (HashMap Text Text)
 bpboAddtional
@@ -2534,6 +2610,7 @@ newtype Deployable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Deployable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2542,6 +2619,7 @@ newtype Deployable =
 deployable
     :: Deployable
 deployable = Deployable' {_dResourceURI = Nothing}
+
 
 -- | Required. Resource URI for the artifact being deployed.
 dResourceURI :: Lens' Deployable [Text]
@@ -2570,6 +2648,7 @@ newtype GrafeasV1beta1DiscoveryDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GrafeasV1beta1DiscoveryDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2579,6 +2658,7 @@ grafeasV1beta1DiscoveryDetails
     :: GrafeasV1beta1DiscoveryDetails
 grafeasV1beta1DiscoveryDetails =
   GrafeasV1beta1DiscoveryDetails' {_gvddDiscovered = Nothing}
+
 
 -- | Required. Analysis status for the discovered resource.
 gvddDiscovered :: Lens' GrafeasV1beta1DiscoveryDetails (Maybe Discovered)
@@ -2610,6 +2690,7 @@ data VulnerabilityLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VulnerabilityLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2624,6 +2705,7 @@ vulnerabilityLocation
 vulnerabilityLocation =
   VulnerabilityLocation'
     {_vlVersion = Nothing, _vlPackage = Nothing, _vlCpeURI = Nothing}
+
 
 -- | Required. The version of the package being described.
 vlVersion :: Lens' VulnerabilityLocation (Maybe Version)
@@ -2669,6 +2751,7 @@ data FixableTotalByDigest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FixableTotalByDigest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2689,6 +2772,7 @@ fixableTotalByDigest =
     , _ftbdResource = Nothing
     , _ftbdTotalCount = Nothing
     }
+
 
 -- | The severity for this count. SEVERITY_UNSPECIFIED indicates total across
 -- all severities.
@@ -2743,6 +2827,7 @@ data RelatedURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelatedURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2753,6 +2838,7 @@ data RelatedURL =
 relatedURL
     :: RelatedURL
 relatedURL = RelatedURL' {_ruURL = Nothing, _ruLabel = Nothing}
+
 
 -- | Specific URL associated with the resource.
 ruURL :: Lens' RelatedURL (Maybe Text)
@@ -2783,6 +2869,7 @@ newtype GrafeasV1beta1ImageDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GrafeasV1beta1ImageDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2792,6 +2879,7 @@ grafeasV1beta1ImageDetails
     :: GrafeasV1beta1ImageDetails
 grafeasV1beta1ImageDetails =
   GrafeasV1beta1ImageDetails' {_gvidDerivedImage = Nothing}
+
 
 -- | Required. Immutable. The child image derived from the base image.
 gvidDerivedImage :: Lens' GrafeasV1beta1ImageDetails (Maybe Derived)
@@ -2821,6 +2909,7 @@ newtype BatchCreateOccurrencesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchCreateOccurrencesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2830,6 +2919,7 @@ batchCreateOccurrencesResponse
     :: BatchCreateOccurrencesResponse
 batchCreateOccurrencesResponse =
   BatchCreateOccurrencesResponse' {_bOccurrences = Nothing}
+
 
 -- | The occurrences that were created.
 bOccurrences :: Lens' BatchCreateOccurrencesResponse [Occurrence]
@@ -2860,6 +2950,7 @@ newtype SourceContextLabels =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourceContextLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2870,6 +2961,7 @@ sourceContextLabels
     -> SourceContextLabels
 sourceContextLabels pSclAddtional_ =
   SourceContextLabels' {_sclAddtional = _Coerce # pSclAddtional_}
+
 
 sclAddtional :: Lens' SourceContextLabels (HashMap Text Text)
 sclAddtional
@@ -2894,6 +2986,7 @@ data ListScanConfigsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListScanConfigsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2906,6 +2999,7 @@ listScanConfigsResponse
 listScanConfigsResponse =
   ListScanConfigsResponse'
     {_lscrNextPageToken = Nothing, _lscrScanConfigs = Nothing}
+
 
 -- | The next pagination token in the list response. It should be used as
 -- \`page_token\` for the following request. An empty value means no more
@@ -2950,6 +3044,7 @@ data Version =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Version' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2970,6 +3065,7 @@ version =
     , _vRevision = Nothing
     , _vEpoch = Nothing
     }
+
 
 -- | Required. Distinguishes between sentinel MIN\/MAX versions and normal
 -- versions.
@@ -3019,6 +3115,7 @@ newtype FileHashes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FileHashes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3027,6 +3124,7 @@ newtype FileHashes =
 fileHashes
     :: FileHashes
 fileHashes = FileHashes' {_fhFileHash = Nothing}
+
 
 -- | Required. Collection of file hashes.
 fhFileHash :: Lens' FileHashes [Hash]
@@ -3057,6 +3155,7 @@ data Resource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Resource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3070,6 +3169,7 @@ resource
     :: Resource
 resource =
   Resource' {_rContentHash = Nothing, _rURI = Nothing, _rName = Nothing}
+
 
 -- | The hash of the resource content. For example, the Docker digest.
 rContentHash :: Lens' Resource (Maybe Hash)
@@ -3110,6 +3210,7 @@ newtype GrafeasV1beta1DeploymentDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GrafeasV1beta1DeploymentDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3119,6 +3220,7 @@ grafeasV1beta1DeploymentDetails
     :: GrafeasV1beta1DeploymentDetails
 grafeasV1beta1DeploymentDetails =
   GrafeasV1beta1DeploymentDetails' {_gvddDeployment = Nothing}
+
 
 -- | Required. Deployment history for the resource.
 gvddDeployment :: Lens' GrafeasV1beta1DeploymentDetails (Maybe Deployment)
@@ -3150,6 +3252,7 @@ data GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3162,6 +3265,7 @@ googleDevtoolsContaineranalysisV1alpha1OperationMetadata
 googleDevtoolsContaineranalysisV1alpha1OperationMetadata =
   GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata'
     {_gdcvomEndTime = Nothing, _gdcvomCreateTime = Nothing}
+
 
 -- | Output only. The time that this operation was marked completed or
 -- failed.
@@ -3207,6 +3311,7 @@ newtype Details =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Details' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3215,6 +3320,7 @@ newtype Details =
 details
     :: Details
 details = Details' {_dAttestation = Nothing}
+
 
 -- | Required. Attestation for the resource.
 dAttestation :: Lens' Details (Maybe Attestation)
@@ -3243,6 +3349,7 @@ data Package =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Package' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3253,6 +3360,7 @@ data Package =
 package
     :: Package
 package = Package' {_pDistribution = Nothing, _pName = Nothing}
+
 
 -- | The various channels by which a package is distributed.
 pDistribution :: Lens' Package [Distribution]
@@ -3290,6 +3398,7 @@ data ListNotesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListNotesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3301,6 +3410,7 @@ listNotesResponse
     :: ListNotesResponse
 listNotesResponse =
   ListNotesResponse' {_lnrNextPageToken = Nothing, _lnrNotes = Nothing}
+
 
 -- | The next pagination token in the list response. It should be used as
 -- \`page_token\` for the following request. An empty value means no more
@@ -3344,6 +3454,7 @@ data BuildSignature =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BuildSignature' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3364,6 +3475,7 @@ buildSignature =
     , _bsKeyId = Nothing
     , _bsPublicKey = Nothing
     }
+
 
 -- | Required. Signature of the related \`BuildProvenance\`. In JSON, this is
 -- base-64 encoded.
@@ -3427,6 +3539,7 @@ newtype TestIAMPermissionsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3436,6 +3549,7 @@ testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
   TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -3472,6 +3586,7 @@ data Discovered =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Discovered' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3492,6 +3607,7 @@ discovered =
     , _dAnalysisStatus = Nothing
     , _dContinuousAnalysis = Nothing
     }
+
 
 -- | The last time continuous analysis was done for this resource.
 -- Deprecated, do not use.
@@ -3554,6 +3670,7 @@ data Derived =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Derived' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3574,6 +3691,7 @@ derived =
     , _dDistance = Nothing
     , _dLayerInfo = Nothing
     }
+
 
 -- | Output only. This contains the base image URL for the derived image
 -- occurrence.
@@ -3631,6 +3749,7 @@ data GrafeasV1beta1BuildDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GrafeasV1beta1BuildDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3643,6 +3762,7 @@ grafeasV1beta1BuildDetails
 grafeasV1beta1BuildDetails =
   GrafeasV1beta1BuildDetails'
     {_gvbdProvenanceBytes = Nothing, _gvbdProvenance = Nothing}
+
 
 -- | Serialized JSON representation of the provenance, used in generating the
 -- build signature in the corresponding build note. After verifying the
@@ -3690,6 +3810,7 @@ data Source =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3710,6 +3831,7 @@ source =
     , _sArtifactStorageSourceURI = Nothing
     , _sFileHashes = Nothing
     }
+
 
 -- | If provided, the source code used for the build came from this location.
 sContext :: Lens' Source (Maybe SourceContext)
@@ -3779,6 +3901,7 @@ data ScanConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ScanConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3802,6 +3925,7 @@ scanConfig =
     , _scDescription = Nothing
     , _scCreateTime = Nothing
     }
+
 
 -- | Whether the scan is enabled.
 scEnabled :: Lens' ScanConfig (Maybe Bool)
@@ -3863,6 +3987,7 @@ data GitSourceContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GitSourceContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3873,6 +3998,7 @@ data GitSourceContext =
 gitSourceContext
     :: GitSourceContext
 gitSourceContext = GitSourceContext' {_gURL = Nothing, _gRevisionId = Nothing}
+
 
 -- | Git repository URL.
 gURL :: Lens' GitSourceContext (Maybe Text)
@@ -3906,6 +4032,7 @@ newtype TestIAMPermissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3915,6 +4042,7 @@ testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
   TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -3966,6 +4094,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3986,6 +4115,7 @@ policy =
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -4050,6 +4180,7 @@ data Layer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Layer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4060,6 +4191,7 @@ data Layer =
 layer
     :: Layer
 layer = Layer' {_lDirective = Nothing, _lArguments = Nothing}
+
 
 -- | Required. The recovered Dockerfile directive used to construct this
 -- layer.
@@ -4098,6 +4230,7 @@ data CloudRepoSourceContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudRepoSourceContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4115,6 +4248,7 @@ cloudRepoSourceContext =
     , _crscRevisionId = Nothing
     , _crscAliasContext = Nothing
     }
+
 
 -- | The ID of the repo.
 crscRepoId :: Lens' CloudRepoSourceContext (Maybe RepoId)
@@ -4163,6 +4297,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4174,6 +4309,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -4217,6 +4353,7 @@ data PgpSignedAttestation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PgpSignedAttestation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4231,6 +4368,7 @@ pgpSignedAttestation
 pgpSignedAttestation =
   PgpSignedAttestation'
     {_psaSignature = Nothing, _psaPgpKeyId = Nothing, _psaContentType = Nothing}
+
 
 -- | Required. The raw content of the signature, as output by GNU Privacy
 -- Guard (GPG) or equivalent. Since this message only supports attached
@@ -4298,6 +4436,7 @@ data WindowsDetail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WindowsDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4318,6 +4457,7 @@ windowsDetail =
     , _wdCpeURI = Nothing
     , _wdDescription = Nothing
     }
+
 
 -- | Required. The name of the vulnerability.
 wdName :: Lens' WindowsDetail (Maybe Text)
@@ -4373,6 +4513,7 @@ newtype BatchCreateNotesRequestNotes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchCreateNotesRequestNotes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4383,6 +4524,7 @@ batchCreateNotesRequestNotes
     -> BatchCreateNotesRequestNotes
 batchCreateNotesRequestNotes pBcnrnAddtional_ =
   BatchCreateNotesRequestNotes' {_bcnrnAddtional = _Coerce # pBcnrnAddtional_}
+
 
 bcnrnAddtional :: Lens' BatchCreateNotesRequestNotes (HashMap Text Note)
 bcnrnAddtional
@@ -4410,6 +4552,7 @@ data AliasContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AliasContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4420,6 +4563,7 @@ data AliasContext =
 aliasContext
     :: AliasContext
 aliasContext = AliasContext' {_acKind = Nothing, _acName = Nothing}
+
 
 -- | The alias kind.
 acKind :: Lens' AliasContext (Maybe AliasContextKind)
@@ -4452,6 +4596,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4465,6 +4610,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -4534,6 +4680,7 @@ data Detail =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Detail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4569,6 +4716,7 @@ detail =
     , _detCpeURI = Nothing
     , _detDescription = Nothing
     }
+
 
 -- | The min version of the package in which the vulnerability exists.
 detMinAffectedVersion :: Lens' Detail (Maybe Version)
@@ -4674,6 +4822,7 @@ newtype Authority =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Authority' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4682,6 +4831,7 @@ newtype Authority =
 authority
     :: Authority
 authority = Authority' {_aHint = Nothing}
+
 
 -- | Hint hints at the purpose of the attestation authority.
 aHint :: Lens' Authority (Maybe Hint)
@@ -4705,6 +4855,7 @@ newtype GrafeasV1beta1PackageDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GrafeasV1beta1PackageDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4714,6 +4865,7 @@ grafeasV1beta1PackageDetails
     :: GrafeasV1beta1PackageDetails
 grafeasV1beta1PackageDetails =
   GrafeasV1beta1PackageDetails' {_gvpdInstallation = Nothing}
+
 
 -- | Required. Where the package was installed.
 gvpdInstallation :: Lens' GrafeasV1beta1PackageDetails (Maybe Installation)
@@ -4749,6 +4901,7 @@ data Deployment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4778,6 +4931,7 @@ deployment =
     , _depAddress = Nothing
     , _depUserEmail = Nothing
     }
+
 
 -- | Output only. Resource URI for the artifact being deployed taken from the
 -- deployable field with the same name.

@@ -69,6 +69,7 @@ data LicensesSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LicensesSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ licensesSetIAMPolicy pLsipProject_ pLsipPayload_ pLsipResource_ =
     , _lsipPayload = pLsipPayload_
     , _lsipResource = pLsipResource_
     }
+
 
 -- | Project ID for this request.
 lsipProject :: Lens' LicensesSetIAMPolicy Text

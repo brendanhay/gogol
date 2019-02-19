@@ -79,6 +79,7 @@ data MyLibraryReadingPositionsSetPosition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MyLibraryReadingPositionsSetPosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ myLibraryReadingPositionsSetPosition pMlrpspVolumeId_ pMlrpspTimestamp_ pMlrpspP
     , _mlrpspTimestamp = pMlrpspTimestamp_
     , _mlrpspPosition = pMlrpspPosition_
     }
+
 
 -- | Random persistent device cookie optional on set position.
 mlrpspDeviceCookie :: Lens' MyLibraryReadingPositionsSetPosition (Maybe Text)

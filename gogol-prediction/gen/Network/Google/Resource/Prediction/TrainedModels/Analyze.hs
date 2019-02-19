@@ -62,6 +62,7 @@ data TrainedModelsAnalyze =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TrainedModelsAnalyze' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ trainedModelsAnalyze
     -> TrainedModelsAnalyze
 trainedModelsAnalyze pTmaProject_ pTmaId_ =
   TrainedModelsAnalyze' {_tmaProject = pTmaProject_, _tmaId = pTmaId_}
+
 
 -- | The project associated with the model.
 tmaProject :: Lens' TrainedModelsAnalyze Text

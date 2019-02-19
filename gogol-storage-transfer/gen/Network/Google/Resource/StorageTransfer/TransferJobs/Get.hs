@@ -73,6 +73,7 @@ data TransferJobsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TransferJobsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ transferJobsGet pTjgJobName_ =
     , _tjgProjectId = Nothing
     , _tjgCallback = Nothing
     }
+
 
 -- | V1 error format.
 tjgXgafv :: Lens' TransferJobsGet (Maybe Xgafv)

@@ -77,6 +77,7 @@ data ProjectsInstancesDatabasesSessionsBeginTransaction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsBeginTransaction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ projectsInstancesDatabasesSessionsBeginTransaction pPidsbtPayload_ pPidsbtSessio
     , _pidsbtSession = pPidsbtSession_
     , _pidsbtCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidsbtXgafv :: Lens' ProjectsInstancesDatabasesSessionsBeginTransaction (Maybe Xgafv)

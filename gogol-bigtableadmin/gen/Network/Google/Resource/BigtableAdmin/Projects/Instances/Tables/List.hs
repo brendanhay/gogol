@@ -81,6 +81,7 @@ data ProjectsInstancesTablesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesTablesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsInstancesTablesList pPitlParent_ =
     , _pitlPageSize = Nothing
     , _pitlCallback = Nothing
     }
+
 
 -- | The unique name of the instance for which tables should be listed.
 -- Values are of the form \`projects\/\/instances\/\`.

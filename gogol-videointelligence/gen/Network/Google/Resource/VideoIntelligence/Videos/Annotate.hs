@@ -79,6 +79,7 @@ data VideosAnnotate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VideosAnnotate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ videosAnnotate pVaPayload_ =
     , _vaPayload = pVaPayload_
     , _vaCallback = Nothing
     }
+
 
 -- | V1 error format.
 vaXgafv :: Lens' VideosAnnotate (Maybe Xgafv)

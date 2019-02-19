@@ -70,6 +70,7 @@ data CustomerUsageReportsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomerUsageReportsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ customerUsageReportsGet pCurgDate_ =
     , _curgParameters = Nothing
     , _curgPageToken = Nothing
     }
+
 
 -- | Represents the customer for which the data is to be fetched.
 curgCustomerId :: Lens' CustomerUsageReportsGet (Maybe Text)

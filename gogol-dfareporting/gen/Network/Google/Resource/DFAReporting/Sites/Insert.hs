@@ -61,6 +61,7 @@ data SitesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ sitesInsert
     -> SitesInsert
 sitesInsert pSProFileId_ pSPayload_ =
   SitesInsert' {_sProFileId = _Coerce # pSProFileId_, _sPayload = pSPayload_}
+
 
 -- | User profile ID associated with this request.
 sProFileId :: Lens' SitesInsert Int64

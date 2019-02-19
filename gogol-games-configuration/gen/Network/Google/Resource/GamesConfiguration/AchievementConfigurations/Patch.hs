@@ -63,6 +63,7 @@ data AchievementConfigurationsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementConfigurationsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ achievementConfigurationsPatch
 achievementConfigurationsPatch pAcpAchievementId_ pAcpPayload_ =
   AchievementConfigurationsPatch'
     {_acpAchievementId = pAcpAchievementId_, _acpPayload = pAcpPayload_}
+
 
 -- | The ID of the achievement used by this method.
 acpAchievementId :: Lens' AchievementConfigurationsPatch Text

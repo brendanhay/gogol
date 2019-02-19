@@ -75,6 +75,7 @@ data ShelvesBooksReturn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShelvesBooksReturn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ shelvesBooksReturn pSbrName_ =
     , _sbrName = pSbrName_
     , _sbrCallback = Nothing
     }
+
 
 -- | V1 error format.
 sbrXgafv :: Lens' ShelvesBooksReturn (Maybe Xgafv)

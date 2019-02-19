@@ -75,6 +75,7 @@ data ProjectsStoredInfoTypesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsStoredInfoTypesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ projectsStoredInfoTypesDelete pPsitdName_ =
     , _psitdName = pPsitdName_
     , _psitdCallback = Nothing
     }
+
 
 -- | V1 error format.
 psitdXgafv :: Lens' ProjectsStoredInfoTypesDelete (Maybe Xgafv)

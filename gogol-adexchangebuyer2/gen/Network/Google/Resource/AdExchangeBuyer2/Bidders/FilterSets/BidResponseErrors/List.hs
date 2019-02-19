@@ -80,6 +80,7 @@ data BiddersFilterSetsBidResponseErrorsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BiddersFilterSetsBidResponseErrorsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ biddersFilterSetsBidResponseErrorsList pBfsbrelFilterSetName_ =
     , _bfsbrelPageSize = Nothing
     , _bfsbrelCallback = Nothing
     }
+
 
 -- | V1 error format.
 bfsbrelXgafv :: Lens' BiddersFilterSetsBidResponseErrorsList (Maybe Xgafv)

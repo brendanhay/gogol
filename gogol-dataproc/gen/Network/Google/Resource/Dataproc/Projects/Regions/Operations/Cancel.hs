@@ -86,6 +86,7 @@ data ProjectsRegionsOperationsCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRegionsOperationsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsRegionsOperationsCancel pProcName_ =
     , _procName = pProcName_
     , _procCallback = Nothing
     }
+
 
 -- | V1 error format.
 procXgafv :: Lens' ProjectsRegionsOperationsCancel (Maybe Xgafv)

@@ -110,6 +110,7 @@ data SitesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -167,6 +168,7 @@ sitesList pSitProFileId_ =
     , _sitAdWordsSite = Nothing
     , _sitMaxResults = 1000
     }
+
 
 -- | Select only sites that have not been mapped to a directory site.
 sitUnmAppedSite :: Lens' SitesList (Maybe Bool)

@@ -79,6 +79,7 @@ data InstancesStop =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesStop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ instancesStop pIsProject_ pIsZone_ pIsInstance_ =
     , _isZone = pIsZone_
     , _isInstance = pIsInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

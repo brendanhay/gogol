@@ -63,6 +63,7 @@ data MarketplaceprivateauctionUpdateproposal =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MarketplaceprivateauctionUpdateproposal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ marketplaceprivateauctionUpdateproposal
 marketplaceprivateauctionUpdateproposal pMuPrivateAuctionId_ pMuPayload_ =
   MarketplaceprivateauctionUpdateproposal'
     {_muPrivateAuctionId = pMuPrivateAuctionId_, _muPayload = pMuPayload_}
+
 
 -- | The private auction id to be updated.
 muPrivateAuctionId :: Lens' MarketplaceprivateauctionUpdateproposal Text

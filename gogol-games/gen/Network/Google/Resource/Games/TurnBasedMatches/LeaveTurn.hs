@@ -70,6 +70,7 @@ data TurnBasedMatchesLeaveTurn =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchesLeaveTurn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ turnBasedMatchesLeaveTurn pTbmltMatchId_ pTbmltMatchVersion_ =
     , _tbmltMatchId = pTbmltMatchId_
     , _tbmltMatchVersion = _Coerce # pTbmltMatchVersion_
     }
+
 
 -- | The preferred language to use for strings returned by this method.
 tbmltLanguage :: Lens' TurnBasedMatchesLeaveTurn (Maybe Text)

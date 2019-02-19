@@ -66,6 +66,7 @@ data RegionBackendServicesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionBackendServicesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ regionBackendServicesGet pRbsgProject_ pRbsgRegion_ pRbsgBackendService_ =
     , _rbsgRegion = pRbsgRegion_
     , _rbsgBackendService = pRbsgBackendService_
     }
+
 
 -- | Project ID for this request.
 rbsgProject :: Lens' RegionBackendServicesGet Text

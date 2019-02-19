@@ -65,6 +65,7 @@ data SchemasPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SchemasPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ schemasPatch pSpPayload_ pSpCustomerId_ pSpSchemaKey_ =
     , _spCustomerId = pSpCustomerId_
     , _spSchemaKey = pSpSchemaKey_
     }
+
 
 -- | Multipart request metadata.
 spPayload :: Lens' SchemasPatch Schema

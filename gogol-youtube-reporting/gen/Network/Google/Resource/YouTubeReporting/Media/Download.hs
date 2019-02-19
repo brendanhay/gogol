@@ -84,6 +84,7 @@ data MediaDownload' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MediaDownload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ mediaDownload pMdResourceName_ =
     , _mdUploadType = Nothing
     , _mdCallback = Nothing
     }
+
 
 -- | V1 error format.
 mdXgafv :: Lens' MediaDownload' (Maybe Xgafv)

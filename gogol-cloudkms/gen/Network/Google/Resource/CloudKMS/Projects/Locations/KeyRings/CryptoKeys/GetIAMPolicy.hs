@@ -73,6 +73,7 @@ data ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ projectsLocationsKeyRingsCryptoKeysGetIAMPolicy pPlkrckgipResource_ =
     , _plkrckgipResource = pPlkrckgipResource_
     , _plkrckgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrckgipXgafv :: Lens' ProjectsLocationsKeyRingsCryptoKeysGetIAMPolicy (Maybe Xgafv)

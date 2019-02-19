@@ -30,6 +30,7 @@ data GooglePrivacyDlpV2InfoTypeStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InfoTypeStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42,6 +43,7 @@ googlePrivacyDlpV2InfoTypeStats
 googlePrivacyDlpV2InfoTypeStats =
   GooglePrivacyDlpV2InfoTypeStats'
     {_gpdvitsCount = Nothing, _gpdvitsInfoType = Nothing}
+
 
 -- | Number of findings for this infoType.
 gpdvitsCount :: Lens' GooglePrivacyDlpV2InfoTypeStats (Maybe Int64)
@@ -80,11 +82,13 @@ data GooglePrivacyDlpV2RedactConfig =
   GooglePrivacyDlpV2RedactConfig'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2RedactConfig' with the minimum fields required to make a request.
 --
 googlePrivacyDlpV2RedactConfig
     :: GooglePrivacyDlpV2RedactConfig
 googlePrivacyDlpV2RedactConfig = GooglePrivacyDlpV2RedactConfig'
+
 
 instance FromJSON GooglePrivacyDlpV2RedactConfig
          where
@@ -105,6 +109,7 @@ data GooglePrivacyDlpV2UpdateJobTriggerRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2UpdateJobTriggerRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +122,7 @@ googlePrivacyDlpV2UpdateJobTriggerRequest
 googlePrivacyDlpV2UpdateJobTriggerRequest =
   GooglePrivacyDlpV2UpdateJobTriggerRequest'
     {_gpdvujtrUpdateMask = Nothing, _gpdvujtrJobTrigger = Nothing}
+
 
 -- | Mask to control which fields get updated.
 gpdvujtrUpdateMask :: Lens' GooglePrivacyDlpV2UpdateJobTriggerRequest (Maybe GFieldMask)
@@ -159,6 +165,7 @@ data GooglePrivacyDlpV2Range =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Range' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -170,6 +177,7 @@ googlePrivacyDlpV2Range
     :: GooglePrivacyDlpV2Range
 googlePrivacyDlpV2Range =
   GooglePrivacyDlpV2Range' {_gpdvrStart = Nothing, _gpdvrEnd = Nothing}
+
 
 -- | Index of the first character of the range (inclusive).
 gpdvrStart :: Lens' GooglePrivacyDlpV2Range (Maybe Int64)
@@ -242,6 +250,7 @@ data GoogleRpcStatus =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleRpcStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -256,6 +265,7 @@ googleRpcStatus
 googleRpcStatus =
   GoogleRpcStatus'
     {_grsDetails = Nothing, _grsCode = Nothing, _grsMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -315,6 +325,7 @@ data GooglePrivacyDlpV2FixedSizeBucketingConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2FixedSizeBucketingConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -332,6 +343,7 @@ googlePrivacyDlpV2FixedSizeBucketingConfig =
     , _gpdvfsbcLowerBound = Nothing
     , _gpdvfsbcBucketSize = Nothing
     }
+
 
 -- | Upper bound value of buckets. All values greater than upper_bound are
 -- grouped together into a single bucket; for example if \`upper_bound\` =
@@ -394,6 +406,7 @@ data GooglePrivacyDlpV2InspectResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InspectResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -406,6 +419,7 @@ googlePrivacyDlpV2InspectResult
 googlePrivacyDlpV2InspectResult =
   GooglePrivacyDlpV2InspectResult'
     {_gpdvirFindingsTruncated = Nothing, _gpdvirFindings = Nothing}
+
 
 -- | If true, then this item might have more findings than were returned, and
 -- the findings returned are an arbitrary subset of all findings. The
@@ -454,6 +468,7 @@ data GooglePrivacyDlpV2StoredInfoTypeConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2StoredInfoTypeConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -471,6 +486,7 @@ googlePrivacyDlpV2StoredInfoTypeConfig =
     , _gpdvsitcDisplayName = Nothing
     , _gpdvsitcDescription = Nothing
     }
+
 
 -- | StoredInfoType where findings are defined by a dictionary of phrases.
 gpdvsitcLargeCustomDictionary :: Lens' GooglePrivacyDlpV2StoredInfoTypeConfig (Maybe GooglePrivacyDlpV2LargeCustomDictionaryConfig)
@@ -523,6 +539,7 @@ data GooglePrivacyDlpV2InfoTypeTransformation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InfoTypeTransformation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -535,6 +552,7 @@ googlePrivacyDlpV2InfoTypeTransformation
 googlePrivacyDlpV2InfoTypeTransformation =
   GooglePrivacyDlpV2InfoTypeTransformation'
     {_gpdvittInfoTypes = Nothing, _gpdvittPrimitiveTransformation = Nothing}
+
 
 -- | InfoTypes to apply the transformation to. An empty list will cause this
 -- transformation to apply to all findings that correspond to infoTypes
@@ -582,6 +600,7 @@ newtype GooglePrivacyDlpV2FieldId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2FieldId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -590,6 +609,7 @@ newtype GooglePrivacyDlpV2FieldId =
 googlePrivacyDlpV2FieldId
     :: GooglePrivacyDlpV2FieldId
 googlePrivacyDlpV2FieldId = GooglePrivacyDlpV2FieldId' {_gpdvfiName = Nothing}
+
 
 -- | Name describing the field.
 gpdvfiName :: Lens' GooglePrivacyDlpV2FieldId (Maybe Text)
@@ -623,6 +643,7 @@ data GooglePrivacyDlpV2DlpJob =
     , _gpdvdjCreateTime     :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GooglePrivacyDlpV2DlpJob' with the minimum fields required to make a request.
 --
@@ -662,6 +683,7 @@ googlePrivacyDlpV2DlpJob =
     , _gpdvdjErrors = Nothing
     , _gpdvdjCreateTime = Nothing
     }
+
 
 -- | Results from inspecting a data source.
 gpdvdjInspectDetails :: Lens' GooglePrivacyDlpV2DlpJob (Maybe GooglePrivacyDlpV2InspectDataSourceDetails)
@@ -766,6 +788,7 @@ data GooglePrivacyDlpV2RecordTransformations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2RecordTransformations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -778,6 +801,7 @@ googlePrivacyDlpV2RecordTransformations
 googlePrivacyDlpV2RecordTransformations =
   GooglePrivacyDlpV2RecordTransformations'
     {_gpdvrtRecordSuppressions = Nothing, _gpdvrtFieldTransformations = Nothing}
+
 
 -- | Configuration defining which records get suppressed entirely. Records
 -- that match any suppression rule are omitted from the output [optional].
@@ -831,6 +855,7 @@ data GooglePrivacyDlpV2Key =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Key' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -842,6 +867,7 @@ googlePrivacyDlpV2Key
     :: GooglePrivacyDlpV2Key
 googlePrivacyDlpV2Key =
   GooglePrivacyDlpV2Key' {_gpdvkPartitionId = Nothing, _gpdvkPath = Nothing}
+
 
 -- | Entities are partitioned into subsets, currently identified by a project
 -- ID and namespace ID. Queries are scoped to a single partition.
@@ -894,6 +920,7 @@ newtype GooglePrivacyDlpV2BucketingConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2BucketingConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -903,6 +930,7 @@ googlePrivacyDlpV2BucketingConfig
     :: GooglePrivacyDlpV2BucketingConfig
 googlePrivacyDlpV2BucketingConfig =
   GooglePrivacyDlpV2BucketingConfig' {_gpdvbcBuckets = Nothing}
+
 
 -- | Set of buckets. Ranges must be non-overlapping.
 gpdvbcBuckets :: Lens' GooglePrivacyDlpV2BucketingConfig [GooglePrivacyDlpV2Bucket]
@@ -943,6 +971,7 @@ data GooglePrivacyDlpV2InspectConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InspectConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -975,6 +1004,7 @@ googlePrivacyDlpV2InspectConfig =
     , _gpdvicContentOptions = Nothing
     , _gpdvicRuleSet = Nothing
     }
+
 
 -- | Restricts what info_types to look for. The values must correspond to
 -- InfoType values returned by ListInfoTypes or listed at
@@ -1088,6 +1118,7 @@ data GooglePrivacyDlpV2RiskAnalysisJobConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2RiskAnalysisJobConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1105,6 +1136,7 @@ googlePrivacyDlpV2RiskAnalysisJobConfig =
     , _gpdvrajcActions = Nothing
     , _gpdvrajcSourceTable = Nothing
     }
+
 
 -- | Privacy metric to compute.
 gpdvrajcPrivacyMetric :: Lens' GooglePrivacyDlpV2RiskAnalysisJobConfig (Maybe GooglePrivacyDlpV2PrivacyMetric)
@@ -1158,6 +1190,7 @@ newtype GooglePrivacyDlpV2QuoteInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2QuoteInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1167,6 +1200,7 @@ googlePrivacyDlpV2QuoteInfo
     :: GooglePrivacyDlpV2QuoteInfo
 googlePrivacyDlpV2QuoteInfo =
   GooglePrivacyDlpV2QuoteInfo' {_gpdvqiDateTime = Nothing}
+
 
 -- | The date time indicated by the quote.
 gpdvqiDateTime :: Lens' GooglePrivacyDlpV2QuoteInfo (Maybe GooglePrivacyDlpV2DateTime)
@@ -1195,6 +1229,7 @@ newtype GooglePrivacyDlpV2RecordSuppression =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2RecordSuppression' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1204,6 +1239,7 @@ googlePrivacyDlpV2RecordSuppression
     :: GooglePrivacyDlpV2RecordSuppression
 googlePrivacyDlpV2RecordSuppression =
   GooglePrivacyDlpV2RecordSuppression' {_gpdvrsCondition = Nothing}
+
 
 -- | A condition that when it evaluates to true will result in the record
 -- being evaluated to be suppressed from the transformed content.
@@ -1240,6 +1276,7 @@ data GooglePrivacyDlpV2CryptoKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CryptoKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1257,6 +1294,7 @@ googlePrivacyDlpV2CryptoKey =
     , _gpdvckKmsWrApped = Nothing
     , _gpdvckUnwrApped = Nothing
     }
+
 
 gpdvckTransient :: Lens' GooglePrivacyDlpV2CryptoKey (Maybe GooglePrivacyDlpV2TransientCryptoKey)
 gpdvckTransient
@@ -1305,6 +1343,7 @@ data GooglePrivacyDlpV2LargeCustomDictionaryConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2LargeCustomDictionaryConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1322,6 +1361,7 @@ googlePrivacyDlpV2LargeCustomDictionaryConfig =
     , _gpdvlcdcCloudStorageFileSet = Nothing
     , _gpdvlcdcOutputPath = Nothing
     }
+
 
 -- | Field in a BigQuery table where each cell represents a dictionary
 -- phrase.
@@ -1378,6 +1418,7 @@ newtype GooglePrivacyDlpV2WordList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2WordList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1387,6 +1428,7 @@ googlePrivacyDlpV2WordList
     :: GooglePrivacyDlpV2WordList
 googlePrivacyDlpV2WordList =
   GooglePrivacyDlpV2WordList' {_gpdvwlWords = Nothing}
+
 
 -- | Words or phrases defining the dictionary. The dictionary must contain at
 -- least one phrase and every phrase must contain at least 2 characters
@@ -1419,6 +1461,7 @@ data GooglePrivacyDlpV2ContentItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ContentItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1433,6 +1476,7 @@ googlePrivacyDlpV2ContentItem
 googlePrivacyDlpV2ContentItem =
   GooglePrivacyDlpV2ContentItem'
     {_gpdvciValue = Nothing, _gpdvciByteItem = Nothing, _gpdvciTable = Nothing}
+
 
 -- | String data to inspect or redact.
 gpdvciValue :: Lens' GooglePrivacyDlpV2ContentItem (Maybe Text)
@@ -1480,6 +1524,7 @@ data GooglePrivacyDlpV2CategoricalStatsHistogramBucket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CategoricalStatsHistogramBucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1503,6 +1548,7 @@ googlePrivacyDlpV2CategoricalStatsHistogramBucket =
     , _gpdvcshbBucketSize = Nothing
     , _gpdvcshbBucketValueCount = Nothing
     }
+
 
 -- | Lower bound on the value frequency of the values in this bucket.
 gpdvcshbValueFrequencyLowerBound :: Lens' GooglePrivacyDlpV2CategoricalStatsHistogramBucket (Maybe Int64)
@@ -1582,6 +1628,7 @@ data GooglePrivacyDlpV2Result =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Result' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1599,6 +1646,7 @@ googlePrivacyDlpV2Result =
     , _gpdvrInfoTypeStats = Nothing
     , _gpdvrTotalEstimatedBytes = Nothing
     }
+
 
 -- | Total size in bytes that were processed.
 gpdvrProcessedBytes :: Lens' GooglePrivacyDlpV2Result (Maybe Int64)
@@ -1651,6 +1699,7 @@ data GooglePrivacyDlpV2InspectDataSourceDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InspectDataSourceDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1663,6 +1712,7 @@ googlePrivacyDlpV2InspectDataSourceDetails
 googlePrivacyDlpV2InspectDataSourceDetails =
   GooglePrivacyDlpV2InspectDataSourceDetails'
     {_gpdvidsdResult = Nothing, _gpdvidsdRequestedOptions = Nothing}
+
 
 -- | A summary of the outcome of this inspect job.
 gpdvidsdResult :: Lens' GooglePrivacyDlpV2InspectDataSourceDetails (Maybe GooglePrivacyDlpV2Result)
@@ -1708,6 +1758,7 @@ data GooglePrivacyDlpV2RedactImageResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2RedactImageResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1725,6 +1776,7 @@ googlePrivacyDlpV2RedactImageResponse =
     , _gpdvrirInspectResult = Nothing
     , _gpdvrirRedactedImage = Nothing
     }
+
 
 -- | If an image was being inspected and the InspectConfig\'s include_quote
 -- was set to true, then this field will include all text, if any, that was
@@ -1776,6 +1828,7 @@ newtype GooglePrivacyDlpV2PublishToPubSub =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2PublishToPubSub' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1785,6 +1838,7 @@ googlePrivacyDlpV2PublishToPubSub
     :: GooglePrivacyDlpV2PublishToPubSub
 googlePrivacyDlpV2PublishToPubSub =
   GooglePrivacyDlpV2PublishToPubSub' {_gpdvptpsTopic = Nothing}
+
 
 -- | Cloud Pub\/Sub topic to send notifications to. The topic must have given
 -- publishing access rights to the DLP API service account executing the
@@ -1819,6 +1873,7 @@ data GooglePrivacyDlpV2BigQueryKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2BigQueryKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1831,6 +1886,7 @@ googlePrivacyDlpV2BigQueryKey
 googlePrivacyDlpV2BigQueryKey =
   GooglePrivacyDlpV2BigQueryKey'
     {_gpdvbqkTableReference = Nothing, _gpdvbqkRowNumber = Nothing}
+
 
 -- | Complete BigQuery table reference.
 gpdvbqkTableReference :: Lens' GooglePrivacyDlpV2BigQueryKey (Maybe GooglePrivacyDlpV2BigQueryTable)
@@ -1871,6 +1927,7 @@ newtype GooglePrivacyDlpV2DetectionRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DetectionRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1880,6 +1937,7 @@ googlePrivacyDlpV2DetectionRule
     :: GooglePrivacyDlpV2DetectionRule
 googlePrivacyDlpV2DetectionRule =
   GooglePrivacyDlpV2DetectionRule' {_gpdvdrHotwordRule = Nothing}
+
 
 -- | Hotword-based detection rule.
 gpdvdrHotwordRule :: Lens' GooglePrivacyDlpV2DetectionRule (Maybe GooglePrivacyDlpV2HotwordRule)
@@ -1911,6 +1969,7 @@ newtype GooglePrivacyDlpV2RecordCondition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2RecordCondition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1920,6 +1979,7 @@ googlePrivacyDlpV2RecordCondition
     :: GooglePrivacyDlpV2RecordCondition
 googlePrivacyDlpV2RecordCondition =
   GooglePrivacyDlpV2RecordCondition' {_gpdvrcExpressions = Nothing}
+
 
 -- | An expression.
 gpdvrcExpressions :: Lens' GooglePrivacyDlpV2RecordCondition (Maybe GooglePrivacyDlpV2Expressions)
@@ -1957,6 +2017,7 @@ data GooglePrivacyDlpV2DateShiftConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DateShiftConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1977,6 +2038,7 @@ googlePrivacyDlpV2DateShiftConfig =
     , _gpdvdscCryptoKey = Nothing
     , _gpdvdscLowerBoundDays = Nothing
     }
+
 
 -- | Points to the field that contains the context, for example, an entity
 -- id. If set, must also set method. If set, shift will be consistent for
@@ -2043,6 +2105,7 @@ data GooglePrivacyDlpV2InspectContentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InspectContentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2060,6 +2123,7 @@ googlePrivacyDlpV2InspectContentRequest =
     , _gpdvicrItem = Nothing
     , _gpdvicrInspectTemplateName = Nothing
     }
+
 
 -- | Configuration for the inspector. What specified here will override the
 -- template referenced by the inspect_template_name argument.
@@ -2114,6 +2178,7 @@ newtype GooglePrivacyDlpV2CategoricalStatsResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CategoricalStatsResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2124,6 +2189,7 @@ googlePrivacyDlpV2CategoricalStatsResult
 googlePrivacyDlpV2CategoricalStatsResult =
   GooglePrivacyDlpV2CategoricalStatsResult'
     {_gpdvcsrValueFrequencyHistogramBuckets = Nothing}
+
 
 -- | Histogram of value frequencies in the column.
 gpdvcsrValueFrequencyHistogramBuckets :: Lens' GooglePrivacyDlpV2CategoricalStatsResult [GooglePrivacyDlpV2CategoricalStatsHistogramBucket]
@@ -2164,6 +2230,7 @@ data GooglePrivacyDlpV2NumericalStatsResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2NumericalStatsResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2181,6 +2248,7 @@ googlePrivacyDlpV2NumericalStatsResult =
     , _gpdvnsrQuantileValues = Nothing
     , _gpdvnsrMinValue = Nothing
     }
+
 
 -- | Maximum value appearing in the column.
 gpdvnsrMaxValue :: Lens' GooglePrivacyDlpV2NumericalStatsResult (Maybe GooglePrivacyDlpV2Value)
@@ -2238,11 +2306,13 @@ data GooglePrivacyDlpV2PublishSummaryToCscc =
   GooglePrivacyDlpV2PublishSummaryToCscc'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2PublishSummaryToCscc' with the minimum fields required to make a request.
 --
 googlePrivacyDlpV2PublishSummaryToCscc
     :: GooglePrivacyDlpV2PublishSummaryToCscc
 googlePrivacyDlpV2PublishSummaryToCscc = GooglePrivacyDlpV2PublishSummaryToCscc'
+
 
 instance FromJSON
            GooglePrivacyDlpV2PublishSummaryToCscc
@@ -2266,6 +2336,7 @@ data GooglePrivacyDlpV2UpdateInspectTemplateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2UpdateInspectTemplateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2278,6 +2349,7 @@ googlePrivacyDlpV2UpdateInspectTemplateRequest
 googlePrivacyDlpV2UpdateInspectTemplateRequest =
   GooglePrivacyDlpV2UpdateInspectTemplateRequest'
     {_gpdvuitrUpdateMask = Nothing, _gpdvuitrInspectTemplate = Nothing}
+
 
 -- | Mask to control which fields get updated.
 gpdvuitrUpdateMask :: Lens' GooglePrivacyDlpV2UpdateInspectTemplateRequest (Maybe GFieldMask)
@@ -2324,6 +2396,7 @@ newtype GooglePrivacyDlpV2EntityId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2EntityId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2333,6 +2406,7 @@ googlePrivacyDlpV2EntityId
     :: GooglePrivacyDlpV2EntityId
 googlePrivacyDlpV2EntityId =
   GooglePrivacyDlpV2EntityId' {_gpdveiField = Nothing}
+
 
 -- | Composite key indicating which field contains the entity identifier.
 gpdveiField :: Lens' GooglePrivacyDlpV2EntityId (Maybe GooglePrivacyDlpV2FieldId)
@@ -2359,6 +2433,7 @@ data GooglePrivacyDlpV2ByteContentItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ByteContentItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2371,6 +2446,7 @@ googlePrivacyDlpV2ByteContentItem
 googlePrivacyDlpV2ByteContentItem =
   GooglePrivacyDlpV2ByteContentItem'
     {_gpdvbciData = Nothing, _gpdvbciType = Nothing}
+
 
 -- | Content data to inspect or redact.
 gpdvbciData :: Lens' GooglePrivacyDlpV2ByteContentItem (Maybe ByteString)
@@ -2410,6 +2486,7 @@ data GooglePrivacyDlpV2TaggedField =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2TaggedField' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2430,6 +2507,7 @@ googlePrivacyDlpV2TaggedField =
     , _gpdvtfInferred = Nothing
     , _gpdvtfCustomTag = Nothing
     }
+
 
 -- | Identifies the column. [required]
 gpdvtfField :: Lens' GooglePrivacyDlpV2TaggedField (Maybe GooglePrivacyDlpV2FieldId)
@@ -2493,6 +2571,7 @@ data GooglePrivacyDlpV2BigQueryOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2BigQueryOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2519,6 +2598,7 @@ googlePrivacyDlpV2BigQueryOptions =
     , _gpdvbqoExcludedFields = Nothing
     , _gpdvbqoSampleMethod = Nothing
     }
+
 
 -- | Max number of rows to scan. If the table has more rows than this value,
 -- the rest of the rows are omitted. If not set, or if set to 0, all rows
@@ -2605,6 +2685,7 @@ data GooglePrivacyDlpV2KMapEstimationQuasiIdValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2KMapEstimationQuasiIdValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2619,6 +2700,7 @@ googlePrivacyDlpV2KMapEstimationQuasiIdValues =
     { _gpdvkmeqivEstimatedAnonymity = Nothing
     , _gpdvkmeqivQuasiIdsValues = Nothing
     }
+
 
 -- | The estimated anonymity for these quasi-identifier values.
 gpdvkmeqivEstimatedAnonymity :: Lens' GooglePrivacyDlpV2KMapEstimationQuasiIdValues (Maybe Int64)
@@ -2666,6 +2748,7 @@ newtype GooglePrivacyDlpV2ExcludeInfoTypes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ExcludeInfoTypes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2675,6 +2758,7 @@ googlePrivacyDlpV2ExcludeInfoTypes
     :: GooglePrivacyDlpV2ExcludeInfoTypes
 googlePrivacyDlpV2ExcludeInfoTypes =
   GooglePrivacyDlpV2ExcludeInfoTypes' {_gpdveitInfoTypes = Nothing}
+
 
 -- | InfoType list in ExclusionRule rule drops a finding when it overlaps or
 -- contained within with a finding of an infoType from this list. For
@@ -2715,6 +2799,7 @@ data GooglePrivacyDlpV2CreateInspectTemplateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CreateInspectTemplateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2727,6 +2812,7 @@ googlePrivacyDlpV2CreateInspectTemplateRequest
 googlePrivacyDlpV2CreateInspectTemplateRequest =
   GooglePrivacyDlpV2CreateInspectTemplateRequest'
     {_gpdvcitrTemplateId = Nothing, _gpdvcitrInspectTemplate = Nothing}
+
 
 -- | The template id can contain uppercase and lowercase letters, numbers,
 -- and hyphens; that is, it must match the regular expression:
@@ -2776,6 +2862,7 @@ data GooglePrivacyDlpV2PathElement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2PathElement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2790,6 +2877,7 @@ googlePrivacyDlpV2PathElement
 googlePrivacyDlpV2PathElement =
   GooglePrivacyDlpV2PathElement'
     {_gpdvpeKind = Nothing, _gpdvpeName = Nothing, _gpdvpeId = Nothing}
+
 
 -- | The kind of the entity. A kind matching regex \`__.*__\` is
 -- reserved\/read-only. A kind must not contain more than 1500 bytes when
@@ -2837,6 +2925,7 @@ newtype GooglePrivacyDlpV2DeltaPresenceEstimationResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DeltaPresenceEstimationResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2847,6 +2936,7 @@ googlePrivacyDlpV2DeltaPresenceEstimationResult
 googlePrivacyDlpV2DeltaPresenceEstimationResult =
   GooglePrivacyDlpV2DeltaPresenceEstimationResult'
     {_gpdvdperDeltaPresenceEstimationHistogram = Nothing}
+
 
 -- | The intervals [min_probability, max_probability) do not overlap. If a
 -- value doesn\'t correspond to any such interval, the associated frequency
@@ -2895,6 +2985,7 @@ data GooglePrivacyDlpV2InspectJobConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InspectJobConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2915,6 +3006,7 @@ googlePrivacyDlpV2InspectJobConfig =
     , _gpdvijcInspectConfig = Nothing
     , _gpdvijcInspectTemplateName = Nothing
     }
+
 
 -- | Actions to execute at the completion of the job. Are executed in the
 -- order provided.
@@ -2977,6 +3069,7 @@ data GooglePrivacyDlpV2StoredType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2StoredType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2989,6 +3082,7 @@ googlePrivacyDlpV2StoredType
 googlePrivacyDlpV2StoredType =
   GooglePrivacyDlpV2StoredType'
     {_gpdvstName = Nothing, _gpdvstCreateTime = Nothing}
+
 
 -- | Resource name of the requested \`StoredInfoType\`, for example
 -- \`organizations\/433245324\/storedInfoTypes\/432452342\` or
@@ -3031,6 +3125,7 @@ data GooglePrivacyDlpV2FieldTransformation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2FieldTransformation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3051,6 +3146,7 @@ googlePrivacyDlpV2FieldTransformation =
     , _gpdvftCondition = Nothing
     , _gpdvftFields = Nothing
     }
+
 
 -- | Treat the contents of the field as free text, and selectively transform
 -- content that matches an \`InfoType\`.
@@ -3119,6 +3215,7 @@ data GooglePrivacyDlpV2HotwordRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2HotwordRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3136,6 +3233,7 @@ googlePrivacyDlpV2HotwordRule =
     , _gpdvhrLikelihoodAdjustment = Nothing
     , _gpdvhrHotwordRegex = Nothing
     }
+
 
 -- | Proximity of the finding within which the entire hotword must reside.
 -- The total length of the window cannot exceed 1000 characters. Note that
@@ -3193,6 +3291,7 @@ data GooglePrivacyDlpV2RedactImageRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2RedactImageRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3213,6 +3312,7 @@ googlePrivacyDlpV2RedactImageRequest =
     , _gpdvrirByteItem = Nothing
     , _gpdvrirImageRedactionConfigs = Nothing
     }
+
 
 -- | Whether the response should include findings along with the redacted
 -- image.
@@ -3273,6 +3373,7 @@ data GooglePrivacyDlpV2FindingLimits =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2FindingLimits' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3290,6 +3391,7 @@ googlePrivacyDlpV2FindingLimits =
     , _gpdvflMaxFindingsPerInfoType = Nothing
     , _gpdvflMaxFindingsPerRequest = Nothing
     }
+
 
 -- | Max number of findings that will be returned for each item scanned. When
 -- set within \`InspectDataSourceRequest\`, the maximum returned is 1000
@@ -3360,6 +3462,7 @@ data GooglePrivacyDlpV2Condition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Condition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3374,6 +3477,7 @@ googlePrivacyDlpV2Condition
 googlePrivacyDlpV2Condition =
   GooglePrivacyDlpV2Condition'
     {_gpdvcField = Nothing, _gpdvcOperator = Nothing, _gpdvcValue = Nothing}
+
 
 -- | Field within the record this condition is evaluated against. [required]
 gpdvcField :: Lens' GooglePrivacyDlpV2Condition (Maybe GooglePrivacyDlpV2FieldId)
@@ -3421,6 +3525,7 @@ data GooglePrivacyDlpV2TimespanConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2TimespanConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3441,6 +3546,7 @@ googlePrivacyDlpV2TimespanConfig =
     , _gpdvtcEnableAutoPopulationOfTimespanConfig = Nothing
     , _gpdvtcEndTime = Nothing
     }
+
 
 -- | Specification of the field containing the timestamp of scanned items.
 -- Used for data sources like Datastore or BigQuery. If not specified for
@@ -3510,6 +3616,7 @@ data GooglePrivacyDlpV2CreateDeidentifyTemplateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CreateDeidentifyTemplateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3522,6 +3629,7 @@ googlePrivacyDlpV2CreateDeidentifyTemplateRequest
 googlePrivacyDlpV2CreateDeidentifyTemplateRequest =
   GooglePrivacyDlpV2CreateDeidentifyTemplateRequest'
     {_gpdvcdtrTemplateId = Nothing, _gpdvcdtrDeidentifyTemplate = Nothing}
+
 
 -- | The template id can contain uppercase and lowercase letters, numbers,
 -- and hyphens; that is, it must match the regular expression:
@@ -3571,6 +3679,7 @@ newtype GooglePrivacyDlpV2TransientCryptoKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2TransientCryptoKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3580,6 +3689,7 @@ googlePrivacyDlpV2TransientCryptoKey
     :: GooglePrivacyDlpV2TransientCryptoKey
 googlePrivacyDlpV2TransientCryptoKey =
   GooglePrivacyDlpV2TransientCryptoKey' {_gpdvtckName = Nothing}
+
 
 -- | Name of the key. [required] This is an arbitrary string used to
 -- differentiate different keys. A unique key is generated per name: two
@@ -3617,6 +3727,7 @@ data GooglePrivacyDlpV2InfoTypeDescription =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InfoTypeDescription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3637,6 +3748,7 @@ googlePrivacyDlpV2InfoTypeDescription =
     , _gpdvitdSupportedBy = Nothing
     , _gpdvitdDescription = Nothing
     }
+
 
 -- | Internal name of the infoType.
 gpdvitdName :: Lens' GooglePrivacyDlpV2InfoTypeDescription (Maybe Text)
@@ -3696,11 +3808,13 @@ data GoogleProtobufEmpty =
   GoogleProtobufEmpty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleProtobufEmpty' with the minimum fields required to make a request.
 --
 googleProtobufEmpty
     :: GoogleProtobufEmpty
 googleProtobufEmpty = GoogleProtobufEmpty'
+
 
 instance FromJSON GoogleProtobufEmpty where
         parseJSON
@@ -3718,6 +3832,7 @@ newtype GoogleRpcStatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleRpcStatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3728,6 +3843,7 @@ googleRpcStatusDetailsItem
     -> GoogleRpcStatusDetailsItem
 googleRpcStatusDetailsItem pGrsdiAddtional_ =
   GoogleRpcStatusDetailsItem' {_grsdiAddtional = _Coerce # pGrsdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 grsdiAddtional :: Lens' GoogleRpcStatusDetailsItem (HashMap Text JSONValue)
@@ -3756,6 +3872,7 @@ data GooglePrivacyDlpV2ImageRedactionConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ImageRedactionConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3773,6 +3890,7 @@ googlePrivacyDlpV2ImageRedactionConfig =
     , _gpdvircInfoType = Nothing
     , _gpdvircRedactAllText = Nothing
     }
+
 
 -- | The color to use when redacting content from an image. If not specified,
 -- the default is black.
@@ -3826,6 +3944,7 @@ newtype GooglePrivacyDlpV2Trigger =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Trigger' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3835,6 +3954,7 @@ googlePrivacyDlpV2Trigger
     :: GooglePrivacyDlpV2Trigger
 googlePrivacyDlpV2Trigger =
   GooglePrivacyDlpV2Trigger' {_gpdvtSchedule = Nothing}
+
 
 -- | Create a job on a repeating basis based on the elapse of time.
 gpdvtSchedule :: Lens' GooglePrivacyDlpV2Trigger (Maybe GooglePrivacyDlpV2Schedule)
@@ -3868,6 +3988,7 @@ data GooglePrivacyDlpV2CloudStorageOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CloudStorageOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3894,6 +4015,7 @@ googlePrivacyDlpV2CloudStorageOptions =
     , _gpdvcsoFilesLimitPercent = Nothing
     , _gpdvcsoSampleMethod = Nothing
     }
+
 
 -- | The set of one or more files to scan.
 gpdvcsoFileSet :: Lens' GooglePrivacyDlpV2CloudStorageOptions (Maybe GooglePrivacyDlpV2FileSet)
@@ -3988,6 +4110,7 @@ data GooglePrivacyDlpV2DeltaPresenceEstimationConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DeltaPresenceEstimationConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4005,6 +4128,7 @@ googlePrivacyDlpV2DeltaPresenceEstimationConfig =
     , _gpdvdpecRegionCode = Nothing
     , _gpdvdpecQuasiIds = Nothing
     }
+
 
 -- | Several auxiliary tables can be used in the analysis. Each custom_tag
 -- used to tag a quasi-identifiers field must appear in exactly one field
@@ -4066,6 +4190,7 @@ data GooglePrivacyDlpV2CreateStoredInfoTypeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CreateStoredInfoTypeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4078,6 +4203,7 @@ googlePrivacyDlpV2CreateStoredInfoTypeRequest
 googlePrivacyDlpV2CreateStoredInfoTypeRequest =
   GooglePrivacyDlpV2CreateStoredInfoTypeRequest'
     {_gpdvcsitrConfig = Nothing, _gpdvcsitrStoredInfoTypeId = Nothing}
+
 
 -- | Configuration of the storedInfoType to create.
 gpdvcsitrConfig :: Lens' GooglePrivacyDlpV2CreateStoredInfoTypeRequest (Maybe GooglePrivacyDlpV2StoredInfoTypeConfig)
@@ -4126,6 +4252,7 @@ data GooglePrivacyDlpV2QuasiIdField =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2QuasiIdField' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4138,6 +4265,7 @@ googlePrivacyDlpV2QuasiIdField
 googlePrivacyDlpV2QuasiIdField =
   GooglePrivacyDlpV2QuasiIdField'
     {_gpdvqifField = Nothing, _gpdvqifCustomTag = Nothing}
+
 
 gpdvqifField :: Lens' GooglePrivacyDlpV2QuasiIdField (Maybe GooglePrivacyDlpV2FieldId)
 gpdvqifField
@@ -4173,6 +4301,7 @@ newtype GooglePrivacyDlpV2TimePartConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2TimePartConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4182,6 +4311,7 @@ googlePrivacyDlpV2TimePartConfig
     :: GooglePrivacyDlpV2TimePartConfig
 googlePrivacyDlpV2TimePartConfig =
   GooglePrivacyDlpV2TimePartConfig' {_gpdvtpcPartToExtract = Nothing}
+
 
 gpdvtpcPartToExtract :: Lens' GooglePrivacyDlpV2TimePartConfig (Maybe GooglePrivacyDlpV2TimePartConfigPartToExtract)
 gpdvtpcPartToExtract
@@ -4214,6 +4344,7 @@ data GooglePrivacyDlpV2InspectionRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InspectionRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4226,6 +4357,7 @@ googlePrivacyDlpV2InspectionRule
 googlePrivacyDlpV2InspectionRule =
   GooglePrivacyDlpV2InspectionRule'
     {_gpdvirExclusionRule = Nothing, _gpdvirHotwordRule = Nothing}
+
 
 -- | Exclusion rule.
 gpdvirExclusionRule :: Lens' GooglePrivacyDlpV2InspectionRule (Maybe GooglePrivacyDlpV2ExclusionRule)
@@ -4273,6 +4405,7 @@ data GooglePrivacyDlpV2CustomInfoType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CustomInfoType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4305,6 +4438,7 @@ googlePrivacyDlpV2CustomInfoType =
     , _gpdvcitDictionary = Nothing
     , _gpdvcitSurrogateType = Nothing
     }
+
 
 -- | Regular expression based CustomInfoType.
 gpdvcitRegex :: Lens' GooglePrivacyDlpV2CustomInfoType (Maybe GooglePrivacyDlpV2Regex)
@@ -4405,6 +4539,7 @@ newtype GooglePrivacyDlpV2KMapEstimationResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2KMapEstimationResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4415,6 +4550,7 @@ googlePrivacyDlpV2KMapEstimationResult
 googlePrivacyDlpV2KMapEstimationResult =
   GooglePrivacyDlpV2KMapEstimationResult'
     {_gpdvkmerKMapEstimationHistogram = Nothing}
+
 
 -- | The intervals [min_anonymity, max_anonymity] do not overlap. If a value
 -- doesn\'t correspond to any such interval, the associated frequency is
@@ -4464,6 +4600,7 @@ data GooglePrivacyDlpV2TransformationSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2TransformationSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4493,6 +4630,7 @@ googlePrivacyDlpV2TransformationSummary =
     , _gpdvtsFieldTransformations = Nothing
     , _gpdvtsTransformation = Nothing
     }
+
 
 gpdvtsResults :: Lens' GooglePrivacyDlpV2TransformationSummary [GooglePrivacyDlpV2SummaryResult]
 gpdvtsResults
@@ -4582,6 +4720,7 @@ data GooglePrivacyDlpV2LikelihoodAdjustment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2LikelihoodAdjustment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4594,6 +4733,7 @@ googlePrivacyDlpV2LikelihoodAdjustment
 googlePrivacyDlpV2LikelihoodAdjustment =
   GooglePrivacyDlpV2LikelihoodAdjustment'
     {_gpdvlaFixedLikelihood = Nothing, _gpdvlaRelativeLikelihood = Nothing}
+
 
 -- | Set the likelihood of a finding to a fixed value.
 gpdvlaFixedLikelihood :: Lens' GooglePrivacyDlpV2LikelihoodAdjustment (Maybe GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihood)
@@ -4645,6 +4785,7 @@ data GooglePrivacyDlpV2Regex =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Regex' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4657,6 +4798,7 @@ googlePrivacyDlpV2Regex
 googlePrivacyDlpV2Regex =
   GooglePrivacyDlpV2Regex'
     {_gpdvrGroupIndexes = Nothing, _gpdvrPattern = Nothing}
+
 
 -- | The index of the submatch to extract as findings. When not specified,
 -- the entire match is returned. No more than 3 may be included.
@@ -4699,6 +4841,7 @@ data GooglePrivacyDlpV2UpdateStoredInfoTypeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2UpdateStoredInfoTypeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4711,6 +4854,7 @@ googlePrivacyDlpV2UpdateStoredInfoTypeRequest
 googlePrivacyDlpV2UpdateStoredInfoTypeRequest =
   GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'
     {_gpdvusitrConfig = Nothing, _gpdvusitrUpdateMask = Nothing}
+
 
 -- | Updated configuration for the storedInfoType. If not provided, a new
 -- version of the storedInfoType will be created with the existing
@@ -4756,6 +4900,7 @@ data GooglePrivacyDlpV2KAnonymityEquivalenceClass =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2KAnonymityEquivalenceClass' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4768,6 +4913,7 @@ googlePrivacyDlpV2KAnonymityEquivalenceClass
 googlePrivacyDlpV2KAnonymityEquivalenceClass =
   GooglePrivacyDlpV2KAnonymityEquivalenceClass'
     {_gpdvkaecEquivalenceClassSize = Nothing, _gpdvkaecQuasiIdsValues = Nothing}
+
 
 -- | Size of the equivalence class, for example number of rows with the above
 -- set of values.
@@ -4819,6 +4965,7 @@ data GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4831,6 +4978,7 @@ googlePrivacyDlpV2UpdateDeidentifyTemplateRequest
 googlePrivacyDlpV2UpdateDeidentifyTemplateRequest =
   GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
     {_gpdvudtrUpdateMask = Nothing, _gpdvudtrDeidentifyTemplate = Nothing}
+
 
 -- | Mask to control which fields get updated.
 gpdvudtrUpdateMask :: Lens' GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest (Maybe GFieldMask)
@@ -4877,6 +5025,7 @@ data GooglePrivacyDlpV2LDiversityConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2LDiversityConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4889,6 +5038,7 @@ googlePrivacyDlpV2LDiversityConfig
 googlePrivacyDlpV2LDiversityConfig =
   GooglePrivacyDlpV2LDiversityConfig'
     {_gpdvldcSensitiveAttribute = Nothing, _gpdvldcQuasiIds = Nothing}
+
 
 -- | Sensitive field for computing the l-value.
 gpdvldcSensitiveAttribute :: Lens' GooglePrivacyDlpV2LDiversityConfig (Maybe GooglePrivacyDlpV2FieldId)
@@ -4932,12 +5082,14 @@ data GooglePrivacyDlpV2JobNotificationEmails =
   GooglePrivacyDlpV2JobNotificationEmails'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2JobNotificationEmails' with the minimum fields required to make a request.
 --
 googlePrivacyDlpV2JobNotificationEmails
     :: GooglePrivacyDlpV2JobNotificationEmails
 googlePrivacyDlpV2JobNotificationEmails =
   GooglePrivacyDlpV2JobNotificationEmails'
+
 
 instance FromJSON
            GooglePrivacyDlpV2JobNotificationEmails
@@ -4966,6 +5118,7 @@ data GooglePrivacyDlpV2DeidentifyContentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DeidentifyContentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -4989,6 +5142,7 @@ googlePrivacyDlpV2DeidentifyContentRequest =
     , _gpdvdcrItem = Nothing
     , _gpdvdcrInspectTemplateName = Nothing
     }
+
 
 -- | Configuration for the inspector. Items specified here will override the
 -- template referenced by the inspect_template_name argument.
@@ -5070,6 +5224,7 @@ data GooglePrivacyDlpV2Color =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Color' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5084,6 +5239,7 @@ googlePrivacyDlpV2Color
 googlePrivacyDlpV2Color =
   GooglePrivacyDlpV2Color'
     {_gpdvcRed = Nothing, _gpdvcGreen = Nothing, _gpdvcBlue = Nothing}
+
 
 -- | The amount of red in the color as a value in the interval [0, 1].
 gpdvcRed :: Lens' GooglePrivacyDlpV2Color (Maybe Double)
@@ -5128,6 +5284,7 @@ data GooglePrivacyDlpV2ListDlpJobsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ListDlpJobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5140,6 +5297,7 @@ googlePrivacyDlpV2ListDlpJobsResponse
 googlePrivacyDlpV2ListDlpJobsResponse =
   GooglePrivacyDlpV2ListDlpJobsResponse'
     {_gpdvldjrNextPageToken = Nothing, _gpdvldjrJobs = Nothing}
+
 
 -- | The standard List next-page token.
 gpdvldjrNextPageToken :: Lens' GooglePrivacyDlpV2ListDlpJobsResponse (Maybe Text)
@@ -5183,6 +5341,7 @@ data GooglePrivacyDlpV2Proximity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Proximity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5195,6 +5354,7 @@ googlePrivacyDlpV2Proximity
 googlePrivacyDlpV2Proximity =
   GooglePrivacyDlpV2Proximity'
     {_gpdvpWindowAfter = Nothing, _gpdvpWindowBefore = Nothing}
+
 
 -- | Number of characters after the finding to consider.
 gpdvpWindowAfter :: Lens' GooglePrivacyDlpV2Proximity (Maybe Int32)
@@ -5238,6 +5398,7 @@ data GooglePrivacyDlpV2Finding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Finding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5264,6 +5425,7 @@ googlePrivacyDlpV2Finding =
     , _gpdvfQuote = Nothing
     , _gpdvfCreateTime = Nothing
     }
+
 
 -- | Where the content was found.
 gpdvfLocation :: Lens' GooglePrivacyDlpV2Finding (Maybe GooglePrivacyDlpV2Location)
@@ -5342,6 +5504,7 @@ data GooglePrivacyDlpV2SummaryResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2SummaryResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5356,6 +5519,7 @@ googlePrivacyDlpV2SummaryResult
 googlePrivacyDlpV2SummaryResult =
   GooglePrivacyDlpV2SummaryResult'
     {_gpdvsrCount = Nothing, _gpdvsrDetails = Nothing, _gpdvsrCode = Nothing}
+
 
 gpdvsrCount :: Lens' GooglePrivacyDlpV2SummaryResult (Maybe Int64)
 gpdvsrCount
@@ -5398,6 +5562,7 @@ newtype GooglePrivacyDlpV2Row =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Row' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5406,6 +5571,7 @@ newtype GooglePrivacyDlpV2Row =
 googlePrivacyDlpV2Row
     :: GooglePrivacyDlpV2Row
 googlePrivacyDlpV2Row = GooglePrivacyDlpV2Row' {_gpdvrValues = Nothing}
+
 
 gpdvrValues :: Lens' GooglePrivacyDlpV2Row [GooglePrivacyDlpV2Value]
 gpdvrValues
@@ -5431,12 +5597,14 @@ data GooglePrivacyDlpV2ReplaceWithInfoTypeConfig =
   GooglePrivacyDlpV2ReplaceWithInfoTypeConfig'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ReplaceWithInfoTypeConfig' with the minimum fields required to make a request.
 --
 googlePrivacyDlpV2ReplaceWithInfoTypeConfig
     :: GooglePrivacyDlpV2ReplaceWithInfoTypeConfig
 googlePrivacyDlpV2ReplaceWithInfoTypeConfig =
   GooglePrivacyDlpV2ReplaceWithInfoTypeConfig'
+
 
 instance FromJSON
            GooglePrivacyDlpV2ReplaceWithInfoTypeConfig
@@ -5467,6 +5635,7 @@ data GoogleTypeTimeOfDay =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleTypeTimeOfDay' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5487,6 +5656,7 @@ googleTypeTimeOfDay =
     , _gttodMinutes = Nothing
     , _gttodSeconds = Nothing
     }
+
 
 -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
 gttodNanos :: Lens' GoogleTypeTimeOfDay (Maybe Int32)
@@ -5546,6 +5716,7 @@ data GooglePrivacyDlpV2ExclusionRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ExclusionRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5566,6 +5737,7 @@ googlePrivacyDlpV2ExclusionRule =
     , _gpdverDictionary = Nothing
     , _gpdverMatchingType = Nothing
     }
+
 
 -- | Regular expression which defines the rule.
 gpdverRegex :: Lens' GooglePrivacyDlpV2ExclusionRule (Maybe GooglePrivacyDlpV2Regex)
@@ -5622,6 +5794,7 @@ data GooglePrivacyDlpV2CreateDlpJobRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CreateDlpJobRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5639,6 +5812,7 @@ googlePrivacyDlpV2CreateDlpJobRequest =
     , _gpdvcdjrJobId = Nothing
     , _gpdvcdjrInspectJob = Nothing
     }
+
 
 gpdvcdjrRiskJob :: Lens' GooglePrivacyDlpV2CreateDlpJobRequest (Maybe GooglePrivacyDlpV2RiskAnalysisJobConfig)
 gpdvcdjrRiskJob
@@ -5689,6 +5863,7 @@ data GooglePrivacyDlpV2RecordKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2RecordKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5706,6 +5881,7 @@ googlePrivacyDlpV2RecordKey =
     , _gpdvrkDatastoreKey = Nothing
     , _gpdvrkBigQueryKey = Nothing
     }
+
 
 -- | Values of identifying columns in the given row. Order of values matches
 -- the order of field identifiers specified in the scanning request.
@@ -5761,6 +5937,7 @@ data GooglePrivacyDlpV2KMapEstimationHistogramBucket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2KMapEstimationHistogramBucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5784,6 +5961,7 @@ googlePrivacyDlpV2KMapEstimationHistogramBucket =
     , _gpdvkmehbBucketSize = Nothing
     , _gpdvkmehbBucketValueCount = Nothing
     }
+
 
 -- | Always greater than or equal to min_anonymity.
 gpdvkmehbMaxAnonymity :: Lens' GooglePrivacyDlpV2KMapEstimationHistogramBucket (Maybe Int64)
@@ -5860,6 +6038,7 @@ data GooglePrivacyDlpV2ListDeidentifyTemplatesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ListDeidentifyTemplatesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5872,6 +6051,7 @@ googlePrivacyDlpV2ListDeidentifyTemplatesResponse
 googlePrivacyDlpV2ListDeidentifyTemplatesResponse =
   GooglePrivacyDlpV2ListDeidentifyTemplatesResponse'
     {_gpdvldtrNextPageToken = Nothing, _gpdvldtrDeidentifyTemplates = Nothing}
+
 
 -- | If the next page is available then the next page token to be used in
 -- following ListDeidentifyTemplates request.
@@ -5922,6 +6102,7 @@ data GooglePrivacyDlpV2KAnonymityConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2KAnonymityConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5934,6 +6115,7 @@ googlePrivacyDlpV2KAnonymityConfig
 googlePrivacyDlpV2KAnonymityConfig =
   GooglePrivacyDlpV2KAnonymityConfig'
     {_gpdvkacEntityId = Nothing, _gpdvkacQuasiIds = Nothing}
+
 
 -- | Optional message indicating that multiple rows might be associated to a
 -- single individual. If the same entity_id is associated to multiple
@@ -5986,6 +6168,7 @@ data GooglePrivacyDlpV2DeidentifyContentResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DeidentifyContentResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -5998,6 +6181,7 @@ googlePrivacyDlpV2DeidentifyContentResponse
 googlePrivacyDlpV2DeidentifyContentResponse =
   GooglePrivacyDlpV2DeidentifyContentResponse'
     {_gOverview = Nothing, _gItem = Nothing}
+
 
 -- | An overview of the changes that were made on the \`item\`.
 gOverview :: Lens' GooglePrivacyDlpV2DeidentifyContentResponse (Maybe GooglePrivacyDlpV2TransformationOverview)
@@ -6048,6 +6232,7 @@ data GooglePrivacyDlpV2JobTrigger =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2JobTrigger' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6086,6 +6271,7 @@ googlePrivacyDlpV2JobTrigger =
     , _gpdvjtDescription = Nothing
     , _gpdvjtCreateTime = Nothing
     }
+
 
 -- | A status for this trigger. [required]
 gpdvjtStatus :: Lens' GooglePrivacyDlpV2JobTrigger (Maybe GooglePrivacyDlpV2JobTriggerStatus)
@@ -6197,6 +6383,7 @@ data GooglePrivacyDlpV2ListStoredInfoTypesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ListStoredInfoTypesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6209,6 +6396,7 @@ googlePrivacyDlpV2ListStoredInfoTypesResponse
 googlePrivacyDlpV2ListStoredInfoTypesResponse =
   GooglePrivacyDlpV2ListStoredInfoTypesResponse'
     {_gpdvlsitrNextPageToken = Nothing, _gpdvlsitrStoredInfoTypes = Nothing}
+
 
 -- | If the next page is available then the next page token to be used in
 -- following ListStoredInfoTypes request.
@@ -6259,6 +6447,7 @@ data GooglePrivacyDlpV2LDiversityEquivalenceClass =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2LDiversityEquivalenceClass' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6279,6 +6468,7 @@ googlePrivacyDlpV2LDiversityEquivalenceClass =
     , _gpdvldecNumDistinctSensitiveValues = Nothing
     , _gpdvldecQuasiIdsValues = Nothing
     }
+
 
 -- | Estimated frequencies of top sensitive values.
 gpdvldecTopSensitiveValues :: Lens' GooglePrivacyDlpV2LDiversityEquivalenceClass [GooglePrivacyDlpV2ValueFrequency]
@@ -6349,6 +6539,7 @@ data GooglePrivacyDlpV2DeidentifyConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DeidentifyConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6363,6 +6554,7 @@ googlePrivacyDlpV2DeidentifyConfig =
     { _gpdvdcInfoTypeTransformations = Nothing
     , _gpdvdcRecordTransformations = Nothing
     }
+
 
 -- | Treat the dataset as free-form text and apply the same free text
 -- transformation everywhere.
@@ -6415,6 +6607,7 @@ data GooglePrivacyDlpV2CharacterMaskConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CharacterMaskConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6435,6 +6628,7 @@ googlePrivacyDlpV2CharacterMaskConfig =
     , _gpdvcmcReverseOrder = Nothing
     , _gpdvcmcCharactersToIgnore = Nothing
     }
+
 
 -- | Number of characters to mask. If not set, all matching chars will be
 -- masked. Skipped characters do not count towards this tally.
@@ -6505,6 +6699,7 @@ data GooglePrivacyDlpV2DatastoreOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DatastoreOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6517,6 +6712,7 @@ googlePrivacyDlpV2DatastoreOptions
 googlePrivacyDlpV2DatastoreOptions =
   GooglePrivacyDlpV2DatastoreOptions'
     {_gpdvdoPartitionId = Nothing, _gpdvdoKind = Nothing}
+
 
 -- | A partition ID identifies a grouping of entities. The grouping is always
 -- by project and namespace, however the namespace ID may be empty.
@@ -6556,6 +6752,7 @@ data GooglePrivacyDlpV2ValueFrequency =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ValueFrequency' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6568,6 +6765,7 @@ googlePrivacyDlpV2ValueFrequency
 googlePrivacyDlpV2ValueFrequency =
   GooglePrivacyDlpV2ValueFrequency'
     {_gpdvvfValue = Nothing, _gpdvvfCount = Nothing}
+
 
 -- | A value contained in the field in question.
 gpdvvfValue :: Lens' GooglePrivacyDlpV2ValueFrequency (Maybe GooglePrivacyDlpV2Value)
@@ -6608,6 +6806,7 @@ data GooglePrivacyDlpV2BoundingBox =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2BoundingBox' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6628,6 +6827,7 @@ googlePrivacyDlpV2BoundingBox =
     , _gpdvbbWidth = Nothing
     , _gpdvbbTop = Nothing
     }
+
 
 -- | Height of the bounding box in pixels.
 gpdvbbHeight :: Lens' GooglePrivacyDlpV2BoundingBox (Maybe Int32)
@@ -6684,6 +6884,7 @@ data GooglePrivacyDlpV2PartitionId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2PartitionId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6696,6 +6897,7 @@ googlePrivacyDlpV2PartitionId
 googlePrivacyDlpV2PartitionId =
   GooglePrivacyDlpV2PartitionId'
     {_gpdvpiNamespaceId = Nothing, _gpdvpiProjectId = Nothing}
+
 
 -- | If not empty, the ID of the namespace to which the entities belong.
 gpdvpiNamespaceId :: Lens' GooglePrivacyDlpV2PartitionId (Maybe Text)
@@ -6734,6 +6936,7 @@ newtype GooglePrivacyDlpV2SaveFindings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2SaveFindings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6743,6 +6946,7 @@ googlePrivacyDlpV2SaveFindings
     :: GooglePrivacyDlpV2SaveFindings
 googlePrivacyDlpV2SaveFindings =
   GooglePrivacyDlpV2SaveFindings' {_gpdvsfOutputConfig = Nothing}
+
 
 gpdvsfOutputConfig :: Lens' GooglePrivacyDlpV2SaveFindings (Maybe GooglePrivacyDlpV2OutputStorageConfig)
 gpdvsfOutputConfig
@@ -6776,6 +6980,7 @@ data GooglePrivacyDlpV2StoredInfoTypeVersion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2StoredInfoTypeVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6796,6 +7001,7 @@ googlePrivacyDlpV2StoredInfoTypeVersion =
     , _gpdvsitvErrors = Nothing
     , _gpdvsitvCreateTime = Nothing
     }
+
 
 -- | Stored info type version state. Read-only, updated by the system during
 -- dictionary creation.
@@ -6870,6 +7076,7 @@ newtype GooglePrivacyDlpV2ListInfoTypesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ListInfoTypesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6879,6 +7086,7 @@ googlePrivacyDlpV2ListInfoTypesResponse
     :: GooglePrivacyDlpV2ListInfoTypesResponse
 googlePrivacyDlpV2ListInfoTypesResponse =
   GooglePrivacyDlpV2ListInfoTypesResponse' {_gpdvlitrInfoTypes = Nothing}
+
 
 -- | Set of sensitive infoTypes.
 gpdvlitrInfoTypes :: Lens' GooglePrivacyDlpV2ListInfoTypesResponse [GooglePrivacyDlpV2InfoTypeDescription]
@@ -6919,6 +7127,7 @@ data GooglePrivacyDlpV2ContentLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ContentLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -6945,6 +7154,7 @@ googlePrivacyDlpV2ContentLocation =
     , _gpdvclContainerVersion = Nothing
     , _gpdvclRecordLocation = Nothing
     }
+
 
 -- | Location within an image\'s pixels.
 gpdvclImageLocation :: Lens' GooglePrivacyDlpV2ContentLocation (Maybe GooglePrivacyDlpV2ImageLocation)
@@ -7034,6 +7244,7 @@ data GooglePrivacyDlpV2AuxiliaryTable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2AuxiliaryTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7051,6 +7262,7 @@ googlePrivacyDlpV2AuxiliaryTable =
     , _gpdvatTable = Nothing
     , _gpdvatQuasiIds = Nothing
     }
+
 
 -- | The relative frequency column must contain a floating-point number
 -- between 0 and 1 (inclusive). Null values are assumed to be zero.
@@ -7110,6 +7322,7 @@ data GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7133,6 +7346,7 @@ googlePrivacyDlpV2DeltaPresenceEstimationHistogramBucket =
     , _gpdvdpehbBucketSize = Nothing
     , _gpdvdpehbBucketValueCount = Nothing
     }
+
 
 -- | Sample of quasi-identifier tuple values in this bucket. The total number
 -- of classes returned per bucket is capped at 20.
@@ -7210,6 +7424,7 @@ data GooglePrivacyDlpV2FileSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2FileSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7222,6 +7437,7 @@ googlePrivacyDlpV2FileSet
 googlePrivacyDlpV2FileSet =
   GooglePrivacyDlpV2FileSet'
     {_gpdvfsURL = Nothing, _gpdvfsRegexFileSet = Nothing}
+
 
 -- | The Cloud Storage url of the file(s) to scan, in the format
 -- \`gs:\/\/\/\`. Trailing wildcard in the path is allowed. If the url ends
@@ -7266,6 +7482,7 @@ data GooglePrivacyDlpV2ListInspectTemplatesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ListInspectTemplatesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7278,6 +7495,7 @@ googlePrivacyDlpV2ListInspectTemplatesResponse
 googlePrivacyDlpV2ListInspectTemplatesResponse =
   GooglePrivacyDlpV2ListInspectTemplatesResponse'
     {_gpdvlitrNextPageToken = Nothing, _gpdvlitrInspectTemplates = Nothing}
+
 
 -- | If the next page is available then the next page token to be used in
 -- following ListInspectTemplates request.
@@ -7326,6 +7544,7 @@ newtype GooglePrivacyDlpV2KAnonymityResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2KAnonymityResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7336,6 +7555,7 @@ googlePrivacyDlpV2KAnonymityResult
 googlePrivacyDlpV2KAnonymityResult =
   GooglePrivacyDlpV2KAnonymityResult'
     {_gpdvkarEquivalenceClassHistogramBuckets = Nothing}
+
 
 -- | Histogram of k-anonymity equivalence classes.
 gpdvkarEquivalenceClassHistogramBuckets :: Lens' GooglePrivacyDlpV2KAnonymityResult [GooglePrivacyDlpV2KAnonymityHistogramBucket]
@@ -7373,6 +7593,7 @@ data GooglePrivacyDlpV2BigQueryField =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2BigQueryField' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7385,6 +7606,7 @@ googlePrivacyDlpV2BigQueryField
 googlePrivacyDlpV2BigQueryField =
   GooglePrivacyDlpV2BigQueryField'
     {_gpdvbqfField = Nothing, _gpdvbqfTable = Nothing}
+
 
 -- | Designated field in the BigQuery table.
 gpdvbqfField :: Lens' GooglePrivacyDlpV2BigQueryField (Maybe GooglePrivacyDlpV2FieldId)
@@ -7421,6 +7643,7 @@ data GooglePrivacyDlpV2OutputStorageConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2OutputStorageConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7433,6 +7656,7 @@ googlePrivacyDlpV2OutputStorageConfig
 googlePrivacyDlpV2OutputStorageConfig =
   GooglePrivacyDlpV2OutputStorageConfig'
     {_gpdvoscOutputSchema = Nothing, _gpdvoscTable = Nothing}
+
 
 -- | Schema used for writing the findings for Inspect jobs. This field is
 -- only used for Inspect and must be unspecified for Risk jobs. Columns are
@@ -7488,6 +7712,7 @@ newtype GooglePrivacyDlpV2CloudStorageFileSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CloudStorageFileSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7497,6 +7722,7 @@ googlePrivacyDlpV2CloudStorageFileSet
     :: GooglePrivacyDlpV2CloudStorageFileSet
 googlePrivacyDlpV2CloudStorageFileSet =
   GooglePrivacyDlpV2CloudStorageFileSet' {_gpdvcsfsURL = Nothing}
+
 
 -- | The url, in the format \`gs:\/\/\/\`. Trailing wildcard in the path is
 -- allowed.
@@ -7530,6 +7756,7 @@ newtype GooglePrivacyDlpV2InfoTypeTransformations =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InfoTypeTransformations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7539,6 +7766,7 @@ googlePrivacyDlpV2InfoTypeTransformations
     :: GooglePrivacyDlpV2InfoTypeTransformations
 googlePrivacyDlpV2InfoTypeTransformations =
   GooglePrivacyDlpV2InfoTypeTransformations' {_gpdvittTransformations = Nothing}
+
 
 -- | Transformation for each infoType. Cannot specify more than one for a
 -- given infoType. [required]
@@ -7579,6 +7807,7 @@ data GooglePrivacyDlpV2KmsWrAppedCryptoKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2KmsWrAppedCryptoKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7591,6 +7820,7 @@ googlePrivacyDlpV2KmsWrAppedCryptoKey
 googlePrivacyDlpV2KmsWrAppedCryptoKey =
   GooglePrivacyDlpV2KmsWrAppedCryptoKey'
     {_gpdvkwackWrAppedKey = Nothing, _gpdvkwackCryptoKeyName = Nothing}
+
 
 -- | The wrapped data crypto key. [required]
 gpdvkwackWrAppedKey :: Lens' GooglePrivacyDlpV2KmsWrAppedCryptoKey (Maybe ByteString)
@@ -7631,6 +7861,7 @@ newtype GooglePrivacyDlpV2InspectContentResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InspectContentResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7640,6 +7871,7 @@ googlePrivacyDlpV2InspectContentResponse
     :: GooglePrivacyDlpV2InspectContentResponse
 googlePrivacyDlpV2InspectContentResponse =
   GooglePrivacyDlpV2InspectContentResponse' {_gpdvicrResult = Nothing}
+
 
 -- | The findings.
 gpdvicrResult :: Lens' GooglePrivacyDlpV2InspectContentResponse (Maybe GooglePrivacyDlpV2InspectResult)
@@ -7676,6 +7908,7 @@ data GooglePrivacyDlpV2LDiversityHistogramBucket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2LDiversityHistogramBucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7699,6 +7932,7 @@ googlePrivacyDlpV2LDiversityHistogramBucket =
     , _gpdvldhbBucketSize = Nothing
     , _gpdvldhbBucketValueCount = Nothing
     }
+
 
 -- | Sample of equivalence classes in this bucket. The total number of
 -- classes returned per bucket is capped at 20.
@@ -7781,6 +8015,7 @@ data GooglePrivacyDlpV2ReidentifyContentResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ReidentifyContentResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7793,6 +8028,7 @@ googlePrivacyDlpV2ReidentifyContentResponse
 googlePrivacyDlpV2ReidentifyContentResponse =
   GooglePrivacyDlpV2ReidentifyContentResponse'
     {_gpdvrcrOverview = Nothing, _gpdvrcrItem = Nothing}
+
 
 -- | An overview of the changes that were made to the \`item\`.
 gpdvrcrOverview :: Lens' GooglePrivacyDlpV2ReidentifyContentResponse (Maybe GooglePrivacyDlpV2TransformationOverview)
@@ -7835,6 +8071,7 @@ data GooglePrivacyDlpV2Expressions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Expressions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7847,6 +8084,7 @@ googlePrivacyDlpV2Expressions
 googlePrivacyDlpV2Expressions =
   GooglePrivacyDlpV2Expressions'
     {_gpdveLogicalOperator = Nothing, _gpdveConditions = Nothing}
+
 
 -- | The operator to apply to the result of conditions. Default and currently
 -- only supported value is \`AND\`.
@@ -7886,6 +8124,7 @@ data GooglePrivacyDlpV2DateTime =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DateTime' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7906,6 +8145,7 @@ googlePrivacyDlpV2DateTime =
     , _gpdvdtTimeZone = Nothing
     , _gpdvdtDayOfWeek = Nothing
     }
+
 
 gpdvdtTime :: Lens' GooglePrivacyDlpV2DateTime (Maybe GoogleTypeTimeOfDay)
 gpdvdtTime
@@ -7979,6 +8219,7 @@ data GooglePrivacyDlpV2CloudStorageRegexFileSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CloudStorageRegexFileSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -7996,6 +8237,7 @@ googlePrivacyDlpV2CloudStorageRegexFileSet =
     , _gpdvcsrfsBucketName = Nothing
     , _gpdvcsrfsIncludeRegex = Nothing
     }
+
 
 -- | A list of regular expressions matching file paths to exclude. All files
 -- in the bucket that match at least one of these regular expressions will
@@ -8064,6 +8306,7 @@ data GooglePrivacyDlpV2Bucket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Bucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8078,6 +8321,7 @@ googlePrivacyDlpV2Bucket
 googlePrivacyDlpV2Bucket =
   GooglePrivacyDlpV2Bucket'
     {_gpdvbMax = Nothing, _gpdvbReplacementValue = Nothing, _gpdvbMin = Nothing}
+
 
 -- | Upper bound of the range, exclusive; type must match min.
 gpdvbMax :: Lens' GooglePrivacyDlpV2Bucket (Maybe GooglePrivacyDlpV2Value)
@@ -8124,6 +8368,7 @@ data GooglePrivacyDlpV2Action =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Action' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8144,6 +8389,7 @@ googlePrivacyDlpV2Action =
     , _gpdvaSaveFindings = Nothing
     , _gpdvaPublishSummaryToCscc = Nothing
     }
+
 
 -- | Enable email notification to project owners and editors on job‘s
 -- completion\/failure.
@@ -8207,6 +8453,7 @@ data GoogleTypeDate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GoogleTypeDate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8220,6 +8467,7 @@ googleTypeDate
     :: GoogleTypeDate
 googleTypeDate =
   GoogleTypeDate' {_gtdDay = Nothing, _gtdYear = Nothing, _gtdMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -8271,11 +8519,13 @@ data GooglePrivacyDlpV2SurrogateType =
   GooglePrivacyDlpV2SurrogateType'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2SurrogateType' with the minimum fields required to make a request.
 --
 googlePrivacyDlpV2SurrogateType
     :: GooglePrivacyDlpV2SurrogateType
 googlePrivacyDlpV2SurrogateType = GooglePrivacyDlpV2SurrogateType'
+
 
 instance FromJSON GooglePrivacyDlpV2SurrogateType
          where
@@ -8299,6 +8549,7 @@ data GooglePrivacyDlpV2Table =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Table' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8310,6 +8561,7 @@ googlePrivacyDlpV2Table
     :: GooglePrivacyDlpV2Table
 googlePrivacyDlpV2Table =
   GooglePrivacyDlpV2Table' {_gpdvtRows = Nothing, _gpdvtHeaders = Nothing}
+
 
 gpdvtRows :: Lens' GooglePrivacyDlpV2Table [GooglePrivacyDlpV2Row]
 gpdvtRows
@@ -8347,6 +8599,7 @@ newtype GooglePrivacyDlpV2LDiversityResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2LDiversityResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8357,6 +8610,7 @@ googlePrivacyDlpV2LDiversityResult
 googlePrivacyDlpV2LDiversityResult =
   GooglePrivacyDlpV2LDiversityResult'
     {_gpdvldrSensitiveValueFrequencyHistogramBuckets = Nothing}
+
 
 -- | Histogram of l-diversity equivalence class sensitive value frequencies.
 gpdvldrSensitiveValueFrequencyHistogramBuckets :: Lens' GooglePrivacyDlpV2LDiversityResult [GooglePrivacyDlpV2LDiversityHistogramBucket]
@@ -8403,6 +8657,7 @@ data GooglePrivacyDlpV2KMapEstimationConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2KMapEstimationConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8420,6 +8675,7 @@ googlePrivacyDlpV2KMapEstimationConfig =
     , _gpdvkmecRegionCode = Nothing
     , _gpdvkmecQuasiIds = Nothing
     }
+
 
 -- | Several auxiliary tables can be used in the analysis. Each custom_tag
 -- used to tag a quasi-identifiers column must appear in exactly one column
@@ -8491,6 +8747,7 @@ data GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8517,6 +8774,7 @@ googlePrivacyDlpV2CryptoReplaceFfxFpeConfig =
     , _gpdvcrffcCryptoKey = Nothing
     , _gpdvcrffcRadix = Nothing
     }
+
 
 -- | The \'tweak\', a context may be used for higher security since the same
 -- identifier in two different contexts won\'t be given the same surrogate.
@@ -8629,6 +8887,7 @@ data GooglePrivacyDlpV2QuasiIdentifierField =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2QuasiIdentifierField' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8641,6 +8900,7 @@ googlePrivacyDlpV2QuasiIdentifierField
 googlePrivacyDlpV2QuasiIdentifierField =
   GooglePrivacyDlpV2QuasiIdentifierField'
     {_gField = Nothing, _gCustomTag = Nothing}
+
 
 gField :: Lens' GooglePrivacyDlpV2QuasiIdentifierField (Maybe GooglePrivacyDlpV2FieldId)
 gField = lens _gField (\ s a -> s{_gField = a})
@@ -8676,6 +8936,7 @@ newtype GooglePrivacyDlpV2InfoType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InfoType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8684,6 +8945,7 @@ newtype GooglePrivacyDlpV2InfoType =
 googlePrivacyDlpV2InfoType
     :: GooglePrivacyDlpV2InfoType
 googlePrivacyDlpV2InfoType = GooglePrivacyDlpV2InfoType' {_gpdvitName = Nothing}
+
 
 -- | Name of the information type. Either a name of your choosing when
 -- creating a CustomInfoType, or one of the names listed at
@@ -8721,6 +8983,7 @@ data GooglePrivacyDlpV2InspectTemplate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InspectTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8747,6 +9010,7 @@ googlePrivacyDlpV2InspectTemplate =
     , _gDescription = Nothing
     , _gCreateTime = Nothing
     }
+
 
 -- | The core content of the template. Configuration of the scanning process.
 gInspectConfig :: Lens' GooglePrivacyDlpV2InspectTemplate (Maybe GooglePrivacyDlpV2InspectConfig)
@@ -8819,6 +9083,7 @@ data GooglePrivacyDlpV2KAnonymityHistogramBucket =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2KAnonymityHistogramBucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8842,6 +9107,7 @@ googlePrivacyDlpV2KAnonymityHistogramBucket =
     , _gpdvkahbBucketSize = Nothing
     , _gpdvkahbBucketValueCount = Nothing
     }
+
 
 -- | Lower bound on the size of the equivalence classes in this bucket.
 gpdvkahbEquivalenceClassSizeLowerBound :: Lens' GooglePrivacyDlpV2KAnonymityHistogramBucket (Maybe Int64)
@@ -8925,6 +9191,7 @@ data GooglePrivacyDlpV2ReidentifyContentRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ReidentifyContentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -8948,6 +9215,7 @@ googlePrivacyDlpV2ReidentifyContentRequest =
     , _gooInspectTemplateName = Nothing
     , _gooReidentifyConfig = Nothing
     }
+
 
 -- | Configuration for the inspector.
 gooInspectConfig :: Lens' GooglePrivacyDlpV2ReidentifyContentRequest (Maybe GooglePrivacyDlpV2InspectConfig)
@@ -9035,6 +9303,7 @@ newtype GooglePrivacyDlpV2CryptoHashConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CryptoHashConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9044,6 +9313,7 @@ googlePrivacyDlpV2CryptoHashConfig
     :: GooglePrivacyDlpV2CryptoHashConfig
 googlePrivacyDlpV2CryptoHashConfig =
   GooglePrivacyDlpV2CryptoHashConfig' {_gpdvchcCryptoKey = Nothing}
+
 
 -- | The key used by the hash function.
 gpdvchcCryptoKey :: Lens' GooglePrivacyDlpV2CryptoHashConfig (Maybe GooglePrivacyDlpV2CryptoKey)
@@ -9076,6 +9346,7 @@ data GooglePrivacyDlpV2InfoTypeLimit =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InfoTypeLimit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9088,6 +9359,7 @@ googlePrivacyDlpV2InfoTypeLimit
 googlePrivacyDlpV2InfoTypeLimit =
   GooglePrivacyDlpV2InfoTypeLimit'
     {_gpdvitlMaxFindings = Nothing, _gpdvitlInfoType = Nothing}
+
 
 -- | Max findings limit for the given infoType.
 gpdvitlMaxFindings :: Lens' GooglePrivacyDlpV2InfoTypeLimit (Maybe Int32)
@@ -9129,6 +9401,7 @@ newtype GooglePrivacyDlpV2TableLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2TableLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9138,6 +9411,7 @@ googlePrivacyDlpV2TableLocation
     :: GooglePrivacyDlpV2TableLocation
 googlePrivacyDlpV2TableLocation =
   GooglePrivacyDlpV2TableLocation' {_gpdvtlRowIndex = Nothing}
+
 
 -- | The zero-based index of the row where the finding is located.
 gpdvtlRowIndex :: Lens' GooglePrivacyDlpV2TableLocation (Maybe Int64)
@@ -9167,6 +9441,7 @@ newtype GooglePrivacyDlpV2TimeZone =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2TimeZone' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9176,6 +9451,7 @@ googlePrivacyDlpV2TimeZone
     :: GooglePrivacyDlpV2TimeZone
 googlePrivacyDlpV2TimeZone =
   GooglePrivacyDlpV2TimeZone' {_gpdvtzOffSetMinutes = Nothing}
+
 
 -- | Set only if the offset can be determined. Positive for time ahead of
 -- UTC. E.g. For \"UTC-9\", this value is -540.
@@ -9210,6 +9486,7 @@ data GooglePrivacyDlpV2StorageConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2StorageConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9230,6 +9507,7 @@ googlePrivacyDlpV2StorageConfig =
     , _gpdvscDatastoreOptions = Nothing
     , _gpdvscCloudStorageOptions = Nothing
     }
+
 
 gpdvscTimespanConfig :: Lens' GooglePrivacyDlpV2StorageConfig (Maybe GooglePrivacyDlpV2TimespanConfig)
 gpdvscTimespanConfig
@@ -9296,6 +9574,7 @@ data GooglePrivacyDlpV2Value =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Value' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9328,6 +9607,7 @@ googlePrivacyDlpV2Value =
     , _gpdvvBooleanValue = Nothing
     , _gpdvvFloatValue = Nothing
     }
+
 
 gpdvvDayOfWeekValue :: Lens' GooglePrivacyDlpV2Value (Maybe GooglePrivacyDlpV2ValueDayOfWeekValue)
 gpdvvDayOfWeekValue
@@ -9427,6 +9707,7 @@ data GooglePrivacyDlpV2Dictionary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Dictionary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9439,6 +9720,7 @@ googlePrivacyDlpV2Dictionary
 googlePrivacyDlpV2Dictionary =
   GooglePrivacyDlpV2Dictionary'
     {_gpdvdWordList = Nothing, _gpdvdCloudStoragePath = Nothing}
+
 
 -- | List of words or phrases to search for.
 gpdvdWordList :: Lens' GooglePrivacyDlpV2Dictionary (Maybe GooglePrivacyDlpV2WordList)
@@ -9483,6 +9765,7 @@ data GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9515,6 +9798,7 @@ googlePrivacyDlpV2AnalyzeDataSourceRiskDetails =
     , _gpdvadsrdNumericalStatsResult = Nothing
     , _gpdvadsrdCategoricalStatsResult = Nothing
     }
+
 
 -- | Privacy metric to compute.
 gpdvadsrdRequestedPrivacyMetric :: Lens' GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails (Maybe GooglePrivacyDlpV2PrivacyMetric)
@@ -9609,6 +9893,7 @@ newtype GooglePrivacyDlpV2Conditions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Conditions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9618,6 +9903,7 @@ googlePrivacyDlpV2Conditions
     :: GooglePrivacyDlpV2Conditions
 googlePrivacyDlpV2Conditions =
   GooglePrivacyDlpV2Conditions' {_gpdvcConditions = Nothing}
+
 
 gpdvcConditions :: Lens' GooglePrivacyDlpV2Conditions [GooglePrivacyDlpV2Condition]
 gpdvcConditions
@@ -9647,6 +9933,7 @@ newtype GooglePrivacyDlpV2DatastoreKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DatastoreKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9656,6 +9943,7 @@ googlePrivacyDlpV2DatastoreKey
     :: GooglePrivacyDlpV2DatastoreKey
 googlePrivacyDlpV2DatastoreKey =
   GooglePrivacyDlpV2DatastoreKey' {_gpdvdkEntityKey = Nothing}
+
 
 -- | Datastore entity key.
 gpdvdkEntityKey :: Lens' GooglePrivacyDlpV2DatastoreKey (Maybe GooglePrivacyDlpV2Key)
@@ -9686,6 +9974,7 @@ data GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9700,6 +9989,7 @@ googlePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues =
     { _gpdvdpeqivEstimatedProbability = Nothing
     , _gpdvdpeqivQuasiIdsValues = Nothing
     }
+
 
 -- | The estimated probability that a given individual sharing these
 -- quasi-identifier values is in the dataset. This value, typically called
@@ -9757,6 +10047,7 @@ data GooglePrivacyDlpV2CharsToIgnore =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CharsToIgnore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9771,6 +10062,7 @@ googlePrivacyDlpV2CharsToIgnore =
     { _gpdvctiCommonCharactersToIgnore = Nothing
     , _gpdvctiCharactersToSkip = Nothing
     }
+
 
 gpdvctiCommonCharactersToIgnore :: Lens' GooglePrivacyDlpV2CharsToIgnore (Maybe GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnore)
 gpdvctiCommonCharactersToIgnore
@@ -9814,6 +10106,7 @@ data GooglePrivacyDlpV2BigQueryTable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2BigQueryTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9831,6 +10124,7 @@ googlePrivacyDlpV2BigQueryTable =
     , _gpdvbqtProjectId = Nothing
     , _gpdvbqtTableId = Nothing
     }
+
 
 -- | Dataset ID of the table.
 gpdvbqtDataSetId :: Lens' GooglePrivacyDlpV2BigQueryTable (Maybe Text)
@@ -9877,6 +10171,7 @@ data GooglePrivacyDlpV2RequestedOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2RequestedOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9889,6 +10184,7 @@ googlePrivacyDlpV2RequestedOptions
 googlePrivacyDlpV2RequestedOptions =
   GooglePrivacyDlpV2RequestedOptions'
     {_gpdvroSnapshotInspectTemplate = Nothing, _gpdvroJobConfig = Nothing}
+
 
 -- | If run with an InspectTemplate, a snapshot of its state at the time of
 -- this run.
@@ -9938,6 +10234,7 @@ data GooglePrivacyDlpV2PrimitiveTransformation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2PrimitiveTransformation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -9976,6 +10273,7 @@ googlePrivacyDlpV2PrimitiveTransformation =
     , _gpdvptReplaceConfig = Nothing
     , _gpdvptCryptoReplaceFfxFpeConfig = Nothing
     }
+
 
 gpdvptFixedSizeBucketingConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2FixedSizeBucketingConfig)
 gpdvptFixedSizeBucketingConfig
@@ -10074,11 +10372,13 @@ data GooglePrivacyDlpV2CancelDlpJobRequest =
   GooglePrivacyDlpV2CancelDlpJobRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CancelDlpJobRequest' with the minimum fields required to make a request.
 --
 googlePrivacyDlpV2CancelDlpJobRequest
     :: GooglePrivacyDlpV2CancelDlpJobRequest
 googlePrivacyDlpV2CancelDlpJobRequest = GooglePrivacyDlpV2CancelDlpJobRequest'
+
 
 instance FromJSON
            GooglePrivacyDlpV2CancelDlpJobRequest
@@ -10102,6 +10402,7 @@ data GooglePrivacyDlpV2RecordLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2RecordLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10119,6 +10420,7 @@ googlePrivacyDlpV2RecordLocation =
     , _gpdvrlFieldId = Nothing
     , _gpdvrlRecordKey = Nothing
     }
+
 
 -- | Location within a \`ContentItem.Table\`.
 gpdvrlTableLocation :: Lens' GooglePrivacyDlpV2RecordLocation (Maybe GooglePrivacyDlpV2TableLocation)
@@ -10168,6 +10470,7 @@ data GooglePrivacyDlpV2Error =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Error' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10179,6 +10482,7 @@ googlePrivacyDlpV2Error
     :: GooglePrivacyDlpV2Error
 googlePrivacyDlpV2Error =
   GooglePrivacyDlpV2Error' {_gpdveDetails = Nothing, _gpdveTimestamps = Nothing}
+
 
 gpdveDetails :: Lens' GooglePrivacyDlpV2Error (Maybe GoogleRpcStatus)
 gpdveDetails
@@ -10219,6 +10523,7 @@ data GooglePrivacyDlpV2StoredInfoType =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2StoredInfoType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10236,6 +10541,7 @@ googlePrivacyDlpV2StoredInfoType =
     , _gpdvsitName = Nothing
     , _gpdvsitPendingVersions = Nothing
     }
+
 
 -- | Current version of the stored info type.
 gpdvsitCurrentVersion :: Lens' GooglePrivacyDlpV2StoredInfoType (Maybe GooglePrivacyDlpV2StoredInfoTypeVersion)
@@ -10292,6 +10598,7 @@ data GooglePrivacyDlpV2StatisticalTable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2StatisticalTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10309,6 +10616,7 @@ googlePrivacyDlpV2StatisticalTable =
     , _gpdvstTable = Nothing
     , _gpdvstQuasiIds = Nothing
     }
+
 
 -- | The relative frequency column must contain a floating-point number
 -- between 0 and 1 (inclusive). Null values are assumed to be zero.
@@ -10366,6 +10674,7 @@ data GooglePrivacyDlpV2DeidentifyTemplate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DeidentifyTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10392,6 +10701,7 @@ googlePrivacyDlpV2DeidentifyTemplate =
     , _gpdvdtDescription = Nothing
     , _gpdvdtCreateTime = Nothing
     }
+
 
 -- | The last update timestamp of a inspectTemplate, output only field.
 gpdvdtUpdateTime :: Lens' GooglePrivacyDlpV2DeidentifyTemplate (Maybe UTCTime)
@@ -10468,6 +10778,7 @@ newtype GooglePrivacyDlpV2ReplaceValueConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ReplaceValueConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10477,6 +10788,7 @@ googlePrivacyDlpV2ReplaceValueConfig
     :: GooglePrivacyDlpV2ReplaceValueConfig
 googlePrivacyDlpV2ReplaceValueConfig =
   GooglePrivacyDlpV2ReplaceValueConfig' {_gpdvrvcNewValue = Nothing}
+
 
 -- | Value to replace it with.
 gpdvrvcNewValue :: Lens' GooglePrivacyDlpV2ReplaceValueConfig (Maybe GooglePrivacyDlpV2Value)
@@ -10509,6 +10821,7 @@ newtype GooglePrivacyDlpV2CategoricalStatsConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CategoricalStatsConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10518,6 +10831,7 @@ googlePrivacyDlpV2CategoricalStatsConfig
     :: GooglePrivacyDlpV2CategoricalStatsConfig
 googlePrivacyDlpV2CategoricalStatsConfig =
   GooglePrivacyDlpV2CategoricalStatsConfig' {_gpdvcscField = Nothing}
+
 
 -- | Field to compute categorical stats on. All column types are supported
 -- except for arrays and structs. However, it may be more informative to
@@ -10553,6 +10867,7 @@ newtype GooglePrivacyDlpV2NumericalStatsConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2NumericalStatsConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10562,6 +10877,7 @@ googlePrivacyDlpV2NumericalStatsConfig
     :: GooglePrivacyDlpV2NumericalStatsConfig
 googlePrivacyDlpV2NumericalStatsConfig =
   GooglePrivacyDlpV2NumericalStatsConfig' {_gpdvnscField = Nothing}
+
 
 -- | Field to compute numerical stats on. Supported types are integer, float,
 -- date, datetime, timestamp, time.
@@ -10594,6 +10910,7 @@ data GooglePrivacyDlpV2ListJobTriggersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ListJobTriggersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10606,6 +10923,7 @@ googlePrivacyDlpV2ListJobTriggersResponse
 googlePrivacyDlpV2ListJobTriggersResponse =
   GooglePrivacyDlpV2ListJobTriggersResponse'
     {_gpdvljtrNextPageToken = Nothing, _gpdvljtrJobTriggers = Nothing}
+
 
 -- | If the next page is available then the next page token to be used in
 -- following ListJobTriggers request.
@@ -10651,6 +10969,7 @@ newtype GooglePrivacyDlpV2CloudStoragePath =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CloudStoragePath' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10660,6 +10979,7 @@ googlePrivacyDlpV2CloudStoragePath
     :: GooglePrivacyDlpV2CloudStoragePath
 googlePrivacyDlpV2CloudStoragePath =
   GooglePrivacyDlpV2CloudStoragePath' {_gpdvcspPath = Nothing}
+
 
 -- | A url representing a file or path (no wildcards) in Cloud Storage.
 -- Example: gs:\/\/[BUCKET_NAME]\/dictionary.txt
@@ -10691,6 +11011,7 @@ data GooglePrivacyDlpV2Location =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10708,6 +11029,7 @@ googlePrivacyDlpV2Location =
     , _gpdvlContentLocations = Nothing
     , _gpdvlByteRange = Nothing
     }
+
 
 -- | Unicode character offsets delimiting the finding. These are relative to
 -- the finding\'s containing element. Provided when the content is text.
@@ -10760,6 +11082,7 @@ newtype GooglePrivacyDlpV2Schedule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2Schedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10769,6 +11092,7 @@ googlePrivacyDlpV2Schedule
     :: GooglePrivacyDlpV2Schedule
 googlePrivacyDlpV2Schedule =
   GooglePrivacyDlpV2Schedule' {_gpdvsRecurrencePeriodDuration = Nothing}
+
 
 -- | With this option a job is started a regular periodic basis. For example:
 -- every day (86400 seconds). A scheduled start time will be skipped if the
@@ -10805,6 +11129,7 @@ data GooglePrivacyDlpV2CreateJobTriggerRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2CreateJobTriggerRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10817,6 +11142,7 @@ googlePrivacyDlpV2CreateJobTriggerRequest
 googlePrivacyDlpV2CreateJobTriggerRequest =
   GooglePrivacyDlpV2CreateJobTriggerRequest'
     {_gpdvcjtrTriggerId = Nothing, _gpdvcjtrJobTrigger = Nothing}
+
 
 -- | The trigger id can contain uppercase and lowercase letters, numbers, and
 -- hyphens; that is, it must match the regular expression:
@@ -10862,6 +11188,7 @@ data GooglePrivacyDlpV2TransformationOverview =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2TransformationOverview' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10876,6 +11203,7 @@ googlePrivacyDlpV2TransformationOverview =
     { _gpdvtoTransformedBytes = Nothing
     , _gpdvtoTransformationSummaries = Nothing
     }
+
 
 -- | Total size in bytes that were transformed in some way.
 gpdvtoTransformedBytes :: Lens' GooglePrivacyDlpV2TransformationOverview (Maybe Int64)
@@ -10922,6 +11250,7 @@ newtype GooglePrivacyDlpV2ImageLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2ImageLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10931,6 +11260,7 @@ googlePrivacyDlpV2ImageLocation
     :: GooglePrivacyDlpV2ImageLocation
 googlePrivacyDlpV2ImageLocation =
   GooglePrivacyDlpV2ImageLocation' {_gpdvilBoundingBoxes = Nothing}
+
 
 -- | Bounding boxes locating the pixels within the image containing the
 -- finding.
@@ -10964,6 +11294,7 @@ newtype GooglePrivacyDlpV2KindExpression =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2KindExpression' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -10973,6 +11304,7 @@ googlePrivacyDlpV2KindExpression
     :: GooglePrivacyDlpV2KindExpression
 googlePrivacyDlpV2KindExpression =
   GooglePrivacyDlpV2KindExpression' {_gpdvkeName = Nothing}
+
 
 -- | The name of the kind.
 gpdvkeName :: Lens' GooglePrivacyDlpV2KindExpression (Maybe Text)
@@ -11005,6 +11337,7 @@ data GooglePrivacyDlpV2PrivacyMetric =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2PrivacyMetric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11031,6 +11364,7 @@ googlePrivacyDlpV2PrivacyMetric =
     , _gpdvpmLDiversityConfig = Nothing
     , _gpdvpmDeltaPresenceEstimationConfig = Nothing
     }
+
 
 gpdvpmNumericalStatsConfig :: Lens' GooglePrivacyDlpV2PrivacyMetric (Maybe GooglePrivacyDlpV2NumericalStatsConfig)
 gpdvpmNumericalStatsConfig
@@ -11101,6 +11435,7 @@ newtype GooglePrivacyDlpV2UnwrAppedCryptoKey =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2UnwrAppedCryptoKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11110,6 +11445,7 @@ googlePrivacyDlpV2UnwrAppedCryptoKey
     :: GooglePrivacyDlpV2UnwrAppedCryptoKey
 googlePrivacyDlpV2UnwrAppedCryptoKey =
   GooglePrivacyDlpV2UnwrAppedCryptoKey' {_gpdvuackKey = Nothing}
+
 
 -- | The AES 128\/192\/256 bit key. [required]
 gpdvuackKey :: Lens' GooglePrivacyDlpV2UnwrAppedCryptoKey (Maybe ByteString)
@@ -11143,6 +11479,7 @@ data GooglePrivacyDlpV2InspectionRuleSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2InspectionRuleSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11155,6 +11492,7 @@ googlePrivacyDlpV2InspectionRuleSet
 googlePrivacyDlpV2InspectionRuleSet =
   GooglePrivacyDlpV2InspectionRuleSet'
     {_gpdvirsRules = Nothing, _gpdvirsInfoTypes = Nothing}
+
 
 -- | Set of rules to be applied to infoTypes. The rules are applied in order.
 gpdvirsRules :: Lens' GooglePrivacyDlpV2InspectionRuleSet [GooglePrivacyDlpV2InspectionRule]
@@ -11200,6 +11538,7 @@ data GooglePrivacyDlpV2QuasiId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2QuasiId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11220,6 +11559,7 @@ googlePrivacyDlpV2QuasiId =
     , _gpdvqiInferred = Nothing
     , _gpdvqiCustomTag = Nothing
     }
+
 
 -- | Identifies the column. [required]
 gpdvqiField :: Lens' GooglePrivacyDlpV2QuasiId (Maybe GooglePrivacyDlpV2FieldId)
@@ -11278,6 +11618,7 @@ newtype GooglePrivacyDlpV2DocumentLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GooglePrivacyDlpV2DocumentLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -11287,6 +11628,7 @@ googlePrivacyDlpV2DocumentLocation
     :: GooglePrivacyDlpV2DocumentLocation
 googlePrivacyDlpV2DocumentLocation =
   GooglePrivacyDlpV2DocumentLocation' {_gpdvdlFileOffSet = Nothing}
+
 
 -- | Offset of the line, from the beginning of the file, where the finding is
 -- located.

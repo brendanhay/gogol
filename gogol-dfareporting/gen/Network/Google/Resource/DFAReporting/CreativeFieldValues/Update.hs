@@ -66,6 +66,7 @@ data CreativeFieldValuesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativeFieldValuesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ creativeFieldValuesUpdate pCfvuCreativeFieldId_ pCfvuProFileId_ pCfvuPayload_ =
     , _cfvuProFileId = _Coerce # pCfvuProFileId_
     , _cfvuPayload = pCfvuPayload_
     }
+
 
 -- | Creative field ID for this creative field value.
 cfvuCreativeFieldId :: Lens' CreativeFieldValuesUpdate Int64

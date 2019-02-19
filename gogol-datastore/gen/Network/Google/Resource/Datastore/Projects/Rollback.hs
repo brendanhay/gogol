@@ -75,6 +75,7 @@ data ProjectsRollback =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsRollback' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsRollback pPrPayload_ pPrProjectId_ =
     , _prProjectId = pPrProjectId_
     , _prCallback = Nothing
     }
+
 
 -- | V1 error format.
 prXgafv :: Lens' ProjectsRollback (Maybe Xgafv)

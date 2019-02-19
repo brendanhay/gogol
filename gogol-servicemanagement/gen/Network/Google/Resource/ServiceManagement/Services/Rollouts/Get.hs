@@ -75,6 +75,7 @@ data ServicesRolloutsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesRolloutsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ servicesRolloutsGet pSrgServiceName_ pSrgRolloutId_ =
     , _srgRolloutId = pSrgRolloutId_
     , _srgCallback = Nothing
     }
+
 
 -- | V1 error format.
 srgXgafv :: Lens' ServicesRolloutsGet (Maybe Xgafv)

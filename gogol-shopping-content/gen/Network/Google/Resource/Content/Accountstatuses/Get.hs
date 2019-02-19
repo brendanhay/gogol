@@ -65,6 +65,7 @@ data AccountstatusesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountstatusesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ accountstatusesGet pAaMerchantId_ pAaAccountId_ =
     , _aaAccountId = _Coerce # pAaAccountId_
     , _aaDestinations = Nothing
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

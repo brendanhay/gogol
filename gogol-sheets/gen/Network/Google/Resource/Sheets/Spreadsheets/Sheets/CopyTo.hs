@@ -81,6 +81,7 @@ data SpreadsheetsSheetsCopyTo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpreadsheetsSheetsCopyTo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +117,7 @@ spreadsheetsSheetsCopyTo pSsctSpreadsheetId_ pSsctPayload_ pSsctSheetId_ =
     , _ssctSheetId = _Coerce # pSsctSheetId_
     , _ssctCallback = Nothing
     }
+
 
 -- | V1 error format.
 ssctXgafv :: Lens' SpreadsheetsSheetsCopyTo (Maybe Xgafv)

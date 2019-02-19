@@ -65,6 +65,7 @@ data NotificationsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -81,6 +82,7 @@ notificationsInsert
 notificationsInsert pNiBucket_ pNiPayload_ =
   NotificationsInsert'
     {_niBucket = pNiBucket_, _niPayload = pNiPayload_, _niUserProject = Nothing}
+
 
 -- | The parent bucket of the notification.
 niBucket :: Lens' NotificationsInsert Text

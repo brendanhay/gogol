@@ -81,6 +81,7 @@ data AdvertiserGroupsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdvertiserGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ advertiserGroupsList pAglProFileId_ =
     , _aglSortField = AGLSFID
     , _aglMaxResults = 1000
     }
+
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"advertiser*2015\" will return objects with names like

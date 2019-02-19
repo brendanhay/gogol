@@ -70,6 +70,7 @@ data ProjectsInstancesClustersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesClustersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsInstancesClustersGet pPicgName_ =
     , _picgName = pPicgName_
     , _picgCallback = Nothing
     }
+
 
 -- | V1 error format.
 picgXgafv :: Lens' ProjectsInstancesClustersGet (Maybe Xgafv)

@@ -70,6 +70,7 @@ data ProjectsScanConfigsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsScanConfigsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsScanConfigsDelete pPscdName_ =
     , _pscdName = pPscdName_
     , _pscdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscdXgafv :: Lens' ProjectsScanConfigsDelete (Maybe Xgafv)

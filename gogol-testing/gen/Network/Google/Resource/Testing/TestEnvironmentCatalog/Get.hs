@@ -81,6 +81,7 @@ data TestEnvironmentCatalogGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestEnvironmentCatalogGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ testEnvironmentCatalogGet pTecgEnvironmentType_ =
     , _tecgProjectId = Nothing
     , _tecgCallback = Nothing
     }
+
 
 -- | V1 error format.
 tecgXgafv :: Lens' TestEnvironmentCatalogGet (Maybe Xgafv)

@@ -57,6 +57,7 @@ newtype CreativesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ creativesInsert
     :: Creative -- ^ 'ciPayload'
     -> CreativesInsert
 creativesInsert pCiPayload_ = CreativesInsert' {_ciPayload = pCiPayload_}
+
 
 -- | Multipart request metadata.
 ciPayload :: Lens' CreativesInsert Creative

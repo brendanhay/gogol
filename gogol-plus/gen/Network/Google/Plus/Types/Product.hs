@@ -29,6 +29,7 @@ newtype ActivityProvider =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityProvider' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -37,6 +38,7 @@ newtype ActivityProvider =
 activityProvider
     :: ActivityProvider
 activityProvider = ActivityProvider' {_apTitle = Nothing}
+
 
 -- | Name of the service provider.
 apTitle :: Lens' ActivityProvider (Maybe Text)
@@ -61,6 +63,7 @@ data ActivityObjectAttachmentsItemEmbed =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectAttachmentsItemEmbed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +76,7 @@ activityObjectAttachmentsItemEmbed
 activityObjectAttachmentsItemEmbed =
   ActivityObjectAttachmentsItemEmbed'
     {_aoaieURL = Nothing, _aoaieType = Nothing}
+
 
 -- | URL of the link.
 aoaieURL :: Lens' ActivityObjectAttachmentsItemEmbed (Maybe Text)
@@ -108,6 +112,7 @@ newtype CommentPlusoners =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentPlusoners' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -116,6 +121,7 @@ newtype CommentPlusoners =
 commentPlusoners
     :: CommentPlusoners
 commentPlusoners = CommentPlusoners' {_cpTotalItems = Nothing}
+
 
 -- | Total number of people who +1\'d this comment.
 cpTotalItems :: Lens' CommentPlusoners (Maybe Word32)
@@ -142,6 +148,7 @@ newtype CommentActorClientSpecificActorInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentActorClientSpecificActorInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -151,6 +158,7 @@ commentActorClientSpecificActorInfo
     :: CommentActorClientSpecificActorInfo
 commentActorClientSpecificActorInfo =
   CommentActorClientSpecificActorInfo' {_cacsaiYouTubeActorInfo = Nothing}
+
 
 -- | Actor info specific to YouTube clients.
 cacsaiYouTubeActorInfo :: Lens' CommentActorClientSpecificActorInfo (Maybe CommentActorClientSpecificActorInfoYouTubeActorInfo)
@@ -183,6 +191,7 @@ newtype ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -193,6 +202,7 @@ activityObjectActorClientSpecificActorInfoYouTubeActorInfo
 activityObjectActorClientSpecificActorInfoYouTubeActorInfo =
   ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'
     {_aoacsaiytaiChannelId = Nothing}
+
 
 -- | ID of the YouTube channel owned by the Actor.
 aoacsaiytaiChannelId :: Lens' ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo (Maybe Text)
@@ -229,6 +239,7 @@ data ActivityObjectPlusoners =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectPlusoners' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -240,6 +251,7 @@ activityObjectPlusoners
     :: ActivityObjectPlusoners
 activityObjectPlusoners =
   ActivityObjectPlusoners' {_aopTotalItems = Nothing, _aopSelfLink = Nothing}
+
 
 -- | Total number of people who +1\'d this activity.
 aopTotalItems :: Lens' ActivityObjectPlusoners (Maybe Word32)
@@ -276,6 +288,7 @@ data PersonEmailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonEmailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -286,6 +299,7 @@ data PersonEmailsItem =
 personEmailsItem
     :: PersonEmailsItem
 personEmailsItem = PersonEmailsItem' {_peiValue = Nothing, _peiType = Nothing}
+
 
 -- | The email address.
 peiValue :: Lens' PersonEmailsItem (Maybe Text)
@@ -321,6 +335,7 @@ newtype CommentActorImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentActorImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -329,6 +344,7 @@ newtype CommentActorImage =
 commentActorImage
     :: CommentActorImage
 commentActorImage = CommentActorImage' {_caiURL = Nothing}
+
 
 -- | The URL of the actor\'s profile photo. To resize the image and crop it
 -- to a square, append the query string ?sz=x, where x is the dimension in
@@ -357,6 +373,7 @@ data ActivityObjectAttachmentsItemThumbnailsItemImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectAttachmentsItemThumbnailsItemImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -377,6 +394,7 @@ activityObjectAttachmentsItemThumbnailsItemImage =
     , _aoaitiiWidth = Nothing
     , _aoaitiiType = Nothing
     }
+
 
 -- | The height, in pixels, of the linked resource.
 aoaitiiHeight :: Lens' ActivityObjectAttachmentsItemThumbnailsItemImage (Maybe Word32)
@@ -435,6 +453,7 @@ data PlacePosition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlacePosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -445,6 +464,7 @@ data PlacePosition =
 placePosition
     :: PlacePosition
 placePosition = PlacePosition' {_ppLatitude = Nothing, _ppLongitude = Nothing}
+
 
 -- | The latitude of this position.
 ppLatitude :: Lens' PlacePosition (Maybe Double)
@@ -481,6 +501,7 @@ data PersonPlacesLivedItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonPlacesLivedItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -492,6 +513,7 @@ personPlacesLivedItem
     :: PersonPlacesLivedItem
 personPlacesLivedItem =
   PersonPlacesLivedItem' {_ppliValue = Nothing, _ppliPrimary = Nothing}
+
 
 -- | A place where this person has lived. For example: \"Seattle, WA\",
 -- \"Near Toronto\".
@@ -528,6 +550,7 @@ newtype ActivityActorClientSpecificActorInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityActorClientSpecificActorInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -537,6 +560,7 @@ activityActorClientSpecificActorInfo
     :: ActivityActorClientSpecificActorInfo
 activityActorClientSpecificActorInfo =
   ActivityActorClientSpecificActorInfo' {_aacsaiYouTubeActorInfo = Nothing}
+
 
 -- | Actor info specific to YouTube clients.
 aacsaiYouTubeActorInfo :: Lens' ActivityActorClientSpecificActorInfo (Maybe ActivityActorClientSpecificActorInfoYouTubeActorInfo)
@@ -597,6 +621,7 @@ data Person =
     , _pCircledByCount     :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Person' with the minimum fields required to make a request.
 --
@@ -696,6 +721,7 @@ person =
     , _pOrganizations = Nothing
     , _pCircledByCount = Nothing
     }
+
 
 -- | (this field is not currently used)
 pCurrentLocation :: Lens' Person (Maybe Text)
@@ -947,6 +973,7 @@ data ActivityObjectAttachmentsItemImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectAttachmentsItemImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -967,6 +994,7 @@ activityObjectAttachmentsItemImage =
     , _aoaiiWidth = Nothing
     , _aoaiiType = Nothing
     }
+
 
 -- | The height, in pixels, of the linked resource.
 aoaiiHeight :: Lens' ActivityObjectAttachmentsItemImage (Maybe Word32)
@@ -1023,6 +1051,7 @@ data CommentActor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentActor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1049,6 +1078,7 @@ commentActor =
     , _caId = Nothing
     , _caVerification = Nothing
     }
+
 
 -- | Actor info specific to particular clients.
 caClientSpecificActorInfo :: Lens' CommentActor (Maybe CommentActorClientSpecificActorInfo)
@@ -1120,6 +1150,7 @@ data ActivityObject =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1158,6 +1189,7 @@ activityObject =
     , _aoId = Nothing
     , _aoResharers = Nothing
     }
+
 
 -- | People who +1\'d this activity.
 aoPlusoners :: Lens' ActivityObject (Maybe ActivityObjectPlusoners)
@@ -1262,6 +1294,7 @@ data ActivityObjectActor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectActor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1288,6 +1321,7 @@ activityObjectActor =
     , _aoaId = Nothing
     , _aoaVerification = Nothing
     }
+
 
 -- | Actor info specific to particular clients.
 aoaClientSpecificActorInfo :: Lens' ActivityObjectActor (Maybe ActivityObjectActorClientSpecificActorInfo)
@@ -1353,6 +1387,7 @@ data ActivityObjectAttachmentsItemFullImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectAttachmentsItemFullImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1373,6 +1408,7 @@ activityObjectAttachmentsItemFullImage =
     , _aoaifiWidth = Nothing
     , _aoaifiType = Nothing
     }
+
 
 -- | The height, in pixels, of the linked resource.
 aoaifiHeight :: Lens' ActivityObjectAttachmentsItemFullImage (Maybe Word32)
@@ -1427,6 +1463,7 @@ newtype ActivityActorImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityActorImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1435,6 +1472,7 @@ newtype ActivityActorImage =
 activityActorImage
     :: ActivityActorImage
 activityActorImage = ActivityActorImage' {_aaiURL = Nothing}
+
 
 -- | The URL of the actor\'s profile photo. To resize the image and crop it
 -- to a square, append the query string ?sz=x, where x is the dimension in
@@ -1465,6 +1503,7 @@ data PeopleFeed =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PeopleFeed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1494,6 +1533,7 @@ peopleFeed =
     , _pfSelfLink = Nothing
     , _pfTitle = Nothing
     }
+
 
 -- | The total number of people available in this list. The number of people
 -- in a response might be smaller due to paging. This might not be set for
@@ -1571,6 +1611,7 @@ data PersonCoverCoverPhoto =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonCoverCoverPhoto' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1585,6 +1626,7 @@ personCoverCoverPhoto
 personCoverCoverPhoto =
   PersonCoverCoverPhoto'
     {_pccpHeight = Nothing, _pccpURL = Nothing, _pccpWidth = Nothing}
+
 
 -- | The height of the image.
 pccpHeight :: Lens' PersonCoverCoverPhoto (Maybe Int32)
@@ -1630,6 +1672,7 @@ data PersonAgeRange =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonAgeRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1640,6 +1683,7 @@ data PersonAgeRange =
 personAgeRange
     :: PersonAgeRange
 personAgeRange = PersonAgeRange' {_parMax = Nothing, _parMin = Nothing}
+
 
 -- | The age range\'s upper bound, if any. Possible values include, but are
 -- not limited to, the following: - \"17\" - for age 17 - \"20\" - for age
@@ -1678,6 +1722,7 @@ newtype ActivityObjectActorImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectActorImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1686,6 +1731,7 @@ newtype ActivityObjectActorImage =
 activityObjectActorImage
     :: ActivityObjectActorImage
 activityObjectActorImage = ActivityObjectActorImage' {_aoaiURL = Nothing}
+
 
 -- | A URL that points to a thumbnail photo of the original actor.
 aoaiURL :: Lens' ActivityObjectActorImage (Maybe Text)
@@ -1709,6 +1755,7 @@ newtype CommentActorClientSpecificActorInfoYouTubeActorInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentActorClientSpecificActorInfoYouTubeActorInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1719,6 +1766,7 @@ commentActorClientSpecificActorInfoYouTubeActorInfo
 commentActorClientSpecificActorInfoYouTubeActorInfo =
   CommentActorClientSpecificActorInfoYouTubeActorInfo'
     {_cacsaiytaiChannelId = Nothing}
+
 
 -- | ID of the YouTube channel owned by the Actor.
 cacsaiytaiChannelId :: Lens' CommentActorClientSpecificActorInfoYouTubeActorInfo (Maybe Text)
@@ -1755,6 +1803,7 @@ data ActivityObjectReplies =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectReplies' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1766,6 +1815,7 @@ activityObjectReplies
     :: ActivityObjectReplies
 activityObjectReplies =
   ActivityObjectReplies' {_aorTotalItems = Nothing, _aorSelfLink = Nothing}
+
 
 -- | Total number of comments on this activity.
 aorTotalItems :: Lens' ActivityObjectReplies (Maybe Word32)
@@ -1802,6 +1852,7 @@ newtype ActivityActorVerification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityActorVerification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1811,6 +1862,7 @@ activityActorVerification
     :: ActivityActorVerification
 activityActorVerification =
   ActivityActorVerification' {_aavAdHocVerified = Nothing}
+
 
 -- | Verification for one-time or manual processes.
 aavAdHocVerified :: Lens' ActivityActorVerification (Maybe Text)
@@ -1840,6 +1892,7 @@ newtype ActivityObjectActorClientSpecificActorInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectActorClientSpecificActorInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1850,6 +1903,7 @@ activityObjectActorClientSpecificActorInfo
 activityObjectActorClientSpecificActorInfo =
   ActivityObjectActorClientSpecificActorInfo'
     {_aoacsaiYouTubeActorInfo = Nothing}
+
 
 -- | Actor info specific to YouTube clients.
 aoacsaiYouTubeActorInfo :: Lens' ActivityObjectActorClientSpecificActorInfo (Maybe ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo)
@@ -1893,6 +1947,7 @@ data ActivityObjectAttachmentsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectAttachmentsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1928,6 +1983,7 @@ activityObjectAttachmentsItem =
     , _aDisplayName = Nothing
     , _aId = Nothing
     }
+
 
 -- | The full image URL for photo attachments.
 aFullImage :: Lens' ActivityObjectAttachmentsItem (Maybe ActivityObjectAttachmentsItemFullImage)
@@ -2020,6 +2076,7 @@ data ActivityFeed =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityFeed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2055,6 +2112,7 @@ activityFeed =
     , _afUpdated = Nothing
     , _afTitle = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 afEtag :: Lens' ActivityFeed (Maybe Text)
@@ -2140,6 +2198,7 @@ newtype ActivityObjectActorVerification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectActorVerification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2149,6 +2208,7 @@ activityObjectActorVerification
     :: ActivityObjectActorVerification
 activityObjectActorVerification =
   ActivityObjectActorVerification' {_aoavAdHocVerified = Nothing}
+
 
 -- | Verification for one-time or manual processes.
 aoavAdHocVerified :: Lens' ActivityObjectActorVerification (Maybe Text)
@@ -2185,6 +2245,7 @@ data PersonName =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonName' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2211,6 +2272,7 @@ personName =
     , _pnFamilyName = Nothing
     , _pnHonorificSuffix = Nothing
     }
+
 
 -- | The given name (first name) of this person.
 pnGivenName :: Lens' PersonName (Maybe Text)
@@ -2276,6 +2338,7 @@ data PersonImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2286,6 +2349,7 @@ data PersonImage =
 personImage
     :: PersonImage
 personImage = PersonImage' {_piURL = Nothing, _piIsDefault = Nothing}
+
 
 -- | The URL of the person\'s profile photo. To resize the image and crop it
 -- to a square, append the query string ?sz=x, where x is the dimension in
@@ -2321,6 +2385,7 @@ newtype ActivityActorClientSpecificActorInfoYouTubeActorInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityActorClientSpecificActorInfoYouTubeActorInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2331,6 +2396,7 @@ activityActorClientSpecificActorInfoYouTubeActorInfo
 activityActorClientSpecificActorInfoYouTubeActorInfo =
   ActivityActorClientSpecificActorInfoYouTubeActorInfo'
     {_aacsaiytaiChannelId = Nothing}
+
 
 -- | ID of the YouTube channel owned by the Actor.
 aacsaiytaiChannelId :: Lens' ActivityActorClientSpecificActorInfoYouTubeActorInfo (Maybe Text)
@@ -2367,6 +2433,7 @@ data PlusACLentryResource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlusACLentryResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2381,6 +2448,7 @@ plusACLentryResource
 plusACLentryResource =
   PlusACLentryResource'
     {_parDisplayName = Nothing, _parId = Nothing, _parType = Nothing}
+
 
 -- | A descriptive name for this entry. Suitable for display.
 parDisplayName :: Lens' PlusACLentryResource (Maybe Text)
@@ -2444,6 +2512,7 @@ data Activity =
     , _actProvider        :: !(Maybe ActivityProvider)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Activity' with the minimum fields required to make a request.
 --
@@ -2513,6 +2582,7 @@ activity =
     , _actPlaceId = Nothing
     , _actProvider = Nothing
     }
+
 
 -- | Identifies who has access to see this activity.
 actAccess :: Lens' Activity (Maybe ACL)
@@ -2676,6 +2746,7 @@ newtype PlaceAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlaceAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2684,6 +2755,7 @@ newtype PlaceAddress =
 placeAddress
     :: PlaceAddress
 placeAddress = PlaceAddress' {_paFormatted = Nothing}
+
 
 -- | The formatted address for display.
 paFormatted :: Lens' PlaceAddress (Maybe Text)
@@ -2710,6 +2782,7 @@ data ActivityObjectAttachmentsItemThumbnailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectAttachmentsItemThumbnailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2724,6 +2797,7 @@ activityObjectAttachmentsItemThumbnailsItem
 activityObjectAttachmentsItemThumbnailsItem =
   ActivityObjectAttachmentsItemThumbnailsItem'
     {_aoaitiImage = Nothing, _aoaitiURL = Nothing, _aoaitiDescription = Nothing}
+
 
 -- | Image resource.
 aoaitiImage :: Lens' ActivityObjectAttachmentsItemThumbnailsItem (Maybe ActivityObjectAttachmentsItemThumbnailsItemImage)
@@ -2774,6 +2848,7 @@ data PersonCover =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonCover' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2788,6 +2863,7 @@ personCover
 personCover =
   PersonCover'
     {_pcLayout = Nothing, _pcCoverInfo = Nothing, _pcCoverPhoto = Nothing}
+
 
 -- | The layout of the cover art. Possible values include, but are not
 -- limited to, the following values: - \"banner\" - One large image banner.
@@ -2829,6 +2905,7 @@ data CommentInReplyToItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentInReplyToItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2840,6 +2917,7 @@ commentInReplyToItem
     :: CommentInReplyToItem
 commentInReplyToItem =
   CommentInReplyToItem' {_cirtiURL = Nothing, _cirtiId = Nothing}
+
 
 -- | The URL of the activity.
 cirtiURL :: Lens' CommentInReplyToItem (Maybe Text)
@@ -2878,6 +2956,7 @@ data PersonOrganizationsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonOrganizationsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2913,6 +2992,7 @@ personOrganizationsItem =
     , _poiType = Nothing
     , _poiDescription = Nothing
     }
+
 
 -- | The department within the organization. Deprecated.
 poiDePartment :: Lens' PersonOrganizationsItem (Maybe Text)
@@ -2998,6 +3078,7 @@ data PersonURLsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonURLsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3011,6 +3092,7 @@ personURLsItem
     :: PersonURLsItem
 personURLsItem =
   PersonURLsItem' {_puiValue = Nothing, _puiType = Nothing, _puiLabel = Nothing}
+
 
 -- | The URL value.
 puiValue :: Lens' PersonURLsItem (Maybe Text)
@@ -3054,6 +3136,7 @@ data PersonCoverCoverInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PersonCoverCoverInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3066,6 +3149,7 @@ personCoverCoverInfo
 personCoverCoverInfo =
   PersonCoverCoverInfo'
     {_pcciTopImageOffSet = Nothing, _pcciLeftImageOffSet = Nothing}
+
 
 -- | The difference between the top position of the cover image and the
 -- actual displayed cover image. Only valid for banner layout.
@@ -3108,6 +3192,7 @@ data ActivityObjectResharers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityObjectResharers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3119,6 +3204,7 @@ activityObjectResharers
     :: ActivityObjectResharers
 activityObjectResharers =
   ActivityObjectResharers' {_aTotalItems = Nothing, _aSelfLink = Nothing}
+
 
 -- | Total number of people who reshared this activity.
 aTotalItems :: Lens' ActivityObjectResharers (Maybe Word32)
@@ -3163,6 +3249,7 @@ data Comment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3204,6 +3291,7 @@ comment =
     , _cVerb = "post"
     , _cInReplyTo = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 cEtag :: Lens' Comment (Maybe Text)
@@ -3304,6 +3392,7 @@ data Place =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Place' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3327,6 +3416,7 @@ place =
     , _plaId = Nothing
     , _plaPosition = Nothing
     }
+
 
 -- | Identifies this resource as a place. Value: \"plus#place\".
 plaKind :: Lens' Place Text
@@ -3382,6 +3472,7 @@ data ACL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ACL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3394,6 +3485,7 @@ data ACL =
 acl
     :: ACL
 acl = ACL' {_aKind = "plus#acl", _aItems = Nothing, _aDescription = Nothing}
+
 
 -- | Identifies this resource as a collection of access controls. Value:
 -- \"plus#acl\".
@@ -3442,6 +3534,7 @@ data ActivityActor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityActor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3471,6 +3564,7 @@ activityActor =
     , _aaId = Nothing
     , _aaVerification = Nothing
     }
+
 
 -- | Actor info specific to particular clients.
 aaClientSpecificActorInfo :: Lens' ActivityActor (Maybe ActivityActorClientSpecificActorInfo)
@@ -3541,6 +3635,7 @@ data CommentObject =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentObject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3558,6 +3653,7 @@ commentObject =
     , _coOriginalContent = Nothing
     , _coContent = Nothing
     }
+
 
 -- | The object type of this comment. Possible values are: - \"comment\" - A
 -- comment in reply to an activity.
@@ -3610,6 +3706,7 @@ data CommentFeed =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentFeed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3642,6 +3739,7 @@ commentFeed =
     , _cfUpdated = Nothing
     , _cfTitle = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 cfEtag :: Lens' CommentFeed (Maybe Text)
@@ -3719,6 +3817,7 @@ newtype CommentActorVerification =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentActorVerification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3728,6 +3827,7 @@ commentActorVerification
     :: CommentActorVerification
 commentActorVerification =
   CommentActorVerification' {_cavAdHocVerified = Nothing}
+
 
 -- | Verification for one-time or manual processes.
 cavAdHocVerified :: Lens' CommentActorVerification (Maybe Text)
@@ -3758,6 +3858,7 @@ data ActivityActorName =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityActorName' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3769,6 +3870,7 @@ activityActorName
     :: ActivityActorName
 activityActorName =
   ActivityActorName' {_aanGivenName = Nothing, _aanFamilyName = Nothing}
+
 
 -- | The given name (\"first name\") of the actor.
 aanGivenName :: Lens' ActivityActorName (Maybe Text)

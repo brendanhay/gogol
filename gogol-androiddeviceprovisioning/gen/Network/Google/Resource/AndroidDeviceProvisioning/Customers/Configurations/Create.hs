@@ -77,6 +77,7 @@ data CustomersConfigurationsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersConfigurationsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -108,6 +109,7 @@ customersConfigurationsCreate pCccParent_ pCccPayload_ =
     , _cccPayload = pCccPayload_
     , _cccCallback = Nothing
     }
+
 
 -- | Required. The customer that manages the configuration. An API resource
 -- name in the format \`customers\/[CUSTOMER_ID]\`.

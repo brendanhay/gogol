@@ -53,11 +53,13 @@ data QueriesListqueries =
   QueriesListqueries'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueriesListqueries' with the minimum fields required to make a request.
 --
 queriesListqueries
     :: QueriesListqueries
 queriesListqueries = QueriesListqueries'
+
 
 instance GoogleRequest QueriesListqueries where
         type Rs QueriesListqueries = ListQueriesResponse

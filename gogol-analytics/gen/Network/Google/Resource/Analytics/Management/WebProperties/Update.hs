@@ -66,6 +66,7 @@ data ManagementWebPropertiesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementWebPropertiesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ managementWebPropertiesUpdate pMwpuWebPropertyId_ pMwpuPayload_ pMwpuAccountId_ 
     , _mwpuPayload = pMwpuPayload_
     , _mwpuAccountId = pMwpuAccountId_
     }
+
 
 -- | Web property ID
 mwpuWebPropertyId :: Lens' ManagementWebPropertiesUpdate Text

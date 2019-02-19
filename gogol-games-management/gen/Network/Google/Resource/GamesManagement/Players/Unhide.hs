@@ -66,6 +66,7 @@ data PlayersUnhide =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlayersUnhide' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -80,6 +81,7 @@ playersUnhide
 playersUnhide pPuApplicationId_ pPuPlayerId_ =
   PlayersUnhide'
     {_puApplicationId = pPuApplicationId_, _puPlayerId = pPuPlayerId_}
+
 
 -- | The application ID from the Google Play developer console.
 puApplicationId :: Lens' PlayersUnhide Text

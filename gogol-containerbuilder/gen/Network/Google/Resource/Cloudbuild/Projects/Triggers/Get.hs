@@ -75,6 +75,7 @@ data ProjectsTriggersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTriggersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsTriggersGet pPtgTriggerId_ pPtgProjectId_ =
     , _ptgProjectId = pPtgProjectId_
     , _ptgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptgXgafv :: Lens' ProjectsTriggersGet (Maybe Xgafv)

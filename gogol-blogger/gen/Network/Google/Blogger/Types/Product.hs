@@ -30,6 +30,7 @@ data PostUserInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostUserInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -47,6 +48,7 @@ postUserInfo =
     , _puiPost = Nothing
     , _puiKind = "blogger#postUserInfo"
     }
+
 
 -- | Information about a User for the Post.
 puiPostUserInfo :: Lens' PostUserInfo (Maybe PostPerUserInfo)
@@ -86,6 +88,7 @@ newtype PostAuthorImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostAuthorImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +97,7 @@ newtype PostAuthorImage =
 postAuthorImage
     :: PostAuthorImage
 postAuthorImage = PostAuthorImage' {_paiURL = Nothing}
+
 
 -- | The Post author\'s avatar URL.
 paiURL :: Lens' PostAuthorImage (Maybe Text)
@@ -119,6 +123,7 @@ data PostList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -139,6 +144,7 @@ postList =
     , _plKind = "blogger#postList"
     , _plItems = Nothing
     }
+
 
 -- | Etag of the response.
 plEtag :: Lens' PostList (Maybe Text)
@@ -186,6 +192,7 @@ newtype CommentInReplyTo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentInReplyTo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -194,6 +201,7 @@ newtype CommentInReplyTo =
 commentInReplyTo
     :: CommentInReplyTo
 commentInReplyTo = CommentInReplyTo' {_cirtId = Nothing}
+
 
 -- | The identified of the parent of this comment.
 cirtId :: Lens' CommentInReplyTo (Maybe Text)
@@ -217,6 +225,7 @@ newtype CommentBlog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentBlog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -225,6 +234,7 @@ newtype CommentBlog =
 commentBlog
     :: CommentBlog
 commentBlog = CommentBlog' {_cbId = Nothing}
+
 
 -- | The identifier of the blog containing this comment.
 cbId :: Lens' CommentBlog (Maybe Text)
@@ -249,6 +259,7 @@ data Pageviews =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Pageviews' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -263,6 +274,7 @@ pageviews
 pageviews =
   Pageviews'
     {_pKind = "blogger#page_views", _pCounts = Nothing, _pBlogId = Nothing}
+
 
 -- | The kind of this entry. Always blogger#page_views
 pKind :: Lens' Pageviews Text
@@ -306,6 +318,7 @@ data PostLocation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -322,6 +335,7 @@ postLocation
 postLocation =
   PostLocation'
     {_plSpan = Nothing, _plLat = Nothing, _plName = Nothing, _plLng = Nothing}
+
 
 -- | Location\'s viewport span. Can be used when rendering a map preview.
 plSpan :: Lens' PostLocation (Maybe Text)
@@ -369,6 +383,7 @@ data BlogPosts =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BlogPosts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -383,6 +398,7 @@ blogPosts
 blogPosts =
   BlogPosts'
     {_bpTotalItems = Nothing, _bpItems = Nothing, _bpSelfLink = Nothing}
+
 
 -- | The count of posts in this blog.
 bpTotalItems :: Lens' BlogPosts (Maybe Int32)
@@ -442,6 +458,7 @@ data Post' =
     , _posTitle          :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Post' with the minimum fields required to make a request.
 --
@@ -508,6 +525,7 @@ post =
     , _posTitleLink = Nothing
     , _posTitle = Nothing
     }
+
 
 -- | Display image for the Post.
 posImages :: Lens' Post' [PostImagesItem]
@@ -671,6 +689,7 @@ data Page =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Page' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -715,6 +734,7 @@ page =
     , _pagUpdated = Nothing
     , _pagTitle = Nothing
     }
+
 
 -- | The status of the page for admin resources (either LIVE or DRAFT).
 pagStatus :: Lens' Page (Maybe Text)
@@ -815,6 +835,7 @@ data BlogLocale =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BlogLocale' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -829,6 +850,7 @@ blogLocale
 blogLocale =
   BlogLocale'
     {_blVariant = Nothing, _blCountry = Nothing, _blLanguage = Nothing}
+
 
 -- | The language variant this blog is authored in.
 blVariant :: Lens' BlogLocale (Maybe Text)
@@ -873,6 +895,7 @@ data PageAuthor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageAuthor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -893,6 +916,7 @@ pageAuthor =
     , _paDisplayName = Nothing
     , _paId = Nothing
     }
+
 
 -- | The page author\'s avatar.
 paImage :: Lens' PageAuthor (Maybe PageAuthorImage)
@@ -949,6 +973,7 @@ data Blog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Blog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -996,6 +1021,7 @@ blog =
     , _bPosts = Nothing
     , _bDescription = Nothing
     }
+
 
 -- | The status of the blog.
 bStatus :: Lens' Blog (Maybe Text)
@@ -1101,6 +1127,7 @@ data BlogPages =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BlogPages' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1111,6 +1138,7 @@ data BlogPages =
 blogPages
     :: BlogPages
 blogPages = BlogPages' {_bpsTotalItems = Nothing, _bpsSelfLink = Nothing}
+
 
 -- | The count of pages in this blog.
 bpsTotalItems :: Lens' BlogPages (Maybe Int32)
@@ -1147,6 +1175,7 @@ newtype PostBlog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostBlog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1155,6 +1184,7 @@ newtype PostBlog =
 postBlog
     :: PostBlog
 postBlog = PostBlog' {_pbId = Nothing}
+
 
 -- | The identifier of the Blog that contains this Post.
 pbId :: Lens' PostBlog (Maybe Text)
@@ -1180,6 +1210,7 @@ data PageList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1200,6 +1231,7 @@ pageList =
     , _pllKind = "blogger#pageList"
     , _pllItems = Nothing
     }
+
 
 -- | Etag of the response.
 pllEtag :: Lens' PageList (Maybe Text)
@@ -1251,6 +1283,7 @@ data UserLocale =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserLocale' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1265,6 +1298,7 @@ userLocale
 userLocale =
   UserLocale'
     {_ulVariant = Nothing, _ulCountry = Nothing, _ulLanguage = Nothing}
+
 
 -- | The user\'s language variant setting.
 ulVariant :: Lens' UserLocale (Maybe Text)
@@ -1306,6 +1340,7 @@ newtype CommentAuthorImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentAuthorImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1314,6 +1349,7 @@ newtype CommentAuthorImage =
 commentAuthorImage
     :: CommentAuthorImage
 commentAuthorImage = CommentAuthorImage' {_caiURL = Nothing}
+
 
 -- | The comment creator\'s avatar URL.
 caiURL :: Lens' CommentAuthorImage (Maybe Text)
@@ -1343,6 +1379,7 @@ data User =
     , _uId          :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -1379,6 +1416,7 @@ user =
     , _uDisplayName = Nothing
     , _uId = Nothing
     }
+
 
 -- | The container of blogs for this user.
 uBlogs :: Lens' User (Maybe UserBlogs)
@@ -1455,6 +1493,7 @@ newtype UserBlogs =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserBlogs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1463,6 +1502,7 @@ newtype UserBlogs =
 userBlogs
     :: UserBlogs
 userBlogs = UserBlogs' {_ubSelfLink = Nothing}
+
 
 -- | The URL of the Blogs for this user.
 ubSelfLink :: Lens' UserBlogs (Maybe Text)
@@ -1490,6 +1530,7 @@ data PostReplies =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostReplies' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1504,6 +1545,7 @@ postReplies
 postReplies =
   PostReplies'
     {_prTotalItems = Nothing, _prItems = Nothing, _prSelfLink = Nothing}
+
 
 -- | The count of comments on this post.
 prTotalItems :: Lens' PostReplies (Maybe Int64)
@@ -1548,6 +1590,7 @@ data BlogList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BlogList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1565,6 +1608,7 @@ blogList =
     , _blItems = Nothing
     , _blBlogUserInfos = Nothing
     }
+
 
 -- | The kind of this entity. Always blogger#blogList
 blKind :: Lens' BlogList Text
@@ -1609,6 +1653,7 @@ newtype PageBlog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageBlog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1617,6 +1662,7 @@ newtype PageBlog =
 pageBlog
     :: PageBlog
 pageBlog = PageBlog' {_pId = Nothing}
+
 
 -- | The identifier of the blog containing this page.
 pId :: Lens' PageBlog (Maybe Text)
@@ -1643,6 +1689,7 @@ data PostAuthor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostAuthor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1663,6 +1710,7 @@ postAuthor =
     , _paaDisplayName = Nothing
     , _paaId = Nothing
     }
+
 
 -- | The Post author\'s avatar.
 paaImage :: Lens' PostAuthor (Maybe PostAuthorImage)
@@ -1711,6 +1759,7 @@ data PostPerUserInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostPerUserInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1734,6 +1783,7 @@ postPerUserInfo =
     , _ppuiHasEditAccess = Nothing
     , _ppuiPostId = Nothing
     }
+
 
 -- | The kind of this entity. Always blogger#postPerUserInfo
 ppuiKind :: Lens' PostPerUserInfo Text
@@ -1790,6 +1840,7 @@ data PageviewsCountsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageviewsCountsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1801,6 +1852,7 @@ pageviewsCountsItem
     :: PageviewsCountsItem
 pageviewsCountsItem =
   PageviewsCountsItem' {_pciTimeRange = Nothing, _pciCount = Nothing}
+
 
 -- | Time range the given count applies to
 pciTimeRange :: Lens' PageviewsCountsItem (Maybe Text)
@@ -1845,6 +1897,7 @@ data Comment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1886,6 +1939,7 @@ comment =
     , _cUpdated = Nothing
     , _cInReplyTo = Nothing
     }
+
 
 -- | The status of the comment (only populated for admin users)
 cStatus :: Lens' Comment (Maybe Text)
@@ -1975,6 +2029,7 @@ newtype CommentPost =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentPost' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1983,6 +2038,7 @@ newtype CommentPost =
 commentPost
     :: CommentPost
 commentPost = CommentPost' {_cpId = Nothing}
+
 
 -- | The identifier of the post containing this comment.
 cpId :: Lens' CommentPost (Maybe Text)
@@ -2010,6 +2066,7 @@ data BlogPerUserInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BlogPerUserInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2036,6 +2093,7 @@ blogPerUserInfo =
     , _bpuiRole = Nothing
     , _bpuiHasAdminAccess = Nothing
     }
+
 
 -- | The Photo Album Key for the user when adding photos to the blog
 bpuiPhotosAlbumKey :: Lens' BlogPerUserInfo (Maybe Text)
@@ -2101,6 +2159,7 @@ data PostUserInfosList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostUserInfosList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2118,6 +2177,7 @@ postUserInfosList =
     , _puilKind = "blogger#postUserInfosList"
     , _puilItems = Nothing
     }
+
 
 -- | Pagination token to fetch the next page, if one exists.
 puilNextPageToken :: Lens' PostUserInfosList (Maybe Text)
@@ -2165,6 +2225,7 @@ data CommentAuthor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentAuthor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2185,6 +2246,7 @@ commentAuthor =
     , _caDisplayName = Nothing
     , _caId = Nothing
     }
+
 
 -- | The comment creator\'s avatar.
 caImage :: Lens' CommentAuthor (Maybe CommentAuthorImage)
@@ -2231,6 +2293,7 @@ data BlogUserInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BlogUserInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2248,6 +2311,7 @@ blogUserInfo =
     , _buiBlog = Nothing
     , _buiBlogUserInfo = Nothing
     }
+
 
 -- | The kind of this entity. Always blogger#blogUserInfo
 buiKind :: Lens' BlogUserInfo Text
@@ -2288,6 +2352,7 @@ newtype PageAuthorImage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PageAuthorImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2296,6 +2361,7 @@ newtype PageAuthorImage =
 pageAuthorImage
     :: PageAuthorImage
 pageAuthorImage = PageAuthorImage' {_pURL = Nothing}
+
 
 -- | The page author\'s avatar URL.
 pURL :: Lens' PageAuthorImage (Maybe Text)
@@ -2322,6 +2388,7 @@ data CommentList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CommentList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2345,6 +2412,7 @@ commentList =
     , _clItems = Nothing
     , _clPrevPageToken = Nothing
     }
+
 
 -- | Etag of the response.
 clEtag :: Lens' CommentList (Maybe Text)
@@ -2399,6 +2467,7 @@ newtype PostImagesItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PostImagesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2407,6 +2476,7 @@ newtype PostImagesItem =
 postImagesItem
     :: PostImagesItem
 postImagesItem = PostImagesItem' {_piiURL = Nothing}
+
 
 piiURL :: Lens' PostImagesItem (Maybe Text)
 piiURL = lens _piiURL (\ s a -> s{_piiURL = a})

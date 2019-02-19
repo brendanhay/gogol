@@ -70,6 +70,7 @@ data ProjectsHistoriesExecutionsClustersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsHistoriesExecutionsClustersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ projectsHistoriesExecutionsClustersGet pPhecgExecutionId_ pPhecgClusterId_ pPhec
     , _phecgHistoryId = pPhecgHistoryId_
     , _phecgProjectId = pPhecgProjectId_
     }
+
 
 -- | An Execution id. Required.
 phecgExecutionId :: Lens' ProjectsHistoriesExecutionsClustersGet Text

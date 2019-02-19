@@ -65,6 +65,7 @@ data AchievementConfigurationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AchievementConfigurationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ achievementConfigurationsList pAclApplicationId_ =
     , _aclPageToken = Nothing
     , _aclMaxResults = Nothing
     }
+
 
 -- | The application ID from the Google Play developer console.
 aclApplicationId :: Lens' AchievementConfigurationsList Text

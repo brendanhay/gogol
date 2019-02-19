@@ -67,6 +67,7 @@ data InstanceTemplatesTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceTemplatesTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ instanceTemplatesTestIAMPermissions pIttipProject_ pIttipPayload_ pIttipResource
     , _ittipPayload = pIttipPayload_
     , _ittipResource = pIttipResource_
     }
+
 
 -- | Project ID for this request.
 ittipProject :: Lens' InstanceTemplatesTestIAMPermissions Text

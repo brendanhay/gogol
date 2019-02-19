@@ -77,6 +77,7 @@ data ProjectsLocationsKeyRingsCryptoKeysPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsKeyRingsCryptoKeysPatch pPlkrckpPayload_ pPlkrckpName_ =
     , _plkrckpName = pPlkrckpName_
     , _plkrckpCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrckpXgafv :: Lens' ProjectsLocationsKeyRingsCryptoKeysPatch (Maybe Xgafv)

@@ -70,6 +70,7 @@ data ProjectsMetricsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsMetricsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsMetricsDelete pPmdMetricName_ =
     , _pmdUploadType = Nothing
     , _pmdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmdXgafv :: Lens' ProjectsMetricsDelete (Maybe Xgafv)

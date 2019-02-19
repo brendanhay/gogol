@@ -69,6 +69,7 @@ data TurnBasedMatchesFinish =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnBasedMatchesFinish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ turnBasedMatchesFinish pTbmfPayload_ pTbmfMatchId_ =
     , _tbmfLanguage = Nothing
     , _tbmfMatchId = pTbmfMatchId_
     }
+
 
 -- | Multipart request metadata.
 tbmfPayload :: Lens' TurnBasedMatchesFinish TurnBasedMatchResults

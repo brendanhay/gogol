@@ -82,6 +82,7 @@ data ProjectsDlpJobsCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDlpJobsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsDlpJobsCancel pPdjcPayload_ pPdjcName_ =
     , _pdjcName = pPdjcName_
     , _pdjcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdjcXgafv :: Lens' ProjectsDlpJobsCancel (Maybe Xgafv)

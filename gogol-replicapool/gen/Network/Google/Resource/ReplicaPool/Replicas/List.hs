@@ -73,6 +73,7 @@ data ReplicasList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReplicasList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ replicasList pRlPoolName_ pRlZone_ pRlProjectName_ =
     , _rlPageToken = Nothing
     , _rlMaxResults = 500
     }
+
 
 -- | The replica pool name for this request.
 rlPoolName :: Lens' ReplicasList Text

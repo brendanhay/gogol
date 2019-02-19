@@ -72,6 +72,7 @@ data CustomersConfigurationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersConfigurationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ customersConfigurationsList pCclParent_ =
     , _cclUploadType = Nothing
     , _cclCallback = Nothing
     }
+
 
 -- | Required. The customer that manages the listed configurations. An API
 -- resource name in the format \`customers\/[CUSTOMER_ID]\`.

@@ -60,6 +60,7 @@ newtype RelyingPartyDownloadAccount =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartyDownloadAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ relyingPartyDownloadAccount
     -> RelyingPartyDownloadAccount
 relyingPartyDownloadAccount pRpdaPayload_ =
   RelyingPartyDownloadAccount' {_rpdaPayload = pRpdaPayload_}
+
 
 -- | Multipart request metadata.
 rpdaPayload :: Lens' RelyingPartyDownloadAccount IdentitytoolkitRelyingPartyDownloadAccountRequest

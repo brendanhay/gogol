@@ -81,6 +81,7 @@ data BiddersAccountsFilterSetsNonBillableWinningBidsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BiddersAccountsFilterSetsNonBillableWinningBidsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ biddersAccountsFilterSetsNonBillableWinningBidsList pBafsnbwblFilterSetName_ =
     , _bafsnbwblPageSize = Nothing
     , _bafsnbwblCallback = Nothing
     }
+
 
 -- | V1 error format.
 bafsnbwblXgafv :: Lens' BiddersAccountsFilterSetsNonBillableWinningBidsList (Maybe Xgafv)

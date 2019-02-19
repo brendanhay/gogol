@@ -72,6 +72,7 @@ data TablesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TablesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -96,6 +97,7 @@ tablesUpdate pTuPayload_ pTuDataSetId_ pTuProjectId_ pTuTableId_ =
     , _tuProjectId = pTuProjectId_
     , _tuTableId = pTuTableId_
     }
+
 
 -- | Multipart request metadata.
 tuPayload :: Lens' TablesUpdate Table

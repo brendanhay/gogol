@@ -31,6 +31,7 @@ data SiteSummaryResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SiteSummaryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -48,6 +49,7 @@ siteSummaryResponse =
     , _ssrReviewedSite = Nothing
     , _ssrDesktopSummary = Nothing
     }
+
 
 -- | Summary for the mobile review of the site.
 ssrMobileSummary :: Lens' SiteSummaryResponse (Maybe PlatformSummary)
@@ -92,6 +94,7 @@ newtype ViolatingSitesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ViolatingSitesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +103,7 @@ newtype ViolatingSitesResponse =
 violatingSitesResponse
     :: ViolatingSitesResponse
 violatingSitesResponse = ViolatingSitesResponse' {_vsrViolatingSites = Nothing}
+
 
 -- | A list of summaries of violating sites.
 vsrViolatingSites :: Lens' ViolatingSitesResponse [SiteSummaryResponse]
@@ -137,6 +141,7 @@ data PlatformSummary =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PlatformSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -166,6 +171,7 @@ platformSummary =
     , _psReportURL = Nothing
     , _psRegion = Nothing
     }
+
 
 -- | The date on which ad filtering begins.
 psEnforcementTime :: Lens' PlatformSummary (Maybe UTCTime)

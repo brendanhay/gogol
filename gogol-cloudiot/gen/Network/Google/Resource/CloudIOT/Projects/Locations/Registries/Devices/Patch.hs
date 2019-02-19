@@ -77,6 +77,7 @@ data ProjectsLocationsRegistriesDevicesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsLocationsRegistriesDevicesPatch pPlrdpPayload_ pPlrdpName_ =
     , _plrdpName = pPlrdpName_
     , _plrdpCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrdpXgafv :: Lens' ProjectsLocationsRegistriesDevicesPatch (Maybe Xgafv)

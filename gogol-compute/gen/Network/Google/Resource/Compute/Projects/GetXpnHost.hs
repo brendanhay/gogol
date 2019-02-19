@@ -60,6 +60,7 @@ newtype ProjectsGetXpnHost =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsGetXpnHost' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ projectsGetXpnHost
     -> ProjectsGetXpnHost
 projectsGetXpnHost pPgxhProject_ =
   ProjectsGetXpnHost' {_pgxhProject = pPgxhProject_}
+
 
 -- | Project ID for this request.
 pgxhProject :: Lens' ProjectsGetXpnHost Text

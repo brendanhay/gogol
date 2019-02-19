@@ -79,6 +79,7 @@ data ProjectsBuildsCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsBuildsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ projectsBuildsCancel pPbcPayload_ pPbcId_ pPbcProjectId_ =
     , _pbcProjectId = pPbcProjectId_
     , _pbcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pbcXgafv :: Lens' ProjectsBuildsCancel (Maybe Xgafv)

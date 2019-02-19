@@ -61,6 +61,7 @@ data ACLGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ACLGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ aclGet
     -> ACLGet
 aclGet pAgCalendarId_ pAgRuleId_ =
   ACLGet' {_agCalendarId = pAgCalendarId_, _agRuleId = pAgRuleId_}
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

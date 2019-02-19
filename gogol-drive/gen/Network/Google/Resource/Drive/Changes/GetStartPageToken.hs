@@ -62,6 +62,7 @@ data ChangesGetStartPageToken =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChangesGetStartPageToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ changesGetStartPageToken
 changesGetStartPageToken =
   ChangesGetStartPageToken'
     {_cgsptTeamDriveId = Nothing, _cgsptSupportsTeamDrives = False}
+
 
 -- | The ID of the Team Drive for which the starting pageToken for listing
 -- future changes from that Team Drive will be returned.

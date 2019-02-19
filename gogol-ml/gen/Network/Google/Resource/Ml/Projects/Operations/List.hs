@@ -100,6 +100,7 @@ data ProjectsOperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -136,6 +137,7 @@ projectsOperationsList pPolName_ =
     , _polPageSize = Nothing
     , _polCallback = Nothing
     }
+
 
 -- | V1 error format.
 polXgafv :: Lens' ProjectsOperationsList (Maybe Xgafv)

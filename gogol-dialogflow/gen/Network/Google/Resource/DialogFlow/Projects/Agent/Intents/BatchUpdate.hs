@@ -76,6 +76,7 @@ data ProjectsAgentIntentsBatchUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAgentIntentsBatchUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsAgentIntentsBatchUpdate pPaibuParent_ pPaibuPayload_ =
     , _paibuPayload = pPaibuPayload_
     , _paibuCallback = Nothing
     }
+
 
 -- | Required. The name of the agent to update or create intents in. Format:
 -- \`projects\/\/agent\`.

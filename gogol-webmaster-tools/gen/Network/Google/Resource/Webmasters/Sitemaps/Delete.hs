@@ -61,6 +61,7 @@ data SitemapsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitemapsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ sitemapsDelete
     -> SitemapsDelete
 sitemapsDelete pSdFeedpath_ pSdSiteURL_ =
   SitemapsDelete' {_sdFeedpath = pSdFeedpath_, _sdSiteURL = pSdSiteURL_}
+
 
 -- | The URL of the actual sitemap. For example:
 -- http:\/\/www.example.com\/sitemap.xml

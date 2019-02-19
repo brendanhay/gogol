@@ -74,6 +74,7 @@ data MattersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MattersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ mattersGet pMgMatterId_ =
     , _mgView = Nothing
     , _mgCallback = Nothing
     }
+
 
 -- | V1 error format.
 mgXgafv :: Lens' MattersGet (Maybe Xgafv)

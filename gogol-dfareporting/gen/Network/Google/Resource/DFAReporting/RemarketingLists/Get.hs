@@ -62,6 +62,7 @@ data RemarketingListsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingListsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ remarketingListsGet
 remarketingListsGet pRlgProFileId_ pRlgId_ =
   RemarketingListsGet'
     {_rlgProFileId = _Coerce # pRlgProFileId_, _rlgId = _Coerce # pRlgId_}
+
 
 -- | User profile ID associated with this request.
 rlgProFileId :: Lens' RemarketingListsGet Int64

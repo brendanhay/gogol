@@ -70,6 +70,7 @@ data SubnetworksTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubnetworksTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ subnetworksTestIAMPermissions pStiampProject_ pStiampPayload_ pStiampResource_ p
     , _stiampResource = pStiampResource_
     , _stiampRegion = pStiampRegion_
     }
+
 
 -- | Project ID for this request.
 stiampProject :: Lens' SubnetworksTestIAMPermissions Text

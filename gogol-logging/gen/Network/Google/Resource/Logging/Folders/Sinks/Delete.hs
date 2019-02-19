@@ -72,6 +72,7 @@ data FoldersSinksDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersSinksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ foldersSinksDelete pFsdSinkName_ =
     , _fsdSinkName = pFsdSinkName_
     , _fsdCallback = Nothing
     }
+
 
 -- | V1 error format.
 fsdXgafv :: Lens' FoldersSinksDelete (Maybe Xgafv)

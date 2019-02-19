@@ -78,6 +78,7 @@ data ProjectsSubscriptionsPull =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsSubscriptionsPull' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsSubscriptionsPull pPspsPayload_ pPspsSubscription_ =
     , _pspsSubscription = pPspsSubscription_
     , _pspsCallback = Nothing
     }
+
 
 -- | V1 error format.
 pspsXgafv :: Lens' ProjectsSubscriptionsPull (Maybe Xgafv)

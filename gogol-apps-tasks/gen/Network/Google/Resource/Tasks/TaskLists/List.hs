@@ -62,6 +62,7 @@ data TaskListsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TaskListsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ taskListsList
     :: TaskListsList
 taskListsList =
   TaskListsList' {_tllPageToken = Nothing, _tllMaxResults = Nothing}
+
 
 -- | Token specifying the result page to return. Optional.
 tllPageToken :: Lens' TaskListsList (Maybe Text)

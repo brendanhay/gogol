@@ -61,6 +61,7 @@ data NotificationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NotificationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ notificationsList
     -> NotificationsList
 notificationsList pNlBucket_ =
   NotificationsList' {_nlBucket = pNlBucket_, _nlUserProject = Nothing}
+
 
 -- | Name of a Google Cloud Storage bucket.
 nlBucket :: Lens' NotificationsList Text

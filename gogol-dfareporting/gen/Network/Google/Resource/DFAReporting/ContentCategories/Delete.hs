@@ -61,6 +61,7 @@ data ContentCategoriesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContentCategoriesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -75,6 +76,7 @@ contentCategoriesDelete
 contentCategoriesDelete pCcdProFileId_ pCcdId_ =
   ContentCategoriesDelete'
     {_ccdProFileId = _Coerce # pCcdProFileId_, _ccdId = _Coerce # pCcdId_}
+
 
 -- | User profile ID associated with this request.
 ccdProFileId :: Lens' ContentCategoriesDelete Int64

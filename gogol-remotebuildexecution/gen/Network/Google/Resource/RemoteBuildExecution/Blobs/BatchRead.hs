@@ -96,6 +96,7 @@ data BlobsBatchRead =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BlobsBatchRead' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -127,6 +128,7 @@ blobsBatchRead pBbrPayload_ pBbrInstanceName_ =
     , _bbrInstanceName = pBbrInstanceName_
     , _bbrCallback = Nothing
     }
+
 
 -- | V1 error format.
 bbrXgafv :: Lens' BlobsBatchRead (Maybe Xgafv)

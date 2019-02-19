@@ -67,6 +67,7 @@ data AccountsAdUnitsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsAdUnitsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ accountsAdUnitsDelete pAaudAdUnitId_ pAaudAdClientId_ pAaudAccountId_ =
     , _aaudAdClientId = pAaudAdClientId_
     , _aaudAccountId = pAaudAccountId_
     }
+
 
 -- | Ad unit to delete.
 aaudAdUnitId :: Lens' AccountsAdUnitsDelete Text

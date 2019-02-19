@@ -76,6 +76,7 @@ data RollingUpdatesListInstanceUpdates =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollingUpdatesListInstanceUpdates' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ rollingUpdatesListInstanceUpdates pRuliuRollingUpdate_ pRuliuProject_ pRuliuZone
     , _ruliuPageToken = Nothing
     , _ruliuMaxResults = 500
     }
+
 
 -- | The name of the update.
 ruliuRollingUpdate :: Lens' RollingUpdatesListInstanceUpdates Text

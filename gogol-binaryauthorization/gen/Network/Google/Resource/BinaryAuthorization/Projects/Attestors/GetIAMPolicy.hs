@@ -72,6 +72,7 @@ data ProjectsAttestorsGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsAttestorsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ projectsAttestorsGetIAMPolicy pPagipResource_ =
     , _pagipResource = pPagipResource_
     , _pagipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pagipXgafv :: Lens' ProjectsAttestorsGetIAMPolicy (Maybe Xgafv)

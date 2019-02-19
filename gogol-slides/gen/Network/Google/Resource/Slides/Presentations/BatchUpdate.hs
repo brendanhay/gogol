@@ -101,6 +101,7 @@ data PresentationsBatchUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PresentationsBatchUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -132,6 +133,7 @@ presentationsBatchUpdate pPbuPresentationId_ pPbuPayload_ =
     , _pbuPayload = pPbuPayload_
     , _pbuCallback = Nothing
     }
+
 
 -- | V1 error format.
 pbuXgafv :: Lens' PresentationsBatchUpdate (Maybe Xgafv)

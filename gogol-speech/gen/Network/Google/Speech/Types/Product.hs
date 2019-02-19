@@ -34,6 +34,7 @@ data LongRunningRecognizeMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LongRunningRecognizeMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -51,6 +52,7 @@ longRunningRecognizeMetadata =
     , _lrrmProgressPercent = Nothing
     , _lrrmLastUpdateTime = Nothing
     }
+
 
 -- | Time when the request was received.
 lrrmStartTime :: Lens' LongRunningRecognizeMetadata (Maybe UTCTime)
@@ -135,6 +137,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -147,6 +150,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -194,6 +198,7 @@ newtype SpeechContext =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpeechContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -202,6 +207,7 @@ newtype SpeechContext =
 speechContext
     :: SpeechContext
 speechContext = SpeechContext' {_scPhrases = Nothing}
+
 
 -- | *Optional* A list of strings containing words and phrases \"hints\" so
 -- that the speech recognition is more likely to recognize them. This can
@@ -235,6 +241,7 @@ data ListOperationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -247,6 +254,7 @@ listOperationsResponse
 listOperationsResponse =
   ListOperationsResponse'
     {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -294,6 +302,7 @@ data RecognitionMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RecognitionMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -329,6 +338,7 @@ recognitionMetadata =
     , _rmRecordingDeviceType = Nothing
     , _rmMicrophoneDistance = Nothing
     }
+
 
 -- | Description of the content. Eg. \"Recordings of federal supreme court
 -- hearings from 2012\".
@@ -436,6 +446,7 @@ data RecognizeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RecognizeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -446,6 +457,7 @@ data RecognizeRequest =
 recognizeRequest
     :: RecognizeRequest
 recognizeRequest = RecognizeRequest' {_rrConfig = Nothing, _rrAudio = Nothing}
+
 
 -- | *Required* Provides information to the recognizer that specifies how to
 -- process the request.
@@ -484,6 +496,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -507,6 +520,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -574,6 +588,7 @@ data SpeechRecognitionAlternative =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpeechRecognitionAlternative' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -588,6 +603,7 @@ speechRecognitionAlternative
 speechRecognitionAlternative =
   SpeechRecognitionAlternative'
     {_sraConfidence = Nothing, _sraWords = Nothing, _sraTranscript = Nothing}
+
 
 -- | Output only. The confidence estimate between 0.0 and 1.0. A higher
 -- number indicates an estimated greater likelihood that the recognized
@@ -646,6 +662,7 @@ data WordInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WordInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -669,6 +686,7 @@ wordInfo =
     , _wiWord = Nothing
     , _wiSpeakerTag = Nothing
     }
+
 
 -- | Output only. Time offset relative to the beginning of the audio, and
 -- corresponding to the start of the spoken word. This field is only set if
@@ -742,6 +760,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -752,6 +771,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -778,6 +798,7 @@ data SpeechRecognitionResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpeechRecognitionResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -795,6 +816,7 @@ speechRecognitionResult =
     , _srrLanguageCode = Nothing
     , _srrChannelTag = Nothing
     }
+
 
 -- | Output only. May contain one or more recognition hypotheses (up to the
 -- maximum specified in \`max_alternatives\`). These alternatives are
@@ -856,6 +878,7 @@ data RecognitionAudio =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RecognitionAudio' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -866,6 +889,7 @@ data RecognitionAudio =
 recognitionAudio
     :: RecognitionAudio
 recognitionAudio = RecognitionAudio' {_raURI = Nothing, _raContent = Nothing}
+
 
 -- | URI that points to a file that contains audio data bytes as specified in
 -- \`RecognitionConfig\`. The file must not be compressed (for example,
@@ -910,6 +934,7 @@ newtype RecognizeResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RecognizeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -918,6 +943,7 @@ newtype RecognizeResponse =
 recognizeResponse
     :: RecognizeResponse
 recognizeResponse = RecognizeResponse' {_rrResults = Nothing}
+
 
 -- | Output only. Sequential list of transcription results corresponding to
 -- sequential portions of audio.
@@ -951,6 +977,7 @@ newtype LongRunningRecognizeResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LongRunningRecognizeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -960,6 +987,7 @@ longRunningRecognizeResponse
     :: LongRunningRecognizeResponse
 longRunningRecognizeResponse =
   LongRunningRecognizeResponse' {_lrrrResults = Nothing}
+
 
 -- | Output only. Sequential list of transcription results corresponding to
 -- sequential portions of audio.
@@ -1007,6 +1035,7 @@ data RecognitionConfig =
     , _rcEnableWordConfidence                :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RecognitionConfig' with the minimum fields required to make a request.
 --
@@ -1070,6 +1099,7 @@ recognitionConfig =
     , _rcAlternativeLanguageCodes = Nothing
     , _rcEnableWordConfidence = Nothing
     }
+
 
 -- | *Optional* If \`true\`, the top result includes a list of words and the
 -- start and end time offsets (timestamps) for those words. If \`false\`,
@@ -1356,6 +1386,7 @@ data LongRunningRecognizeRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LongRunningRecognizeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1367,6 +1398,7 @@ longRunningRecognizeRequest
     :: LongRunningRecognizeRequest
 longRunningRecognizeRequest =
   LongRunningRecognizeRequest' {_lrrrConfig = Nothing, _lrrrAudio = Nothing}
+
 
 -- | *Required* Provides information to the recognizer that specifies how to
 -- process the request.
@@ -1405,6 +1437,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1415,6 +1448,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -1446,6 +1480,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1456,6 +1491,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1481,6 +1517,7 @@ data SpeakerDiarizationConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SpeakerDiarizationConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1498,6 +1535,7 @@ speakerDiarizationConfig =
     , _sdcMaxSpeakerCount = Nothing
     , _sdcEnableSpeakerDiarization = Nothing
     }
+
 
 -- | *Optional* Only used if diarization_speaker_count is not set. Minimum
 -- number of speakers in the conversation. This range gives you more

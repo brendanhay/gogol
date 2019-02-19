@@ -57,6 +57,7 @@ newtype WebResourceDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WebResourceDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ webResourceDelete
     :: Text -- ^ 'wrdId'
     -> WebResourceDelete
 webResourceDelete pWrdId_ = WebResourceDelete' {_wrdId = pWrdId_}
+
 
 -- | The id of a verified site or domain.
 wrdId :: Lens' WebResourceDelete Text

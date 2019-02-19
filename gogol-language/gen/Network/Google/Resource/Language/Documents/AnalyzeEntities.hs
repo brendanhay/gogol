@@ -76,6 +76,7 @@ data DocumentsAnalyzeEntities =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentsAnalyzeEntities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ documentsAnalyzeEntities pDaePayload_ =
     , _daePayload = pDaePayload_
     , _daeCallback = Nothing
     }
+
 
 -- | V1 error format.
 daeXgafv :: Lens' DocumentsAnalyzeEntities (Maybe Xgafv)

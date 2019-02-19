@@ -74,6 +74,7 @@ data SitesVersionsPopulateFiles =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesVersionsPopulateFiles' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ sitesVersionsPopulateFiles pSvpfParent_ pSvpfPayload_ =
     , _svpfPayload = pSvpfPayload_
     , _svpfCallback = Nothing
     }
+
 
 -- | Required. The version to add files to, in the format:
 -- 'sites\/site-name\/versions\/versionID'

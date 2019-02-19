@@ -74,6 +74,7 @@ data ManagementProFileFilterLinksUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementProFileFilterLinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ managementProFileFilterLinksUpdate pMpffluWebPropertyId_ pMpffluProFileId_ pMpff
     , _mpffluAccountId = pMpffluAccountId_
     , _mpffluLinkId = pMpffluLinkId_
     }
+
 
 -- | Web property Id to which profile filter link belongs
 mpffluWebPropertyId :: Lens' ManagementProFileFilterLinksUpdate Text

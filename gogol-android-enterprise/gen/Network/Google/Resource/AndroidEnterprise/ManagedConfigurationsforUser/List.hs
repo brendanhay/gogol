@@ -65,6 +65,7 @@ data ManagedConfigurationsforUserList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedConfigurationsforUserList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ managedConfigurationsforUserList
 managedConfigurationsforUserList pMculEnterpriseId_ pMculUserId_ =
   ManagedConfigurationsforUserList'
     {_mculEnterpriseId = pMculEnterpriseId_, _mculUserId = pMculUserId_}
+
 
 -- | The ID of the enterprise.
 mculEnterpriseId :: Lens' ManagedConfigurationsforUserList Text

@@ -75,6 +75,7 @@ data CustomersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ customersList =
     , _clPageSize = Nothing
     , _clCallback = Nothing
     }
+
 
 -- | V1 error format.
 clXgafv :: Lens' CustomersList (Maybe Xgafv)

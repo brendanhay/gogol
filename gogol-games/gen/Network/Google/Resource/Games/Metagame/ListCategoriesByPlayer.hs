@@ -75,6 +75,7 @@ data MetagameListCategoriesByPlayer =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MetagameListCategoriesByPlayer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ metagameListCategoriesByPlayer pMlcbpCollection_ pMlcbpPlayerId_ =
     , _mlcbpPlayerId = pMlcbpPlayerId_
     , _mlcbpMaxResults = Nothing
     }
+
 
 -- | The collection of categories for which data will be returned.
 mlcbpCollection :: Lens' MetagameListCategoriesByPlayer MetagameListCategoriesByPlayerCollection

@@ -70,6 +70,7 @@ data ProjectsInstancesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsInstancesGet pPigName_ =
     , _pigName = pPigName_
     , _pigCallback = Nothing
     }
+
 
 -- | V1 error format.
 pigXgafv :: Lens' ProjectsInstancesGet (Maybe Xgafv)

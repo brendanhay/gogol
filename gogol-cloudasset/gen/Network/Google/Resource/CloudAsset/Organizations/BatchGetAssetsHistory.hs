@@ -93,6 +93,7 @@ data OrganizationsBatchGetAssetsHistory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsBatchGetAssetsHistory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -132,6 +133,7 @@ organizationsBatchGetAssetsHistory pObgahParent_ =
     , _obgahContentType = Nothing
     , _obgahCallback = Nothing
     }
+
 
 -- | Required. The relative name of the root asset. It can only be an
 -- organization number (such as \"organizations\/123\"), a project ID (such

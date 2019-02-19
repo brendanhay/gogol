@@ -73,6 +73,7 @@ data ProjectsLocationsDataSetsHl7V2StoresDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsDataSetsHl7V2StoresDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ projectsLocationsDataSetsHl7V2StoresDelete pPldshvsdName_ =
     , _pldshvsdName = pPldshvsdName_
     , _pldshvsdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pldshvsdXgafv :: Lens' ProjectsLocationsDataSetsHl7V2StoresDelete (Maybe Xgafv)

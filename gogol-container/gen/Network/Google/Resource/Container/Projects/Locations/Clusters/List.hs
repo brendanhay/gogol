@@ -80,6 +80,7 @@ data ProjectsLocationsClustersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsLocationsClustersList pPlclParent_ =
     , _plclProjectId = Nothing
     , _plclCallback = Nothing
     }
+
 
 -- | The parent (project and location) where the clusters will be listed.
 -- Specified in the format \'projects\/*\/locations\/*\'. Location \"-\"

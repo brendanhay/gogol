@@ -65,6 +65,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -140,6 +142,7 @@ data AuditConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -150,6 +153,7 @@ data AuditConfig =
 auditConfig
     :: AuditConfig
 auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -195,6 +199,7 @@ data Expr =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -215,6 +220,7 @@ expr =
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -273,6 +279,7 @@ data Operation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -296,6 +303,7 @@ operation =
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -365,6 +373,7 @@ data Asset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Asset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -385,6 +394,7 @@ asset =
     , _aIAMPolicy = Nothing
     , _aAssetType = Nothing
     }
+
 
 -- | The full name of the asset. For example:
 -- \`\/\/compute.googleapis.com\/projects\/my_project_123\/zones\/zone1\/instances\/instance1\`.
@@ -437,6 +447,7 @@ newtype GcsDestination =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GcsDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -445,6 +456,7 @@ newtype GcsDestination =
 gcsDestination
     :: GcsDestination
 gcsDestination = GcsDestination' {_gdURI = Nothing}
+
 
 -- | The uri of the Cloud Storage object. It\'s the same uri that is used by
 -- gsutil. For example: \"gs:\/\/bucket_name\/object_name\". See [Viewing
@@ -471,6 +483,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -481,6 +494,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -508,6 +522,7 @@ data ExportAssetsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ExportAssetsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -528,6 +543,7 @@ exportAssetsRequest =
     , _earOutputConfig = Nothing
     , _earContentType = Nothing
     }
+
 
 -- | Timestamp to take an asset snapshot. This can only be set to a timestamp
 -- between 2018-10-02 UTC (inclusive) and the current time. If not
@@ -594,6 +610,7 @@ data TimeWindow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeWindow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -604,6 +621,7 @@ data TimeWindow =
 timeWindow
     :: TimeWindow
 timeWindow = TimeWindow' {_twStartTime = Nothing, _twEndTime = Nothing}
+
 
 -- | Start time of the time window (exclusive).
 twStartTime :: Lens' TimeWindow (Maybe UTCTime)
@@ -644,6 +662,7 @@ data TemporalAsset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TemporalAsset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -657,6 +676,7 @@ temporalAsset
     :: TemporalAsset
 temporalAsset =
   TemporalAsset' {_taWindow = Nothing, _taAsset = Nothing, _taDeleted = Nothing}
+
 
 -- | The time window when the asset data and state was observed.
 taWindow :: Lens' TemporalAsset (Maybe TimeWindow)
@@ -701,6 +721,7 @@ data Resource =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Resource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -727,6 +748,7 @@ resource =
     , _rDiscoveryDocumentURI = Nothing
     , _rResourceURL = Nothing
     }
+
 
 -- | The full name of the immediate parent of this resource. See [Resource
 -- Names](https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name)
@@ -806,6 +828,7 @@ newtype ResourceData =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ResourceData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -816,6 +839,7 @@ resourceData
     -> ResourceData
 resourceData pRdAddtional_ =
   ResourceData' {_rdAddtional = _Coerce # pRdAddtional_}
+
 
 -- | Properties of the object.
 rdAddtional :: Lens' ResourceData (HashMap Text JSONValue)
@@ -840,6 +864,7 @@ newtype OutputConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OutputConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -848,6 +873,7 @@ newtype OutputConfig =
 outputConfig
     :: OutputConfig
 outputConfig = OutputConfig' {_ocGcsDestination = Nothing}
+
 
 -- | Destination on Cloud Storage.
 ocGcsDestination :: Lens' OutputConfig (Maybe GcsDestination)
@@ -894,6 +920,7 @@ data Policy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -914,6 +941,7 @@ policy =
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -977,6 +1005,7 @@ newtype BatchGetAssetsHistoryResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchGetAssetsHistoryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -986,6 +1015,7 @@ batchGetAssetsHistoryResponse
     :: BatchGetAssetsHistoryResponse
 batchGetAssetsHistoryResponse =
   BatchGetAssetsHistoryResponse' {_bgahrAssets = Nothing}
+
 
 -- | A list of assets with valid time windows.
 bgahrAssets :: Lens' BatchGetAssetsHistoryResponse [TemporalAsset]
@@ -1017,6 +1047,7 @@ newtype OperationMetadata =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1027,6 +1058,7 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
   OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -1056,6 +1088,7 @@ data AuditLogConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1067,6 +1100,7 @@ auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
   AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -1113,6 +1147,7 @@ newtype OperationResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1123,6 +1158,7 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
   OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1149,6 +1185,7 @@ data Binding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1162,6 +1199,7 @@ binding
     :: Binding
 binding =
   Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A

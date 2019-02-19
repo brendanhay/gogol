@@ -35,6 +35,7 @@ data RemoteConfigParameterValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemoteConfigParameterValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -47,6 +48,7 @@ remoteConfigParameterValue
 remoteConfigParameterValue =
   RemoteConfigParameterValue'
     {_rcpvValue = Nothing, _rcpvUseInAppDefault = Nothing}
+
 
 -- | the string to set the parameter to
 rcpvValue :: Lens' RemoteConfigParameterValue (Maybe Text)
@@ -84,6 +86,7 @@ newtype RemoteConfigParameterConditionalValues =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemoteConfigParameterConditionalValues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -95,6 +98,7 @@ remoteConfigParameterConditionalValues
 remoteConfigParameterConditionalValues pRcpcvAddtional_ =
   RemoteConfigParameterConditionalValues'
     {_rcpcvAddtional = _Coerce # pRcpcvAddtional_}
+
 
 rcpcvAddtional :: Lens' RemoteConfigParameterConditionalValues (HashMap Text RemoteConfigParameterValue)
 rcpcvAddtional
@@ -128,6 +132,7 @@ newtype RemoteConfigParameters =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemoteConfigParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -138,6 +143,7 @@ remoteConfigParameters
     -> RemoteConfigParameters
 remoteConfigParameters pRcpAddtional_ =
   RemoteConfigParameters' {_rcpAddtional = _Coerce # pRcpAddtional_}
+
 
 rcpAddtional :: Lens' RemoteConfigParameters (HashMap Text RemoteConfigParameter)
 rcpAddtional
@@ -166,6 +172,7 @@ data RemoteConfigParameter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemoteConfigParameter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -183,6 +190,7 @@ remoteConfigParameter =
     , _rcpDescription = Nothing
     , _rcpConditionalValues = Nothing
     }
+
 
 -- | Optional - value to set the parameter to, when none of the named
 -- conditions evaluate to 'true'.
@@ -238,6 +246,7 @@ data RemoteConfigCondition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemoteConfigCondition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -258,6 +267,7 @@ remoteConfigCondition =
     , _rccExpression = Nothing
     , _rccDescription = Nothing
     }
+
 
 -- | Optional. The display (tag) color of this condition. This serves as part
 -- of a tag (in the future, we may add tag text as well as tag color, but
@@ -324,6 +334,7 @@ data RemoteConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemoteConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -334,6 +345,7 @@ data RemoteConfig =
 remoteConfig
     :: RemoteConfig
 remoteConfig = RemoteConfig' {_rcParameters = Nothing, _rcConditions = Nothing}
+
 
 -- | Map of parameter keys to their optional default values and optional
 -- submap of (condition name : value). Order doesn\'t affect semantics, and

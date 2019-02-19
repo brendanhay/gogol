@@ -57,6 +57,7 @@ newtype QueriesCreateQuery =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QueriesCreateQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -67,6 +68,7 @@ queriesCreateQuery
     -> QueriesCreateQuery
 queriesCreateQuery pQcqPayload_ =
   QueriesCreateQuery' {_qcqPayload = pQcqPayload_}
+
 
 -- | Multipart request metadata.
 qcqPayload :: Lens' QueriesCreateQuery Query

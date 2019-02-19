@@ -115,6 +115,7 @@ data AccountsStoreInfosList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsStoreInfosList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -178,6 +179,7 @@ accountsStoreInfosList pAsilAccountId_ =
     , _asilPageSize = Nothing
     , _asilCallback = Nothing
     }
+
 
 -- | See _List methods rules_ for info about this field.
 asilPphNames :: Lens' AccountsStoreInfosList [Text]

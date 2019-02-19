@@ -60,6 +60,7 @@ newtype RelyingPartyResetPassword =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RelyingPartyResetPassword' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -70,6 +71,7 @@ relyingPartyResetPassword
     -> RelyingPartyResetPassword
 relyingPartyResetPassword pRprpPayload_ =
   RelyingPartyResetPassword' {_rprpPayload = pRprpPayload_}
+
 
 -- | Multipart request metadata.
 rprpPayload :: Lens' RelyingPartyResetPassword IdentitytoolkitRelyingPartyResetPasswordRequest

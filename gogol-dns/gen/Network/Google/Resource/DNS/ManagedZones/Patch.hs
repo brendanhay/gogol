@@ -68,6 +68,7 @@ data ManagedZonesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedZonesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ managedZonesPatch pMzpProject_ pMzpPayload_ pMzpManagedZone_ =
     , _mzpManagedZone = pMzpManagedZone_
     , _mzpClientOperationId = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 mzpProject :: Lens' ManagedZonesPatch Text

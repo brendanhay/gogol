@@ -62,6 +62,7 @@ newtype EnterprisesAcknowledgeNotificationSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EnterprisesAcknowledgeNotificationSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ enterprisesAcknowledgeNotificationSet
     :: EnterprisesAcknowledgeNotificationSet
 enterprisesAcknowledgeNotificationSet =
   EnterprisesAcknowledgeNotificationSet' {_eansNotificationSetId = Nothing}
+
 
 -- | The notification set ID as returned by Enterprises.PullNotificationSet.
 -- This must be provided.

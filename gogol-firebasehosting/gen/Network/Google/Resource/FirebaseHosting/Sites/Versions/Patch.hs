@@ -86,6 +86,7 @@ data SitesVersionsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesVersionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ sitesVersionsPatch pSvpPayload_ pSvpName_ =
     , _svpName = pSvpName_
     , _svpCallback = Nothing
     }
+
 
 -- | V1 error format.
 svpXgafv :: Lens' SitesVersionsPatch (Maybe Xgafv)

@@ -94,6 +94,7 @@ data InstanceGroupManagersDeleteInstances =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstanceGroupManagersDeleteInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ instanceGroupManagersDeleteInstances pIgmdiProject_ pIgmdiInstanceGroupManager_ 
     , _igmdiZone = pIgmdiZone_
     , _igmdiPayload = pIgmdiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

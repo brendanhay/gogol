@@ -70,6 +70,7 @@ data ProjectsInstancesDatabasesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ projectsInstancesDatabasesGet pPidgName_ =
     , _pidgName = pPidgName_
     , _pidgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidgXgafv :: Lens' ProjectsInstancesDatabasesGet (Maybe Xgafv)

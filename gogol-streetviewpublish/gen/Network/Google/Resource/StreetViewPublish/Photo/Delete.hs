@@ -77,6 +77,7 @@ data PhotoDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PhotoDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ photoDelete pPdPhotoId_ =
     , _pdPhotoId = pPdPhotoId_
     , _pdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdXgafv :: Lens' PhotoDelete (Maybe Xgafv)

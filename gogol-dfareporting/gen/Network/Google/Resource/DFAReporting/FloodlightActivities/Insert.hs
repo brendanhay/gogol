@@ -62,6 +62,7 @@ data FloodlightActivitiesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivitiesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ floodlightActivitiesInsert
 floodlightActivitiesInsert pFaiProFileId_ pFaiPayload_ =
   FloodlightActivitiesInsert'
     {_faiProFileId = _Coerce # pFaiProFileId_, _faiPayload = pFaiPayload_}
+
 
 -- | User profile ID associated with this request.
 faiProFileId :: Lens' FloodlightActivitiesInsert Int64

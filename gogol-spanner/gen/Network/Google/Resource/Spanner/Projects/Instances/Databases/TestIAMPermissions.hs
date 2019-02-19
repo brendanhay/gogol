@@ -83,6 +83,7 @@ data ProjectsInstancesDatabasesTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ projectsInstancesDatabasesTestIAMPermissions pPidtipPayload_ pPidtipResource_ =
     , _pidtipResource = pPidtipResource_
     , _pidtipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidtipXgafv :: Lens' ProjectsInstancesDatabasesTestIAMPermissions (Maybe Xgafv)

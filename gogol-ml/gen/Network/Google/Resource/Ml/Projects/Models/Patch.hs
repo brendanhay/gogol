@@ -79,6 +79,7 @@ data ProjectsModelsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsModelsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ projectsModelsPatch pPmpPayload_ pPmpName_ =
     , _pmpName = pPmpName_
     , _pmpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmpXgafv :: Lens' ProjectsModelsPatch (Maybe Xgafv)

@@ -28,6 +28,7 @@ newtype BatchDeleteMessagesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchDeleteMessagesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -36,6 +37,7 @@ newtype BatchDeleteMessagesRequest =
 batchDeleteMessagesRequest
     :: BatchDeleteMessagesRequest
 batchDeleteMessagesRequest = BatchDeleteMessagesRequest' {_bdmrIds = Nothing}
+
 
 -- | The IDs of the messages to delete.
 bdmrIds :: Lens' BatchDeleteMessagesRequest [Text]
@@ -66,6 +68,7 @@ data Delegate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Delegate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +79,7 @@ data Delegate =
 delegate
     :: Delegate
 delegate = Delegate' {_dVerificationStatus = Nothing, _dDelegateEmail = Nothing}
+
 
 -- | Indicates whether this address has been verified and can act as a
 -- delegate for the account. Read-only.
@@ -114,6 +118,7 @@ data ModifyThreadRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModifyThreadRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -125,6 +130,7 @@ modifyThreadRequest
     :: ModifyThreadRequest
 modifyThreadRequest =
   ModifyThreadRequest' {_mtrRemoveLabelIds = Nothing, _mtrAddLabelIds = Nothing}
+
 
 -- | A list of IDs of labels to remove from this thread.
 mtrRemoveLabelIds :: Lens' ModifyThreadRequest [Text]
@@ -166,6 +172,7 @@ newtype ListFiltersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListFiltersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -174,6 +181,7 @@ newtype ListFiltersResponse =
 listFiltersResponse
     :: ListFiltersResponse
 listFiltersResponse = ListFiltersResponse' {_lfrFilter = Nothing}
+
 
 -- | List of a user\'s filters.
 lfrFilter :: Lens' ListFiltersResponse [Filter]
@@ -201,6 +209,7 @@ data ModifyMessageRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModifyMessageRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -213,6 +222,7 @@ modifyMessageRequest
 modifyMessageRequest =
   ModifyMessageRequest'
     {_mmrRemoveLabelIds = Nothing, _mmrAddLabelIds = Nothing}
+
 
 -- | A list IDs of labels to remove from this message.
 mmrRemoveLabelIds :: Lens' ModifyMessageRequest [Text]
@@ -254,6 +264,7 @@ newtype ListForwardingAddressesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListForwardingAddressesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -263,6 +274,7 @@ listForwardingAddressesResponse
     :: ListForwardingAddressesResponse
 listForwardingAddressesResponse =
   ListForwardingAddressesResponse' {_lfarForwardingAddresses = Nothing}
+
 
 -- | List of addresses that may be used for forwarding.
 lfarForwardingAddresses :: Lens' ListForwardingAddressesResponse [ForwardingAddress]
@@ -297,6 +309,7 @@ data PopSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PopSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -307,6 +320,7 @@ data PopSettings =
 popSettings
     :: PopSettings
 popSettings = PopSettings' {_psAccessWindow = Nothing, _psDisPosition = Nothing}
+
 
 -- | The range of messages which are accessible via POP.
 psAccessWindow :: Lens' PopSettings (Maybe PopSettingsAccessWindow)
@@ -350,6 +364,7 @@ data History =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'History' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -376,6 +391,7 @@ history =
     , _hId = Nothing
     , _hMessages = Nothing
     }
+
 
 -- | Labels removed from messages in this history record.
 hLabelsRemoved :: Lens' History [HistoryLabelRemoved]
@@ -454,6 +470,7 @@ newtype ListDelegatesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDelegatesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -462,6 +479,7 @@ newtype ListDelegatesResponse =
 listDelegatesResponse
     :: ListDelegatesResponse
 listDelegatesResponse = ListDelegatesResponse' {_ldrDelegates = Nothing}
+
 
 -- | List of the user\'s delegates (with any verification status).
 ldrDelegates :: Lens' ListDelegatesResponse [Delegate]
@@ -491,6 +509,7 @@ data LabelColor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LabelColor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -501,6 +520,7 @@ data LabelColor =
 labelColor
     :: LabelColor
 labelColor = LabelColor' {_lcBackgRoundColor = Nothing, _lcTextColor = Nothing}
+
 
 -- | The background color represented as hex string #RRGGBB (ex #000000).
 -- This field is required in order to set the color of a label. Only the
@@ -564,6 +584,7 @@ data FilterCriteria =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterCriteria' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -599,6 +620,7 @@ filterCriteria =
     , _fcNegatedQuery = Nothing
     , _fcHasAttachment = Nothing
     }
+
 
 -- | How the message size in bytes should be in relation to the size field.
 fcSizeComparison :: Lens' FilterCriteria (Maybe FilterCriteriaSizeComparison)
@@ -696,6 +718,7 @@ data ProFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -716,6 +739,7 @@ proFile =
     , _pfHistoryId = Nothing
     , _pfEmailAddress = Nothing
     }
+
 
 -- | The total number of messages in the mailbox.
 pfMessagesTotal :: Lens' ProFile (Maybe Int32)
@@ -770,6 +794,7 @@ data MessagePartHeader =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MessagePartHeader' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -780,6 +805,7 @@ data MessagePartHeader =
 messagePartHeader
     :: MessagePartHeader
 messagePartHeader = MessagePartHeader' {_mphValue = Nothing, _mphName = Nothing}
+
 
 -- | The value of the header after the : separator. For example,
 -- someuser\'example.com.
@@ -814,6 +840,7 @@ data ListHistoryResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListHistoryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -831,6 +858,7 @@ listHistoryResponse =
     , _lhrHistory = Nothing
     , _lhrHistoryId = Nothing
     }
+
 
 -- | Page token to retrieve the next page of results in the list.
 lhrNextPageToken :: Lens' ListHistoryResponse (Maybe Text)
@@ -889,6 +917,7 @@ data SendAs =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SendAs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -924,6 +953,7 @@ sendAs =
     , _saIsPrimary = Nothing
     , _saIsDefault = Nothing
     }
+
 
 -- | An optional HTML signature that is included in messages composed with
 -- this alias in the Gmail web UI.
@@ -1036,6 +1066,7 @@ data ListThreadsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListThreadsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1053,6 +1084,7 @@ listThreadsResponse =
     , _ltrResultSizeEstimate = Nothing
     , _ltrThreads = Nothing
     }
+
 
 -- | Page token to retrieve the next page of results in the list.
 ltrNextPageToken :: Lens' ListThreadsResponse (Maybe Text)
@@ -1107,6 +1139,7 @@ data MessagePart =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MessagePart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1133,6 +1166,7 @@ messagePart =
     , _mpPartId = Nothing
     , _mpFilename = Nothing
     }
+
 
 -- | The child MIME message parts of this part. This only applies to
 -- container MIME message parts, for example multipart\/*. For non-
@@ -1202,6 +1236,7 @@ data HistoryLabelAdded =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistoryLabelAdded' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1213,6 +1248,7 @@ historyLabelAdded
     :: HistoryLabelAdded
 historyLabelAdded =
   HistoryLabelAdded' {_hlaLabelIds = Nothing, _hlaMessage = Nothing}
+
 
 -- | Label IDs added to the message.
 hlaLabelIds :: Lens' HistoryLabelAdded [Text]
@@ -1247,6 +1283,7 @@ newtype ListLabelsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListLabelsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1255,6 +1292,7 @@ newtype ListLabelsResponse =
 listLabelsResponse
     :: ListLabelsResponse
 listLabelsResponse = ListLabelsResponse' {_llrLabels = Nothing}
+
 
 -- | List of labels.
 llrLabels :: Lens' ListLabelsResponse [Label]
@@ -1290,6 +1328,7 @@ data VacationSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VacationSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1322,6 +1361,7 @@ vacationSettings =
     , _vsResponseSubject = Nothing
     , _vsEndTime = Nothing
     }
+
 
 -- | Flag that controls whether Gmail automatically replies to messages.
 vsEnableAutoReply :: Lens' VacationSettings (Maybe Bool)
@@ -1419,6 +1459,7 @@ newtype HistoryMessageDeleted =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistoryMessageDeleted' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1427,6 +1468,7 @@ newtype HistoryMessageDeleted =
 historyMessageDeleted
     :: HistoryMessageDeleted
 historyMessageDeleted = HistoryMessageDeleted' {_hmdMessage = Nothing}
+
 
 hmdMessage :: Lens' HistoryMessageDeleted (Maybe Message)
 hmdMessage
@@ -1452,6 +1494,7 @@ data MessagePartBody =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MessagePartBody' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1466,6 +1509,7 @@ messagePartBody
 messagePartBody =
   MessagePartBody'
     {_mpbSize = Nothing, _mpbData = Nothing, _mpbAttachmentId = Nothing}
+
 
 -- | Number of bytes for the message part data (encoding notwithstanding).
 mpbSize :: Lens' MessagePartBody (Maybe Int32)
@@ -1517,6 +1561,7 @@ data AutoForwarding =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AutoForwarding' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1531,6 +1576,7 @@ autoForwarding
 autoForwarding =
   AutoForwarding'
     {_afEnabled = Nothing, _afDisPosition = Nothing, _afEmailAddress = Nothing}
+
 
 -- | Whether all incoming mail is automatically forwarded to another address.
 afEnabled :: Lens' AutoForwarding (Maybe Bool)
@@ -1576,6 +1622,7 @@ data ListDraftsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListDraftsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1593,6 +1640,7 @@ listDraftsResponse =
     , _ldrResultSizeEstimate = Nothing
     , _ldrDrafts = Nothing
     }
+
 
 -- | Token to retrieve the next page of results in the list.
 ldrNextPageToken :: Lens' ListDraftsResponse (Maybe Text)
@@ -1640,6 +1688,7 @@ newtype ListSendAsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSendAsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1648,6 +1697,7 @@ newtype ListSendAsResponse =
 listSendAsResponse
     :: ListSendAsResponse
 listSendAsResponse = ListSendAsResponse' {_lsarSendAs = Nothing}
+
 
 -- | List of send-as aliases.
 lsarSendAs :: Lens' ListSendAsResponse [SendAs]
@@ -1676,6 +1726,7 @@ data WatchResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1686,6 +1737,7 @@ data WatchResponse =
 watchResponse
     :: WatchResponse
 watchResponse = WatchResponse' {_wrExpiration = Nothing, _wrHistoryId = Nothing}
+
 
 -- | When Gmail will stop sending notifications for mailbox updates (epoch
 -- millis). Call watch again before this time to renew the watch.
@@ -1724,6 +1776,7 @@ data BatchModifyMessagesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchModifyMessagesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1741,6 +1794,7 @@ batchModifyMessagesRequest =
     , _bmmrRemoveLabelIds = Nothing
     , _bmmrAddLabelIds = Nothing
     }
+
 
 -- | The IDs of the messages to modify. There is a limit of 1000 ids per
 -- request.
@@ -1792,6 +1846,7 @@ data Draft =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Draft' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1802,6 +1857,7 @@ data Draft =
 draft
     :: Draft
 draft = Draft' {_dId = Nothing, _dMessage = Nothing}
+
 
 -- | The immutable ID of the draft.
 dId :: Lens' Draft (Maybe Text)
@@ -1836,6 +1892,7 @@ data SmtpMsa =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SmtpMsa' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1859,6 +1916,7 @@ smtpMsa =
     , _smHost = Nothing
     , _smPort = Nothing
     }
+
 
 -- | The protocol that will be used to secure communication with the SMTP
 -- service. Required.
@@ -1920,6 +1978,7 @@ data ForwardingAddress =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ForwardingAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1932,6 +1991,7 @@ forwardingAddress
 forwardingAddress =
   ForwardingAddress'
     {_faForwardingEmail = Nothing, _faVerificationStatus = Nothing}
+
 
 -- | An email address to which messages can be forwarded.
 faForwardingEmail :: Lens' ForwardingAddress (Maybe Text)
@@ -1973,6 +2033,7 @@ data Filter =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1985,6 +2046,7 @@ data Filter =
 filter'
     :: Filter
 filter' = Filter' {_fAction = Nothing, _fId = Nothing, _fCriteria = Nothing}
+
 
 -- | Action that the filter performs.
 fAction :: Lens' Filter (Maybe FilterAction)
@@ -2025,6 +2087,7 @@ data WatchRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2042,6 +2105,7 @@ watchRequest =
     , _wrTopicName = Nothing
     , _wrLabelIds = Nothing
     }
+
 
 -- | Filtering behavior of labelIds list specified.
 wrLabelFilterAction :: Lens' WatchRequest (Maybe WatchRequestLabelFilterAction)
@@ -2097,6 +2161,7 @@ data ImapSettings =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImapSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2117,6 +2182,7 @@ imapSettings =
     , _isAutoExpunge = Nothing
     , _isMaxFolderSize = Nothing
     }
+
 
 -- | Whether IMAP is enabled for the account.
 isEnabled :: Lens' ImapSettings (Maybe Bool)
@@ -2173,6 +2239,7 @@ newtype ListSmimeInfoResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSmimeInfoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2181,6 +2248,7 @@ newtype ListSmimeInfoResponse =
 listSmimeInfoResponse
     :: ListSmimeInfoResponse
 listSmimeInfoResponse = ListSmimeInfoResponse' {_lsirSmimeInfo = Nothing}
+
 
 -- | List of SmimeInfo.
 lsirSmimeInfo :: Lens' ListSmimeInfoResponse [SmimeInfo]
@@ -2219,6 +2287,7 @@ data Message =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Message' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2254,6 +2323,7 @@ message =
     , _mThreadId = Nothing
     , _mInternalDate = Nothing
     }
+
 
 -- | The entire email message in an RFC 2822 formatted and base64url encoded
 -- string. Returned in messages.get and drafts.get responses when the
@@ -2350,6 +2420,7 @@ data HistoryLabelRemoved =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistoryLabelRemoved' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2361,6 +2432,7 @@ historyLabelRemoved
     :: HistoryLabelRemoved
 historyLabelRemoved =
   HistoryLabelRemoved' {_hlrLabelIds = Nothing, _hlrMessage = Nothing}
+
 
 -- | Label IDs removed from the message.
 hlrLabelIds :: Lens' HistoryLabelRemoved [Text]
@@ -2399,6 +2471,7 @@ data Thread =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Thread' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2419,6 +2492,7 @@ thread =
     , _tId = Nothing
     , _tMessages = Nothing
     }
+
 
 -- | A short part of the message text.
 tSnippet :: Lens' Thread (Maybe Text)
@@ -2469,6 +2543,7 @@ data FilterAction =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilterAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2486,6 +2561,7 @@ filterAction =
     , _faRemoveLabelIds = Nothing
     , _faAddLabelIds = Nothing
     }
+
 
 -- | Email address that the message should be forwarded to.
 faForward :: Lens' FilterAction (Maybe Text)
@@ -2544,6 +2620,7 @@ data Label =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Label' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2582,6 +2659,7 @@ label =
     , _lId = Nothing
     , _lType = Nothing
     }
+
 
 -- | The number of unread threads with the label.
 lThreadsUnread :: Lens' Label (Maybe Int32)
@@ -2695,6 +2773,7 @@ data SmimeInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SmimeInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2724,6 +2803,7 @@ smimeInfo =
     , _siIssuerCn = Nothing
     , _siIsDefault = Nothing
     }
+
 
 -- | PEM formatted X509 concatenated certificate string (standard base64
 -- encoding). Format used for returning key, which includes public key as
@@ -2802,6 +2882,7 @@ data ListMessagesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListMessagesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2819,6 +2900,7 @@ listMessagesResponse =
     , _lmrResultSizeEstimate = Nothing
     , _lmrMessages = Nothing
     }
+
 
 -- | Token to retrieve the next page of results in the list.
 lmrNextPageToken :: Lens' ListMessagesResponse (Maybe Text)
@@ -2867,6 +2949,7 @@ newtype HistoryMessageAdded =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'HistoryMessageAdded' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2875,6 +2958,7 @@ newtype HistoryMessageAdded =
 historyMessageAdded
     :: HistoryMessageAdded
 historyMessageAdded = HistoryMessageAdded' {_hmaMessage = Nothing}
+
 
 hmaMessage :: Lens' HistoryMessageAdded (Maybe Message)
 hmaMessage

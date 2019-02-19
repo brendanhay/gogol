@@ -62,6 +62,7 @@ data UsersThreadsUntrash =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersThreadsUntrash' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ usersThreadsUntrash
     -> UsersThreadsUntrash
 usersThreadsUntrash pUtuId_ =
   UsersThreadsUntrash' {_utuUserId = "me", _utuId = pUtuId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

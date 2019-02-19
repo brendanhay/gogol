@@ -77,6 +77,7 @@ data CustomersConfigurationsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomersConfigurationsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ customersConfigurationsPatch pCcpPayload_ pCcpName_ =
     , _ccpName = pCcpName_
     , _ccpCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccpXgafv :: Lens' CustomersConfigurationsPatch (Maybe Xgafv)

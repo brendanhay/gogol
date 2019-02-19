@@ -73,6 +73,7 @@ data ManagementUploadsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementUploadsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ managementUploadsList pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_ 
     , _mulStartIndex = Nothing
     , _mulMaxResults = Nothing
     }
+
 
 -- | Web property Id for the uploads to retrieve.
 mulWebPropertyId :: Lens' ManagementUploadsList Text

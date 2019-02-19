@@ -72,6 +72,7 @@ data DocumentsAnalyzeSentiment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DocumentsAnalyzeSentiment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ documentsAnalyzeSentiment pDasPayload_ =
     , _dasPayload = pDasPayload_
     , _dasCallback = Nothing
     }
+
 
 -- | V1 error format.
 dasXgafv :: Lens' DocumentsAnalyzeSentiment (Maybe Xgafv)

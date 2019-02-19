@@ -81,6 +81,7 @@ data ProjectsScanConfigsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsScanConfigsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -117,6 +118,7 @@ projectsScanConfigsList pPsclParent_ =
     , _psclPageSize = Nothing
     , _psclCallback = Nothing
     }
+
 
 -- | The name of the project to list scan configurations for in the form of
 -- \`projects\/[PROJECT_ID]\`.

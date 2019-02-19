@@ -65,6 +65,7 @@ data EntitlementsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EntitlementsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ entitlementsGet pEgEntitlementId_ pEgEnterpriseId_ pEgUserId_ =
     , _egEnterpriseId = pEgEnterpriseId_
     , _egUserId = pEgUserId_
     }
+
 
 -- | The ID of the entitlement (a product ID), e.g.
 -- \"app:com.google.android.gm\".

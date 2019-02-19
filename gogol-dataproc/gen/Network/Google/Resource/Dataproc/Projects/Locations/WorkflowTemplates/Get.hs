@@ -76,6 +76,7 @@ data ProjectsLocationsWorkflowTemplatesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLocationsWorkflowTemplatesGet pPlwtgName_ =
     , _plwtgVersion = Nothing
     , _plwtgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plwtgXgafv :: Lens' ProjectsLocationsWorkflowTemplatesGet (Maybe Xgafv)

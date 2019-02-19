@@ -69,6 +69,7 @@ data NodeGroupsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ nodeGroupsGet pNggNodeGroup_ pNggProject_ pNggZone_ =
     , _nggProject = pNggProject_
     , _nggZone = pNggZone_
     }
+
 
 -- | Name of the node group to return.
 nggNodeGroup :: Lens' NodeGroupsGet Text

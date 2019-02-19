@@ -62,6 +62,7 @@ data UsersSettingsFiltersDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsFiltersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ usersSettingsFiltersDelete
     -> UsersSettingsFiltersDelete
 usersSettingsFiltersDelete pUsfdId_ =
   UsersSettingsFiltersDelete' {_usfdUserId = "me", _usfdId = pUsfdId_}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

@@ -88,6 +88,7 @@ data ProjectsZonesClustersNodePoolsSetSize =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsSetSize' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -131,6 +132,7 @@ projectsZonesClustersNodePoolsSetSize pPzcnpssZone_ pPzcnpssPayload_ pPzcnpssNod
     , _pzcnpssProjectId = pPzcnpssProjectId_
     , _pzcnpssCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcnpssXgafv :: Lens' ProjectsZonesClustersNodePoolsSetSize (Maybe Xgafv)

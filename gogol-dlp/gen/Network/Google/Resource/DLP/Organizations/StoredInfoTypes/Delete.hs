@@ -75,6 +75,7 @@ data OrganizationsStoredInfoTypesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsStoredInfoTypesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -102,6 +103,7 @@ organizationsStoredInfoTypesDelete pOsitdName_ =
     , _ositdName = pOsitdName_
     , _ositdCallback = Nothing
     }
+
 
 -- | V1 error format.
 ositdXgafv :: Lens' OrganizationsStoredInfoTypesDelete (Maybe Xgafv)

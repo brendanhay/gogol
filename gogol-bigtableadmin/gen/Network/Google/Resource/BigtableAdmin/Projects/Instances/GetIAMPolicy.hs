@@ -76,6 +76,7 @@ data ProjectsInstancesGetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsInstancesGetIAMPolicy pPigipPayload_ pPigipResource_ =
     , _pigipResource = pPigipResource_
     , _pigipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pigipXgafv :: Lens' ProjectsInstancesGetIAMPolicy (Maybe Xgafv)

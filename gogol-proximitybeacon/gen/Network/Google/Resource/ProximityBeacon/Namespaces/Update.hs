@@ -78,6 +78,7 @@ data NamespacesUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NamespacesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +113,7 @@ namespacesUpdate pNuPayload_ pNuNamespaceName_ =
     , _nuProjectId = Nothing
     , _nuCallback = Nothing
     }
+
 
 -- | V1 error format.
 nuXgafv :: Lens' NamespacesUpdate (Maybe Xgafv)

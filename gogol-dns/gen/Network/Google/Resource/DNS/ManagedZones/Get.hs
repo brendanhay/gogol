@@ -64,6 +64,7 @@ data ManagedZonesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagedZonesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ managedZonesGet pMzgProject_ pMzgManagedZone_ =
     , _mzgManagedZone = pMzgManagedZone_
     , _mzgClientOperationId = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 mzgProject :: Lens' ManagedZonesGet Text

@@ -70,6 +70,7 @@ data NodeTemplatesTestIAMPermissions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NodeTemplatesTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -94,6 +95,7 @@ nodeTemplatesTestIAMPermissions pNttipProject_ pNttipPayload_ pNttipResource_ pN
     , _nttipResource = pNttipResource_
     , _nttipRegion = pNttipRegion_
     }
+
 
 -- | Project ID for this request.
 nttipProject :: Lens' NodeTemplatesTestIAMPermissions Text

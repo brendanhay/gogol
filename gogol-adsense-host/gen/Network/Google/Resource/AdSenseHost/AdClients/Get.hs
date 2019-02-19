@@ -57,6 +57,7 @@ newtype AdClientsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdClientsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ adClientsGet
     :: Text -- ^ 'acgAdClientId'
     -> AdClientsGet
 adClientsGet pAcgAdClientId_ = AdClientsGet' {_acgAdClientId = pAcgAdClientId_}
+
 
 -- | Ad client to get.
 acgAdClientId :: Lens' AdClientsGet Text

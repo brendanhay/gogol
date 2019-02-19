@@ -85,6 +85,7 @@ data ProjectsDatabasesDocumentsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesDocumentsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +129,7 @@ projectsDatabasesDocumentsPatch pPddpPayload_ pPddpName_ =
     , _pddpMaskFieldPaths = Nothing
     , _pddpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pddpXgafv :: Lens' ProjectsDatabasesDocumentsPatch (Maybe Xgafv)

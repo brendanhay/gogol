@@ -82,6 +82,7 @@ data FoldersSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FoldersSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -113,6 +114,7 @@ foldersSetIAMPolicy pFsipPayload_ pFsipResource_ =
     , _fsipResource = pFsipResource_
     , _fsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 fsipXgafv :: Lens' FoldersSetIAMPolicy (Maybe Xgafv)

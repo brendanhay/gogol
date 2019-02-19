@@ -63,6 +63,7 @@ data MobileApppanelsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MobileApppanelsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ mobileApppanelsUpdate
 mobileApppanelsUpdate pMauPayload_ pMauPanelId_ =
   MobileApppanelsUpdate'
     {_mauPayload = pMauPayload_, _mauPanelId = pMauPanelId_}
+
 
 -- | Multipart request metadata.
 mauPayload :: Lens' MobileApppanelsUpdate MobileAppPanel

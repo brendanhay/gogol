@@ -57,6 +57,7 @@ newtype ContactsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ContactsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ contactsDelete
     :: Text -- ^ 'cdId'
     -> ContactsDelete
 contactsDelete pCdId_ = ContactsDelete' {_cdId = pCdId_}
+
 
 -- | The ID of the contact.
 cdId :: Lens' ContactsDelete Text

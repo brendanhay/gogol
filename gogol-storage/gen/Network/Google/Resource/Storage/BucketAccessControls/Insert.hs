@@ -65,6 +65,7 @@ data BucketAccessControlsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketAccessControlsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -84,6 +85,7 @@ bucketAccessControlsInsert pBaciBucket_ pBaciPayload_ =
     , _baciPayload = pBaciPayload_
     , _baciUserProject = Nothing
     }
+
 
 -- | Name of a bucket.
 baciBucket :: Lens' BucketAccessControlsInsert Text

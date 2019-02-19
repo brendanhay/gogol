@@ -73,6 +73,7 @@ data ZoneOperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ZoneOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ zoneOperationsList pZolProject_ pZolZone_ =
     , _zolPageToken = Nothing
     , _zolMaxResults = 500
     }
+
 
 -- | Name of the project scoping this request.
 zolProject :: Lens' ZoneOperationsList Text

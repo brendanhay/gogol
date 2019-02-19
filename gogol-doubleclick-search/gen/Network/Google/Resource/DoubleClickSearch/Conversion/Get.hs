@@ -93,6 +93,7 @@ data ConversionGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ConversionGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -141,6 +142,7 @@ conversionGet pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgS
     , _cgAdId = Nothing
     , _cgRowCount = _Coerce # pCgRowCount_
     }
+
 
 -- | Numeric ID of the ad group.
 cgAdGroupId :: Lens' ConversionGet (Maybe Int64)

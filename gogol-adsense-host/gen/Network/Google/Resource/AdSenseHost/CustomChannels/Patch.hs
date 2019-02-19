@@ -67,6 +67,7 @@ data CustomChannelsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomChannelsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ customChannelsPatch pCcpCustomChannelId_ pCcpPayload_ pCcpAdClientId_ =
     , _ccpPayload = pCcpPayload_
     , _ccpAdClientId = pCcpAdClientId_
     }
+
 
 -- | Custom channel to get.
 ccpCustomChannelId :: Lens' CustomChannelsPatch Text

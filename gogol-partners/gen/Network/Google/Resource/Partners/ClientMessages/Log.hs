@@ -76,6 +76,7 @@ data ClientMessagesLog =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ClientMessagesLog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -103,6 +104,7 @@ clientMessagesLog pCmlPayload_ =
     , _cmlPayload = pCmlPayload_
     , _cmlCallback = Nothing
     }
+
 
 -- | V1 error format.
 cmlXgafv :: Lens' ClientMessagesLog (Maybe Xgafv)

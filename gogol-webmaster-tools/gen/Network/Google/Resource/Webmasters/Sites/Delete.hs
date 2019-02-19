@@ -57,6 +57,7 @@ newtype SitesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SitesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ sitesDelete
     :: Text -- ^ 'sSiteURL'
     -> SitesDelete
 sitesDelete pSSiteURL_ = SitesDelete' {_sSiteURL = pSSiteURL_}
+
 
 -- | The URI of the property as defined in Search Console. Examples:
 -- http:\/\/www.example.com\/ or android-app:\/\/com.example\/ Note: for

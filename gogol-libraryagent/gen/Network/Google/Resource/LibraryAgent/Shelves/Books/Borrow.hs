@@ -77,6 +77,7 @@ data ShelvesBooksBorrow =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShelvesBooksBorrow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ shelvesBooksBorrow pSbbName_ =
     , _sbbName = pSbbName_
     , _sbbCallback = Nothing
     }
+
 
 -- | V1 error format.
 sbbXgafv :: Lens' ShelvesBooksBorrow (Maybe Xgafv)

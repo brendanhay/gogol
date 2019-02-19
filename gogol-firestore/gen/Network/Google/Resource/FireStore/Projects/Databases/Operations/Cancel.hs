@@ -91,6 +91,7 @@ data ProjectsDatabasesOperationsCancel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsDatabasesOperationsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -122,6 +123,7 @@ projectsDatabasesOperationsCancel pPdocPayload_ pPdocName_ =
     , _pdocName = pPdocName_
     , _pdocCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdocXgafv :: Lens' ProjectsDatabasesOperationsCancel (Maybe Xgafv)

@@ -80,6 +80,7 @@ data RegionBackendServicesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RegionBackendServicesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ regionBackendServicesPatch pRbspProject_ pRbspPayload_ pRbspRegion_ pRbspBackend
     , _rbspRegion = pRbspRegion_
     , _rbspBackendService = pRbspBackendService_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

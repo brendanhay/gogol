@@ -101,6 +101,7 @@ data OffersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OffersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -145,6 +146,7 @@ offersList =
     , _olRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _olCallback = Nothing
     }
+
 
 -- | V1 error format.
 olXgafv :: Lens' OffersList (Maybe Xgafv)

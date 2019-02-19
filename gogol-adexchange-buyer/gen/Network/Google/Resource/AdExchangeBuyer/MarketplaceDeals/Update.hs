@@ -63,6 +63,7 @@ data MarketplaceDealsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MarketplaceDealsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ marketplaceDealsUpdate
 marketplaceDealsUpdate pMduPayload_ pMduProposalId_ =
   MarketplaceDealsUpdate'
     {_mduPayload = pMduPayload_, _mduProposalId = pMduProposalId_}
+
 
 -- | Multipart request metadata.
 mduPayload :: Lens' MarketplaceDealsUpdate EditAllOrderDealsRequest

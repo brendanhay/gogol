@@ -65,6 +65,7 @@ data LeaderboardConfigurationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LeaderboardConfigurationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -83,6 +84,7 @@ leaderboardConfigurationsList pLclApplicationId_ =
     , _lclPageToken = Nothing
     , _lclMaxResults = Nothing
     }
+
 
 -- | The application ID from the Google Play developer console.
 lclApplicationId :: Lens' LeaderboardConfigurationsList Text

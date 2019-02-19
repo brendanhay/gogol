@@ -72,6 +72,7 @@ data ProjectsHistoriesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsHistoriesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ projectsHistoriesCreate pPhcPayload_ pPhcProjectId_ =
     , _phcPayload = pPhcPayload_
     , _phcProjectId = pPhcProjectId_
     }
+
 
 -- | A unique request ID for server to detect duplicated requests. For
 -- example, a UUID. Optional, but strongly recommended.

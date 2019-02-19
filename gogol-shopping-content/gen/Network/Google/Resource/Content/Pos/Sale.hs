@@ -65,6 +65,7 @@ data PosSale' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'PosSale'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ posSale' pPsMerchantId_ pPsTargetMerchantId_ pPsPayload_ =
     , _psTargetMerchantId = _Coerce # pPsTargetMerchantId_
     , _psPayload = pPsPayload_
     }
+
 
 -- | The ID of the POS or inventory data provider.
 psMerchantId :: Lens' PosSale' Word64

@@ -30,6 +30,7 @@ data ListCourseAliasesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListCourseAliasesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -42,6 +43,7 @@ listCourseAliasesResponse
 listCourseAliasesResponse =
   ListCourseAliasesResponse'
     {_lcarNextPageToken = Nothing, _lcarAliases = Nothing}
+
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -100,6 +102,7 @@ data CourseWork =
     , _cwDescription                :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CourseWork' with the minimum fields required to make a request.
 --
@@ -172,6 +175,7 @@ courseWork =
     , _cwAssignment = Nothing
     , _cwDescription = Nothing
     }
+
 
 -- | Timestamp when this course work was created. Read-only.
 cwCreationTime :: Lens' CourseWork (Maybe UTCTime)
@@ -383,6 +387,7 @@ data GradeHistory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GradeHistory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -406,6 +411,7 @@ gradeHistory =
     , _ghActorUserId = Nothing
     , _ghGradeChangeType = Nothing
     }
+
 
 -- | When the grade of the submission was changed.
 ghGradeTimestamp :: Lens' GradeHistory (Maybe UTCTime)
@@ -470,6 +476,7 @@ newtype CourseWorkChangesInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CourseWorkChangesInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -478,6 +485,7 @@ newtype CourseWorkChangesInfo =
 courseWorkChangesInfo
     :: CourseWorkChangesInfo
 courseWorkChangesInfo = CourseWorkChangesInfo' {_cwciCourseId = Nothing}
+
 
 -- | The \`course_id\` of the course to subscribe to work changes for.
 cwciCourseId :: Lens' CourseWorkChangesInfo (Maybe Text)
@@ -505,6 +513,7 @@ data ModifyCourseWorkAssigneesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModifyCourseWorkAssigneesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -519,6 +528,7 @@ modifyCourseWorkAssigneesRequest =
     { _mcwarAssigneeMode = Nothing
     , _mcwarModifyIndividualStudentsOptions = Nothing
     }
+
 
 -- | Mode of the coursework describing whether it will be assigned to all
 -- students or specified individual students.
@@ -565,6 +575,7 @@ data DriveFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DriveFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -585,6 +596,7 @@ driveFile =
     , _dfTitle = Nothing
     , _dfAlternateLink = Nothing
     }
+
 
 -- | URL of a thumbnail image of the Drive item. Read-only.
 dfThumbnailURL :: Lens' DriveFile (Maybe Text)
@@ -637,6 +649,7 @@ data GuardianInvitation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GuardianInvitation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -660,6 +673,7 @@ guardianInvitation =
     , _giInvitationId = Nothing
     , _giInvitedEmailAddress = Nothing
     }
+
 
 -- | The time that this invitation was created. Read-only.
 giCreationTime :: Lens' GuardianInvitation (Maybe UTCTime)
@@ -723,6 +737,7 @@ data Feed =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Feed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -740,6 +755,7 @@ feed =
     , _fFeedType = Nothing
     , _fCourseRosterChangesInfo = Nothing
     }
+
 
 -- | Information about a \`Feed\` with a \`feed_type\` of
 -- \`COURSE_WORK_CHANGES\`. This field must be specified if \`feed_type\`
@@ -791,6 +807,7 @@ data ModifyAnnouncementAssigneesRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModifyAnnouncementAssigneesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -805,6 +822,7 @@ modifyAnnouncementAssigneesRequest =
     { _maarAssigneeMode = Nothing
     , _maarModifyIndividualStudentsOptions = Nothing
     }
+
 
 -- | Mode of the announcement describing whether it will be accessible by all
 -- students or specified individual students.
@@ -846,11 +864,13 @@ data ReturnStudentSubmissionRequest =
   ReturnStudentSubmissionRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReturnStudentSubmissionRequest' with the minimum fields required to make a request.
 --
 returnStudentSubmissionRequest
     :: ReturnStudentSubmissionRequest
 returnStudentSubmissionRequest = ReturnStudentSubmissionRequest'
+
 
 instance FromJSON ReturnStudentSubmissionRequest
          where
@@ -868,11 +888,13 @@ data ReclaimStudentSubmissionRequest =
   ReclaimStudentSubmissionRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ReclaimStudentSubmissionRequest' with the minimum fields required to make a request.
 --
 reclaimStudentSubmissionRequest
     :: ReclaimStudentSubmissionRequest
 reclaimStudentSubmissionRequest = ReclaimStudentSubmissionRequest'
+
 
 instance FromJSON ReclaimStudentSubmissionRequest
          where
@@ -893,6 +915,7 @@ data ListCourseWorkResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListCourseWorkResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -905,6 +928,7 @@ listCourseWorkResponse
 listCourseWorkResponse =
   ListCourseWorkResponse'
     {_lcwrCourseWork = Nothing, _lcwrNextPageToken = Nothing}
+
 
 -- | Course work items that match the request.
 lcwrCourseWork :: Lens' ListCourseWorkResponse [CourseWork]
@@ -947,11 +971,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -968,6 +994,7 @@ newtype GlobalPermission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GlobalPermission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -976,6 +1003,7 @@ newtype GlobalPermission =
 globalPermission
     :: GlobalPermission
 globalPermission = GlobalPermission' {_gpPermission = Nothing}
+
 
 -- | Permission value.
 gpPermission :: Lens' GlobalPermission (Maybe GlobalPermissionPermission)
@@ -1003,6 +1031,7 @@ data Link =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Link' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1015,6 +1044,7 @@ data Link =
 link
     :: Link
 link = Link' {_lThumbnailURL = Nothing, _lURL = Nothing, _lTitle = Nothing}
+
 
 -- | URL of a thumbnail image of the target URL. Read-only.
 lThumbnailURL :: Lens' Link (Maybe Text)
@@ -1056,6 +1086,7 @@ newtype IndividualStudentsOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IndividualStudentsOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1065,6 +1096,7 @@ individualStudentsOptions
     :: IndividualStudentsOptions
 individualStudentsOptions =
   IndividualStudentsOptions' {_isoStudentIds = Nothing}
+
 
 -- | Identifiers for the students that have access to the
 -- coursework\/announcement.
@@ -1096,6 +1128,7 @@ newtype AssignmentSubmission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AssignmentSubmission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1104,6 +1137,7 @@ newtype AssignmentSubmission =
 assignmentSubmission
     :: AssignmentSubmission
 assignmentSubmission = AssignmentSubmission' {_asAttachments = Nothing}
+
 
 -- | Attachments added by the student. Drive files that correspond to
 -- materials with a share mode of STUDENT_COPY may not exist yet if the
@@ -1139,6 +1173,7 @@ newtype ModifyAttachmentsRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModifyAttachmentsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1148,6 +1183,7 @@ modifyAttachmentsRequest
     :: ModifyAttachmentsRequest
 modifyAttachmentsRequest =
   ModifyAttachmentsRequest' {_marAddAttachments = Nothing}
+
 
 -- | Attachments to add. A student submission may not have more than 20
 -- attachments. Form attachments are not supported.
@@ -1181,6 +1217,7 @@ data ListAnnouncementsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListAnnouncementsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1193,6 +1230,7 @@ listAnnouncementsResponse
 listAnnouncementsResponse =
   ListAnnouncementsResponse'
     {_larNextPageToken = Nothing, _larAnnouncements = Nothing}
+
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -1234,6 +1272,7 @@ data ListStudentSubmissionsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListStudentSubmissionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1246,6 +1285,7 @@ listStudentSubmissionsResponse
 listStudentSubmissionsResponse =
   ListStudentSubmissionsResponse'
     {_lssrNextPageToken = Nothing, _lssrStudentSubmissions = Nothing}
+
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -1292,6 +1332,7 @@ data Material =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Material' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1312,6 +1353,7 @@ material =
     , _mYouTubeVideo = Nothing
     , _mForm = Nothing
     }
+
 
 -- | Google Drive file material.
 mDriveFile :: Lens' Material (Maybe SharedDriveFile)
@@ -1360,6 +1402,7 @@ newtype MultipleChoiceSubmission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MultipleChoiceSubmission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1368,6 +1411,7 @@ newtype MultipleChoiceSubmission =
 multipleChoiceSubmission
     :: MultipleChoiceSubmission
 multipleChoiceSubmission = MultipleChoiceSubmission' {_mcsAnswer = Nothing}
+
 
 -- | Student\'s select choice.
 mcsAnswer :: Lens' MultipleChoiceSubmission (Maybe Text)
@@ -1394,6 +1438,7 @@ data ListInvitationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListInvitationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1406,6 +1451,7 @@ listInvitationsResponse
 listInvitationsResponse =
   ListInvitationsResponse'
     {_lirNextPageToken = Nothing, _lirInvitations = Nothing}
+
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -1450,6 +1496,7 @@ data Guardian =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Guardian' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1470,6 +1517,7 @@ guardian =
     , _gInvitedEmailAddress = Nothing
     , _gGuardianProFile = Nothing
     }
+
 
 -- | Identifier for the student to whom the guardian relationship applies.
 gStudentId :: Lens' Guardian (Maybe Text)
@@ -1524,6 +1572,7 @@ data CourseMaterial =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CourseMaterial' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1544,6 +1593,7 @@ courseMaterial =
     , _cmYouTubeVideo = Nothing
     , _cmForm = Nothing
     }
+
 
 -- | Google Drive file attachment.
 cmDriveFile :: Lens' CourseMaterial (Maybe DriveFile)
@@ -1591,6 +1641,7 @@ newtype ShortAnswerSubmission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ShortAnswerSubmission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1599,6 +1650,7 @@ newtype ShortAnswerSubmission =
 shortAnswerSubmission
     :: ShortAnswerSubmission
 shortAnswerSubmission = ShortAnswerSubmission' {_sasAnswer = Nothing}
+
 
 -- | Student response to a short-answer question.
 sasAnswer :: Lens' ShortAnswerSubmission (Maybe Text)
@@ -1626,6 +1678,7 @@ data Invitation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Invitation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1642,6 +1695,7 @@ invitation
 invitation =
   Invitation'
     {_iCourseId = Nothing, _iUserId = Nothing, _iRole = Nothing, _iId = Nothing}
+
 
 -- | Identifier of the course to invite the user to.
 iCourseId :: Lens' Invitation (Maybe Text)
@@ -1694,6 +1748,7 @@ data Attachment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Attachment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1714,6 +1769,7 @@ attachment =
     , _aYouTubeVideo = Nothing
     , _aForm = Nothing
     }
+
 
 -- | Google Drive file attachment.
 aDriveFile :: Lens' Attachment (Maybe DriveFile)
@@ -1772,6 +1828,7 @@ data Announcement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Announcement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1816,6 +1873,7 @@ announcement =
     , _aCreatorUserId = Nothing
     , _aAlternateLink = Nothing
     }
+
 
 -- | Timestamp when this announcement was created. Read-only.
 aCreationTime :: Lens' Announcement (Maybe UTCTime)
@@ -1957,6 +2015,7 @@ data StudentSubmission =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StudentSubmission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2016,6 +2075,7 @@ studentSubmission =
     , _ssAlternateLink = Nothing
     , _ssCourseWorkId = Nothing
     }
+
 
 -- | Creation time of this submission. This may be unset if the student has
 -- not accessed this item. Read-only.
@@ -2184,6 +2244,7 @@ data ListGuardiansResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListGuardiansResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2195,6 +2256,7 @@ listGuardiansResponse
     :: ListGuardiansResponse
 listGuardiansResponse =
   ListGuardiansResponse' {_lgrNextPageToken = Nothing, _lgrGuardians = Nothing}
+
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -2244,6 +2306,7 @@ data Date =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2256,6 +2319,7 @@ data Date =
 date
     :: Date
 date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -2305,6 +2369,7 @@ data YouTubeVideo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'YouTubeVideo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2325,6 +2390,7 @@ youTubeVideo =
     , _ytvTitle = Nothing
     , _ytvAlternateLink = Nothing
     }
+
 
 -- | URL of a thumbnail image of the YouTube video. Read-only.
 ytvThumbnailURL :: Lens' YouTubeVideo (Maybe Text)
@@ -2374,6 +2440,7 @@ data Teacher =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Teacher' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2387,6 +2454,7 @@ teacher
     :: Teacher
 teacher =
   Teacher' {_tCourseId = Nothing, _tProFile = Nothing, _tUserId = Nothing}
+
 
 -- | Identifier of the course. Read-only.
 tCourseId :: Lens' Teacher (Maybe Text)
@@ -2432,6 +2500,7 @@ data CourseMaterialSet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CourseMaterialSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2443,6 +2512,7 @@ courseMaterialSet
     :: CourseMaterialSet
 courseMaterialSet =
   CourseMaterialSet' {_cmsMaterials = Nothing, _cmsTitle = Nothing}
+
 
 -- | Materials attached to this set.
 cmsMaterials :: Lens' CourseMaterialSet [CourseMaterial]
@@ -2480,6 +2550,7 @@ data Name =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Name' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2493,6 +2564,7 @@ name
     :: Name
 name =
   Name' {_nGivenName = Nothing, _nFullName = Nothing, _nFamilyName = Nothing}
+
 
 -- | The user\'s first name. Read-only.
 nGivenName :: Lens' Name (Maybe Text)
@@ -2536,6 +2608,7 @@ data ListCoursesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListCoursesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2547,6 +2620,7 @@ listCoursesResponse
     :: ListCoursesResponse
 listCoursesResponse =
   ListCoursesResponse' {_lcrNextPageToken = Nothing, _lcrCourses = Nothing}
+
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -2584,11 +2658,13 @@ data TurnInStudentSubmissionRequest =
   TurnInStudentSubmissionRequest'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TurnInStudentSubmissionRequest' with the minimum fields required to make a request.
 --
 turnInStudentSubmissionRequest
     :: TurnInStudentSubmissionRequest
 turnInStudentSubmissionRequest = TurnInStudentSubmissionRequest'
+
 
 instance FromJSON TurnInStudentSubmissionRequest
          where
@@ -2612,6 +2688,7 @@ data UserProFile =
     , _upfPermissions     :: !(Maybe [GlobalPermission])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserProFile' with the minimum fields required to make a request.
 --
@@ -2639,6 +2716,7 @@ userProFile =
     , _upfId = Nothing
     , _upfPermissions = Nothing
     }
+
 
 -- | URL of user\'s profile photo. Read-only.
 upfPhotoURL :: Lens' UserProFile (Maybe Text)
@@ -2709,6 +2787,7 @@ data DriveFolder =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DriveFolder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2722,6 +2801,7 @@ driveFolder
     :: DriveFolder
 driveFolder =
   DriveFolder' {_dId = Nothing, _dTitle = Nothing, _dAlternateLink = Nothing}
+
 
 -- | Drive API resource ID.
 dId :: Lens' DriveFolder (Maybe Text)
@@ -2763,6 +2843,7 @@ data SubmissionHistory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubmissionHistory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2774,6 +2855,7 @@ submissionHistory
     :: SubmissionHistory
 submissionHistory =
   SubmissionHistory' {_shGradeHistory = Nothing, _shStateHistory = Nothing}
+
 
 -- | The grade history information of the submission, if present.
 shGradeHistory :: Lens' SubmissionHistory (Maybe GradeHistory)
@@ -2812,6 +2894,7 @@ data StateHistory =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StateHistory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2826,6 +2909,7 @@ stateHistory
 stateHistory =
   StateHistory'
     {_shState = Nothing, _shActorUserId = Nothing, _shStateTimestamp = Nothing}
+
 
 -- | The workflow pipeline stage.
 shState :: Lens' StateHistory (Maybe StateHistoryState)
@@ -2869,6 +2953,7 @@ newtype MultipleChoiceQuestion =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MultipleChoiceQuestion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -2877,6 +2962,7 @@ newtype MultipleChoiceQuestion =
 multipleChoiceQuestion
     :: MultipleChoiceQuestion
 multipleChoiceQuestion = MultipleChoiceQuestion' {_mcqChoices = Nothing}
+
 
 -- | Possible choices.
 mcqChoices :: Lens' MultipleChoiceQuestion [Text]
@@ -2921,6 +3007,7 @@ data Course =
     , _couSection            :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Course' with the minimum fields required to make a request.
 --
@@ -2984,6 +3071,7 @@ course =
     , _couDescriptionHeading = Nothing
     , _couSection = Nothing
     }
+
 
 -- | Creation time of the course. Specifying this field in a course update
 -- mask results in an error. Read-only.
@@ -3182,6 +3270,7 @@ data TimeOfDay' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3202,6 +3291,7 @@ timeOfDay =
     , _todMinutes = Nothing
     , _todSeconds = Nothing
     }
+
 
 -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
 todNanos :: Lens' TimeOfDay' (Maybe Int32)
@@ -3258,6 +3348,7 @@ data ListGuardianInvitationsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListGuardianInvitationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3270,6 +3361,7 @@ listGuardianInvitationsResponse
 listGuardianInvitationsResponse =
   ListGuardianInvitationsResponse'
     {_lgirNextPageToken = Nothing, _lgirGuardianInvitations = Nothing}
+
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -3312,6 +3404,7 @@ newtype Assignment =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Assignment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3320,6 +3413,7 @@ newtype Assignment =
 assignment
     :: Assignment
 assignment = Assignment' {_aStudentWorkFolder = Nothing}
+
 
 -- | Drive folder where attachments from student submissions are placed. This
 -- is only populated for course teachers and administrators.
@@ -3349,6 +3443,7 @@ data ListStudentsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListStudentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3360,6 +3455,7 @@ listStudentsResponse
     :: ListStudentsResponse
 listStudentsResponse =
   ListStudentsResponse' {_lsrNextPageToken = Nothing, _lsrStudents = Nothing}
+
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -3400,6 +3496,7 @@ data SharedDriveFile =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SharedDriveFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3411,6 +3508,7 @@ sharedDriveFile
     :: SharedDriveFile
 sharedDriveFile =
   SharedDriveFile' {_sdfDriveFile = Nothing, _sdfShareMode = Nothing}
+
 
 -- | Drive file details.
 sdfDriveFile :: Lens' SharedDriveFile (Maybe DriveFile)
@@ -3456,6 +3554,7 @@ newtype CourseAlias =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CourseAlias' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3464,6 +3563,7 @@ newtype CourseAlias =
 courseAlias
     :: CourseAlias
 courseAlias = CourseAlias' {_caAlias = Nothing}
+
 
 -- | Alias string. The format of the string indicates the desired alias
 -- scoping. * \`d:\` indicates a domain-scoped alias. Example:
@@ -3491,6 +3591,7 @@ newtype CourseRosterChangesInfo =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CourseRosterChangesInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3499,6 +3600,7 @@ newtype CourseRosterChangesInfo =
 courseRosterChangesInfo
     :: CourseRosterChangesInfo
 courseRosterChangesInfo = CourseRosterChangesInfo' {_crciCourseId = Nothing}
+
 
 -- | The \`course_id\` of the course to subscribe to roster changes for.
 crciCourseId :: Lens' CourseRosterChangesInfo (Maybe Text)
@@ -3528,6 +3630,7 @@ data ModifyIndividualStudentsOptions =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ModifyIndividualStudentsOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3540,6 +3643,7 @@ modifyIndividualStudentsOptions
 modifyIndividualStudentsOptions =
   ModifyIndividualStudentsOptions'
     {_misoAddStudentIds = Nothing, _misoRemoveStudentIds = Nothing}
+
 
 -- | Ids of students to be added as having access to this
 -- coursework\/announcement.
@@ -3587,6 +3691,7 @@ newtype CloudPubsubTopic =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CloudPubsubTopic' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3595,6 +3700,7 @@ newtype CloudPubsubTopic =
 cloudPubsubTopic
     :: CloudPubsubTopic
 cloudPubsubTopic = CloudPubsubTopic' {_cptTopicName = Nothing}
+
 
 -- | The \`name\` field of a Cloud Pub\/Sub
 -- [Topic](https:\/\/cloud.google.com\/pubsub\/docs\/reference\/rest\/v1\/projects.topics#Topic).
@@ -3624,6 +3730,7 @@ data Form =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Form' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3644,6 +3751,7 @@ form =
     , _fTitle = Nothing
     , _fResponseURL = Nothing
     }
+
 
 -- | URL of a thumbnail image of the Form. Read-only.
 fThumbnailURL :: Lens' Form (Maybe Text)
@@ -3694,6 +3802,7 @@ data ListTeachersResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTeachersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3705,6 +3814,7 @@ listTeachersResponse
     :: ListTeachersResponse
 listTeachersResponse =
   ListTeachersResponse' {_ltrNextPageToken = Nothing, _ltrTeachers = Nothing}
+
 
 -- | Token identifying the next page of results to return. If empty, no
 -- further results are available.
@@ -3747,6 +3857,7 @@ data Student =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Student' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3767,6 +3878,7 @@ student =
     , _sStudentWorkFolder = Nothing
     , _sUserId = Nothing
     }
+
 
 -- | Identifier of the course. Read-only.
 sCourseId :: Lens' Student (Maybe Text)
@@ -3823,6 +3935,7 @@ data Registration =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Registration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -3843,6 +3956,7 @@ registration =
     , _rFeed = Nothing
     , _rCloudPubsubTopic = Nothing
     }
+
 
 -- | A server-generated unique identifier for this \`Registration\`.
 -- Read-only.

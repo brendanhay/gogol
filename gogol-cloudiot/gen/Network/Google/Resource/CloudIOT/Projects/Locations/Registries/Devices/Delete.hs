@@ -71,6 +71,7 @@ data ProjectsLocationsRegistriesDevicesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ projectsLocationsRegistriesDevicesDelete pPlrddName_ =
     , _plrddName = pPlrddName_
     , _plrddCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrddXgafv :: Lens' ProjectsLocationsRegistriesDevicesDelete (Maybe Xgafv)

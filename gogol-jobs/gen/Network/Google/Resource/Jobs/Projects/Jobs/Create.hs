@@ -76,6 +76,7 @@ data ProjectsJobsCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsJobsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ projectsJobsCreate pPjcParent_ pPjcPayload_ =
     , _pjcPayload = pPjcPayload_
     , _pjcCallback = Nothing
     }
+
 
 -- | Required. The resource name of the project under which the job is
 -- created. The format is \"projects\/{project_id}\", for example,

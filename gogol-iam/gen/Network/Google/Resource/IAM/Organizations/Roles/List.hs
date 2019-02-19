@@ -84,6 +84,7 @@ data OrganizationsRolesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsRolesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ organizationsRolesList pOrlParent_ =
     , _orlPageSize = Nothing
     , _orlCallback = Nothing
     }
+
 
 -- | The resource name of the parent resource in one of the following
 -- formats: \`\` (empty string) -- this refers to curated roles.

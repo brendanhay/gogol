@@ -69,6 +69,7 @@ data ViolatingSitesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ViolatingSitesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -92,6 +93,7 @@ violatingSitesList =
     , _vslUploadType = Nothing
     , _vslCallback = Nothing
     }
+
 
 -- | V1 error format.
 vslXgafv :: Lens' ViolatingSitesList (Maybe Xgafv)

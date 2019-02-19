@@ -69,6 +69,7 @@ data InstallsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstallsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -93,6 +94,7 @@ installsGet pIgEnterpriseId_ pIgUserId_ pIgInstallId_ pIgDeviceId_ =
     , _igInstallId = pIgInstallId_
     , _igDeviceId = pIgDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 igEnterpriseId :: Lens' InstallsGet Text

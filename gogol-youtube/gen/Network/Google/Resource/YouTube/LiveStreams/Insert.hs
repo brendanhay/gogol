@@ -68,6 +68,7 @@ data LiveStreamsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'LiveStreamsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ liveStreamsInsert pLsiPart_ pLsiPayload_ =
     , _lsiOnBehalfOfContentOwner = Nothing
     , _lsiOnBehalfOfContentOwnerChannel = Nothing
     }
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

@@ -67,6 +67,7 @@ data SSLPoliciesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SSLPoliciesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ sslPoliciesInsert pSslpiProject_ pSslpiPayload_ =
     , _sslpiProject = pSslpiProject_
     , _sslpiPayload = pSslpiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

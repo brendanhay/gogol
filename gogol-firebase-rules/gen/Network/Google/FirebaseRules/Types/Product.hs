@@ -33,6 +33,7 @@ data SourcePosition =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SourcePosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -47,6 +48,7 @@ sourcePosition
 sourcePosition =
   SourcePosition'
     {_spLine = Nothing, _spColumn = Nothing, _spFileName = Nothing}
+
 
 -- | Line number of the source fragment. 1-based.
 spLine :: Lens' SourcePosition (Maybe Int32)
@@ -99,6 +101,7 @@ data TestCase =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestCase' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -119,6 +122,7 @@ testCase =
     , _tcFunctionMocks = Nothing
     , _tcRequest = Nothing
     }
+
 
 -- | Optional resource value as it appears in persistent storage before the
 -- request is fulfilled. The resource type depends on the \`request.path\`
@@ -185,6 +189,7 @@ data VisitedExpression =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VisitedExpression' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -196,6 +201,7 @@ visitedExpression
     :: VisitedExpression
 visitedExpression =
   VisitedExpression' {_veSourcePosition = Nothing, _veValue = Nothing}
+
 
 -- | Position in the \`Source\` or \`Ruleset\` where an expression was
 -- visited.
@@ -233,11 +239,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -263,6 +271,7 @@ data FunctionMock =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FunctionMock' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -276,6 +285,7 @@ functionMock
     :: FunctionMock
 functionMock =
   FunctionMock' {_fmArgs = Nothing, _fmFunction = Nothing, _fmResult = Nothing}
+
 
 -- | The list of \`Arg\` values to match. The order in which the arguments
 -- are provided is the order in which they must appear in the function
@@ -322,6 +332,7 @@ data FunctionCall =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FunctionCall' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -332,6 +343,7 @@ data FunctionCall =
 functionCall
     :: FunctionCall
 functionCall = FunctionCall' {_fcArgs = Nothing, _fcFunction = Nothing}
+
 
 -- | The arguments that were provided to the function.
 fcArgs :: Lens' FunctionCall [JSONValue]
@@ -368,6 +380,7 @@ data ListReleasesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListReleasesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -379,6 +392,7 @@ listReleasesResponse
     :: ListReleasesResponse
 listReleasesResponse =
   ListReleasesResponse' {_lrrNextPageToken = Nothing, _lrrReleases = Nothing}
+
 
 -- | The pagination token to retrieve the next page of results. If the value
 -- is empty, no further results remain.
@@ -419,6 +433,7 @@ data Result =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Result' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -429,6 +444,7 @@ data Result =
 result
     :: Result
 result = Result' {_rValue = Nothing, _rUndefined = Nothing}
+
 
 -- | The result is an actual value. The type of the value must match that of
 -- the type declared by the service.
@@ -463,6 +479,7 @@ data TestRulesetResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestRulesetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -474,6 +491,7 @@ testRulesetResponse
     :: TestRulesetResponse
 testRulesetResponse =
   TestRulesetResponse' {_trrTestResults = Nothing, _trrIssues = Nothing}
+
 
 -- | The set of test results given the test cases in the \`TestSuite\`. The
 -- results will appear in the same order as the test cases appear in the
@@ -522,6 +540,7 @@ data Release =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Release' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -542,6 +561,7 @@ release =
     , _rName = Nothing
     , _rCreateTime = Nothing
     }
+
 
 -- | Name of the \`Ruleset\` referred to by this \`Release\`. The \`Ruleset\`
 -- must exist the \`Release\` to be created.
@@ -609,6 +629,7 @@ data Arg =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Arg' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -619,6 +640,7 @@ data Arg =
 arg
     :: Arg
 arg = Arg' {_aAnyValue = Nothing, _aExactValue = Nothing}
+
 
 -- | Argument matches any value provided.
 aAnyValue :: Lens' Arg (Maybe Empty)
@@ -655,6 +677,7 @@ data Ruleset =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Ruleset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -668,6 +691,7 @@ ruleset
     :: Ruleset
 ruleset =
   Ruleset' {_rulName = Nothing, _rulSource = Nothing, _rulCreateTime = Nothing}
+
 
 -- | Name of the \`Ruleset\`. The ruleset_id is auto generated by the
 -- service. Format: \`projects\/{project_id}\/rulesets\/{ruleset_id}\`
@@ -717,6 +741,7 @@ data GetReleaseExecutableResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetReleaseExecutableResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -743,6 +768,7 @@ getReleaseExecutableResponse =
     , _grerExecutableVersion = Nothing
     , _grerLanguage = Nothing
     }
+
 
 -- | Executable view of the \`Ruleset\` referenced by the \`Release\`.
 grerExecutable :: Lens' GetReleaseExecutableResponse (Maybe ByteString)
@@ -819,6 +845,7 @@ data TestResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -842,6 +869,7 @@ testResult =
     , _trErrorPosition = Nothing
     , _trDebugMessages = Nothing
     }
+
 
 -- | State of the test.
 trState :: Lens' TestResult (Maybe TestResultState)
@@ -921,6 +949,7 @@ newtype Source =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -929,6 +958,7 @@ newtype Source =
 source
     :: Source
 source = Source' {_sFiles = Nothing}
+
 
 -- | \`File\` set constituting the \`Source\` bundle.
 sFiles :: Lens' Source [File]
@@ -957,6 +987,7 @@ newtype TestSuite =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestSuite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -965,6 +996,7 @@ newtype TestSuite =
 testSuite
     :: TestSuite
 testSuite = TestSuite' {_tsTestCases = Nothing}
+
 
 -- | Collection of test cases associated with the \`TestSuite\`.
 tsTestCases :: Lens' TestSuite [TestCase]
@@ -994,6 +1026,7 @@ data TestRulesetRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TestRulesetRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1005,6 +1038,7 @@ testRulesetRequest
     :: TestRulesetRequest
 testRulesetRequest =
   TestRulesetRequest' {_trrSource = Nothing, _trrTestSuite = Nothing}
+
 
 -- | Optional \`Source\` to be checked for correctness. This field must not
 -- be set when the resource name refers to a \`Ruleset\`.
@@ -1042,6 +1076,7 @@ data File =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1054,6 +1089,7 @@ data File =
 file
     :: File
 file = File' {_fFingerprint = Nothing, _fContent = Nothing, _fName = Nothing}
+
 
 -- | Fingerprint (e.g. github sha) associated with the \`File\`.
 fFingerprint :: Lens' File (Maybe ByteString)
@@ -1095,6 +1131,7 @@ data ListRulesetsResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListRulesetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1106,6 +1143,7 @@ listRulesetsResponse
     :: ListRulesetsResponse
 listRulesetsResponse =
   ListRulesetsResponse' {_lRulesets = Nothing, _lNextPageToken = Nothing}
+
 
 -- | List of \`Ruleset\` instances.
 lRulesets :: Lens' ListRulesetsResponse [Ruleset]
@@ -1147,6 +1185,7 @@ data Issue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Issue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1161,6 +1200,7 @@ issue
 issue =
   Issue'
     {_iSourcePosition = Nothing, _iSeverity = Nothing, _iDescription = Nothing}
+
 
 -- | Position of the issue in the \`Source\`.
 iSourcePosition :: Lens' Issue (Maybe SourcePosition)
@@ -1204,6 +1244,7 @@ data UpdateReleaseRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateReleaseRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1215,6 +1256,7 @@ updateReleaseRequest
     :: UpdateReleaseRequest
 updateReleaseRequest =
   UpdateReleaseRequest' {_urrUpdateMask = Nothing, _urrRelease = Nothing}
+
 
 -- | Specifies which fields to update.
 urrUpdateMask :: Lens' UpdateReleaseRequest (Maybe GFieldMask)

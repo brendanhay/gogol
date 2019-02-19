@@ -77,6 +77,7 @@ data ProjectsNotesCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsNotesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ projectsNotesCreate pPncParent_ pPncPayload_ =
     , _pncNoteId = Nothing
     , _pncCallback = Nothing
     }
+
 
 -- | The name of the project in the form of \`projects\/[PROJECT_ID]\`, under
 -- which the note is to be created.

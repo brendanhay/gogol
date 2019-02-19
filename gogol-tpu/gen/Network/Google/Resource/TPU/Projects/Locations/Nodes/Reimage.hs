@@ -74,6 +74,7 @@ data ProjectsLocationsNodesReimage =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsNodesReimage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -105,6 +106,7 @@ projectsLocationsNodesReimage pPlnrPayload_ pPlnrName_ =
     , _plnrName = pPlnrName_
     , _plnrCallback = Nothing
     }
+
 
 -- | V1 error format.
 plnrXgafv :: Lens' ProjectsLocationsNodesReimage (Maybe Xgafv)

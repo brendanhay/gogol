@@ -79,6 +79,7 @@ data SettingsSearchApplicationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SettingsSearchApplicationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ settingsSearchApplicationsList =
     , _ssalPageSize = Nothing
     , _ssalCallback = Nothing
     }
+
 
 -- | V1 error format.
 ssalXgafv :: Lens' SettingsSearchApplicationsList (Maybe Xgafv)

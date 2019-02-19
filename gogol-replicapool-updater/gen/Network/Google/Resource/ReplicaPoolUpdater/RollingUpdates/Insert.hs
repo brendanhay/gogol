@@ -66,6 +66,7 @@ data RollingUpdatesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RollingUpdatesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ rollingUpdatesInsert pRuiProject_ pRuiZone_ pRuiPayload_ =
     , _ruiZone = pRuiZone_
     , _ruiPayload = pRuiPayload_
     }
+
 
 -- | The Google Developers Console project name.
 ruiProject :: Lens' RollingUpdatesInsert Text

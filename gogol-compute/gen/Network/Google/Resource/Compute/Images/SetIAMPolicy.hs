@@ -69,6 +69,7 @@ data ImagesSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ImagesSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -89,6 +90,7 @@ imagesSetIAMPolicy pIsiampProject_ pIsiampPayload_ pIsiampResource_ =
     , _isiampPayload = pIsiampPayload_
     , _isiampResource = pIsiampResource_
     }
+
 
 -- | Project ID for this request.
 isiampProject :: Lens' ImagesSetIAMPolicy Text

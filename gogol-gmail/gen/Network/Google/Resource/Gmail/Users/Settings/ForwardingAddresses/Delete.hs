@@ -66,6 +66,7 @@ data UsersSettingsForwardingAddressesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsForwardingAddressesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -79,6 +80,7 @@ usersSettingsForwardingAddressesDelete
 usersSettingsForwardingAddressesDelete pUsfadForwardingEmail_ =
   UsersSettingsForwardingAddressesDelete'
     {_usfadForwardingEmail = pUsfadForwardingEmail_, _usfadUserId = "me"}
+
 
 -- | The forwarding address to be deleted.
 usfadForwardingEmail :: Lens' UsersSettingsForwardingAddressesDelete Text

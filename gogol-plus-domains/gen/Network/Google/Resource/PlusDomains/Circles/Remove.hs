@@ -57,6 +57,7 @@ newtype CirclesRemove =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CirclesRemove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ circlesRemove
     :: Text -- ^ 'crCircleId'
     -> CirclesRemove
 circlesRemove pCrCircleId_ = CirclesRemove' {_crCircleId = pCrCircleId_}
+
 
 -- | The ID of the circle to delete.
 crCircleId :: Lens' CirclesRemove Text

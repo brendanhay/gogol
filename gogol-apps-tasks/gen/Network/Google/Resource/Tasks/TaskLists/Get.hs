@@ -59,6 +59,7 @@ newtype TaskListsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TaskListsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -68,6 +69,7 @@ taskListsGet
     :: Text -- ^ 'tlgTaskList'
     -> TaskListsGet
 taskListsGet pTlgTaskList_ = TaskListsGet' {_tlgTaskList = pTlgTaskList_}
+
 
 -- | Task list identifier.
 tlgTaskList :: Lens' TaskListsGet Text

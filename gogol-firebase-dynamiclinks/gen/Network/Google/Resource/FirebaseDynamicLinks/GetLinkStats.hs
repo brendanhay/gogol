@@ -82,6 +82,7 @@ data GetLinkStats =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetLinkStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -115,6 +116,7 @@ getLinkStats pGlsDynamicLink_ =
     , _glsDurationDays = Nothing
     , _glsCallback = Nothing
     }
+
 
 -- | V1 error format.
 glsXgafv :: Lens' GetLinkStats (Maybe Xgafv)

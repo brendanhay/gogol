@@ -76,6 +76,7 @@ data ServicesConsumersSetIAMPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesConsumersSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -107,6 +108,7 @@ servicesConsumersSetIAMPolicy pScsipPayload_ pScsipResource_ =
     , _scsipResource = pScsipResource_
     , _scsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 scsipXgafv :: Lens' ServicesConsumersSetIAMPolicy (Maybe Xgafv)

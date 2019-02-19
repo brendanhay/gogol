@@ -69,6 +69,7 @@ data VolumesRecommendedRate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VolumesRecommendedRate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -91,6 +92,7 @@ volumesRecommendedRate pVrrRating_ pVrrVolumeId_ =
     , _vrrVolumeId = pVrrVolumeId_
     , _vrrSource = Nothing
     }
+
 
 -- | Rating to be given to the volume.
 vrrRating :: Lens' VolumesRecommendedRate VolumesRecommendedRateRating

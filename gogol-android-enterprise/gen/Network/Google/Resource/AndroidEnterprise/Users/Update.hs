@@ -70,6 +70,7 @@ data UsersUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ usersUpdate pUuEnterpriseId_ pUuPayload_ pUuUserId_ =
     , _uuPayload = pUuPayload_
     , _uuUserId = pUuUserId_
     }
+
 
 -- | The ID of the enterprise.
 uuEnterpriseId :: Lens' UsersUpdate Text

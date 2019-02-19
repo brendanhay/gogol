@@ -62,6 +62,7 @@ data UsersSettingsFiltersGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsersSettingsFiltersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ usersSettingsFiltersGet
     -> UsersSettingsFiltersGet
 usersSettingsFiltersGet pUsfgId_ =
   UsersSettingsFiltersGet' {_usfgUserId = "me", _usfgId = pUsfgId_}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

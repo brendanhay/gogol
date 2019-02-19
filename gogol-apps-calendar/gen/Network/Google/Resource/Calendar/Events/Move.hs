@@ -71,6 +71,7 @@ data EventsMove =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EventsMove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -97,6 +98,7 @@ eventsMove pEmDestination_ pEmCalendarId_ pEmEventId_ =
     , _emSendUpdates = Nothing
     , _emEventId = pEmEventId_
     }
+
 
 -- | Calendar identifier of the target calendar where the event is to be
 -- moved to.

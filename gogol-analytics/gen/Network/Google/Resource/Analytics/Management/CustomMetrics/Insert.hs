@@ -67,6 +67,7 @@ data ManagementCustomMetricsInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ManagementCustomMetricsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ managementCustomMetricsInsert pMcmiWebPropertyId_ pMcmiPayload_ pMcmiAccountId_ 
     , _mcmiPayload = pMcmiPayload_
     , _mcmiAccountId = pMcmiAccountId_
     }
+
 
 -- | Web property ID for the custom dimension to create.
 mcmiWebPropertyId :: Lens' ManagementCustomMetricsInsert Text

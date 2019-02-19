@@ -78,6 +78,7 @@ data ProjectsServicesEnable =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsServicesEnable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ projectsServicesEnable pPsePayload_ pPseName_ =
     , _pseName = pPseName_
     , _pseCallback = Nothing
     }
+
 
 -- | V1 error format.
 pseXgafv :: Lens' ProjectsServicesEnable (Maybe Xgafv)

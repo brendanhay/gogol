@@ -88,6 +88,7 @@ data MediaItemsBatchCreate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'MediaItemsBatchCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -121,6 +122,7 @@ mediaItemsBatchCreate pMibcPayload_ =
     , _mibcBearerToken = Nothing
     , _mibcCallback = Nothing
     }
+
 
 -- | V1 error format.
 mibcXgafv :: Lens' MediaItemsBatchCreate (Maybe Xgafv)

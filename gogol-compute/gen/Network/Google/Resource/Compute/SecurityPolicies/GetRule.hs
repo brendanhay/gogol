@@ -67,6 +67,7 @@ data SecurityPoliciesGetRule =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SecurityPoliciesGetRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ securityPoliciesGetRule pSpgrProject_ pSpgrSecurityPolicy_ =
     , _spgrProject = pSpgrProject_
     , _spgrSecurityPolicy = pSpgrSecurityPolicy_
     }
+
 
 -- | The priority of the rule to get from the security policy.
 spgrPriority :: Lens' SecurityPoliciesGetRule (Maybe Int32)

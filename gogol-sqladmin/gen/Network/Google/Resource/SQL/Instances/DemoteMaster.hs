@@ -68,6 +68,7 @@ data InstancesDemoteMaster =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesDemoteMaster' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -88,6 +89,7 @@ instancesDemoteMaster pIdmProject_ pIdmPayload_ pIdmInstance_ =
     , _idmPayload = pIdmPayload_
     , _idmInstance = pIdmInstance_
     }
+
 
 -- | ID of the project that contains the instance.
 idmProject :: Lens' InstancesDemoteMaster Text

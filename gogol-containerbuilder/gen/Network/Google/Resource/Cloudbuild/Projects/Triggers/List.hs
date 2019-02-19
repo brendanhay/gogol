@@ -73,6 +73,7 @@ data ProjectsTriggersList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsTriggersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ projectsTriggersList pPtlProjectId_ =
     , _ptlProjectId = pPtlProjectId_
     , _ptlCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptlXgafv :: Lens' ProjectsTriggersList (Maybe Xgafv)

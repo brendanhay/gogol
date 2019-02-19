@@ -64,6 +64,7 @@ data InstancesPromoteReplica =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'InstancesPromoteReplica' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -78,6 +79,7 @@ instancesPromoteReplica
 instancesPromoteReplica pIprProject_ pIprInstance_ =
   InstancesPromoteReplica'
     {_iprProject = pIprProject_, _iprInstance = pIprInstance_}
+
 
 -- | ID of the project that contains the read replica.
 iprProject :: Lens' InstancesPromoteReplica Text

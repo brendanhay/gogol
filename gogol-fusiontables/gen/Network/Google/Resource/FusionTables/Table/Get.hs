@@ -57,6 +57,7 @@ newtype TableGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TableGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -66,6 +67,7 @@ tableGet
     :: Text -- ^ 'tgTableId'
     -> TableGet
 tableGet pTgTableId_ = TableGet' {_tgTableId = pTgTableId_}
+
 
 -- | Identifier for the table being requested.
 tgTableId :: Lens' TableGet Text

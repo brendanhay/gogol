@@ -64,6 +64,7 @@ data GlobalAddressesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GlobalAddressesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -77,6 +78,7 @@ globalAddressesGet
     -> GlobalAddressesGet
 globalAddressesGet pGagProject_ pGagAddress_ =
   GlobalAddressesGet' {_gagProject = pGagProject_, _gagAddress = pGagAddress_}
+
 
 -- | Project ID for this request.
 gagProject :: Lens' GlobalAddressesGet Text

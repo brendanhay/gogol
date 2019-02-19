@@ -71,6 +71,7 @@ data EditsImagesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'EditsImagesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ editsImagesDelete pEidPackageName_ pEidImageType_ pEidImageId_ pEidLanguage_ pEi
     , _eidLanguage = pEidLanguage_
     , _eidEditId = pEidEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

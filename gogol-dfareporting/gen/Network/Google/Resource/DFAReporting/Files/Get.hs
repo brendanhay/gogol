@@ -72,6 +72,7 @@ data FilesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -86,6 +87,7 @@ filesGet
 filesGet pFgReportId_ pFgFileId_ =
   FilesGet'
     {_fgReportId = _Coerce # pFgReportId_, _fgFileId = _Coerce # pFgFileId_}
+
 
 -- | The ID of the report.
 fgReportId :: Lens' FilesGet Int64

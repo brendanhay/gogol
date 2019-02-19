@@ -65,6 +65,7 @@ data StylePatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StylePatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ stylePatch pSpPayload_ pSpStyleId_ pSpTableId_ =
     , _spStyleId = _Coerce # pSpStyleId_
     , _spTableId = pSpTableId_
     }
+
 
 -- | Multipart request metadata.
 spPayload :: Lens' StylePatch StyleSetting

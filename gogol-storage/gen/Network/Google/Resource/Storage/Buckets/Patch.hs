@@ -84,6 +84,7 @@ data BucketsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BucketsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -118,6 +119,7 @@ bucketsPatch pBpBucket_ pBpPayload_ =
     , _bpIfMetagenerationNotMatch = Nothing
     , _bpProjection = Nothing
     }
+
 
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration matches the given value.

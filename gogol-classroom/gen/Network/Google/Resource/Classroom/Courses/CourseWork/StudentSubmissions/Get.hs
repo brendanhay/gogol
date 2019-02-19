@@ -88,6 +88,7 @@ data CoursesCourseWorkStudentSubmissionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -123,6 +124,7 @@ coursesCourseWorkStudentSubmissionsGet pCcwssgCourseId_ pCcwssgId_ pCcwssgCourse
     , _ccwssgCallback = Nothing
     , _ccwssgCourseWorkId = pCcwssgCourseWorkId_
     }
+
 
 -- | V1 error format.
 ccwssgXgafv :: Lens' CoursesCourseWorkStudentSubmissionsGet (Maybe Xgafv)

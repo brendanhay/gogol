@@ -78,6 +78,7 @@ data CreativesList' =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CreativesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -104,6 +105,7 @@ creativesList' =
     , _clDealsStatusFilter = Nothing
     , _clMaxResults = Nothing
     }
+
 
 -- | When specified, only creatives for the given buyer creative ids are
 -- returned.

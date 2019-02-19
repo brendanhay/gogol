@@ -62,6 +62,7 @@ data StorelayoutpagesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StorelayoutpagesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ storelayoutpagesDelete
 storelayoutpagesDelete pSdEnterpriseId_ pSdPageId_ =
   StorelayoutpagesDelete'
     {_sdEnterpriseId = pSdEnterpriseId_, _sdPageId = pSdPageId_}
+
 
 -- | The ID of the enterprise.
 sdEnterpriseId :: Lens' StorelayoutpagesDelete Text

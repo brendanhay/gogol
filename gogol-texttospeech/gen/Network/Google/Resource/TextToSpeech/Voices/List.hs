@@ -72,6 +72,7 @@ data VoicesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'VoicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -98,6 +99,7 @@ voicesList =
     , _vlUploadType = Nothing
     , _vlCallback = Nothing
     }
+
 
 -- | V1 error format.
 vlXgafv :: Lens' VoicesList (Maybe Xgafv)

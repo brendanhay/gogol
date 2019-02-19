@@ -75,6 +75,7 @@ data AppsAuthorizedCertificatesDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AppsAuthorizedCertificatesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ appsAuthorizedCertificatesDelete pAacdAuthorizedCertificatesId_ pAacdAppsId_ =
     , _aacdAppsId = pAacdAppsId_
     , _aacdCallback = Nothing
     }
+
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
 aacdAuthorizedCertificatesId :: Lens' AppsAuthorizedCertificatesDelete Text

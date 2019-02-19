@@ -78,6 +78,7 @@ data ServicesGetConfig =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ServicesGetConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ servicesGetConfig pSgcServiceName_ =
     , _sgcView = Nothing
     , _sgcCallback = Nothing
     }
+
 
 -- | V1 error format.
 sgcXgafv :: Lens' ServicesGetConfig (Maybe Xgafv)

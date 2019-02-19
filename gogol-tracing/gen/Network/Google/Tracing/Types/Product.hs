@@ -44,6 +44,7 @@ data Span =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Span' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -85,6 +86,7 @@ span =
     , _sLinks = Nothing
     , _sSpanId = Nothing
     }
+
 
 -- | An optional final status for this span.
 sStatus :: Lens' Span (Maybe Status)
@@ -204,6 +206,7 @@ data TruncatableString =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TruncatableString' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -215,6 +218,7 @@ truncatableString
     :: TruncatableString
 truncatableString =
   TruncatableString' {_tsTruncatedCharacterCount = Nothing, _tsValue = Nothing}
+
 
 -- | The number of characters truncated from the original string value. If 0
 -- it means that the string value was not truncated.
@@ -290,6 +294,7 @@ data Status =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -302,6 +307,7 @@ data Status =
 status
     :: Status
 status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There will be a common
 -- set of message types for APIs to use.
@@ -355,6 +361,7 @@ newtype AttributesAttributeMap =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AttributesAttributeMap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -365,6 +372,7 @@ attributesAttributeMap
     -> AttributesAttributeMap
 attributesAttributeMap pAamAddtional_ =
   AttributesAttributeMap' {_aamAddtional = _Coerce # pAamAddtional_}
+
 
 aamAddtional :: Lens' AttributesAttributeMap (HashMap Text AttributeValue)
 aamAddtional
@@ -391,6 +399,7 @@ data Annotation =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Annotation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -401,6 +410,7 @@ data Annotation =
 annotation
     :: Annotation
 annotation = Annotation' {_aAttributes = Nothing, _aDescription = Nothing}
+
 
 -- | A set of attributes on the annotation. A maximum of 4 attributes are
 -- allowed per Annotation.
@@ -439,6 +449,7 @@ data AttributeValue =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AttributeValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -453,6 +464,7 @@ attributeValue
 attributeValue =
   AttributeValue'
     {_avBoolValue = Nothing, _avIntValue = Nothing, _avStringValue = Nothing}
+
 
 -- | A boolean value.
 avBoolValue :: Lens' AttributeValue (Maybe Bool)
@@ -498,11 +510,13 @@ data Empty =
   Empty'
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -525,6 +539,7 @@ data Link =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Link' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -537,6 +552,7 @@ data Link =
 link
     :: Link
 link = Link' {_lTraceId = Nothing, _lType = Nothing, _lSpanId = Nothing}
+
 
 -- | \`TRACE_ID\` is a unique identifier for a trace within a project. It is
 -- a base16-encoded, case-insensitive string of a 16-bytes array and is
@@ -577,6 +593,7 @@ newtype StatusDetailsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -587,6 +604,7 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
   StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -612,6 +630,7 @@ data ListSpansResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListSpansResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -623,6 +642,7 @@ listSpansResponse
     :: ListSpansResponse
 listSpansResponse =
   ListSpansResponse' {_lsrNextPageToken = Nothing, _lsrSpans = Nothing}
+
 
 -- | If defined, indicates that there are more spans that match the request.
 -- Pass this as the value of \`pageToken\` in a subsequent request to
@@ -664,6 +684,7 @@ data StackTrace =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StackTrace' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -675,6 +696,7 @@ stackTrace
     :: StackTrace
 stackTrace =
   StackTrace' {_stStackTraceHashId = Nothing, _stStackFrames = Nothing}
+
 
 -- | The hash ID is used to conserve network bandwidth for duplicate stack
 -- traces within a single trace. Often multiple spans will have identical
@@ -717,6 +739,7 @@ newtype BatchWriteSpansRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'BatchWriteSpansRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -725,6 +748,7 @@ newtype BatchWriteSpansRequest =
 batchWriteSpansRequest
     :: BatchWriteSpansRequest
 batchWriteSpansRequest = BatchWriteSpansRequest' {_bwsrSpans = Nothing}
+
 
 -- | A collection of spans.
 bwsrSpans :: Lens' BatchWriteSpansRequest [Span]
@@ -754,6 +778,7 @@ data Attributes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Attributes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -765,6 +790,7 @@ attributes
     :: Attributes
 attributes =
   Attributes' {_aDroppedAttributesCount = Nothing, _aAttributeMap = Nothing}
+
 
 -- | The number of dropped attributes after the maximum size was enforced. If
 -- 0 then no attributes were dropped.
@@ -816,6 +842,7 @@ data NetworkEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'NetworkEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -836,6 +863,7 @@ networkEvent =
     , _neType = Nothing
     , _neMessageId = Nothing
     }
+
 
 -- | If available, this is the kernel time: * For sent messages, this is the
 -- time at which the first bit was sent. * For received messages, this is
@@ -891,6 +919,7 @@ data Module =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Module' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -901,6 +930,7 @@ data Module =
 module'
     :: Module
 module' = Module' {_mBuildId = Nothing, _mModule = Nothing}
+
 
 -- | Build_id is a unique identifier for the module, usually a hash of its
 -- contents (up to 128 characters).
@@ -938,6 +968,7 @@ data TimeEvents =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeEvents' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -955,6 +986,7 @@ timeEvents =
     , _teDroppedNetworkEventsCount = Nothing
     , _teTimeEvent = Nothing
     }
+
 
 -- | The number of dropped annotations after the maximum size was enforced.
 -- If 0 then no annotations were dropped.
@@ -1008,6 +1040,7 @@ data StackFrames =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StackFrames' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1018,6 +1051,7 @@ data StackFrames =
 stackFrames
     :: StackFrames
 stackFrames = StackFrames' {_sfDroppedFramesCount = Nothing, _sfFrame = Nothing}
+
 
 -- | The number of dropped stack frames after the maximum size was enforced.
 -- If 0 then no frames were dropped.
@@ -1063,6 +1097,7 @@ data StackFrame =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'StackFrame' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1092,6 +1127,7 @@ stackFrame =
     , _sfColumnNumber = Nothing
     , _sfFileName = Nothing
     }
+
 
 -- | Binary module the code is loaded from.
 sfLoadModule :: Lens' StackFrame (Maybe Module)
@@ -1175,6 +1211,7 @@ data Links =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Links' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1185,6 +1222,7 @@ data Links =
 links
     :: Links
 links = Links' {_lDroppedLinksCount = Nothing, _lLink = Nothing}
+
 
 -- | The number of dropped links after the maximum size was enforced. If 0
 -- then no links were dropped.
@@ -1225,6 +1263,7 @@ data ListTracesResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListTracesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1236,6 +1275,7 @@ listTracesResponse
     :: ListTracesResponse
 listTracesResponse =
   ListTracesResponse' {_ltrNextPageToken = Nothing, _ltrTraces = Nothing}
+
 
 -- | If defined, indicates that there are more traces that match the request
 -- and that this value should be passed to the next request to continue
@@ -1278,6 +1318,7 @@ data TimeEvent =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TimeEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1292,6 +1333,7 @@ timeEvent
 timeEvent =
   TimeEvent'
     {_teAnnotation = Nothing, _teTime = Nothing, _teNetworkEvent = Nothing}
+
 
 -- | One or more key:value pairs.
 teAnnotation :: Lens' TimeEvent (Maybe Annotation)
@@ -1337,6 +1379,7 @@ newtype Trace =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Trace' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1345,6 +1388,7 @@ newtype Trace =
 trace
     :: Trace
 trace = Trace' {_tName = Nothing}
+
 
 -- | The resource name of Trace in the format
 -- \`projects\/PROJECT_ID\/traces\/TRACE_ID\`. \`TRACE_ID\` is a unique

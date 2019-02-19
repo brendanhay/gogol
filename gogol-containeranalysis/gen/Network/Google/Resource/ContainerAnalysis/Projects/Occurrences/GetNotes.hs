@@ -73,6 +73,7 @@ data ProjectsOccurrencesGetNotes =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsOccurrencesGetNotes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -100,6 +101,7 @@ projectsOccurrencesGetNotes pPognName_ =
     , _pognName = pPognName_
     , _pognCallback = Nothing
     }
+
 
 -- | V1 error format.
 pognXgafv :: Lens' ProjectsOccurrencesGetNotes (Maybe Xgafv)

@@ -78,6 +78,7 @@ data OrganizationsExclusionsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'OrganizationsExclusionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ organizationsExclusionsList pOelParent_ =
     , _oelPageSize = Nothing
     , _oelCallback = Nothing
     }
+
 
 -- | Required. The parent resource whose exclusions are to be listed.
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

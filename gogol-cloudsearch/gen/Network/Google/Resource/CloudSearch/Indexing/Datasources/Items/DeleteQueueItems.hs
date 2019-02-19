@@ -79,6 +79,7 @@ data IndexingDatasourcesItemsDeleteQueueItems =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'IndexingDatasourcesItemsDeleteQueueItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -110,6 +111,7 @@ indexingDatasourcesItemsDeleteQueueItems pIdidqiPayload_ pIdidqiName_ =
     , _ididqiName = pIdidqiName_
     , _ididqiCallback = Nothing
     }
+
 
 -- | V1 error format.
 ididqiXgafv :: Lens' IndexingDatasourcesItemsDeleteQueueItems (Maybe Xgafv)

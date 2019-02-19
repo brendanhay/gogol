@@ -59,6 +59,7 @@ newtype CalendarsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CalendarsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -69,6 +70,7 @@ calendarsDelete
     -> CalendarsDelete
 calendarsDelete pCdCalendarId_ =
   CalendarsDelete' {_cdCalendarId = pCdCalendarId_}
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

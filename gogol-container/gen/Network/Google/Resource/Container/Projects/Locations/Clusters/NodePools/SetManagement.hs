@@ -75,6 +75,7 @@ data ProjectsLocationsClustersNodePoolsSetManagement =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsSetManagement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLocationsClustersNodePoolsSetManagement pPlcnpsmPayload_ pPlcnpsmName_ =
     , _plcnpsmName = pPlcnpsmName_
     , _plcnpsmCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcnpsmXgafv :: Lens' ProjectsLocationsClustersNodePoolsSetManagement (Maybe Xgafv)

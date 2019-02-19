@@ -78,6 +78,7 @@ data DebugDatasourcesItemsSearchByViewURL =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DebugDatasourcesItemsSearchByViewURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -109,6 +110,7 @@ debugDatasourcesItemsSearchByViewURL pDdisbvuPayload_ pDdisbvuName_ =
     , _ddisbvuName = pDdisbvuName_
     , _ddisbvuCallback = Nothing
     }
+
 
 -- | V1 error format.
 ddisbvuXgafv :: Lens' DebugDatasourcesItemsSearchByViewURL (Maybe Xgafv)

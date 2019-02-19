@@ -93,6 +93,7 @@ data ChannelBannersInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelBannersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -111,6 +112,7 @@ channelBannersInsert pCbiPayload_ =
     , _cbiPayload = pCbiPayload_
     , _cbiOnBehalfOfContentOwner = Nothing
     }
+
 
 -- | The channelId parameter identifies the YouTube channel to which the
 -- banner is uploaded. The channelId parameter was introduced as a required

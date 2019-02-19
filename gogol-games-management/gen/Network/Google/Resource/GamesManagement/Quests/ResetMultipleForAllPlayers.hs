@@ -63,6 +63,7 @@ newtype QuestsResetMultipleForAllPlayers =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'QuestsResetMultipleForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -73,6 +74,7 @@ questsResetMultipleForAllPlayers
     -> QuestsResetMultipleForAllPlayers
 questsResetMultipleForAllPlayers pQrmfapPayload_ =
   QuestsResetMultipleForAllPlayers' {_qrmfapPayload = pQrmfapPayload_}
+
 
 -- | Multipart request metadata.
 qrmfapPayload :: Lens' QuestsResetMultipleForAllPlayers QuestsResetMultipleForAllRequest

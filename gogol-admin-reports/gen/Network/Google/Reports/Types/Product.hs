@@ -33,6 +33,7 @@ data UsageReportParametersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsageReportParametersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -59,6 +60,7 @@ usageReportParametersItem =
     , _urpiName = Nothing
     , _urpiMsgValue = Nothing
     }
+
 
 -- | RFC 3339 formatted value of the parameter.
 urpiDatetimeValue :: Lens' UsageReportParametersItem (Maybe UTCTime)
@@ -130,6 +132,7 @@ data ActivityId =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -150,6 +153,7 @@ activityId =
     , _aiCustomerId = Nothing
     , _aiApplicationName = Nothing
     }
+
 
 -- | Time of occurrence of the activity.
 aiTime :: Lens' ActivityId (Maybe UTCTime)
@@ -206,6 +210,7 @@ data UsageReports =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsageReports' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -229,6 +234,7 @@ usageReports =
     , _urKind = "admin#reports#usageReports"
     , _urWarnings = Nothing
     }
+
 
 -- | ETag of the resource.
 urEtag :: Lens' UsageReports (Maybe Text)
@@ -287,6 +293,7 @@ newtype UsageReportParametersItemMsgValueItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsageReportParametersItemMsgValueItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -298,6 +305,7 @@ usageReportParametersItemMsgValueItem
 usageReportParametersItemMsgValueItem pUrpimviAddtional_ =
   UsageReportParametersItemMsgValueItem'
     {_urpimviAddtional = _Coerce # pUrpimviAddtional_}
+
 
 urpimviAddtional :: Lens' UsageReportParametersItemMsgValueItem (HashMap Text JSONValue)
 urpimviAddtional
@@ -330,6 +338,7 @@ data Activities =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Activities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -350,6 +359,7 @@ activities =
     , _aKind = "admin#reports#activities"
     , _aItems = Nothing
     }
+
 
 -- | ETag of the resource.
 aEtag :: Lens' Activities (Maybe Text)
@@ -406,6 +416,7 @@ data Channel =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -444,6 +455,7 @@ channel =
     , _cId = Nothing
     , _cType = Nothing
     }
+
 
 -- | A version-specific identifier for the watched resource.
 cResourceURI :: Lens' Channel (Maybe Text)
@@ -535,6 +547,7 @@ data UsageReport =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsageReport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -558,6 +571,7 @@ usageReport =
     , _uParameters = Nothing
     , _uEntity = Nothing
     }
+
 
 -- | ETag of the resource.
 uEtag :: Lens' UsageReport (Maybe Text)
@@ -611,6 +625,7 @@ data UsageReportsWarningsItemDataItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsageReportsWarningsItemDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -623,6 +638,7 @@ usageReportsWarningsItemDataItem
 usageReportsWarningsItemDataItem =
   UsageReportsWarningsItemDataItem'
     {_urwidiValue = Nothing, _urwidiKey = Nothing}
+
 
 -- | Value associated with a key-value pair to give detailed information on
 -- the warning.
@@ -662,6 +678,7 @@ data UsageReportsWarningsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsageReportsWarningsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -676,6 +693,7 @@ usageReportsWarningsItem
 usageReportsWarningsItem =
   UsageReportsWarningsItem'
     {_urwiData = Nothing, _urwiCode = Nothing, _urwiMessage = Nothing}
+
 
 -- | Key-Value pairs to give detailed information on the warning.
 urwiData :: Lens' UsageReportsWarningsItem [UsageReportsWarningsItemDataItem]
@@ -719,6 +737,7 @@ data ActivityEventsItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityEventsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -733,6 +752,7 @@ activityEventsItem
 activityEventsItem =
   ActivityEventsItem'
     {_aeiName = Nothing, _aeiParameters = Nothing, _aeiType = Nothing}
+
 
 -- | Name of event.
 aeiName :: Lens' ActivityEventsItem (Maybe Text)
@@ -775,6 +795,7 @@ newtype ChannelParams =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -785,6 +806,7 @@ channelParams
     -> ChannelParams
 channelParams pCpAddtional_ =
   ChannelParams' {_cpAddtional = _Coerce # pCpAddtional_}
+
 
 -- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
@@ -815,6 +837,7 @@ data Activity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'Activity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -844,6 +867,7 @@ activity =
     , _actEvents = Nothing
     , _actId = Nothing
     }
+
 
 -- | ETag of the entry.
 actEtag :: Lens' Activity (Maybe Text)
@@ -915,6 +939,7 @@ data UsageReportEntity =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UsageReportEntity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -938,6 +963,7 @@ usageReportEntity =
     , _ureType = Nothing
     , _ureEntityId = Nothing
     }
+
 
 -- | Obfuscated user id for the record.
 ureProFileId :: Lens' UsageReportEntity (Maybe Text)
@@ -998,6 +1024,7 @@ data ActivityEventsItemParametersItem =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityEventsItemParametersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1024,6 +1051,7 @@ activityEventsItemParametersItem =
     , _aeipiName = Nothing
     , _aeipiMultiValue = Nothing
     }
+
 
 -- | Boolean value of the parameter.
 aeipiBoolValue :: Lens' ActivityEventsItemParametersItem (Maybe Bool)
@@ -1100,6 +1128,7 @@ data ActivityActor =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ActivityActor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -1120,6 +1149,7 @@ activityActor =
     , _aaProFileId = Nothing
     , _aaKey = Nothing
     }
+
 
 -- | Email address of the user.
 aaEmail :: Lens' ActivityActor (Maybe Text)

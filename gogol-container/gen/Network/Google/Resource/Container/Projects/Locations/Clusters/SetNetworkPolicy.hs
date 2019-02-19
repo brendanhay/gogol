@@ -75,6 +75,7 @@ data ProjectsLocationsClustersSetNetworkPolicy =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsClustersSetNetworkPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -106,6 +107,7 @@ projectsLocationsClustersSetNetworkPolicy pPlcsnpPayload_ pPlcsnpName_ =
     , _plcsnpName = pPlcsnpName_
     , _plcsnpCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcsnpXgafv :: Lens' ProjectsLocationsClustersSetNetworkPolicy (Maybe Xgafv)

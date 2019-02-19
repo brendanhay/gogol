@@ -86,6 +86,7 @@ data ProjectsLocationsJobsPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsLocationsJobsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -120,6 +121,7 @@ projectsLocationsJobsPatch pPljpPayload_ pPljpName_ =
     , _pljpName = pPljpName_
     , _pljpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljpXgafv :: Lens' ProjectsLocationsJobsPatch (Maybe Xgafv)

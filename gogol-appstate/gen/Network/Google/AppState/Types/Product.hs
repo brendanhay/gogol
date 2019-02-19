@@ -31,6 +31,7 @@ data WriteResult =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'WriteResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -48,6 +49,7 @@ writeResult =
     , _wrKind = "appstate#writeResult"
     , _wrStateKey = Nothing
     }
+
 
 -- | The version of the data for this key on the server.
 wrCurrentStateVersion :: Lens' WriteResult (Maybe Text)
@@ -95,6 +97,7 @@ data ListResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -112,6 +115,7 @@ listResponse =
     , _lrKind = "appstate#listResponse"
     , _lrItems = Nothing
     }
+
 
 -- | The maximum number of keys allowed for this user.
 lrMaximumKeyCount :: Lens' ListResponse (Maybe Int32)
@@ -159,6 +163,7 @@ data GetResponse =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'GetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -179,6 +184,7 @@ getResponse =
     , _grData = Nothing
     , _grStateKey = Nothing
     }
+
 
 -- | The current app state version.
 grCurrentStateVersion :: Lens' GetResponse (Maybe Text)
@@ -230,6 +236,7 @@ data UpdateRequest =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UpdateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -241,6 +248,7 @@ updateRequest
     :: UpdateRequest
 updateRequest =
   UpdateRequest' {_urKind = "appstate#updateRequest", _urData = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string appstate#updateRequest.

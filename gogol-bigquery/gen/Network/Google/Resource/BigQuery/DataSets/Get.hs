@@ -61,6 +61,7 @@ data DataSetsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'DataSetsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ dataSetsGet
     -> DataSetsGet
 dataSetsGet pDsgDataSetId_ pDsgProjectId_ =
   DataSetsGet' {_dsgDataSetId = pDsgDataSetId_, _dsgProjectId = pDsgProjectId_}
+
 
 -- | Dataset ID of the requested dataset
 dsgDataSetId :: Lens' DataSetsGet Text

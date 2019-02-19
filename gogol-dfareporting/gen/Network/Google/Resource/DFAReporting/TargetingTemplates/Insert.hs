@@ -62,6 +62,7 @@ data TargetingTemplatesInsert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'TargetingTemplatesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ targetingTemplatesInsert
 targetingTemplatesInsert pTtiProFileId_ pTtiPayload_ =
   TargetingTemplatesInsert'
     {_ttiProFileId = _Coerce # pTtiProFileId_, _ttiPayload = pTtiPayload_}
+
 
 -- | User profile ID associated with this request.
 ttiProFileId :: Lens' TargetingTemplatesInsert Int64

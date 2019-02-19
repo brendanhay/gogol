@@ -73,6 +73,7 @@ data ObjectAccessControlsDelete =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ObjectAccessControlsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -99,6 +100,7 @@ objectAccessControlsDelete pOacdBucket_ pOacdObject_ pOacdEntity_ =
     , _oacdEntity = pOacdEntity_
     , _oacdGeneration = Nothing
     }
+
 
 -- | Name of a bucket.
 oacdBucket :: Lens' ObjectAccessControlsDelete Text

@@ -97,6 +97,7 @@ data UserProFilesGuardiansGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'UserProFilesGuardiansGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +129,7 @@ userProFilesGuardiansGet pUpfggStudentId_ pUpfggGuardianId_ =
     , _upfggGuardianId = pUpfggGuardianId_
     , _upfggCallback = Nothing
     }
+
 
 -- | The student whose guardian is being requested. One of the following: *
 -- the numeric identifier for the user * the email address of the user *

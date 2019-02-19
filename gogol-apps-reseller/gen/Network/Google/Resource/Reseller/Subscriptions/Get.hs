@@ -62,6 +62,7 @@ data SubscriptionsGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'SubscriptionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ subscriptionsGet
 subscriptionsGet pSgCustomerId_ pSgSubscriptionId_ =
   SubscriptionsGet'
     {_sgCustomerId = pSgCustomerId_, _sgSubscriptionId = pSgSubscriptionId_}
+
 
 -- | Either the customer\'s primary domain name or the customer\'s unique
 -- identifier. If using the domain name, we do not recommend using a

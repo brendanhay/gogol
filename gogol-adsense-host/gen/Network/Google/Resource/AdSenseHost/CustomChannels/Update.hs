@@ -62,6 +62,7 @@ data CustomChannelsUpdate =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'CustomChannelsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -76,6 +77,7 @@ customChannelsUpdate
 customChannelsUpdate pCcuPayload_ pCcuAdClientId_ =
   CustomChannelsUpdate'
     {_ccuPayload = pCcuPayload_, _ccuAdClientId = pCcuAdClientId_}
+
 
 -- | Multipart request metadata.
 ccuPayload :: Lens' CustomChannelsUpdate CustomChannel

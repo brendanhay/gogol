@@ -113,6 +113,7 @@ data FloodlightActivitiesList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FloodlightActivitiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -164,6 +165,7 @@ floodlightActivitiesList pFalProFileId_ =
     , _falSortField = FALSFID
     , _falMaxResults = 1000
     }
+
 
 -- | Select only floodlight activities with the specified tag string.
 falTagString :: Lens' FloodlightActivitiesList (Maybe Text)

@@ -97,6 +97,7 @@ data ProjectsInstancesDatabasesSessionsPartitionRead =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsPartitionRead' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -128,6 +129,7 @@ projectsInstancesDatabasesSessionsPartitionRead pPidsprPayload_ pPidsprSession_ 
     , _pidsprSession = pPidsprSession_
     , _pidsprCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidsprXgafv :: Lens' ProjectsInstancesDatabasesSessionsPartitionRead (Maybe Xgafv)

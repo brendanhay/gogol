@@ -72,6 +72,7 @@ data FilesGet =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'FilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -90,6 +91,7 @@ filesGet pFgFileId_ =
     , _fgFileId = pFgFileId_
     , _fgSupportsTeamDrives = False
     }
+
 
 -- | Whether the user is acknowledging the risk of downloading known malware
 -- or other abusive files. This is only applicable when alt=media.

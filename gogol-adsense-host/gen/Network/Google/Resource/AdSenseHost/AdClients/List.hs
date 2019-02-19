@@ -60,6 +60,7 @@ data AdClientsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AdClientsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -71,6 +72,7 @@ adClientsList
     :: AdClientsList
 adClientsList =
   AdClientsList' {_aclPageToken = Nothing, _aclMaxResults = Nothing}
+
 
 -- | A continuation token, used to page through ad clients. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the

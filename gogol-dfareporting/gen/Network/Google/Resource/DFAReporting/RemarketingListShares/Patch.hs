@@ -67,6 +67,7 @@ data RemarketingListSharesPatch =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'RemarketingListSharesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -87,6 +88,7 @@ remarketingListSharesPatch pRlspProFileId_ pRlspPayload_ pRlspRemarketingListId_
     , _rlspPayload = pRlspPayload_
     , _rlspRemarketingListId = _Coerce # pRlspRemarketingListId_
     }
+
 
 -- | User profile ID associated with this request.
 rlspProFileId :: Lens' RemarketingListSharesPatch Int64

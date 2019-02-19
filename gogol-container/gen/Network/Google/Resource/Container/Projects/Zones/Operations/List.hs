@@ -80,6 +80,7 @@ data ProjectsZonesOperationsList =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'ProjectsZonesOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -114,6 +115,7 @@ projectsZonesOperationsList pPzolZone_ pPzolProjectId_ =
     , _pzolProjectId = pPzolProjectId_
     , _pzolCallback = Nothing
     }
+
 
 -- | The parent (project and location) where the operations will be listed.
 -- Specified in the format \'projects\/*\/locations\/*\'. Location \"-\"

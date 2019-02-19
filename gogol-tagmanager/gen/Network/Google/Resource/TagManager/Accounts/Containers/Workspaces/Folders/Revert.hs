@@ -61,6 +61,7 @@ data AccountsContainersWorkspacesFoldersRevert =
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
+
 -- | Creates a value of 'AccountsContainersWorkspacesFoldersRevert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
@@ -74,6 +75,7 @@ accountsContainersWorkspacesFoldersRevert
 accountsContainersWorkspacesFoldersRevert pAcwfrPath_ =
   AccountsContainersWorkspacesFoldersRevert'
     {_acwfrPath = pAcwfrPath_, _acwfrFingerprint = Nothing}
+
 
 -- | GTM Folder\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/folders\/{folder_id}
